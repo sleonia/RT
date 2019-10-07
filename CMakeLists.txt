@@ -1,0 +1,21 @@
+cmake_minimum_required(VERSION 3.14)
+project(RTv1)
+
+set(CMAKE_C_STANDARD 99)
+
+include_directories(./libft/includes)
+FILE(GLOB LIBFT_SRCS ./libft/*.c)
+
+add_executable(RTv1 main.c ${LIBFT_SRCS} rtv1.h)
+set(SDL2_INCLUDE_DIR /Users/deladia/.brew/include/SDL2)
+set(SDL2_LIBRARIES /Users/deladia/.brew/lib)
+set(SDL_TTF_INCLUDE_DIR /Users/deladia/.brew/include/SDL2)
+set(SDL_TTF_LIBRARY /Users/deladia/.brew/lib)
+##find_file(SDL2_INCLUDE_DIR NAME SDL.h HINTS SDL2)
+##find_library(SDL2_LIBRARY NAME SDL2)
+find_package(SDL2 REQUIRED)
+##find_package(SDL_ttf REQUIRED)
+target_include_directories(RTv1 PUBLIC ${SDL2_INCLUDE_DIR} /Users/deladia/.brew/include/SDL2/SDL_ttf.h)
+TARGET_LINK_LIBRARIES(RTv1 ${SDL2_LIBRARIES} /Users/deladia/.brew/lib/libSDL2_ttf.a)
+##target_link_libraries(SDL SDL2)
+##INCLUDE_DIRECTORIES(${SDL2_INCLUDE_DIRS})
