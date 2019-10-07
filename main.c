@@ -7,9 +7,7 @@ int 	sdl_init(void)
 	SDL_Texture		*tex;
 	char 			quit = 0;
 	SDL_Event		e;
-	SDL_Keysym		key;
 	int				*pixels;
-	SDL_PixelFormat	*ftm;
 
 	//Инициальзация нужных подсистем
 	if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_EVENTS) != 0)
