@@ -16,7 +16,7 @@ int 	sdl_init(void)
 		return (1);
 	}
 	//Создание окна (название, х, у, ширина, высота, флаги)
-	if ((window = SDL_CreateWindow("Hello World!", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN)) == NULL)
+	if ((window = SDL_CreateWindow("Hello World!", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, WIDTH, HEIGHT, SDL_WINDOW_SHOWN)) == NULL)
 	{
 		printf("SDL_CreateWindow Error: %s", SDL_GetError());
 		return (1);
@@ -35,14 +35,14 @@ int 	sdl_init(void)
 //		return (1);
 //	}
 //////	//Загрузка картинки в рендер
-	if ((tex = SDL_CreateTexture(ren, SDL_PIXELFORMAT_ARGB8888, SDL_TEXTUREACCESS_STREAMING, SCREEN_WIDTH, SCREEN_HEIGHT)) == NULL)
+	if ((tex = SDL_CreateTexture(ren, SDL_PIXELFORMAT_ARGB8888, SDL_TEXTUREACCESS_STREAMING, WIDTH, HEIGHT)) == NULL)
 	{
 		printf("SDL_CreateTextureFromSurface Error: %s", SDL_GetError());
 		return (1);
 	}
-	pixels = (int *)ft_memalloc(sizeof(int) * SCREEN_WIDTH * SCREEN_HEIGHT);
+	pixels = (int *)ft_memalloc(sizeof(int) * WIDTH * HEIGHT);
 //    SDL_SetRenderDrawColor(ren, 255, 0, 0, 255);
-	SDL_UpdateTexture(tex, NULL, pixels, SCREEN_WIDTH * sizeof(int));
+	SDL_UpdateTexture(tex, NULL, pixels, WIDTH * sizeof(int));
 //	SDL_UpdateTexture(tex, NULL, pixels, SCREEN_WIDTH * sizeof(uint32_t));
 	SDL_RenderClear(ren);
 	SDL_RenderCopy(ren, tex, NULL, NULL);
@@ -89,7 +89,7 @@ int 	sdl_init(void)
 				if (e.key.keysym.scancode == SDL_SCANCODE_DOWN)
 					j += 2;
 				int g = 0;
-				while(g < SCREEN_HEIGHT * SCREEN_WIDTH)
+				while(g < HEIGHT * WIDTH)
 				{
 					pixels[g] = 0x0000FF + 1 + g;
 					g++;
@@ -97,7 +97,7 @@ int 	sdl_init(void)
 //				pixels[200 * 100] = 0xFF0000;
 //				pixels[201 * 100] = 0xFF0000;
 //				pixels[202 * 100] = 0xFF0000;
-				SDL_UpdateTexture(tex, NULL, pixels, SCREEN_WIDTH * sizeof(int));
+				SDL_UpdateTexture(tex, NULL, pixels, WIDTH * sizeof(int));
 				SDL_RenderCopy(ren, tex, NULL, NULL);
 				SDL_RenderDrawPoint(ren, i, j);
 				SDL_RenderPresent(ren);
@@ -119,30 +119,34 @@ int 	sdl_init(void)
 	return (0);
 }
 
+t_pos	*insert(x, y, z)
+{
+	t_pos	pos;
+
+	pos.x = x;
+	pos.y = y;
+	pos.z = z;
+}
+
 int		main()
 {
-	int 	sx;
-	int 	sy; //координаты в представлении экрана
-	int 	cx;
-	int 	cy; //координаты в нашем представлении
+	t_cam	*o;
+	int		x;
+	int		y;
 
-	//холст
-	int 	vw = 200;
-	int 	vh = 200;
-	int 	d = 200;
-	int 	vx;
-	int 	vy;
-	int 	vz;
+	o = (t_cam *)ft_memalloc(sizeof(t_cam));
+	o->position = (t_pos *)ft_memalloc(sizeof(t_pos));
+	o->position = insert(0, 0, 0);
 
-	//перевод в координаты экрана из нашей системы координат
-	sx = SCREEN_WIDTH / 2 + cx;
-	sy = SCREEN_HEIGHT / 2 - cy;
+	x = -WIDTH / 2;
+	y = -HEIGHT / 2;
+	while(x < WIDTH / 2)
+	{
+		while(y < HEIGHT / 2)
+		{
 
-	//определяем квадрат сетки соответсвующий этому пикселю
-	// для каждого пикселя (Сх, Су) холста определяем соответсвующую точку окна просмотра (Vx, Vy, Vz)
-	vx = cx * vw / SCREEN_WIDTH;
-	vy = cy * vh / SCREEN_HEIGHT;
-	vz = d;
+		}
+	}
 
 
 	sdl_init();

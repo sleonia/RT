@@ -6,5 +6,5 @@ C_FLAGS = -g   -std=gnu99
 
 C_DEFINES = 
 
-C_INCLUDES = -I/Users/deladia/CLionProjects/RTv1/./libft/includes -I/Users/deladia/.brew/include/SDL2 -I/Users/deladia/.brew/include/SDL2/SDL_ttf.h 
+C_INCLUDES = -I/Users/deladia/CLionProjects/RTv11/./libft/includes -I/Users/deladia/.brew/include/SDL2 -I/Users/deladia/.brew/include/SDL2/SDL_ttf.h 
 

@@ -3,8 +3,8 @@
 
 #include "libft/libft.h"
 #include <SDL.h>
-# define SCREEN_WIDTH 640
-# define SCREEN_HEIGHT 480
+# define WIDTH 1920
+# define HEIGHT 1080
 
 typedef struct			s_pos
 {
@@ -29,6 +29,7 @@ typedef struct 			s_light
 {
 	t_pos				*position;
 	double 				brightness;
+	struct s_light		*next;
 	//mb something else
 }						t_light;
 
@@ -37,6 +38,7 @@ typedef struct 			s_fig
 	t_pos				*position;
 	int 				color;
 	char 				type;
+	struct s_fig		*next;
 	//mb something else
 }						t_fig;
 
@@ -49,7 +51,7 @@ typedef struct 			s_scene
 	//mb something else
 }						t_scene;
 
-/*typedef struct			s_cl
+/*typedef struct		s_cl
 {
 	cl_platform_id		platform_id;
 	cl_uint				ret_num_platforms;
