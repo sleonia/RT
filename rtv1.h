@@ -3,8 +3,19 @@
 
 #include "libft/libft.h"
 #include <SDL.h>
+#include <math.h>
 # define WIDTH 1920
 # define HEIGHT 1080
+# define VW 1.7
+# define VH 1
+# define D 1
+# define WHITE 0xFFFFFF
+
+typedef struct			s_result
+{
+	double 				t1;
+	double 				t2;
+}						t_result;
 
 typedef struct			s_pos
 {
@@ -33,21 +44,21 @@ typedef struct 			s_light
 	//mb something else
 }						t_light;
 
-typedef struct 			s_fig
+typedef struct 			s_sphere
 {
-	t_pos				*position;
+	t_pos				*center;
 	int 				color;
-	char 				type;
-	struct s_fig		*next;
+	double				radius;
+	struct s_sphere		*next;
 	//mb something else
-}						t_fig;
+}						t_sphere;
 
 typedef struct 			s_scene
 {
 	t_view				*view;
 	t_cam				*cam;
 	t_light				*light;
-	t_fig				*figure;
+	t_sphere			*figure;
 	//mb something else
 }						t_scene;
 
