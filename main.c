@@ -86,11 +86,8 @@ int 		sdl_init(t_sdl *sdl)
 	return (0);
 }
 
-t_pos		*insert(x, y, z)
+t_pos		*insert(int x,int y, int z, t_pos * pos)
 {
-	t_pos	*pos;
-
-	pos = (t_pos *)ft_memalloc(sizeof(t_pos));
 	pos->x = x;
 	pos->y = y;
 	pos->z = z;
@@ -196,24 +193,29 @@ int 		*put_pixel(double x, double y, int color, t_sdl *sdl)
 t_sphere	*init_sphere(t_sphere *sphere)
 {
 	t_sphere	*tmp;
-	t_pos		*center;
+	t_pos		*center1;
+	t_pos		*center2;
+	t_pos		*center3;
 
 	sphere = (t_sphere *)ft_memalloc(sizeof(t_sphere));
+	center1 = (t_pos *)ft_memalloc(sizeof(t_pos));
 	sphere->radius  = 1;
 	sphere->color = 0xFF0000;
-	sphere->center = insert(0, -1, 3);
+	sphere->center = insert(0, -1, 3, center1);
 
 	sphere->next = (t_sphere *)ft_memalloc(sizeof(t_sphere));
+	center2 = (t_pos *)ft_memalloc(sizeof(t_pos));
 	tmp = sphere->next;
 	tmp->radius  = 1;
 	tmp->color = 0x0000FF;
-	tmp->center = insert(2, 0, 4);
+	tmp->center = insert(2, 0, 4, center2);
 
 	tmp->next = (t_sphere *)ft_memalloc(sizeof(t_sphere));
+	center3 = (t_pos *)ft_memalloc(sizeof(t_pos));
 	tmp = tmp->next;
 	tmp->radius  = 1;
 	tmp->color = 0x00FF00;
-	tmp->center = insert(-2, 0, 4);
+	tmp->center = insert(-2, 0, 4, center3);
 	return (sphere);
 }
 
@@ -235,9 +237,10 @@ int			main(void)
 	o = (t_cam *)ft_memalloc(sizeof(t_cam));
 	o->position = (t_pos *)ft_memalloc(sizeof(t_pos));
 	d = (t_view *)ft_memalloc(sizeof(t_view));
+	d->position = (t_pos *)ft_memalloc(sizeof(t_pos));
 //	d->position = (t_pos *)ft_memalloc(sizeof(t_pos));
 
-	o->position = insert(0, 0, 0);
+	o->position = insert(0, 0, 0, o->position);
 	x = -WIDTH / 2;
 	sphere = NULL;
 	sphere = init_sphere(sphere);
@@ -246,7 +249,6 @@ int			main(void)
 		y = -HEIGHT / 2;
 		while(y < HEIGHT / 2)
 		{
-			d->position = (t_pos *)ft_memalloc(sizeof(t_pos));
 			d->position = CanvasToViewport(x, y, d->position);
 //			printf("%f %f %f\n", d->position->x, d->position->y, d->position->z);
 			color = TraceRay(o, d, 1.0, INFINITY, sphere);
