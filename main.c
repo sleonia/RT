@@ -1,11 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: deladia <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/10/24 12:57:07 by deladia           #+#    #+#             */
+/*   Updated: 2019/10/24 12:57:08 by deladia          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "rtv1.h"
-#include <math.h>
 
 /*
 ** Решает квадратное уравнение и возвращает два корня если есть, если нет то INF
 */
 
-t_result	*IntersectRaySphere(t_result *res, t_cam *o, t_view *d, t_sphere *sphere)
+t_result	*intersect_ray_sphere(t_result *res, t_cam *o, t_view *d, t_sphere *sphere)
 {
 	t_pos		oc;
 	double		k1;
@@ -33,12 +44,18 @@ t_result	*IntersectRaySphere(t_result *res, t_cam *o, t_view *d, t_sphere *spher
 ** Находит ближайшую точку в позиции (x, y) среди всех сфер и закрашивает цветом
 */
 
-int			TraceRay(t_cam *o, t_view *d, double t_min, double t_max, t_sphere *sphere)
+int			trace_ray(t_cam *o, t_view *d, double t_min, double t_max, t_sphere *sphere, t_light *light)
 {
 	double		closest_t;
 	t_sphere	*closest_sphere;
 	t_result	*res;
 	t_sphere	*tmp;
+
+	t_pos		*p;
+	p = (t_pos *)ft_memalloc(sizeof(t_pos));
+	t_pos		*n;
+	n = (t_pos *)ft_memalloc(sizeof(t_pos));
+	t_pos		buf;
 
 	closest_t = INFINITY;
 	closest_sphere = NULL;
@@ -46,7 +63,7 @@ int			TraceRay(t_cam *o, t_view *d, double t_min, double t_max, t_sphere *sphere
 	tmp = sphere;
 	while (tmp)
 	{
-		res = IntersectRaySphere(res, o, d, tmp);
+		res = intersect_ray_sphere(res, o, d, tmp);
 //		printf ("%f %f\n", res->t1, res->t2);
 		if (res->t1 >= t_min && res->t1 <= t_max && res->t1 < closest_t)
 		{
@@ -64,23 +81,28 @@ int			TraceRay(t_cam *o, t_view *d, double t_min, double t_max, t_sphere *sphere
 	free(res);
 	if (closest_sphere == NULL)
 		return (WHITE);
-	return (closest_sphere->color);
+	///////////////
+	buf = vector_on_number(d->position, closest_t);
+	*p = vector_pus(o->position, &buf);
+	*n = vector_minus(p, closest_sphere->center);
+	*n = vector_div(n, vector_len(n));
+
+	double c = computer_lighting(p, n, light);
+//	printf ("%f", c);
+	int red = (closest_sphere->color & 0xFF0000) >> 16;
+	red *= c;
+	int green = (closest_sphere->color & 0x00FF00) >> 8;
+	green *= c;
+	int blue = (closest_sphere->color & 0x0000FF);
+	blue *= c;
+	return ((red << 16) | (green << 8) | blue);
 }
 
-int 		*put_pixel(double x, double y, int color, t_sdl *sdl)
-{
-	int		xnew;
-	int		ynew;
 
-	xnew = WIDTH / 2 + (int)x;
-	ynew = HEIGHT / 2 - (int)y;
-//	printf("%d \n", (int)xnew + (int)ynew * WIDTH);
-	sdl->pixels[xnew + ynew * WIDTH] = color;
-	return (sdl->pixels);
-}
 
 /*
-** Заменить на парсер
+** 		Костыльное добавление сфер
+**		НУЖЕН ПАРСЕР
 */
 
 t_sphere	*init_sphere(t_sphere *sphere)
@@ -89,6 +111,7 @@ t_sphere	*init_sphere(t_sphere *sphere)
 	t_pos		*center1;
 	t_pos		*center2;
 	t_pos		*center3;
+	t_pos		*center4;
 
 	sphere = (t_sphere *)ft_memalloc(sizeof(t_sphere));
 	center1 = (t_pos *)ft_memalloc(sizeof(t_pos));
@@ -109,6 +132,13 @@ t_sphere	*init_sphere(t_sphere *sphere)
 	tmp->radius  = 1;
 	tmp->color = 0x00FF00;
 	tmp->center = insert(-2, 0, 4, center3);
+
+	tmp->next = (t_sphere *)ft_memalloc(sizeof(t_sphere));
+	center4 = (t_pos *)ft_memalloc(sizeof(t_pos));
+	tmp = tmp->next;
+	tmp->radius  = 5000;
+	tmp->color = 0xFFFF00;
+	tmp->center = insert(0, -5005, 0, center4);
 	return (sphere);
 }
 
@@ -121,6 +151,7 @@ int			main(void)
 	int			y;
 	int 		color;
 	t_sdl		*sdl;
+	t_light		*light;
 
 
 	sdl = (t_sdl *)ft_memalloc((sizeof(t_sdl)));
@@ -137,6 +168,8 @@ int			main(void)
 	x = -WIDTH / 2;
 	sphere = NULL;
 	sphere = init_sphere(sphere);
+	light = NULL;
+	light = init_light(light);
 	while(x < WIDTH / 2)
 	{
 		y = -HEIGHT / 2;
@@ -144,7 +177,7 @@ int			main(void)
 		{
 			d->position = canvas_to_viewport(x, y, d->position);
 //			printf("%f %f %f\n", d->position->x, d->position->y, d->position->z);
-			color = TraceRay(o, d, 1.0, INFINITY, sphere);
+			color = trace_ray(o, d, 1.0, INFINITY, sphere, light);
 			sdl->pixels = put_pixel(x, y, color, sdl);
 			y++;
 		}

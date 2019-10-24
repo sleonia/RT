@@ -289,6 +289,9 @@
 		<Unit filename="/Users/deladia/CLionProjects/RTv11/libft/get_next_line.h">
 			<Option target="RTv1"/>
 		</Unit>
+		<Unit filename="/Users/deladia/CLionProjects/RTv11/light.c">
+			<Option target="RTv1"/>
+		</Unit>
 		<Unit filename="/Users/deladia/CLionProjects/RTv11/main.c">
 			<Option target="RTv1"/>
 		</Unit>
