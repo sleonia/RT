@@ -16,6 +16,7 @@
 ** 		Костыльное добавление источников света
 ** 		НУЖЕН ПАРСЕР!!!
 */
+
 t_light		*init_light(t_light *light)
 {
 	t_light		*tmp;
@@ -46,12 +47,11 @@ double		computer_lighting(t_pos *p, t_pos *n, t_light *light)
 {
 	double		intens;
 	t_light		*tmp;
-	t_pos		*l;
+	t_pos		l;
 	double		n_dot_1;
 
 	intens = 0.0;
 	tmp = light;
-	l = (t_pos *)ft_memalloc(sizeof(t_pos));
 	while (tmp)
 	{
 		if (tmp->type == 'A')
@@ -59,13 +59,16 @@ double		computer_lighting(t_pos *p, t_pos *n, t_light *light)
 		else
 		{
 			if (tmp->type == 'P')
-				*l = vector_minus(tmp->position, p);
+				l = vector_minus(tmp->position, p);
 			else if (tmp->type == 'D')
-				l = tmp->position;
-
-			n_dot_1 = dot(n, l);
+			{
+				l.x = tmp->position->x;
+				l.y = tmp->position->y;
+				l.z = tmp->position->z;
+			}
+			n_dot_1 = dot(n, &l);
 			if (n_dot_1 > 1)
-				intens += tmp->intensity * n_dot_1 / (vector_len(n) * vector_len(l));
+				intens += tmp->intensity * n_dot_1 / (vector_len(n) * vector_len(&l));
 		}
 		tmp = tmp->next;
 	}

@@ -79,8 +79,11 @@ int			trace_ray(t_cam *o, t_view *d, double t_min, double t_max, t_sphere *spher
 	}
 //	printf ("%f %f\n", res->t1, res->t2);
 	free(res);
-	if (closest_sphere == NULL)
+	if (closest_sphere == NULL) {
+		free(p);
+		free(n);
 		return (WHITE);
+	}
 	///////////////
 	buf = vector_on_number(d->position, closest_t);
 	*p = vector_pus(o->position, &buf);
@@ -95,6 +98,8 @@ int			trace_ray(t_cam *o, t_view *d, double t_min, double t_max, t_sphere *spher
 	green *= c;
 	int blue = (closest_sphere->color & 0x0000FF);
 	blue *= c;
+	free(p);
+	free(n);
 	return ((red << 16) | (green << 8) | blue);
 }
 
