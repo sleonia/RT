@@ -71,6 +71,7 @@ set(CMAKE_DEPENDS_CHECK_C
   "/Users/deladia/CLionProjects/RTv11/libft/ft_toupper.c" "/Users/deladia/CLionProjects/RTv11/cmake-build-debug/CMakeFiles/RTv1.dir/libft/ft_toupper.c.o"
   "/Users/deladia/CLionProjects/RTv11/libft/get_next_line.c" "/Users/deladia/CLionProjects/RTv11/cmake-build-debug/CMakeFiles/RTv1.dir/libft/get_next_line.c.o"
   "/Users/deladia/CLionProjects/RTv11/main.c" "/Users/deladia/CLionProjects/RTv11/cmake-build-debug/CMakeFiles/RTv1.dir/main.c.o"
+  "/Users/deladia/CLionProjects/RTv11/sdl.c" "/Users/deladia/CLionProjects/RTv11/cmake-build-debug/CMakeFiles/RTv1.dir/sdl.c.o"
   )
 set(CMAKE_C_COMPILER_ID "AppleClang")
 
