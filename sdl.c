@@ -27,6 +27,9 @@ void		ft_error(char *str)
 	exit(1);
 }
 
+/*
+** 	Бесконечный цикл реагирующий на нажатие клавишь и обновляющий после этого текстуру
+*/
 int			sdl_control(t_sdl *sdl)
 {
 	char	quit;
