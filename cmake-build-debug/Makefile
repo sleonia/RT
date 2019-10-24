@@ -1932,6 +1932,33 @@ main.c.s:
 	$(MAKE) -f CMakeFiles/RTv1.dir/build.make CMakeFiles/RTv1.dir/main.c.s
 .PHONY : main.c.s
 
+sdl.o: sdl.c.o
+
+.PHONY : sdl.o
+
+# target to build an object file
+sdl.c.o:
+	$(MAKE) -f CMakeFiles/RTv1.dir/build.make CMakeFiles/RTv1.dir/sdl.c.o
+.PHONY : sdl.c.o
+
+sdl.i: sdl.c.i
+
+.PHONY : sdl.i
+
+# target to preprocess a source file
+sdl.c.i:
+	$(MAKE) -f CMakeFiles/RTv1.dir/build.make CMakeFiles/RTv1.dir/sdl.c.i
+.PHONY : sdl.c.i
+
+sdl.s: sdl.c.s
+
+.PHONY : sdl.s
+
+# target to generate assembly for a file
+sdl.c.s:
+	$(MAKE) -f CMakeFiles/RTv1.dir/build.make CMakeFiles/RTv1.dir/sdl.c.s
+.PHONY : sdl.c.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -2142,6 +2169,9 @@ help:
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
+	@echo "... sdl.o"
+	@echo "... sdl.i"
+	@echo "... sdl.s"
 .PHONY : help
 
 

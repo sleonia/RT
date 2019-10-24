@@ -100,5 +100,7 @@ t_pos					*insert(int x,int y, int z, t_pos *pos);
 t_pos					*canvas_to_viewport(int x, int y, t_pos *pos);
 t_pos					vector_minus(t_pos *o, t_pos	*center);
 double 					dot(t_pos *a, t_pos *b);
+int						sdl_init(t_sdl *sdl);
+int						sdl_control(t_sdl *sdl);
 
 #endif
