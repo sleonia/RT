@@ -67,6 +67,7 @@ file(REMOVE_RECURSE
   "CMakeFiles/RTv1.dir/libft/get_next_line.c.o"
   "CMakeFiles/RTv1.dir/helps.c.o"
   "CMakeFiles/RTv1.dir/sdl.c.o"
+  "CMakeFiles/RTv1.dir/light.c.o"
   "RTv1.pdb"
   "RTv1"
 )

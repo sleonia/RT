@@ -1905,6 +1905,33 @@ libft/get_next_line.c.s:
 	$(MAKE) -f CMakeFiles/RTv1.dir/build.make CMakeFiles/RTv1.dir/libft/get_next_line.c.s
 .PHONY : libft/get_next_line.c.s
 
+light.o: light.c.o
+
+.PHONY : light.o
+
+# target to build an object file
+light.c.o:
+	$(MAKE) -f CMakeFiles/RTv1.dir/build.make CMakeFiles/RTv1.dir/light.c.o
+.PHONY : light.c.o
+
+light.i: light.c.i
+
+.PHONY : light.i
+
+# target to preprocess a source file
+light.c.i:
+	$(MAKE) -f CMakeFiles/RTv1.dir/build.make CMakeFiles/RTv1.dir/light.c.i
+.PHONY : light.c.i
+
+light.s: light.c.s
+
+.PHONY : light.s
+
+# target to generate assembly for a file
+light.c.s:
+	$(MAKE) -f CMakeFiles/RTv1.dir/build.make CMakeFiles/RTv1.dir/light.c.s
+.PHONY : light.c.s
+
 main.o: main.c.o
 
 .PHONY : main.o
@@ -2166,6 +2193,9 @@ help:
 	@echo "... libft/get_next_line.o"
 	@echo "... libft/get_next_line.i"
 	@echo "... libft/get_next_line.s"
+	@echo "... light.o"
+	@echo "... light.i"
+	@echo "... light.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"

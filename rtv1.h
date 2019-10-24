@@ -38,8 +38,9 @@ typedef struct 			s_cam
 
 typedef struct 			s_light
 {
+	char 				type;
+	double 				intensity;
 	t_pos				*position;
-	double 				brightness;
 	struct s_light		*next;
 	//mb something else
 }						t_light;
@@ -102,5 +103,12 @@ t_pos					vector_minus(t_pos *o, t_pos	*center);
 double 					dot(t_pos *a, t_pos *b);
 int						sdl_init(t_sdl *sdl);
 int						sdl_control(t_sdl *sdl);
+int						*put_pixel(double x, double y, int color, t_sdl *sdl);
+t_pos					vector_pus(t_pos *o, t_pos *center);
+t_pos					vector_on_number(t_pos *o, double nbr);
+t_pos					vector_div(t_pos *o, double nbr);
+double					vector_len(t_pos *o);
+double					computer_lighting(t_pos *p, t_pos *n, t_light *light);
+t_light					*init_light(t_light *light);
 
 #endif
