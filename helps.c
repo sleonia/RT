@@ -28,7 +28,7 @@ t_pos		*insert(int x, int y, int z, t_pos *pos)
 ** Преобразование координат в координаты холста
 */
 
-t_pos		*CanvasToViewport(int x, int y, t_pos *pos)
+t_pos		*canvas_to_viewport(int x, int y, t_pos *pos)
 {
 	pos->x = (double)x * VW / WIDTH;
 	pos->y = (double)y * VH / HEIGHT;
@@ -40,7 +40,7 @@ t_pos		*CanvasToViewport(int x, int y, t_pos *pos)
 ** Разность векторов
 */
 
-t_pos		VectorMinus(t_pos *o, t_pos *center)
+t_pos		vector_minus(t_pos *o, t_pos *center)
 {
 	t_pos	oc;
 
@@ -54,7 +54,7 @@ t_pos		VectorMinus(t_pos *o, t_pos *center)
 ** Скалярное произведение векторов
 */
 
-double		Dot(t_pos *a, t_pos *b)
+double		dot(t_pos *a, t_pos *b)
 {
 	return (a->x * b->x + a->y * b->y + a->z * b->z);
 }
