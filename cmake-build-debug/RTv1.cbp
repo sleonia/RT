@@ -88,6 +88,9 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="/Users/deladia/CLionProjects/RTv11/helps.c">
+			<Option target="RTv1"/>
+		</Unit>
 		<Unit filename="/Users/deladia/CLionProjects/RTv11/libft/ft_atoi.c">
 			<Option target="RTv1"/>
 		</Unit>

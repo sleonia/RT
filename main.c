@@ -19,7 +19,6 @@ void		ft_error(char *str)
 int 		sdl_control(t_sdl *sdl)
 {
 	char 	quit;
-	int 	g;
 
 	quit = 0;
 	while (!quit)
@@ -34,12 +33,6 @@ int 		sdl_control(t_sdl *sdl)
 				//сравниваем с тем что нажато и делаем то что нужно
 				if (sdl->event.key.keysym.scancode == SDL_SCANCODE_ESCAPE)
 					quit = 1;
-				g = 0;
-//				while(g < HEIGHT * WIDTH)
-//				{
-//					sdl->pixels[g] = 0x0000FF + 1 + g;
-//					g++;
-//				}
 				SDL_UpdateTexture(sdl->texture, NULL, sdl->pixels, WIDTH * sizeof(int));
 				SDL_RenderCopy(sdl->render, sdl->texture, NULL, NULL);
 				SDL_RenderPresent(sdl->render);
@@ -47,6 +40,7 @@ int 		sdl_control(t_sdl *sdl)
 
 		}
 	}
+	//Уборка мусора
 	SDL_DestroyTexture(sdl->texture);
 	SDL_DestroyRenderer(sdl->render);
 	SDL_DestroyWindow(sdl->window);
@@ -75,76 +69,40 @@ int 		sdl_init(t_sdl *sdl)
 	SDL_RenderClear(sdl->render);
 	SDL_RenderCopy(sdl->render, sdl->texture, NULL, NULL);
 	SDL_RenderPresent(sdl->render);
-
-//	sdl_control(sdl);
-
-	//уборка мусора
-//	SDL_DestroyTexture(sdl->texture);
-//	SDL_DestroyRenderer(sdl->render);
-//	SDL_DestroyWindow(sdl->window);
-//	SDL_Quit();
 	return (0);
 }
 
-t_pos		*insert(int x,int y, int z, t_pos * pos)
-{
-	pos->x = x;
-	pos->y = y;
-	pos->z = z;
-	return (pos);
-}
+/*
+** Решает квадратное уравнение и возвращает два корня если есть, если нет то INF
+*/
 
-t_pos		*CanvasToViewport(int x, int y, t_pos *pos)
-{
-	pos->x = (double)x * VW / WIDTH;
-	pos->y = (double)y * VH / HEIGHT;
-	pos->z = D;
-	return (pos);
-}
-
-t_pos		VectorMinus(t_pos *o, t_pos	*center)
-{
-	t_pos	oc;
-
-	oc.x = o->x - center->x;
-	oc.y = o->y - center->y;
-	oc.z = o->z - center->z;
-	return (oc);
-}
-
-double 		Dot(t_pos *a, t_pos *b)
-{
-	return (a->x * b->x + a->y * b->y + a->z * b->z);
-}
-
-t_result	*IntersectRaySphere(t_cam *o, t_view *d, t_sphere *sphere)
+t_result	*IntersectRaySphere(t_result *res, t_cam *o, t_view *d, t_sphere *sphere)
 {
 	t_pos		oc;
-	t_result	*res;
 	double		k1;
 	double		k2;
 	double		k3;
-	double		discriminant;
 
-	res = (t_result *)ft_memalloc(sizeof(t_result));
+
 	oc = VectorMinus(o->position, sphere->center);
-
 	k1 = Dot(d->position, d->position);
 	k2 = 2 * Dot(&oc, d->position);
 	k3 = Dot(&oc, &oc) - sphere->radius * sphere->radius;
-
-	discriminant = k2 * k2 - 4 * k1 * k3;
-	if (discriminant < 0)
+	if (k2 * k2 - 4 * k1 * k3 < 0)
 	{
 		res->t1 = INFINITY;
 		res->t2 = INFINITY;
 		return (res);
 	}
-	res->t1 = (-k2 + sqrt(discriminant)) / (2 * k1);
-	res->t2 = (-k2 - sqrt(discriminant)) / (2 * k1);
+	res->t1 = (-k2 + sqrt(k2 * k2 - 4 * k1 * k3)) / (2 * k1);
+	res->t2 = (-k2 - sqrt(k2 * k2 - 4 * k1 * k3)) / (2 * k1);
 //	printf ("%f %f\n", res->t1, res->t2);
 	return (res);
 }
+
+/*
+** Находит ближайшую точку в позиции (x, y) среди всех сфер и закрашивает цветом
+*/
 
 int			TraceRay(t_cam *o, t_view *d, double t_min, double t_max, t_sphere *sphere)
 {
@@ -155,10 +113,11 @@ int			TraceRay(t_cam *o, t_view *d, double t_min, double t_max, t_sphere *sphere
 
 	closest_t = INFINITY;
 	closest_sphere = NULL;
+	res = (t_result *)ft_memalloc(sizeof(t_result));
 	tmp = sphere;
 	while (tmp)
 	{
-		res = IntersectRaySphere(o, d, tmp);
+		res = IntersectRaySphere(res, o, d, tmp);
 //		printf ("%f %f\n", res->t1, res->t2);
 		if (res->t1 >= t_min && res->t1 <= t_max && res->t1 < closest_t)
 		{
@@ -173,6 +132,7 @@ int			TraceRay(t_cam *o, t_view *d, double t_min, double t_max, t_sphere *sphere
 		tmp = tmp->next;
 	}
 //	printf ("%f %f\n", res->t1, res->t2);
+	free(res);
 	if (closest_sphere == NULL)
 		return (WHITE);
 	return (closest_sphere->color);
@@ -189,6 +149,10 @@ int 		*put_pixel(double x, double y, int color, t_sdl *sdl)
 	sdl->pixels[xnew + ynew * WIDTH] = color;
 	return (sdl->pixels);
 }
+
+/*
+** Заменить на парсер
+*/
 
 t_sphere	*init_sphere(t_sphere *sphere)
 {

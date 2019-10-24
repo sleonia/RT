@@ -123,6 +123,33 @@ RTv1/fast:
 	$(MAKE) -f CMakeFiles/RTv1.dir/build.make CMakeFiles/RTv1.dir/build
 .PHONY : RTv1/fast
 
+helps.o: helps.c.o
+
+.PHONY : helps.o
+
+# target to build an object file
+helps.c.o:
+	$(MAKE) -f CMakeFiles/RTv1.dir/build.make CMakeFiles/RTv1.dir/helps.c.o
+.PHONY : helps.c.o
+
+helps.i: helps.c.i
+
+.PHONY : helps.i
+
+# target to preprocess a source file
+helps.c.i:
+	$(MAKE) -f CMakeFiles/RTv1.dir/build.make CMakeFiles/RTv1.dir/helps.c.i
+.PHONY : helps.c.i
+
+helps.s: helps.c.s
+
+.PHONY : helps.s
+
+# target to generate assembly for a file
+helps.c.s:
+	$(MAKE) -f CMakeFiles/RTv1.dir/build.make CMakeFiles/RTv1.dir/helps.c.s
+.PHONY : helps.c.s
+
 libft/ft_atoi.o: libft/ft_atoi.c.o
 
 .PHONY : libft/ft_atoi.o
@@ -1914,6 +1941,9 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
 	@echo "... RTv1"
+	@echo "... helps.o"
+	@echo "... helps.i"
+	@echo "... helps.s"
 	@echo "... libft/ft_atoi.o"
 	@echo "... libft/ft_atoi.i"
 	@echo "... libft/ft_atoi.s"
