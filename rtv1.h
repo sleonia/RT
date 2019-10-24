@@ -6,7 +6,7 @@
 #include <math.h>
 # define WIDTH 1920
 # define HEIGHT 1080
-# define VW 1.7
+# define VW 1.7777777
 # define VH 1
 # define D 1
 # define WHITE 0xFFFFFF
@@ -96,5 +96,9 @@ typedef struct 			s_rtv1
 	//mb something else
 }						t_rtv1;
 
+t_pos					*insert(int x,int y, int z, t_pos *pos);
+t_pos					*CanvasToViewport(int x, int y, t_pos *pos);
+t_pos					VectorMinus(t_pos *o, t_pos	*center);
+double 					Dot(t_pos *a, t_pos *b);
 
 #endif

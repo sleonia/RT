@@ -4,6 +4,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_C
+  "/Users/deladia/CLionProjects/RTv11/helps.c" "/Users/deladia/CLionProjects/RTv11/cmake-build-debug/CMakeFiles/RTv1.dir/helps.c.o"
   "/Users/deladia/CLionProjects/RTv11/libft/ft_atoi.c" "/Users/deladia/CLionProjects/RTv11/cmake-build-debug/CMakeFiles/RTv1.dir/libft/ft_atoi.c.o"
   "/Users/deladia/CLionProjects/RTv11/libft/ft_bzero.c" "/Users/deladia/CLionProjects/RTv11/cmake-build-debug/CMakeFiles/RTv1.dir/libft/ft_bzero.c.o"
   "/Users/deladia/CLionProjects/RTv11/libft/ft_is_negative.c" "/Users/deladia/CLionProjects/RTv11/cmake-build-debug/CMakeFiles/RTv1.dir/libft/ft_is_negative.c.o"
