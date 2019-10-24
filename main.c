@@ -84,10 +84,10 @@ t_result	*IntersectRaySphere(t_result *res, t_cam *o, t_view *d, t_sphere *spher
 	double		k3;
 
 
-	oc = VectorMinus(o->position, sphere->center);
-	k1 = Dot(d->position, d->position);
-	k2 = 2 * Dot(&oc, d->position);
-	k3 = Dot(&oc, &oc) - sphere->radius * sphere->radius;
+	oc = vector_minus(o->position, sphere->center);
+	k1 = dot(d->position, d->position);
+	k2 = 2 * dot(&oc, d->position);
+	k3 = dot(&oc, &oc) - sphere->radius * sphere->radius;
 	if (k2 * k2 - 4 * k1 * k3 < 0)
 	{
 		res->t1 = INFINITY;
@@ -213,7 +213,7 @@ int			main(void)
 		y = -HEIGHT / 2;
 		while(y < HEIGHT / 2)
 		{
-			d->position = CanvasToViewport(x, y, d->position);
+			d->position = canvas_to_viewport(x, y, d->position);
 //			printf("%f %f %f\n", d->position->x, d->position->y, d->position->z);
 			color = TraceRay(o, d, 1.0, INFINITY, sphere);
 			sdl->pixels = put_pixel(x, y, color, sdl);
