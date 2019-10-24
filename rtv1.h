@@ -4,12 +4,13 @@
 #include "libft/libft.h"
 #include <SDL.h>
 #include <math.h>
-# define WIDTH 1920
-# define HEIGHT 1080
-# define VW 1.7777777
+# define WIDTH 1280
+# define HEIGHT 1024
+# define VW 1.25
 # define VH 1
 # define D 1
 # define WHITE 0xFFFFFF
+# define BLACK 0x000000
 
 typedef struct			s_result
 {
@@ -50,6 +51,7 @@ typedef struct 			s_sphere
 	t_pos				*center;
 	int 				color;
 	double				radius;
+	int 				specular;
 	struct s_sphere		*next;
 	//mb something else
 }						t_sphere;
@@ -108,7 +110,7 @@ t_pos					vector_pus(t_pos *o, t_pos *center);
 t_pos					vector_on_number(t_pos *o, double nbr);
 t_pos					vector_div(t_pos *o, double nbr);
 double					vector_len(t_pos *o);
-double					computer_lighting(t_pos *p, t_pos *n, t_light *light);
+double					computer_lighting(t_pos *p, t_pos *n, t_pos *v, int s, t_light *light);
 t_light					*init_light(t_light *light);
 void 					ft_error(char *str);
 

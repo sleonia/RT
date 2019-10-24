@@ -56,6 +56,7 @@ int			trace_ray(t_cam *o, t_view *d, double t_min, double t_max, t_sphere *spher
 	t_pos		*n;
 	n = (t_pos *)ft_memalloc(sizeof(t_pos));
 	t_pos		buf;
+	t_pos		*v;
 
 	closest_t = INFINITY;
 	closest_sphere = NULL;
@@ -82,15 +83,15 @@ int			trace_ray(t_cam *o, t_view *d, double t_min, double t_max, t_sphere *spher
 	if (closest_sphere == NULL) {
 		free(p);
 		free(n);
-		return (WHITE);
+		return (BLACK);
 	}
 	///////////////
 	buf = vector_on_number(d->position, closest_t);
 	*p = vector_pus(o->position, &buf);
 	*n = vector_minus(p, closest_sphere->center);
 	*n = vector_div(n, vector_len(n));
-
-	double c = computer_lighting(p, n, light);
+	buf = vector_on_number(d->position, -1);
+	double c = computer_lighting(p, n, &buf, closest_sphere->specular, light);
 //	printf ("%f", c);
 	int red = (closest_sphere->color & 0xFF0000) >> 16;
 	red *= c;
@@ -123,6 +124,7 @@ t_sphere	*init_sphere(t_sphere *sphere)
 	sphere->radius  = 1;
 	sphere->color = 0xFF0000;
 	sphere->center = insert(0, -1, 3, center1);
+	sphere->specular = 500;
 
 	sphere->next = (t_sphere *)ft_memalloc(sizeof(t_sphere));
 	center2 = (t_pos *)ft_memalloc(sizeof(t_pos));
@@ -130,6 +132,7 @@ t_sphere	*init_sphere(t_sphere *sphere)
 	tmp->radius  = 1;
 	tmp->color = 0x0000FF;
 	tmp->center = insert(2, 0, 4, center2);
+	tmp->specular = 500;
 
 	tmp->next = (t_sphere *)ft_memalloc(sizeof(t_sphere));
 	center3 = (t_pos *)ft_memalloc(sizeof(t_pos));
@@ -137,13 +140,15 @@ t_sphere	*init_sphere(t_sphere *sphere)
 	tmp->radius  = 1;
 	tmp->color = 0x00FF00;
 	tmp->center = insert(-2, 0, 4, center3);
+	tmp->specular = 10;
 
 	tmp->next = (t_sphere *)ft_memalloc(sizeof(t_sphere));
 	center4 = (t_pos *)ft_memalloc(sizeof(t_pos));
 	tmp = tmp->next;
 	tmp->radius  = 5000;
 	tmp->color = 0xFFFF00;
-	tmp->center = insert(0, -5005, 0, center4);
+	tmp->center = insert(0, -5002, 0, center4);
+	tmp->specular = 1000;
 	return (sphere);
 }
 
