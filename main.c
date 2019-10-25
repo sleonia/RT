@@ -71,7 +71,7 @@ int			trace_ray(t_cam *o, t_view *d, double t_min, double t_max, t_sphere *spher
 			closest_t = res->t1;
 			closest_sphere = tmp;
 		}
-		else if (res->t2 >= t_min && res->t2 <= t_max && res->t2 < closest_t)
+		if (res->t2 >= t_min && res->t2 <= t_max && res->t2 < closest_t)
 		{
 			closest_t = res->t2;
 			closest_sphere = tmp;
@@ -95,6 +95,7 @@ int			trace_ray(t_cam *o, t_view *d, double t_min, double t_max, t_sphere *spher
 //	printf ("%f", c);
 	int red = (closest_sphere->color & 0xFF0000) >> 16;
 	red *= c;
+	printf("%d\n", red);
 	int green = (closest_sphere->color & 0x00FF00) >> 8;
 	green *= c;
 	int blue = (closest_sphere->color & 0x0000FF);
@@ -109,6 +110,8 @@ int			trace_ray(t_cam *o, t_view *d, double t_min, double t_max, t_sphere *spher
 /*
 ** 		Костыльное добавление сфер
 **		НУЖЕН ПАРСЕР
+** 		массив структур вместо односвязного списка
+**
 */
 
 t_sphere	*init_sphere(t_sphere *sphere)
@@ -147,7 +150,7 @@ t_sphere	*init_sphere(t_sphere *sphere)
 	tmp = tmp->next;
 	tmp->radius  = 5000;
 	tmp->color = 0xFFFF00;
-	tmp->center = insert(0, -5002, 0, center4);
+	tmp->center = insert(0, -5001, 0, center4);
 	tmp->specular = 1000;
 	return (sphere);
 }

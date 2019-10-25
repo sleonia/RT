@@ -39,7 +39,7 @@
 			</Target>
 			<Target title="RTv1">
 				<Option output="/Users/deladia/CLionProjects/RTv11/cmake-build-debug/RTv1" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/Users/deladia/CLionProjects/RTv11/cmake-build-debug"/>
+				<Option working_dir=""/>
 				<Option object_output="./"/>
 				<Option type="1"/>
 				<Option compiler="gcc"/>
@@ -64,7 +64,7 @@
 			</Target>
 			<Target title="RTv1/fast">
 				<Option output="/Users/deladia/CLionProjects/RTv11/cmake-build-debug/RTv1" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/Users/deladia/CLionProjects/RTv11/cmake-build-debug"/>
+				<Option working_dir=""/>
 				<Option object_output="./"/>
 				<Option type="1"/>
 				<Option compiler="gcc"/>
