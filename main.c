@@ -94,15 +94,16 @@ int			trace_ray(t_cam *o, t_view *d, double t_min, double t_max, t_sphere *spher
 	double c = computer_lighting(p, n, &buf, closest_sphere->specular, light);
 //	printf ("%f", c);
 	int red = (closest_sphere->color & 0xFF0000) >> 16;
-	red *= c;
-	printf("%d\n", red);
+	red = (int)((double)red * c);
+//	printf("%d\n", red);
 	int green = (closest_sphere->color & 0x00FF00) >> 8;
-	green *= c;
+	green = (int)((double)green * c);
 	int blue = (closest_sphere->color & 0x0000FF);
-	blue *= c;
+	blue = (int)((double)blue * c);
 	free(p);
 	free(n);
 	return ((red << 16) | (green << 8) | blue);
+//	return (c * closest_sphere->color);
 }
 
 
