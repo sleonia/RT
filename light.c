@@ -44,7 +44,7 @@ t_light		*init_light(t_light *light)
 //	tmp->position = insert(-3, 1, 0, center3);
 //	tmp->type = 'P';
 //	tmp->intensity = 0.6;
-	//directional - направленный источник света
+//	directional - направленный источник света
 	tmp->next = (t_light *)ft_memalloc(sizeof(t_light));
 	center3 = (t_pos *)ft_memalloc(sizeof(t_pos));
 	tmp = tmp->next;
@@ -65,7 +65,7 @@ t_light		*init_light(t_light *light)
 **  	Вычисляет яркость пикселя сферы в зависимости от источников света
 */
 
-double		computer_lighting(t_pos *p, t_pos *n, t_pos *v, int s, t_light *light)
+double		computer_lighting(t_pos *p, t_pos *n, t_pos *v, int s, t_light *light, t_sphere *sphere)
 {
 	double		intens;
 	t_light		*tmp;
@@ -74,6 +74,8 @@ double		computer_lighting(t_pos *p, t_pos *n, t_pos *v, int s, t_light *light)
 	double		r_dot_v;
 	t_pos		r;
 	t_pos		buf;
+	t_return	shadow;
+	double		t_max;
 
 	intens = 0.0;
 	tmp = light;
@@ -84,16 +86,29 @@ double		computer_lighting(t_pos *p, t_pos *n, t_pos *v, int s, t_light *light)
 		else
 		{
 			if (tmp->type == 'P')
+			{
 				l = vector_minus(tmp->position, p);
+				t_max = 1.0;
+			}
 			else if (tmp->type == 'D')
 			{
 				l.x = tmp->position->x;
 				l.y = tmp->position->y;
 				l.z = tmp->position->z;
+				t_max = INFINITY;
 			}
+			// Проверка тени
+			shadow = closest_intersection(p, &l, 0.001, t_max, sphere);
+			if (shadow.closest_sphere != NULL)
+			{
+				tmp = tmp->next;
+				continue;
+			}
+			// Диффузность
 			n_dot_l = dot(n, &l);
 			if (n_dot_l > 1)
 				intens += tmp->intensity * n_dot_l / (vector_len(n) * vector_len(&l));
+			// Зеркальность
 			if (s != -1)
 			{
 				buf = vector_on_number(n, 2);

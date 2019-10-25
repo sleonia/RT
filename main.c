@@ -13,97 +13,107 @@
 #include "rtv1.h"
 
 /*
-** Решает квадратное уравнение и возвращает два корня если есть, если нет то INF
+** 		Решает квадратное уравнение и возвращает два корня если есть, если нет то INF
 */
 
-t_result	*intersect_ray_sphere(t_result *res, t_cam *o, t_view *d, t_sphere *sphere)
+t_result	intersect_ray_sphere(t_pos *o, t_pos *d, t_sphere *sphere)
 {
 	t_pos		oc;
 	double		k1;
 	double		k2;
 	double		k3;
+	t_result	res;
 
 
-	oc = vector_minus(o->position, sphere->center);
-	k1 = dot(d->position, d->position);
-	k2 = 2 * dot(&oc, d->position);
+	oc = vector_minus(o, sphere->center);
+	k1 = dot(d, d);
+	k2 = 2 * dot(&oc, d);
 	k3 = dot(&oc, &oc) - sphere->radius * sphere->radius;
 	if (k2 * k2 - 4 * k1 * k3 < 0)
 	{
-		res->t1 = INFINITY;
-		res->t2 = INFINITY;
+		res.t1 = INFINITY;
+		res.t2 = INFINITY;
 		return (res);
 	}
-	res->t1 = (-k2 + sqrt(k2 * k2 - 4 * k1 * k3)) / (2 * k1);
-	res->t2 = (-k2 - sqrt(k2 * k2 - 4 * k1 * k3)) / (2 * k1);
+	res.t1 = (-k2 + sqrt(k2 * k2 - 4 * k1 * k3)) / (2 * k1);
+	res.t2 = (-k2 - sqrt(k2 * k2 - 4 * k1 * k3)) / (2 * k1);
 //	printf ("%f %f\n", res->t1, res->t2);
 	return (res);
 }
 
 /*
-** Находит ближайшую точку в позиции (x, y) среди всех сфер и закрашивает цветом
+** 		Находит ближайшую точку в позиции (x, y) среди всех сфер и возвращает укзатель на сферу и ближайшую точку пересечения
 */
 
-int			trace_ray(t_cam *o, t_view *d, double t_min, double t_max, t_sphere *sphere, t_light *light)
+t_return	closest_intersection(t_pos *o, t_pos *d, double t_min, double t_max, t_sphere *sphere)
 {
-	double		closest_t;
-	t_sphere	*closest_sphere;
-	t_result	*res;
+	t_result	res;
 	t_sphere	*tmp;
+	t_return	ret;
 
-	t_pos		*p;
-	p = (t_pos *)ft_memalloc(sizeof(t_pos));
-	t_pos		*n;
-	n = (t_pos *)ft_memalloc(sizeof(t_pos));
-	t_pos		buf;
-	t_pos		*v;
-
-	closest_t = INFINITY;
-	closest_sphere = NULL;
-	res = (t_result *)ft_memalloc(sizeof(t_result));
+	ret.closest_t = INFINITY;
+	ret.closest_sphere = NULL;
 	tmp = sphere;
 	while (tmp)
 	{
-		res = intersect_ray_sphere(res, o, d, tmp);
-//		printf ("%f %f\n", res->t1, res->t2);
-		if (res->t1 >= t_min && res->t1 <= t_max && res->t1 < closest_t)
+		res = intersect_ray_sphere(o, d, tmp);
+		if (res.t1 >= t_min && res.t1 <= t_max && res.t1 < ret.closest_t)
 		{
-			closest_t = res->t1;
-			closest_sphere = tmp;
+			ret.closest_t = res.t1;
+			ret.closest_sphere = tmp;
 		}
-		if (res->t2 >= t_min && res->t2 <= t_max && res->t2 < closest_t)
+		if (res.t2 >= t_min && res.t2 <= t_max && res.t2 < ret.closest_t)
 		{
-			closest_t = res->t2;
-			closest_sphere = tmp;
+			ret.closest_t = res.t2;
+			ret.closest_sphere = tmp;
 		}
 		tmp = tmp->next;
 	}
-//	printf ("%f %f\n", res->t1, res->t2);
-	free(res);
-	if (closest_sphere == NULL) {
-		free(p);
-		free(n);
-		return (BLACK);
-	}
-	///////////////
-	buf = vector_on_number(d->position, closest_t);
-	*p = vector_pus(o->position, &buf);
-	*n = vector_minus(p, closest_sphere->center);
-	*n = vector_div(n, vector_len(n));
-	buf = vector_on_number(d->position, -1);
-	double c = computer_lighting(p, n, &buf, closest_sphere->specular, light);
-//	printf ("%f", c);
-	int red = (closest_sphere->color & 0xFF0000) >> 16;
+	return (ret);
+}
+
+int 		color_scale(int	color, double c)
+{
+	int 	red;
+	int 	green;
+	int 	blue;
+
+	red = (color & 0xFF0000) >> 16;
 	red = (int)((double)red * c);
-//	printf("%d\n", red);
-	int green = (closest_sphere->color & 0x00FF00) >> 8;
+	green = (color & 0x00FF00) >> 8;
 	green = (int)((double)green * c);
-	int blue = (closest_sphere->color & 0x0000FF);
+	blue = (color & 0x0000FF);
 	blue = (int)((double)blue * c);
-	free(p);
-	free(n);
 	return ((red << 16) | (green << 8) | blue);
-//	return (c * closest_sphere->color);
+}
+
+
+
+/*
+** 		Находит ближайшую точку в позиции (x, y) среди всех сфер и возвращает цвет пикселя
+*/
+
+int			trace_ray(t_pos *o, t_pos *d, double t_min, double t_max, t_sphere *sphere, t_light *light)
+{
+	t_pos		p;
+	t_pos		n;
+	t_pos		buf;
+	t_return	ret;
+	double 		c;
+
+	ret = closest_intersection(o, d, t_min, t_max, sphere);
+	if (ret.closest_sphere == NULL)
+		return (BLACK);
+
+	//Часть для добавления бликов от света
+	buf = vector_on_number(d, ret.closest_t);
+	p = vector_pus(o, &buf);
+	n = vector_minus(&p, ret.closest_sphere->center);
+	n = vector_div(&n, vector_len(&n));
+	buf = vector_on_number(d, -1);
+	// Вычисление коэфа для умножения на цвет сферы
+	c = computer_lighting(&p, &n, &buf, ret.closest_sphere->specular, light, sphere);
+	return (color_scale(ret.closest_sphere->color, c));
 }
 
 
@@ -129,6 +139,7 @@ t_sphere	*init_sphere(t_sphere *sphere)
 	sphere->color = 0xFF0000;
 	sphere->center = insert(0, -1, 3, center1);
 	sphere->specular = 500;
+	sphere->reflective = 0.2;
 
 	sphere->next = (t_sphere *)ft_memalloc(sizeof(t_sphere));
 	center2 = (t_pos *)ft_memalloc(sizeof(t_pos));
@@ -137,6 +148,7 @@ t_sphere	*init_sphere(t_sphere *sphere)
 	tmp->color = 0x0000FF;
 	tmp->center = insert(2, 0, 4, center2);
 	tmp->specular = 500;
+	tmp->reflective = 0.3;
 
 	tmp->next = (t_sphere *)ft_memalloc(sizeof(t_sphere));
 	center3 = (t_pos *)ft_memalloc(sizeof(t_pos));
@@ -145,6 +157,7 @@ t_sphere	*init_sphere(t_sphere *sphere)
 	tmp->color = 0x00FF00;
 	tmp->center = insert(-2, 0, 4, center3);
 	tmp->specular = 10;
+	tmp->reflective = 0.4;
 
 	tmp->next = (t_sphere *)ft_memalloc(sizeof(t_sphere));
 	center4 = (t_pos *)ft_memalloc(sizeof(t_pos));
@@ -153,6 +166,7 @@ t_sphere	*init_sphere(t_sphere *sphere)
 	tmp->color = 0xFFFF00;
 	tmp->center = insert(0, -5001, 0, center4);
 	tmp->specular = 1000;
+	tmp->reflective = 0.5;
 	return (sphere);
 }
 
@@ -176,7 +190,6 @@ int			main(void)
 	o->position = (t_pos *)ft_memalloc(sizeof(t_pos));
 	d = (t_view *)ft_memalloc(sizeof(t_view));
 	d->position = (t_pos *)ft_memalloc(sizeof(t_pos));
-//	d->position = (t_pos *)ft_memalloc(sizeof(t_pos));
 
 	o->position = insert(0, 0, 0, o->position);
 	x = -WIDTH / 2;
@@ -191,7 +204,7 @@ int			main(void)
 		{
 			d->position = canvas_to_viewport(x, y, d->position);
 //			printf("%f %f %f\n", d->position->x, d->position->y, d->position->z);
-			color = trace_ray(o, d, 1.0, INFINITY, sphere, light);
+			color = trace_ray(o->position, d->position, 1.0, INFINITY, sphere, light);
 			sdl->pixels = put_pixel(x, y, color, sdl);
 			y++;
 		}

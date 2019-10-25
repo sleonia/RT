@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   rtv1.h                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: deladia <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/10/25 21:18:10 by deladia           #+#    #+#             */
+/*   Updated: 2019/10/25 21:18:13 by deladia          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef RTV1_RTV1_H
 # define RTV1_RTV1_H
 
@@ -52,9 +64,16 @@ typedef struct 			s_sphere
 	int 				color;
 	double				radius;
 	int 				specular;
+	double				reflective;
 	struct s_sphere		*next;
 	//mb something else
 }						t_sphere;
+
+typedef struct			s_return
+{
+	t_sphere			*closest_sphere;
+	double				closest_t;
+}						t_return;
 
 typedef struct 			s_scene
 {
@@ -110,8 +129,9 @@ t_pos					vector_pus(t_pos *o, t_pos *center);
 t_pos					vector_on_number(t_pos *o, double nbr);
 t_pos					vector_div(t_pos *o, double nbr);
 double					vector_len(t_pos *o);
-double					computer_lighting(t_pos *p, t_pos *n, t_pos *v, int s, t_light *light);
+double					computer_lighting(t_pos *p, t_pos *n, t_pos *v, int s, t_light *light, t_sphere *sphere);
 t_light					*init_light(t_light *light);
 void 					ft_error(char *str);
+t_return				closest_intersection(t_pos *o, t_pos *d, double t_min, double t_max, t_sphere *sphere);
 
 #endif
