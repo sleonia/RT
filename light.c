@@ -15,8 +15,7 @@
 /*
 ** 		Костыльное добавление источников света
 ** 		НУЖЕН ПАРСЕР!!!
-** 		При большой интенсивности черные пятна
-**
+**		Разобраться с источниками света
 */
 
 t_light		*init_light(t_light *light)
@@ -30,6 +29,7 @@ t_light		*init_light(t_light *light)
 	light = (t_light *)ft_memalloc(sizeof(t_light));
 	light->type = 'A';
 	light->intensity = 0.2;
+
 	//point - точечный источник света
 	light->next = (t_light *)ft_memalloc(sizeof(t_light));
 	center2 = (t_pos *)ft_memalloc(sizeof(t_pos));
@@ -87,19 +87,20 @@ double		computer_lighting(t_pos *p, t_pos *n, t_pos *v, int s, t_light *light)
 			n_dot_l = dot(n, &l);
 			if (n_dot_l > 1)
 				intens += tmp->intensity * n_dot_l / (vector_len(n) * vector_len(&l));
-			if (s != -1)
-			{
-				buf = vector_on_number(n, 2);
-				buf = vector_on_number(&buf, dot(n, &l));
-				r =  vector_minus(&buf, &l);
-				r_dot_v = dot(&r, v);
-				if (r_dot_v > 0)
-					intens += tmp->intensity * pow(r_dot_v / (vector_len(&r) * vector_len(v)), s);
-			}
+//			if (s != -1)
+//			{
+//				buf = vector_on_number(n, 2);
+//				buf = vector_on_number(&buf, dot(n, &l));
+//				r =  vector_minus(&buf, &l);
+//				r_dot_v = dot(&r, v);
+//				if (r_dot_v > 0)
+//					intens += tmp->intensity * pow(r_dot_v / (vector_len(&r) * vector_len(v)), s);
+//			}
 		}
 		tmp = tmp->next;
 	}
-	if (intens > 1)
-		return (1);
+//	printf("%f\n", intens);
+	if (intens > 1.0)
+		return (1.0);
 	return (intens);
 }
