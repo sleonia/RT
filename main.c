@@ -212,8 +212,8 @@ int 		trace_start(t_sdl *sdl, t_scene *scene)
 		y = -HEIGHT / 2;
 		while(y < HEIGHT / 2)
 		{
-			scene->view = canvas_to_viewport(x, y, scene->view);
-			color = trace_ray(scene->cam, scene->view, 1.0, INFINITY, scene, 3);
+			scene->view = vector_on_vector(scene->cam->cam_rotation, canvas_to_viewport(x, y, scene->view), scene->view);
+			color = trace_ray(scene->cam->position, scene->view, 1.0, INFINITY, scene, 3);
 			sdl->pixels = put_pixel(x, y, color, sdl);
 			y++;
 		}
@@ -233,8 +233,12 @@ int			main(void)
 
 	rtv1->scene = (t_scene *)ft_memalloc(sizeof(t_scene));
 
-	rtv1->scene->cam = (t_pos *)ft_memalloc(sizeof(t_pos));
-	rtv1->scene->cam = insert(0, 0, 0, rtv1->scene->cam);
+	rtv1->scene->cam = (t_cam *)ft_memalloc(sizeof(t_cam));
+	rtv1->scene->cam->position = (t_pos *)ft_memalloc(sizeof(t_pos));
+	rtv1->scene->cam->cam_rotation = (t_pos *)ft_memalloc(sizeof(t_pos));
+	rtv1->scene->cam->position = insert(0, 0, 0, rtv1->scene->cam->position);
+	//разобраться с поворотом камеры
+	rtv1->scene->cam->cam_rotation = insert(1, 1, 1, rtv1->scene->cam->cam_rotation);
 
 	rtv1->scene->view = (t_pos *)ft_memalloc(sizeof(t_pos));
 
