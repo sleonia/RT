@@ -27,14 +27,35 @@ void		ft_error(char *str)
 	exit(1);
 }
 
+void		ft_free(t_rtv1 *rtv1)
+{
+	free(rtv1->sdl);
+	free(rtv1->scene->cam);
+	free(rtv1->scene->view);
+	free(rtv1->scene->figure->sphere);
+	free(rtv1->scene->figure);
+	free(rtv1->scene);
+	free(rtv1);
+}
+
+int 		sdl_update(t_sdl *sdl)
+{
+	SDL_UpdateTexture(sdl->texture, NULL, sdl->pixels,
+					  WIDTH * sizeof(int));
+	SDL_RenderCopy(sdl->render, sdl->texture, NULL, NULL);
+	SDL_RenderPresent(sdl->render);
+	return (0);
+}
+
 /*
 ** 	Бесконечный цикл реагирующий на нажатие клавишь и обновляющий после этого текстуру
 */
-int			sdl_control(t_sdl *sdl)
+int			sdl_control(t_sdl *sdl, t_scene *scene)
 {
 	char	quit;
 
 	quit = 0;
+	sdl_update(sdl);
 	while (!quit)
 	{
 		while (SDL_PollEvent(&sdl->event))
@@ -47,10 +68,17 @@ int			sdl_control(t_sdl *sdl)
 				//сравниваем с тем что нажато и делаем то что нужно
 				if (sdl->event.key.keysym.scancode == SDL_SCANCODE_ESCAPE)
 					quit = 1;
-				SDL_UpdateTexture(sdl->texture, NULL, sdl->pixels,
-						WIDTH * sizeof(int));
-				SDL_RenderCopy(sdl->render, sdl->texture, NULL, NULL);
-				SDL_RenderPresent(sdl->render);
+				if (sdl->event.key.keysym.scancode == SDL_SCANCODE_K)
+				{
+					scene->cam->z += 0.1;
+					trace_start(sdl, scene);
+				}
+				if (sdl->event.key.keysym.scancode == SDL_SCANCODE_J)
+				{
+					scene->cam->z -= 0.1;
+					trace_start(sdl, scene);
+				}
+				sdl_update(sdl);
 			}
 		}
 	}
