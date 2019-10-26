@@ -65,7 +65,7 @@ t_light		*init_light(t_light *light)
 **  	Вычисляет яркость пикселя сферы в зависимости от источников света
 */
 
-double		computer_lighting(t_pos *p, t_pos *n, t_pos *v, int s, t_light *light, t_sphere *sphere)
+double		computer_lighting(t_pos *p, t_pos *n, t_pos *v, int s, t_scene *scene)
 {
 	double		intens;
 	t_light		*tmp;
@@ -78,7 +78,7 @@ double		computer_lighting(t_pos *p, t_pos *n, t_pos *v, int s, t_light *light, t
 	double		t_max;
 
 	intens = 0.0;
-	tmp = light;
+	tmp = scene->light;
 	while (tmp)
 	{
 		if (tmp->type == 'A')
@@ -98,7 +98,7 @@ double		computer_lighting(t_pos *p, t_pos *n, t_pos *v, int s, t_light *light, t
 				t_max = INFINITY;
 			}
 			// Проверка тени
-			shadow = closest_intersection(p, &l, 0.001, t_max, sphere);
+			shadow = closest_intersection(p, &l, 0.001, t_max, scene->figure->sphere);
 			if (shadow.closest_sphere != NULL)
 			{
 				tmp = tmp->next;

@@ -37,17 +37,17 @@ typedef struct			s_pos
 	double 				z;
 }						t_pos;
 
-typedef struct 			s_view
-{
-	t_pos				*position;
-	//mb something else
-}						t_view;
+//typedef struct 			s_view
+//{
+//	t_pos				*position;
+//	//mb something else
+//}						t_view;
 
-typedef struct 			s_cam
-{
-	t_pos				*position;
-	//mb something else
-}						t_cam;
+//typedef struct 			s_cam
+//{
+//	t_pos				*position;
+//	//mb something else
+//}						t_cam;
 
 typedef struct 			s_light
 {
@@ -58,6 +58,39 @@ typedef struct 			s_light
 	//mb something else
 }						t_light;
 
+typedef struct 			s_cylinder
+{
+	t_pos				*center;
+	double 				height;
+	int 				color;
+	double				radius;
+	int 				specular;
+	double				reflective;
+	struct s_cylinder	*next;
+}						t_cylinder;
+
+typedef struct 			s_cone
+{
+	t_pos				*center;
+//	double 				height;
+	int 				color;
+//	double				radius;
+	int 				specular;
+	double				reflective;
+	struct s_cone		*next;
+}						t_cone;
+
+typedef struct 			s_plane
+{
+//	t_pos				*center;
+//	double 				height;
+	int 				color;
+//	double				radius;
+	int 				specular;
+	double				reflective;
+	struct s_plane		*next;
+}						t_plane;
+
 typedef struct 			s_sphere
 {
 	t_pos				*center;
@@ -66,7 +99,6 @@ typedef struct 			s_sphere
 	int 				specular;
 	double				reflective;
 	struct s_sphere		*next;
-	//mb something else
 }						t_sphere;
 
 typedef struct			s_return
@@ -75,12 +107,20 @@ typedef struct			s_return
 	double				closest_t;
 }						t_return;
 
+typedef struct			s_figure
+{
+	t_cylinder			*cylinder;
+	t_sphere			*sphere;
+	t_cone				*cone;
+	t_plane				*plane;
+}						t_figure;
+
 typedef struct 			s_scene
 {
-	t_view				*view;
-	t_cam				*cam;
+	t_pos				*view;
+	t_pos				*cam;
 	t_light				*light;
-	t_sphere			*figure;
+	t_figure			*figure;
 	//mb something else
 }						t_scene;
 
@@ -123,15 +163,16 @@ t_pos					*canvas_to_viewport(int x, int y, t_pos *pos);
 t_pos					vector_minus(t_pos *o, t_pos	*center);
 double 					dot(t_pos *a, t_pos *b);
 int						sdl_init(t_sdl *sdl);
-int						sdl_control(t_sdl *sdl);
+int						sdl_control(t_sdl *sdl, t_scene *scene);
 int						*put_pixel(double x, double y, int color, t_sdl *sdl);
 t_pos					vector_pus(t_pos *o, t_pos *center);
 t_pos					vector_on_number(t_pos *o, double nbr);
 t_pos					vector_div(t_pos *o, double nbr);
 double					vector_len(t_pos *o);
-double					computer_lighting(t_pos *p, t_pos *n, t_pos *v, int s, t_light *light, t_sphere *sphere);
+double					computer_lighting(t_pos *p, t_pos *n, t_pos *v, int s, t_scene *scene);
 t_light					*init_light(t_light *light);
 void 					ft_error(char *str);
 t_return				closest_intersection(t_pos *o, t_pos *d, double t_min, double t_max, t_sphere *sphere);
+int						trace_start(t_sdl *sdl, t_scene *scene);
 
 #endif
