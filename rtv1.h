@@ -25,6 +25,18 @@
 # define WHITE 0xFFFFFF
 # define BLACK 0x000000
 
+typedef struct 			s_dictionary
+{
+	char				*object[3];
+	char				*camera_properties[2];
+	char				*light_properties[3];
+	char 				*figure_type[4];
+	char 				*figure_properties[6];
+	char 				*id[10];
+	char 				*light_type[3];
+	char 				token[10];
+}						t_dictionary;
+
 typedef struct			s_result
 {
 	double 				t1;

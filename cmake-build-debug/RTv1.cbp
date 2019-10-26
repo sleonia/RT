@@ -295,6 +295,9 @@
 		<Unit filename="/Users/deladia/CLionProjects/RTv11/main.c">
 			<Option target="RTv1"/>
 		</Unit>
+		<Unit filename="/Users/deladia/CLionProjects/RTv11/parser.c">
+			<Option target="RTv1"/>
+		</Unit>
 		<Unit filename="/Users/deladia/CLionProjects/RTv11/rtv1.h">
 			<Option target="RTv1"/>
 		</Unit>
