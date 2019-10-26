@@ -610,6 +610,10 @@ close_code.h
 
 /Users/deladia/.brew/include/SDL2/close_code.h
 
+/Users/deladia/CLionProjects/RTv11/helps.c
+rtv1.h
+/Users/deladia/CLionProjects/RTv11/rtv1.h
+
 /Users/deladia/CLionProjects/RTv11/libft/get_next_line.h
 stdio.h
 -
@@ -640,11 +644,21 @@ get_next_line.h
 rtv1.h
 /Users/deladia/CLionProjects/RTv11/rtv1.h
 
+/Users/deladia/CLionProjects/RTv11/main.c
+rtv1.h
+/Users/deladia/CLionProjects/RTv11/rtv1.h
+
 /Users/deladia/CLionProjects/RTv11/rtv1.h
 libft/libft.h
 /Users/deladia/CLionProjects/RTv11/libft/libft.h
 SDL.h
 -
+OpenCL/opencl.h
+-
 math.h
 -
+
+/Users/deladia/CLionProjects/RTv11/sdl.c
+rtv1.h
+/Users/deladia/CLionProjects/RTv11/rtv1.h
 

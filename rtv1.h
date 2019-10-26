@@ -15,6 +15,7 @@
 
 #include "libft/libft.h"
 #include <SDL.h>
+#include <OpenCL/opencl.h>
 #include <math.h>
 # define WIDTH 1280
 # define HEIGHT 1024
@@ -118,7 +119,7 @@ typedef struct 			s_scene
 	//mb something else
 }						t_scene;
 
-/*typedef struct		s_cl
+typedef struct		s_cl
 {
 	cl_platform_id		platform_id;
 	cl_uint				ret_num_platforms;
@@ -132,7 +133,7 @@ typedef struct 			s_scene
 	cl_mem				memobjs;
 	char 				*program_source;
 	size_t 				program_size;
-}						t_cl;*/
+}						t_cl;
 
 typedef struct 			s_sdl
 {
@@ -147,7 +148,7 @@ typedef struct 			s_sdl
 typedef struct 			s_rtv1
 {
 	t_sdl				*sdl;
-//	t_sl				*opencl;
+	t_cl				*opencl;
 	t_scene				*scene;
 	//mb something else
 }						t_rtv1;

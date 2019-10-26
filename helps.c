@@ -19,7 +19,6 @@ int 		*put_pixel(double x, double y, int color, t_sdl *sdl)
 
 	xnew = WIDTH / 2 + (int)x;
 	ynew = HEIGHT / 2 - (int)y;
-//	printf("%d \n", (int)xnew + (int)ynew * WIDTH);
 	sdl->pixels[xnew + ynew * WIDTH] = color;
 	return (sdl->pixels);
 }
