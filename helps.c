@@ -114,6 +114,18 @@ t_pos		vector_pus(t_pos *o, t_pos *center)
 }
 
 /*
+** Векторное произведение
+*/
+
+t_pos		*vector_on_vector(t_pos *a, t_pos *b, t_pos *ab)
+{
+	ab->x = a->x * b->x;
+	ab->y = a->y * b->y;
+	ab->z = a->z * b->z;
+	return (ab);
+}
+
+/*
 ** Скалярное произведение векторов
 */
 

@@ -68,16 +68,50 @@ int			sdl_control(t_sdl *sdl, t_scene *scene)
 				//сравниваем с тем что нажато и делаем то что нужно
 				if (sdl->event.key.keysym.scancode == SDL_SCANCODE_ESCAPE)
 					quit = 1;
-				if (sdl->event.key.keysym.scancode == SDL_SCANCODE_K)
+				if (sdl->event.key.keysym.scancode == SDL_SCANCODE_W)
 				{
-					scene->cam->z += 0.1;
+					scene->cam->position->z += 0.1;
 					trace_start(sdl, scene);
 				}
-				if (sdl->event.key.keysym.scancode == SDL_SCANCODE_J)
+				if (sdl->event.key.keysym.scancode == SDL_SCANCODE_S)
 				{
-					scene->cam->z -= 0.1;
+					scene->cam->position->z -= 0.1;
 					trace_start(sdl, scene);
 				}
+				if (sdl->event.key.keysym.scancode == SDL_SCANCODE_A)
+				{
+					scene->cam->position->x -= 0.1;
+					trace_start(sdl, scene);
+				}
+				if (sdl->event.key.keysym.scancode == SDL_SCANCODE_D)
+				{
+					scene->cam->position->x += 0.1;
+					trace_start(sdl, scene);
+				}
+				if (sdl->event.key.keysym.scancode == SDL_SCANCODE_R)
+				{
+					scene->cam->position->y += 0.1;
+					trace_start(sdl, scene);
+				}
+				if (sdl->event.key.keysym.scancode == SDL_SCANCODE_F)
+				{
+					scene->cam->position->y -= 0.1;
+					trace_start(sdl, scene);
+				}
+//				if (sdl->event.key.keysym.scancode == SDL_SCANCODE_Z)
+//				{
+//					scene->cam->cam_rotation->z -= 0.1;
+//					scene->cam->cam_rotation->y -= 0.1;
+//					scene->cam->cam_rotation->x -= 0.1;
+//					trace_start(sdl, scene);
+//				}
+//				if (sdl->event.key.keysym.scancode == SDL_SCANCODE_X)
+//				{
+//					scene->cam->cam_rotation->z += 0.1;
+//					scene->cam->cam_rotation->y += 0.1;
+//					scene->cam->cam_rotation->x += 0.1;
+//					trace_start(sdl, scene);
+//				}
 				sdl_update(sdl);
 			}
 		}

@@ -65,7 +65,7 @@ t_light		*init_light(t_light *light)
 **  	Вычисляет яркость пикселя сферы в зависимости от источников света
 */
 
-double		computer_lighting(t_pos *p, t_pos *n, t_pos *v, int s, t_scene *scene)
+double		computer_lighting(t_pos *p, t_pos *n, t_pos *v, int specular, t_scene *scene)
 {
 	double		intens;
 	t_light		*tmp;
@@ -109,20 +109,19 @@ double		computer_lighting(t_pos *p, t_pos *n, t_pos *v, int s, t_scene *scene)
 			if (n_dot_l > 1)
 				intens += tmp->intensity * n_dot_l / (vector_len(n) * vector_len(&l));
 			// Зеркальность
-			if (s != -1)
+			if (specular != -1)
 			{
 				buf = vector_on_number(n, 2);
 				buf = vector_on_number(&buf, dot(n, &l));
 				r =  vector_minus(&buf, &l);
 				r_dot_v = dot(&r, v);
 				if (r_dot_v > 0)
-					intens += tmp->intensity * pow(r_dot_v / (vector_len(&r) * vector_len(v)), s);
+					intens += tmp->intensity * pow(r_dot_v / (vector_len(&r) * vector_len(v)), specular);
 			}
 		}
 		tmp = tmp->next;
 	}
-//	printf("%f\n", intens);
-	if (intens >= 1.0)
+	if (intens > 1.0)
 		return (1.0);
 	return (intens);
 }

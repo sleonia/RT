@@ -37,18 +37,6 @@ typedef struct			s_pos
 	double 				z;
 }						t_pos;
 
-//typedef struct 			s_view
-//{
-//	t_pos				*position;
-//	//mb something else
-//}						t_view;
-
-//typedef struct 			s_cam
-//{
-//	t_pos				*position;
-//	//mb something else
-//}						t_cam;
-
 typedef struct 			s_light
 {
 	char 				type;
@@ -115,10 +103,16 @@ typedef struct			s_figure
 	t_plane				*plane;
 }						t_figure;
 
+typedef struct			s_cam
+{
+	t_pos				*position;
+	t_pos				*cam_rotation;
+}						t_cam;
+
 typedef struct 			s_scene
 {
 	t_pos				*view;
-	t_pos				*cam;
+	t_cam				*cam;
 	t_light				*light;
 	t_figure			*figure;
 	//mb something else
@@ -174,5 +168,6 @@ t_light					*init_light(t_light *light);
 void 					ft_error(char *str);
 t_return				closest_intersection(t_pos *o, t_pos *d, double t_min, double t_max, t_sphere *sphere);
 int						trace_start(t_sdl *sdl, t_scene *scene);
+t_pos					*vector_on_vector(t_pos *a, t_pos *b, t_pos *ab);
 
 #endif
