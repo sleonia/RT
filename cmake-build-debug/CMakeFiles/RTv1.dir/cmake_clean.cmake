@@ -68,6 +68,7 @@ file(REMOVE_RECURSE
   "CMakeFiles/RTv1.dir/helps.c.o"
   "CMakeFiles/RTv1.dir/sdl.c.o"
   "CMakeFiles/RTv1.dir/light.c.o"
+  "CMakeFiles/RTv1.dir/parser.c.o"
   "RTv1.pdb"
   "RTv1"
 )
