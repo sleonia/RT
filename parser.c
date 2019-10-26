@@ -119,7 +119,7 @@ int 			ft_open(t_scene *scene, char *file)
 				{
 					if (ft_strchr(line, dict->token[0]))
 					{
-						
+
 					}
 				}
 				else if (ft_strstr(line, dict->camera_properties[1]))
