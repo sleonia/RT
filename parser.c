@@ -59,25 +59,33 @@ t_dictionary	*dictionary(void)
 	dict->figure_properties[4] = "position:";
 	dict->figure_properties[5] = "height:";
 
-	dict->id[0] = "0:";
-	dict->id[1] = "1:";
-	dict->id[2] = "2:";
-	dict->id[3] = "3:";
-	dict->id[4] = "4:";
-	dict->id[5] = "5:";
-	dict->id[6] = "6:";
-	dict->id[7] = "7:";
-	dict->id[8] = "8:";
-	dict->id[9] = "9:";
-
-	dict->token[0] = '{';
-	dict->token[1] = '}';
-	dict->token[2] = ',';
-	dict->token[3] = '.';
-	dict->token[4] = '0';
-	dict->token[5] = 'x';
-
+	dict->separatorn[0] = '{';
+	dict->separatorn[1] = '}';
+	dict->separatorn[2] = ',';
+	dict->separatorn[3] = '.';
+	dict->separatorn[4] = '0';
+	dict->separatorn[5] = 'x';
+	dict->separatorn[6] = ':';
+	dict->separatorn[6] = '"';
 	return (dict);
+}
+
+char 			*word(char *file_sorce)
+{
+	char	*buf;
+	int 	i;
+
+	i = 0;
+	if (*file_sorce++ == '"')
+	{
+		while (*file_sorce != '"')
+		{
+			buf[i] = *file_sorce;
+			i++;
+			file_sorce++;
+		}
+	}
+	return (buf);
 }
 
 t_scene			*parse(t_scene *scene, char *file_sorce, t_dictionary *dict)
@@ -89,62 +97,19 @@ t_scene			*parse(t_scene *scene, char *file_sorce, t_dictionary *dict)
 int 			ft_open(t_scene *scene, char *file)
 {
 	ssize_t			fd;
-	char 			*file_source;
 	char 			*line;
 	t_dictionary	*dict;
+
 
 	if ((fd = open(file, O_RDONLY)) < 0)
 		parser_error("Can't open file!");
 	dict = dictionary();
-//	get_next_line(fd, &line);
-//	file_source = ft_strdup(line);
-//	free(line);
-//	while (get_next_line(fd, &line) > 0)
-//	{
-//		file_source = ft_strjoin(file_source, line);
-//		file_source = ft_strjoin(file_source, "\n");
-//		free(line);
-//	}
-	if (get_next_line(fd, &line))
+	while (get_next_line(fd, &line) > 0)
 	{
-		if (ft_strcmp(line, dict->object[0]))
-		{
-			free(line);
-			get_next_line(fd, &line);
-			if (ft_strchr(line, dict->token[0]))
-			{
-				free(line);
-				get_next_line(fd, &line);
-				if (ft_strstr(line, dict->camera_properties[0]))
-				{
-					if (ft_strchr(line, dict->token[0]))
-					{
 
-					}
-				}
-				else if (ft_strstr(line, dict->camera_properties[1]))
-				{
-
-				}
-				else
-					parser_error("Syntax error");
-			}
-			else
-				parser_error("Syntax error");
-
-		}
-		else if (ft_strcmp(line, dict->object[1]))
-		{
-
-		}
-		else if (ft_strcmp(line, dict->object[0]))
-		{
-
-		}
-		else
-			parser_error("Syntax error");
+		free(line);
 	}
-	parse(scene, line, dict);
+
 //	printf("%s", file_source);
 	return (0);
 }
@@ -155,3 +120,4 @@ int 			ft_open(t_scene *scene, char *file)
 //токен float, int, 16-система, {}, ',', id(0, 1, 2...)
 //токен для света тип света
 //каждае ключевое слово в кавычки и двгать поинтер чтобы запомирнать позицию
+//чекать до сепаратора {} ' ' , :

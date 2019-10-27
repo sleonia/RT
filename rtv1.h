@@ -25,6 +25,30 @@
 # define WHITE 0xFFFFFF
 # define BLACK 0x000000
 
+typedef enum			e_type
+{
+	Object = 1,
+	Subobject,
+	Properties,
+	Options,
+	Separator,
+	Id_light,
+	Id_sphere,
+	Id_cone,
+	Id_cylinder,
+	Id_plane,
+	Hex,
+	Oct,
+	Double_presition
+}						t_type;
+
+typedef struct			s_token
+{
+	char				*value;
+	t_type				type;
+	struct s_token		*next;
+}						t_token;
+
 typedef struct 			s_dictionary
 {
 	char				*object[3];
@@ -34,7 +58,7 @@ typedef struct 			s_dictionary
 	char 				*figure_properties[6];
 	char 				*id[10];
 	char 				*light_type[3];
-	char 				token[10];
+	char 				separatorn[10];
 }						t_dictionary;
 
 typedef struct			s_result
