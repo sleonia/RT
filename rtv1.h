@@ -58,7 +58,7 @@ typedef struct 			s_dictionary
 	char 				*figure_properties[6];
 	char 				*id[10];
 	char 				*light_type[3];
-	char 				separatorn[10];
+	char 				separatorn[6];
 }						t_dictionary;
 
 typedef struct			s_result
