@@ -13,13 +13,6 @@
 #include "rtv1.h"
 #include "libft/libft.h"
 
-void			parser_error(char *str)
-{
-	ft_putstr(str);
-	ft_putstr("\n");
-	exit(1);
-}
-
 //t_cam	*create_camera()
 //{
 //	t_cam	*cam
@@ -64,45 +57,79 @@ t_dictionary	*dictionary(void)
 	dict->separatorn[2] = ',';
 	dict->separatorn[3] = '.';
 	dict->separatorn[4] = ':';
+	dict->separatorn[5] = '"';
 	return (dict);
 }
 
-char 			*word(char *file_sorce)
-{
-	char		*buf;
-	int 		i;
+//char 			*word(char *file_sorce)
+//{
+//	char		*buf;
+//	int 		i;
+//
+//	i = 0;
+//	if (*file_sorce++ == '"')
+//	{
+//		while (*file_sorce != '"')
+//		{
+//			buf[i] = *file_sorce;
+//			i++;
+//			file_sorce++;
+//		}
+//	}
+//	return (buf);
+//}
 
-	i = 0;
-	if (*file_sorce++ == '"')
-	{
-		while (*file_sorce != '"')
-		{
-			buf[i] = *file_sorce;
-			i++;
-			file_sorce++;
-		}
-	}
-	return (buf);
-}
-
-int 			word_len(char *line)
+int 			word_len(char *line, t_dictionary *dict)
 {
 	int 		len;
+	int 		j;
+
+	len = 0;
+	while(line[len] != '\0' && line[len] != ' ' && line[len] != '\t')
+	{
+		len++;
+		j = 6;
+		while(j-- > 0)
+		{
+			if (line[len - 1] == dict->separatorn[j])
+				return (len == 1 ? len : len - 1);
+		}
+	}
+	return (len);
+}
+
+char 			*create_word(char **line, t_dictionary *dict)
+{
+	char 		*word;
 	int 		i;
+	int 		len;
 
 	i = 0;
-	while(line[i])
-	return (len);
+	while (**line == ' ' || **line == '\t')
+		(*line)++;
+	len = word_len(*line, dict);
+	if (!(word = (char *)ft_memalloc(sizeof(char) * len + 1)))
+		ft_error("Memory not allocated (for word)");
+	while(len-- > 0)
+	{
+		word[i] = **line;
+		i++;
+		(*line)++;
+	}
+	word[i] = '\0';
+	return (word);
 }
 
 t_token			*parse(char *line, t_dictionary *dict, t_token *token)
 {
-	int 	i;
+	char 	*word;
 
-	i = 0;
 	while(*line != '\0')
 	{
-
+		word = create_word(&line, dict);
+		printf("%s\n", word);
+		free(word);
+//		line++;
 	}
 	return (token);
 }
@@ -117,7 +144,7 @@ int 			ft_open(t_scene *scene, char *file)
 
 
 	if ((fd = open(file, O_RDONLY)) < 0)
-		parser_error("Can't open file!");
+		ft_error("Can't open file!");
 	dict = dictionary();
 	token_head = (t_token *)ft_memalloc(sizeof(t_token));
 	token_tmp = token_head;
@@ -131,6 +158,14 @@ int 			ft_open(t_scene *scene, char *file)
 	return (0);
 }
 
+int 	main(void)
+{
+	t_scene		*scene;
+
+	scene = NULL;
+	ft_open(scene, "../param.json");
+	return (0);
+}
 //объекты -> свойства -> параметры
 //для фигуо объект -> фигура -> свойста -> параметры
 // разделитель , .
