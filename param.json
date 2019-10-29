@@ -11,10 +11,10 @@
 				"position":				{3, 1, 0}
 			2:
 				"type":					"ambient"
-				"intensity":				0.2
+				"intensity":			0.2
 			3:
 				"type":					"directional"
-				"intesity":				0.2
+				"intensity":				0.2
 				"position":				{1, 4, 4}
 }
 "figure":
@@ -76,6 +76,3 @@
 		}
 }
 
-//написать стандарт документацию
-//строка двойная ковычка
-//использовать буквы как ключевые слова
