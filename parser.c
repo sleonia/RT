@@ -11,15 +11,7 @@
 /* ************************************************************************** */
 
 #include "rtv1.h"
-#include "libft/libft.h"
 
-//t_cam	*create_camera()
-//{
-//	t_cam	*cam
-//
-//	return ()
-//}
-//
 t_dictionary	*dictionary(void)
 {
 	t_dictionary	*dict;
@@ -38,7 +30,7 @@ t_dictionary	*dictionary(void)
 
 	dict->light_type[0] = "point";
 	dict->light_type[1] = "ambient";
-	dict->light_type[2] = "derectional";
+	dict->light_type[2] = "directional";
 
 	dict->figure_type[0] = "sphere";
 	dict->figure_type[1] = "cone";
@@ -52,32 +44,13 @@ t_dictionary	*dictionary(void)
 	dict->figure_properties[4] = "position:";
 	dict->figure_properties[5] = "height";
 
-	dict->separatorn[0] = '{';
-	dict->separatorn[1] = '}';
-	dict->separatorn[2] = ',';
-	dict->separatorn[3] = '.';
-	dict->separatorn[4] = ':';
-	dict->separatorn[5] = '"';
+	dict->separator[0] = '{';
+	dict->separator[1] = '}';
+	dict->separator[2] = ',';
+	dict->separator[3] = ':';
+	dict->separator[4] = '"';
 	return (dict);
 }
-
-//char 			*word(char *file_sorce)
-//{
-//	char		*buf;
-//	int 		i;
-//
-//	i = 0;
-//	if (*file_sorce++ == '"')
-//	{
-//		while (*file_sorce != '"')
-//		{
-//			buf[i] = *file_sorce;
-//			i++;
-//			file_sorce++;
-//		}
-//	}
-//	return (buf);
-//}
 
 int 			word_len(char *line, t_dictionary *dict)
 {
@@ -88,10 +61,10 @@ int 			word_len(char *line, t_dictionary *dict)
 	while(line[len] != '\0' && line[len] != ' ' && line[len] != '\t')
 	{
 		len++;
-		j = 6;
+		j = 5;
 		while(j-- > 0)
 		{
-			if (line[len - 1] == dict->separatorn[j])
+			if (line[len - 1] == dict->separator[j])
 				return (len == 1 ? len : len - 1);
 		}
 	}
@@ -120,6 +93,108 @@ char 			*create_word(char **line, t_dictionary *dict)
 	return (word);
 }
 
+t_type			is_text(char *word, t_dictionary *dict)
+{
+	int 		i;
+
+	i = 0;
+	while(i < 3)
+		if (!ft_strcmp(word, dict->object[i++]))
+			return (Object);
+	i = 0;
+	while(i < 2)
+		if (!ft_strcmp(word, dict->camera_properties[i++]))
+			return (Camera_properties);
+	i = 0;
+	while(i < 3)
+		if (!ft_strcmp(word, dict->light_properties[i++]))
+			return (Light_properties);
+	i = 0;
+	while(i < 6)
+		if (!ft_strcmp(word, dict->figure_properties[i++]))
+			return (Figure_properties);
+	i = 0;
+	while(i < 3)
+		if (!ft_strcmp(word, dict->light_type[i++]))
+			return (Light_type);
+	i = 0;
+	while(i < 4)
+		if (!ft_strcmp(word, dict->figure_type[i++]))
+			return (Subobject);
+	return (None);
+}
+
+t_type			is_separator(char *word, t_dictionary *dict)
+{
+	int 		i;
+
+	i = 0;
+	while(i < 5)
+	{
+		if (ft_strchr(word, dict->separator[i++]))
+			return (Separator);
+	}
+	return (None);
+}
+
+t_type			is_number(char *word, t_dictionary *dict)
+{
+	int 		i;
+	int 		len;
+
+	i = 0;
+	len = 0;
+	if (word[0] == '-')
+		len++;
+	while(word[i] != '\0')
+	{
+		if (word[i] >= '0' && word[i] <= '9')
+			len++;
+		i++;
+	}
+	if (ft_strlen(word) == len)
+		return (Oct);
+	else if (ft_strlen(word) - len == 1 && word[1] == '.')
+		return (Double_presition);
+	else if (word[0] == '0' && word[1] == 'x')
+		return (Hex);
+	return (None);
+}
+
+t_token			*init_token(char *word, t_token *token, t_type type)
+{
+	if (token == NULL)
+	{
+		token->value = ft_strdup(word);
+		token->type = type;
+	}
+	else
+	{
+		if ((token->next = (t_token *)ft_memalloc(sizeof(t_token))) == NULL)
+			ft_error("Memory not allocated (for token)");
+		token = token->next;
+		token->value = ft_strdup(word);
+		token->type = type;
+	}
+	return (token);
+}
+
+t_token			*create_token(char *word, t_dictionary *dict, t_token *token)
+{
+	t_type		type;
+
+	if ((type = is_text(word, dict)) != None)
+		token = init_token(word, token, type);
+	else if ((type = is_separator(word, dict)) != None)
+		token = init_token(word, token, type);
+	else if ((type = is_number(word, dict)) != None)
+		token = init_token(word, token, type);
+	else
+		ft_error("Non-existent token type");
+//	printf("%d\n", type);
+	return (token);
+}
+
 t_token			*parse(char *line, t_dictionary *dict, t_token *token)
 {
 	char 	*word;
@@ -127,7 +202,8 @@ t_token			*parse(char *line, t_dictionary *dict, t_token *token)
 	while(*line != '\0')
 	{
 		word = create_word(&line, dict);
-		printf("%s\n", word);
+		token = create_token(word, dict, token);
+//		printf("%s\n", word);
 		free(word);
 //		line++;
 	}
@@ -146,14 +222,19 @@ int 			ft_open(t_scene *scene, char *file)
 	if ((fd = open(file, O_RDONLY)) < 0)
 		ft_error("Can't open file!");
 	dict = dictionary();
-	token_head = (t_token *)ft_memalloc(sizeof(t_token));
+	if (!(token_head = (t_token *)ft_memalloc(sizeof(t_token))))
+		ft_error("Memory not allocated (for token)");
 	token_tmp = token_head;
 	while (get_next_line(fd, &line) > 0)
 	{
 		token_tmp = parse(line, dict, token_tmp);
 		free(line);
 	}
-
+	while (token_head)
+	{
+		printf("%s\n", token_head->value);
+		token_head = token_head->next;
+	}
 //	printf("%s", file_source);
 	return (0);
 }
@@ -173,3 +254,11 @@ int 	main(void)
 //токен для света тип света
 //каждае ключевое слово в кавычки и двигать поинтер чтобы запомирнать позицию
 //чекать до сепаратора {} ' ' , :
+
+
+
+//написать стандарт документацию
+//строка двойная ковычка
+//использовать буквы как ключевые слова
+//придумать как избавиться от валидных повторов
+//подменять Hex на Id ????удобно ли

@@ -29,8 +29,10 @@ typedef enum			e_type
 {
 	Object = 1,
 	Subobject,
-	Properties,
-	Options,
+	Light_properties,
+	Camera_properties,
+	Figure_properties,
+	Light_type,
 	Separator,
 	Id_light,
 	Id_sphere,
@@ -39,7 +41,8 @@ typedef enum			e_type
 	Id_plane,
 	Hex,
 	Oct,
-	Double_presition
+	Double_presition,
+	None
 }						t_type;
 
 typedef struct			s_token
@@ -56,9 +59,8 @@ typedef struct 			s_dictionary
 	char				*light_properties[3];
 	char 				*figure_type[4];
 	char 				*figure_properties[6];
-	char 				*id[10];
 	char 				*light_type[3];
-	char 				separatorn[6];
+	char 				separator[6];
 }						t_dictionary;
 
 typedef struct			s_result
