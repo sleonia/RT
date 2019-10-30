@@ -40,7 +40,7 @@ typedef enum			e_type
 	Id_cylinder,
 	Id_plane,
 	Hex,
-	Oct,
+	Dec,
 	Double_presition,
 	None
 }						t_type;
