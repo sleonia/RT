@@ -967,6 +967,45 @@ CMakeFiles/RTv1.dir/parser.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/RTv1.dir/parser.c.s"
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/deladia/CLionProjects/RTv11/parser.c -o CMakeFiles/RTv1.dir/parser.c.s
 
+CMakeFiles/RTv1.dir/dictionary.c.o: CMakeFiles/RTv1.dir/flags.make
+CMakeFiles/RTv1.dir/dictionary.c.o: ../dictionary.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/deladia/CLionProjects/RTv11/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_71) "Building C object CMakeFiles/RTv1.dir/dictionary.c.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/RTv1.dir/dictionary.c.o   -c /Users/deladia/CLionProjects/RTv11/dictionary.c
+
+CMakeFiles/RTv1.dir/dictionary.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/RTv1.dir/dictionary.c.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/deladia/CLionProjects/RTv11/dictionary.c > CMakeFiles/RTv1.dir/dictionary.c.i
+
+CMakeFiles/RTv1.dir/dictionary.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/RTv1.dir/dictionary.c.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/deladia/CLionProjects/RTv11/dictionary.c -o CMakeFiles/RTv1.dir/dictionary.c.s
+
+CMakeFiles/RTv1.dir/validation_token.c.o: CMakeFiles/RTv1.dir/flags.make
+CMakeFiles/RTv1.dir/validation_token.c.o: ../validation_token.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/deladia/CLionProjects/RTv11/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_72) "Building C object CMakeFiles/RTv1.dir/validation_token.c.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/RTv1.dir/validation_token.c.o   -c /Users/deladia/CLionProjects/RTv11/validation_token.c
+
+CMakeFiles/RTv1.dir/validation_token.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/RTv1.dir/validation_token.c.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/deladia/CLionProjects/RTv11/validation_token.c > CMakeFiles/RTv1.dir/validation_token.c.i
+
+CMakeFiles/RTv1.dir/validation_token.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/RTv1.dir/validation_token.c.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/deladia/CLionProjects/RTv11/validation_token.c -o CMakeFiles/RTv1.dir/validation_token.c.s
+
+CMakeFiles/RTv1.dir/creation_token_list.c.o: CMakeFiles/RTv1.dir/flags.make
+CMakeFiles/RTv1.dir/creation_token_list.c.o: ../creation_token_list.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/deladia/CLionProjects/RTv11/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_73) "Building C object CMakeFiles/RTv1.dir/creation_token_list.c.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/RTv1.dir/creation_token_list.c.o   -c /Users/deladia/CLionProjects/RTv11/creation_token_list.c
+
+CMakeFiles/RTv1.dir/creation_token_list.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/RTv1.dir/creation_token_list.c.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/deladia/CLionProjects/RTv11/creation_token_list.c > CMakeFiles/RTv1.dir/creation_token_list.c.i
+
+CMakeFiles/RTv1.dir/creation_token_list.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/RTv1.dir/creation_token_list.c.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/deladia/CLionProjects/RTv11/creation_token_list.c -o CMakeFiles/RTv1.dir/creation_token_list.c.s
+
 # Object files for target RTv1
 RTv1_OBJECTS = \
 "CMakeFiles/RTv1.dir/main.c.o" \
@@ -1038,7 +1077,10 @@ RTv1_OBJECTS = \
 "CMakeFiles/RTv1.dir/helps.c.o" \
 "CMakeFiles/RTv1.dir/sdl.c.o" \
 "CMakeFiles/RTv1.dir/light.c.o" \
-"CMakeFiles/RTv1.dir/parser.c.o"
+"CMakeFiles/RTv1.dir/parser.c.o" \
+"CMakeFiles/RTv1.dir/dictionary.c.o" \
+"CMakeFiles/RTv1.dir/validation_token.c.o" \
+"CMakeFiles/RTv1.dir/creation_token_list.c.o"
 
 # External object files for target RTv1
 RTv1_EXTERNAL_OBJECTS =
@@ -1113,10 +1155,13 @@ RTv1: CMakeFiles/RTv1.dir/helps.c.o
 RTv1: CMakeFiles/RTv1.dir/sdl.c.o
 RTv1: CMakeFiles/RTv1.dir/light.c.o
 RTv1: CMakeFiles/RTv1.dir/parser.c.o
+RTv1: CMakeFiles/RTv1.dir/dictionary.c.o
+RTv1: CMakeFiles/RTv1.dir/validation_token.c.o
+RTv1: CMakeFiles/RTv1.dir/creation_token_list.c.o
 RTv1: CMakeFiles/RTv1.dir/build.make
 RTv1: /Users/deladia/.brew/lib/libSDL2_ttf.a
 RTv1: CMakeFiles/RTv1.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Users/deladia/CLionProjects/RTv11/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_71) "Linking C executable RTv1"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Users/deladia/CLionProjects/RTv11/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_74) "Linking C executable RTv1"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/RTv1.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

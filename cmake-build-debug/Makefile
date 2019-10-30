@@ -123,6 +123,60 @@ RTv1/fast:
 	$(MAKE) -f CMakeFiles/RTv1.dir/build.make CMakeFiles/RTv1.dir/build
 .PHONY : RTv1/fast
 
+creation_token_list.o: creation_token_list.c.o
+
+.PHONY : creation_token_list.o
+
+# target to build an object file
+creation_token_list.c.o:
+	$(MAKE) -f CMakeFiles/RTv1.dir/build.make CMakeFiles/RTv1.dir/creation_token_list.c.o
+.PHONY : creation_token_list.c.o
+
+creation_token_list.i: creation_token_list.c.i
+
+.PHONY : creation_token_list.i
+
+# target to preprocess a source file
+creation_token_list.c.i:
+	$(MAKE) -f CMakeFiles/RTv1.dir/build.make CMakeFiles/RTv1.dir/creation_token_list.c.i
+.PHONY : creation_token_list.c.i
+
+creation_token_list.s: creation_token_list.c.s
+
+.PHONY : creation_token_list.s
+
+# target to generate assembly for a file
+creation_token_list.c.s:
+	$(MAKE) -f CMakeFiles/RTv1.dir/build.make CMakeFiles/RTv1.dir/creation_token_list.c.s
+.PHONY : creation_token_list.c.s
+
+dictionary.o: dictionary.c.o
+
+.PHONY : dictionary.o
+
+# target to build an object file
+dictionary.c.o:
+	$(MAKE) -f CMakeFiles/RTv1.dir/build.make CMakeFiles/RTv1.dir/dictionary.c.o
+.PHONY : dictionary.c.o
+
+dictionary.i: dictionary.c.i
+
+.PHONY : dictionary.i
+
+# target to preprocess a source file
+dictionary.c.i:
+	$(MAKE) -f CMakeFiles/RTv1.dir/build.make CMakeFiles/RTv1.dir/dictionary.c.i
+.PHONY : dictionary.c.i
+
+dictionary.s: dictionary.c.s
+
+.PHONY : dictionary.s
+
+# target to generate assembly for a file
+dictionary.c.s:
+	$(MAKE) -f CMakeFiles/RTv1.dir/build.make CMakeFiles/RTv1.dir/dictionary.c.s
+.PHONY : dictionary.c.s
+
 helps.o: helps.c.o
 
 .PHONY : helps.o
@@ -2013,6 +2067,33 @@ sdl.c.s:
 	$(MAKE) -f CMakeFiles/RTv1.dir/build.make CMakeFiles/RTv1.dir/sdl.c.s
 .PHONY : sdl.c.s
 
+validation_token.o: validation_token.c.o
+
+.PHONY : validation_token.o
+
+# target to build an object file
+validation_token.c.o:
+	$(MAKE) -f CMakeFiles/RTv1.dir/build.make CMakeFiles/RTv1.dir/validation_token.c.o
+.PHONY : validation_token.c.o
+
+validation_token.i: validation_token.c.i
+
+.PHONY : validation_token.i
+
+# target to preprocess a source file
+validation_token.c.i:
+	$(MAKE) -f CMakeFiles/RTv1.dir/build.make CMakeFiles/RTv1.dir/validation_token.c.i
+.PHONY : validation_token.c.i
+
+validation_token.s: validation_token.c.s
+
+.PHONY : validation_token.s
+
+# target to generate assembly for a file
+validation_token.c.s:
+	$(MAKE) -f CMakeFiles/RTv1.dir/build.make CMakeFiles/RTv1.dir/validation_token.c.s
+.PHONY : validation_token.c.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -2022,6 +2103,12 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
 	@echo "... RTv1"
+	@echo "... creation_token_list.o"
+	@echo "... creation_token_list.i"
+	@echo "... creation_token_list.s"
+	@echo "... dictionary.o"
+	@echo "... dictionary.i"
+	@echo "... dictionary.s"
 	@echo "... helps.o"
 	@echo "... helps.i"
 	@echo "... helps.s"
@@ -2232,6 +2319,9 @@ help:
 	@echo "... sdl.o"
 	@echo "... sdl.i"
 	@echo "... sdl.s"
+	@echo "... validation_token.o"
+	@echo "... validation_token.i"
+	@echo "... validation_token.s"
 .PHONY : help
 
 

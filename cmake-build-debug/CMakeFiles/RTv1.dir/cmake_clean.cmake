@@ -69,6 +69,9 @@ file(REMOVE_RECURSE
   "CMakeFiles/RTv1.dir/sdl.c.o"
   "CMakeFiles/RTv1.dir/light.c.o"
   "CMakeFiles/RTv1.dir/parser.c.o"
+  "CMakeFiles/RTv1.dir/dictionary.c.o"
+  "CMakeFiles/RTv1.dir/validation_token.c.o"
+  "CMakeFiles/RTv1.dir/creation_token_list.c.o"
   "RTv1.pdb"
   "RTv1"
 )

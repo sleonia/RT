@@ -12,46 +12,6 @@
 
 #include "rtv1.h"
 
-t_dictionary	*dictionary(void)
-{
-	t_dictionary	*dict;
-
-	dict = (t_dictionary *)ft_memalloc(sizeof(t_dictionary));
-	dict->object[0] = "camera";
-	dict->object[1] = "light";
-	dict->object[2] = "figure";
-
-	dict->camera_properties[0] = "position";
-	dict->camera_properties[1] = "cam_rotation";
-
-	dict->light_properties[0] = "type";
-	dict->light_properties[1] = "intensity";
-	dict->light_properties[2] = "position";
-
-	dict->light_type[0] = "point";
-	dict->light_type[1] = "ambient";
-	dict->light_type[2] = "directional";
-
-	dict->figure_type[0] = "sphere";
-	dict->figure_type[1] = "cone";
-	dict->figure_type[2] = "cylinder";
-	dict->figure_type[3] = "plane";
-
-	dict->figure_properties[0] = "radius";
-	dict->figure_properties[1] = "color";
-	dict->figure_properties[2] = "specular";
-	dict->figure_properties[3] = "reflective";
-	dict->figure_properties[4] = "position:";
-	dict->figure_properties[5] = "height";
-
-	dict->separator[0] = '{';
-	dict->separator[1] = '}';
-	dict->separator[2] = ',';
-	dict->separator[3] = ':';
-	dict->separator[4] = '"';
-	return (dict);
-}
-
 int 			word_len(char *line, t_dictionary *dict)
 {
 	int 		len;
@@ -93,107 +53,10 @@ char 			*create_word(char **line, t_dictionary *dict)
 	return (word);
 }
 
-t_type			is_text(char *word, t_dictionary *dict)
-{
-	int 		i;
-
-	i = 0;
-	while(i < 3)
-		if (!ft_strcmp(word, dict->object[i++]))
-			return (Object);
-	i = 0;
-	while(i < 2)
-		if (!ft_strcmp(word, dict->camera_properties[i++]))
-			return (Camera_properties);
-	i = 0;
-	while(i < 3)
-		if (!ft_strcmp(word, dict->light_properties[i++]))
-			return (Light_properties);
-	i = 0;
-	while(i < 6)
-		if (!ft_strcmp(word, dict->figure_properties[i++]))
-			return (Figure_properties);
-	i = 0;
-	while(i < 3)
-		if (!ft_strcmp(word, dict->light_type[i++]))
-			return (Light_type);
-	i = 0;
-	while(i < 4)
-		if (!ft_strcmp(word, dict->figure_type[i++]))
-			return (Subobject);
-	return (None);
-}
-
-t_type			is_separator(char *word, t_dictionary *dict)
-{
-	int 		i;
-
-	i = 0;
-	while(i < 5)
-	{
-		if (ft_strchr(word, dict->separator[i++]))
-			return (Separator);
-	}
-	return (None);
-}
-
-t_type			is_number(char *word, t_dictionary *dict)
-{
-	int 		i;
-	int 		len;
-
-	i = 0;
-	len = 0;
-	if (word[0] == '-')
-		len++;
-	while(word[i] != '\0')
-	{
-		if (word[i] >= '0' && word[i] <= '9')
-			len++;
-		i++;
-	}
-	if (ft_strlen(word) == len)
-		return (Oct);
-	else if (ft_strlen(word) - len == 1 && word[1] == '.')
-		return (Double_presition);
-	else if (word[0] == '0' && word[1] == 'x')
-		return (Hex);
-	return (None);
-}
-
-t_token			*init_token(char *word, t_token *token, t_type type)
-{
-	if (token == NULL)
-	{
-		token->value = ft_strdup(word);
-		token->type = type;
-	}
-	else
-	{
-		if ((token->next = (t_token *)ft_memalloc(sizeof(t_token))) == NULL)
-			ft_error("Memory not allocated (for token)");
-		token = token->next;
-		token->value = ft_strdup(word);
-		token->type = type;
-	}
-	return (token);
-}
-
-t_token			*create_token(char *word, t_dictionary *dict, t_token *token)
-{
-	t_type		type;
-
-	if ((type = is_text(word, dict)) != None)
-		token = init_token(word, token, type);
-	else if ((type = is_separator(word, dict)) != None)
-		token = init_token(word, token, type);
-	else if ((type = is_number(word, dict)) != None)
-		token = init_token(word, token, type);
-	else
-		ft_error("Non-existent token type");
-//	printf("%d\n", type);
-	return (token);
-}
+/*
+** 		Парсит line по ключевым словам и кладет в односвязный список token
+** 		возвращает указатель на последний добавленный token
+*/
 
 t_token			*parse(char *line, t_dictionary *dict, t_token *token)
 {
@@ -209,6 +72,12 @@ t_token			*parse(char *line, t_dictionary *dict, t_token *token)
 	}
 	return (token);
 }
+
+/*
+** 		Открывает json создает указатель на первый токен token_head
+** 		Читает гнлом построчно и каждую строку сразу отправляет в parse
+** 		Затем вызывает проверку на валидность последовательности токенов
+ */
 
 int 			ft_open(t_scene *scene, char *file)
 {
@@ -230,11 +99,8 @@ int 			ft_open(t_scene *scene, char *file)
 		token_tmp = parse(line, dict, token_tmp);
 		free(line);
 	}
-	while (token_head)
-	{
-		printf("%s\n", token_head->value);
-		token_head = token_head->next;
-	}
+	valiation_token_list(token_head, dict);
+
 //	printf("%s", file_source);
 	return (0);
 }

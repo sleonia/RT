@@ -208,5 +208,8 @@ void 					ft_error(char *str);
 t_return				closest_intersection(t_pos *o, t_pos *d, double t_min, double t_max, t_sphere *sphere);
 int						trace_start(t_sdl *sdl, t_scene *scene);
 t_pos					*vector_on_vector(t_pos *a, t_pos *b, t_pos *ab);
+t_dictionary			*dictionary(void);
+int						valiation_token_list(t_token *token, t_dictionary *dict);
+t_token					*create_token(char *word, t_dictionary *dict, t_token *token);
 
 #endif
