@@ -72,7 +72,7 @@ t_type			is_number(char *word, t_dictionary *dict)
 		i++;
 	}
 	if (ft_strlen(word) == len)
-		return (Oct);
+		return (Dec);
 	else if (ft_strlen(word) - len == 1 && word[1] == '.')
 		return (Double_presition);
 	else if (word[0] == '0' && word[1] == 'x')
@@ -86,7 +86,7 @@ t_type			is_number(char *word, t_dictionary *dict)
 
 t_token			*init_token(char *word, t_token *token, t_type type)
 {
-	if (token == NULL)
+	if (token->value == NULL)
 	{
 		token->value = ft_strdup(word);
 		token->type = type;
