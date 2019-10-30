@@ -14,7 +14,7 @@
 				"intensity":			0.2
 			3:
 				"type":					"directional"
-				"intensity":				0.2
+				"intensity":			0.2
 				"position":				{1, 4, 4}
 }
 "figure":
