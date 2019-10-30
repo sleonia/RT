@@ -4,6 +4,8 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_C
+  "/Users/deladia/CLionProjects/RTv11/creation_token_list.c" "/Users/deladia/CLionProjects/RTv11/cmake-build-debug/CMakeFiles/RTv1.dir/creation_token_list.c.o"
+  "/Users/deladia/CLionProjects/RTv11/dictionary.c" "/Users/deladia/CLionProjects/RTv11/cmake-build-debug/CMakeFiles/RTv1.dir/dictionary.c.o"
   "/Users/deladia/CLionProjects/RTv11/helps.c" "/Users/deladia/CLionProjects/RTv11/cmake-build-debug/CMakeFiles/RTv1.dir/helps.c.o"
   "/Users/deladia/CLionProjects/RTv11/libft/ft_atoi.c" "/Users/deladia/CLionProjects/RTv11/cmake-build-debug/CMakeFiles/RTv1.dir/libft/ft_atoi.c.o"
   "/Users/deladia/CLionProjects/RTv11/libft/ft_bzero.c" "/Users/deladia/CLionProjects/RTv11/cmake-build-debug/CMakeFiles/RTv1.dir/libft/ft_bzero.c.o"
@@ -74,6 +76,7 @@ set(CMAKE_DEPENDS_CHECK_C
   "/Users/deladia/CLionProjects/RTv11/main.c" "/Users/deladia/CLionProjects/RTv11/cmake-build-debug/CMakeFiles/RTv1.dir/main.c.o"
   "/Users/deladia/CLionProjects/RTv11/parser.c" "/Users/deladia/CLionProjects/RTv11/cmake-build-debug/CMakeFiles/RTv1.dir/parser.c.o"
   "/Users/deladia/CLionProjects/RTv11/sdl.c" "/Users/deladia/CLionProjects/RTv11/cmake-build-debug/CMakeFiles/RTv1.dir/sdl.c.o"
+  "/Users/deladia/CLionProjects/RTv11/validation_token.c" "/Users/deladia/CLionProjects/RTv11/cmake-build-debug/CMakeFiles/RTv1.dir/validation_token.c.o"
   )
 set(CMAKE_C_COMPILER_ID "AppleClang")
 

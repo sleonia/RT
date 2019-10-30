@@ -88,6 +88,12 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="/Users/deladia/CLionProjects/RTv11/creation_token_list.c">
+			<Option target="RTv1"/>
+		</Unit>
+		<Unit filename="/Users/deladia/CLionProjects/RTv11/dictionary.c">
+			<Option target="RTv1"/>
+		</Unit>
 		<Unit filename="/Users/deladia/CLionProjects/RTv11/helps.c">
 			<Option target="RTv1"/>
 		</Unit>
@@ -302,6 +308,9 @@
 			<Option target="RTv1"/>
 		</Unit>
 		<Unit filename="/Users/deladia/CLionProjects/RTv11/sdl.c">
+			<Option target="RTv1"/>
+		</Unit>
+		<Unit filename="/Users/deladia/CLionProjects/RTv11/validation_token.c">
 			<Option target="RTv1"/>
 		</Unit>
 		<Unit filename="/Users/deladia/CLionProjects/RTv11/CMakeLists.txt">

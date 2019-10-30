@@ -6,7 +6,7 @@ set(CMAKE_C_STANDARD 99)
 include_directories(./libft/includes)
 FILE(GLOB LIBFT_SRCS ./libft/*.c)
 
-add_executable(RTv1 main.c ${LIBFT_SRCS} rtv1.h helps.c sdl.c light.c parser.c)
+add_executable(RTv1 main.c ${LIBFT_SRCS} rtv1.h helps.c sdl.c light.c parser.c dictionary.c validation_token.c creation_token_list.c)
 set(SDL2_INCLUDE_DIR /Users/deladia/.brew/include/SDL2)
 set(SDL2_LIBRARIES /Users/deladia/.brew/lib)
 set(SDL_TTF_INCLUDE_DIR /Users/deladia/.brew/include/SDL2)
