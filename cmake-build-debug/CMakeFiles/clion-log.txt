@@ -1,19 +1,4 @@
 /Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /Users/deladia/CLionProjects/RTv11
-CMake Error at CMakeLists.txt:10 (add_executable):
-  The target name "../RTv1" is reserved or not valid for certain CMake
-  features, such as generator expressions, and may result in undefined
-  behavior.
-
-
-CMake Error at CMakeLists.txt:20 (target_include_directories):
-  Cannot specify include directories for target "RTv1" which is not built by
-  this project.
-
-
-CMake Error at CMakeLists.txt:21 (TARGET_LINK_LIBRARIES):
-  Cannot specify link libraries for target "RTv1" which is not built by this
-  project.
-
-
--- Configuring incomplete, errors occurred!
-See also "/Users/deladia/CLionProjects/RTv11/cmake-build-debug/CMakeFiles/CMakeOutput.log".
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /Users/deladia/CLionProjects/RTv11/cmake-build-debug
