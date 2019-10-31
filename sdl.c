@@ -98,20 +98,20 @@ int			sdl_control(t_sdl *sdl, t_scene *scene)
 					scene->cam->position->y -= 0.1;
 					trace_start(sdl, scene);
 				}
-//				if (sdl->event.key.keysym.scancode == SDL_SCANCODE_Z)
-//				{
+				if (sdl->event.key.keysym.scancode == SDL_SCANCODE_Z)
+				{
 //					scene->cam->cam_rotation->z -= 0.1;
 //					scene->cam->cam_rotation->y -= 0.1;
-//					scene->cam->cam_rotation->x -= 0.1;
-//					trace_start(sdl, scene);
-//				}
-//				if (sdl->event.key.keysym.scancode == SDL_SCANCODE_X)
-//				{
+					scene->cam->cam_rotation->x -= 0.1;
+					trace_start(sdl, scene);
+				}
+				if (sdl->event.key.keysym.scancode == SDL_SCANCODE_X)
+				{
 //					scene->cam->cam_rotation->z += 0.1;
 //					scene->cam->cam_rotation->y += 0.1;
-//					scene->cam->cam_rotation->x += 0.1;
-//					trace_start(sdl, scene);
-//				}
+					scene->cam->cam_rotation->x += 0.1;
+					trace_start(sdl, scene);
+				}
 				sdl_update(sdl);
 			}
 		}
