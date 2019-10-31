@@ -44,7 +44,8 @@
 				<Option type="1"/>
 				<Option compiler="gcc"/>
 				<Compiler>
-					<Add directory="/Users/deladia/CLionProjects/RTv11/./libft/includes"/>
+					<Add directory="/Users/deladia/CLionProjects/RTv11/./libft"/>
+					<Add directory="/Users/deladia/CLionProjects/RTv11/./includes"/>
 					<Add directory="/Users/deladia/.brew/include/SDL2"/>
 					<Add directory="/Users/deladia/.brew/include/SDL2/SDL_ttf.h"/>
 					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1"/>
@@ -69,7 +70,8 @@
 				<Option type="1"/>
 				<Option compiler="gcc"/>
 				<Compiler>
-					<Add directory="/Users/deladia/CLionProjects/RTv11/./libft/includes"/>
+					<Add directory="/Users/deladia/CLionProjects/RTv11/./libft"/>
+					<Add directory="/Users/deladia/CLionProjects/RTv11/./includes"/>
 					<Add directory="/Users/deladia/.brew/include/SDL2"/>
 					<Add directory="/Users/deladia/.brew/include/SDL2/SDL_ttf.h"/>
 					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1"/>
@@ -88,15 +90,6 @@
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="/Users/deladia/CLionProjects/RTv11/creation_token_list.c">
-			<Option target="RTv1"/>
-		</Unit>
-		<Unit filename="/Users/deladia/CLionProjects/RTv11/dictionary.c">
-			<Option target="RTv1"/>
-		</Unit>
-		<Unit filename="/Users/deladia/CLionProjects/RTv11/helps.c">
-			<Option target="RTv1"/>
-		</Unit>
 		<Unit filename="/Users/deladia/CLionProjects/RTv11/libft/ft_atoi.c">
 			<Option target="RTv1"/>
 		</Unit>
@@ -295,22 +288,28 @@
 		<Unit filename="/Users/deladia/CLionProjects/RTv11/libft/get_next_line.h">
 			<Option target="RTv1"/>
 		</Unit>
-		<Unit filename="/Users/deladia/CLionProjects/RTv11/light.c">
+		<Unit filename="/Users/deladia/CLionProjects/RTv11/src/creation_token_list.c">
 			<Option target="RTv1"/>
 		</Unit>
-		<Unit filename="/Users/deladia/CLionProjects/RTv11/main.c">
+		<Unit filename="/Users/deladia/CLionProjects/RTv11/src/dictionary.c">
 			<Option target="RTv1"/>
 		</Unit>
-		<Unit filename="/Users/deladia/CLionProjects/RTv11/parser.c">
+		<Unit filename="/Users/deladia/CLionProjects/RTv11/src/helps.c">
 			<Option target="RTv1"/>
 		</Unit>
-		<Unit filename="/Users/deladia/CLionProjects/RTv11/rtv1.h">
+		<Unit filename="/Users/deladia/CLionProjects/RTv11/src/light.c">
 			<Option target="RTv1"/>
 		</Unit>
-		<Unit filename="/Users/deladia/CLionProjects/RTv11/sdl.c">
+		<Unit filename="/Users/deladia/CLionProjects/RTv11/src/main.c">
 			<Option target="RTv1"/>
 		</Unit>
-		<Unit filename="/Users/deladia/CLionProjects/RTv11/validation_token.c">
+		<Unit filename="/Users/deladia/CLionProjects/RTv11/src/parser.c">
+			<Option target="RTv1"/>
+		</Unit>
+		<Unit filename="/Users/deladia/CLionProjects/RTv11/src/sdl.c">
+			<Option target="RTv1"/>
+		</Unit>
+		<Unit filename="/Users/deladia/CLionProjects/RTv11/src/validation_token.c">
 			<Option target="RTv1"/>
 		</Unit>
 		<Unit filename="/Users/deladia/CLionProjects/RTv11/CMakeLists.txt">
