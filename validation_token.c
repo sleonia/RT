@@ -12,6 +12,42 @@
 
 #include "rtv1.h"
 
+int				valid_token_1(t_token *token, t_dictionary *dict)
+{
+	if (token->type == Object || token->type == Subobject || token->type == Light_properties
+	|| token->type == Camera_properties || token->type == Figure_properties || token->type == Light_type)
+	{
+		if (token->next->type == Separator)
+			return (0);
+		else
+			return (1);
+	}
+	else if (token->type == Hex)
+	{
+		if (token->next->type == Separator)
+			return (0);
+		else
+			return (1);
+	}
+	else if (token->type == Dec)
+	{
+		if (token->next->type == Separator)
+			return (0);
+		else
+			return (1);
+	}
+	else if (token->type == Double_presition)
+	{
+		if (token->next->type == Separator)
+			return (0);
+		if (token->next->type == Dec)
+			return (0);
+		else
+			return (1);
+	}
+	return (1);
+}
+
 int 			valid_token(t_token *token, t_dictionary *dict)
 {
 	if (token->type == Separator)
@@ -39,41 +75,10 @@ int 			valid_token(t_token *token, t_dictionary *dict)
 		else
 			return (1);
 	}
-	else if (token->type == Object || token->type == Subobject || token->type == Light_properties
-	|| token->type == Camera_properties || token->type == Figure_properties || token->type == Light_type)
-	{
-		if (token->next->type == Separator)
-			return (0);
-		else
-			return (1);
-	}
-	else if (token->type == Hex)
-	{
-		if (token->next->type == Separator)
-			return (0);
-		else
-			return(1);
-	}
-	else if (token->type == Dec)
-	{
-		if (token->next->type == Separator)
-			return (0);
-		else
-			return(1);
-	}
-	else if (token->type == Double_presition)
-	{
-		if (token->next->type == Separator)
-			return (0);
-		if (token->next->type == Dec)
-			return (0);
-		else
-			return(1);
-	}
-	return (1);
+	return(valid_token_1(token, dict));
 }
 
-int 			valiation_token_list(t_token *token, t_dictionary *dict)
+int				valiation_token_list(t_token *token, t_dictionary *dict)
 {
 	int 		ret;
 
