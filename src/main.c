@@ -141,7 +141,7 @@ int			trace_ray(t_pos *o, t_pos *d, double t_min, double t_max, t_scene *scene, 
 	reflected_color = trace_ray(&p, &r, 0.001, INFINITY, scene, depth - 1);
 
 	return (color_scale(local_color, 1 - ref) + color_scale(reflected_color, ref));
-
+//	return ((int)((double)local_color * c));
 }
 
 /*

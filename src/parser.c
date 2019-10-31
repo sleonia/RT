@@ -101,8 +101,6 @@ int 			ft_open(t_scene *scene, char *file)
 		free(line);
 	}
 	valiation_token_list(token_head, dict);
-
-//	printf("%s", file_source);
 	return (0);
 }
 
