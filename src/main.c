@@ -103,22 +103,21 @@ t_pos		reflect_ray(t_pos *r, t_pos *n)
 ** 		Находит ближайшую точку в позиции (x, y) среди всех сфер и возвращает цвет пикселя
 */
 
-int			trace_ray(t_pos *o, t_pos *d, double t_min, double t_max, t_scene *scene, int depth)
-{
-	t_pos		p;
-	t_pos		n;
-	t_pos		buf;
-	t_pos		r;
-	t_return	ret;
-	double 		c;
-	int 		local_color;
-	int 		reflected_color;
-	double		ref;
+int			 trace_ray(t_pos *o, t_pos *d, double t_min, double t_max, t_scene *scene, int depth) {
+	t_pos p;
+	t_pos n;
+	t_pos buf;
+	t_pos r;
+	t_return ret;
+	double c;
+	int local_color;
+	int reflected_color;
+	double ref;
 
 	ret = closest_intersection(o, d, t_min, t_max, scene->figure->sphere);
 	if (ret.closest_sphere == NULL)
 		return (BLACK);
-
+//	return (ret.closest_sphere->color);
 	//Часть для добавления бликов от света
 	// 		Вычисление локального цвета
 	buf = vector_on_number(d, ret.closest_t);
@@ -139,11 +138,9 @@ int			trace_ray(t_pos *o, t_pos *d, double t_min, double t_max, t_scene *scene, 
 	//Рекурсивная часть отражения объектов
 	r = reflect_ray(&buf, &n);
 	reflected_color = trace_ray(&p, &r, 0.001, INFINITY, scene, depth - 1);
-
+////
 	return (color_scale(local_color, 1 - ref) + color_scale(reflected_color, ref));
-//	return ((int)((double)local_color * c));
 }
-
 /*
 ** 		Костыльное добавление сфер
 **		НУЖЕН ПАРСЕР
@@ -212,7 +209,8 @@ int 		trace_start(t_sdl *sdl, t_scene *scene)
 		y = -HEIGHT / 2;
 		while(y < HEIGHT / 2)
 		{
-			scene->view = vector_on_vector(scene->cam->cam_rotation, canvas_to_viewport(x, y, scene->view), scene->view);
+//			scene->view = vector_on_vector(scene->cam->cam_rotation, canvas_to_viewport(x, y, scene->view), scene->view);
+			scene->view = matrix_on_vector(scene->cam->a, scene->cam->b, canvas_to_viewport(x, y, scene->view));
 			color = trace_ray(scene->cam->position, scene->view, 1.0, INFINITY, scene, 3);
 			sdl->pixels = put_pixel(x, y, color, sdl);
 			y++;
@@ -223,34 +221,40 @@ int 		trace_start(t_sdl *sdl, t_scene *scene)
 	return (0);
 }
 
-//int			main(void)
-//{
-//	t_rtv1		*rtv1;
-//
-//	rtv1 = (t_rtv1 *)ft_memalloc(sizeof(t_rtv1));
-//	rtv1->sdl = (t_sdl *)ft_memalloc((sizeof(t_sdl)));
-//	sdl_init(rtv1->sdl);
-//
-//	rtv1->scene = (t_scene *)ft_memalloc(sizeof(t_scene));
-//
-//	rtv1->scene->cam = (t_cam *)ft_memalloc(sizeof(t_cam));
-//	rtv1->scene->cam->position = (t_pos *)ft_memalloc(sizeof(t_pos));
-//	rtv1->scene->cam->cam_rotation = (t_pos *)ft_memalloc(sizeof(t_pos));
-//	rtv1->scene->cam->position = insert(0, 0, 0, rtv1->scene->cam->position);
-//	//разобраться с поворотом камеры
-//	rtv1->scene->cam->cam_rotation = insert(1, 1, 1, rtv1->scene->cam->cam_rotation);
-//
-//	rtv1->scene->view = (t_pos *)ft_memalloc(sizeof(t_pos));
-//
-//	//инициализация света нужен прасер
-//	rtv1->scene->light = init_light(rtv1->scene->light);
-//
-//	rtv1->scene->figure = (t_figure *)ft_memalloc(sizeof(t_figure));
-//
-//	//парсер чтобы считать сферы из файла в *shpere
-//	//инициальзация сфер
-//	rtv1->scene->figure->sphere = init_sphere(rtv1->scene->figure->sphere);
-//
-//	trace_start(rtv1->sdl, rtv1->scene);
-//	return (0);
-//}
+int			main(void)
+{
+	t_rtv1		*rtv1;
+
+	rtv1 = (t_rtv1 *)ft_memalloc(sizeof(t_rtv1));
+	rtv1->sdl = (t_sdl *)ft_memalloc((sizeof(t_sdl)));
+	sdl_init(rtv1->sdl);
+
+	rtv1->scene = (t_scene *)ft_memalloc(sizeof(t_scene));
+
+	rtv1->scene->cam = (t_cam *)ft_memalloc(sizeof(t_cam));
+	rtv1->scene->cam->position = (t_pos *)ft_memalloc(sizeof(t_pos));
+	rtv1->scene->cam->cam_rotation = (t_pos *)ft_memalloc(sizeof(t_pos));
+	rtv1->scene->cam->position = insert(0, 0, 0, rtv1->scene->cam->position);
+	rtv1->scene->cam->a = 0;
+	rtv1->scene->cam->b = 0;
+	//разобраться с поворотом камеры
+	rtv1->scene->cam->cam_rotation = insert(1, 1, 1, rtv1->scene->cam->cam_rotation);
+
+	rtv1->scene->view = (t_pos *)ft_memalloc(sizeof(t_pos));
+
+	//инициализация света нужен прасер
+	rtv1->scene->light = init_light(rtv1->scene->light);
+
+	rtv1->scene->figure = (t_figure *)ft_memalloc(sizeof(t_figure));
+
+	//парсер чтобы считать сферы из файла в *shpere
+	//инициальзация сфер
+	rtv1->scene->figure->sphere = init_sphere(rtv1->scene->figure->sphere);
+
+	trace_start(rtv1->sdl, rtv1->scene);
+	return (0);
+}
+
+//написать функцию которая вызывает vector_on_number миллион раз и посмотреть время, а потом
+//отправляю с * принимаю без
+//отправляю без принимаю с *

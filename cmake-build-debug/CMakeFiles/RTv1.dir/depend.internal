@@ -260,6 +260,54 @@ CMakeFiles/RTv1.dir/src/creation_token_list.c.o
 CMakeFiles/RTv1.dir/src/dictionary.c.o
  /Users/deladia/CLionProjects/RTv11/src/dictionary.c
 CMakeFiles/RTv1.dir/src/helps.c.o
+ .././includes/rtv1.h
+ .././libft/get_next_line.h
+ .././libft/libft.h
+ /Users/deladia/.brew/include/SDL2/SDL.h
+ /Users/deladia/.brew/include/SDL2/SDL_assert.h
+ /Users/deladia/.brew/include/SDL2/SDL_atomic.h
+ /Users/deladia/.brew/include/SDL2/SDL_audio.h
+ /Users/deladia/.brew/include/SDL2/SDL_blendmode.h
+ /Users/deladia/.brew/include/SDL2/SDL_clipboard.h
+ /Users/deladia/.brew/include/SDL2/SDL_config.h
+ /Users/deladia/.brew/include/SDL2/SDL_cpuinfo.h
+ /Users/deladia/.brew/include/SDL2/SDL_endian.h
+ /Users/deladia/.brew/include/SDL2/SDL_error.h
+ /Users/deladia/.brew/include/SDL2/SDL_events.h
+ /Users/deladia/.brew/include/SDL2/SDL_filesystem.h
+ /Users/deladia/.brew/include/SDL2/SDL_gamecontroller.h
+ /Users/deladia/.brew/include/SDL2/SDL_gesture.h
+ /Users/deladia/.brew/include/SDL2/SDL_haptic.h
+ /Users/deladia/.brew/include/SDL2/SDL_hints.h
+ /Users/deladia/.brew/include/SDL2/SDL_joystick.h
+ /Users/deladia/.brew/include/SDL2/SDL_keyboard.h
+ /Users/deladia/.brew/include/SDL2/SDL_keycode.h
+ /Users/deladia/.brew/include/SDL2/SDL_loadso.h
+ /Users/deladia/.brew/include/SDL2/SDL_log.h
+ /Users/deladia/.brew/include/SDL2/SDL_main.h
+ /Users/deladia/.brew/include/SDL2/SDL_messagebox.h
+ /Users/deladia/.brew/include/SDL2/SDL_mouse.h
+ /Users/deladia/.brew/include/SDL2/SDL_mutex.h
+ /Users/deladia/.brew/include/SDL2/SDL_pixels.h
+ /Users/deladia/.brew/include/SDL2/SDL_platform.h
+ /Users/deladia/.brew/include/SDL2/SDL_power.h
+ /Users/deladia/.brew/include/SDL2/SDL_quit.h
+ /Users/deladia/.brew/include/SDL2/SDL_rect.h
+ /Users/deladia/.brew/include/SDL2/SDL_render.h
+ /Users/deladia/.brew/include/SDL2/SDL_rwops.h
+ /Users/deladia/.brew/include/SDL2/SDL_scancode.h
+ /Users/deladia/.brew/include/SDL2/SDL_sensor.h
+ /Users/deladia/.brew/include/SDL2/SDL_shape.h
+ /Users/deladia/.brew/include/SDL2/SDL_stdinc.h
+ /Users/deladia/.brew/include/SDL2/SDL_surface.h
+ /Users/deladia/.brew/include/SDL2/SDL_system.h
+ /Users/deladia/.brew/include/SDL2/SDL_thread.h
+ /Users/deladia/.brew/include/SDL2/SDL_timer.h
+ /Users/deladia/.brew/include/SDL2/SDL_touch.h
+ /Users/deladia/.brew/include/SDL2/SDL_version.h
+ /Users/deladia/.brew/include/SDL2/SDL_video.h
+ /Users/deladia/.brew/include/SDL2/begin_code.h
+ /Users/deladia/.brew/include/SDL2/close_code.h
  /Users/deladia/CLionProjects/RTv11/src/helps.c
 CMakeFiles/RTv1.dir/src/light.c.o
  .././includes/rtv1.h
@@ -412,6 +460,54 @@ CMakeFiles/RTv1.dir/src/parser.c.o
  /Users/deladia/.brew/include/SDL2/close_code.h
  /Users/deladia/CLionProjects/RTv11/src/parser.c
 CMakeFiles/RTv1.dir/src/sdl.c.o
+ .././includes/rtv1.h
+ .././libft/get_next_line.h
+ .././libft/libft.h
+ /Users/deladia/.brew/include/SDL2/SDL.h
+ /Users/deladia/.brew/include/SDL2/SDL_assert.h
+ /Users/deladia/.brew/include/SDL2/SDL_atomic.h
+ /Users/deladia/.brew/include/SDL2/SDL_audio.h
+ /Users/deladia/.brew/include/SDL2/SDL_blendmode.h
+ /Users/deladia/.brew/include/SDL2/SDL_clipboard.h
+ /Users/deladia/.brew/include/SDL2/SDL_config.h
+ /Users/deladia/.brew/include/SDL2/SDL_cpuinfo.h
+ /Users/deladia/.brew/include/SDL2/SDL_endian.h
+ /Users/deladia/.brew/include/SDL2/SDL_error.h
+ /Users/deladia/.brew/include/SDL2/SDL_events.h
+ /Users/deladia/.brew/include/SDL2/SDL_filesystem.h
+ /Users/deladia/.brew/include/SDL2/SDL_gamecontroller.h
+ /Users/deladia/.brew/include/SDL2/SDL_gesture.h
+ /Users/deladia/.brew/include/SDL2/SDL_haptic.h
+ /Users/deladia/.brew/include/SDL2/SDL_hints.h
+ /Users/deladia/.brew/include/SDL2/SDL_joystick.h
+ /Users/deladia/.brew/include/SDL2/SDL_keyboard.h
+ /Users/deladia/.brew/include/SDL2/SDL_keycode.h
+ /Users/deladia/.brew/include/SDL2/SDL_loadso.h
+ /Users/deladia/.brew/include/SDL2/SDL_log.h
+ /Users/deladia/.brew/include/SDL2/SDL_main.h
+ /Users/deladia/.brew/include/SDL2/SDL_messagebox.h
+ /Users/deladia/.brew/include/SDL2/SDL_mouse.h
+ /Users/deladia/.brew/include/SDL2/SDL_mutex.h
+ /Users/deladia/.brew/include/SDL2/SDL_pixels.h
+ /Users/deladia/.brew/include/SDL2/SDL_platform.h
+ /Users/deladia/.brew/include/SDL2/SDL_power.h
+ /Users/deladia/.brew/include/SDL2/SDL_quit.h
+ /Users/deladia/.brew/include/SDL2/SDL_rect.h
+ /Users/deladia/.brew/include/SDL2/SDL_render.h
+ /Users/deladia/.brew/include/SDL2/SDL_rwops.h
+ /Users/deladia/.brew/include/SDL2/SDL_scancode.h
+ /Users/deladia/.brew/include/SDL2/SDL_sensor.h
+ /Users/deladia/.brew/include/SDL2/SDL_shape.h
+ /Users/deladia/.brew/include/SDL2/SDL_stdinc.h
+ /Users/deladia/.brew/include/SDL2/SDL_surface.h
+ /Users/deladia/.brew/include/SDL2/SDL_system.h
+ /Users/deladia/.brew/include/SDL2/SDL_thread.h
+ /Users/deladia/.brew/include/SDL2/SDL_timer.h
+ /Users/deladia/.brew/include/SDL2/SDL_touch.h
+ /Users/deladia/.brew/include/SDL2/SDL_version.h
+ /Users/deladia/.brew/include/SDL2/SDL_video.h
+ /Users/deladia/.brew/include/SDL2/begin_code.h
+ /Users/deladia/.brew/include/SDL2/close_code.h
  /Users/deladia/CLionProjects/RTv11/src/sdl.c
 CMakeFiles/RTv1.dir/src/validation_token.c.o
  .././includes/rtv1.h
