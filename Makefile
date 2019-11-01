@@ -6,12 +6,12 @@
 #    By: thorker <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/31 15:32:23 by thorker           #+#    #+#              #
-#    Updated: 2019/10/31 16:40:14 by thorker          ###   ########.fr        #
+#    Updated: 2019/11/01 18:22:01 by deladia          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = rtv1
-FLAG = -Wall -Wextra -Werror
+FLAG = -g 
 SRC_DIR = src
 OBJ_DIR = objects
 LIB_DIR = ./libft

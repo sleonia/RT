@@ -124,6 +124,21 @@ t_pos		*vector_on_vector(t_pos *a, t_pos *b, t_pos *ab)
 	return (ab);
 }
 
+t_pos		*matrix_on_vector(double a, double b, t_pos *vec)
+{
+	double	x;
+	double	y;
+	double	z;
+
+	x = vec->x;
+	y = vec->y;
+	z = vec->z;
+	vec->x = x * cos(b) + z * sin(b);
+	vec->y = (x - z) * sin(a) * cos(b) + y * cos(a);
+	vec->z = (y - x * cos(a)) * sin(a) + z * cos(a) * cos (b);
+	return (vec);
+}
+
 /*
 ** Скалярное произведение векторов
 */
