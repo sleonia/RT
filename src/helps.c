@@ -133,9 +133,16 @@ t_pos		*matrix_on_vector(double a, double b, t_pos *vec)
 	x = vec->x;
 	y = vec->y;
 	z = vec->z;
+	vec->x = x;
+	vec->y = y * cos(a) - z * sin(a);
+	vec->z = y * sin(a) + z * cos(a);
+
+	x = vec->x;
+	y = vec->y;
+	z = vec->z;
 	vec->x = x * cos(b) + z * sin(b);
-	vec->y = (x - z) * sin(a) * cos(b) + y * cos(a);
-	vec->z = (y - x * cos(a)) * sin(a) + z * cos(a) * cos (b);
+	vec->y = y;
+	vec->z = -x * sin(b) + z * cos(b);
 	return (vec);
 }
 
