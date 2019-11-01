@@ -235,8 +235,6 @@ int			main(void)
 	rtv1->scene->cam->position = (t_pos *)ft_memalloc(sizeof(t_pos));
 	rtv1->scene->cam->cam_rotation = (t_pos *)ft_memalloc(sizeof(t_pos));
 	rtv1->scene->cam->position = insert(0, 0, 0, rtv1->scene->cam->position);
-	rtv1->scene->cam->a = 0;
-	rtv1->scene->cam->b = 0;
 	//разобраться с поворотом камеры
 	rtv1->scene->cam->cam_rotation = insert(1, 1, 1, rtv1->scene->cam->cam_rotation);
 
