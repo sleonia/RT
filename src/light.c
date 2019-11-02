@@ -35,7 +35,7 @@ t_light		*init_light(t_light *light)
 	light->next = (t_light *)ft_memalloc(sizeof(t_light));
 	center2 = (t_pos *)ft_memalloc(sizeof(t_pos));
 	tmp = light->next;
-	tmp->position = insert(3, 1, 0, center2);
+	tmp->position = insert(3, 1, -1, center2);
 	tmp->type = 'P';
 	tmp->intensity = 0.6;
 //
@@ -82,16 +82,16 @@ double		computer_lighting(t_pos *p, t_pos *n, t_pos *v, int specular, t_scene *s
 	tmp = scene->light;
 	while (tmp)
 	{
-		if (tmp->type == 'A')
+		if (tmp->type == 'A' && !scene->off->ambient)
 			intens += tmp->intensity;
 		else
 		{
-			if (tmp->type == 'P')
+			if (tmp->type == 'P' && !scene->off->point)
 			{
 				l = vector_minus(tmp->position, p);
 				t_max = 1.0;
 			}
-			else if (tmp->type == 'D')
+			else if (tmp->type == 'D' && !scene->off->directional)
 			{
 				l.x = tmp->position->x;
 				l.y = tmp->position->y;
@@ -99,25 +99,29 @@ double		computer_lighting(t_pos *p, t_pos *n, t_pos *v, int specular, t_scene *s
 				t_max = INFINITY;
 			}
 			// Проверка тени
-			shadow = closest_intersection(p, &l, 0.001, t_max, scene->figure->sphere);
-			if (shadow.closest_sphere != NULL)
+			if (t_max)
 			{
-				tmp = tmp->next;
-				continue;
-			}
-			// Диффузность
-			n_dot_l = dot(n, &l);
-			if (n_dot_l > 1)
-				intens += tmp->intensity * n_dot_l / (vector_len(n) * vector_len(&l));
-			// Зеркальность
-			if (specular != -1)
-			{
-				buf = vector_on_number(n, 2);
-				buf = vector_on_number(&buf, dot(n, &l));
-				r =  vector_minus(&buf, &l);
-				r_dot_v = dot(&r, v);
-				if (r_dot_v > 0)
-					intens += tmp->intensity * pow(r_dot_v / (vector_len(&r) * vector_len(v)), specular);
+				shadow = closest_intersection(p, &l, 0.001, t_max, scene->figure->sphere);
+				if (shadow.closest_sphere != NULL)
+				{
+					tmp = tmp->next;
+					continue;
+				}
+
+				// Диффузность
+				n_dot_l = dot(n, &l);
+				if (n_dot_l > 1)
+					intens += tmp->intensity * n_dot_l / (vector_len(n) * vector_len(&l));
+				// Зеркальность
+				if (specular != -1)
+				{
+					buf = vector_on_number(n, 2);
+					buf = vector_on_number(&buf, dot(n, &l));
+					r = vector_minus(&buf, &l);
+					r_dot_v = dot(&r, v);
+					if (r_dot_v > 0)
+						intens += tmp->intensity * pow(r_dot_v / (vector_len(&r) * vector_len(v)), specular);
+				}
 			}
 		}
 		tmp = tmp->next;

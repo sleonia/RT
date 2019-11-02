@@ -15,10 +15,16 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/RTv1.dir/C.includecache" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/RTv1.dir/C.includecache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/RTv1.dir/src/helps.c.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/RTv1.dir/src/helps.c.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/RTv1.dir/src/light.c.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/RTv1.dir/src/light.c.o" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/RTv1.dir/src/main.c.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/RTv1.dir/src/main.c.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/RTv1.dir/src/parser.c.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/RTv1.dir/src/parser.c.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/RTv1.dir/src/sdl.c.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/RTv1.dir/src/sdl.c.o" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/RTv1" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/RTv1" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/includes/rtv1.h" beforeDir="false" afterPath="$PROJECT_DIR$/includes/rtv1.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/helps.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/helps.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/light.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/light.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sdl.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/sdl.c" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -113,7 +119,8 @@
       <workItem from="1572539411472" duration="7000" />
       <workItem from="1572556622576" duration="4592000" />
       <workItem from="1572615261178" duration="1397000" />
-      <workItem from="1572619205596" duration="8127000" />
+      <workItem from="1572619205596" duration="8530000" />
+      <workItem from="1572700691544" duration="2749000" />
     </task>
     <servers />
   </component>
@@ -145,5 +152,16 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="small changes" />
     <option name="LAST_COMMIT_MESSAGE" value="small changes" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/src/light.c</url>
+          <line>91</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

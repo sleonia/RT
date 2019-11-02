@@ -110,12 +110,44 @@ int			sdl_control(t_sdl *sdl, t_scene *scene)
 				}
 				if (sdl->event.key.keysym.scancode == SDL_SCANCODE_Q)
 				{
-					scene->cam->b += 0.1;
+					scene->cam->b -= 0.1;
 					trace_start(sdl, scene);
 				}
 				if (sdl->event.key.keysym.scancode == SDL_SCANCODE_E)
 				{
-					scene->cam->b -= 0.1;
+					scene->cam->b += 0.1;
+					trace_start(sdl, scene);
+				}
+				if (sdl->event.key.keysym.scancode == SDL_SCANCODE_P)
+				{
+					if (!scene->off->point)
+						scene->off->point = 1;
+					else
+						scene->off->point = 0;
+					trace_start(sdl, scene);
+				}
+				if (sdl->event.key.keysym.scancode == SDL_SCANCODE_I)
+				{
+					if (!scene->off->ambient)
+						scene->off->ambient = 1;
+					else
+						scene->off->ambient = 0;
+					trace_start(sdl, scene);
+				}
+				if (sdl->event.key.keysym.scancode == SDL_SCANCODE_O)
+				{
+					if (!scene->off->directional)
+						scene->off->directional = 1;
+					else
+						scene->off->directional = 0;
+					trace_start(sdl, scene);
+				}
+				if (sdl->event.key.keysym.scancode == SDL_SCANCODE_U)
+				{
+					if (!scene->off->reflect)
+						scene->off->reflect = 1;
+					else
+						scene->off->reflect = 0;
 					trace_start(sdl, scene);
 				}
 				sdl_update(sdl);
