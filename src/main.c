@@ -130,11 +130,9 @@ int			 trace_ray(t_pos *o, t_pos *d, double t_min, double t_max, t_scene *scene,
 	c = computer_lighting(&p, &n, &buf, ret.closest_sphere->specular, scene);
 	local_color = color_scale(ret.closest_sphere->color, c);
 
-	if (scene->off->reflect)
-		return (local_color);
 	// Проверка выхода из рекурсии
 	ref = ret.closest_sphere->reflective;
-	if (depth <= 0 || ref <= 0)
+	if (depth <= 0 || ref <= 0 || scene->off->reflect)
 		return (local_color);
 
 	//Рекурсивная часть отражения объектов
