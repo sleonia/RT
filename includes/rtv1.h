@@ -150,12 +150,21 @@ typedef struct			s_cam
 	double 				b;
 }						t_cam;
 
+typedef struct 			s_light_off
+{
+	short int			ambient;
+	short int			point;
+	short int			directional;
+	short int			reflect;
+}						t_light_off;
+
 typedef struct 			s_scene
 {
 	t_pos				*view;
 	t_cam				*cam;
 	t_light				*light;
 	t_figure			*figure;
+	t_light_off			*off;
 	//mb something else
 }						t_scene;
 
