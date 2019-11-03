@@ -12,26 +12,35 @@
 
 #include "rtv1.h"
 
-int 			word_len(char *line, t_dictionary *dict)
+int 			word_len(char *line)
 {
 	int 		len;
-	int 		j;
 
 	len = 0;
 	while(line[len] != '\0' && line[len] != ' ' && line[len] != '\t')
 	{
 		len++;
-		j = 5;
-		while(j-- > 0)
-		{
-			if (line[len - 1] == dict->separator[j])
-				return (len == 1 ? len : len - 1);
-		}
+		if (line[len - 1] == '{')
+			return (len == 1 ? len : len - 1);
+		else if (line[len - 1] == '}')
+			return (len == 1 ? len : len - 1);
+		else if (line[len - 1] == '"')
+			return (len == 1 ? len : len - 1);
+		else if (line[len - 1] == ',')
+			return (len == 1 ? len : len - 1);
+		else if (line[len - 1] == ':')
+			return (len == 1 ? len : len - 1);
+		else if (line[len - 1] == '[')
+			return (len == 1 ? len : len - 1);
+		else if (line[len - 1] == ']')
+			return (len == 1 ? len : len - 1);
+		else if (line[len - 1] == '\\' && line[len] == '\"')
+			len += 1;
 	}
 	return (len);
 }
 
-char 			*create_word(char **line, t_dictionary *dict)
+char 			*create_word(char **line)
 {
 	char 		*word;
 	int 		i;
@@ -40,7 +49,7 @@ char 			*create_word(char **line, t_dictionary *dict)
 	i = 0;
 	while (**line == ' ' || **line == '\t')
 		(*line)++;
-	len = word_len(*line, dict);
+	len = word_len(*line);
 	if (!(word = (char *)ft_memalloc(sizeof(char) * len + 1)))
 		ft_error("Memory not allocated (for word)");
 	while(len-- > 0)
@@ -64,8 +73,8 @@ t_token			*parse(char *line, t_dictionary *dict, t_token *token)
 
 	while(*line != '\0')
 	{
-		word = create_word(&line, dict);
-		token = create_token(word, dict, token);
+		word = create_word(&line);
+		token = create_token(word, token);
 //		printf("%s\n", word);
 		free(word);
 //		line++;
@@ -100,7 +109,16 @@ int 			ft_open(t_scene *scene, char *file)
 		token_tmp = parse(line, dict, token_tmp);
 		free(line);
 	}
-	valiation_token_list(token_head, dict);
+
+
+	while (token_head)
+	{
+		printf("%s\n", token_head->value);
+		if (!token_head->next)
+			break ;
+		token_head = token_head->next;
+	}
+//	valiation_token_list(token_head, dict);
 	return (0);
 }
 

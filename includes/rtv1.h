@@ -220,7 +220,7 @@ int						trace_start(t_sdl *sdl, t_scene *scene);
 t_pos					*vector_on_vector(t_pos *a, t_pos *b, t_pos *ab);
 t_dictionary			*dictionary(void);
 int						valiation_token_list(t_token *token, t_dictionary *dict);
-t_token					*create_token(char *word, t_dictionary *dict, t_token *token);
+t_token					*create_token(char *word, t_token *token);
 t_pos					*matrix_on_vector(double a, double b, t_pos *vec);
 
 #endif

@@ -50,5 +50,7 @@ t_dictionary	*dictionary(void)
 	dict->separator[2] = ',';
 	dict->separator[3] = ':';
 	dict->separator[4] = '"';
+	// [
+	// ]
 	return (dict);
 }

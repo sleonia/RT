@@ -42,7 +42,7 @@ t_light		*init_light(t_light *light)
 //	tmp->next = (t_light *)ft_memalloc(sizeof(t_light));
 //	center3 = (t_pos *)ft_memalloc(sizeof(t_pos));
 //	tmp = tmp->next;
-//	tmp->position = insert(-3, 1, 0, center3);
+//	tmp->position = insert(3, 1, -2, center3);
 //	tmp->type = 'P';
 //	tmp->intensity = 0.6;
 //	directional - направленный источник света
