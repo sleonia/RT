@@ -48,6 +48,8 @@ int				valid_token_1(t_token *token, t_dictionary *dict)
 		{
 			if (ft_strchr(token->next->value, dict->separator[4]))
 				return (0);
+			else if (ft_strchr(token->next->value, dict->separator[1]))
+				return (0);
 		}
 		if (token->next->type == Dec)
 			return (0);
