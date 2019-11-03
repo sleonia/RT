@@ -105,12 +105,11 @@ double		computer_lighting(t_pos *p, t_pos *n, t_pos *v, int specular, t_scene *s
 				if (shadow.closest_sphere != NULL)
 				{
 					tmp = tmp->next;
-					continue;
+					continue ;
 				}
-
 				// Диффузность
 				n_dot_l = dot(n, &l);
-				if (n_dot_l > 1)
+				if (n_dot_l)
 					intens += tmp->intensity * n_dot_l / (vector_len(n) * vector_len(&l));
 				// Зеркальность
 				if (specular != -1)
