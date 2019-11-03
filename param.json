@@ -1,6 +1,8 @@
 "camera":
 {
 				"position":				{0, 0, 0}
+				"angle_a":				0
+				"angle_b":				0
 }
 "light":
 {

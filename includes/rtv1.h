@@ -55,7 +55,7 @@ typedef struct			s_token
 typedef struct 			s_dictionary
 {
 	char				*object[3];
-	char				*camera_properties[2];
+	char				*camera_properties[3];
 	char				*light_properties[3];
 	char 				*figure_type[4];
 	char 				*figure_properties[6];
