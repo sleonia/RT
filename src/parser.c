@@ -104,14 +104,14 @@ int 			ft_open(t_scene *scene, char *file)
 	return (0);
 }
 
-//int 	main(void)
-//{
-//	t_scene		*scene;
-//
-//	scene = NULL;
-//	ft_open(scene, "../param.json");
-//	return (0);
-//}
+int 	main(void)
+{
+	t_scene		*scene;
+
+	scene = NULL;
+	ft_open(scene, "../param.json");
+	return (0);
+}
 //объекты -> свойства -> параметры
 //для фигуо объект -> фигура -> свойста -> параметры
 // разделитель , .

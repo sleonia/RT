@@ -22,6 +22,8 @@ t_dictionary	*dictionary(void)
 	dict->object[2] = "figure";
 
 	dict->camera_properties[0] = "position";
+	dict->camera_properties[1] = "angle_a";
+	dict->camera_properties[2] = "angle_b";
 
 	dict->light_properties[0] = "type";
 	dict->light_properties[1] = "intensity";

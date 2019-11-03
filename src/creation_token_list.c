@@ -21,7 +21,7 @@ t_type			is_text(char *word, t_dictionary *dict)
 		if (!ft_strcmp(word, dict->object[i++]))
 			return (Object);
 	i = 0;
-	while(i < 1)
+	while(i < 3)
 		if (!ft_strcmp(word, dict->camera_properties[i++]))
 			return (Camera_properties);
 	i = 0;
