@@ -145,7 +145,6 @@ typedef struct			s_figure
 typedef struct			s_cam
 {
 	t_pos				*position;
-	t_pos				*cam_rotation;
 	double 				a;
 	double 				b;
 }						t_cam;
