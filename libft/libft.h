@@ -88,5 +88,6 @@ int					ft_sqrt(int nb);
 void				ft_is_negative(int n);
 int					ft_iterative_factorial(int nb);
 int					*ft_range(int min, int max);
+double				ft_atof(char *s);
 
 #endif
