@@ -6,7 +6,7 @@
 /*   By: deladia <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/03 20:55:14 by delalia           #+#    #+#             */
-/*   Updated: 2019/11/06 21:51:48 by thorker          ###   ########.fr       */
+/*   Updated: 2019/11/06 22:27:58 by thorker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,23 @@ int				add_name(t_key_value *for_re, t_token **token)
 	*(new + k) = ft_strdup((*token)->value);
 	*(new + k + 1) = 0;
 	*token = (*token)->next;
-	if (ft_strcmp((*token)->value, "\"") == 0)
-
+	if (*token == 0 || ft_strcmp((*token)->value, "\"") != 0 ||
+			(*token = (*token->next)) == 0 || ft_strcmp((*token)->value, ":") != 0
+			|| (*token = (*token->next)) == 0)
+	{
+		k = 0;
+		while (k < i + 2)
+		{
+			ft_strdel(new + k);
+			k++;
+		}
+		free(new);
+		return (-1);
+	}
+	if (
+	free(for_re->key);
+	for_re->key = new;
+		
 }
 
 t_key_value		*check_object(t_token **token)
