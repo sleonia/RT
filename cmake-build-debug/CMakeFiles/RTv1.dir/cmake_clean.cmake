@@ -1,5 +1,6 @@
 file(REMOVE_RECURSE
   "CMakeFiles/RTv1.dir/src/main.c.o"
+  "CMakeFiles/RTv1.dir/libft/ft_atof.c.o"
   "CMakeFiles/RTv1.dir/libft/ft_atoi.c.o"
   "CMakeFiles/RTv1.dir/libft/ft_bzero.c.o"
   "CMakeFiles/RTv1.dir/libft/ft_is_negative.c.o"
@@ -68,10 +69,6 @@ file(REMOVE_RECURSE
   "CMakeFiles/RTv1.dir/src/helps.c.o"
   "CMakeFiles/RTv1.dir/src/sdl.c.o"
   "CMakeFiles/RTv1.dir/src/light.c.o"
-  "CMakeFiles/RTv1.dir/src/parser.c.o"
-  "CMakeFiles/RTv1.dir/src/dictionary.c.o"
-  "CMakeFiles/RTv1.dir/src/validation_token.c.o"
-  "CMakeFiles/RTv1.dir/src/creation_token_list.c.o"
   "RTv1.pdb"
   "RTv1"
 )
