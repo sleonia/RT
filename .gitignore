@@ -1,0 +1,8 @@
+/cmake-build-debug
+.DS_Store
+.idea
+CMakeLists.txt
+/objects
+/libft/*.o
+rtv1
+/libft/libft.a
