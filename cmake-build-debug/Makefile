@@ -48,10 +48,10 @@ RM = /Users/deladia/Desktop/CLion.app/Contents/bin/cmake/mac/bin/cmake -E remove
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /Users/deladia/CLionProjects/RTv11
+CMAKE_SOURCE_DIR = /Users/deladia/CLionProjects/rtv1
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /Users/deladia/CLionProjects/RTv11/cmake-build-debug
+CMAKE_BINARY_DIR = /Users/deladia/CLionProjects/rtv1/cmake-build-debug
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -80,9 +80,9 @@ edit_cache/fast: edit_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/deladia/CLionProjects/RTv11/cmake-build-debug/CMakeFiles /Users/deladia/CLionProjects/RTv11/cmake-build-debug/CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/deladia/CLionProjects/rtv1/cmake-build-debug/CMakeFiles /Users/deladia/CLionProjects/rtv1/cmake-build-debug/CMakeFiles/progress.marks
 	$(MAKE) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/deladia/CLionProjects/RTv11/cmake-build-debug/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/deladia/CLionProjects/rtv1/cmake-build-debug/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -122,6 +122,33 @@ RTv1: cmake_check_build_system
 RTv1/fast:
 	$(MAKE) -f CMakeFiles/RTv1.dir/build.make CMakeFiles/RTv1.dir/build
 .PHONY : RTv1/fast
+
+libft/ft_atof.o: libft/ft_atof.c.o
+
+.PHONY : libft/ft_atof.o
+
+# target to build an object file
+libft/ft_atof.c.o:
+	$(MAKE) -f CMakeFiles/RTv1.dir/build.make CMakeFiles/RTv1.dir/libft/ft_atof.c.o
+.PHONY : libft/ft_atof.c.o
+
+libft/ft_atof.i: libft/ft_atof.c.i
+
+.PHONY : libft/ft_atof.i
+
+# target to preprocess a source file
+libft/ft_atof.c.i:
+	$(MAKE) -f CMakeFiles/RTv1.dir/build.make CMakeFiles/RTv1.dir/libft/ft_atof.c.i
+.PHONY : libft/ft_atof.c.i
+
+libft/ft_atof.s: libft/ft_atof.c.s
+
+.PHONY : libft/ft_atof.s
+
+# target to generate assembly for a file
+libft/ft_atof.c.s:
+	$(MAKE) -f CMakeFiles/RTv1.dir/build.make CMakeFiles/RTv1.dir/libft/ft_atof.c.s
+.PHONY : libft/ft_atof.c.s
 
 libft/ft_atoi.o: libft/ft_atoi.c.o
 
@@ -1878,60 +1905,6 @@ libft/get_next_line.c.s:
 	$(MAKE) -f CMakeFiles/RTv1.dir/build.make CMakeFiles/RTv1.dir/libft/get_next_line.c.s
 .PHONY : libft/get_next_line.c.s
 
-src/creation_token_list.o: src/creation_token_list.c.o
-
-.PHONY : src/creation_token_list.o
-
-# target to build an object file
-src/creation_token_list.c.o:
-	$(MAKE) -f CMakeFiles/RTv1.dir/build.make CMakeFiles/RTv1.dir/src/creation_token_list.c.o
-.PHONY : src/creation_token_list.c.o
-
-src/creation_token_list.i: src/creation_token_list.c.i
-
-.PHONY : src/creation_token_list.i
-
-# target to preprocess a source file
-src/creation_token_list.c.i:
-	$(MAKE) -f CMakeFiles/RTv1.dir/build.make CMakeFiles/RTv1.dir/src/creation_token_list.c.i
-.PHONY : src/creation_token_list.c.i
-
-src/creation_token_list.s: src/creation_token_list.c.s
-
-.PHONY : src/creation_token_list.s
-
-# target to generate assembly for a file
-src/creation_token_list.c.s:
-	$(MAKE) -f CMakeFiles/RTv1.dir/build.make CMakeFiles/RTv1.dir/src/creation_token_list.c.s
-.PHONY : src/creation_token_list.c.s
-
-src/dictionary.o: src/dictionary.c.o
-
-.PHONY : src/dictionary.o
-
-# target to build an object file
-src/dictionary.c.o:
-	$(MAKE) -f CMakeFiles/RTv1.dir/build.make CMakeFiles/RTv1.dir/src/dictionary.c.o
-.PHONY : src/dictionary.c.o
-
-src/dictionary.i: src/dictionary.c.i
-
-.PHONY : src/dictionary.i
-
-# target to preprocess a source file
-src/dictionary.c.i:
-	$(MAKE) -f CMakeFiles/RTv1.dir/build.make CMakeFiles/RTv1.dir/src/dictionary.c.i
-.PHONY : src/dictionary.c.i
-
-src/dictionary.s: src/dictionary.c.s
-
-.PHONY : src/dictionary.s
-
-# target to generate assembly for a file
-src/dictionary.c.s:
-	$(MAKE) -f CMakeFiles/RTv1.dir/build.make CMakeFiles/RTv1.dir/src/dictionary.c.s
-.PHONY : src/dictionary.c.s
-
 src/helps.o: src/helps.c.o
 
 .PHONY : src/helps.o
@@ -2013,33 +1986,6 @@ src/main.c.s:
 	$(MAKE) -f CMakeFiles/RTv1.dir/build.make CMakeFiles/RTv1.dir/src/main.c.s
 .PHONY : src/main.c.s
 
-src/parser.o: src/parser.c.o
-
-.PHONY : src/parser.o
-
-# target to build an object file
-src/parser.c.o:
-	$(MAKE) -f CMakeFiles/RTv1.dir/build.make CMakeFiles/RTv1.dir/src/parser.c.o
-.PHONY : src/parser.c.o
-
-src/parser.i: src/parser.c.i
-
-.PHONY : src/parser.i
-
-# target to preprocess a source file
-src/parser.c.i:
-	$(MAKE) -f CMakeFiles/RTv1.dir/build.make CMakeFiles/RTv1.dir/src/parser.c.i
-.PHONY : src/parser.c.i
-
-src/parser.s: src/parser.c.s
-
-.PHONY : src/parser.s
-
-# target to generate assembly for a file
-src/parser.c.s:
-	$(MAKE) -f CMakeFiles/RTv1.dir/build.make CMakeFiles/RTv1.dir/src/parser.c.s
-.PHONY : src/parser.c.s
-
 src/sdl.o: src/sdl.c.o
 
 .PHONY : src/sdl.o
@@ -2067,33 +2013,6 @@ src/sdl.c.s:
 	$(MAKE) -f CMakeFiles/RTv1.dir/build.make CMakeFiles/RTv1.dir/src/sdl.c.s
 .PHONY : src/sdl.c.s
 
-src/validation_token.o: src/validation_token.c.o
-
-.PHONY : src/validation_token.o
-
-# target to build an object file
-src/validation_token.c.o:
-	$(MAKE) -f CMakeFiles/RTv1.dir/build.make CMakeFiles/RTv1.dir/src/validation_token.c.o
-.PHONY : src/validation_token.c.o
-
-src/validation_token.i: src/validation_token.c.i
-
-.PHONY : src/validation_token.i
-
-# target to preprocess a source file
-src/validation_token.c.i:
-	$(MAKE) -f CMakeFiles/RTv1.dir/build.make CMakeFiles/RTv1.dir/src/validation_token.c.i
-.PHONY : src/validation_token.c.i
-
-src/validation_token.s: src/validation_token.c.s
-
-.PHONY : src/validation_token.s
-
-# target to generate assembly for a file
-src/validation_token.c.s:
-	$(MAKE) -f CMakeFiles/RTv1.dir/build.make CMakeFiles/RTv1.dir/src/validation_token.c.s
-.PHONY : src/validation_token.c.s
-
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -2103,6 +2022,9 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
 	@echo "... RTv1"
+	@echo "... libft/ft_atof.o"
+	@echo "... libft/ft_atof.i"
+	@echo "... libft/ft_atof.s"
 	@echo "... libft/ft_atoi.o"
 	@echo "... libft/ft_atoi.i"
 	@echo "... libft/ft_atoi.s"
@@ -2298,12 +2220,6 @@ help:
 	@echo "... libft/get_next_line.o"
 	@echo "... libft/get_next_line.i"
 	@echo "... libft/get_next_line.s"
-	@echo "... src/creation_token_list.o"
-	@echo "... src/creation_token_list.i"
-	@echo "... src/creation_token_list.s"
-	@echo "... src/dictionary.o"
-	@echo "... src/dictionary.i"
-	@echo "... src/dictionary.s"
 	@echo "... src/helps.o"
 	@echo "... src/helps.i"
 	@echo "... src/helps.s"
@@ -2313,15 +2229,9 @@ help:
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"
-	@echo "... src/parser.o"
-	@echo "... src/parser.i"
-	@echo "... src/parser.s"
 	@echo "... src/sdl.o"
 	@echo "... src/sdl.i"
 	@echo "... src/sdl.s"
-	@echo "... src/validation_token.o"
-	@echo "... src/validation_token.i"
-	@echo "... src/validation_token.s"
 .PHONY : help
 
 
