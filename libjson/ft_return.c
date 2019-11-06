@@ -12,7 +12,23 @@
 
 #include "to_json.h"
 
-t_token 	*ft_return(t_token *token, t_key_value **key_value)
+t_token 	*ft_return(t_token *token, t_key_value **tree)
 {
+	int 	i;
+	int 	len;
+
+	i = 0;
+	while(tree->key[i])
+		free(tree->key[i++]);
+	free(tree->key);
+	len = i;
+	i = 0;
+	while (i < len)
+		free(tree->value[i++]);
+	free(tree->value);
+	i = 0;
+	while (i < len)
+		free(tree->type[i++]);
+	free(tree->type);
 	return (token);
 }
