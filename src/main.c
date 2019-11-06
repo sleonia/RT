@@ -6,7 +6,7 @@
 /*   By: deladia <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/24 12:57:07 by deladia           #+#    #+#             */
-/*   Updated: 2019/10/31 16:17:06 by thorker          ###   ########.fr       */
+/*   Updated: 2019/11/04 01:12:02 by thorker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -218,39 +218,39 @@ int 		trace_start(t_sdl *sdl, t_scene *scene)
 	sdl_control(sdl, scene);
 	return (0);
 }
+/*
+int			main(void)
+{
+	t_rtv1		*rtv1;
 
-//int			main(void)
-//{
-//	t_rtv1		*rtv1;
-//
-//	rtv1 = (t_rtv1 *)ft_memalloc(sizeof(t_rtv1));
-//	rtv1->sdl = (t_sdl *)ft_memalloc((sizeof(t_sdl)));
-//	sdl_init(rtv1->sdl);
-//
-//	rtv1->scene = (t_scene *)ft_memalloc(sizeof(t_scene));
-//
-//	rtv1->scene->cam = (t_cam *)ft_memalloc(sizeof(t_cam));
-//	rtv1->scene->cam->position = (t_pos *)ft_memalloc(sizeof(t_pos));
-//	rtv1->scene->cam->position = insert(0, 0, 0, rtv1->scene->cam->position);
-//	//разобраться с поворотом камеры
-//
-//	rtv1->scene->view = (t_pos *)ft_memalloc(sizeof(t_pos));
-//
-//	//инициализация света нужен прасер
-//	rtv1->scene->light = init_light(rtv1->scene->light);
-//
-//	rtv1->scene->figure = (t_figure *)ft_memalloc(sizeof(t_figure));
-//
-//	rtv1->scene->off = (t_light_off *)ft_memalloc(sizeof(t_light_off));
-//
-//	//парсер чтобы считать сферы из файла в *shpere
-//	//инициальзация сфер
-//	rtv1->scene->figure->sphere = init_sphere(rtv1->scene->figure->sphere);
-//
-//	trace_start(rtv1->sdl, rtv1->scene);
-//	return (0);
-//}
+	rtv1 = (t_rtv1 *)ft_memalloc(sizeof(t_rtv1));
+	rtv1->sdl = (t_sdl *)ft_memalloc((sizeof(t_sdl)));
+	sdl_init(rtv1->sdl);
 
+	rtv1->scene = (t_scene *)ft_memalloc(sizeof(t_scene));
+
+	rtv1->scene->cam = (t_cam *)ft_memalloc(sizeof(t_cam));
+	rtv1->scene->cam->position = (t_pos *)ft_memalloc(sizeof(t_pos));
+	rtv1->scene->cam->position = insert(0, 0, 0, rtv1->scene->cam->position);
+	//разобраться с поворотом камеры
+
+	rtv1->scene->view = (t_pos *)ft_memalloc(sizeof(t_pos));
+
+	//инициализация света нужен прасер
+	rtv1->scene->light = init_light(rtv1->scene->light);
+
+	rtv1->scene->figure = (t_figure *)ft_memalloc(sizeof(t_figure));
+
+	rtv1->scene->off = (t_light_off *)ft_memalloc(sizeof(t_light_off));
+
+	//парсер чтобы считать сферы из файла в *shpere
+	//инициальзация сфер
+	rtv1->scene->figure->sphere = init_sphere(rtv1->scene->figure->sphere);
+
+	trace_start(rtv1->sdl, rtv1->scene);
+	return (0);
+}
+*/
 //написать функцию которая вызывает vector_on_number миллион раз и посмотреть время, а потом
 //отправляю с * принимаю без
 //отправляю без принимаю с *
