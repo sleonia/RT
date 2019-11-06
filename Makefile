@@ -6,7 +6,7 @@
 #    By: thorker <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/31 15:32:23 by thorker           #+#    #+#              #
-#    Updated: 2019/11/06 22:33:06 by thorker          ###   ########.fr        #
+#    Updated: 2019/11/06 23:51:47 by thorker          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ SRC_DIR = src
 OBJ_DIR = objects
 LIB_DIR = ./libft
 FRWR_DIR = ./framework
-SRC = sdl.c helps.c validation_token.c parser.c creation_token_list.c light.c dictionary.c main.c
+SRC = sdl.c helps.c light.c main.c
 INC = -I ./libft/ \
 	  -I ./includes \
 	  -I $(FRWR_DIR)/SDL2.framework/Versions/A/Headers
