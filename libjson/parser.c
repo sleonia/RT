@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "rtv1.h"
+#include "to_json.h"
 
 int 			word_len(char *line)
 {
@@ -67,7 +67,7 @@ char 			*create_word(char **line)
 ** 		возвращает указатель на последний добавленный token
 */
 
-t_token			*parse(char *line, t_dictionary *dict, t_token *token)
+t_token			*parse(char *line, t_token *token)
 {
 	char 	*word;
 
@@ -106,7 +106,7 @@ int 			ft_open(t_scene *scene, char *file)
 	token_tmp = token_head;
 	while (get_next_line(fd, &line) > 0)
 	{
-		token_tmp = parse(line, dict, token_tmp);
+		token_tmp = parse(line, token_tmp);
 		free(line);
 	}
 
@@ -118,15 +118,11 @@ int 			ft_open(t_scene *scene, char *file)
 			break ;
 		token_head = token_head->next;
 	}
-//	valiation_token_list(token_head, dict);
 	return (0);
 }
 
 int 	main(void)
 {
-	t_scene		*scene;
-
-	scene = NULL;
 	ft_open(scene, "./param.json");
 	return (0);
 }

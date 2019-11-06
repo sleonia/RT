@@ -218,7 +218,7 @@ int 		trace_start(t_sdl *sdl, t_scene *scene)
 	sdl_control(sdl, scene);
 	return (0);
 }
-/*
+
 int			main(void)
 {
 	t_rtv1		*rtv1;
@@ -250,7 +250,6 @@ int			main(void)
 	trace_start(rtv1->sdl, rtv1->scene);
 	return (0);
 }
-*/
 //написать функцию которая вызывает vector_on_number миллион раз и посмотреть время, а потом
 //отправляю с * принимаю без
 //отправляю без принимаю с *
