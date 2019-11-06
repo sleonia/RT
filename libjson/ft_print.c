@@ -6,7 +6,7 @@
 /*   By: deladia <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/06 23:27:09 by deladia           #+#    #+#             */
-/*   Updated: 2019/11/06 23:27:11 by deladia          ###   ########.fr       */
+/*   Updated: 2019/11/07 00:04:21 by thorker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,6 @@ void		ft_print(t_key_value *tree)
 	int 	i;
 
 	i = 0;
-	if (tree->key[i] == NULL)
-		return ;
 	while (tree->key[i] != NULL)
 	{
 		if (tree->type[i] == Array)
@@ -42,7 +40,7 @@ void		ft_print(t_key_value *tree)
 			printf("value: NULL\nkey: %s\n", tree->key[i]);
 		}
 		else if (tree->type[i] == Object)
-			ft_print(tree->value[i]);
+			ft_print((t_key_value*)tree->value[i]);
 		i++;
 	}
 }
