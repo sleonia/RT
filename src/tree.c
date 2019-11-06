@@ -6,7 +6,7 @@
 /*   By: deladia <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/03 20:55:14 by delalia           #+#    #+#             */
-/*   Updated: 2019/11/06 22:27:58 by thorker          ###   ########.fr       */
+/*   Updated: 2019/11/06 23:50:56 by thorker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ int				add_name(t_key_value *for_re, t_token **token)
 	char	**new;
 	size_t	i;
 	size_t	k;
+	t_type	type;
+	void	*new_value;
 
 	i = 0;
 	while (*(for_re->key + i) != 0)
@@ -48,13 +50,41 @@ int				add_name(t_key_value *for_re, t_token **token)
 		free(new);
 		return (-1);
 	}
-	if (
+	if (ft_strcmp((*token)->value, "[") == 0)
+	{
+		if ((new_value = add_value_array(token, &type)) == *token)
+		{
+			k = 0;
+			while (k < i + 2)
+			{
+				ft_strdel(new + k);
+				k++;
+			}
+			free(new);
+			return (-1);
+		}
+	}
+	if (ft_strcmp((*token)->value, "{") == 0)
+	{
+		if ((new_value = check_object(token, &type)) == *token)
+		{
+			k = 0;
+			while (k < i + 2)
+			{
+				ft_strdel(new + k);
+				k++;
+			}
+			free(new);
+			return (-1);
+		}
+	}
+	//начать с проверки string
 	free(for_re->key);
 	for_re->key = new;
 		
 }
 
-t_key_value		*check_object(t_token **token)
+t_key_value		*check_object(t_token **token, t_type *type)
 {
 	t_key_value		*for_re;
 
@@ -73,6 +103,7 @@ t_key_value		*check_object(t_token **token)
 	*token = (*token)->next;
 	while (*token != 0)
 	{
+		//добавить проерку ","
 		if (ft_strcmp((*token)->value, "}") == 0)
 			return (for_re);
 		if (ft_strcmp((*token)->value, "\"") == 0)
@@ -82,7 +113,6 @@ t_key_value		*check_object(t_token **token)
 				return (fr_return(token
 		}
 	}
-	//добавить функцию цистки всей структуры
 	return (*token);
 }
 
