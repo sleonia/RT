@@ -1,9 +1,9 @@
 {
 	"camera":
 	{
-		"pos\tition":				[0, 0, 0],
-		"ang\/le_a":				0.0,
-		"ang\\le_b":				0.0
+		"pos\tition":			[0, 0, 0],
+		"ang\/le_a":			0.0,
+		"ang\\le_b":			0.0
 	},
 	"light_1":
 	{
