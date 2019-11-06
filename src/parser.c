@@ -6,7 +6,7 @@
 /*   By: deladia <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/26 20:44:57 by deladia           #+#    #+#             */
-/*   Updated: 2019/10/31 16:40:34 by thorker          ###   ########.fr       */
+/*   Updated: 2019/11/04 04:50:26 by thorker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,7 +127,7 @@ int 	main(void)
 	t_scene		*scene;
 
 	scene = NULL;
-	ft_open(scene, "../param.json");
+	ft_open(scene, "./param.json");
 	return (0);
 }
 //объекты -> свойства -> параметры
