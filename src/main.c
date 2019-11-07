@@ -50,7 +50,8 @@ int 		trace_start(t_sdl *sdl, t_scene *scene)
 		while(y < HEIGHT / 2)
 		{
 			scene->view = matrix_on_vector(scene->cam->a, scene->cam->b, canvas_to_viewport(x, y, scene->view));
-			color = trace_ray(scene->cam->position, scene->view, 1.0, INFINITY, scene, 3);
+			*scene->view = vector_normalize(scene->view);
+			color = trace_ray(scene->cam->position, scene->view, 1.0, INFINITY, scene, 0);
 			sdl->pixels = put_pixel(x, y, color, sdl);
 			y++;
 		}

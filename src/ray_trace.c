@@ -27,7 +27,7 @@ t_result	intersect_ray_sphere(t_pos *o, t_pos *d, t_sphere *sphere)
 	k1 = dot(d, d);
 	k2 = 2 * dot(&oc, d);
 	k3 = dot(&oc, &oc) - sphere->radius * sphere->radius;
-	if (k2 * k2 - 4 * k1 * k3 < 0)
+	if (k2 * k2 - 4 * k1 * k3 < 0.001)
 	{
 		res.t1 = INFINITY;
 		res.t2 = INFINITY;
@@ -39,10 +39,64 @@ t_result	intersect_ray_sphere(t_pos *o, t_pos *d, t_sphere *sphere)
 	return (res);
 }
 
+/*int     	get_intersect_cylinder(const t_vector3d start_ray, const t_vector3d ray, const t_object3d obj,
+								  float *intersect_dist, const float min_distance)
+{
+	float       intersect_check, intersect_tmp;
+	float       a, b, c;
+	float       discriminant;
+	t_vector3d  OC;
+
+	intersect_tmp = *intersect_dist;
+	OC = mv_minus(start_ray, obj.center);
+	a = 1 - mv_scalar_mult(ray, obj.axis) * mv_scalar_mult(ray, obj.axis);
+
+	b = mv_scalar_mult(ray, OC) - mv_scalar_mult(ray, obj.axis) * mv_scalar_mult(OC, obj.axis);
+
+	c = mv_scalar_mult(OC, OC) - mv_scalar_mult(OC, obj.axis) *
+								 mv_scalar_mult(OC, obj.axis) - obj.sq_radius;
+	discriminant = b * b - a * c;
+	if (discriminant < 0.001)
+		return (0);
+	intersect_check = (-b - sqrt(discriminant)) / a;
+	if (intersect_check < *intersect_dist && intersect_check > min_distance)
+		*intersect_dist = intersect_check;
+	if (*intersect_dist == intersect_tmp)
+		return (0);
+	return (1);
+}*/
+
+t_result	intersect_ray_cylinder(t_pos *o, t_pos *d, t_cylinder *cylinder)
+{
+	double		a;
+	double		b;
+	double		c;
+	double		discriminant;
+	t_pos		oc;
+	t_result	res;
+
+	oc = vector_minus(o, &cylinder->center);
+	a = 1.0 - dot(d, &cylinder->axis) * dot(d, &cylinder->axis);
+	b = dot(d, &oc) - dot(d, &cylinder->axis) * dot(&oc, &cylinder->axis);
+	c = dot(&oc, &oc) - dot(&oc, &cylinder->axis) * dot(&oc, &cylinder->axis) - cylinder->radius * cylinder->radius;
+	discriminant = b * b - a * c;
+	if (discriminant < 0.001)
+	{
+		res.t1 = INFINITY;
+		res.t2 = INFINITY;
+		return (res);
+	}
+	res.t1 = (-b - sqrt(discriminant)) / a;
+	res.t2 = INFINITY;
+	return (res);
+}
+
 t_result	get_intersect(t_pos *o, t_pos *d, t_object *obj)
 {
 	if (obj->type == o_sphere)
 		return (intersect_ray_sphere(o, d, &obj->objects->sphere));
+	else if (obj->type == o_cylinder)
+		return (intersect_ray_cylinder(o, d, &obj->objects->cylinder));
 }
 
 t_return	closest_intersection(t_pos *o, t_pos *d, double t_min, double t_max, t_object *obj)
@@ -111,6 +165,7 @@ int			 trace_ray(t_pos *o, t_pos *d, double t_min, double t_max, t_scene *scene,
 	ret = closest_intersection(o, d, t_min, t_max, scene->object);
 	if (ret.closest_obj == NULL)
 		return (BLACK);
+
 	buf = vector_on_number(d, ret.closest_t);
 	p = vector_pus(o, &buf);
 	n = get_obj_normal(&p, ret.closest_obj);

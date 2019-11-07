@@ -143,6 +143,19 @@ t_pos		*matrix_on_vector(double a, double b, t_pos *vec)
 ** Скалярное произведение векторов
 */
 
+t_pos		vector_normalize(t_pos *a)
+{
+	float	len;
+	t_pos	vec;
+
+	vec = *a;
+	len = vector_len(a);
+	if (len == 0)
+		return (vec);
+	vec = vector_on_number(a, 1 / len);
+	return (vec);
+}
+
 double		dot(t_pos *a, t_pos *b)
 {
 	return (a->x * b->x + a->y * b->y + a->z * b->z);

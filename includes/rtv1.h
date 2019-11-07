@@ -25,17 +25,6 @@
 # define WHITE 0xFFFFFF
 # define BLACK 0x000000
 
-typedef struct 			s_dictionary
-{
-	char				*object[3];
-	char				*camera_properties[3];
-	char				*light_properties[3];
-	char 				*figure_type[4];
-	char 				*figure_properties[6];
-	char 				*light_type[3];
-	char 				separator[6];
-}						t_dictionary;
-
 typedef struct			s_result
 {
 	double 				t1;
@@ -55,45 +44,12 @@ typedef struct 			s_light
 	double 				intensity;
 	t_pos				*position;
 	struct s_light		*next;
-	//mb something else
 }						t_light;
-
-/*typedef struct 			s_cylinder
-{
-	t_pos				*center;
-	double 				height;
-	int 				color;
-	double				radius;
-	int 				specular;
-	double				reflective;
-	struct s_cylinder	*next;
-}						t_cylinder;
-
-typedef struct 			s_cone
-{
-	t_pos				*center;
-//	double 				height;
-	int 				color;
-//	double				radius;
-	int 				specular;
-	double				reflective;
-	struct s_cone		*next;
-}						t_cone;
-
-typedef struct 			s_plane
-{
-//	t_pos				*center;
-//	double 				height;
-	int 				color;
-//	double				radius;
-	int 				specular;
-	double				reflective;
-	struct s_plane		*next;
-}						t_plane;*/
 
 typedef struct 			s_cylinder
 {
 	t_pos				center;
+	t_pos				axis;
 	double				radius;
 }						t_cylinder;
 
@@ -144,6 +100,7 @@ typedef struct			s_object
 typedef struct 			s_cylinder_params
 {
 	t_pos				pos;
+	t_pos				axis;
 	double 				radius;
 	int 				color;
 	int 				specular;
@@ -233,6 +190,7 @@ t_pos					vector_pus(t_pos *o, t_pos *center);
 t_pos					vector_on_number(t_pos *o, double nbr);
 t_pos					vector_div(t_pos *o, double nbr);
 double					vector_len(t_pos *o);
+t_pos					vector_normalize(t_pos *a);
 double					computer_lighting(t_pos *p, t_pos *n, t_pos *v, int s, t_scene *scene);
 t_light					*init_light(t_light *light);
 void 					ft_error(char *str);
@@ -242,8 +200,8 @@ t_pos					*vector_on_vector(t_pos *a, t_pos *b, t_pos *ab);
 t_pos					*matrix_on_vector(double a, double b, t_pos *vec);
 int						trace_ray(t_pos *o, t_pos *d, double t_min, double t_max,
 		t_scene *scene, int depth);
-t_sphere	*init_sphere(t_sphere *sphere);
-t_object	*init_spheres(t_object *obj, t_sphere_params params);
-t_object 	*init_scene(void);
+t_object				*init_sphere(t_object *obj, t_sphere_params params);
+t_object				*init_cylinder(t_object *obj, t_cylinder_params params);
+t_object				*init_scene(void);
 
 #endif
