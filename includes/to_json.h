@@ -39,4 +39,7 @@ typedef struct			s_token
 	struct s_token		*next;
 }						t_token;
 
+t_token					*ft_return(t_token *token, t_key_value **tree);
+void					ft_print(t_key_value *tree);
+
 #endif
