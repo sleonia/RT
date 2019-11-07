@@ -87,7 +87,7 @@ t_object	*init_plane(t_object *obj, t_plane_params params)
 		obj->reflective = params.reflective;
 		obj->specular = params.specular;
 		obj->objects->plane.center = params.pos;
-		obj->objects->plane.radius = params.radius;
+		obj->objects->plane.normal = params.normal;
 		return (obj);
 	}
 	else
@@ -103,7 +103,7 @@ t_object	*init_plane(t_object *obj, t_plane_params params)
 		new_obj->reflective = params.reflective;
 		new_obj->specular = params.specular;
 		new_obj->objects->plane.center = params.pos;
-		new_obj->objects->plane.radius = params.radius;
+		new_obj->objects->plane.normal = params.normal;
 		new_obj->next = obj;
 		return (new_obj);
 	}
@@ -151,9 +151,6 @@ t_object 	*init_scene(void)
 	object = init_spheres(NULL,  (t_sphere_params){{0.0, -1.0, 3.0}, 1.0, 0xFF00FF, 500, 0.2});
 	object = init_spheres(object,  (t_sphere_params){{2.0, 2.0, 3.0}, 1.0, 0xFF00FF, 500, 0.2});
 	object = init_spheres(object,  (t_sphere_params){{-2.0, 2.0, 3.0}, 1.0, 0xFF00FF, 500, 0.2});
+	object = init_plane(object,  (t_plane_params){{-2.0, 0.0, 3.0}, 1.0, 0xFFFFFF, 500, 0.2, {0.0, 0.0, -1.0}});
 	return (object);
-//	obj = init_spheres(obj)
-//	init_spheres()
-//	init_spheres()
-//	init_spheres()
 }

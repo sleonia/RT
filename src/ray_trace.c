@@ -15,6 +15,25 @@ int 		color_scale(int	color, double c)
 	return ((red << 16) | (green << 8) | blue);
 }
 
+t_result	intersect_ray_plane(t_pos *o, t_pos *d, t_plane *plane) // min == closest obj. closest t
+{
+	double 		a;
+	double 		b;
+	t_pos		c;
+	t_result	res;
+
+	b = dot(d, &plane->normal);
+	res.t1 = INFINITY;
+	res.t2 = INFINITY;
+	if (b > 0.0)
+		return (res);
+	c = vector_minus(o, &plane->center);
+	a = dot(&c, &plane->normal);
+	res.t1 = -(a / b);
+	return (res);
+
+}
+
 t_result	intersect_ray_sphere(t_pos *o, t_pos *d, t_sphere *sphere)
 {
 	t_pos		oc;
@@ -43,6 +62,8 @@ t_result	get_intersect(t_pos *o, t_pos *d, t_object *obj)
 {
 	if (obj->type == o_sphere)
 		return (intersect_ray_sphere(o, d, &obj->objects->sphere));
+	if (obj->type == o_plane)
+		return (intersect_ray_plane(o, d, &obj->objects->plane));
 }
 
 t_return	closest_intersection(t_pos *o, t_pos *d, double t_min, double t_max, t_object *obj)
@@ -90,6 +111,8 @@ t_pos	get_obj_normal(t_pos *p, t_object *obj)
 
 	if (obj->type == o_sphere)
 		n = vector_minus(p, &obj->objects->sphere.center);
+	if (obj->type == o_plane)
+		n = obj->objects->plane.normal;
 	n = vector_div(&n, vector_len(&n));
 	return (n);
 }

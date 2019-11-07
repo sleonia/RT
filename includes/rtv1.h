@@ -58,39 +58,6 @@ typedef struct 			s_light
 	//mb something else
 }						t_light;
 
-/*typedef struct 			s_cylinder
-{
-	t_pos				*center;
-	double 				height;
-	int 				color;
-	double				radius;
-	int 				specular;
-	double				reflective;
-	struct s_cylinder	*next;
-}						t_cylinder;
-
-typedef struct 			s_cone
-{
-	t_pos				*center;
-//	double 				height;
-	int 				color;
-//	double				radius;
-	int 				specular;
-	double				reflective;
-	struct s_cone		*next;
-}						t_cone;
-
-typedef struct 			s_plane
-{
-//	t_pos				*center;
-//	double 				height;
-	int 				color;
-//	double				radius;
-	int 				specular;
-	double				reflective;
-	struct s_plane		*next;
-}						t_plane;*/
-
 typedef struct 			s_cylinder
 {
 	t_pos				center;
@@ -100,7 +67,7 @@ typedef struct 			s_cylinder
 typedef struct 			s_plane
 {
 	t_pos				center;
-	double				radius;
+	t_pos				normal;
 }						t_plane;
 
 typedef struct 			s_cone
@@ -166,6 +133,7 @@ typedef struct 			s_plane_params
 	int 				color;
 	int 				specular;
 	double 				reflective;
+	t_pos				normal;
 }						t_plane_params;
 
 typedef struct 			s_sphere_params
