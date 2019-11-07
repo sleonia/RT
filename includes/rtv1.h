@@ -256,5 +256,6 @@ int						trace_ray(t_pos *o, t_pos *d, double t_min, double t_max,
 		t_scene *scene, int depth);
 t_sphere	*init_sphere(t_sphere *sphere);
 t_object	*init_spheres(t_object *obj, t_sphere_params params);
+t_object 	*init_scene(void);
 
 #endif

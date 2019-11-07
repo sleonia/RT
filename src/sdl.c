@@ -27,16 +27,14 @@ void		ft_error(char *str)
 	exit(1);
 }
 
-void		ft_free(t_rtv1 *rtv1)
+/*void		ft_free(t_rtv1 *rtv1)
 {
 	free(rtv1->sdl);
 	free(rtv1->scene->cam);
 	free(rtv1->scene->view);
-	free(rtv1->scene->figure->sphere);
-	free(rtv1->scene->figure);
 	free(rtv1->scene);
 	free(rtv1);
-}
+}*/
 
 int 		sdl_update(t_sdl *sdl)
 {

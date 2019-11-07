@@ -15,7 +15,7 @@ int 		color_scale(int	color, double c)
 	return ((red << 16) | (green << 8) | blue);
 }
 
-t_result	intersect_ray_sphere(t_pos *o, t_pos *d, t_sphere *sphere)
+t_result	intersect_ray_sphere(t_pos *o, t_pos *d, t_spheres *sphere)
 {
 	t_pos		oc;
 	double		k1;
@@ -23,7 +23,7 @@ t_result	intersect_ray_sphere(t_pos *o, t_pos *d, t_sphere *sphere)
 	double		k3;
 	t_result	res;
 
-	oc = vector_minus(o, sphere->center);
+	oc = vector_minus(o, &sphere->center);
 	k1 = dot(d, d);
 	k2 = 2 * dot(&oc, d);
 	k3 = dot(&oc, &oc) - sphere->radius * sphere->radius;
@@ -89,7 +89,7 @@ t_pos	get_obj_normal(t_pos *p, t_object *obj)
 	t_pos n;
 
 	if (obj->type == o_sphere)
-		n = vector_minus(p, obj->objects->sphere.center);
+		n = vector_minus(p, &obj->objects->sphere.center);
 	n = vector_div(&n, vector_len(&n));
 	return (n);
 }

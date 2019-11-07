@@ -83,12 +83,14 @@ t_object	*init_spheres(t_object *obj, t_sphere_params params)
 	{
 		if (!(obj = (t_object *)ft_memalloc(sizeof(t_object))))
 			return (NULL);
+		if (!(obj->objects = (union u_objects *)ft_memalloc(sizeof(union u_objects))))
+			return (NULL);
 		obj->type = o_sphere;
 		obj->color = params.color;
 		obj->reflective = params.reflective;
 		obj->specular = params.specular;
-		obj->objects.sphere.center = params.pos;
-		obj->objects.sphere.radius = params.radius;
+		obj->objects->sphere.center = params.pos;
+		obj->objects->sphere.radius = params.radius;
 		//		obj->objects.sphere = params.asdsadasdasdasda
 		return (obj);
 		//создать лист поместить в ноду объект вернуть лист;
@@ -96,15 +98,17 @@ t_object	*init_spheres(t_object *obj, t_sphere_params params)
 	else
 	{
 		t_object *new_obj;
-		new_obj->next = obj;
 		if (!(new_obj = (t_object *)ft_memalloc(sizeof(t_object))))
 			return NULL;
+		if (!(new_obj->objects = (union u_objects *)ft_memalloc(sizeof(union u_objects))))
+			return (NULL);
+		new_obj->next = obj;
 		new_obj->type = o_sphere;
 		new_obj->color = params.color;
 		new_obj->reflective = params.reflective;
 		new_obj->specular = params.specular;
-		new_obj->objects.sphere.center = params.pos;
-		new_obj->objects.sphere.radius = params.radius;
+		new_obj->objects->sphere.center = params.pos;
+		new_obj->objects->sphere.radius = params.radius;
 		new_obj->next = obj;
 		return (new_obj);
 		// в текущий лист занести объект и тоже вернуть лист.
@@ -116,6 +120,8 @@ t_object 	*init_scene(void)
 	t_object *object;
 
 	object = init_spheres(NULL,  (t_sphere_params){{0.0, -1.0, 3.0}, 1.0, 0xFF00FF, 500, 0.2});
+	object = init_spheres(object,  (t_sphere_params){{2.0, 2.0, 3.0}, 1.0, 0xFF00FF, 500, 0.2});
+	object = init_spheres(object,  (t_sphere_params){{-2.0, 2.0, 3.0}, 1.0, 0xFF00FF, 500, 0.2});
 	return (object);
 //	obj = init_spheres(obj)
 //	init_spheres()
