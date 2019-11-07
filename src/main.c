@@ -12,50 +12,30 @@
 
 #include "rtv1.h"
 
-t_sphere	*init_sphere(t_sphere *sphere)
-{
-	t_sphere	*tmp;
-	t_pos		*center1;
-	t_pos		*center2;
-	t_pos		*center3;
-	t_pos		*center4;
+/*
+** 		Решает квадратное уравнение и возвращает два корня если есть, если нет то INF
+*/
 
-	sphere = (t_sphere *)ft_memalloc(sizeof(t_sphere));
-	center1 = (t_pos *)ft_memalloc(sizeof(t_pos));
-	sphere->radius  = 1;
-	sphere->color = 0xFF0000;
-	sphere->center = insert(0, -1, 3, center1);
-	sphere->specular = 500;
-	sphere->reflective = 0.2;
 
-/*	sphere->next = (t_sphere *)ft_memalloc(sizeof(t_sphere));
-	center2 = (t_pos *)ft_memalloc(sizeof(t_pos));
-	tmp = sphere->next;
-	tmp->radius  = 1;
-	tmp->color = 0x0000FF;
-	tmp->center = insert(2, 0, 4, center2);
-	tmp->specular = 500;
-	tmp->reflective = 0.3;
 
-	tmp->next = (t_sphere *)ft_memalloc(sizeof(t_sphere));
-	center3 = (t_pos *)ft_memalloc(sizeof(t_pos));
-	tmp = tmp->next;
-	tmp->radius  = 1;
-	tmp->color = 0x00FF00;
-	tmp->center = insert(-2, 0, 4, center3);
-	tmp->specular = 10;
-	tmp->reflective = 0.4;
+/*
+** 		Находит ближайшую точку в позиции (x, y) среди всех сфер и возвращает укзатель на сферу и ближайшую точку пересечения
+*/
 
-	tmp->next = (t_sphere *)ft_memalloc(sizeof(t_sphere));
-	center4 = (t_pos *)ft_memalloc(sizeof(t_pos));
-	tmp = tmp->next;
-	tmp->radius  = 5000;
-	tmp->color = 0xFFFF00;
-	tmp->center = insert(0, -5001, 0, center4);
-	tmp->specular = 1000;
-	tmp->reflective = 0.5;*/
-	return (sphere);
-}
+
+
+/*
+** 		Костыльное добавление сфер
+**		НУЖЕН ПАРСЕР
+** 		массив структур вместо односвязного списка
+**
+*/
+
+
+
+/*
+**	Начало обхода по всем пикселям экрана
+*/
 
 int 		trace_start(t_sdl *sdl, t_scene *scene)
 {
@@ -111,3 +91,6 @@ int			main(void)
 	trace_start(rtv1->sdl, rtv1->scene);
 	return (0);
 }
+//написать функцию которая вызывает vector_on_number миллион раз и посмотреть время, а потом
+//отправляю с * принимаю без
+//отправляю без принимаю с *
