@@ -56,7 +56,7 @@ typedef struct 			s_cylinder
 typedef struct 			s_plane
 {
 	t_pos				center;
-	double				radius;
+	t_pos				normal;
 }						t_plane;
 
 typedef struct 			s_cone
@@ -123,6 +123,7 @@ typedef struct 			s_plane_params
 	int 				color;
 	int 				specular;
 	double 				reflective;
+	t_pos				normal;
 }						t_plane_params;
 
 typedef struct 			s_sphere_params

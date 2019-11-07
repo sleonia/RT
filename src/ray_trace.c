@@ -15,6 +15,25 @@ int 		color_scale(int	color, double c)
 	return ((red << 16) | (green << 8) | blue);
 }
 
+t_result	intersect_ray_plane(t_pos *o, t_pos *d, t_plane *plane) // min == closest obj. closest t
+{
+	double 		a;
+	double 		b;
+	t_pos		c;
+	t_result	res;
+
+	b = dot(d, &plane->normal);
+	res.t1 = INFINITY;
+	res.t2 = INFINITY;
+	if (b > 0.0)
+		return (res);
+	c = vector_minus(o, &plane->center);
+	a = dot(&c, &plane->normal);
+	res.t1 = -(a / b);
+	return (res);
+
+}
+
 t_result	intersect_ray_sphere(t_pos *o, t_pos *d, t_sphere *sphere)
 {
 	t_pos		oc;
@@ -27,7 +46,7 @@ t_result	intersect_ray_sphere(t_pos *o, t_pos *d, t_sphere *sphere)
 	k1 = dot(d, d);
 	k2 = 2 * dot(&oc, d);
 	k3 = dot(&oc, &oc) - sphere->radius * sphere->radius;
-	if (k2 * k2 - 4 * k1 * k3 < 0.001)
+	if (k2 * k2 - 4 * k1 * k3 < 0)
 	{
 		res.t1 = INFINITY;
 		res.t2 = INFINITY;
@@ -95,6 +114,8 @@ t_result	get_intersect(t_pos *o, t_pos *d, t_object *obj)
 {
 	if (obj->type == o_sphere)
 		return (intersect_ray_sphere(o, d, &obj->objects->sphere));
+	if (obj->type == o_plane)
+		return (intersect_ray_plane(o, d, &obj->objects->plane));
 	else if (obj->type == o_cylinder)
 		return (intersect_ray_cylinder(o, d, &obj->objects->cylinder));
 }
@@ -144,6 +165,8 @@ t_pos	get_obj_normal(t_pos *p, t_object *obj)
 
 	if (obj->type == o_sphere)
 		n = vector_minus(p, &obj->objects->sphere.center);
+	if (obj->type == o_plane)
+		n = obj->objects->plane.normal;
 	n = vector_div(&n, vector_len(&n));
 	return (n);
 }
@@ -165,7 +188,6 @@ int			 trace_ray(t_pos *o, t_pos *d, double t_min, double t_max, t_scene *scene,
 	ret = closest_intersection(o, d, t_min, t_max, scene->object);
 	if (ret.closest_obj == NULL)
 		return (BLACK);
-
 	buf = vector_on_number(d, ret.closest_t);
 	p = vector_pus(o, &buf);
 	n = get_obj_normal(&p, ret.closest_obj);
