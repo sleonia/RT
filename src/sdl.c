@@ -22,8 +22,7 @@ void		sdl_error(char *str)
 
 void		ft_error(char *str)
 {
-	ft_putstr(str);
-	write(1, "\n", 1);
+	ft_putendl(str);
 	exit(1);
 }
 

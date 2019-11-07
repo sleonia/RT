@@ -6,11 +6,49 @@
 /*   By: deladia <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/06 23:27:09 by deladia           #+#    #+#             */
-/*   Updated: 2019/11/07 00:04:21 by thorker          ###   ########.fr       */
+/*   Updated: 2019/11/07 23:22:50 by deladia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "to_json.h"
+
+void		ft_array(void *tree_value)
+{
+	int		i;
+
+	i = 0;
+	if ((t_array*)tree_value->type == Object)
+	{
+		while(i < tree_value->length)
+		{
+			ft_printf((t_key_value*)tree_value->value[i]);
+			i++;
+		}
+	}
+	else if ((t_array*)tree_value->type == String)
+	{
+		i = 0;
+		printf("[");
+		while(i < tree_value->lengt)
+		{
+			printf("%s  ", tree_value->value[i]);
+			i++;
+		}
+		printf("]");
+	}
+	else if ((t_array*)tree_value->type == Dec)
+	{
+		(int**)tree_value->value;
+		i = 0;
+		printf("[");
+		while(i < tree_value->lengt)
+		{
+			printf("%s  ", tree_value->value[i]);
+			i++;
+		}
+		printf("]");
+	}
+}
 
 void		ft_print(t_key_value *tree)
 {
@@ -21,6 +59,7 @@ void		ft_print(t_key_value *tree)
 	{
 		if (tree->type[i] == Array)
 		{
+			 (t_array*)(tree->value)->type == 
 			//Печатать массив
 		}
 		else if (tree->type[i] == String)
