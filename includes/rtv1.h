@@ -142,38 +142,11 @@ typedef struct 			s_sphere_params
 	double 				reflective;
 }						t_sphere_params;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 typedef struct			s_return
 {
-//	t_sphere			*closest_sphere;
 	t_object			*closest_obj;
 	double				closest_t;
 }						t_return;
-
-typedef struct			s_figure
-{
-//	t_cylinder			*cylinder;
-	t_sphere			*sphere;
-//	t_cone				*cone;
-//	t_plane				*plane;
-}						t_figure;
 
 typedef struct			s_cam
 {
@@ -197,24 +170,7 @@ typedef struct 			s_scene
 	t_light				*light;
 	t_object			*object;
 	t_light_off			*off;
-	//mb something else
 }						t_scene;
-
-typedef struct		s_cl
-{
-	cl_platform_id		platform_id;
-	cl_uint				ret_num_platforms;
-	cl_context			context;
-	cl_uint				ret_num_devices;
-	cl_command_queue	cmd_queue;
-	cl_program			program;
-	cl_kernel			kernel;
-	size_t				global_work_size[1];
-	cl_device_id		device_id;
-	cl_mem				memobjs;
-	char 				*program_source;
-	size_t 				program_size;
-}						t_cl;
 
 typedef struct 			s_sdl
 {
@@ -223,15 +179,12 @@ typedef struct 			s_sdl
 	SDL_Texture			*texture;
 	SDL_Event			event;
 	int					*pixels;
-	//mb something else
 }						t_sdl;
 
 typedef struct 			s_rtv1
 {
 	t_sdl				*sdl;
-	t_cl				*opencl;
 	t_scene				*scene;
-	//mb something else
 }						t_rtv1;
 
 t_pos					*insert(int x,int y, int z, t_pos *pos);
