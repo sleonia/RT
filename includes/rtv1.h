@@ -58,7 +58,7 @@ typedef struct 			s_light
 	//mb something else
 }						t_light;
 
-typedef struct 			s_cylinder
+/*typedef struct 			s_cylinder
 {
 	t_pos				*center;
 	double 				height;
@@ -89,7 +89,7 @@ typedef struct 			s_plane
 	int 				specular;
 	double				reflective;
 	struct s_plane		*next;
-}						t_plane;
+}						t_plane;*/
 
 typedef struct 			s_sphere
 {
@@ -101,6 +101,51 @@ typedef struct 			s_sphere
 	struct s_sphere		*next;
 }						t_sphere;
 
+union					u_objects
+{
+	t_sphere			sphere;
+//	t_cylinder			cylinder;
+//	t_cone				cone;
+//	t_plane				plane;
+};
+
+enum					e_obj_type
+{
+	o_sphere = 1,
+	o_cylinder,
+	o_cone,
+	o_plane,
+};
+
+typedef struct			s_object
+{
+	union u_objects		objects;
+	enum e_obj_type		type;
+	int					color;
+	int 				specular;
+	double				reflective;
+	struct s_object		*next;
+}						t_object;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 typedef struct			s_return
 {
 	t_sphere			*closest_sphere;
@@ -109,10 +154,10 @@ typedef struct			s_return
 
 typedef struct			s_figure
 {
-	t_cylinder			*cylinder;
+//	t_cylinder			*cylinder;
 	t_sphere			*sphere;
-	t_cone				*cone;
-	t_plane				*plane;
+//	t_cone				*cone;
+//	t_plane				*plane;
 }						t_figure;
 
 typedef struct			s_cam
@@ -192,5 +237,7 @@ t_return				closest_intersection(t_pos *o, t_pos *d, double t_min, double t_max,
 int						trace_start(t_sdl *sdl, t_scene *scene);
 t_pos					*vector_on_vector(t_pos *a, t_pos *b, t_pos *ab);
 t_pos					*matrix_on_vector(double a, double b, t_pos *vec);
+int						trace_ray(t_pos *o, t_pos *d, double t_min, double t_max,
+		t_scene *scene, int depth);
 
 #endif
