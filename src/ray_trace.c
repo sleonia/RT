@@ -39,30 +39,35 @@ t_result	intersect_ray_sphere(t_pos *o, t_pos *d, t_sphere *sphere)
 	return (res);
 }
 
+t_result	get_intersect(t_pos *o, t_pos *d, t_object *obj)
+{
+	if (obj->type == o_sphere)
+		return (intersect_ray_sphere(o, d, &obj->objects->sphere));
+}
 
-t_return	closest_intersection(t_pos *o, t_pos *d, double t_min, double t_max, t_sphere *sphere)
+t_return	closest_intersection(t_pos *o, t_pos *d, double t_min, double t_max, t_object *obj)
 {
 	t_result	res;
-	t_sphere	*tmp;
+	t_object	*tmp_obj;
 	t_return	ret;
 
 	ret.closest_t = INFINITY;
-	ret.closest_sphere = NULL;
-	tmp = sphere;
-	while (tmp)
+	ret.closest_obj = NULL;
+	tmp_obj = obj;
+	while (tmp_obj)
 	{
-		res = intersect_ray_sphere(o, d, tmp);
+		res = get_intersect(o, d, tmp_obj);
 		if (res.t1 >= t_min && res.t1 <= t_max && res.t1 < ret.closest_t)
 		{
 			ret.closest_t = res.t1;
-			ret.closest_sphere = tmp;
+			ret.closest_obj = tmp_obj;
 		}
 		if (res.t2 >= t_min && res.t2 <= t_max && res.t2 < ret.closest_t)
 		{
 			ret.closest_t = res.t2;
-			ret.closest_sphere = tmp;
+			ret.closest_obj = tmp_obj;
 		}
-		tmp = tmp->next;
+		tmp_obj = tmp_obj->next;
 	}
 	return (ret);
 }
@@ -79,6 +84,16 @@ t_pos		reflect_ray(t_pos *r, t_pos *n)
 	return (ret);
 }
 
+t_pos	get_obj_normal(t_pos *p, t_object *obj)
+{
+	t_pos n;
+
+	if (obj->type == o_sphere)
+		n = vector_minus(p, obj->objects->sphere.center);
+	n = vector_div(&n, vector_len(&n));
+	return (n);
+}
+
 /*
 ** 		Находит ближайшую точку в позиции (x, y) среди всех сфер и возвращает цвет пикселя
 */
@@ -93,24 +108,20 @@ int			 trace_ray(t_pos *o, t_pos *d, double t_min, double t_max, t_scene *scene,
 	int reflected_color;
 	double ref;
 
-	ret = closest_intersection(o, d, t_min, t_max, scene->figure->sphere);
-	if (ret.closest_sphere == NULL)
+	ret = closest_intersection(o, d, t_min, t_max, scene->object);
+	if (ret.closest_obj == NULL)
 		return (BLACK);
-//	return (ret.closest_sphere->color);
-	//Часть для добавления бликов от света
-	// 		Вычисление локального цвета
 	buf = vector_on_number(d, ret.closest_t);
 	p = vector_pus(o, &buf);
-	n = vector_minus(&p, ret.closest_sphere->center);
-	n = vector_div(&n, vector_len(&n));
+	n = get_obj_normal(&p, ret.closest_obj);
 	//Теперь buf это -D
 	buf = vector_on_number(d, -1);
 	// Вычисление коэфа для умножения на цвет сферы
-	c = computer_lighting(&p, &n, &buf, ret.closest_sphere->specular, scene);
-	local_color = color_scale(ret.closest_sphere->color, c);
+	c = computer_lighting(&p, &n, &buf, ret.closest_obj->specular, scene);
+	local_color = color_scale(ret.closest_obj->color, c);
 
 	// Проверка выхода из рекурсии
-	ref = ret.closest_sphere->reflective;
+	ref = ret.closest_obj->reflective;
 	if (depth <= 0 || ref <= 0 || scene->off->reflect)
 		return (local_color);
 

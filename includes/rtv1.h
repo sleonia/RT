@@ -119,7 +119,7 @@ enum					e_obj_type
 
 typedef struct			s_object
 {
-	union u_objects		objects;
+	union u_objects		*objects;
 	enum e_obj_type		type;
 	int					color;
 	int 				specular;
@@ -148,7 +148,8 @@ typedef struct			s_object
 
 typedef struct			s_return
 {
-	t_sphere			*closest_sphere;
+//	t_sphere			*closest_sphere;
+	t_object			*closest_obj;
 	double				closest_t;
 }						t_return;
 
@@ -180,7 +181,7 @@ typedef struct 			s_scene
 	t_pos				*view;
 	t_cam				*cam;
 	t_light				*light;
-	t_figure			*figure;
+	t_object			*object;
 	t_light_off			*off;
 	//mb something else
 }						t_scene;
@@ -233,7 +234,7 @@ double					vector_len(t_pos *o);
 double					computer_lighting(t_pos *p, t_pos *n, t_pos *v, int s, t_scene *scene);
 t_light					*init_light(t_light *light);
 void 					ft_error(char *str);
-t_return				closest_intersection(t_pos *o, t_pos *d, double t_min, double t_max, t_sphere *sphere);
+t_return				closest_intersection(t_pos *o, t_pos *d, double t_min, double t_max, t_object *obj);
 int						trace_start(t_sdl *sdl, t_scene *scene);
 t_pos					*vector_on_vector(t_pos *a, t_pos *b, t_pos *ab);
 t_pos					*matrix_on_vector(double a, double b, t_pos *vec);

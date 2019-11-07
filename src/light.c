@@ -103,8 +103,8 @@ double		computer_lighting(t_pos *p, t_pos *n, t_pos *v, int specular, t_scene *s
 			// Проверка тени
 			if (t_max)
 			{
-				shadow = closest_intersection(p, &l, 0.001, t_max, scene->figure->sphere);
-				if (shadow.closest_sphere != NULL)
+				shadow = closest_intersection(p, &l, 0.001, t_max, scene->object);
+				if (shadow.closest_obj != NULL)
 				{
 					tmp = tmp->next;
 					continue ;
