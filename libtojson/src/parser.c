@@ -6,7 +6,7 @@
 /*   By: deladia <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/26 20:44:57 by deladia           #+#    #+#             */
-/*   Updated: 2019/11/04 04:50:26 by thorker          ###   ########.fr       */
+/*   Updated: 2019/11/07 22:52:48 by deladia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,19 +88,15 @@ t_token			*parse(char *line, t_token *token)
 ** 		Затем вызывает проверку на валидность последовательности токенов
  */
 
-int 			ft_open(t_scene *scene, char *file)
+t_token 			*ft_open(char *file)
 {
 	ssize_t			fd;
 	char 			*line;
-	t_dictionary	*dict;
 	t_token			*token_head;
 	t_token			*token_tmp;
 
-
-	(void)scene;
 	if ((fd = open(file, O_RDONLY)) < 0)
 		ft_error("Can't open file!");
-	dict = dictionary();
 	if (!(token_head = (t_token *)ft_memalloc(sizeof(t_token))))
 		ft_error("Memory not allocated (for token)");
 	token_tmp = token_head;
@@ -109,8 +105,6 @@ int 			ft_open(t_scene *scene, char *file)
 		token_tmp = parse(line, token_tmp);
 		free(line);
 	}
-
-
 	while (token_head)
 	{
 		printf("%s\n", token_head->value);
@@ -118,13 +112,7 @@ int 			ft_open(t_scene *scene, char *file)
 			break ;
 		token_head = token_head->next;
 	}
-	return (0);
-}
-
-int 	main(void)
-{
-	ft_open(scene, "./param.json");
-	return (0);
+	return (token_head);
 }
 //объекты -> свойства -> параметры
 //для фигуо объект -> фигура -> свойста -> параметры

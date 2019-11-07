@@ -6,7 +6,7 @@
 #    By: thorker <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/31 15:32:23 by thorker           #+#    #+#              #
-#    Updated: 2019/11/06 23:51:47 by thorker          ###   ########.fr        #
+#    Updated: 2019/11/07 21:51:53 by deladia          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ OBJ_DIR = objects
 LIB_DIR = ./libft
 FRWR_DIR = ./framework
 SRC = sdl.c helps.c light.c main.c
-INC = -I ./libft/ \
+INC = -I ./libft/includes/ \
 	  -I ./includes \
 	  -I $(FRWR_DIR)/SDL2.framework/Versions/A/Headers
 LIB = -L $(LIB_DIR)/ -lft
