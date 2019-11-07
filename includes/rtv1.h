@@ -101,9 +101,15 @@ typedef struct 			s_sphere
 	struct s_sphere		*next;
 }						t_sphere;
 
+typedef struct 			s_spheres
+{
+	t_pos				center;
+	double				radius;
+}						t_spheres;
+
 union					u_objects
 {
-	t_sphere			sphere;
+	t_spheres			sphere;
 //	t_cylinder			cylinder;
 //	t_cone				cone;
 //	t_plane				plane;
@@ -127,6 +133,14 @@ typedef struct			s_object
 	struct s_object		*next;
 }						t_object;
 
+typedef struct 			s_sphere_params
+{
+	t_pos				pos;
+	double 				radius;
+	int 				color;
+	int 				specular;
+	double 				reflective;
+}						t_sphere_params;
 
 
 
@@ -181,6 +195,7 @@ typedef struct 			s_scene
 	t_cam				*cam;
 	t_light				*light;
 	t_figure			*figure;
+	t_object			*object;
 	t_light_off			*off;
 	//mb something else
 }						t_scene;
@@ -239,5 +254,7 @@ t_pos					*vector_on_vector(t_pos *a, t_pos *b, t_pos *ab);
 t_pos					*matrix_on_vector(double a, double b, t_pos *vec);
 int						trace_ray(t_pos *o, t_pos *d, double t_min, double t_max,
 		t_scene *scene, int depth);
+t_sphere	*init_sphere(t_sphere *sphere);
+t_object	*init_spheres(t_object *obj, t_sphere_params params);
 
 #endif
