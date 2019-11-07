@@ -101,6 +101,24 @@ typedef struct 			s_sphere
 	struct s_sphere		*next;
 }						t_sphere;
 
+typedef struct 			s_cylinder
+{
+	t_pos				center;
+	double				radius;
+}						t_cylinder;
+
+typedef struct 			s_plane
+{
+	t_pos				center;
+	double				radius;
+}						t_plane;
+
+typedef struct 			s_cone
+{
+	t_pos				center;
+	double				radius;
+}						t_cone;
+
 typedef struct 			s_spheres
 {
 	t_pos				center;
@@ -110,9 +128,9 @@ typedef struct 			s_spheres
 union					u_objects
 {
 	t_spheres			sphere;
-//	t_cylinder			cylinder;
-//	t_cone				cone;
-//	t_plane				plane;
+	t_cylinder			cylinder;
+	t_cone				cone;
+	t_plane				plane;
 };
 
 enum					e_obj_type
@@ -132,6 +150,33 @@ typedef struct			s_object
 	double				reflective;
 	struct s_object		*next;
 }						t_object;
+
+typedef struct 			s_cylinder_params
+{
+	t_pos				pos;
+	double 				radius;
+	int 				color;
+	int 				specular;
+	double 				reflective;
+}						t_cylinder_params;
+
+typedef struct 			s_cone_params
+{
+	t_pos				pos;
+	double 				radius;
+	int 				color;
+	int 				specular;
+	double 				reflective;
+}						t_cone_params;
+
+typedef struct 			s_plane_params
+{
+	t_pos				pos;
+	double 				radius;
+	int 				color;
+	int 				specular;
+	double 				reflective;
+}						t_plane_params;
 
 typedef struct 			s_sphere_params
 {
