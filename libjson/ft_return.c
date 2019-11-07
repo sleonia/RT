@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "to_json.h"
-//добавить проверку на null v value
+
 t_token 	*ft_return(t_token *token, t_key_value **tree)
 {
 	int 	i;
@@ -24,7 +24,11 @@ t_token 	*ft_return(t_token *token, t_key_value **tree)
 	len = i;
 	i = 0;
 	while (i < len)
+	{
+		if ((*tree)->value == NULL)
+			continue ;
 		free((*tree)->value[i++]);
+	}
 	free((*tree)->value);
 	free((*tree)->type);
 	return (token);
