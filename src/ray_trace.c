@@ -15,7 +15,7 @@ int 		color_scale(int	color, double c)
 	return ((red << 16) | (green << 8) | blue);
 }
 
-t_result	intersect_ray_sphere(t_pos *o, t_pos *d, t_spheres *sphere)
+t_result	intersect_ray_sphere(t_pos *o, t_pos *d, t_sphere *sphere)
 {
 	t_pos		oc;
 	double		k1;

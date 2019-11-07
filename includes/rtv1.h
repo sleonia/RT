@@ -91,16 +91,6 @@ typedef struct 			s_plane
 	struct s_plane		*next;
 }						t_plane;*/
 
-typedef struct 			s_sphere
-{
-	t_pos				*center;
-	int 				color;
-	double				radius;
-	int 				specular;
-	double				reflective;
-	struct s_sphere		*next;
-}						t_sphere;
-
 typedef struct 			s_cylinder
 {
 	t_pos				center;
@@ -119,15 +109,15 @@ typedef struct 			s_cone
 	double				radius;
 }						t_cone;
 
-typedef struct 			s_spheres
+typedef struct 			s_sphere
 {
 	t_pos				center;
 	double				radius;
-}						t_spheres;
+}						t_sphere;
 
 union					u_objects
 {
-	t_spheres			sphere;
+	t_sphere			sphere;
 	t_cylinder			cylinder;
 	t_cone				cone;
 	t_plane				plane;
