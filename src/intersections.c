@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   putin_clone.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hfalmer <hfalmer@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/07/24 21:25:06 by hfalmer           #+#    #+#             */
+/*   Updated: 2019/07/24 22:58:47 by hfalmer          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "rtv1.h"
 
 t_result	intersect_ray_cone(t_pos *o, t_pos *d, t_cone *cone)
@@ -67,23 +79,21 @@ t_result	intersect_ray_sphere(t_pos *o, t_pos *d, t_sphere *sphere)
 
 t_result	intersect_ray_cylinder(t_pos *o, t_pos *d, t_cylinder *cylinder)
 {
-	double a;
-	double b;
-	double c;
-	double discriminant;
-	t_pos oc;
-	t_result res;
+	t_discriminant	disc;
+	t_pos			oc;
+	t_result		res;
 
 	res.t1 = INFINITY;
 	res.t2 = INFINITY;
 	oc = vector_minus(o, &cylinder->center);
-	a = 1.0 - dot(d, &cylinder->axis) * dot(d, &cylinder->axis);
-	b = dot(d, &oc) - dot(d, &cylinder->axis) * dot(&oc, &cylinder->axis);
-	c = dot(&oc, &oc) - dot(&oc, &cylinder->axis) * dot(&oc, &cylinder->axis) - cylinder->radius * cylinder->radius;
-	discriminant = b * b - a * c;
-	if (discriminant < 0.0)
+	disc.a = 1.0 - dot(d, &cylinder->axis) * dot(d, &cylinder->axis);
+	disc.b = dot(d, &oc) - dot(d, &cylinder->axis) * dot(&oc, &cylinder->axis);
+	disc.c = dot(&oc, &oc) - dot(&oc, &cylinder->axis)
+			* dot(&oc, &cylinder->axis) - cylinder->radius * cylinder->radius;
+	disc.discriminant = disc.b * disc.b - disc.a * disc.c;
+	if (disc.discriminant < 0.0)
 		return (res);
-	res.t1 = (-b - sqrt(discriminant)) / a;
+	res.t1 = (-disc.b - sqrt(disc.discriminant)) / disc.a;
 	return (res);
 }
 
