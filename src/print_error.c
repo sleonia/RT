@@ -1,35 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_return.c                                        :+:      :+:    :+:   */
+/*   print_error.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: deladia <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/06 21:54:38 by deladia           #+#    #+#             */
-/*   Updated: 2019/11/06 23:56:38 by thorker          ###   ########.fr       */
+/*   Created: 2019/11/08 14:09:38 by deladia           #+#    #+#             */
+/*   Updated: 2019/11/08 14:09:52 by deladia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "to_json.h"
+#include "rtv1.h"
 
-t_token 	*ft_return(t_token *token, t_key_value **tree)
+void		sdl_error(char *str)
 {
-	int 	i;
-	int 	len;
+	ft_putendl(str);
+	ft_putendl(SDL_GetError());
+	exit(1);
+}
 
-	i = 0;
-	while((*tree)->key[i])
-		free((*tree)->key[i++]);
-	free((*tree)->key);
-	len = i;
-	i = 0;
-	while (i < len)
-	{
-		if ((*tree)->value == NULL)
-			continue ;
-		free((*tree)->value[i++]);
-	}
-	free((*tree)->value);
-	free((*tree)->type);
-	return (token);
+void		ft_error(char *str)
+{
+	ft_putendl(str);
+	exit(1);
 }
