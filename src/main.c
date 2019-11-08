@@ -52,6 +52,11 @@ int		validate(t_scene *scene, int ac, char **av)
 		init_scene(scene);
 		return (1);
 	}
+	else if (ft_strcmp(av[1], "scene_2") == 0)
+	{
+		scene_2(scene);
+		return (1);
+	}
 	else
 	{
 		ft_putstr("input \"map_one\" or \"map_one\" ");
