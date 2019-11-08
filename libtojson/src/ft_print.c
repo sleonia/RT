@@ -6,7 +6,7 @@
 /*   By: deladia <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/06 23:27:09 by deladia           #+#    #+#             */
-/*   Updated: 2019/11/07 23:22:50 by deladia          ###   ########.fr       */
+/*   Updated: 2019/11/08 11:37:30 by deladia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 void		ft_array(void *tree_value)
 {
 	int		i;
+	int**	d;
 
 	i = 0;
 	if ((t_array*)tree_value->type == Object)
@@ -29,7 +30,7 @@ void		ft_array(void *tree_value)
 	{
 		i = 0;
 		printf("[");
-		while(i < tree_value->lengt)
+		while(i < tree_value->length)
 		{
 			printf("%s  ", tree_value->value[i]);
 			i++;
@@ -38,12 +39,12 @@ void		ft_array(void *tree_value)
 	}
 	else if ((t_array*)tree_value->type == Dec)
 	{
-		(int**)tree_value->value;
+		d = (int**)(((t_key_value*)tree_value)->value);
 		i = 0;
 		printf("[");
-		while(i < tree_value->lengt)
+		while(i < ((t_key_value*)tree_value)->length)
 		{
-			printf("%s  ", tree_value->value[i]);
+			printf("%s  ", d[i]);
 			i++;
 		}
 		printf("]");
