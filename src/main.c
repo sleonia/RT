@@ -39,20 +39,24 @@ int		trace_start(t_sdl *sdl, t_scene *scene)
 	return (0);
 }
 
+void	error_output()
+{
+	ft_putstr("input \"map_one\" or \"map_one\" ");
+	ft_putendl("or \"map_one\" or \"map_one\"\n");
+}
+
 int		validate(t_scene *scene, int ac, char **av)
 {
 	if (ac != 2)
 	{
-		ft_putstr("input \"map_one\" or \"map_one\" ");
-		ft_putendl("or \"map_one\" or \"map_one\"\n");
+		error_output();
 		return (0);
 	}
 	if (ft_strcmp(av[1], "map_one") == 0)
 		map_one(scene);
 	else
 	{
-		ft_putstr("input \"map_one\" or \"map_one\" ");
-		ft_putendl("or \"map_one\" or \"map_one\"\n");
+		error_output();
 		return (0);
 	}
 	return (1);
