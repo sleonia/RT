@@ -58,20 +58,17 @@ double		computer_lighting(t_pos *p, t_pos *n, t_pos *v, int specular, t_scene *s
 				l.z = tmp->position.z;
 				t_max = INFINITY;
 			}
-			// Проверка тени
 			if (t_max)
 			{
-				shadow = closest_intersection(p, &l, 0.001, t_max, scene->object);
+				shadow = closest_intersection(p, &l, (t_min_max){0.001, t_max}, scene->object);
 				if (shadow.closest_obj != NULL)
 				{
 					tmp = tmp->next;
 					continue ;
 				}
-				// Диффузность
 				n_dot_l = dot(n, &l);
 				if (n_dot_l > 0)
 					intens += tmp->intensity * n_dot_l / (vector_len(n) * vector_len(&l));
-				// Зеркальность
 				if (specular != -1)
 				{
 					buf = vector_on_number(n, 2);

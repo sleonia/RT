@@ -205,9 +205,9 @@ void		init_scene(t_scene *scene)
 	object = init_cone(object, (t_cone_params){{0.0, 0.0, 3.0},
 											0.2, 0xFF0000, 500,
 											0.2, {0.0, 1.0, 0.0}});
-//	object = init_plane(object,  (t_plane_params){{-2.0, 0.0, 3.0},
-//											   0xFFFFFF, 500, 0.2,
-//											   {0.0, 0.0, -1.0}});
+	object = init_plane(object,  (t_plane_params){{-2.0, 0.0, 3.0},
+											   0xFFFFFF, 500, 0.2,
+											   {0.0, 0.0, -1.0}});
 	scene->object = object;
 	scene->light = light;
 }

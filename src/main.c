@@ -12,31 +12,6 @@
 
 #include "rtv1.h"
 
-/*
-** 		Решает квадратное уравнение и возвращает два корня если есть, если нет то INF
-*/
-
-
-
-/*
-** 		Находит ближайшую точку в позиции (x, y) среди всех сфер и возвращает укзатель на сферу и ближайшую точку пересечения
-*/
-
-
-
-/*
-** 		Костыльное добавление сфер
-**		НУЖЕН ПАРСЕР
-** 		массив структур вместо односвязного списка
-**
-*/
-
-
-
-/*
-**	Начало обхода по всем пикселям экрана
-*/
-
 int		trace_start(t_sdl *sdl, t_scene *scene)
 {
 	int	color;
@@ -49,11 +24,12 @@ int		trace_start(t_sdl *sdl, t_scene *scene)
 		y = -HEIGHT / 2;
 		while (y < HEIGHT / 2)
 		{
+			scene->depth = 0;
 			scene->view = matrix_on_vector(scene->cam->a,
 					scene->cam->b, canvas_to_viewport(x, y, scene->view));
 			*scene->view = vector_normalize(scene->view);
 			color = trace_ray(&scene->cam->position, scene->view,
-					1.0, INFINITY, scene, 0);
+							  (t_min_max){1.0, INFINITY}, scene);
 			sdl->pixels = put_pixel(x, y, color, sdl);
 			y++;
 		}
@@ -78,6 +54,3 @@ int		main(void)
 	trace_start(rtv1->sdl, rtv1->scene);
 	return (0);
 }
-//написать функцию которая вызывает vector_on_number миллион раз и посмотреть время, а потом
-//отправляю с * принимаю без
-//отправляю без принимаю с *

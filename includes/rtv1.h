@@ -111,6 +111,12 @@ typedef struct			s_discriminant
 	double				discriminant;
 }						t_discriminant;
 
+typedef struct			s_min_max
+{
+	double				min;
+	double				max;
+}						t_min_max;
+
 typedef struct			s_cylinder_params
 {
 	t_pos				pos;
@@ -177,6 +183,9 @@ typedef struct			s_scene
 	t_light				*light;
 	t_object			*object;
 	t_light_off			*off;
+	int					local_color;
+	int					reflected_color;
+	int					depth;
 }						t_scene;
 
 typedef struct			s_sdl
@@ -209,13 +218,11 @@ t_pos					vector_normalize(t_pos *a);
 double					computer_lighting(t_pos *p, t_pos *n, t_pos *v, int s,
 							t_scene *scene);
 void					ft_error(char *str);
-t_return				closest_intersection(t_pos *o, t_pos *d, double t_min,
-							double t_max, t_object *obj);
+t_return				closest_intersection(t_pos *o, t_pos *d, t_min_max mn, t_object *obj);
 int						trace_start(t_sdl *sdl, t_scene *scene);
 t_pos					*vector_on_vector(t_pos *a, t_pos *b, t_pos *ab);
 t_pos					*matrix_on_vector(double a, double b, t_pos *vec);
-int						trace_ray(t_pos *o, t_pos *d, double t_min,
-							double t_max, t_scene *scene, int depth);
+int						trace_ray(t_pos *o, t_pos *d, t_min_max mn, t_scene *scene);
 t_object				*init_sphere(t_object *obj, t_sphere_params params);
 t_object				*init_cylinder(t_object *obj, t_cylinder_params params);
 void					init_scene(t_scene *scene);
