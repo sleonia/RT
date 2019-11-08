@@ -3,12 +3,12 @@ project(RTv1)
 
 set(CMAKE_C_STANDARD 99)
 
-include_directories(./libft)
+include_directories(./libft/includes)
 include_directories(./includes)
-FILE(GLOB LIBFT_SRCS ./libft/*.c)
+FILE(GLOB LIBFT_SRCS ./libft/src/*.c)
 
 add_executable(RTv1 src/main.c ${LIBFT_SRCS} src/helps.c src/sdl.c src/light.c src/normals.c
-        src/ray_trace.c src/init_objects.c src/intersections.c src/print_error.c src/sdl_controls.c)
+        src/ray_trace.c src/init_objects.c src/intersections.c src/print_error.c src/sdl_controls.c src/vector_operations_1.c src/vector_operations_2.c)
 set(SDL2_INCLUDE_DIR /Users/$ENV{USER}/.brew/include/SDL2)
 set(SDL2_LIBRARIES /Users/$ENV{USER}/.brew/lib)
 set(SDL_TTF_INCLUDE_DIR /Users/$ENV{USER}/.brew/include/SDL2)
