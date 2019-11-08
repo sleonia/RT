@@ -54,6 +54,11 @@ int		validate(t_scene *scene, int ac, char **av)
 	}
 	if (ft_strcmp(av[1], "map_one") == 0)
 		map_one(scene);
+	else if (ft_strcmp(av[1], "scene_2") == 0)
+	{
+		scene_2(scene);
+		return (1);
+	}
 	else
 	{
 		error_output();

@@ -268,5 +268,6 @@ t_object				*init_cylinder(t_object *obj, t_cylinder_params params);
 t_object				*init_sphere(t_object *obj, t_sphere_params params);
 t_object				*init_plane(t_object *obj, t_plane_params params);
 t_object				*init_cone(t_object *obj, t_cone_params params);
+void					scene_2(t_scene *scene);
 
 #endif
