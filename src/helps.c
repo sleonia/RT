@@ -27,11 +27,13 @@ int 		*put_pixel(double x, double y, int color, t_sdl *sdl)
 **	Инициализация вектора
 */
 
-t_pos		*insert(int x, int y, int z, t_pos *pos)
+t_pos		insert(int x, int y, int z)
 {
-	pos->x = x;
-	pos->y = y;
-	pos->z = z;
+	t_pos pos;
+
+	pos.x = x;
+	pos.y = y;
+	pos.z = z;
 	return (pos);
 }
 

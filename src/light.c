@@ -18,50 +18,6 @@
 **		Разобраться с источниками света
 */
 
-t_light		*init_light(t_light *light)
-{
-	t_light		*tmp;
-	t_pos		*center2;
-	t_pos		*center3;
-	t_pos		*center4;
-
-	(void)center4;
-	//ambient - окружающий свет
-	light = (t_light *)ft_memalloc(sizeof(t_light));
-	light->type = 'A';
-	light->intensity = 0.2;
-
-	//point - точечный источник света
-	light->next = (t_light *)ft_memalloc(sizeof(t_light));
-	center2 = (t_pos *)ft_memalloc(sizeof(t_pos));
-	tmp = light->next;
-	tmp->position = insert(3, 1, -1, center2);
-	tmp->type = 'P';
-	tmp->intensity = 0.6;
-//
-//	tmp->next = (t_light *)ft_memalloc(sizeof(t_light));
-//	center3 = (t_pos *)ft_memalloc(sizeof(t_pos));
-//	tmp = tmp->next;
-//	tmp->position = insert(3, 1, -2, center3);
-//	tmp->type = 'P';
-//	tmp->intensity = 0.6;
-//	directional - направленный источник света
-	tmp->next = (t_light *)ft_memalloc(sizeof(t_light));
-	center3 = (t_pos *)ft_memalloc(sizeof(t_pos));
-	tmp = tmp->next;
-	tmp->type = 'D';
-	tmp->intensity = 0.2;
-	tmp->position = insert(1, 4, 4, center3);
-
-//	tmp->next = (t_light *)ft_memalloc(sizeof(t_light));
-//	center4 = (t_pos *)ft_memalloc(sizeof(t_pos));
-//	tmp = tmp->next;
-//	tmp->type = 'P';
-//	tmp->intensity = 0.4;
-//	tmp->position = insert(-100, -100, -100, center4);
-	return (light);
-}
-
 /*
 **  	Вычисляет яркость пикселя сферы в зависимости от источников света
 */
@@ -91,15 +47,15 @@ double		computer_lighting(t_pos *p, t_pos *n, t_pos *v, int specular, t_scene *s
 		{
 			if (tmp->type == 'P' && !scene->off->point)
 			{
-				l = vector_minus(tmp->position, p);
+				l = vector_minus(&tmp->position, p);
 				l = vector_normalize(&l);
 				t_max = 1.0;
 			}
 			else if (tmp->type == 'D' && !scene->off->directional)
 			{
-				l.x = tmp->position->x;
-				l.y = tmp->position->y;
-				l.z = tmp->position->z;
+				l.x = tmp->position.x;
+				l.y = tmp->position.y;
+				l.z = tmp->position.z;
 				t_max = INFINITY;
 			}
 			// Проверка тени
