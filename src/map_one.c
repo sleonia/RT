@@ -49,7 +49,7 @@ static t_object		*object_in(void)
 	return (object);
 }
 
-void				map_one(t_scene *scene)
+void				scene_1(t_scene *scene)
 {
 	t_object	*object;
 	t_light		*light;

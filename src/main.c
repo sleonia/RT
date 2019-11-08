@@ -41,7 +41,7 @@ int		trace_start(t_sdl *sdl, t_scene *scene)
 
 void	error_output()
 {
-	ft_putstr("input \"map_one\" or \"map_one\" ");
+	ft_putstr("input \"scene_1\" or \"scene_2\" ");
 	ft_putendl("or \"map_one\" or \"map_one\"\n");
 }
 
@@ -52,8 +52,8 @@ int		validate(t_scene *scene, int ac, char **av)
 		error_output();
 		return (0);
 	}
-	if (ft_strcmp(av[1], "map_one") == 0)
-		map_one(scene);
+	if (ft_strcmp(av[1], "scene_1") == 0)
+		scene_1(scene);
 	else if (ft_strcmp(av[1], "scene_2") == 0)
 	{
 		scene_2(scene);

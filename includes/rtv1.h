@@ -244,7 +244,7 @@ int						trace_ray(t_pos *o, t_pos *d, t_min_max mn,
 							t_scene *scene);
 t_object				*init_sphere(t_object *obj, t_sphere_params params);
 t_object				*init_cylinder(t_object *obj, t_cylinder_params params);
-void					map_one(t_scene *scene);
+void					scene_1(t_scene *scene);
 void					sdl_error(char *str);
 void					sdl_control_1(t_sdl *sdl, t_scene *scene);
 void					sdl_control_2(t_sdl *sdl, t_scene *scene);
