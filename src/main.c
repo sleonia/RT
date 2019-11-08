@@ -64,7 +64,6 @@ int 	validate(t_scene *scene, int ac, char **av)
 int		main(int ac, char **av)
 {
 	t_rtv1		*rtv1;
-	t_config	conf;
 
 	rtv1 = (t_rtv1 *)ft_memalloc(sizeof(t_rtv1));
 	rtv1->sdl = (t_sdl *)ft_memalloc((sizeof(t_sdl)));
