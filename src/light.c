@@ -36,6 +36,7 @@ double		computer_lighting(t_pos *p, t_pos *n, t_pos *v, int specular, t_scene *s
 
 	intens = 0.0;
 	tmp = scene->light;
+	t_max = 0.0;
 	//костыль чтобы занулить l
 	l = vector_on_number(&l, 0);
 	while (tmp)

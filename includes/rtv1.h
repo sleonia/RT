@@ -103,6 +103,14 @@ typedef struct			s_object
 	struct s_object		*next;
 }						t_object;
 
+typedef struct			s_discriminant
+{
+	double				a;
+	double				b;
+	double				c;
+	double				discriminant;
+}						t_discriminant;
+
 typedef struct			s_cylinder_params
 {
 	t_pos				pos;
@@ -218,5 +226,6 @@ void					sdl_control_3(t_sdl *sdl, t_scene *scene);
 void					sdl_control_4(t_sdl *sdl, t_scene *scene);
 void					sdl_control_5(t_sdl *sdl, t_scene *scene);
 void					sdl_control_6(t_sdl *sdl, t_scene *scene);
+t_result				get_intersect(t_pos *o, t_pos *d, t_object *obj);
 
 #endif
