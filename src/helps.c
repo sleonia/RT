@@ -129,13 +129,17 @@ t_pos		*matrix_on_vector(double a, double b, t_pos *vec)
 	double	x;
 	double	y;
 	double	z;
+	double	b_to_rad;
+	double 	a_to_rad;
 
 	x = vec->x;
 	y = vec->y;
 	z = vec->z;
-	vec->x = x * cos(b) + z * sin(b);
-	vec->y = (x * sin(b) - z * cos(b)) * sin(a) + y * cos(a);
-	vec->z = (z * cos(b) - x * sin(b)) + y * sin(a);
+	b_to_rad = (b * M_PI) / 180;
+	a_to_rad = (a * M_PI) / 180;
+	vec->x = x * cos(b_to_rad) + z * sin(b_to_rad);
+	vec->y = (x * sin(b_to_rad) - z * cos(b_to_rad)) * sin(a_to_rad) + y * cos(a_to_rad);
+	vec->z = ((z * cos(b_to_rad) - x * sin(b_to_rad)) * cos(a_to_rad)) + y * sin(a_to_rad);
 	return (vec);
 }
 
