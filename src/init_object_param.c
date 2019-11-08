@@ -52,5 +52,5 @@ void		init_cylinder_params(t_object *obj, t_cylinder_params params)
 	obj->specular = params.specular;
 	obj->objects->cylinder.center = params.pos;
 	obj->objects->cylinder.radius = params.radius;
-	obj->objects->cylinder.axis = params.axis;
+	obj->objects->cylinder.axis = vector_normalize(&params.axis);
 }

@@ -6,7 +6,7 @@
 /*   By: deladia <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/24 12:57:07 by deladia           #+#    #+#             */
-/*   Updated: 2019/11/04 01:12:02 by thorker          ###   ########.fr       */
+/*   Updated: 2019/11/08 17:38:06 by deladia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,10 @@ int		trace_start(t_sdl *sdl, t_scene *scene)
 	return (0);
 }
 
-void	error_output()
+void	error_output(void)
 {
 	ft_putstr("input \"scene_1\" or \"scene_2\" ");
-	ft_putendl("or \"map_one\" or \"map_one\"\n");
+	ft_putendl("or \"scene_3\" or \"scene_4\"\n");
 }
 
 int		validate(t_scene *scene, int ac, char **av)
@@ -55,10 +55,11 @@ int		validate(t_scene *scene, int ac, char **av)
 	if (ft_strcmp(av[1], "scene_1") == 0)
 		scene_1(scene);
 	else if (ft_strcmp(av[1], "scene_2") == 0)
-	{
 		scene_2(scene);
-		return (1);
-	}
+	else if (ft_strcmp(av[1], "scene_3") == 0)
+		scene_3(scene);
+	else if (ft_strcmp(av[1], "scene_4") == 0)
+		scene_4(scene);
 	else
 	{
 		error_output();
