@@ -232,7 +232,8 @@ t_pos					vector_on_number(t_pos *o, double nbr);
 t_pos					vector_div(t_pos *o, double nbr);
 double					vector_len(t_pos *o);
 t_pos					vector_normalize(t_pos *a);
-double					computer_lighting(t_pos *p, t_pos *n, t_pos *v, t_scene *scene);
+double					computer_lighting(t_pos *p, t_pos *n, t_pos *v,
+							t_scene *scene);
 void					ft_error(char *str);
 t_return				closest_intersection(t_pos *o, t_pos *d,
 							t_min_max mn, t_object *obj);
