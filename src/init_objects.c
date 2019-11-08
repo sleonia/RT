@@ -1,7 +1,6 @@
 #include "rtv1.h"
 
 
-
 t_object	*init_cone(t_object *obj, t_cone_params params)
 {
 	if (obj == NULL)
@@ -10,12 +9,14 @@ t_object	*init_cone(t_object *obj, t_cone_params params)
 			return (NULL);
 		if (!(obj->objects = (union u_objects *)ft_memalloc(sizeof(union u_objects))))
 			return (NULL);
-		obj->type = o_sphere;
+		obj->type = o_cone;
 		obj->color = params.color;
 		obj->reflective = params.reflective;
 		obj->specular = params.specular;
 		obj->objects->cone.center = params.pos;
 		obj->objects->cone.radius = params.radius;
+		obj->objects->cone.axis = params.axis;
+		obj->objects->cone.axis = vector_normalize(&obj->objects->cone.axis);
 		return (obj);
 	}
 	else
@@ -32,6 +33,8 @@ t_object	*init_cone(t_object *obj, t_cone_params params)
 		new_obj->specular = params.specular;
 		new_obj->objects->cone.center = params.pos;
 		new_obj->objects->cone.radius = params.radius;
+		new_obj->objects->cone.axis = params.axis;
+		obj->objects->cone.axis = vector_normalize(&obj->objects->cone.axis);
 		new_obj->next = obj;
 		return (new_obj);
 	}
@@ -150,8 +153,8 @@ t_object 	*init_scene(void)
 	object = init_sphere(NULL,  (t_sphere_params){{0.0, -1.0, 3.0}, 1.0, 0xFF00FF, 500, 0.2});
 	object = init_sphere(object,  (t_sphere_params){{2.0, 2.0, 3.0}, 1.0, 0xFF00FF, 500, 0.2});
 	object = init_sphere(object,  (t_sphere_params){{-2.0, 2.0, 3.0}, 1.0, 0xFF00FF, 500, 0.2});
-//	object = init_sphere(object,  (t_sphere_params){{-2.0, 2.0, 3.0}, 1.0, 0xFF00FF, 500, 0.2});
-	object = init_cylinder(object,  (t_cylinder_params){{0.0, 0.0, 3.0}, {1.0, 0.0, 0.0}, 1.0, 0xFF00FF, 500, 0.2});
+	object = init_cone(object, (t_cone_params){{-2.0, 2.0, 3.0}, 0.2, 0xFFFFFF, 500, 0.2, {1.0, 0.0, 0.0}});
 //	object = init_plane(object,  (t_plane_params){{-2.0, 0.0, 3.0}, 1.0, 0xFFFFFF, 500, 0.2, {0.0, 0.0, -1.0}});
+//	object
 	return (object);
 }

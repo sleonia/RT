@@ -17,10 +17,10 @@
 #include <SDL.h>
 #include <OpenCL/opencl.h>
 #include <math.h>
-# define WIDTH 1250
+# define WIDTH 1000
 # define HEIGHT 1000
-# define VW 1.25
-# define VH 1
+# define VW 1.0472
+# define VH 1.0472
 # define D 1
 # define WHITE 0xFFFFFF
 # define BLACK 0x000000
@@ -62,7 +62,8 @@ typedef struct 			s_plane
 typedef struct 			s_cone
 {
 	t_pos				center;
-	double				radius;
+	t_pos				axis;
+	double 				radius;
 }						t_cone;
 
 typedef struct 			s_sphere
@@ -114,6 +115,7 @@ typedef struct 			s_cone_params
 	int 				color;
 	int 				specular;
 	double 				reflective;
+	t_pos				axis;
 }						t_cone_params;
 
 typedef struct 			s_plane_params

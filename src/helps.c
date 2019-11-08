@@ -160,3 +160,15 @@ double		dot(t_pos *a, t_pos *b)
 {
 	return (a->x * b->x + a->y * b->y + a->z * b->z);
 }
+
+t_pos		vec_normalize(t_pos a)
+{
+	t_pos vec;
+	double len;
+
+	len = vector_len(&a);
+	if (len == 0)
+		return (a);
+	vec = vector_on_number(&a, 1 / len);
+	return (vec);
+}
