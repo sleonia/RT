@@ -1,10 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   putin_clone.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hfalmer <hfalmer@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/07/24 21:25:06 by hfalmer           #+#    #+#             */
+/*   Updated: 2019/07/24 22:58:47 by hfalmer          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "rtv1.h"
 
-int 		color_scale(int	color, double c)
+int			color_scale(int color, double c)
 {
-	int 	red;
-	int 	green;
-	int 	blue;
+	int	red;
+	int	green;
+	int	blue;
 
 	red = (color & 0xFF0000) >> 16;
 	red = (int)((double)red * c);
@@ -15,7 +27,8 @@ int 		color_scale(int	color, double c)
 	return ((red << 16) | (green << 8) | blue);
 }
 
-t_return	closest_intersection(t_pos *o, t_pos *d, t_min_max mn, t_object *obj)
+t_return	closest_intersection(t_pos *o, t_pos *d, t_min_max mn,
+		t_object *obj)
 {
 	t_result	res;
 	t_object	*tmp_obj;
@@ -54,28 +67,29 @@ t_pos		reflect_ray(t_pos *r, t_pos *n)
 	return (ret);
 }
 
-int		trace_ray(t_pos *o, t_pos *d, t_min_max	mn, t_scene *scene) {
-	t_pos p;
-	t_pos n;
-	t_pos buf;
-	t_pos r;
-	t_return ret;
-	double c;
+int			trace_ray(t_pos *o, t_pos *d, t_min_max mn, t_scene *scene)
+{
+	t_pos			p;
+	t_pos			n;
+	t_pos			buf;
+	t_pos			r;
+	t_for_ray_trace	a;
 
-	ret = closest_intersection(o, d, mn, scene->object);
-	if (ret.closest_obj == NULL)
+	a.ret = closest_intersection(o, d, mn, scene->object);
+	if (a.ret.closest_obj == NULL)
 		return (BLACK);
-	buf = vector_on_number(d, ret.closest_t);
+	buf = vector_on_number(d, a.ret.closest_t);
 	p = vector_pus(o, &buf);
-	n = get_obj_normal(&p, &ret, o, d);
+	n = get_obj_normal(&p, &a.ret, o, d);
 	buf = vector_on_number(d, -1);
-	c = computer_lighting(&p, &n, &buf, ret.closest_obj->specular, scene);
-	scene->local_color = color_scale(ret.closest_obj->color, c);
-	if (scene->depth <= 0 || ret.closest_obj->reflective <= 0 || scene->off->reflect)
-		return (scene->local_color);
+	a.local_color = color_scale(a.ret.closest_obj->color,
+		computer_lighting(&p, &n, &buf, a.ret.closest_obj->specular, scene));
+	if (scene->depth <= 0 || a.ret.closest_obj->reflective <= 0 ||
+			scene->off->reflect)
+		return (a.local_color);
 	r = reflect_ray(&buf, &n);
 	scene->depth--;
-	scene->reflected_color = trace_ray(&p, &r, (t_min_max){0.001, INFINITY}, scene);
-	return (color_scale(scene->local_color, 1 - ret.closest_obj->reflective)
-		+ color_scale(scene->reflected_color, ret.closest_obj->reflective));
+	a.reflected_color = trace_ray(&p, &r, (t_min_max){0.001, INFINITY}, scene);
+	return (color_scale(a.local_color, 1 - a.ret.closest_obj->reflective)
+			+ color_scale(a.reflected_color, a.ret.closest_obj->reflective));
 }

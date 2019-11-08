@@ -93,6 +93,7 @@ enum					e_obj_type
 	o_plane,
 };
 
+
 typedef struct			s_object
 {
 	union u_objects		*objects;
@@ -161,6 +162,13 @@ typedef struct			s_return
 	double				closest_t;
 }						t_return;
 
+typedef struct s_for_ray_trace
+{
+	int local_color;
+	int reflected_color;
+	t_return ret;
+}				t_for_ray_trace;
+
 typedef struct			s_cam
 {
 	t_pos				position;
@@ -183,8 +191,6 @@ typedef struct			s_scene
 	t_light				*light;
 	t_object			*object;
 	t_light_off			*off;
-	int					local_color;
-	int					reflected_color;
 	int					depth;
 }						t_scene;
 
