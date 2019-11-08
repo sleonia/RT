@@ -68,32 +68,32 @@ int			sdl_control(t_sdl *sdl, t_scene *scene)
 					quit = 1;
 				if (sdl->event.key.keysym.scancode == SDL_SCANCODE_W)
 				{
-					scene->cam->position->z += 0.1;
+					scene->cam->position.z += 0.1;
 					trace_start(sdl, scene);
 				}
 				if (sdl->event.key.keysym.scancode == SDL_SCANCODE_S)
 				{
-					scene->cam->position->z -= 0.1;
+					scene->cam->position.z -= 0.1;
 					trace_start(sdl, scene);
 				}
 				if (sdl->event.key.keysym.scancode == SDL_SCANCODE_A)
 				{
-					scene->cam->position->x -= 0.1;
+					scene->cam->position.x -= 0.1;
 					trace_start(sdl, scene);
 				}
 				if (sdl->event.key.keysym.scancode == SDL_SCANCODE_D)
 				{
-					scene->cam->position->x += 0.1;
+					scene->cam->position.x += 0.1;
 					trace_start(sdl, scene);
 				}
 				if (sdl->event.key.keysym.scancode == SDL_SCANCODE_R)
 				{
-					scene->cam->position->y += 0.1;
+					scene->cam->position.y += 0.1;
 					trace_start(sdl, scene);
 				}
 				if (sdl->event.key.keysym.scancode == SDL_SCANCODE_F)
 				{
-					scene->cam->position->y -= 0.1;
+					scene->cam->position.y -= 0.1;
 					trace_start(sdl, scene);
 				}
 				if (sdl->event.key.keysym.scancode == SDL_SCANCODE_Z && scene->cam->a <= 90)

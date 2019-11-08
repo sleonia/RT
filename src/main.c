@@ -51,7 +51,7 @@ int 		trace_start(t_sdl *sdl, t_scene *scene)
 		{
 			scene->view = matrix_on_vector(scene->cam->a, scene->cam->b, canvas_to_viewport(x, y, scene->view));
 			*scene->view = vector_normalize(scene->view);
-			color = trace_ray(scene->cam->position, scene->view, 1.0, INFINITY, scene, 0);
+			color = trace_ray(&scene->cam->position, scene->view, 1.0, INFINITY, scene, 0);
 			sdl->pixels = put_pixel(x, y, color, sdl);
 			y++;
 		}
@@ -71,12 +71,11 @@ int			main(void)
 
 	rtv1->scene = (t_scene *)ft_memalloc(sizeof(t_scene));
 	rtv1->scene->cam = (t_cam *)ft_memalloc(sizeof(t_cam));
-	rtv1->scene->cam->position = (t_pos *)ft_memalloc(sizeof(t_pos));
-	rtv1->scene->cam->position = insert(0, 0, 0, rtv1->scene->cam->position);
+//	rtv1->scene->cam->position = (t_pos *)ft_memalloc(sizeof(t_pos));
 	rtv1->scene->view = (t_pos *)ft_memalloc(sizeof(t_pos));
-	rtv1->scene->light = init_light(rtv1->scene->light);
+//	rtv1->scene->light = init_light(rtv1->scene->light);
 	rtv1->scene->off = (t_light_off *)ft_memalloc(sizeof(t_light_off));
-	rtv1->scene->object = init_scene();
+	init_scene(rtv1->scene);
 	trace_start(rtv1->sdl, rtv1->scene);
 	return (0);
 }

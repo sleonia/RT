@@ -42,9 +42,16 @@ typedef struct 			s_light
 {
 	char 				type;
 	double 				intensity;
-	t_pos				*position;
+	t_pos				position;
 	struct s_light		*next;
 }						t_light;
+
+typedef struct 			s_light_params
+{
+	char 				type;
+	double 				intensity;
+	t_pos				pos;
+}						t_light_params;
 
 typedef struct 			s_cylinder
 {
@@ -144,7 +151,7 @@ typedef struct			s_return
 
 typedef struct			s_cam
 {
-	t_pos				*position;
+	t_pos				position;
 	double 				a;
 	double 				b;
 }						t_cam;
@@ -181,7 +188,7 @@ typedef struct 			s_rtv1
 	t_scene				*scene;
 }						t_rtv1;
 
-t_pos					*insert(int x,int y, int z, t_pos *pos);
+t_pos					insert(int x,int y, int z);
 t_pos					*canvas_to_viewport(int x, int y, t_pos *pos);
 t_pos					vector_minus(t_pos *o, t_pos	*center);
 double 					dot(t_pos *a, t_pos *b);
@@ -204,6 +211,6 @@ int						trace_ray(t_pos *o, t_pos *d, double t_min, double t_max,
 		t_scene *scene, int depth);
 t_object				*init_sphere(t_object *obj, t_sphere_params params);
 t_object				*init_cylinder(t_object *obj, t_cylinder_params params);
-t_object				*init_scene(void);
+void					init_scene(t_scene *scene);
 
 #endif
