@@ -168,6 +168,17 @@ typedef struct			s_for_ray_trace
 	t_return			ret;
 }						t_for_ray_trace;
 
+typedef struct			s_comp_light
+{
+	double				intens;
+	t_pos				l;
+	double				n_dot_l;
+	double				r_dot_v;
+	t_pos				r;
+	t_pos				buf;
+	int					specular;
+}						t_comp_light;
+
 typedef struct			s_cam
 {
 	t_pos				position;
@@ -191,6 +202,7 @@ typedef struct			s_scene
 	t_object			*object;
 	t_light_off			*off;
 	int					depth;
+	int					specular;
 }						t_scene;
 
 typedef struct			s_sdl
@@ -220,8 +232,7 @@ t_pos					vector_on_number(t_pos *o, double nbr);
 t_pos					vector_div(t_pos *o, double nbr);
 double					vector_len(t_pos *o);
 t_pos					vector_normalize(t_pos *a);
-double					computer_lighting(t_pos *p, t_pos *n, t_pos *v, int s,
-							t_scene *scene);
+double					computer_lighting(t_pos *p, t_pos *n, t_pos *v, t_scene *scene);
 void					ft_error(char *str);
 t_return				closest_intersection(t_pos *o, t_pos *d,
 							t_min_max mn, t_object *obj);

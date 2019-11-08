@@ -36,7 +36,7 @@ void		init_scene(t_scene *scene)
 													1.0, 0xFF00FF, 500,
 													0.2});
 	object = init_sphere(object,  (t_sphere_params){{-2.0, 2.0, 3.0},
-													1.0, 0xFF00FF, 500,
+													1.5, 0xFF00FF, 500,
 													0.2});
 	object = init_cone(object, (t_cone_params){{0.0, 0.0, 3.0},
 											   0.2, 0xFF0000, 500,

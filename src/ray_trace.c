@@ -82,8 +82,9 @@ int			trace_ray(t_pos *o, t_pos *d, t_min_max mn, t_scene *scene)
 	p = vector_pus(o, &buf);
 	n = get_obj_normal(&p, &a.ret, o, d);
 	buf = vector_on_number(d, -1);
+	scene->specular = a.ret.closest_obj->specular;
 	a.local_color = color_scale(a.ret.closest_obj->color,
-		computer_lighting(&p, &n, &buf, a.ret.closest_obj->specular, scene));
+		computer_lighting(&p, &n, &buf, scene));
 	if (scene->depth <= 0 || a.ret.closest_obj->reflective <= 0 ||
 			scene->off->reflect)
 		return (a.local_color);
