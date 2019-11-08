@@ -48,10 +48,7 @@ int		validate(t_scene *scene, int ac, char **av)
 		return (0);
 	}
 	if (ft_strcmp(av[1], "map_one") == 0)
-	{
-		init_scene(scene);
-		return (1);
-	}
+		map_one(scene);
 	else if (ft_strcmp(av[1], "scene_2") == 0)
 	{
 		scene_2(scene);
