@@ -107,14 +107,14 @@ t_result	intersect_ray_sphere(t_pos *o, t_pos *d, t_sphere *sphere)
 	return (1);
 }*/
 
-t_result	intersect_ray_cylinder(t_pos *o, t_pos *d, t_cylinder *cylinder)
+t_result intersect_ray_cylinder(t_pos *o, t_pos *d, t_cylinder *cylinder)
 {
-	double		a;
-	double		b;
-	double		c;
-	double		discriminant;
-	t_pos		oc;
-	t_result	res;
+	double a;
+	double b;
+	double c;
+	double discriminant;
+	t_pos oc;
+	t_result res;
 
 	oc = vector_minus(o, &cylinder->center);
 	a = 1.0 - dot(d, &cylinder->axis) * dot(d, &cylinder->axis);
@@ -201,16 +201,29 @@ t_pos	get_cone_normal(t_pos *start_ray, t_pos *ray, t_cone *obj,
 	return (retNormal);
 }
 
+t_pos get_cylinder_normal(t_pos *start_ray, t_pos *ray, t_cylinder *obj, double intersect_dist, t_pos *intersect_point)
+{
+	t_pos n;
+
+	t_pos v = vector_minus(intersect_point, &obj->center);
+	n = vector_on_number(&obj->axis, dot(&v, &obj->axis));
+	n = vector_minus(&v, &n);
+
+	return (n);
+}
+
 t_pos	get_obj_normal(t_pos *p, t_object *obj, double intersect_dist, t_pos *o, t_pos *d)
 {
 	t_pos n;
 
 	if (obj->type == o_sphere)
 		n = vector_minus(p, &obj->objects->sphere.center);
-	if (obj->type == o_plane)
+	else if (obj->type == o_plane)
 		n = obj->objects->plane.normal;
-	if (obj->type == o_cone)
+	else if (obj->type == o_cone)
 		n = get_cone_normal(o, d, &obj->objects->cone, intersect_dist);
+	else if (obj->type == o_cylinder)
+		n = get_cylinder_normal(o, d, &obj->objects->cylinder, intersect_dist, p);
 	n = vector_div(&n, vector_len(&n));
 	return (n);
 }

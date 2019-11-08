@@ -121,7 +121,6 @@ typedef struct 			s_cone_params
 typedef struct 			s_plane_params
 {
 	t_pos				pos;
-	double 				radius;
 	int 				color;
 	int 				specular;
 	double 				reflective;

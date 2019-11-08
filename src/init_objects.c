@@ -26,7 +26,6 @@ t_object	*init_cone(t_object *obj, t_cone_params params)
 			return NULL;
 		if (!(new_obj->objects = (union u_objects *)ft_memalloc(sizeof(union u_objects))))
 			return (NULL);
-		new_obj->next = obj;
 		new_obj->type = o_cone;
 		new_obj->color = params.color;
 		new_obj->reflective = params.reflective;
@@ -63,7 +62,6 @@ t_object	*init_plane(t_object *obj, t_plane_params params)
 			return NULL;
 		if (!(new_obj->objects = (union u_objects *)ft_memalloc(sizeof(union u_objects))))
 			return (NULL);
-		new_obj->next = obj;
 		new_obj->type = o_plane;
 		new_obj->color = params.color;
 		new_obj->reflective = params.reflective;
@@ -98,7 +96,6 @@ t_object	*init_sphere(t_object *obj, t_sphere_params params)
 			return NULL;
 		if (!(new_obj->objects = (union u_objects *)ft_memalloc(sizeof(union u_objects))))
 			return (NULL);
-		new_obj->next = obj;
 		new_obj->type = o_sphere;
 		new_obj->color = params.color;
 		new_obj->reflective = params.reflective;
@@ -123,8 +120,8 @@ t_object	*init_cylinder(t_object *obj, t_cylinder_params params)
 		obj->reflective = params.reflective;
 		obj->specular = params.specular;
 		obj->objects->cylinder.center = params.pos;
-		obj->objects->cylinder.axis = vector_normalize(&params.axis);
 		obj->objects->cylinder.radius = params.radius;
+		obj->objects->cylinder.axis = params.axis;
 		return (obj);
 	}
 	else
@@ -139,8 +136,8 @@ t_object	*init_cylinder(t_object *obj, t_cylinder_params params)
 		obj->reflective = params.reflective;
 		obj->specular = params.specular;
 		obj->objects->cylinder.center = params.pos;
-		obj->objects->cylinder.axis = vector_normalize(&params.axis);
 		obj->objects->cylinder.radius = params.radius;
+		obj->objects->cylinder.axis = params.axis;
 		new_obj->next = obj;
 		return (new_obj);
 	}
@@ -151,11 +148,12 @@ t_object 	*init_scene(void)
 	t_object *object;
 
 	object = NULL;
+	object = init_cylinder(object,  (t_cylinder_params){{-2.0, 0.0, 3.0}, {0, 1, 0}, 1.0, 0xFFFFFF, 500, 0.2});
 	object = init_sphere(object,  (t_sphere_params){{0.0, -1.0, 3.0}, 1.0, 0xFF00FF, 500, 0.2});
 	object = init_sphere(object,  (t_sphere_params){{2.0, 2.0, 3.0}, 1.0, 0xFF00FF, 500, 0.2});
 	object = init_sphere(object,  (t_sphere_params){{-2.0, 2.0, 3.0}, 1.0, 0xFF00FF, 500, 0.2});
 	object = init_cone(object, (t_cone_params){{-2.0, 2.0, 3.0}, 0.2, 0xFFFFFF, 500, 0.2, {1.0, 0.0, 0.0}});
-	object = init_plane(object,  (t_plane_params){{-2.0, 0.0, 3.0}, 1.0, 0xFFFFFF, 500, 0.2, {0.0, 0.0, -1.0}});
+	object = init_plane(object,  (t_plane_params){{-2.0, 0.0, 3.0}, 0xFFFFFF, 500, 0.2, {0.0, 0.0, -1.0}});
 //	object
 	return (object);
 }
