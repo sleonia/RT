@@ -15,14 +15,12 @@
 
 # include "libft.h"
 # include <SDL.h>
-# include <OpenCL/opencl.h>
 # include <math.h>
 # define WIDTH 1000
 # define HEIGHT 1000
 # define VW 1.0472
 # define VH 1.0472
 # define D 1
-# define WHITE 0xFFFFFF
 # define BLACK 0x000000
 
 typedef struct			s_result
@@ -210,7 +208,6 @@ double					vector_len(t_pos *o);
 t_pos					vector_normalize(t_pos *a);
 double					computer_lighting(t_pos *p, t_pos *n, t_pos *v, int s,
 							t_scene *scene);
-t_light					*init_light(t_light *light);
 void					ft_error(char *str);
 t_return				closest_intersection(t_pos *o, t_pos *d, double t_min,
 							double t_max, t_object *obj);
@@ -222,6 +219,13 @@ int						trace_ray(t_pos *o, t_pos *d, double t_min,
 t_object				*init_sphere(t_object *obj, t_sphere_params params);
 t_object				*init_cylinder(t_object *obj, t_cylinder_params params);
 void					init_scene(t_scene *scene);
+void					sdl_error(char *str);
+void					sdl_control_1(t_sdl *sdl, t_scene *scene);
+void					sdl_control_2(t_sdl *sdl, t_scene *scene);
+void					sdl_control_3(t_sdl *sdl, t_scene *scene);
+void					sdl_control_4(t_sdl *sdl, t_scene *scene);
+void					sdl_control_5(t_sdl *sdl, t_scene *scene);
+void					sdl_control_6(t_sdl *sdl, t_scene *scene);
 t_result				get_intersect(t_pos *o, t_pos *d, t_object *obj);
 t_pos					get_obj_normal(t_pos *p, t_return *ret, t_pos *o, t_pos *d);
 t_pos					v_minus(t_pos v1, t_pos v2);
