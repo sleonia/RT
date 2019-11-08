@@ -227,8 +227,20 @@ void					sdl_control_4(t_sdl *sdl, t_scene *scene);
 void					sdl_control_5(t_sdl *sdl, t_scene *scene);
 void					sdl_control_6(t_sdl *sdl, t_scene *scene);
 t_result				get_intersect(t_pos *o, t_pos *d, t_object *obj);
-t_pos					get_obj_normal(t_pos *p, t_return *ret, t_pos *o, t_pos *d);
+t_pos					get_obj_normal(t_pos *p, t_return *ret,
+							t_pos *o, t_pos *d);
 t_pos					v_minus(t_pos v1, t_pos v2);
 t_pos					v_plus(t_pos v1, t_pos v2);
+void					init_cone_params(t_object *obj, t_cone_params params);
+void					init_plane_params(t_object *obj, t_plane_params params);
+void					init_sphere_params(t_object *obj,
+							t_sphere_params params);
+void					init_cylinder_params(t_object *obj,
+							t_cylinder_params params);
+t_light					*init_lights(t_light *l, t_light_params params);
+t_object				*init_cylinder(t_object *obj, t_cylinder_params params);
+t_object				*init_sphere(t_object *obj, t_sphere_params params);
+t_object				*init_plane(t_object *obj, t_plane_params params);
+t_object				*init_cone(t_object *obj, t_cone_params params);
 
 #endif

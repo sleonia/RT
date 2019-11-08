@@ -53,7 +53,7 @@ int		trace_start(t_sdl *sdl, t_scene *scene)
 					scene->cam->b, canvas_to_viewport(x, y, scene->view));
 			*scene->view = vector_normalize(scene->view);
 			color = trace_ray(&scene->cam->position, scene->view,
-					1.0, INFINITY, scene, 0);
+					1.0, INFINITY, scene, 3);
 			sdl->pixels = put_pixel(x, y, color, sdl);
 			y++;
 		}
@@ -88,7 +88,7 @@ int 	validate(t_scene *scene, int ac, char **av)
 int		main(int ac, char **av)
 {
 	t_rtv1		*rtv1;
-	t_config	conf;
+//	t_config	conf;
 
 	rtv1 = (t_rtv1 *)ft_memalloc(sizeof(t_rtv1));
 	rtv1->sdl = (t_sdl *)ft_memalloc((sizeof(t_sdl)));
