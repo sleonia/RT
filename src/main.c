@@ -48,7 +48,7 @@ int		validate(t_scene *scene, int ac, char **av)
 		return (0);
 	}
 	if (ft_strcmp(av[1], "map_one") == 0)
-		init_scene(scene);
+		map_one(scene);
 	else
 	{
 		ft_putstr("input \"map_one\" or \"map_one\" ");
