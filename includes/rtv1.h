@@ -223,5 +223,8 @@ t_object				*init_sphere(t_object *obj, t_sphere_params params);
 t_object				*init_cylinder(t_object *obj, t_cylinder_params params);
 void					init_scene(t_scene *scene);
 t_result				get_intersect(t_pos *o, t_pos *d, t_object *obj);
+t_pos					get_obj_normal(t_pos *p, t_return *ret, t_pos *o, t_pos *d);
+t_pos					v_minus(t_pos v1, t_pos v2);
+t_pos					v_plus(t_pos v1, t_pos v2);
 
 #endif

@@ -169,3 +169,22 @@ double		dot(t_pos *a, t_pos *b)
 	return (a->x * b->x + a->y * b->y + a->z * b->z);
 }
 
+t_pos	v_plus(t_pos v1, t_pos v2)
+{
+	t_pos	new_v;
+
+	new_v.x = v1.x + v2.x;
+	new_v.y = v1.y + v2.y;
+	new_v.z = v1.z + v2.z;
+	return (new_v);
+}
+
+t_pos	v_minus(t_pos v1, t_pos v2)
+{
+	t_pos	new_v;
+
+	new_v.x = v1.x - v2.x;
+	new_v.y = v1.y - v2.y;
+	new_v.z = v1.z - v2.z;
+	return (new_v);
+}
