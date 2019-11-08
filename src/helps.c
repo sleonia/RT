@@ -12,7 +12,7 @@
 
 #include "rtv1.h"
 
-int 		*put_pixel(double x, double y, int color, t_sdl *sdl)
+int			*put_pixel(double x, double y, int color, t_sdl *sdl)
 {
 	int		xnew;
 	int		ynew;
@@ -83,7 +83,7 @@ t_pos		vector_div(t_pos *o, double nbr)
 
 double		vector_len(t_pos *o)
 {
-	return(sqrt(o->x * o->x + o->y * o->y + o->z * o->z));
+	return (sqrt(o->x * o->x + o->y * o->y + o->z * o->z));
 }
 
 /*
@@ -132,7 +132,7 @@ t_pos		*matrix_on_vector(double a, double b, t_pos *vec)
 	double	y;
 	double	z;
 	double	b_to_rad;
-	double 	a_to_rad;
+	double	a_to_rad;
 
 	x = vec->x;
 	y = vec->y;
@@ -140,8 +140,10 @@ t_pos		*matrix_on_vector(double a, double b, t_pos *vec)
 	b_to_rad = (b * M_PI) / 180;
 	a_to_rad = (a * M_PI) / 180;
 	vec->x = x * cos(b_to_rad) + z * sin(b_to_rad);
-	vec->y = (x * sin(b_to_rad) - z * cos(b_to_rad)) * sin(a_to_rad) + y * cos(a_to_rad);
-	vec->z = ((z * cos(b_to_rad) - x * sin(b_to_rad)) * cos(a_to_rad)) + y * sin(a_to_rad);
+	vec->y = (x * sin(b_to_rad) - z * cos(b_to_rad)) * sin(a_to_rad) + y
+			* cos(a_to_rad);
+	vec->z = ((z * cos(b_to_rad) - x * sin(b_to_rad)) * cos(a_to_rad)) + y
+			* sin(a_to_rad);
 	return (vec);
 }
 
@@ -167,14 +169,3 @@ double		dot(t_pos *a, t_pos *b)
 	return (a->x * b->x + a->y * b->y + a->z * b->z);
 }
 
-t_pos		vec_normalize(t_pos a)
-{
-	t_pos vec;
-	double len;
-
-	len = vector_len(&a);
-	if (len == 0)
-		return (a);
-	vec = vector_on_number(&a, 1 / len);
-	return (vec);
-}

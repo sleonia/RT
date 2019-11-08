@@ -13,10 +13,10 @@
 #ifndef RTV1_RTV1_H
 # define RTV1_RTV1_H
 
-#include "libft.h"
-#include <SDL.h>
-#include <OpenCL/opencl.h>
-#include <math.h>
+# include "libft.h"
+# include <SDL.h>
+# include <OpenCL/opencl.h>
+# include <math.h>
 # define WIDTH 1000
 # define HEIGHT 1000
 # define VW 1.0472
@@ -27,53 +27,53 @@
 
 typedef struct			s_result
 {
-	double 				t1;
-	double 				t2;
+	double				t1;
+	double				t2;
 }						t_result;
 
 typedef struct			s_pos
 {
-	double 				x;
-	double 				y;
-	double 				z;
+	double				x;
+	double				y;
+	double				z;
 }						t_pos;
 
-typedef struct 			s_light
+typedef struct			s_light
 {
-	char 				type;
-	double 				intensity;
+	char				type;
+	double				intensity;
 	t_pos				position;
 	struct s_light		*next;
 }						t_light;
 
-typedef struct 			s_light_params
+typedef struct			s_light_params
 {
-	char 				type;
-	double 				intensity;
+	char				type;
+	double				intensity;
 	t_pos				pos;
 }						t_light_params;
 
-typedef struct 			s_cylinder
+typedef struct			s_cylinder
 {
 	t_pos				center;
 	t_pos				axis;
 	double				radius;
 }						t_cylinder;
 
-typedef struct 			s_plane
+typedef struct			s_plane
 {
 	t_pos				center;
 	t_pos				normal;
 }						t_plane;
 
-typedef struct 			s_cone
+typedef struct			s_cone
 {
 	t_pos				center;
 	t_pos				axis;
-	double 				radius;
+	double				radius;
 }						t_cone;
 
-typedef struct 			s_sphere
+typedef struct			s_sphere
 {
 	t_pos				center;
 	double				radius;
@@ -100,7 +100,7 @@ typedef struct			s_object
 	union u_objects		*objects;
 	enum e_obj_type		type;
 	int					color;
-	int 				specular;
+	int					specular;
 	double				reflective;
 	struct s_object		*next;
 }						t_object;
@@ -113,42 +113,42 @@ typedef struct			s_discriminant
 	double				discriminant;
 }						t_discriminant;
 
-typedef struct 			s_cylinder_params
+typedef struct			s_cylinder_params
 {
 	t_pos				pos;
 	t_pos				axis;
-	double 				radius;
-	int 				color;
-	int 				specular;
-	double 				reflective;
+	double				radius;
+	int					color;
+	int					specular;
+	double				reflective;
 }						t_cylinder_params;
 
-typedef struct 			s_cone_params
+typedef struct			s_cone_params
 {
 	t_pos				pos;
-	double 				radius;
-	int 				color;
-	int 				specular;
-	double 				reflective;
+	double				radius;
+	int					color;
+	int					specular;
+	double				reflective;
 	t_pos				axis;
 }						t_cone_params;
 
-typedef struct 			s_plane_params
+typedef struct			s_plane_params
 {
 	t_pos				pos;
-	int 				color;
-	int 				specular;
-	double 				reflective;
+	int					color;
+	int					specular;
+	double				reflective;
 	t_pos				normal;
 }						t_plane_params;
 
-typedef struct 			s_sphere_params
+typedef struct			s_sphere_params
 {
 	t_pos				pos;
-	double 				radius;
-	int 				color;
-	int 				specular;
-	double 				reflective;
+	double				radius;
+	int					color;
+	int					specular;
+	double				reflective;
 }						t_sphere_params;
 
 typedef struct			s_return
@@ -160,11 +160,11 @@ typedef struct			s_return
 typedef struct			s_cam
 {
 	t_pos				position;
-	double 				a;
-	double 				b;
+	double				a;
+	double				b;
 }						t_cam;
 
-typedef struct 			s_light_off
+typedef struct			s_light_off
 {
 	short int			ambient;
 	short int			point;
@@ -172,7 +172,7 @@ typedef struct 			s_light_off
 	short int			reflect;
 }						t_light_off;
 
-typedef struct 			s_scene
+typedef struct			s_scene
 {
 	t_pos				*view;
 	t_cam				*cam;
@@ -181,7 +181,7 @@ typedef struct 			s_scene
 	t_light_off			*off;
 }						t_scene;
 
-typedef struct 			s_sdl
+typedef struct			s_sdl
 {
 	SDL_Window			*window;
 	SDL_Renderer		*render;
@@ -190,16 +190,16 @@ typedef struct 			s_sdl
 	int					*pixels;
 }						t_sdl;
 
-typedef struct 			s_rtv1
+typedef struct			s_rtv1
 {
 	t_sdl				*sdl;
 	t_scene				*scene;
 }						t_rtv1;
 
-t_pos					insert(int x,int y, int z);
+t_pos					insert(int x, int y, int z);
 t_pos					*canvas_to_viewport(int x, int y, t_pos *pos);
 t_pos					vector_minus(t_pos *o, t_pos	*center);
-double 					dot(t_pos *a, t_pos *b);
+double					dot(t_pos *a, t_pos *b);
 int						sdl_init(t_sdl *sdl);
 int						sdl_control(t_sdl *sdl, t_scene *scene);
 int						*put_pixel(double x, double y, int color, t_sdl *sdl);
@@ -208,15 +208,17 @@ t_pos					vector_on_number(t_pos *o, double nbr);
 t_pos					vector_div(t_pos *o, double nbr);
 double					vector_len(t_pos *o);
 t_pos					vector_normalize(t_pos *a);
-double					computer_lighting(t_pos *p, t_pos *n, t_pos *v, int s, t_scene *scene);
+double					computer_lighting(t_pos *p, t_pos *n, t_pos *v, int s,
+							t_scene *scene);
 t_light					*init_light(t_light *light);
-void 					ft_error(char *str);
-t_return				closest_intersection(t_pos *o, t_pos *d, double t_min, double t_max, t_object *obj);
+void					ft_error(char *str);
+t_return				closest_intersection(t_pos *o, t_pos *d, double t_min,
+							double t_max, t_object *obj);
 int						trace_start(t_sdl *sdl, t_scene *scene);
 t_pos					*vector_on_vector(t_pos *a, t_pos *b, t_pos *ab);
 t_pos					*matrix_on_vector(double a, double b, t_pos *vec);
-int						trace_ray(t_pos *o, t_pos *d, double t_min, double t_max,
-		t_scene *scene, int depth);
+int						trace_ray(t_pos *o, t_pos *d, double t_min,
+							double t_max, t_scene *scene, int depth);
 t_object				*init_sphere(t_object *obj, t_sphere_params params);
 t_object				*init_cylinder(t_object *obj, t_cylinder_params params);
 void					init_scene(t_scene *scene);
