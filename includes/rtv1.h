@@ -105,6 +105,14 @@ typedef struct			s_object
 	struct s_object		*next;
 }						t_object;
 
+typedef struct			s_discriminant
+{
+	double				a;
+	double				b;
+	double				c;
+	double				discriminant;
+}						t_discriminant;
+
 typedef struct 			s_cylinder_params
 {
 	t_pos				pos;
@@ -212,5 +220,6 @@ int						trace_ray(t_pos *o, t_pos *d, double t_min, double t_max,
 t_object				*init_sphere(t_object *obj, t_sphere_params params);
 t_object				*init_cylinder(t_object *obj, t_cylinder_params params);
 void					init_scene(t_scene *scene);
+t_result				get_intersect(t_pos *o, t_pos *d, t_object *obj);
 
 #endif
