@@ -6,7 +6,7 @@
 /*   By: deladia <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/24 12:57:07 by deladia           #+#    #+#             */
-/*   Updated: 2019/11/08 17:38:06 by deladia          ###   ########.fr       */
+/*   Updated: 2019/11/08 17:51:21 by deladia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int		trace_start(t_sdl *sdl, t_scene *scene)
 void	error_output(void)
 {
 	ft_putstr("input \"scene_1\" or \"scene_2\" ");
-	ft_putendl("or \"scene_3\" or \"scene_4\"\n");
+	ft_putendl("or \"scene_3\" or \"scene_4\"");
 }
 
 int		validate(t_scene *scene, int ac, char **av)

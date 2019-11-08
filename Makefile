@@ -6,7 +6,7 @@
 #    By: deladia <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/08 17:43:59 by deladia           #+#    #+#              #
-#    Updated: 2019/11/08 17:47:01 by deladia          ###   ########.fr        #
+#    Updated: 2019/11/08 17:50:01 by deladia          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,9 +16,9 @@ SRC_DIR = src
 OBJ_DIR = objects
 LIB_DIR = ./libft
 FRWR_DIR = ./framework
-SRC = helps.c init_object_param.c init_object.c intersections.c light.c main.c \
+SRC = helps.c init_object_param.c init_objects.c intersections.c light.c main.c \
 	  normals.c print_error.c ray_trace.c scene_1.c scene_2.c scene_3.c scene_4.c \
-	  sdl.c sdl_control.c vector_operations_1.c vector_operations_2.c
+	  sdl.c sdl_controls.c vector_operations_1.c vector_operations_2.c
 INC = -I ./libft/includes/ \
 	  -I ./includes \
 	  -I $(FRWR_DIR)/SDL2.framework/Versions/A/Headers

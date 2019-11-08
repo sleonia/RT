@@ -6,7 +6,7 @@
 /*   By: deladia <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/08 17:42:17 by deladia           #+#    #+#             */
-/*   Updated: 2019/11/08 17:42:19 by deladia          ###   ########.fr       */
+/*   Updated: 2019/11/08 17:49:23 by deladia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,6 @@ t_result	get_intersect(t_pos *o, t_pos *d, t_object *obj)
 		return (intersect_ray_plane(o, d, &obj->objects->plane));
 	else if (obj->type == o_cone)
 		return (intersect_ray_cone(o, d, &obj->objects->cone));
-	else if (obj->type == o_cylinder)
+	else
 		return (intersect_ray_cylinder(o, d, &obj->objects->cylinder));
 }
