@@ -91,6 +91,7 @@ double		computer_lighting(t_pos *p, t_pos *n, t_pos *v, int specular, t_scene *s
 			if (tmp->type == 'P' && !scene->off->point)
 			{
 				l = vector_minus(tmp->position, p);
+				l = vector_normalize(&l);
 				t_max = 1.0;
 			}
 			else if (tmp->type == 'D' && !scene->off->directional)
