@@ -6,88 +6,104 @@
 /*   By: deladia <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/03 20:55:14 by delalia           #+#    #+#             */
-/*   Updated: 2019/11/07 22:50:27 by deladia          ###   ########.fr       */
+/*   Updated: 2019/11/11 10:58:22 by thorker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "to_json.h"
-#include "rtv1.h"
-//добавить функцию добавления имени и проверки на валидность
 
-int				add_name(t_key_value *for_re, t_token **token)
+int				realloc_key_value(t_key_value *for_re, char* new_key, void *new_value, t_type new_type)
 {
-	char	**new;
 	size_t	i;
+	char	**new_key_array;
+	void	**new_value_array;
+	t_type	*new_type_array;
 	size_t	k;
-	t_type	type;
-	void	*new_value;
 
 	i = 0;
 	while (*(for_re->key + i) != 0)
 		i++;
-	new = (char**)malloc(sizeof(char*) * (i + 2));
-	k = 0;
-	while (k <= i)
+	if ((new_key_array = (char**)malloc(sizeof(char*) * (i + 2))) == 0)
+		return (0);
+	if ((new_value_array = (void**)malloc(sizeof(void*) * (i + 1))) == 0)
 	{
-		*(new + k) = ft_strdup(*(for_re->key + k));
-		ft_strdel(for_re->key + k);
+		free(new_key_array);
+		return (0);
+	}
+	if ((new_type_array = (t_type*)malloc(sizeof(t_type) * (i + 1))) == 0)
+	{
+		free(new_key_array);
+		free(new_value_array);
+		return (0);
+	}
+	k = 0;
+	while (k < i)
+	{
+		*(new_key_array + k) = *(for_re->key + k);
+		*(new_value_array + k) = *(for_re->value + k);
+		*(new_type_array + k) = *(for_re->type + k);
 		k++;
 	}
-	*(new + k) = ft_strdup((*token)->value);
-	*(new + k + 1) = 0;
-	*token = (*token)->next;
-	if (*token == 0 || ft_strcmp((*token)->value, "\"") != 0 ||
-			(*token = (*token->next)) == 0 || ft_strcmp((*token)->value, ":") != 0
-			|| (*token = (*token->next)) == 0)
-	{
-		k = 0;
-		while (k < i + 2)
-		{
-			ft_strdel(new + k);
-			k++;
-		}
-		free(new);
-		return (-1);
-	}
-	if (ft_strcmp((*token)->value, "[") == 0)
-	{
-		if ((new_value = add_value_array(token, &type)) == *token)
-		{
-			k = 0;
-			while (k < i + 2)
-			{
-				ft_strdel(new + k);
-				k++;
-			}
-			free(new);
-			return (-1);
-		}
-	}
-	if (ft_strcmp((*token)->value, "{") == 0)
-	{
-		if ((new_value = check_object(token, &type)) == *token)
-		{
-			k = 0;
-			while (k < i + 2)
-			{
-				ft_strdel(new + k);
-				k++;
-			}
-			free(new);
-			return (-1);
-		}
-	}
-	//начать с проверки string
+	*(new_key_array + k) = new_key;
+	*(new_key_array + k + 1) = 0;
+	*(new_value_array + k) = new_value;
+	*(new_type_array + k) = new_type;
 	free(for_re->key);
-	for_re->key = new;
-		
+	free(for_re->value);
+	if (for_re->type != 0)
+		free(for_re->type);
+	for_re->key = new_key_array;
+	for_re->value = new_value_array;
+	for_re->type = new_type_array;
+	return (1);
 }
 
-t_key_value		*check_object(t_token **token, t_type *type)
+int				check_value_and_name(t_key_value *for_re, t_token **token)
+{
+	char	*new_key;
+	void	*new_value;
+	t_type	new_type;
+
+	new_type = 0;
+	if ((*token = (*token)->next) == 0)
+		return (0);
+	if ((new_key = ft_strdup((*token)->value)) == 0)
+		return (0);
+	if ((*token = (*token)->next) == 0 ||
+			ft_strcmp((*token)->value, "\"") != 0 ||
+			(*token = (*token)->next) == 0 ||
+			ft_strcmp((*token)->value, ":") != 0 ||
+			(*token = (*token)->next) == 0)
+	{
+		ft_strdel(&new_key);
+		return (0);
+	}
+	
+	if (ft_str_isdigit((*token)->value) != 0)
+	{
+		if ((new_value = check_digit(token)) != *token)
+			new_type = Dec;
+	}
+	if (new_type == 0)
+	{
+		ft_strdel(&new_key);
+		return (0);
+	}
+	else if (realloc_key_value(for_re, new_key, new_value, new_type) == 0)
+	{
+			ft_strdel(&new_key);
+			free(new_value);
+			return (0);
+	}
+	return (1);
+}
+
+void		*check_object(t_token **token)
 {
 	t_key_value		*for_re;
 
-	if ((*token)->next != 0 && ft_strcmp((*token)->next->value, "}") != 0)
+	//разделить проверки
+	if ((*token)->next != 0 && ft_strcmp(((*token)->next)->value, "}") == 0)
 		return (0);
 	else
 	{
@@ -96,25 +112,32 @@ t_key_value		*check_object(t_token **token, t_type *type)
 		*(for_re->key) = 0;
 		for_re->value = (void**)malloc(sizeof(void*));
 		*(for_re->value) = 0;
-		for_re->type = (char**)malloc(sizeof(char*));
-		*(for_re->type) = 0;
+		for_re->type = 0;
 	}
 	*token = (*token)->next;
 	while (*token != 0)
 	{
-		//добавить проерку ","
-		if (ft_strcmp((*token)->value, "}") == 0)
-			return (for_re);
 		if (ft_strcmp((*token)->value, "\"") == 0)
 		{
+			if (check_value_and_name(for_re, token) == 0)
+			{
+				ft_return(&for_re);
+				return (*token);
+			}
+		}
+		if (ft_strcmp((*token)->value, ",") == 0)
 			*token = (*token)->next;
-			if (add_name(for_re, token) != 0)
-				return (fr_return(token
+		else if (ft_strcmp((*token)->value, "}") == 0)
+			return (for_re);
+		else
+		{
+			ft_return(&for_re);
+			return (*token);
 		}
 	}
 	return (*token);
 }
 
-//проверить "{" в самом начале (до этой функции)
+//проверить "{" и на  в самом начале (до этой функции)
 //считается ли {} null или нет
 //что делать если   token == 0

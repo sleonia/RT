@@ -6,30 +6,39 @@
 /*   By: deladia <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/06 21:54:38 by deladia           #+#    #+#             */
-/*   Updated: 2019/11/06 23:56:38 by thorker          ###   ########.fr       */
+/*   Updated: 2019/11/11 09:31:25 by thorker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "to_json.h"
 
-t_token 	*ft_return(t_token *token, t_key_value **tree)
+void 	ft_return(t_key_value **tree)
 {
 	int 	i;
 	int 	len;
 
 	i = 0;
 	while((*tree)->key[i])
+	{
 		free((*tree)->key[i++]);
+		*((*tree)->key + i++) = 0;
+	}
 	free((*tree)->key);
 	len = i;
 	i = 0;
-	while (i < len)
+	while (i <= len)
 	{
 		if ((*tree)->value == NULL)
 			continue ;
-		free((*tree)->value[i++]);
+		free((*tree)->value[i]);
+		*((*tree)->key + i++) = 0;
 	}
 	free((*tree)->value);
+	(*tree)->value = 0;
 	free((*tree)->type);
-	return (token);
+	(*tree)->type = 0;
+	free(*tree);
+	*tree = 0;
 }
+// а что если в валуе находится структура
+

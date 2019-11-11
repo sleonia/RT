@@ -6,7 +6,7 @@
 #    By: deladia <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/07 20:57:04 by deladia           #+#    #+#              #
-#    Updated: 2019/11/07 23:00:25 by deladia          ###   ########.fr        #
+#    Updated: 2019/11/11 10:31:51 by thorker          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,9 +16,9 @@ INC = -I ./includes/ \
 SRC_DIR = src
 OBJ_DIR = object
 LIB_DIR	= ../libft
-LIB = -L $(LIBFT_DIR)/ -lft
-SRC = parser.c ft_return.c ft_print.c creation_token_list.c
-FLAGS = -Wall -Wextra -Werror
+LIB = -L $(LIB_DIR)/ -lft
+SRC = tree.c ft_error.c helps.c parser.c ft_return.c ft_print.c creation_token_list.c
+FLAG = -Wall -Wextra -Werror
 OBJ = $(addprefix $(OBJ_DIR)/, $(SRC:.c=.o))
 
 $(NAME): cr_obj_dir $(OBJ_DIR) $(OBJ)
@@ -47,3 +47,6 @@ fclean: clean
 		rm -f $(NAME)
 
 re: fclean $(NAME)
+
+test:
+	gcc $(FLAG) main.c $(INC) $(LIB) -L ./ -ltojson -o test.out
