@@ -3,6 +3,10 @@
 .DS_Store
 .idea
 /objects
-/libft/*.o
 rtv1
-/libft/libft.a
+*.a
+/libft/object
+/libtojson/object
+/libtojson/cmake-build-debug/
+/libtojson/main.c
+
