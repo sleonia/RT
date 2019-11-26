@@ -26,12 +26,12 @@ void 	ft_return(t_key_value **tree)
 	free((*tree)->key);
 	len = i;
 	i = 0;
-	while (i <= len)
+	while (i < len)
 	{
 		if ((*tree)->value == NULL)
 			continue ;
 		free((*tree)->value[i]);
-		*((*tree)->key + i++) = 0;
+		*((*tree)->value + i++) = 0;
 	}
 	free((*tree)->value);
 	(*tree)->value = 0;
