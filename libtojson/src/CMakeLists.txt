@@ -16,4 +16,4 @@ add_executable(src
         parser.c
         tree.c
         ${LIBFT_SRCS}
-        ../main.c)
+        ../main.c get_int.c)
