@@ -25,12 +25,13 @@ int 	get_int(t_key_value *tree, char *name, int *number)
 		{
 			if (tree->type[i] == Dec)
 			{
-				*name = (int) tree->value;
+				*number = *(int*)tree->value[i];
 				return (0);
 			}
 			else
 				return(WRONG_TYPE);
 		}
+		i++;
 	}
 	return (NOT_FOUND);
 }

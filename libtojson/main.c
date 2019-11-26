@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "to_json.h"
+
 void	free_token(t_token **token)
 {
 	t_token		*tmp;
@@ -29,9 +30,13 @@ void	free_token(t_token **token)
 int		main(void)
 {
 	t_key_value	*tmp;
+	int 		ret;
+	int 		number;
 
-	tmp = parse_json("test.json");
-	
+//	tmp = parse_json("../../../param.json");
+	tmp = parse_json("../../test.json");
+	ret = get_int(tmp, "angle_a", &number);
+	printf("ret = %d value = %d\n", ret, number);
 	ft_print(tmp);
 	/*
 	char *line = 0;

@@ -15,5 +15,6 @@ add_executable(src
         helps.c
         parser.c
         tree.c
+        parse_json.c
         ${LIBFT_SRCS}
         ../main.c get_int.c)
