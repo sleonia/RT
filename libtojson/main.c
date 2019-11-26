@@ -43,5 +43,6 @@ int		main(void)
 	size_t k = read(0, line, 3);
 	(void)k;
 	*/
+	ft_return(&tmp);
 	return (0);
 }
