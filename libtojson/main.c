@@ -6,12 +6,11 @@
 /*   By: deladia <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/07 22:54:41 by deladia           #+#    #+#             */
-/*   Updated: 2019/11/26 15:25:53 by thorker          ###   ########.fr       */
+/*   Updated: 2019/11/26 16:03:24 by thorker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "to_json.h"
-
 void	free_token(t_token **token)
 {
 	t_token		*tmp;
@@ -27,7 +26,7 @@ void	free_token(t_token **token)
 	}
 }
 
-int		main(void)
+int		ftf_parse(void)
 {
 	t_key_value		*tmp;
 	t_token			*token;
@@ -58,6 +57,13 @@ int		main(void)
 		head_token = token;		
 	}
 	ft_return(&tmp);
-	//возвращается указатель на последний token
+	return (0);
+}
+int		main(void)
+{
+	ftf_parse();
+	char *line = 0;
+	size_t k = read(0, line, 3);
+	(void)k;
 	return (0);
 }
