@@ -25,17 +25,6 @@
 # define WHITE 0xFFFFFF
 # define BLACK 0x000000
 
-typedef struct 			s_dictionary
-{
-	char				*object[3];
-	char				*camera_properties[3];
-	char				*light_properties[3];
-	char 				*figure_type[4];
-	char 				*figure_properties[6];
-	char 				*light_type[3];
-	char 				separator[6];
-}						t_dictionary;
-
 typedef struct			s_result
 {
 	double 				t1;
@@ -53,74 +42,118 @@ typedef struct 			s_light
 {
 	char 				type;
 	double 				intensity;
-	t_pos				*position;
-	struct s_light		*next;
-	//mb something else
+	t_pos				position;
 }						t_light;
+
+typedef struct			s_light_params
+{
+	char				type;
+	double				intensity;
+	t_pos				pos;
+}						t_light_params;
 
 typedef struct 			s_cylinder
 {
-	t_pos				*center;
-	double 				height;
-	int 				color;
+	t_pos				center;
+	t_pos				axis;
 	double				radius;
-	int 				specular;
-	double				reflective;
-	struct s_cylinder	*next;
 }						t_cylinder;
 
 typedef struct 			s_cone
 {
-	t_pos				*center;
-//	double 				height;
-	int 				color;
-//	double				radius;
-	int 				specular;
-	double				reflective;
-	struct s_cone		*next;
+	t_pos				center;
+	t_pos				axis;
+	double				radius;
 }						t_cone;
 
 typedef struct 			s_plane
 {
-//	t_pos				*center;
-//	double 				height;
-	int 				color;
-//	double				radius;
-	int 				specular;
-	double				reflective;
-	struct s_plane		*next;
+	t_pos				center;
+	t_pos				normal;
 }						t_plane;
 
 typedef struct 			s_sphere
 {
-	t_pos				*center;
-	int 				color;
+	t_pos				center;
 	double				radius;
-	int 				specular;
-	double				reflective;
-	struct s_sphere		*next;
 }						t_sphere;
+
+union					u_objects
+{
+	t_sphere			sphere;
+	t_cylinder			cylinder;
+	t_cone				cone;
+	t_plane				plane;
+};
+
+enum					e_obj_type
+{
+	o_sphere = 1,
+	o_cylinder,
+	o_cone,
+	o_plane,
+};
+
+typedef struct			s_object
+{
+	union u_objects		*objects;
+	enum e_obj_type		type;
+	int					color;
+	int					specular;
+	double				reflective;
+	struct s_object		*next;
+}						t_object;
 
 typedef struct			s_return
 {
-	t_sphere			*closest_sphere;
+	t_object			*closest_object;
 	double				closest_t;
 }						t_return;
 
-typedef struct			s_figure
-{
-	t_cylinder			*cylinder;
-	t_sphere			*sphere;
-	t_cone				*cone;
-	t_plane				*plane;
-}						t_figure;
-
 typedef struct			s_cam
 {
-	t_pos				*position;
+	t_pos				position;
 	double 				a;
 	double 				b;
 }						t_cam;
+
+typedef struct			s_cylinder_params
+{
+	t_pos				pos;
+	t_pos				axis;
+	double				radius;
+	int					color;
+	int					specular;
+	double				reflective;
+}						t_cylinder_params;
+
+typedef struct			s_cone_params
+{
+	t_pos				pos;
+	double				radius;
+	int					color;
+	int					specular;
+	double				reflective;
+	t_pos				axis;
+}						t_cone_params;
+
+typedef struct			s_plane_params
+{
+	t_pos				pos;
+	int					color;
+	int					specular;
+	double				reflective;
+	t_pos				normal;
+}						t_plane_params;
+
+typedef struct			s_sphere_params
+{
+	t_pos				pos;
+	double				radius;
+	int					color;
+	int					specular;
+	double				reflective;
+}						t_sphere_params;
 
 typedef struct 			s_light_off
 {
@@ -130,14 +163,13 @@ typedef struct 			s_light_off
 	short int			reflect;
 }						t_light_off;
 
-typedef struct 			s_scene
+typedef struct			s_scene
 {
 	t_pos				*view;
 	t_cam				*cam;
-	t_light				*light;
-	t_figure			*figure;
+	t_light				**light;
+	t_object			**object;
 	t_light_off			*off;
-	//mb something else
 }						t_scene;
 
 typedef struct		s_cl
@@ -186,11 +218,14 @@ t_pos					vector_on_number(t_pos *o, double nbr);
 t_pos					vector_div(t_pos *o, double nbr);
 double					vector_len(t_pos *o);
 double					computer_lighting(t_pos *p, t_pos *n, t_pos *v, int s, t_scene *scene);
-t_light					*init_light(t_light *light);
+t_light					**init_light(void);
 void 					ft_error(char *str);
-t_return				closest_intersection(t_pos *o, t_pos *d, double t_min, double t_max, t_sphere *sphere);
+t_return				closest_intersection(t_pos *o, t_pos *d, double t_min, double t_max, t_object **obj);
 int						trace_start(t_sdl *sdl, t_scene *scene);
 t_pos					*vector_on_vector(t_pos *a, t_pos *b, t_pos *ab);
 t_pos					*matrix_on_vector(double a, double b, t_pos *vec);
+t_pos					v_minus(t_pos v1, t_pos v2);
+t_pos					v_plus(t_pos v1, t_pos v2);
+t_pos					get_obj_normal(t_pos *p, t_return *ret, t_pos *o, t_pos *d);
 
 #endif

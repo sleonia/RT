@@ -7,7 +7,7 @@ include_directories(./libft/includes)
 include_directories(./includes)
 FILE(GLOB LIBFT_SRCS ./libft/src/*.c)
 
-add_executable(RTv1 src/main.c ${LIBFT_SRCS} src/helps.c src/sdl.c src/light.c)
+add_executable(RTv1 src/main.c ${LIBFT_SRCS} src/helps.c src/sdl.c src/light.c src/normals.c)
 set(SDL2_INCLUDE_DIR /Users/$ENV{USER}/.brew/include/SDL2)
 set(SDL2_LIBRARIES /Users/$ENV{USER}/.brew/lib)
 set(SDL_TTF_INCLUDE_DIR /Users/$ENV{USER}/.brew/include/SDL2)

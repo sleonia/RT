@@ -25,7 +25,7 @@ t_result	intersect_ray_sphere(t_pos *o, t_pos *d, t_sphere *sphere)
 	t_result	res;
 
 
-	oc = vector_minus(o, sphere->center);
+	oc = vector_minus(o, &sphere->center);
 	k1 = dot(d, d);
 	k2 = 2 * dot(&oc, d);
 	k3 = dot(&oc, &oc) - sphere->radius * sphere->radius;
@@ -45,29 +45,44 @@ t_result	intersect_ray_sphere(t_pos *o, t_pos *d, t_sphere *sphere)
 ** 		Находит ближайшую точку в позиции (x, y) среди всех сфер и возвращает укзатель на сферу и ближайшую точку пересечения
 */
 
-t_return	closest_intersection(t_pos *o, t_pos *d, double t_min, double t_max, t_sphere *sphere)
+t_result	get_intersect(t_pos *o, t_pos *d, t_object *obj)
+{
+	if (obj->type == o_sphere)
+		return (intersect_ray_sphere(o, d, &obj->objects->sphere));
+//	else if (obj->type == o_plane)
+//		return (intersect_ray_plane(o, d, &obj->objects->plane));
+//	else if (obj->type == o_cone)
+//		return (intersect_ray_cone(o, d, &obj->objects->cone));
+//	else
+//		return (intersect_ray_cylinder(o, d, &obj->objects->cylinder));
+}
+
+t_return	closest_intersection(t_pos *o, t_pos *d, double t_min, double t_max, t_object **obj)
 {
 	t_result	res;
-	t_sphere	*tmp;
+	t_object	**tmp;
 	t_return	ret;
+	int 		i;
 
 	ret.closest_t = INFINITY;
-	ret.closest_sphere = NULL;
-	tmp = sphere;
-	while (tmp)
+	ret.closest_object = NULL;
+	tmp = obj;
+	i = 0;
+	while (tmp[i])
 	{
-		res = intersect_ray_sphere(o, d, tmp);
+		res = get_intersect(o, d, tmp[i]);
 		if (res.t1 >= t_min && res.t1 <= t_max && res.t1 < ret.closest_t)
 		{
 			ret.closest_t = res.t1;
-			ret.closest_sphere = tmp;
+			ret.closest_object = tmp[i];
 		}
 		if (res.t2 >= t_min && res.t2 <= t_max && res.t2 < ret.closest_t)
 		{
 			ret.closest_t = res.t2;
-			ret.closest_sphere = tmp;
+			ret.closest_object = tmp[i];
 		}
-		tmp = tmp->next;
+//		tmp = tmp->next;
+		i++;
 	}
 	return (ret);
 }
@@ -103,7 +118,8 @@ t_pos		reflect_ray(t_pos *r, t_pos *n)
 ** 		Находит ближайшую точку в позиции (x, y) среди всех сфер и возвращает цвет пикселя
 */
 
-int			 trace_ray(t_pos *o, t_pos *d, double t_min, double t_max, t_scene *scene, int depth) {
+int			 trace_ray(t_pos *o, t_pos *d, double t_min, double t_max, t_scene *scene, int depth)
+{
 	t_pos p;
 	t_pos n;
 	t_pos buf;
@@ -114,24 +130,25 @@ int			 trace_ray(t_pos *o, t_pos *d, double t_min, double t_max, t_scene *scene,
 	int reflected_color;
 	double ref;
 
-	ret = closest_intersection(o, d, t_min, t_max, scene->figure->sphere);
-	if (ret.closest_sphere == NULL)
+	ret = closest_intersection(o, d, t_min, t_max, scene->object);
+	if (ret.closest_object == NULL)
 		return (BLACK);
 //	return (ret.closest_sphere->color);
 	//Часть для добавления бликов от света
 	// 		Вычисление локального цвета
 	buf = vector_on_number(d, ret.closest_t);
 	p = vector_pus(o, &buf);
-	n = vector_minus(&p, ret.closest_sphere->center);
+//	n = vector_minus(&p, &ret.closest_object->center);
+	n = get_obj_normal(&p, &ret, o, d);
 	n = vector_div(&n, vector_len(&n));
 	//Теперь buf это -D
 	buf = vector_on_number(d, -1);
 	// Вычисление коэфа для умножения на цвет сферы
-	c = computer_lighting(&p, &n, &buf, ret.closest_sphere->specular, scene);
-	local_color = color_scale(ret.closest_sphere->color, c);
+	c = computer_lighting(&p, &n, &buf, ret.closest_object->specular, scene);
+	local_color = color_scale(ret.closest_object->color, c);
 
 	// Проверка выхода из рекурсии
-	ref = ret.closest_sphere->reflective;
+	ref = ret.closest_object->reflective;
 	if (depth <= 0 || ref <= 0 || scene->off->reflect)
 		return (local_color);
 
@@ -147,7 +164,7 @@ int			 trace_ray(t_pos *o, t_pos *d, double t_min, double t_max, t_scene *scene,
 **
 */
 
-t_sphere	*init_sphere(t_sphere *sphere)
+/*t_sphere	*init_sphere(t_sphere *sphere)
 {
 	t_sphere	*tmp;
 	t_pos		*center1;
@@ -190,7 +207,7 @@ t_sphere	*init_sphere(t_sphere *sphere)
 	tmp->specular = 1000;
 	tmp->reflective = 0.5;
 	return (sphere);
-}
+}*/
 
 /*
 **	Начало обхода по всем пикселям экрана
@@ -209,7 +226,7 @@ int 		trace_start(t_sdl *sdl, t_scene *scene)
 		while(y < HEIGHT / 2)
 		{
 			scene->view = matrix_on_vector(scene->cam->a, scene->cam->b, canvas_to_viewport(x, y, scene->view));
-			color = trace_ray(scene->cam->position, scene->view, 1.0, INFINITY, scene, 3);
+			color = trace_ray(&scene->cam->position, scene->view, 1.0, INFINITY, scene, 3);
 			sdl->pixels = put_pixel(x, y, color, sdl);
 			y++;
 		}
@@ -217,6 +234,37 @@ int 		trace_start(t_sdl *sdl, t_scene *scene)
 	}
 	sdl_control(sdl, scene);
 	return (0);
+}
+
+void		init_sphere_param(t_object *obj, t_sphere_params params)
+{
+	obj->type = o_sphere;
+	obj->color = params.color;
+	obj->reflective = params.reflective;
+	obj->specular = params.specular;
+	obj->objects->sphere.center = params.pos;
+	obj->objects->sphere.radius = params.radius;
+}
+
+t_object	**init_object(void)
+{
+	t_object	**object;
+
+	object = (t_object **)ft_memalloc(sizeof(t_object *) * 4);
+	object[0] = (t_object *)ft_memalloc(sizeof(t_object));
+	object[1] = (t_object *)ft_memalloc(sizeof(t_object));
+	object[2] = (t_object *)ft_memalloc(sizeof(t_object));
+	object[3] = (t_object *)ft_memalloc(sizeof(t_object));
+
+	object[0]->objects = (union u_objects *)ft_memalloc(sizeof(union u_objects));
+	object[1]->objects = (union u_objects *)ft_memalloc(sizeof(union u_objects));
+	object[2]->objects = (union u_objects *)ft_memalloc(sizeof(union u_objects));
+	object[3]->objects = (union u_objects *)ft_memalloc(sizeof(union u_objects));
+	init_sphere_param(object[0], (t_sphere_params){{0, -1, 3}, 1.0, 0xFF0000, 500, 0.2});
+	init_sphere_param(object[1], (t_sphere_params){{2, 0, 4}, 1.0, 0x0000FF, 500, 0.3});
+	init_sphere_param(object[2], (t_sphere_params){{-2, 0, 4}, 1.0, 0x00FF00, 10, 0.4});
+	init_sphere_param(object[3], (t_sphere_params){{0, -5001, 0}, 5000.0, 0xFFFF00, 1000, 0.5});
+	return (object);
 }
 
 int			main(void)
@@ -230,23 +278,22 @@ int			main(void)
 	rtv1->scene = (t_scene *)ft_memalloc(sizeof(t_scene));
 
 	rtv1->scene->cam = (t_cam *)ft_memalloc(sizeof(t_cam));
-	rtv1->scene->cam->position = (t_pos *)ft_memalloc(sizeof(t_pos));
-	rtv1->scene->cam->position = insert(0, 0, 0, rtv1->scene->cam->position);
+	rtv1->scene->cam->position = (t_pos){0, 0, 0};
 	//разобраться с поворотом камеры
 
 	rtv1->scene->view = (t_pos *)ft_memalloc(sizeof(t_pos));
 
 	//инициализация света нужен прасер
-	rtv1->scene->light = init_light(rtv1->scene->light);
+	rtv1->scene->light = init_light();
 
-	rtv1->scene->figure = (t_figure *)ft_memalloc(sizeof(t_figure));
+//	rtv1->scene->figure = (t_figure *)ft_memalloc(sizeof(t_figure));
 
 	rtv1->scene->off = (t_light_off *)ft_memalloc(sizeof(t_light_off));
 
 	//парсер чтобы считать сферы из файла в *shpere
 	//инициальзация сфер
-	rtv1->scene->figure->sphere = init_sphere(rtv1->scene->figure->sphere);
-
+//	rtv1->scene->figure->sphere = init_sphere(rtv1->scene->figure->sphere);
+	rtv1->scene->object = init_object();
 	trace_start(rtv1->sdl, rtv1->scene);
 	return (0);
 }

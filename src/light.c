@@ -18,26 +18,21 @@
 **		Разобраться с источниками света
 */
 
-t_light		*init_light(t_light *light)
+t_light		**init_light(void)
 {
-	t_light		*tmp;
-	t_pos		*center2;
-	t_pos		*center3;
-	t_pos		*center4;
+	t_light **light;
 
-	(void)center4;
 	//ambient - окружающий свет
-	light = (t_light *)ft_memalloc(sizeof(t_light));
-	light->type = 'A';
-	light->intensity = 0.2;
+	light = (t_light **)ft_memalloc(sizeof(t_light *) * 3);
+	light[0] = (t_light *)ft_memalloc(sizeof(t_light));
+	light[0]->type = 'A';
+	light[0]->intensity = 0.2;
 
 	//point - точечный источник света
-	light->next = (t_light *)ft_memalloc(sizeof(t_light));
-	center2 = (t_pos *)ft_memalloc(sizeof(t_pos));
-	tmp = light->next;
-	tmp->position = insert(3, 1, -1, center2);
-	tmp->type = 'P';
-	tmp->intensity = 0.6;
+	light[1] = (t_light *)ft_memalloc(sizeof(t_light));
+	light[1]->position = (t_pos){3, 1, -1};
+	light[1]->type = 'P';
+	light[1]->intensity = 0.6;
 //
 //	tmp->next = (t_light *)ft_memalloc(sizeof(t_light));
 //	center3 = (t_pos *)ft_memalloc(sizeof(t_pos));
@@ -46,19 +41,10 @@ t_light		*init_light(t_light *light)
 //	tmp->type = 'P';
 //	tmp->intensity = 0.6;
 //	directional - направленный источник света
-	tmp->next = (t_light *)ft_memalloc(sizeof(t_light));
-	center3 = (t_pos *)ft_memalloc(sizeof(t_pos));
-	tmp = tmp->next;
-	tmp->type = 'D';
-	tmp->intensity = 0.2;
-	tmp->position = insert(1, 4, 4, center3);
-
-//	tmp->next = (t_light *)ft_memalloc(sizeof(t_light));
-//	center4 = (t_pos *)ft_memalloc(sizeof(t_pos));
-//	tmp = tmp->next;
-//	tmp->type = 'P';
-//	tmp->intensity = 0.4;
-//	tmp->position = insert(-100, -100, -100, center4);
+	light[2] = (t_light *)ft_memalloc(sizeof(t_light));
+	light[2]->type = 'D';
+	light[2]->intensity = 0.2;
+	light[2]->position = (t_pos){1, 4, 4};
 	return (light);
 }
 
@@ -69,7 +55,7 @@ t_light		*init_light(t_light *light)
 double		computer_lighting(t_pos *p, t_pos *n, t_pos *v, int specular, t_scene *scene)
 {
 	double		intens;
-	t_light		*tmp;
+	t_light		**tmp;
 	t_pos		l;
 	double		n_dot_l;
 	double		r_dot_v;
@@ -77,42 +63,44 @@ double		computer_lighting(t_pos *p, t_pos *n, t_pos *v, int specular, t_scene *s
 	t_pos		buf;
 	t_return	shadow;
 	double		t_max;
+	int 		i;
 
+	i = 0;
 	intens = 0.0;
 	tmp = scene->light;
 	//костыль чтобы занулить l
 	l = vector_on_number(&l, 0);
-	while (tmp)
+	while (tmp[i])
 	{
-		if (tmp->type == 'A' && !scene->off->ambient)
-			intens += tmp->intensity;
+		if (tmp[i]->type == 'A' && !scene->off->ambient)
+			intens += tmp[i]->intensity;
 		else
 		{
-			if (tmp->type == 'P' && !scene->off->point)
+			if (tmp[i]->type == 'P' && !scene->off->point)
 			{
-				l = vector_minus(tmp->position, p);
+				l = vector_minus(&tmp[i]->position, p);
 				t_max = 1.0;
 			}
-			else if (tmp->type == 'D' && !scene->off->directional)
+			else if (tmp[i]->type == 'D' && !scene->off->directional)
 			{
-				l.x = tmp->position->x;
-				l.y = tmp->position->y;
-				l.z = tmp->position->z;
+				l.x = tmp[i]->position.x;
+				l.y = tmp[i]->position.y;
+				l.z = tmp[i]->position.z;
 				t_max = INFINITY;
 			}
 			// Проверка тени
 			if (t_max)
 			{
-				shadow = closest_intersection(p, &l, 0.001, t_max, scene->figure->sphere);
-				if (shadow.closest_sphere != NULL)
+				shadow = closest_intersection(p, &l, 0.001, t_max, scene->object);
+				if (shadow.closest_object != NULL)
 				{
-					tmp = tmp->next;
+					i++;
 					continue ;
 				}
 				// Диффузность
 				n_dot_l = dot(n, &l);
 				if (n_dot_l > 0)
-					intens += tmp->intensity * n_dot_l / (vector_len(n) * vector_len(&l));
+					intens += tmp[i]->intensity * n_dot_l / (vector_len(n) * vector_len(&l));
 				// Зеркальность
 				if (specular != -1)
 				{
@@ -121,11 +109,11 @@ double		computer_lighting(t_pos *p, t_pos *n, t_pos *v, int specular, t_scene *s
 					r = vector_minus(&buf, &l);
 					r_dot_v = dot(&r, v);
 					if (r_dot_v > 0)
-						intens += tmp->intensity * pow(r_dot_v / (vector_len(&r) * vector_len(v)), specular);
+						intens += tmp[i]->intensity * pow(r_dot_v / (vector_len(&r) * vector_len(v)), specular);
 				}
 			}
 		}
-		tmp = tmp->next;
+		i++;
 	}
 	if (intens > 1.0)
 		return (1.0);
