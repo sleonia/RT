@@ -6,7 +6,7 @@
 #    By: deladia <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/07 20:57:04 by deladia           #+#    #+#              #
-#    Updated: 2019/11/26 14:27:39 by thorker          ###   ########.fr        #
+#    Updated: 2019/11/26 16:47:44 by thorker          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ SRC_DIR = src
 OBJ_DIR = object
 LIB_DIR	= ../libft
 LIB = -L $(LIB_DIR)/ -lft
-SRC = tree.c ft_error.c helps.c parser.c ft_return.c ft_print.c creation_token_list.c
+SRC = parse_json.c tree.c ft_error.c helps.c parser.c ft_return.c ft_print.c creation_token_list.c
 FLAG = -Wall -Wextra -Werror
 OBJ = $(addprefix $(OBJ_DIR)/, $(SRC:.c=.o))
 

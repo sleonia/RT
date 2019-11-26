@@ -6,7 +6,7 @@
 /*   By: thorker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/04 01:50:08 by thorker           #+#    #+#             */
-/*   Updated: 2019/11/26 15:02:25 by thorker          ###   ########.fr       */
+/*   Updated: 2019/11/26 16:50:34 by thorker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ typedef struct			s_token
 	struct s_token		*next;
 }						t_token;
 
+t_key_value				*parse_json(char *file_name);
 t_token					*ft_open(char *file);
 void					*check_object(t_token **token);
 void					ft_return(t_key_value **tree);
