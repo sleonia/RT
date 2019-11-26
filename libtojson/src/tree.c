@@ -6,14 +6,13 @@
 /*   By: deladia <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/03 20:55:14 by delalia           #+#    #+#             */
-/*   Updated: 2019/11/26 16:22:12 by thorker          ###   ########.fr       */
+/*   Updated: 2019/11/26 17:14:46 by thorker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "to_json.h"
 /* 
- * 
- *
+ * функция в которой выделяется новая память для расширенного массива
  */
 int				realloc_key_value(t_key_value *for_re, char* new_key, void *new_value, t_type new_type)
 {
@@ -60,7 +59,9 @@ int				realloc_key_value(t_key_value *for_re, char* new_key, void *new_value, t_
 	for_re->type = new_type_array;
 	return (1);
 }
-
+/*
+ *	Функция которая проверяет имя и вызывает функцию для обработки значения
+ */
 int				check_value_and_name(t_key_value *for_re, t_token **token)
 {
 	char	*new_key;
@@ -101,6 +102,10 @@ int				check_value_and_name(t_key_value *for_re, t_token **token)
 	return (1);
 }
 
+/*
+ *	функция, которая проверяет валидность объектов
+ */
+
 void		*check_object(t_token **token)
 {
 	t_key_value		*for_re;
@@ -140,7 +145,4 @@ void		*check_object(t_token **token)
 	}
 	return (*token);
 }
-
-//проверить "{" и на  в самом начале (до этой функции)
-//считается ли {} null или нет
 //что делать если   token == 0
