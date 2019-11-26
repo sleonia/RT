@@ -6,7 +6,7 @@
 /*   By: deladia <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/07 22:54:41 by deladia           #+#    #+#             */
-/*   Updated: 2019/11/11 10:44:47 by thorker          ###   ########.fr       */
+/*   Updated: 2019/11/26 14:36:34 by thorker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,11 @@ int		main(void)
 {
 	t_key_value		*tmp;
 	t_token			*token;
+	t_token			*head_token;
 
 	tmp = NULL;
-	token = ft_open("../../test.json");
+	token = ft_open("test.json");
+	head_token = token;
 	if (token == 0)
 		return (0);
 	if (ft_strcmp(token->value, "{") == 0)
@@ -48,7 +50,14 @@ int		main(void)
 		ft_error("токен равен тмп");
 	}
 	ft_print(tmp);
+	while (head_token != 0)
+	{
+		token = head_token->next;
+		ft_putendl(head_token->value);
+		free(head_token->value);
+		free(head_token);
+		head_token = token;		
+	}
 	//возвращается указатель на последний token
-//	free_token(&token);
 	return (0);
 }
