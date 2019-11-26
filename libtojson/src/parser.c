@@ -6,7 +6,7 @@
 /*   By: deladia <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/26 20:44:57 by deladia           #+#    #+#             */
-/*   Updated: 2019/11/11 10:44:59 by thorker          ###   ########.fr       */
+/*   Updated: 2019/11/26 15:38:36 by thorker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,7 @@ t_token 			*ft_open(char *file)
 			break ;
 		token_head = token_head->next;
 	}*/
+	close(fd);
 	return (token_head);
 }
 //объекты -> свойства -> параметры

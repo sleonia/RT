@@ -6,7 +6,7 @@
 /*   By: thorker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/04 01:50:08 by thorker           #+#    #+#             */
-/*   Updated: 2019/11/11 10:00:24 by thorker          ###   ########.fr       */
+/*   Updated: 2019/11/26 15:02:25 by thorker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define TO_JSON_H
 
 #include "libft.h"
+#include <fcntl.h>
 
 typedef enum			e_type
 {
