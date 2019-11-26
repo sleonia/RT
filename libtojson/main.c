@@ -6,7 +6,7 @@
 /*   By: deladia <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/07 22:54:41 by deladia           #+#    #+#             */
-/*   Updated: 2019/11/26 17:14:12 by thorker          ###   ########.fr       */
+/*   Updated: 2019/11/26 19:33:00 by thorker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int		main(void)
 	int 		number;
 
 //	tmp = parse_json("../../../param.json");
-	tmp = parse_json("../../test.json");
+	tmp = parse_json("test.json");
 	ret = get_int(tmp, "angle_a", &number);
 	printf("ret = %d value = %d\n", ret, number);
 	ft_print(tmp);

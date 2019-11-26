@@ -6,7 +6,7 @@
 #    By: deladia <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/07 20:57:04 by deladia           #+#    #+#              #
-#    Updated: 2019/11/26 17:17:48 by thorker          ###   ########.fr        #
+#    Updated: 2019/11/26 19:33:12 by thorker          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ OBJ_DIR = object
 LIB_DIR	= ../libft
 LIB = -L $(LIB_DIR)/ -lft
 SRC = realloc_key_value.c get_int.c parse_json.c tree.c ft_error.c helps.c parser.c ft_return.c ft_print.c creation_token_list.c
-FLAG = -Wall -Wextra -Werror
+FLAG = -Wall -Wextra -Werror -g
 OBJ = $(addprefix $(OBJ_DIR)/, $(SRC:.c=.o))
 
 $(NAME): cr_obj_dir $(OBJ_DIR) $(OBJ)
