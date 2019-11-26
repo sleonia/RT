@@ -68,7 +68,7 @@ t_return	closest_intersection(t_pos *o, t_pos *d, double t_min, double t_max, t_
 	ret.closest_object = NULL;
 	tmp = obj;
 	i = 0;
-	while (tmp[i])
+	while (i < 4)
 	{
 		res = get_intersect(o, d, tmp[i]);
 		if (res.t1 >= t_min && res.t1 <= t_max && res.t1 < ret.closest_t)

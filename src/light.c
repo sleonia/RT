@@ -70,7 +70,7 @@ double		computer_lighting(t_pos *p, t_pos *n, t_pos *v, int specular, t_scene *s
 	tmp = scene->light;
 	//костыль чтобы занулить l
 	l = vector_on_number(&l, 0);
-	while (tmp[i])
+	while (i < 3)
 	{
 		if (tmp[i]->type == 'A' && !scene->off->ambient)
 			intens += tmp[i]->intensity;
