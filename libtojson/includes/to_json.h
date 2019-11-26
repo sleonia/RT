@@ -6,15 +6,16 @@
 /*   By: thorker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/04 01:50:08 by thorker           #+#    #+#             */
-/*   Updated: 2019/11/26 16:50:34 by thorker          ###   ########.fr       */
+/*   Updated: 2019/11/26 16:59:17 by thorker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef TO_JSON_H
 # define TO_JSON_H
-
+# define WRONG_TYPE -1
+# define NOT_FOUND -2
+# define WRONG_CONTAINER -3
 #include "libft.h"
-#include <fcntl.h>
 
 typedef enum			e_type
 {
