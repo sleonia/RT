@@ -101,7 +101,6 @@ typedef struct			s_object
 	int					color;
 	int					specular;
 	double				reflective;
-	struct s_object		*next;
 }						t_object;
 
 typedef struct			s_return
