@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: thorker <marvin@42.fr>                     +#+  +:+       +#+         #
+#    By: ccriston <ccriston@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/31 15:32:23 by thorker           #+#    #+#              #
-#    Updated: 2019/11/26 20:09:48 by deladia          ###   ########.fr        #
+#    Updated: 2019/11/28 16:11:55 by ccriston         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ SRC_DIR = src
 OBJ_DIR = objects
 LIB_DIR = ./libft
 FRWR_DIR = ./framework
-SRC = sdl.c helps.c light.c main.c normals.c
+SRC = sdl.c helps.c light.c main.c normals.c plane.c
 INC = -I ./libft/includes/ \
 	  -I ./includes \
 	  -I $(FRWR_DIR)/SDL2.framework/Versions/A/Headers
