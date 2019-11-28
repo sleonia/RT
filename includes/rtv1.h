@@ -6,7 +6,7 @@
 /*   By: ccriston <ccriston@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/25 21:18:10 by deladia           #+#    #+#             */
-/*   Updated: 2019/11/28 18:33:01 by ccriston         ###   ########.fr       */
+/*   Updated: 2019/11/28 18:49:21 by ccriston         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ typedef struct 			s_cone
 {
 	t_pos				center;
 	t_pos				axis;
-	double				radius;
+	double				tan;
 }						t_cone;
 
 typedef struct 			s_plane
@@ -129,11 +129,11 @@ typedef struct			s_cylinder_params
 typedef struct			s_cone_params
 {
 	t_pos				pos;
-	double				radius;
+	t_pos				axis;
+	double				tan;
 	int					color;
 	int					specular;
 	double				reflective;
-	t_pos				axis;
 }						t_cone_params;
 
 typedef struct			s_plane_params
@@ -229,5 +229,6 @@ t_pos					get_obj_normal(t_pos *p, t_return *ret, t_pos *o, t_pos *d);
 
 t_result intersect_ray_plane(t_pos *cam, t_pos *view, t_plane *pl);
 t_result    intersect_ray_cylinder(t_pos *o, t_pos *d, t_cylinder *cyl);
+t_result    intersect_ray_cone(t_pos *o, t_pos *d, t_cone *cone);
 
 #endif

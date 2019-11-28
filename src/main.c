@@ -6,7 +6,7 @@
 /*   By: ccriston <ccriston@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/24 12:57:07 by deladia           #+#    #+#             */
-/*   Updated: 2019/11/28 18:31:07 by ccriston         ###   ########.fr       */
+/*   Updated: 2019/11/28 18:53:10 by ccriston         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,8 @@ t_result	get_intersect(t_pos *o, t_pos *d, t_object *obj)
 		return (intersect_ray_sphere(o, d, &obj->objects->sphere));
 	else if (obj->type == o_plane)
 		return (intersect_ray_plane(o, d, &obj->objects->plane));
-//	else if (obj->type == o_cone)
-//		return (intersect_ray_cone(o, d, &obj->objects->cone));
+	else if (obj->type == o_cone)
+		return (intersect_ray_cone(o, d, &obj->objects->cone));
 	else
 		return (intersect_ray_cylinder(o, d, &obj->objects->cylinder));
 }
@@ -68,7 +68,7 @@ t_return	closest_intersection(t_pos *o, t_pos *d, double t_min, double t_max, t_
 	ret.closest_object = NULL;
 	tmp = obj;
 	i = 0;
-	while (i < 6)
+	while (i < 7)
 	{
 		res = get_intersect(o, d, tmp[i]);
 		if (res.t1 >= t_min && res.t1 <= t_max && res.t1 < ret.closest_t)
@@ -267,30 +267,44 @@ void		init_cylinder_param(t_object *obj, t_cylinder_params params)
 	obj->objects->cylinder.radius = params.radius;
 }
 
+void		init_cone_param(t_object *obj, t_cone_params params)
+{
+	obj->type = o_cone;
+	obj->color = params.color;
+	obj->reflective = params.reflective;
+	obj->specular = params.specular;
+	obj->objects->cone.center = params.pos;
+	obj->objects->cone.axis = params.axis;
+	obj->objects->cone.tan = params.tan;
+}
+
 t_object	**init_object(void)
 {
 	t_object	**object;
 
-	object = (t_object **)ft_memalloc(sizeof(t_object *) * 6);
+	object = (t_object **)ft_memalloc(sizeof(t_object *) * 7);
 	object[0] = (t_object *)ft_memalloc(sizeof(t_object));
 	object[1] = (t_object *)ft_memalloc(sizeof(t_object));
 	object[2] = (t_object *)ft_memalloc(sizeof(t_object));
 	object[3] = (t_object *)ft_memalloc(sizeof(t_object));
 	object[4] = (t_object *)ft_memalloc(sizeof(t_object));
 	object[5] = (t_object *)ft_memalloc(sizeof(t_object));
-
+	object[6] = (t_object *)ft_memalloc(sizeof(t_object));
+	
 	object[0]->objects = (union u_objects *)ft_memalloc(sizeof(union u_objects));
 	object[1]->objects = (union u_objects *)ft_memalloc(sizeof(union u_objects));
 	object[2]->objects = (union u_objects *)ft_memalloc(sizeof(union u_objects));
 	object[3]->objects = (union u_objects *)ft_memalloc(sizeof(union u_objects));
 	object[4]->objects = (union u_objects *)ft_memalloc(sizeof(union u_objects));
 	object[5]->objects = (union u_objects *)ft_memalloc(sizeof(union u_objects));
+	object[6]->objects = (union u_objects *)ft_memalloc(sizeof(union u_objects));
 	init_sphere_param(object[0], (t_sphere_params){{0, -1, 3}, 1.0, 0xFF0000, 500, 0.2});
 	init_sphere_param(object[1], (t_sphere_params){{2, 0, 4}, 1.0, 0x0000FF, 500, 0.3});
 	init_sphere_param(object[2], (t_sphere_params){{-2, 0, 4}, 1.0, 0x00FF00, 10, 0.4});
 	init_sphere_param(object[3], (t_sphere_params){{0, -5001, 0}, 5000.0, 0xFFFF00, 1000, 0.5});
 	init_plane_param(object[4], (t_plane_params){{0, 0, 26}, 0x0000FF, 500, 0.4, {0, 0, 1}});
-	init_cylinder_param(object[5], (t_cylinder_params){{0, 2, 5},{0, 1, 0}, 0.1, 0xFFFFF0, 500, 0.4});
+	init_cylinder_param(object[5], (t_cylinder_params){{0, 2, 5},{1, 0, 0}, 0.1, 0xFFFFF0, 500, 0.4});
+	init_cone_param(object[6], (t_cone_params){{0, 3, 5},{0, 1, 0}, 0.2, 0xFF00FF, 500, 0.4});
 	return (object);
 }
 

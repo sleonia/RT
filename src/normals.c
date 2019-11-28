@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   normals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: deladia <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: ccriston <ccriston@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/26 19:35:12 by deladia           #+#    #+#             */
-/*   Updated: 2019/11/26 19:35:14 by deladia          ###   ########.fr       */
+/*   Updated: 2019/11/28 18:51:04 by ccriston         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ t_pos	get_cone_normal(t_pos *start_ray, t_pos *ray, t_cone *obj,
 	oc = vector_minus(start_ray, &obj->center);
 	m = dot(ray, &obj->axis) * intersect_dist + dot(&oc, &obj->axis);
 	ret_normal = v_minus(v_plus(vector_on_number(ray, intersect_dist), oc),
-						 vector_on_number(&obj->axis, (1 + obj->radius * obj->radius) * m));
+						 vector_on_number(&obj->axis, (1 + obj->tan * obj->tan) * m));
 	return (ret_normal);
 }
 
