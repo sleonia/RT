@@ -6,40 +6,15 @@
 /*   By: deladia <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/03 20:55:14 by delalia           #+#    #+#             */
-/*   Updated: 2019/11/28 22:31:17 by thorker          ###   ########.fr       */
+/*   Updated: 2019/11/28 23:45:07 by thorker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "to_json.h"
 
-char				*create_string(char *str)
-{
-	char	*new_key;
-	size_t	k;
-	size_t	i;
-
-	k = 0;
-	i = 0;
-	while (*(str + k) != 0)
-	{
-		if (*(str + k) != '\\')
-			i++;
-		else if (*(str + ++k) == 0)
-			return (0);
-		k++;
-	}
-	if ((new_key = ft_strnew(i)) == 0)
-		return (0);
-	i = 0;
-	k = 0;
-	while (*(str + k) != 0)
-	{
-		if (*(str + k) == '\\')
-			k++;
-		*(new_key + i++) = *(str + k++);
-	}
-	return (new_key);
-}
+/*
+** проверка имени и создание его
+*/
 
 char				*check_key(t_token **token)
 {
@@ -47,7 +22,7 @@ char				*check_key(t_token **token)
 
 	if ((*token = (*token)->next) == 0)
 		return (0);
-	if ((new_key = create_string((*token)->value)) == 0)
+	if ((new_key = make_string((*token)->value)) == 0)
 		return (0);
 	if ((*token = (*token)->next) == 0 ||
 			ft_strcmp((*token)->value, "\"") != 0 ||
@@ -74,11 +49,7 @@ int					check_value_and_name(t_key_value *for_re, t_token **token)
 	new_type = 0;
 	if ((new_key = check_key(token)) == 0)
 		return (0);
-	if (ft_str_isdigit((*token)->value) != 0)
-	{
-		if ((new_value = check_digit(token)) != *token)
-			new_type = Dec;
-	}
+	new_value = check_value(token, &new_type);
 	if (new_type == 0)
 	{
 		ft_strdel(&new_key);
@@ -124,7 +95,7 @@ static t_key_value	*create_empty_struct(void)
 **	функция, которая проверяет валидность объектов
 */
 
-void				*check_object(t_token **token)
+void				*make_object(t_token **token)
 {
 	t_key_value		*for_re;
 
