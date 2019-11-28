@@ -6,13 +6,13 @@
 /*   By: thorker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/11 05:48:25 by thorker           #+#    #+#             */
-/*   Updated: 2019/11/28 21:38:08 by thorker          ###   ########.fr       */
+/*   Updated: 2019/11/28 22:01:02 by thorker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "to_json.h"
 
-int		ft_str_isdigit(char	*str)
+int		ft_str_isdigit(char *str)
 {
 	size_t	i;
 
