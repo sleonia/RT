@@ -171,7 +171,7 @@ typedef struct			s_scene
 	t_light_off			*off;
 }						t_scene;
 
-typedef struct		s_cl
+typedef struct			s_cl
 {
 	cl_platform_id		platform_id;
 	cl_uint				ret_num_platforms;
