@@ -6,7 +6,7 @@
 /*   By: ccriston <ccriston@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/24 12:57:07 by deladia           #+#    #+#             */
-/*   Updated: 2019/11/28 18:53:10 by ccriston         ###   ########.fr       */
+/*   Updated: 2019/11/28 21:09:24 by ccriston         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -258,23 +258,43 @@ void		init_plane_param(t_object *obj, t_plane_params params)
 
 void		init_cylinder_param(t_object *obj, t_cylinder_params params)
 {
+	double	len;
+	
 	obj->type = o_cylinder;
 	obj->color = params.color;
 	obj->reflective = params.reflective;
 	obj->specular = params.specular;
 	obj->objects->cylinder.center = params.pos;
-	obj->objects->cylinder.axis = params.axis;
+	len = vector_len(&params.axis);
+	if (len == 1)
+	 	obj->objects->cylinder.axis = params.axis;
+	else if (len != 0)
+	{
+		obj->objects->cylinder.axis.x = params.axis.x / len;
+		obj->objects->cylinder.axis.y = params.axis.y / len;
+		obj->objects->cylinder.axis.z = params.axis.z / len;
+	}
 	obj->objects->cylinder.radius = params.radius;
 }
 
 void		init_cone_param(t_object *obj, t_cone_params params)
 {
+	double	len;
+	
 	obj->type = o_cone;
 	obj->color = params.color;
 	obj->reflective = params.reflective;
 	obj->specular = params.specular;
 	obj->objects->cone.center = params.pos;
-	obj->objects->cone.axis = params.axis;
+	len = vector_len(&params.axis);
+	if (len == 1)
+	 	obj->objects->cylinder.axis = params.axis;
+	else if (len != 0)
+	{
+		obj->objects->cylinder.axis.x = params.axis.x / len;
+		obj->objects->cylinder.axis.y = params.axis.y / len;
+		obj->objects->cylinder.axis.z = params.axis.z / len;
+	}
 	obj->objects->cone.tan = params.tan;
 }
 
@@ -303,7 +323,7 @@ t_object	**init_object(void)
 	init_sphere_param(object[2], (t_sphere_params){{-2, 0, 4}, 1.0, 0x00FF00, 10, 0.4});
 	init_sphere_param(object[3], (t_sphere_params){{0, -5001, 0}, 5000.0, 0xFFFF00, 1000, 0.5});
 	init_plane_param(object[4], (t_plane_params){{0, 0, 26}, 0x0000FF, 500, 0.4, {0, 0, 1}});
-	init_cylinder_param(object[5], (t_cylinder_params){{0, 2, 5},{1, 0, 0}, 0.1, 0xFFFFF0, 500, 0.4});
+	init_cylinder_param(object[5], (t_cylinder_params){{0, 2, 5},{1, 0.5, 0}, 0.1, 0xFFFFF0, 500, 0.4});
 	init_cone_param(object[6], (t_cone_params){{0, 3, 5},{0, 1, 0}, 0.2, 0xFF00FF, 500, 0.4});
 	return (object);
 }
