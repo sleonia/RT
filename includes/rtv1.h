@@ -6,7 +6,7 @@
 /*   By: ccriston <ccriston@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/25 21:18:10 by deladia           #+#    #+#             */
-/*   Updated: 2019/11/28 16:12:40 by ccriston         ###   ########.fr       */
+/*   Updated: 2019/11/28 18:33:01 by ccriston         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -228,5 +228,6 @@ t_pos					v_plus(t_pos v1, t_pos v2);
 t_pos					get_obj_normal(t_pos *p, t_return *ret, t_pos *o, t_pos *d);
 
 t_result intersect_ray_plane(t_pos *cam, t_pos *view, t_plane *pl);
+t_result    intersect_ray_cylinder(t_pos *o, t_pos *d, t_cylinder *cyl);
 
 #endif

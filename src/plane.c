@@ -41,28 +41,14 @@
 /*провеяет, лежит ли точка в плоскости*/
 t_result intersect_ray_plane(t_pos *cam, t_pos *view, t_plane *pl) //view - точка экрана
 {
-    double  a;
-    double  b;
-    double  c;
-    double  d;
     double  t;
-    t_pos   i; // точка пересечения луча, выходящего из камеры и проходящего через плоскость проектирования, с плоскосьтю
+    t_pos   oc;
+    t_pos   min;
     t_result res;
 
-    a = pl->normal.x;
-    b = pl->normal.y;
-    c = pl->normal.z;
-    d = -(a * pl->center.x + b * pl->center.y + c * pl->center.z);
-    t = (a * cam->x + b * cam->y + c * cam->z + d) / 
-        (a * cam->x - a * view->x + b * cam->y - b * view->y + 
-        c * cam->z - c * view->z);
-    // i.x = (1 - t) * cam->x + t * view->x;
-    // i.y = (1 - t) * cam->y + t * view->y;
-    // i.z = (1 - t) * cam->z + t * view->z; //проверка координат (?)
-    // if (t >= 0 || (a * i.x + b * i.y + c * i.z + d != 0)) // (???) t может быть от 0 до +беск или от 0 до 1?
-    // {
-    //     t = INFINITY;
-    // }
+    oc = vector_minus(cam,&pl->center);
+    min = vector_on_number(&oc,-1);
+    t = dot(&min,&pl->normal) / dot(view,&pl->normal);
     res.t1 = t;
     res.t2 = INFINITY;
     return (res); 
