@@ -6,7 +6,7 @@
 /*   By: thorker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/04 01:50:08 by thorker           #+#    #+#             */
-/*   Updated: 2019/11/26 19:28:20 by thorker          ###   ########.fr       */
+/*   Updated: 2019/11/28 21:50:33 by deladia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 # define WRONG_TYPE -1
 # define NOT_FOUND -2
 # define WRONG_CONTAINER -3
-#include "libft.h"
+# include "libft.h"
 
 typedef enum			e_type
 {
@@ -41,7 +41,8 @@ typedef struct			s_token
 	struct s_token		*next;
 }						t_token;
 
-int						realloc_key_value(t_key_value *for_re, char* new_key, void *new_value, t_type new_type);
+int						realloc_key_value(t_key_value *for_re, char *new_key,
+		void *new_value, t_type new_type);
 int						get_int(t_key_value *node, char	*name, int *container);
 t_key_value				*parse_json(char *file_name);
 t_token					*ft_open(char *file);
@@ -50,6 +51,6 @@ void					ft_return(t_key_value **tree);
 void					ft_print(t_key_value *tree);
 t_token					*create_token(char *word, t_token *token);
 void					ft_error(char *str);
-void     				*check_digit(t_token **token);
-int     				ft_str_isdigit(char *str);
+void					*check_digit(t_token **token);
+int						ft_str_isdigit(char *str);
 #endif

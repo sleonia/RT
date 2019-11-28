@@ -6,32 +6,32 @@
 /*   By: deladia <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/06 21:54:38 by deladia           #+#    #+#             */
-/*   Updated: 2019/11/26 17:12:37 by thorker          ###   ########.fr       */
+/*   Updated: 2019/11/28 21:58:24 by deladia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "to_json.h"
 
-void 	ft_return(t_key_value **tree)
+void	ft_return(t_key_value **tree)
 {
-	int 	i;
-	int 	len;
+	int		i;
+	int		len;
 
 	i = 0;
-	while((*tree)->key[i])
+	while ((*tree)->key[i])
 	{
 		free((*tree)->key[i]);
 		*((*tree)->key + i++) = 0;
 	}
 	free((*tree)->key);
-	len = i;
-	i = 0;
-	while (i < len)
+	while (--i >= 0)
 	{
 		if ((*tree)->value == NULL)
 			continue ;
+		if ((*tree)->type == Object)
+			ft_return((*tree)->value);
 		free((*tree)->value[i]);
-		*((*tree)->value + i++) = 0;
+		*((*tree)->value + i) = 0;
 	}
 	free((*tree)->value);
 	(*tree)->value = 0;
@@ -40,5 +40,7 @@ void 	ft_return(t_key_value **tree)
 	free(*tree);
 	*tree = 0;
 }
-// а что если в валуе находится структура
 
+/*
+** добавить чистку маcсива когда она будет
+*/

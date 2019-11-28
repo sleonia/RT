@@ -6,18 +6,18 @@
 /*   By: deladia <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/26 20:44:57 by deladia           #+#    #+#             */
-/*   Updated: 2019/11/26 15:38:36 by thorker          ###   ########.fr       */
+/*   Updated: 2019/11/28 22:05:07 by deladia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "to_json.h"
 
-int 			word_len(char *line)
+int			word_len(char *line)
 {
-	int 		len;
+	int		len;
 
 	len = 0;
-	while(line[len] != '\0' && line[len] != ' ' && line[len] != '\t')
+	while (line[len] != '\0' && line[len] != ' ' && line[len] != '\t')
 	{
 		len++;
 		if (line[len - 1] == '{')
@@ -40,11 +40,11 @@ int 			word_len(char *line)
 	return (len);
 }
 
-char 			*create_word(char **line)
+char		*create_word(char **line)
 {
-	char 		*word;
-	int 		i;
-	int 		len;
+	char	*word;
+	int		i;
+	int		len;
 
 	i = 0;
 	while (**line == ' ' || **line == '\t')
@@ -52,7 +52,7 @@ char 			*create_word(char **line)
 	len = word_len(*line);
 	if (!(word = (char *)ft_memalloc(sizeof(char) * len + 1)))
 		ft_error("Memory not allocated (for word)");
-	while(len-- > 0)
+	while (len-- > 0)
 	{
 		word[i] = **line;
 		i++;
@@ -67,17 +67,15 @@ char 			*create_word(char **line)
 ** 		возвращает указатель на последний добавленный token
 */
 
-t_token			*parse(char *line, t_token *token)
+t_token		*parse(char *line, t_token *token)
 {
-	char 	*word;
+	char	*word;
 
-	while(*line != '\0')
+	while (*line != '\0')
 	{
 		word = create_word(&line);
 		token = create_token(word, token);
-//		printf("%s\n", word);
 		free(word);
-//		line++;
 	}
 	return (token);
 }
@@ -86,12 +84,12 @@ t_token			*parse(char *line, t_token *token)
 ** 		Открывает json создает указатель на первый токен token_head
 ** 		Читает гнлом построчно и каждую строку сразу отправляет в parse
 ** 		Затем вызывает проверку на валидность последовательности токенов
- */
+*/
 
-t_token 			*ft_open(char *file)
+t_token		*ft_open(char *file)
 {
 	ssize_t			fd;
-	char 			*line;
+	char			*line;
 	t_token			*token_head;
 	t_token			*token_tmp;
 
@@ -105,29 +103,6 @@ t_token 			*ft_open(char *file)
 		token_tmp = parse(line, token_tmp);
 		free(line);
 	}
-	/*	
-	while (token_head)
-	{
-		printf("%s\n", token_head->value);
-		if (!token_head->next)
-			break ;
-		token_head = token_head->next;
-	}*/
 	close(fd);
 	return (token_head);
 }
-//объекты -> свойства -> параметры
-//для фигуо объект -> фигура -> свойста -> параметры
-// разделитель , .
-//токен float, int, 16-система, {}, ',', id(0, 1, 2...)
-//токен для света тип света
-//каждае ключевое слово в кавычки и двигать поинтер чтобы запомирнать позицию
-//чекать до сепаратора {} ' ' , :
-
-
-
-//написать стандарт документацию
-//строка двойная ковычка
-//использовать буквы как ключевые слова
-//придумать как избавиться от валидных повторов
-//подменять Hex на Id ????удобно ли
