@@ -6,7 +6,7 @@
 /*   By: thorker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/28 22:52:36 by thorker           #+#    #+#             */
-/*   Updated: 2019/11/28 23:48:02 by thorker          ###   ########.fr       */
+/*   Updated: 2019/12/01 02:03:22 by thorker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,27 +42,23 @@ int		ft_str_isdouble(char *str)
 {
 	size_t	i;
 	int		flag;
-	size_t	k;
 
 	if (str == 0)
 		return (0);
 	i = 0;
 	flag = 0;
-	while (*(str + i) == 0)
+	while (*(str + i) != 0)
 	{
 		if (ft_isdigit(*(str + i)) == 0)
 		{
-			if (*(str + i) == '.' && flag == 0 && i != 0)
-			{
+			if (*(str + i) == '.' && flag == 0)
 				flag = 1;
-				k = i;
-			}
 			else
 				return (0);
 		}
 		i++;
 	}
-	if (i == 0 || flag == 0 || i == k)
+	if (i == 0 || flag == 0 || (flag == 1 && i == 1))
 		return (0);
 	return (1);
 }

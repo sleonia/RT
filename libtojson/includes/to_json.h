@@ -6,7 +6,7 @@
 /*   By: thorker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/04 01:50:08 by thorker           #+#    #+#             */
-/*   Updated: 2019/11/28 23:29:36 by thorker          ###   ########.fr       */
+/*   Updated: 2019/12/01 02:17:01 by thorker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,4 +55,6 @@ t_token					*create_token(char *word, t_token *token);
 void					ft_error(char *str);
 void					*make_digit(t_token **token);
 int						ft_str_isdigit(char *str);
+int						ft_str_isdouble(char *str);
+void					*make_double(t_token **token);
 #endif

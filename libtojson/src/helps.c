@@ -6,11 +6,22 @@
 /*   By: thorker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/11 05:48:25 by thorker           #+#    #+#             */
-/*   Updated: 2019/11/28 23:45:53 by thorker          ###   ########.fr       */
+/*   Updated: 2019/12/01 01:56:31 by thorker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "to_json.h"
+
+void	*make_double(t_token **token)
+{
+	double *new_value;
+
+	if ((new_value = (double*)malloc(sizeof(double))) == 0)
+		return (*token);
+	*new_value = ft_atof((*token)->value);
+	*token = (*token)->next;
+	return ((void*)new_value);
+}
 
 /*
 ** создает число и двигает токен

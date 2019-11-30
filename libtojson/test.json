@@ -3,5 +3,10 @@
 		"angle_a":				11,
 		"ang\\le_b":			13,
 		"test":					"sdfjdfgn",
-		"newtest":				"fjjfffff"
+		"newtest":				"fjjffs\\\tff",
+		"another_test":			.2,
+		"test_object":			{
+			"first_position":	1,
+			"second_pos":		"СЮДАААААА"
+		}
 }

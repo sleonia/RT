@@ -6,7 +6,7 @@
 /*   By: thorker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/28 22:37:18 by thorker           #+#    #+#             */
-/*   Updated: 2019/11/28 23:44:34 by thorker          ###   ########.fr       */
+/*   Updated: 2019/12/01 02:16:58 by thorker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,5 +33,15 @@ void	*check_value(t_token **token, t_type *type)
 		*type = String;
 		*token = (*token)->next->next;
 	}
+	else if (ft_str_isdouble((*token)->value) != 0)
+	{
+		if ((new_value = make_double(token)) != *token)
+			*type = Doub;
+	}
+	else if ((new_value = make_object(token)) != *token)
+		*type = Object;
+	else
+		ft_putendl((*token)->value);
 	return (new_value);
 }
+//соединить ли is digit и make digit

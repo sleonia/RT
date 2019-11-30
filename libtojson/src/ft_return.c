@@ -6,7 +6,7 @@
 /*   By: deladia <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/06 21:54:38 by deladia           #+#    #+#             */
-/*   Updated: 2019/11/28 23:46:15 by thorker          ###   ########.fr       */
+/*   Updated: 2019/12/01 02:43:44 by thorker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	ft_return(t_key_value **tree)
 		if ((*tree)->value[i] == NULL)
 			continue ;
 		if ((*tree)->type[i] == Object)
-			ft_return((t_key_value**)(*tree)->value);
+			ft_return((t_key_value**)((*tree)->value + i));
 		else
 			free((*tree)->value[i]);
 		*((*tree)->value + i) = 0;

@@ -6,7 +6,7 @@
 /*   By: deladia <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/03 20:55:14 by delalia           #+#    #+#             */
-/*   Updated: 2019/11/28 23:45:07 by thorker          ###   ########.fr       */
+/*   Updated: 2019/12/01 02:19:04 by thorker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,8 @@ int					check_value_and_name(t_key_value *for_re, t_token **token)
 		ft_strdel(&new_key);
 		return (0);
 	}
-	else if (realloc_key_value(for_re, new_key, new_value, new_type) == 0)
+	else if (*token == 0 || realloc_key_value(for_re, new_key,
+				new_value, new_type) == 0)
 	{
 		ft_strdel(&new_key);
 		free(new_value);
@@ -122,3 +123,4 @@ void				*make_object(t_token **token)
 	ft_return(&for_re);
 	return (*token);
 }
+//если возращаем null в make object нужно ли менять тип на NULL
