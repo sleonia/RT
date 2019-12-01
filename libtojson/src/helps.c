@@ -6,7 +6,7 @@
 /*   By: thorker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/11 05:48:25 by thorker           #+#    #+#             */
-/*   Updated: 2019/12/01 01:56:31 by thorker          ###   ########.fr       */
+/*   Updated: 2019/12/01 03:21:57 by thorker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,11 +52,10 @@ char	*make_string(char *str)
 	i = 0;
 	while (*(str + k) != 0)
 	{
-		if (*(str + k) != '\\')
-			i++;
-		else if (*(str + ++k) == 0)
+		if (*(str + k) == '\\' && *(str + ++k) == 0)
 			return (0);
 		k++;
+		i++;
 	}
 	if ((new_key = ft_strnew(i)) == 0)
 		return (0);

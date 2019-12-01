@@ -8,5 +8,11 @@
 		"test_object":			{
 			"first_position":	1,
 			"second_pos":		"СЮДАААААА"
+		},
+		"another_test_object":	{
+			"another_object":	{
+				"not":			1
+			},
+			"hy":				"not_empty"
 		}
 }

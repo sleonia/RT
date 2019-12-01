@@ -6,7 +6,7 @@
 /*   By: deladia <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/03 20:55:14 by delalia           #+#    #+#             */
-/*   Updated: 2019/12/01 02:19:04 by thorker          ###   ########.fr       */
+/*   Updated: 2019/12/01 03:13:29 by thorker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,7 @@ void				*make_object(t_token **token)
 {
 	t_key_value		*for_re;
 
+	//добавить переход на след токен
 	if ((*token = (*token)->next) != 0 && ft_strcmp((*token)->value, "}") == 0)
 		return (0);
 	else if ((for_re = create_empty_struct()) == 0)
@@ -117,7 +118,10 @@ void				*make_object(t_token **token)
 			}
 		}
 		if (ft_strcmp((*token)->value, "}") == 0)
+		{
+			*token = (*token)->next;
 			return (for_re);
+		}
 		break ;
 	}
 	ft_return(&for_re);
