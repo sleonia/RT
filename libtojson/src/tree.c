@@ -6,40 +6,15 @@
 /*   By: deladia <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/03 20:55:14 by delalia           #+#    #+#             */
-/*   Updated: 2019/11/28 21:31:31 by thorker          ###   ########.fr       */
+/*   Updated: 2019/12/01 03:13:29 by thorker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "to_json.h"
 
-char				*create_string(char *str)
-{
-	char	*new_key;
-	size_t	k;
-	size_t	i;
-
-	k = 0;
-	i = 0;
-	while (*(str + k) != 0)
-	{
-		if (*(str + k) != '\\')
-			i++;
-		else if (*(str + ++k) == 0)
-			return (0);
-		k++;
-	}
-	if ((new_key = ft_strnew(i)) == 0)
-		return (0);
-	i = 0;
-	k = 0;
-	while (*(str + k) != 0)
-	{
-		if (*(str + k) == '\\')
-			k++;
-		*(new_key + i++) = *(str + k++);
-	}
-	return (new_key);
-}
+/*
+** проверка имени и создание его
+*/
 
 char				*check_key(t_token **token)
 {
@@ -47,7 +22,7 @@ char				*check_key(t_token **token)
 
 	if ((*token = (*token)->next) == 0)
 		return (0);
-	if ((new_key = create_string((*token)->value)) == 0)
+	if ((new_key = make_string((*token)->value)) == 0)
 		return (0);
 	if ((*token = (*token)->next) == 0 ||
 			ft_strcmp((*token)->value, "\"") != 0 ||
@@ -74,17 +49,14 @@ int					check_value_and_name(t_key_value *for_re, t_token **token)
 	new_type = 0;
 	if ((new_key = check_key(token)) == 0)
 		return (0);
-	if (ft_str_isdigit((*token)->value) != 0)
-	{
-		if ((new_value = check_digit(token)) != *token)
-			new_type = Dec;
-	}
+	new_value = check_value(token, &new_type);
 	if (new_type == 0)
 	{
 		ft_strdel(&new_key);
 		return (0);
 	}
-	else if (realloc_key_value(for_re, new_key, new_value, new_type) == 0)
+	else if (*token == 0 || realloc_key_value(for_re, new_key,
+				new_value, new_type) == 0)
 	{
 		ft_strdel(&new_key);
 		free(new_value);
@@ -124,10 +96,11 @@ static t_key_value	*create_empty_struct(void)
 **	функция, которая проверяет валидность объектов
 */
 
-void				*check_object(t_token **token)
+void				*make_object(t_token **token)
 {
 	t_key_value		*for_re;
 
+	//добавить переход на след токен
 	if ((*token = (*token)->next) != 0 && ft_strcmp((*token)->value, "}") == 0)
 		return (0);
 	else if ((for_re = create_empty_struct()) == 0)
@@ -145,9 +118,13 @@ void				*check_object(t_token **token)
 			}
 		}
 		if (ft_strcmp((*token)->value, "}") == 0)
+		{
+			*token = (*token)->next;
 			return (for_re);
+		}
 		break ;
 	}
 	ft_return(&for_re);
 	return (*token);
 }
+//если возращаем null в make object нужно ли менять тип на NULL

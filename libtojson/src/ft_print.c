@@ -6,11 +6,15 @@
 /*   By: deladia <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/06 23:27:09 by deladia           #+#    #+#             */
-/*   Updated: 2019/11/28 22:08:06 by deladia          ###   ########.fr       */
+/*   Updated: 2019/12/01 02:54:51 by thorker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "to_json.h"
+
+/*
+** функция для печати всего дерева
+*/
 
 void		ft_print(t_key_value *tree)
 {
@@ -36,7 +40,11 @@ void		ft_print(t_key_value *tree)
 			printf("key: %s\nvalue: NULL\n", tree->key[i]);
 		}
 		else if (tree->type[i] == Object)
+		{
+			printf("key: %s\nvalue:{\n", tree->key[i]);
 			ft_print((t_key_value*)tree->value[i]);
+			printf("}\n");
+		}
 		i++;
 	}
 }

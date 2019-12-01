@@ -1,5 +1,18 @@
 {
 		"position":				10,
 		"angle_a":				11,
-		"ang\\le_b":			13
+		"ang\\le_b":			13,
+		"test":					"sdfjdfgn",
+		"newtest":				"fjjffs\\\tff",
+		"another_test":			.2,
+		"test_object":			{
+			"first_position":	1,
+			"second_pos":		"СЮДАААААА"
+		},
+		"another_test_object":	{
+			"another_object":	{
+				"not":			1
+			},
+			"hy":				"not_empty"
+		}
 }
