@@ -226,9 +226,7 @@ t_pos					*matrix_on_vector(double a, double b, t_pos *vec);
 t_pos					v_minus(t_pos v1, t_pos v2);
 t_pos					v_plus(t_pos v1, t_pos v2);
 t_pos					get_obj_normal(t_pos *p, t_return *ret, t_pos *o, t_pos *d);
-
-t_result intersect_ray_plane(t_pos *cam, t_pos *view, t_plane *pl);
-t_result    intersect_ray_cylinder(t_pos *o, t_pos *d, t_cylinder *cyl);
-t_result    intersect_ray_cone(t_pos *o, t_pos *d, t_cone *cone);
+void                    func_error(int err);
+t_result				get_intersect(t_pos *o, t_pos *d, t_object *obj);
 
 #endif

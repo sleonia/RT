@@ -12,51 +12,6 @@
 
 #include "rtv1.h"
 
-/*
-** 		Решает квадратное уравнение и возвращает два корня если есть, если нет то INF
-*/
-
-t_result	intersect_ray_sphere(t_pos *o, t_pos *d, t_sphere *sphere)
-{
-	t_pos		oc;
-	double		k1;
-	double		k2;
-	double		k3;
-	t_result	res;
-
-
-	oc = vector_minus(o, &sphere->center);
-	k1 = dot(d, d);
-	k2 = 2 * dot(&oc, d);
-	k3 = dot(&oc, &oc) - sphere->radius * sphere->radius;
-	if (k2 * k2 - 4 * k1 * k3 < 0)
-	{
-		res.t1 = INFINITY;
-		res.t2 = INFINITY;
-		return (res);
-	}
-	res.t1 = (-k2 + sqrt(k2 * k2 - 4 * k1 * k3)) / (2 * k1);
-	res.t2 = (-k2 - sqrt(k2 * k2 - 4 * k1 * k3)) / (2 * k1);
-//	printf ("%f %f\n", res->t1, res->t2);
-	return (res);
-}
-
-/*
-** 		Находит ближайшую точку в позиции (x, y) среди всех сфер и возвращает укзатель на сферу и ближайшую точку пересечения
-*/
-
-t_result	get_intersect(t_pos *o, t_pos *d, t_object *obj)
-{
-	if (obj->type == o_sphere)
-		return (intersect_ray_sphere(o, d, &obj->objects->sphere));
-	else if (obj->type == o_plane)
-		return (intersect_ray_plane(o, d, &obj->objects->plane));
-	else if (obj->type == o_cone)
-		return (intersect_ray_cone(o, d, &obj->objects->cone));
-	else
-		return (intersect_ray_cylinder(o, d, &obj->objects->cylinder));
-}
-
 t_return	closest_intersection(t_pos *o, t_pos *d, double t_min, double t_max, t_object **obj)
 {
 	t_result	res;
