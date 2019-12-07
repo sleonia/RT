@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccriston <ccriston@student.42.fr>          +#+  +:+       +#+        */
+/*   By: deladia <deladia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/24 12:57:07 by deladia           #+#    #+#             */
-/*   Updated: 2019/11/28 21:09:24 by ccriston         ###   ########.fr       */
+/*   Updated: 2019/12/07 22:18:18 by deladia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ t_pos		reflect_ray(t_pos *r, t_pos *n)
 	t_pos	b;
 
 	a = vector_on_number(n, 2);
-	b = vector_on_number(&a, dot(r, n));
+	b = vector_on_number(&a, ft_dot(r, n));
 	ret = vector_minus(&b, r);
 	return (ret);
 }
@@ -310,7 +310,11 @@ int			main(void)
 	//инициальзация сфер
 //	rtv1->scene->figure->sphere = init_sphere(rtv1->scene->figure->sphere);
 	rtv1->scene->object = init_object();
-	trace_start(rtv1->sdl, rtv1->scene);
+	// trace_start(rtv1->sdl, rtv1->scene);
+	rtv1->opencl = (t_cl *)ft_memalloc(sizeof(t_cl));
+	read_kernel(rtv1->opencl);
+	create_cl(rtv1->opencl, rtv1->sdl, rtv1->scene);
+	// sdl_control(rtv1->sdl, rtv1->scene);
 	return (0);
 }
 //написать функцию которая вызывает vector_on_number миллион раз и посмотреть время, а потом

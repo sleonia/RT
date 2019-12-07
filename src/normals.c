@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   normals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccriston <ccriston@student.42.fr>          +#+  +:+       +#+        */
+/*   By: deladia <deladia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/26 19:35:12 by deladia           #+#    #+#             */
-/*   Updated: 2019/11/28 18:51:04 by ccriston         ###   ########.fr       */
+/*   Updated: 2019/12/07 22:17:24 by deladia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ t_pos	get_cone_normal(t_pos *start_ray, t_pos *ray, t_cone *obj,
 	double	m;
 
 	oc = vector_minus(start_ray, &obj->center);
-	m = dot(ray, &obj->axis) * intersect_dist + dot(&oc, &obj->axis);
+	m = ft_dot(ray, &obj->axis) * intersect_dist + ft_dot(&oc, &obj->axis);
 	ret_normal = v_minus(v_plus(vector_on_number(ray, intersect_dist), oc),
 						 vector_on_number(&obj->axis, (1 + obj->tan * obj->tan) * m));
 	return (ret_normal);
@@ -32,7 +32,7 @@ t_pos	get_cylinder_normal(t_cylinder *obj, t_pos *intersect_point)
 	t_pos	v;
 
 	v = vector_minus(intersect_point, &obj->center);
-	n = vector_on_number(&obj->axis, dot(&v, &obj->axis));
+	n = vector_on_number(&obj->axis, ft_dot(&v, &obj->axis));
 	n = vector_minus(&v, &n);
 	return (n);
 }

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ccriston <ccriston@student.42.fr>          +#+  +:+       +#+         #
+#    By: deladia <deladia@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/31 15:32:23 by thorker           #+#    #+#              #
-#    Updated: 2019/12/06 19:21:39 by deladia          ###   ########.fr        #
+#    Updated: 2019/12/07 18:58:34 by deladia          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,12 +16,12 @@ SRC_DIR = src
 OBJ_DIR = objects
 LIB_DIR = ./libft
 FRWR_DIR = ./framework
-SRC = sdl.c helps.c light.c main.c normals.c get_intersect.c
+SRC = sdl.c helps.c light.c main.c normals.c get_intersect.c init_opencl.c read_kernel.c errors_for_opencl.c
 INC = -I ./libft/includes/ \
 	  -I ./includes \
 	  -I $(FRWR_DIR)/SDL2.framework/Versions/A/Headers
 LIB = -L $(LIB_DIR)/ -lft
-FRWR = -framework SDL2 -F ./framework
+FRWR = -framework SDL2 -F ./framework -framework OpenCL
 OBJ = $(addprefix $(OBJ_DIR)/, $(SRC:.c=.o))
 
 all: $(NAME)

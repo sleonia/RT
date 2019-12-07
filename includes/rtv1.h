@@ -3,20 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   rtv1.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccriston <ccriston@student.42.fr>          +#+  +:+       +#+        */
+/*   By: deladia <deladia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/25 21:18:10 by deladia           #+#    #+#             */
-/*   Updated: 2019/11/28 18:49:21 by ccriston         ###   ########.fr       */
+/*   Updated: 2019/12/07 22:48:29 by deladia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef RTV1_RTV1_H
 # define RTV1_RTV1_H
 
+# ifndef OPENCL___
 #include "libft.h"
 #include <SDL.h>
-#include <OpenCL/opencl.h>
 #include <math.h>
+#include <OpenCL/opencl.h>
+# endif
 # define WIDTH 1250
 # define HEIGHT 1000
 # define VW 1.25
@@ -170,7 +172,7 @@ typedef struct			s_scene
 	t_object			**object;
 	t_light_off			*off;
 }						t_scene;
-
+# ifndef OPENCL___
 typedef struct			s_cl
 {
 	cl_platform_id		platform_id;
@@ -204,29 +206,35 @@ typedef struct 			s_rtv1
 	t_scene				*scene;
 	//mb something else
 }						t_rtv1;
+# endif
 
+# ifndef OPENCL___
 t_pos					*insert(int x,int y, int z, t_pos *pos);
-t_pos					*canvas_to_viewport(int x, int y, t_pos *pos);
-t_pos					vector_minus(t_pos *o, t_pos	*center);
-double 					dot(t_pos *a, t_pos *b);
 int						sdl_init(t_sdl *sdl);
 int						sdl_control(t_sdl *sdl, t_scene *scene);
-int						*put_pixel(double x, double y, int color, t_sdl *sdl);
-t_pos					vector_pus(t_pos *o, t_pos *center);
-t_pos					vector_on_number(t_pos *o, double nbr);
-t_pos					vector_div(t_pos *o, double nbr);
-double					vector_len(t_pos *o);
-double					computer_lighting(t_pos *p, t_pos *n, t_pos *v, int s, t_scene *scene);
 t_light					**init_light(void);
 void 					ft_error(char *str);
-t_return				closest_intersection(t_pos *o, t_pos *d, double t_min, double t_max, t_object **obj);
 int						trace_start(t_sdl *sdl, t_scene *scene);
-t_pos					*vector_on_vector(t_pos *a, t_pos *b, t_pos *ab);
-t_pos					*matrix_on_vector(double a, double b, t_pos *vec);
-t_pos					v_minus(t_pos v1, t_pos v2);
-t_pos					v_plus(t_pos v1, t_pos v2);
-t_pos					get_obj_normal(t_pos *p, t_return *ret, t_pos *o, t_pos *d);
 void                    func_error(int err);
+int						*put_pixel(double x, double y, int color, t_sdl *sdl);
+int						read_kernel(t_cl *cl);
+int						create_cl(t_cl *cl, t_sdl *sdl, t_scene *scene);
+double					computer_lighting(t_pos *p, t_pos *n, t_pos *v, int s, t_scene *scene);
+t_pos					vector_pus(t_pos *o, t_pos *center);
+t_pos					vector_minus(t_pos *o, t_pos	*center);
+double					ft_dot(t_pos *a, t_pos *b);
+t_return				closest_intersection(t_pos *o, t_pos *d, double t_min, double t_max, t_object **obj);
+t_pos					*matrix_on_vector(double a, double b, t_pos *vec);
+t_pos					v_plus(t_pos v1, t_pos v2);
 t_result				get_intersect(t_pos *o, t_pos *d, t_object *obj);
+t_pos					*canvas_to_viewport(int x, int y, t_pos *pos);
+t_pos					v_minus(t_pos v1, t_pos v2);
+t_pos					vector_on_number(t_pos *o, double nbr);
+t_pos					get_obj_normal(t_pos *p, t_return *ret, t_pos *o, t_pos *d);
+double					vector_len(t_pos *o);
+t_pos					*vector_on_vector(t_pos *a, t_pos *b, t_pos *ab);
+t_pos					vector_div(t_pos *o, double nbr);
+int						trace_ray(t_pos *o, t_pos *d, double t_min, double t_max, t_scene *scene, int depth);
+# endif
 
 #endif

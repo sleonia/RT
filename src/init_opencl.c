@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_opencl.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: deladia <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: deladia <deladia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/28 19:00:37 by deladia           #+#    #+#             */
-/*   Updated: 2019/11/28 19:00:39 by deladia          ###   ########.fr       */
+/*   Updated: 2019/12/07 22:40:22 by deladia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,45 +30,59 @@ int		set_arg_1(t_cl *cl, t_sdl *sdl)
 	return (0);
 }
 
-//int		set_arg(t_cl *cl, t_sdl *sdl)
-//{
-//	int		ret;
-//	int		side_x;
-//	int		side_y;
-//
-//	side_x = WIDTH;
-//	side_y = HEIGHT;
-//	ret = clSetKernelArg(cl->kernel, 0, sizeof(cl_mem), &cl->memobjs);
-//	ret |= clSetKernelArg(cl->kernel, 1, sizeof(int), &side_x);
-//	ret |= clSetKernelArg(cl->kernel, 2, sizeof(int), &side_y);
-//	ret |= clSetKernelArg(cl->kernel, 3, sizeof(double), &fract->x);
-//	ret |= clSetKernelArg(cl->kernel, 4, sizeof(double), &fract->y);
-//	ret |= clSetKernelArg(cl->kernel, 5, sizeof(int), &fract->repeat);
-//	ret |= clSetKernelArg(cl->kernel, 6, sizeof(int), &fract->color);
-//	ret |= clSetKernelArg(cl->kernel, 7, sizeof(double), &fract->xmin);
-//	ret |= clSetKernelArg(cl->kernel, 8, sizeof(double), &fract->xmax);
-//	ret |= clSetKernelArg(cl->kernel, 9, sizeof(double), &fract->ymin);
-//	ret |= clSetKernelArg(cl->kernel, 10, sizeof(double), &fract->ymax);
-//	ret |= clSetKernelArg(cl->kernel, 11, sizeof(char), &fract->key1);
-//	ret |= clSetKernelArg(cl->kernel, 12, sizeof(int), &fract->mouse_jul_x);
-//	ret |= clSetKernelArg(cl->kernel, 13, sizeof(int), &fract->mouse_jul_y);
-//	if (ret != 0)
-//		func_error(-9);
-//	set_arg_1(cl, sdl);
-//	return (0);
-//}
+int		set_arg(t_cl *cl, t_sdl *sdl, t_scene *scene)
+{
+	int		ret;
+	int		side_x;
+	int		side_y;
+
+	side_x = WIDTH;
+	side_y = HEIGHT;
+	ret = clSetKernelArg(cl->kernel, 0, sizeof(cl_mem), &cl->memobjs);
+	ret |= clSetKernelArg(cl->kernel, 1, sizeof(t_scene), &scene);
+	// ret |= clSetKernelArg(cl->kernel, 1, sizeof(int), &side_x);
+	// ret |= clSetKernelArg(cl->kernel, 2, sizeof(int), &side_y);
+	// ret |= clSetKernelArg(cl->kernel, 3, sizeof(double), &fract->x);
+	// ret |= clSetKernelArg(cl->kernel, 4, sizeof(double), &fract->y);
+	// ret |= clSetKernelArg(cl->kernel, 5, sizeof(int), &fract->repeat);
+	// ret |= clSetKernelArg(cl->kernel, 6, sizeof(int), &fract->color);
+	// ret |= clSetKernelArg(cl->kernel, 7, sizeof(double), &fract->xmin);
+	// ret |= clSetKernelArg(cl->kernel, 8, sizeof(double), &fract->xmax);
+	// ret |= clSetKernelArg(cl->kernel, 9, sizeof(double), &fract->ymin);
+	// ret |= clSetKernelArg(cl->kernel, 10, sizeof(double), &fract->ymax);
+	// ret |= clSetKernelArg(cl->kernel, 11, sizeof(char), &fract->key1);
+	// ret |= clSetKernelArg(cl->kernel, 12, sizeof(int), &fract->mouse_jul_x);
+	// ret |= clSetKernelArg(cl->kernel, 13, sizeof(int), &fract->mouse_jul_y);
+	if (ret != 0)
+		func_error(-9);
+	set_arg_1(cl, sdl);
+	return (0);
+}
 
 int		create_cl_1(t_cl *cl)
 {
 	int		ret;
+	char	*log;
+	size_t	log_size;
 
 	if ((cl->program = clCreateProgramWithSource(cl->context, 1, (const char **)
 			&cl->program_source, (const size_t *)&cl->program_size, &ret))
 		&& ret != 0)
 		func_error(-6);
-	if ((ret = clBuildProgram(cl->program, 1, &cl->device_id, NULL, NULL, NULL))
+	if ((ret = clBuildProgram(cl->program, 1, &cl->device_id, "-DOPENCL___ -I include/ ", NULL, NULL))
 		!= 0)
-		func_error(-7);
+	{
+		if (ret != 0)
+		{
+			clGetProgramBuildInfo(cl->program, cl->device_id, CL_PROGRAM_BUILD_LOG, 0, NULL, &log_size);
+			log = (char*)malloc(log_size);
+			clGetProgramBuildInfo(cl->program, cl->device_id, CL_PROGRAM_BUILD_LOG, log_size, log, NULL);
+			printf("build program - ERROR (%d)\n", ret);
+			printf("%s\n", log);
+			// func_error(-7);
+			exit(-1);
+		}
+	}
 	if ((cl->kernel = clCreateKernel(cl->program, "RT", &ret)) && ret != 0)
 		func_error(-8);
 	cl->global_work_size[0] = WIDTH * HEIGHT;
@@ -78,7 +92,7 @@ int		create_cl_1(t_cl *cl)
 	return (0);
 }
 
-int		create_cl(t_cl *cl, t_sdl *sdl)
+int		create_cl(t_cl *cl, t_sdl *sdl, t_scene *scene)
 {
     int     ret;
 
@@ -95,6 +109,6 @@ int		create_cl(t_cl *cl, t_sdl *sdl)
                                               &ret)) && ret != 0)
         func_error(-4);
     create_cl_1(cl);
-//    set_arg(cl, sdl);
+	set_arg(cl, sdl, scene);
 	return (0);
 }

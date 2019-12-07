@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   light.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: deladia <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: deladia <deladia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/24 13:05:14 by deladia           #+#    #+#             */
-/*   Updated: 2019/10/31 16:36:36 by thorker          ###   ########.fr       */
+/*   Updated: 2019/12/07 22:17:13 by deladia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,16 +98,16 @@ double		computer_lighting(t_pos *p, t_pos *n, t_pos *v, int specular, t_scene *s
 					continue ;
 				}
 				// Диффузность
-				n_dot_l = dot(n, &l);
+				n_dot_l = ft_dot(n, &l);
 				if (n_dot_l > 0)
 					intens += tmp[i]->intensity * n_dot_l / (vector_len(n) * vector_len(&l));
 				// Зеркальность
 				if (specular != -1)
 				{
 					buf = vector_on_number(n, 2);
-					buf = vector_on_number(&buf, dot(n, &l));
+					buf = vector_on_number(&buf, ft_dot(n, &l));
 					r = vector_minus(&buf, &l);
-					r_dot_v = dot(&r, v);
+					r_dot_v = ft_dot(&r, v);
 					if (r_dot_v > 0)
 						intens += tmp[i]->intensity * pow(r_dot_v / (vector_len(&r) * vector_len(v)), specular);
 				}

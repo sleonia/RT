@@ -6,7 +6,7 @@
 /*   By: deladia <deladia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/06 21:28:06 by deladia           #+#    #+#             */
-/*   Updated: 2019/12/06 21:30:47 by deladia          ###   ########.fr       */
+/*   Updated: 2019/12/07 22:16:53 by deladia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@ t_result	intersect_ray_sphere(t_pos *o, t_pos *d, t_sphere *sphere)
 
 
 	oc = vector_minus(o, &sphere->center);
-	k1 = dot(d, d);
-	k2 = 2 * dot(&oc, d);
-	k3 = dot(&oc, &oc) - sphere->radius * sphere->radius;
+	k1 = ft_dot(d, d);
+	k2 = 2 * ft_dot(&oc, d);
+	k3 = ft_dot(&oc, &oc) - sphere->radius * sphere->radius;
 	if (k2 * k2 - 4 * k1 * k3 < 0)
 	{
 		res.t1 = INFINITY;
@@ -50,9 +50,9 @@ t_result    intersect_ray_cylinder(t_pos *o, t_pos *d, t_cylinder *cyl)
 	double  discr;
 
 	oc = vector_minus(o, &cyl->center);
-	a = dot(d,d) - dot(d,&cyl->axis) * dot(d,&cyl->axis);
-	c = dot(&oc,&oc) - dot(&oc,&cyl->axis) * dot(&oc,&cyl->axis) - cyl->radius * cyl->radius;
-	b = dot(d,&oc) - dot(d,&cyl->axis) * dot(&oc,&cyl->axis);
+	a = ft_dot(d,d) - ft_dot(d,&cyl->axis) * ft_dot(d,&cyl->axis);
+	c = ft_dot(&oc,&oc) - ft_dot(&oc,&cyl->axis) * ft_dot(&oc,&cyl->axis) - cyl->radius * cyl->radius;
+	b = ft_dot(d,&oc) - ft_dot(d,&cyl->axis) * ft_dot(&oc,&cyl->axis);
 	discr = b*b - a*c;
 	if (discr < 0.0 )
 	{
@@ -77,7 +77,7 @@ t_result intersect_ray_plane(t_pos *cam, t_pos *view, t_plane *pl) //view - то
 
 	oc = vector_minus(cam,&pl->center);
 	min = vector_on_number(&oc,-1);
-	t = dot(&min,&pl->normal) / dot(view,&pl->normal);
+	t = ft_dot(&min,&pl->normal) / ft_dot(view,&pl->normal);
 	res.t1 = t;
 	res.t2 = INFINITY;
 	return (res);
@@ -93,9 +93,9 @@ t_result    intersect_ray_cone(t_pos *o, t_pos *d, t_cone *cone)
 	double  discr;
 
 	oc = vector_minus(o, &cone->center);
-	a = dot(d,d) - (1 + cone->tan * cone->tan)*dot(d,&cone->axis) * dot(d,&cone->axis);
-	c = dot(&oc,&oc) - (1 + cone->tan * cone->tan)*dot(&oc,&cone->axis) * dot(&oc,&cone->axis);
-	b = dot(d,&oc) - (1 + cone->tan * cone->tan)*dot(d,&cone->axis) * dot(&oc,&cone->axis);
+	a = ft_dot(d,d) - (1 + cone->tan * cone->tan)*ft_dot(d,&cone->axis) * ft_dot(d,&cone->axis);
+	c = ft_dot(&oc,&oc) - (1 + cone->tan * cone->tan)*ft_dot(&oc,&cone->axis) * ft_dot(&oc,&cone->axis);
+	b = ft_dot(d,&oc) - (1 + cone->tan * cone->tan)*ft_dot(d,&cone->axis) * ft_dot(&oc,&cone->axis);
 	discr = b*b - a*c;
 	if (discr < 0.0 )
 	{

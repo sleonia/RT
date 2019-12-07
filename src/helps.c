@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   helps.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: deladia <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: deladia <deladia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/24 10:59:13 by deladia           #+#    #+#             */
-/*   Updated: 2019/10/31 16:38:53 by thorker          ###   ########.fr       */
+/*   Updated: 2019/12/07 22:17:00 by deladia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,7 +143,7 @@ t_pos		*matrix_on_vector(double a, double b, t_pos *vec)
 ** Скалярное произведение векторов
 */
 
-double		dot(t_pos *a, t_pos *b)
+double		ft_dot(t_pos *a, t_pos *b)
 {
 	return (a->x * b->x + a->y * b->y + a->z * b->z);
 }
