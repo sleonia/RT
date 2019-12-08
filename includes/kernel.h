@@ -6,7 +6,7 @@
 /*   By: deladia <deladia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/06 19:23:27 by deladia           #+#    #+#             */
-/*   Updated: 2019/12/08 19:17:20 by deladia          ###   ########.fr       */
+/*   Updated: 2019/12/08 22:58:57 by deladia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ typedef struct			s_cam
 	cl_float3			pos;
 # else
 	float3				pos;
-#endif
+# endif
 	float				a;
 	float				b;
 }						t_cam;
@@ -99,10 +99,10 @@ typedef struct 			s_sphere
 {
 # ifndef OPENCL___
 	cl_float3			center;
-	cl_float3			radius;
+	float				radius;
 # else
 	float3				center;
-	float3				radius;
+	float				radius;
 # endif
 
 }						t_sphere;
