@@ -6,24 +6,28 @@
 /*   By: deladia <deladia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/28 19:00:37 by deladia           #+#    #+#             */
-/*   Updated: 2019/12/07 22:40:22 by deladia          ###   ########.fr       */
+/*   Updated: 2019/12/08 17:19:49 by deladia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 
-int		set_arg_1(t_cl *cl, t_sdl *sdl)
+int		set_arg_1(t_cl *cl, t_sdl *sdl, t_scene *scene)
 {
 	int		ret;
 
-	if ((ret = clEnqueueWriteBuffer(cl->cmd_queue, cl->memobjs, CL_TRUE, 0,
+	if ((ret = clEnqueueWriteBuffer(cl->cmd_queue, cl->memobjs[0], CL_TRUE, 0,
 									sizeof(cl_int) * HEIGHT * WIDTH, (cl_int *)sdl->pixels, 0, NULL,
+									NULL)) != 0)
+		func_error(-10);
+	if ((ret = clEnqueueWriteBuffer(cl->cmd_queue, cl->memobjs[1], CL_TRUE, 0,
+									sizeof(t_scene), &scene, 0, NULL,
 									NULL)) != 0)
 		func_error(-10);
 	if ((ret = clEnqueueNDRangeKernel(cl->cmd_queue, cl->kernel, 1, NULL,
 									  cl->global_work_size, NULL, 0, NULL, NULL)) != 0)
 		func_error(-11);
-	if ((ret = clEnqueueReadBuffer(cl->cmd_queue, cl->memobjs, CL_TRUE, 0,
+	if ((ret = clEnqueueReadBuffer(cl->cmd_queue, cl->memobjs[0], CL_TRUE, 0,
 								   HEIGHT * WIDTH * sizeof(cl_int), (cl_int *)sdl->pixels, 0, NULL,
 								   NULL)) != 0)
 		func_error(-12);
@@ -38,8 +42,8 @@ int		set_arg(t_cl *cl, t_sdl *sdl, t_scene *scene)
 
 	side_x = WIDTH;
 	side_y = HEIGHT;
-	ret = clSetKernelArg(cl->kernel, 0, sizeof(cl_mem), &cl->memobjs);
-	ret |= clSetKernelArg(cl->kernel, 1, sizeof(t_scene), &scene);
+	ret = clSetKernelArg(cl->kernel, 0, sizeof(cl_mem), &cl->memobjs[0]);
+	ret |= clSetKernelArg(cl->kernel, 1, sizeof(cl_mem), &cl->memobjs[1]);
 	// ret |= clSetKernelArg(cl->kernel, 1, sizeof(int), &side_x);
 	// ret |= clSetKernelArg(cl->kernel, 2, sizeof(int), &side_y);
 	// ret |= clSetKernelArg(cl->kernel, 3, sizeof(double), &fract->x);
@@ -55,7 +59,7 @@ int		set_arg(t_cl *cl, t_sdl *sdl, t_scene *scene)
 	// ret |= clSetKernelArg(cl->kernel, 13, sizeof(int), &fract->mouse_jul_y);
 	if (ret != 0)
 		func_error(-9);
-	set_arg_1(cl, sdl);
+	set_arg_1(cl, sdl, scene);
 	return (0);
 }
 
@@ -86,8 +90,11 @@ int		create_cl_1(t_cl *cl)
 	if ((cl->kernel = clCreateKernel(cl->program, "RT", &ret)) && ret != 0)
 		func_error(-8);
 	cl->global_work_size[0] = WIDTH * HEIGHT;
-	if ((cl->memobjs = clCreateBuffer(cl->context, CL_MEM_READ_WRITE,
+	if ((cl->memobjs[0] = clCreateBuffer(cl->context, CL_MEM_READ_WRITE,
 									  sizeof(cl_int) * WIDTH * HEIGHT, NULL, &ret)) && ret != 0)
+		func_error(-5);
+	if ((cl->memobjs[1] = clCreateBuffer(cl->context, CL_MEM_READ_WRITE,
+									  sizeof(t_scene), NULL, &ret)) && ret != 0)
 		func_error(-5);
 	return (0);
 }

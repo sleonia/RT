@@ -6,7 +6,7 @@
 /*   By: deladia <deladia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/25 21:18:10 by deladia           #+#    #+#             */
-/*   Updated: 2019/12/07 22:48:29 by deladia          ###   ########.fr       */
+/*   Updated: 2019/12/08 17:06:28 by deladia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,10 +158,10 @@ typedef struct			s_sphere_params
 
 typedef struct 			s_light_off
 {
-	short int			ambient;
-	short int			point;
-	short int			directional;
-	short int			reflect;
+	int					ambient;
+	int					point;
+	int					directional;
+	int					reflect;
 }						t_light_off;
 
 typedef struct			s_scene
@@ -184,7 +184,7 @@ typedef struct			s_cl
 	cl_kernel			kernel;
 	size_t				global_work_size[1];
 	cl_device_id		device_id;
-	cl_mem				memobjs;
+	cl_mem				memobjs[2];
 	char 				*program_source;
 	size_t 				program_size;
 }						t_cl;
@@ -196,7 +196,6 @@ typedef struct 			s_sdl
 	SDL_Texture			*texture;
 	SDL_Event			event;
 	int					*pixels;
-	//mb something else
 }						t_sdl;
 
 typedef struct 			s_rtv1
@@ -204,7 +203,6 @@ typedef struct 			s_rtv1
 	t_sdl				*sdl;
 	t_cl				*opencl;
 	t_scene				*scene;
-	//mb something else
 }						t_rtv1;
 # endif
 
