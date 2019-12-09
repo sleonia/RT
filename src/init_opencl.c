@@ -6,7 +6,7 @@
 /*   By: deladia <deladia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/28 19:00:37 by deladia           #+#    #+#             */
-/*   Updated: 2019/12/08 23:08:17 by deladia          ###   ########.fr       */
+/*   Updated: 2019/12/09 13:41:59 by deladia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,13 @@ int		set_arg_1(t_cl *cl, t_sdl *sdl, t_scene *scene)
 									NULL)) != 0)
 		func_error(-10);
 	if ((ret = clEnqueueWriteBuffer(cl->cmd_queue, cl->memobjs[2], CL_TRUE, 0,
-									sizeof(t_object) * 4, &scene->object, 0, NULL,
+									sizeof(t_object) * 4, scene->object, 0, NULL,
 									NULL)) != 0)
+		func_error(-10);
+	if ((ret = clEnqueueWriteBuffer(cl->cmd_queue, cl->memobjs[3], CL_TRUE, 0,
+									sizeof(t_light) * 3, scene->light, 0, NULL,
+									NULL)) != 0)
+		func_error(-10);
 	if ((ret = clEnqueueNDRangeKernel(cl->cmd_queue, cl->kernel, 1, NULL,
 									  cl->global_work_size, NULL, 0, NULL, NULL)) != 0)
 		func_error(-11);
@@ -42,7 +47,7 @@ int		set_arg_1(t_cl *cl, t_sdl *sdl, t_scene *scene)
 
 int		set_arg(t_cl *cl, t_sdl *sdl, t_scene *scene)
 {
-	int		ret;
+	cl_int		ret;
 	int		side_x;
 	int		side_y;
 
@@ -50,6 +55,8 @@ int		set_arg(t_cl *cl, t_sdl *sdl, t_scene *scene)
 	side_y = HEIGHT;
 	ret = clSetKernelArg(cl->kernel, 0, sizeof(cl_mem), &cl->memobjs[0]);
 	ret |= clSetKernelArg(cl->kernel, 1, sizeof(cl_mem), &cl->memobjs[1]);
+	ret |= clSetKernelArg(cl->kernel, 2, sizeof(cl_mem), &cl->memobjs[2]);
+	ret |= clSetKernelArg(cl->kernel, 3, sizeof(cl_mem), &cl->memobjs[3]);
 	// ret |= clSetKernelArg(cl->kernel, 1, sizeof(int), &side_x);
 	// ret |= clSetKernelArg(cl->kernel, 2, sizeof(int), &side_y);
 	// ret |= clSetKernelArg(cl->kernel, 3, sizeof(double), &fract->x);
@@ -71,7 +78,7 @@ int		set_arg(t_cl *cl, t_sdl *sdl, t_scene *scene)
 
 int		create_cl_1(t_cl *cl, t_scene *scene)
 {
-	int		ret;
+	cl_int		ret;
 	char	*log;
 	size_t	log_size;
 
@@ -101,6 +108,8 @@ int		create_cl_1(t_cl *cl, t_scene *scene)
 	if ((cl->memobjs[1] = clCreateBuffer(cl->context, CL_MEM_READ_WRITE | CL_MEM_COPY_HOST_PTR, sizeof(t_scene), scene, &ret)) && ret != 0)
 		func_error(-5);
 	if ((cl->memobjs[2] = clCreateBuffer(cl->context, CL_MEM_READ_WRITE | CL_MEM_COPY_HOST_PTR, sizeof(t_object) * 4, scene->object, &ret)) && ret != 0)
+		func_error(-5);
+	if ((cl->memobjs[3] = clCreateBuffer(cl->context, CL_MEM_READ_WRITE | CL_MEM_COPY_HOST_PTR, sizeof(t_light) * 3, scene->light, &ret)) && ret != 0)
 		func_error(-5);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: deladia <deladia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/24 13:05:14 by deladia           #+#    #+#             */
-/*   Updated: 2019/12/08 19:51:50 by deladia          ###   ########.fr       */
+/*   Updated: 2019/12/09 14:04:02 by deladia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,21 +18,19 @@
 **		Разобраться с источниками света
 */
 
-t_light		**init_light(void)
+void		init_light(t_light **light)
 {
-	t_light **light;
-
 	//ambient - окружающий свет
-	light = (t_light **)ft_memalloc(sizeof(t_light *) * 3);
-	light[0] = (t_light *)ft_memalloc(sizeof(t_light));
-	light[0]->type = 'A';
-	light[0]->intensity = 0.2;
+	*light = (t_light *)ft_memalloc(sizeof(t_light) * 3);
+	// light[0] = (t_light *)ft_memalloc(sizeof(t_light));
+	(*light)[0].type = 'A';
+	(*light)[0].intensity = 0.2;
 
 	//point - точечный источник света
-	light[1] = (t_light *)ft_memalloc(sizeof(t_light));
-	light[1]->pos = (cl_float3){3, 1, -1};
-	light[1]->type = 'P';
-	light[1]->intensity = 0.6;
+	// light[1] = (t_light *)ft_memalloc(sizeof(t_light));
+	(*light)[1].pos = (cl_float3){3, 1, -1};
+	(*light)[1].type = 'P';
+	(*light)[1].intensity = 0.6;
 //
 //	tmp->next = (t_light *)ft_memalloc(sizeof(t_light));
 //	center3 = (t_pos *)ft_memalloc(sizeof(t_pos));
@@ -41,11 +39,10 @@ t_light		**init_light(void)
 //	tmp->type = 'P';
 //	tmp->intensity = 0.6;
 //	directional - направленный источник света
-	light[2] = (t_light *)ft_memalloc(sizeof(t_light));
-	light[2]->type = 'D';
-	light[2]->intensity = 0.2;
-	light[2]->pos = (cl_float3){1, 4, 4};
-	return (light);
+	// light[2] = (t_light *)ft_memalloc(sizeof(t_light));
+	(*light)[2].type = 'D';
+	(*light)[2].intensity = 0.2;
+	(*light)[2].pos = (cl_float3){1, 4, 4};
 }
 
 /*

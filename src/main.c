@@ -6,7 +6,7 @@
 /*   By: deladia <deladia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/24 12:57:07 by deladia           #+#    #+#             */
-/*   Updated: 2019/12/08 23:00:50 by deladia          ###   ########.fr       */
+/*   Updated: 2019/12/09 20:37:17 by deladia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -191,24 +191,16 @@
 // 	return (0);
 // }
 
-void		init_sphere_param(t_object *obj, t_sphere_params params)
-{
-	obj->type = o_sphere;
-	obj->color = params.color;
-	obj->reflective = params.reflective;
-	obj->specular = params.specular;
-	obj->objects->sphere.center = params.pos;
-	obj->objects->sphere.radius = params.radius;
-}
+
 
 void		init_plane_param(t_object *obj, t_plane_params params)
 {
-	obj->type = o_plane;
-	obj->color = params.color;
-	obj->reflective = params.reflective;
-	obj->specular = params.specular;
-	obj->objects->plane.center = params.pos;
-	obj->objects->plane.normal = params.normal;
+	(*obj).type = o_plane;
+	(*obj).color = params.color;
+	(*obj).reflective = params.reflective;
+	(*obj).specular = params.specular;
+	(*obj).center = params.pos;
+	(*obj).normal = params.normal;
 }
 
 // void		init_cylinder_param(t_object *obj, t_cylinder_params params)
@@ -253,34 +245,65 @@ void		init_plane_param(t_object *obj, t_plane_params params)
 // 	obj->objects->cone.tan = params.tan;
 // }
 
-t_object	**init_object(void)
+void		init_sphere_param(t_object obj, t_sphere_params params)
 {
-	t_object	**object;
+	obj.type = o_sphere;
+	obj.color = params.color;
+	obj.reflective = params.reflective;
+	obj.specular = params.specular;
+	obj.center = params.pos;
+	obj.radius = params.radius;
+}
 
-	object = (t_object **)ft_memalloc(sizeof(t_object *) * 4);
-	object[0] = (t_object *)ft_memalloc(sizeof(t_object));
-	object[1] = (t_object *)ft_memalloc(sizeof(t_object));
-	object[2] = (t_object *)ft_memalloc(sizeof(t_object));
-	object[3] = (t_object *)ft_memalloc(sizeof(t_object));
+void	init_object(t_object **object)
+{
+	*object = (t_object *)ft_memalloc(sizeof(t_object) * 4);
+
 	// object[4] = (t_object *)ft_memalloc(sizeof(t_object));
 	// object[5] = (t_object *)ft_memalloc(sizeof(t_object));
 	// object[6] = (t_object *)ft_memalloc(sizeof(t_object));
 	
-	object[0]->objects = (union u_objects *)ft_memalloc(sizeof(union u_objects));
-	object[1]->objects = (union u_objects *)ft_memalloc(sizeof(union u_objects));
-	object[2]->objects = (union u_objects *)ft_memalloc(sizeof(union u_objects));
-	object[3]->objects = (union u_objects *)ft_memalloc(sizeof(union u_objects));
+	// (*object)[0].objects = (union u_objects *)ft_memalloc(sizeof(union u_objects));
+	// (*object)[1].objects = (union u_objects *)ft_memalloc(sizeof(union u_objects));
+	// (*object)[2].objects = (union u_objects *)ft_memalloc(sizeof(union u_objects));
+	// (*object)[3].objects = (union u_objects *)ft_memalloc(sizeof(union u_objects));
 	// object[4]->objects = (union u_objects *)ft_memalloc(sizeof(union u_objects));
 	// object[5]->objects = (union u_objects *)ft_memalloc(sizeof(union u_objects));
 	// object[6]->objects = (union u_objects *)ft_memalloc(sizeof(union u_objects));
-	init_sphere_param(object[0], (t_sphere_params){{0, -1, 3}, 1.0, 0xFF0000, 500, 0.2});
-	init_sphere_param(object[1], (t_sphere_params){{2, 0, 4}, 1.0, 0x0000FF, 500, 0.3});
-	init_sphere_param(object[2], (t_sphere_params){{-2, 0, 4}, 1.0, 0x00FF00, 10, 0.4});
-	init_sphere_param(object[3], (t_sphere_params){{0, -5001, 0}, 5000.0, 0xFFFF00, 1000, 0.5});
+	(*object)[0].type = o_sphere;
+	(*object)[0].color = 0xFF0000;
+	(*object)[0].reflective = 0.2f;
+	(*object)[0].specular = 500;
+	(*object)[0].center = (cl_float3){0, -1, 3};
+	(*object)[0].radius = 1.0f;
+
+	(*object)[1].type = o_sphere;
+	(*object)[1].color = 0x0000FF;
+	(*object)[1].reflective = 0.3f;
+	(*object)[1].specular = 500;
+	(*object)[1].center = (cl_float3){2, 0, 4};
+	(*object)[1].radius = 1.0f;
+
+	(*object)[2].type = o_sphere;
+	(*object)[2].color = 0x00FF00;
+	(*object)[2].reflective = 0.4f;
+	(*object)[2].specular = 300;
+	(*object)[2].center = (cl_float3){-2, 0, 4};
+	(*object)[2].radius = 1.0f;
+
+	(*object)[3].type = o_sphere;
+	(*object)[3].color = 0xFFFF00;
+	(*object)[3].reflective = 0.4f;
+	(*object)[3].specular = 300;
+	(*object)[3].center = (cl_float3){0, -5001, 0};
+	(*object)[3].radius = 5000.0f;
+	// init_sphere_param((*object)[0], (t_sphere_params){(cl_float3){0, -1, 3}, 1.0f, 0xFF0000, 500, 0.2f});
+	// init_sphere_param((*object)[1], (t_sphere_params){(cl_float3){2, 0, 4}, 1.0f, 0x0000FF, 500, 0.3f});
+	// init_sphere_param((*object)[2], (t_sphere_params){(cl_float3){-2, 0, 4}, 1.0f, 0x00FF00, 10, 0.4f});
+	// init_sphere_param((*object)[3], (t_sphere_params){(cl_float3){0, -5001, 0}, 5000.0f, 0xFFFF00, 1000, 0.5f});
 	// init_plane_param(object[4], (t_plane_params){{0, 0, 26}, 0x0000FF, 500, 0.4, {0, 0, 1}});
 	// init_cylinder_param(object[5], (t_cylinder_params){{0, 2, 5},{1, 0.5, 0}, 0.1, 0xFFFFF0, 500, 0.4});
 	// init_cone_param(object[6], (t_cone_params){{0, 3, 5},{0, 1, 0}, 0.2, 0xFF00FF, 500, 0.4});
-	return (object);
 }
 
 // t_object	**init_object_1(void)
@@ -342,11 +365,12 @@ int			main(void)
 	//инициальзация сфер
 //	rtv1->scene->figure->sphere = init_sphere(rtv1->scene->figure->sphere);
 	// rtv1->scene->object = init_object();
-	rtv1->scene->object = init_object();
-	rtv1->scene->light = init_light();
-	// printf("%f ", rtv1->scene->object[0]->reflective);
-	// printf("%f ", rtv1->scene->object[1]->reflective);
-	// printf("%f ", rtv1->scene->object[2]->reflective);
+	init_object(&rtv1->scene->object);
+	init_light(&rtv1->scene->light);
+	
+	// printf("%f ", rtv1->scene->object[0].reflective);
+	// printf("%f ", rtv1->scene->object[1].reflective);
+	// printf("%f ", rtv1->scene->object[2].reflective);
 	// trace_start(rtv1->sdl, rtv1->scene);
 	rtv1->opencl = (t_cl *)ft_memalloc(sizeof(t_cl));
 	read_kernel(rtv1->opencl);

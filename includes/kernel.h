@@ -6,7 +6,7 @@
 /*   By: deladia <deladia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/06 19:23:27 by deladia           #+#    #+#             */
-/*   Updated: 2019/12/08 22:58:57 by deladia          ###   ########.fr       */
+/*   Updated: 2019/12/09 20:09:04 by deladia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,60 +60,60 @@ typedef struct 			s_light_off
 	int					reflect;
 }						t_light_off;
 
-typedef struct 			s_cylinder
-{
-# ifndef OPENCL___	
-	cl_float3			center;
-	cl_float3			axis;
-# else
-	float3				center;
-	float3				axis;
-# endif
-	float				radius;
-}						t_cylinder;
+// typedef struct 			s_cylinder
+// {
+// # ifndef OPENCL___	
+// 	cl_float3			center;
+// 	cl_float3			axis;
+// # else
+// 	float3				center;
+// 	float3				axis;
+// # endif
+// 	float				radius;
+// }						t_cylinder;
 
-typedef struct 			s_cone
-{
-# ifndef OPENCL___	
-	cl_float3			center;
-	cl_float3			axis;
-# else
-	float3				center;
-	float3				axis;
-# endif
-	float				tan;
-}						t_cone;
+// typedef struct 			s_cone
+// {
+// # ifndef OPENCL___	
+// 	cl_float3			center;
+// 	cl_float3			axis;
+// # else
+// 	float3				center;
+// 	float3				axis;
+// # endif
+// 	float				tan;
+// }						t_cone;
 
-typedef struct 			s_plane
-{
-# ifndef OPENCL___
-	cl_float3			center;
-	cl_float3			normal;
-# else
-	float3				normal;
-	float3				center;
-# endif
-}						t_plane;
+// typedef struct 			s_plane
+// {
+// # ifndef OPENCL___
+// 	cl_float3			center;
+// 	cl_float3			normal;
+// # else
+// 	float3				normal;
+// 	float3				center;
+// # endif
+// }						t_plane;
 
-typedef struct 			s_sphere
-{
-# ifndef OPENCL___
-	cl_float3			center;
-	float				radius;
-# else
-	float3				center;
-	float				radius;
-# endif
+// typedef struct 			s_sphere
+// {
+// # ifndef OPENCL___
+// 	cl_float3			center;
+// 	float				radius;
+// # else
+// 	float3				center;
+// 	float				radius;
+// # endif
 
-}						t_sphere;
+// }						t_sphere;
 
-union					u_objects
-{
-	t_sphere			sphere;
-	t_cylinder			cylinder;
-	t_cone				cone;
-	t_plane				plane;
-};
+// union					u_objects
+// {
+// 	t_sphere			sphere;
+// 	t_cylinder			cylinder;
+// 	t_cone				cone;
+// 	t_plane				plane;
+// };
 
 enum					e_obj_type
 {
@@ -125,16 +125,28 @@ enum					e_obj_type
 
 typedef struct			s_object
 {
-	union u_objects		*objects;
+# ifndef OPENCL___
+	// union u_objects		*objects;
+	cl_float3			center;
+	float				radius;
+	cl_float3			normal;
+	cl_float3			axis;
+# else
+	float3				center;
+	float				radius;
+	float3				normal;
+	float3				axis;
+# endif
 	enum e_obj_type		type;
 	int					color;
 	int					specular;
 	float				reflective;
+	float				tan;
 }						t_object;
 
 typedef struct			s_return
 {
-	t_object			*closest_object;
+	int					closest_object;
 	float				closest_t;
 }						t_return;
 
@@ -145,9 +157,9 @@ typedef struct			s_scene
 # else
 	float3				view;
 # endif
-	t_light				**light;
+	t_light				*light;
 	t_cam				*cam;
-	t_object			**object;
+	t_object			*object;
 	t_light_off			*off;
 }						t_scene;
 

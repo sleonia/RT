@@ -6,7 +6,7 @@
 /*   By: deladia <deladia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/25 21:18:10 by deladia           #+#    #+#             */
-/*   Updated: 2019/12/08 23:07:02 by deladia          ###   ########.fr       */
+/*   Updated: 2019/12/09 13:39:41 by deladia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -191,7 +191,7 @@ typedef struct			s_cl
 	cl_kernel			kernel;
 	size_t				global_work_size[1];
 	cl_device_id		device_id;
-	cl_mem				memobjs[3];
+	cl_mem				memobjs[4];
 	char 				*program_source;
 	size_t 				program_size;
 }						t_cl;
@@ -217,7 +217,8 @@ typedef struct 			s_rtv1
 t_pos					*insert(int x,int y, int z, t_pos *pos);
 int						sdl_init(t_sdl *sdl);
 int						sdl_control(t_sdl *sdl, t_scene *scene);
-t_light					**init_light(void);
+void					init_light(t_light **light);
+void					init_object(t_object **object);
 void 					ft_error(char *str);
 int						trace_start(t_sdl *sdl, t_scene *scene);
 void                    func_error(int err);
