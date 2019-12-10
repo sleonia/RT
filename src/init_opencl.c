@@ -6,7 +6,7 @@
 /*   By: deladia <deladia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/28 19:00:37 by deladia           #+#    #+#             */
-/*   Updated: 2019/12/09 13:41:59 by deladia          ###   ########.fr       */
+/*   Updated: 2019/12/10 19:20:07 by deladia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,12 @@ int		set_arg_1(t_cl *cl, t_sdl *sdl, t_scene *scene)
 									sizeof(cl_int) * HEIGHT * WIDTH, (cl_int *)sdl->pixels, 0, NULL,
 									NULL)) != 0)
 		func_error(-10);
+	// if ((ret = clEnqueueWriteBuffer(cl->cmd_queue, cl->memobjs[1], CL_TRUE, 0,
+	// 								sizeof(t_scene), &scene, 0, NULL,
+	// 								NULL)) != 0)
+	// 	func_error(-10);
 	if ((ret = clEnqueueWriteBuffer(cl->cmd_queue, cl->memobjs[1], CL_TRUE, 0,
-									sizeof(t_scene), &scene, 0, NULL,
+									sizeof(t_cam), &scene->cam, 0, NULL,
 									NULL)) != 0)
 		func_error(-10);
 	if ((ret = clEnqueueWriteBuffer(cl->cmd_queue, cl->memobjs[2], CL_TRUE, 0,
@@ -105,7 +109,9 @@ int		create_cl_1(t_cl *cl, t_scene *scene)
 	cl->global_work_size[0] = WIDTH * HEIGHT;
 	if ((cl->memobjs[0] = clCreateBuffer(cl->context, CL_MEM_READ_WRITE, sizeof(cl_int) * WIDTH * HEIGHT, NULL, &ret)) && ret != 0)
 		func_error(-5);
-	if ((cl->memobjs[1] = clCreateBuffer(cl->context, CL_MEM_READ_WRITE | CL_MEM_COPY_HOST_PTR, sizeof(t_scene), scene, &ret)) && ret != 0)
+	// if ((cl->memobjs[1] = clCreateBuffer(cl->context, CL_MEM_READ_WRITE | CL_MEM_COPY_HOST_PTR, sizeof(t_scene), scene, &ret)) && ret != 0)
+	// 	func_error(-5);
+	if ((cl->memobjs[1] = clCreateBuffer(cl->context, CL_MEM_READ_WRITE | CL_MEM_COPY_HOST_PTR, sizeof(t_cam), &scene->cam, &ret)) && ret != 0)
 		func_error(-5);
 	if ((cl->memobjs[2] = clCreateBuffer(cl->context, CL_MEM_READ_WRITE | CL_MEM_COPY_HOST_PTR, sizeof(t_object) * 4, scene->object, &ret)) && ret != 0)
 		func_error(-5);

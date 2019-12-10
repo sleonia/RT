@@ -6,7 +6,7 @@
 /*   By: deladia <deladia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/06 19:23:27 by deladia           #+#    #+#             */
-/*   Updated: 2019/12/09 20:09:04 by deladia          ###   ########.fr       */
+/*   Updated: 2019/12/10 19:41:17 by deladia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,9 +158,9 @@ typedef struct			s_scene
 	float3				view;
 # endif
 	t_light				*light;
-	t_cam				*cam;
+	t_cam				cam;
 	t_object			*object;
-	t_light_off			*off;
+	t_light_off			off;
 }						t_scene;
 
 #endif

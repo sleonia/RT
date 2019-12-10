@@ -6,7 +6,7 @@
 /*   By: deladia <deladia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/24 12:43:04 by deladia           #+#    #+#             */
-/*   Updated: 2019/12/08 19:55:46 by deladia          ###   ########.fr       */
+/*   Updated: 2019/12/10 19:06:26 by deladia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,54 +99,54 @@ int			sdl_control(t_sdl *sdl, t_scene *scene)
 				// }
 				if (sdl->event.key.keysym.scancode == SDL_SCANCODE_Z)
 				{
-					scene->cam->a += 0.1;
+					scene->cam.a += 0.1;
 					// trace_start(sdl, scene);
 				}
 				if (sdl->event.key.keysym.scancode == SDL_SCANCODE_X)
 				{
-					scene->cam->a -= 0.1;
+					scene->cam.a -= 0.1;
 					// trace_start(sdl, scene);
 				}
 				if (sdl->event.key.keysym.scancode == SDL_SCANCODE_Q)
 				{
-					scene->cam->b -= 0.1;
+					scene->cam.b -= 0.1;
 					// trace_start(sdl, scene);
 				}
 				if (sdl->event.key.keysym.scancode == SDL_SCANCODE_E)
 				{
-					scene->cam->b += 0.1;
+					scene->cam.b += 0.1;
 					// trace_start(sdl, scene);
 				}
 				if (sdl->event.key.keysym.scancode == SDL_SCANCODE_P)
 				{
-					if (!scene->off->point)
-						scene->off->point = 1;
+					if (!scene->off.point)
+						scene->off.point = 1;
 					else
-						scene->off->point = 0;
+						scene->off.point = 0;
 					// trace_start(sdl, scene);
 				}
 				if (sdl->event.key.keysym.scancode == SDL_SCANCODE_I)
 				{
-					if (!scene->off->ambient)
-						scene->off->ambient = 1;
+					if (!scene->off.ambient)
+						scene->off.ambient = 1;
 					else
-						scene->off->ambient = 0;
+						scene->off.ambient = 0;
 					// trace_start(sdl, scene);
 				}
 				if (sdl->event.key.keysym.scancode == SDL_SCANCODE_O)
 				{
-					if (!scene->off->directional)
-						scene->off->directional = 1;
+					if (!scene->off.directional)
+						scene->off.directional = 1;
 					else
-						scene->off->directional = 0;
+						scene->off.directional = 0;
 					// trace_start(sdl, scene);
 				}
 				if (sdl->event.key.keysym.scancode == SDL_SCANCODE_U)
 				{
-					if (!scene->off->reflect)
-						scene->off->reflect = 1;
+					if (!scene->off.reflect)
+						scene->off.reflect = 1;
 					else
-						scene->off->reflect = 0;
+						scene->off.reflect = 0;
 					// trace_start(sdl, scene);
 				}
 				sdl_update(sdl);

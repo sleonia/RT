@@ -6,7 +6,7 @@
 /*   By: deladia <deladia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/24 12:57:07 by deladia           #+#    #+#             */
-/*   Updated: 2019/12/09 20:37:17 by deladia          ###   ########.fr       */
+/*   Updated: 2019/12/10 19:41:57 by deladia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -346,10 +346,9 @@ int			main(void)
 
 	rtv1->scene = (t_scene *)ft_memalloc(sizeof(t_scene));
 
-	rtv1->scene->cam = (t_cam *)ft_memalloc(sizeof(t_cam));
 	
-	rtv1->scene->cam->pos = (cl_float3){0.0, 2.0, 0.0};
-
+	rtv1->scene->cam.pos = (cl_float3){0.0, 0.0, 0.0};
+	// printf("%f %f %f\n", rtv1->scene->cam.pos.s[0], rtv1->scene->cam.pos.s[1], rtv1->scene->cam.pos.s[2]);
 	//разобраться с поворотом камеры
 
 	// rtv1->scene->view = (t_pos *)ft_memalloc(sizeof(t_pos));
@@ -358,8 +357,6 @@ int			main(void)
 	// rtv1->scene->light = init_light();
 
 //	rtv1->scene->figure = (t_figure *)ft_memalloc(sizeof(t_figure));
-
-	rtv1->scene->off = (t_light_off *)ft_memalloc(sizeof(t_light_off));
 
 	//парсер чтобы считать сферы из файла в *shpere
 	//инициальзация сфер
