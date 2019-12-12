@@ -26,9 +26,10 @@ static float3		matrix_rotation(float a, float b, float3 vec)
 	z = vec.z;
 	vec.x = x * cos(b) + z * sin(b);
 	vec.y = (x * sin(b) - z * cos(b)) * sin(a) + y * cos(a);
-	vec.z = (z * cos(b) - x * sin(b)) + y * sin(a);
+	vec.z = (z * cos(b) - x * sin(b)) * cos(a) + y * sin(a);
 	return (vec);
 }
+
 
 static float		vector_len(float3 o)
 {
@@ -367,15 +368,15 @@ static int			 trace_ray(float3 *o, float3 *d, float t_min, float t_max, __global
 	local_color = color_scale(object[ret.closest_object].color, c);
 	return (local_color);
 	// Проверка выхода из рекурсии
-	ref = object[ret.closest_object].reflective;
-	printf("%f ", ref);
-	if (depth <= 0 || ref <= 0)
-		return (local_color);
+	// ref = object[ret.closest_object].reflective;
+	// printf("%f ", ref);
+	// if (depth <= 0 || ref <= 0)
+	// 	return (local_color);
 
-	// //Рекурсивная часть отражения объектов
-	r = reflect_ray(&buf, &n);
-	reflected_color = trace_ray(&p, &r, 0.001, INFINITY, object, light, depth - 1);
-	return (color_scale(local_color, 1 - ref) + color_scale(reflected_color, ref));
+	// // //Рекурсивная часть отражения объектов
+	// r = reflect_ray(&buf, &n);
+	// reflected_color = trace_ray(&p, &r, 0.001, INFINITY, object, light, depth - 1);
+	// return (color_scale(local_color, 1 - ref) + color_scale(reflected_color, ref));
 }
 
 __kernel void RT(__global int *arr, __global t_cam *cam, __global t_object *object, __global t_light *light)
