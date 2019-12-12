@@ -388,18 +388,26 @@ __kernel void RT(__global int *arr, __global t_cam *cam, __global t_object *obje
 	int		pixel;
 	float3	d;
 	float3	o;
+	int4	color_vec;
 
 	pixel = get_global_id(0);
-	x = pixel % WIDTH - WIDTH / 2;
-	y = HEIGHT / 2 - pixel / WIDTH;
+	// for(int i = 0; i < 4; i++)
+	// {
+		x = pixel % WIDTH - WIDTH / 2;
+		y = HEIGHT / 2 - pixel / WIDTH;
+		// x += i % 2;
+		// y += i / 2;
 	// printf("%f %f\n", scene->cam->a, scene->cam->b);
-	d = matrix_rotation(cam->a, cam->b, canvas_to_viewport(x, y));
-	o = (float3)cam->pos;
+		d = matrix_rotation(cam->a, cam->b, canvas_to_viewport(x, y));
+		o = (float3)cam->pos;
 	// printf("%f %f %f\n", scene->view.x, scene->view.y, scene->view.z);
 	// printf("%f ", scene->light[0]->intensity);
 	// До этого момента все нормально, нужно пробежаться принтфом по trace_ray
 	// или написать заного по статье
-	color = trace_ray(&o, &d, 1.0, INFINITY, object, light);
+		color = trace_ray(&o, &d, 1.0, INFINITY, object, light);
+		// color_vec[i] = color;
+	// }
+	// color = color_scale(color_vec[0], 0.25f) + color_scale(color_vec[1], 0.25f) + color_scale(color_vec[2], 0.25f) + color_scale(color_vec[3], 0.25f);
 	// printf("%d %d\n", x, y);
 	arr[pixel] = color;
 }
