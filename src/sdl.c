@@ -6,7 +6,7 @@
 /*   By: deladia <deladia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/24 12:43:04 by deladia           #+#    #+#             */
-/*   Updated: 2019/12/11 16:04:29 by deladia          ###   ########.fr       */
+/*   Updated: 2019/12/12 16:58:36 by deladia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,7 @@
 void		sdl_error(char *str)
 {
 	ft_putstr(str);
-	ft_putstr(SDL_GetError());
-	write(1, "\n", 1);
+	ft_putendl(SDL_GetError());
 	exit(1);
 }
 

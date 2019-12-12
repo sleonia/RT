@@ -237,6 +237,7 @@ static t_return	closest_intersection(float3 *o, float3 *d, float t_min, float t_
 	// printf("%f ", ret.closest_t);
 	return (ret);
 }
+
 ///////////////////////////////////////////////////
 static float		computer_lighting(float3 *p, float3 *n, float3 *v, int specular, __global t_object *object, __global t_light *light)
 {
@@ -333,11 +334,11 @@ static int			 trace_ray(float3 *o, float3 *d, float t_min, float t_max, __global
 	float3 p;
 	float3 n;
 	float3 buf;
-	float3 r;
+	// float3 r;
 	float c;
 	float ref;
 	int local_color;
-	int reflected_color;
+	// int reflected_color;
 	t_return ret;
 
 	for (int i = 3; i > 0; i--)
