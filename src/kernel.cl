@@ -411,3 +411,7 @@ __kernel void RT(__global int *arr, __global t_cam *cam, __global t_object *obje
 	// printf("%d %d\n", x, y);
 	arr[pixel] = color;
 }
+
+//Не работает рекурсия, надо как-то заменить для зеркального отражения объектов на других объектах
+//Реализовать path tracing
+//Как пускать не 1 луч в пиксель, а 4 луча на границах для точности
