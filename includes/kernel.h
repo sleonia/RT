@@ -6,7 +6,7 @@
 /*   By: deladia <deladia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/06 19:23:27 by deladia           #+#    #+#             */
-/*   Updated: 2019/12/10 19:41:17 by deladia          ###   ########.fr       */
+/*   Updated: 2019/12/11 16:28:21 by deladia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,6 @@
 # define D 1
 # define WHITE 0xFFFFFF
 # define BLACK 0x000000
-
-typedef struct			s_result
-{
-	float 				t1;
-	float 				t2;
-}						t_result;
 
 typedef struct			s_cam
 {
@@ -48,8 +42,8 @@ typedef struct 			s_light
 # else
 	float3				pos;
 # endif
-	char 				type;
 	float 				intensity;
+	char 				type;
 }						t_light;
 
 typedef struct 			s_light_off
@@ -128,14 +122,14 @@ typedef struct			s_object
 # ifndef OPENCL___
 	// union u_objects		*objects;
 	cl_float3			center;
-	float				radius;
 	cl_float3			normal;
 	cl_float3			axis;
+	float				radius;
 # else
 	float3				center;
-	float				radius;
 	float3				normal;
 	float3				axis;
+	float				radius;
 # endif
 	enum e_obj_type		type;
 	int					color;

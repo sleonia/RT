@@ -6,7 +6,7 @@
 /*   By: deladia <deladia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/24 12:43:04 by deladia           #+#    #+#             */
-/*   Updated: 2019/12/10 19:06:26 by deladia          ###   ########.fr       */
+/*   Updated: 2019/12/11 16:04:29 by deladia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int 		sdl_update(t_sdl *sdl)
 /*
 ** 	Бесконечный цикл реагирующий на нажатие клавишь и обновляющий после этого текстуру
 */
-int			sdl_control(t_sdl *sdl, t_scene *scene)
+int			sdl_control(t_sdl *sdl, t_scene *scene, t_cl *cl)
 {
 	char	quit;
 
@@ -67,55 +67,45 @@ int			sdl_control(t_sdl *sdl, t_scene *scene)
 				//сравниваем с тем что нажато и делаем то что нужно
 				if (sdl->event.key.keysym.scancode == SDL_SCANCODE_ESCAPE)
 					quit = 1;
-				// if (sdl->event.key.keysym.scancode == SDL_SCANCODE_W)
-				// {
-				// 	scene->cam->position.z += 0.1;
-				// 	trace_start(sdl, scene);
-				// }
-				// if (sdl->event.key.keysym.scancode == SDL_SCANCODE_S)
-				// {
-				// 	scene->cam->position.z -= 0.1;
-				// 	trace_start(sdl, scene);
-				// }
-				// if (sdl->event.key.keysym.scancode == SDL_SCANCODE_A)
-				// {
-				// 	scene->cam->position.x -= 0.1;
-				// 	trace_start(sdl, scene);
-				// }
-				// if (sdl->event.key.keysym.scancode == SDL_SCANCODE_D)
-				// {
-				// 	scene->cam->position.x += 0.1;
-				// 	trace_start(sdl, scene);
-				// }
-				// if (sdl->event.key.keysym.scancode == SDL_SCANCODE_R)
-				// {
-				// 	scene->cam->position.y += 0.1;
-				// 	trace_start(sdl, scene);
-				// }
-				// if (sdl->event.key.keysym.scancode == SDL_SCANCODE_F)
-				// {
-				// 	scene->cam->position.y -= 0.1;
-				// 	trace_start(sdl, scene);
-				// }
+				if (sdl->event.key.keysym.scancode == SDL_SCANCODE_W)
+				{
+					scene->cam.pos.s[2] += 0.1;
+				}
+				if (sdl->event.key.keysym.scancode == SDL_SCANCODE_S)
+				{
+					scene->cam.pos.s[2] -= 0.1;
+				}
+				if (sdl->event.key.keysym.scancode == SDL_SCANCODE_A)
+				{
+					scene->cam.pos.s[0] -= 0.1;
+				}
+				if (sdl->event.key.keysym.scancode == SDL_SCANCODE_D)
+				{
+					scene->cam.pos.s[0]+= 0.1;
+				}
+				if (sdl->event.key.keysym.scancode == SDL_SCANCODE_R)
+				{
+					scene->cam.pos.s[1] += 0.1;
+				}
+				if (sdl->event.key.keysym.scancode == SDL_SCANCODE_F)
+				{
+					scene->cam.pos.s[1] -= 0.1;
+				}
 				if (sdl->event.key.keysym.scancode == SDL_SCANCODE_Z)
 				{
 					scene->cam.a += 0.1;
-					// trace_start(sdl, scene);
 				}
 				if (sdl->event.key.keysym.scancode == SDL_SCANCODE_X)
 				{
 					scene->cam.a -= 0.1;
-					// trace_start(sdl, scene);
 				}
 				if (sdl->event.key.keysym.scancode == SDL_SCANCODE_Q)
 				{
 					scene->cam.b -= 0.1;
-					// trace_start(sdl, scene);
 				}
 				if (sdl->event.key.keysym.scancode == SDL_SCANCODE_E)
 				{
 					scene->cam.b += 0.1;
-					// trace_start(sdl, scene);
 				}
 				if (sdl->event.key.keysym.scancode == SDL_SCANCODE_P)
 				{
@@ -123,7 +113,6 @@ int			sdl_control(t_sdl *sdl, t_scene *scene)
 						scene->off.point = 1;
 					else
 						scene->off.point = 0;
-					// trace_start(sdl, scene);
 				}
 				if (sdl->event.key.keysym.scancode == SDL_SCANCODE_I)
 				{
@@ -131,7 +120,6 @@ int			sdl_control(t_sdl *sdl, t_scene *scene)
 						scene->off.ambient = 1;
 					else
 						scene->off.ambient = 0;
-					// trace_start(sdl, scene);
 				}
 				if (sdl->event.key.keysym.scancode == SDL_SCANCODE_O)
 				{
@@ -139,7 +127,6 @@ int			sdl_control(t_sdl *sdl, t_scene *scene)
 						scene->off.directional = 1;
 					else
 						scene->off.directional = 0;
-					// trace_start(sdl, scene);
 				}
 				if (sdl->event.key.keysym.scancode == SDL_SCANCODE_U)
 				{
@@ -147,8 +134,8 @@ int			sdl_control(t_sdl *sdl, t_scene *scene)
 						scene->off.reflect = 1;
 					else
 						scene->off.reflect = 0;
-					// trace_start(sdl, scene);
 				}
+				set_arg(cl, sdl, scene);
 				sdl_update(sdl);
 			}
 		}
