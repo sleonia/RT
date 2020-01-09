@@ -77,7 +77,7 @@ static float3		get_obj_normal(float3 *p, t_return *ret, float3 *o, float3 *d, __
 	if (obj[ret->closest_object].type == o_sphere)
 		n = *p - obj[ret->closest_object].center;
 	else if (obj[ret->closest_object].type == o_plane)
-		n = obj[ret->closest_object].normal;
+		n = obj[ret->closest_object].axis;
 	else if (obj[ret->closest_object].type == o_cone)
 		n = get_cone_normal(o, d, obj, ret->closest_t);
 	else if (obj[ret->closest_object].type == o_cylinder)
@@ -145,7 +145,7 @@ static float2	intersect_ray_plane(float3 *o, float3 *d, __global t_object *pl)
 
 	oc = *o - pl->center;
 	min = oc * (-1);
-	t = dot(min, pl->normal) / dot(*d, pl->normal);
+	t = dot(min, pl->axis) / dot(*d, pl->axis);
 	res.x = t;
 	res.y = INFINITY;
 	return (res);
@@ -199,7 +199,7 @@ static t_return	closest_intersection(float3 *o, float3 *d, float t_min, float t_
 	ret.closest_t = INFINITY;
 	ret.closest_object = -1;
 	i = 0;
-	while (i < 4)
+	while (i < 6)
 	{
 		res = get_intersect(o, d, &object[i]);
 		if (res.y >= t_min && res.y <= t_max && res.y < ret.closest_t)
@@ -207,7 +207,7 @@ static t_return	closest_intersection(float3 *o, float3 *d, float t_min, float t_
 			ret.closest_t = res.y;
 			ret.closest_object = i;
 		}
-		else if (res.x >= t_min && res.x <= t_max && res.x < ret.closest_t)
+		if (res.x >= t_min && res.x <= t_max && res.x < ret.closest_t)
 		{
 			ret.closest_t = res.x;
 			ret.closest_object = i;

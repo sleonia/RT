@@ -6,7 +6,7 @@
 /*   By: deladia <deladia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/24 12:57:07 by deladia           #+#    #+#             */
-/*   Updated: 2020/01/09 04:11:47 by deladia          ###   ########.fr       */
+/*   Updated: 2020/01/09 05:51:42 by deladia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	init_object(t_object **object)
 {
-	*object = (t_object *)ft_memalloc(sizeof(t_object) * 4);
+	*object = (t_object *)ft_memalloc(sizeof(t_object) * 5);
 
 	// object[4] = (t_object *)ft_memalloc(sizeof(t_object));
 	// object[5] = (t_object *)ft_memalloc(sizeof(t_object));
@@ -48,12 +48,43 @@ void	init_object(t_object **object)
 	(*object)[2].center = (cl_float3){-2, 0, 4};
 	(*object)[2].radius = 1.0f;
 
-	(*object)[3].type = o_sphere;
+	// (*object)[3].type = o_sphere;
+	// (*object)[3].color = 0xFFFF00;
+	// (*object)[3].reflective = 0.3f;
+	// (*object)[3].specular = 300;
+	// (*object)[3].center = (cl_float3){0, -5001, 0};
+	// (*object)[3].radius = 5000.0f;
+
+	cl_float3			pos;
+	cl_float3			axis;
+	float				tan;
+	int					color;
+	int					specular;
+	float				reflective;
+
+	(*object)[3].type = o_cone;
 	(*object)[3].color = 0xFFFF00;
 	(*object)[3].reflective = 0.3f;
 	(*object)[3].specular = 300;
-	(*object)[3].center = (cl_float3){0, -5001, 0};
-	(*object)[3].radius = 5000.0f;
+	(*object)[3].center = (cl_float3){-3, 0, 10};
+	(*object)[3].axis = (cl_float3){0, 1, 0};
+	(*object)[3].tan = 0.2f;
+
+	(*object)[4].type = o_cylinder;
+	(*object)[4].color = 0xFF00FF;
+	(*object)[4].reflective = 0.3f;
+	(*object)[4].specular = 300;
+	(*object)[4].center = (cl_float3){3, 0, 7};
+	(*object)[4].axis = (cl_float3){0, 1, 0};
+	(*object)[4].radius = 0.2f;
+
+	(*object)[5].type = o_plane;
+	(*object)[5].color = 0x00FFFF;
+	(*object)[5].reflective = 0.3f;
+	(*object)[5].specular = 300;
+	(*object)[5].center = (cl_float3){0, -5, 10};
+	(*object)[5].axis = (cl_float3){0, 1, 0};
+	(*object)[5].tan = 0.2f;
 	// init_sphere_param((*object)[0], (t_sphere_params){(cl_float3){0, -1, 3}, 1.0f, 0xFF0000, 500, 0.2f});
 	// init_sphere_param((*object)[1], (t_sphere_params){(cl_float3){2, 0, 4}, 1.0f, 0x0000FF, 500, 0.3f});
 	// init_sphere_param((*object)[2], (t_sphere_params){(cl_float3){-2, 0, 4}, 1.0f, 0x00FF00, 10, 0.4f});

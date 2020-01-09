@@ -6,7 +6,7 @@
 /*   By: deladia <deladia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/06 19:23:27 by deladia           #+#    #+#             */
-/*   Updated: 2020/01/09 01:49:41 by deladia          ###   ########.fr       */
+/*   Updated: 2020/01/09 05:41:25 by deladia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,12 +135,10 @@ typedef struct			s_object
 # ifndef OPENCL___
 	// union u_objects		*objects;
 	cl_float3			center;
-	cl_float3			normal;
 	cl_float3			axis;
 	float				radius;
 # else
 	float3				center;
-	float3				normal;
 	float3				axis;
 	float				radius;
 # endif
