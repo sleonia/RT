@@ -53,11 +53,8 @@ static float3	get_cone_normal(float3 *start_ray, float3 *ray, __global t_object 
 	float3	oc;
 	float	m;
 
-	// oc = vector_minus(start_ray, &obj->center);
 	oc = *start_ray - obj->center;
-	// m = dot(ray, &obj->axis) * intersect_dist + dot(&oc, &obj->axis);
 	m = dot(*ray, obj->axis) * intersect_dist + dot(oc, obj->axis);
-	// ret_normal = v_minus(v_plus(vector_on_number(ray, intersect_dist), oc), vector_on_number(&obj->axis, (1 + obj->tan * obj->tan) * m));
 	ret_normal = (((*ray * intersect_dist) + oc) - (obj->axis * (1 + obj->tan * obj->tan) * m));
 	return (ret_normal);
 }
@@ -67,11 +64,8 @@ static float3	get_cylinder_normal(__global t_object *obj, float3 *intersect_poin
 	float3	n;
 	float3	v;
 
-	// v = vector_minus(intersect_point, &obj->center);
 	v = *intersect_point - obj->center;
-	// n = vector_on_number(&obj->axis, dot(&v, &obj->axis));
 	n = obj->axis * dot(v, obj->axis);
-	// n = vector_minus(&v, &n);
 	n = v - n;
 	return (n);
 }
@@ -79,11 +73,8 @@ static float3	get_cylinder_normal(__global t_object *obj, float3 *intersect_poin
 static float3		get_obj_normal(float3 *p, t_return *ret, float3 *o, float3 *d, __global t_object *obj)
 {
 	float3		n;
-	// t_object	*obj;
 
-	// obj = ret->closest_object;
 	if (obj[ret->closest_object].type == o_sphere)
-		// n = vector_minus(p, &obj->objects->sphere.center);
 		n = *p - obj[ret->closest_object].center;
 	else if (obj[ret->closest_object].type == o_plane)
 		n = obj[ret->closest_object].normal;
@@ -91,7 +82,6 @@ static float3		get_obj_normal(float3 *p, t_return *ret, float3 *o, float3 *d, __
 		n = get_cone_normal(o, d, obj, ret->closest_t);
 	else if (obj[ret->closest_object].type == o_cylinder)
 		n = get_cylinder_normal(obj, p);
-	// n = vector_div(&n, vector_len(&n));
 	n = n / vector_len(n);
 	return (n);
 }
@@ -104,8 +94,6 @@ static float2	intersect_ray_sphere(float3 *o, float3 *d, __global t_object *sphe
 	float		k3;
 	float2	res;
 
-
-	// oc = vector_minus(o, &sphere->center);
 	oc = *o - sphere->center;
 	k1 = dot(*d, *d);
 	k2 = 2 * dot(oc, *d);
@@ -130,7 +118,6 @@ static float2    intersect_ray_cylinder(float3 *o, float3 *d, __global t_object 
 	float  discr;
 	float2    res;
 
-	// oc = vector_minus(o, &cyl->center);
 	oc = *o - cyl->center;
 	a = dot(*d, *d) - dot(*d, cyl->axis) * dot(*d, cyl->axis);
 	c = dot(oc, oc) - dot(oc, cyl->axis) * dot(oc, cyl->axis) - cyl->radius * cyl->radius;
@@ -156,9 +143,7 @@ static float2	intersect_ray_plane(float3 *o, float3 *d, __global t_object *pl)
 	float		t;
 	float2		res;
 
-	// oc = vector_minus(cam,&pl->center);
 	oc = *o - pl->center;
-	// min = vector_on_number(&oc,-1);
 	min = oc * (-1);
 	t = dot(min, pl->normal) / dot(*d, pl->normal);
 	res.x = t;
@@ -175,7 +160,6 @@ static float2    intersect_ray_cone(float3 *o, float3 *d, __global t_object *con
 	float  discr;
 	float2    res;
 
-	// oc = vector_minus(o, &cone->center);
 	oc = *o - cone->center;
 	a = dot(*d, *d) - (1 + cone->tan * cone->tan) * dot(*d, cone->axis) * dot(*d, cone->axis);
 	c = dot(oc, oc) - (1 + cone->tan * cone->tan) * dot(oc, cone->axis) * dot(oc, cone->axis);
@@ -209,16 +193,12 @@ static float2	get_intersect(float3 *o, float3 *d, __global t_object *obj)
 static t_return	closest_intersection(float3 *o, float3 *d, float t_min, float t_max, __global t_object *object)
 {
 	float2	res;
-	// t_object	*tmp;
 	int 		i;
 	t_return	ret;
 
 	ret.closest_t = INFINITY;
 	ret.closest_object = -1;
-	// tmp = (t_object *)object;
-	// printf("%f ", tmp[2].reflective);
 	i = 0;
-	// printf("%d ", tmp[0]->specular);
 	while (i < 4)
 	{
 		res = get_intersect(o, d, &object[i]);
@@ -234,7 +214,6 @@ static t_return	closest_intersection(float3 *o, float3 *d, float t_min, float t_
 		}	
 		i++;
 	}
-	// printf("%f ", ret.closest_t);
 	return (ret);
 }
 /////////////////////////////////////
@@ -248,7 +227,6 @@ static float3		reflect_ray(float3 *r, float3 *n)
 ///////////////////////////////////////////////////
 static float		computer_lighting(float3 *p, float3 *n, float3 *v, int specular, __global t_object *object, __global t_light *light)
 {
-	// t_light		*tmp;
 	float3		l;
 	float3		r;
 	float3		buf;
@@ -261,31 +239,20 @@ static float		computer_lighting(float3 *p, float3 *n, float3 *v, int specular, _
 
 	i = 0;
 	intens = 0.0;
-	// tmp = (t_light *)light;
-	//костыль чтобы занулить l
-	// l = vector_on_number(&l, 0);
 	l = 0;
 	while (i < 3)
 	{
-		// printf("%c ", light[i].type)
-		// if (light[i].type == 'A' && !scene->off->ambient)
 		if (light[i].type == 'A')
 			intens += light[i].intensity;
 		else
 		{
-			// if (light[i].type == 'P' && !scene->off->point)
 			if (light[i].type == 'P')
 			{
-				// l = vector_minus(&tmp[i].position, p);
 				l = light[i].pos - *p;
 				t_max = 1.0;
 			}
-			// else if (light[i].type == 'D' && !scene->off->directional)
 			else if (light[i].type == 'D')
 			{
-				// l.x = tmp[i]->position.x;
-				// l.y = tmp[i]->position.y;
-				// l.z = tmp[i]->position.z;
 				l = light[i].pos;
 				t_max = INFINITY;
 			}
@@ -305,12 +272,6 @@ static float		computer_lighting(float3 *p, float3 *n, float3 *v, int specular, _
 				// Блеск
 				if (specular != -1)
 				{
-					//// buf = vector_on_number(n, 2);
-					// buf = *n * 2;
-					// // buf = vector_on_number(&buf, ft_dot(n, &l));
-					// buf = buf * dot(*n, l);
-					// // r = vector_minus(&buf, &l);
-					// r = buf - l;
 					r = reflect_ray(&l, n);
 					r_dot_v = dot(r, *v);
 					if (r_dot_v > 0)
@@ -332,20 +293,11 @@ static t_help			 trace_ray(float3 *o, float3 *d, float t_min, float t_max, __glo
 	float3		buf;
 	float3		r;
 	float		c;
-	// float		ref;
 	int			local_color;
-	// int reflected_color;
 	t_return	ret;
 	t_help		help;
 
-
-	// printf("%f ", object[2].reflective);
-	// printf("%f ", light[2].intensity);
 	ret = closest_intersection(o, d, t_min, t_max, object);
-	//  был NULL
-	// printf("%f ", o.x);
-	// printf("%f ", object[ret.closest_object].reflective);
-	// if (!object[ret.closest_object])
 	if (ret.closest_object ==  -1)
 	{
 		help.color = BLACK;
@@ -354,18 +306,11 @@ static t_help			 trace_ray(float3 *o, float3 *d, float t_min, float t_max, __glo
 		help.ref = 0;
 		return (help);
 	}
-	// buf = vector_on_number(d, ret.closest_t);
 	buf = *d * ret.closest_t;
-	// p = vector_pus(o, &buf);
 	p = *o + buf;
-	// n = get_obj_normal(&p, &ret, o, d);!
 	n = get_obj_normal(&p, &ret, o, d, object);
-	// printf("%f ", n.x);
-	// n = vector_div(&n, vector_len(&n));!!!!
-	// buf = vector_on_number(d, -1);
 	buf = *d * (-1);
 	c = computer_lighting(&p, &n, &buf, object[ret.closest_object].specular, object, light);
-	// printf("%f ", c);
 	local_color = color_scale(object[ret.closest_object].color, c);
 	r = reflect_ray(&buf, &n);
 	help.color = local_color;
@@ -373,21 +318,10 @@ static t_help			 trace_ray(float3 *o, float3 *d, float t_min, float t_max, __glo
 	help.r = r;
 	help.ref = object[ret.closest_object].reflective;
 	return (help);
-	// Проверка выхода из рекурсии
-	// ref = object[ret.closest_object].reflective;
-	// printf("%f ", ref);
-	// if (depth <= 0 || ref <= 0)
-	// 	return (local_color);
-
-	// // //Рекурсивная часть отражения объектов
-	// r = reflect_ray(&buf, &n);
-	// reflected_color = trace_ray(&p, &r, 0.001, INFINITY, object, light, depth - 1);
-	// return (color_scale(local_color, 1 - ref) + color_scale(reflected_color, ref));
 }
 
 __kernel void RT(__global int *arr, __global t_cam *cam, __global t_object *object, __global t_light *light)
 {
-	int 	color;
 	int 	x;
 	int 	y;
 	int		pixel;
@@ -396,24 +330,12 @@ __kernel void RT(__global int *arr, __global t_cam *cam, __global t_object *obje
 	float3	ref_tmp;
 	int3	color_tmp;
 	t_help	help;
-	// int4	color_vec;
 
 	pixel = get_global_id(0);
-	// for(int i = 0; i < 4; i++)
-	// {
-		x = pixel % WIDTH - WIDTH / 2;
-		y = HEIGHT / 2 - pixel / WIDTH;
-
-
-		// x += i % 2;
-		// y += i / 2;
-	// printf("%f %f\n", scene->cam->a, scene->cam->b);
+	x = pixel % WIDTH - WIDTH / 2;
+	y = HEIGHT / 2 - pixel / WIDTH;
 	d = matrix_rotation(cam->a, cam->b, canvas_to_viewport(x, y));
 	o = (float3)cam->pos;
-	// printf("%f %f %f\n", scene->view.x, scene->view.y, scene->view.z);
-	// printf("%f ", scene->light[0]->intensity);
-	// До этого момента все нормально, нужно пробежаться принтфом по trace_ray
-	// или написать заного по статье
 	int i = 1;
 	help = trace_ray(&o, &d, 1.0f, INFINITY, object, light);
 	color_tmp[0] = help.color;
@@ -421,12 +343,6 @@ __kernel void RT(__global int *arr, __global t_cam *cam, __global t_object *obje
 	while (i < 3)
 	{
 		help = trace_ray(&help.p, &help.r, 0.1f, INFINITY, object, light);
-		// if (help.color == BLACK)
-		// {
-		// 	color_tmp[i] = BLACK;
-		// 	i++;
-		// 	break ;
-		// }
 		if (help.ref == 0)
 		{
 			color_tmp[i] = help.color;
@@ -436,16 +352,12 @@ __kernel void RT(__global int *arr, __global t_cam *cam, __global t_object *obje
 		color_tmp[i] = help.color;
 		ref_tmp[i] = help.ref;
 		i++;
-		// color_scale(local_color, 1 - ref) + color_scale(reflected_color, ref)
 	}
-	// printf("%d %d %d\n", color_tmp.x, color_tmp.y, color_tmp.z);
 	while (--i > 0)
 	{
 		color_tmp[i - 1] = color_scale(color_tmp[i - 1], 1 - ref_tmp[i - 1]) + color_scale(color_tmp[i], ref_tmp[i - 1]);
 	}
-	// printf("%d %d\n", x, y);
-	color = color_tmp[0];
-	arr[pixel] = color;
+	arr[pixel] = color_tmp[0];
 }
 
 //Не работает рекурсия, надо как-то заменить для зеркального отражения объектов на других объектах
