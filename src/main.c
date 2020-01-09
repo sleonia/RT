@@ -6,7 +6,7 @@
 /*   By: deladia <deladia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/24 12:57:07 by deladia           #+#    #+#             */
-/*   Updated: 2019/12/11 16:32:54 by deladia          ###   ########.fr       */
+/*   Updated: 2020/01/09 04:11:47 by deladia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	init_object(t_object **object)
 
 	(*object)[3].type = o_sphere;
 	(*object)[3].color = 0xFFFF00;
-	(*object)[3].reflective = 0.4f;
+	(*object)[3].reflective = 0.3f;
 	(*object)[3].specular = 300;
 	(*object)[3].center = (cl_float3){0, -5001, 0};
 	(*object)[3].radius = 5000.0f;

@@ -6,7 +6,7 @@
 /*   By: deladia <deladia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/06 19:23:27 by deladia           #+#    #+#             */
-/*   Updated: 2019/12/11 16:28:21 by deladia          ###   ########.fr       */
+/*   Updated: 2020/01/09 01:49:41 by deladia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,19 @@ typedef struct			s_cam
 	float				a;
 	float				b;
 }						t_cam;
+
+typedef struct			s_help
+{
+# ifndef OPENCL___
+	cl_float3			p;
+	cl_float3			r;
+# else
+	float3				p;
+	float3				r;
+# endif
+	int					color;
+	float				ref;
+}						t_help;
 
 typedef struct 			s_light
 {

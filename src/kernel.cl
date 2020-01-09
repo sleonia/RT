@@ -237,7 +237,14 @@ static t_return	closest_intersection(float3 *o, float3 *d, float t_min, float t_
 	// printf("%f ", ret.closest_t);
 	return (ret);
 }
-
+/////////////////////////////////////
+static float3		reflect_ray(float3 *r, float3 *n)
+{
+	float3	ret;
+	
+	ret = *n * 2 * dot(*r, *n) - *r;
+	return (ret);
+}
 ///////////////////////////////////////////////////
 static float		computer_lighting(float3 *p, float3 *n, float3 *v, int specular, __global t_object *object, __global t_light *light)
 {
@@ -295,15 +302,16 @@ static float		computer_lighting(float3 *p, float3 *n, float3 *v, int specular, _
 				n_dot_l = dot(*n, l);
 				if (n_dot_l > 0)
 					intens += light[i].intensity * n_dot_l / (vector_len(*n) * vector_len(l));
-				// Зеркальность
+				// Блеск
 				if (specular != -1)
 				{
-					// buf = vector_on_number(n, 2);
-					buf = *n * 2;
-					// buf = vector_on_number(&buf, ft_dot(n, &l));
-					buf = buf * dot(*n, l);
-					// r = vector_minus(&buf, &l);
-					r = buf - l;
+					//// buf = vector_on_number(n, 2);
+					// buf = *n * 2;
+					// // buf = vector_on_number(&buf, ft_dot(n, &l));
+					// buf = buf * dot(*n, l);
+					// // r = vector_minus(&buf, &l);
+					// r = buf - l;
+					r = reflect_ray(&l, n);
 					r_dot_v = dot(r, *v);
 					if (r_dot_v > 0)
 						intens += light[i].intensity * pow(r_dot_v / (vector_len(r) * vector_len(*v)), specular);
@@ -316,35 +324,21 @@ static float		computer_lighting(float3 *p, float3 *n, float3 *v, int specular, _
 		return (1.0);
 	return (intens);
 }
-/////////////////////////////////////
-static float3		reflect_ray(float3 *r, float3 *n)
-{
-	float3	ret;
-	float3	a;
-	float3	b;
 
-	a = *n * 2;
-	b = a * dot(*r, *n);
-	ret = b - *r;
-	return (ret);
-}
-///////////////////////////////////////
-static int			 trace_ray(float3 *o, float3 *d, float t_min, float t_max, __global t_object *object, __global t_light *light)
+static t_help			 trace_ray(float3 *o, float3 *d, float t_min, float t_max, __global t_object *object, __global t_light *light)
 {
-	float3 p;
-	float3 n;
-	float3 buf;
-	// float3 r;
-	float c;
-	float ref;
-	int local_color;
+	float3		p;
+	float3		n;
+	float3		buf;
+	float3		r;
+	float		c;
+	// float		ref;
+	int			local_color;
 	// int reflected_color;
-	t_return ret;
+	t_return	ret;
+	t_help		help;
 
-	for (int i = 3; i > 0; i--)
-	{
 
-	}
 	// printf("%f ", object[2].reflective);
 	// printf("%f ", light[2].intensity);
 	ret = closest_intersection(o, d, t_min, t_max, object);
@@ -353,7 +347,13 @@ static int			 trace_ray(float3 *o, float3 *d, float t_min, float t_max, __global
 	// printf("%f ", object[ret.closest_object].reflective);
 	// if (!object[ret.closest_object])
 	if (ret.closest_object ==  -1)
-		return (BLACK);
+	{
+		help.color = BLACK;
+		help.r = 0;
+		help.p = 0;
+		help.ref = 0;
+		return (help);
+	}
 	// buf = vector_on_number(d, ret.closest_t);
 	buf = *d * ret.closest_t;
 	// p = vector_pus(o, &buf);
@@ -367,7 +367,12 @@ static int			 trace_ray(float3 *o, float3 *d, float t_min, float t_max, __global
 	c = computer_lighting(&p, &n, &buf, object[ret.closest_object].specular, object, light);
 	// printf("%f ", c);
 	local_color = color_scale(object[ret.closest_object].color, c);
-	return (local_color);
+	r = reflect_ray(&buf, &n);
+	help.color = local_color;
+	help.p = p;
+	help.r = r;
+	help.ref = object[ret.closest_object].reflective;
+	return (help);
 	// Проверка выхода из рекурсии
 	// ref = object[ret.closest_object].reflective;
 	// printf("%f ", ref);
@@ -388,30 +393,62 @@ __kernel void RT(__global int *arr, __global t_cam *cam, __global t_object *obje
 	int		pixel;
 	float3	d;
 	float3	o;
-	int4	color_vec;
+	float3	ref_tmp;
+	int3	color_tmp;
+	t_help	help;
+	// int4	color_vec;
 
 	pixel = get_global_id(0);
 	// for(int i = 0; i < 4; i++)
 	// {
 		x = pixel % WIDTH - WIDTH / 2;
 		y = HEIGHT / 2 - pixel / WIDTH;
+
+
 		// x += i % 2;
 		// y += i / 2;
 	// printf("%f %f\n", scene->cam->a, scene->cam->b);
-		d = matrix_rotation(cam->a, cam->b, canvas_to_viewport(x, y));
-		o = (float3)cam->pos;
+	d = matrix_rotation(cam->a, cam->b, canvas_to_viewport(x, y));
+	o = (float3)cam->pos;
 	// printf("%f %f %f\n", scene->view.x, scene->view.y, scene->view.z);
 	// printf("%f ", scene->light[0]->intensity);
 	// До этого момента все нормально, нужно пробежаться принтфом по trace_ray
 	// или написать заного по статье
-		color = trace_ray(&o, &d, 1.0, INFINITY, object, light);
-		// color_vec[i] = color;
-	// }
-	// color = color_scale(color_vec[0], 0.25f) + color_scale(color_vec[1], 0.25f) + color_scale(color_vec[2], 0.25f) + color_scale(color_vec[3], 0.25f);
+	int i = 1;
+	help = trace_ray(&o, &d, 1.0f, INFINITY, object, light);
+	color_tmp[0] = help.color;
+	ref_tmp[0] = help.ref;
+	while (i < 3)
+	{
+		help = trace_ray(&help.p, &help.r, 0.1f, INFINITY, object, light);
+		// if (help.color == BLACK)
+		// {
+		// 	color_tmp[i] = BLACK;
+		// 	i++;
+		// 	break ;
+		// }
+		if (help.ref == 0)
+		{
+			color_tmp[i] = help.color;
+			i++;
+			break ;
+		}		
+		color_tmp[i] = help.color;
+		ref_tmp[i] = help.ref;
+		i++;
+		// color_scale(local_color, 1 - ref) + color_scale(reflected_color, ref)
+	}
+	// printf("%d %d %d\n", color_tmp.x, color_tmp.y, color_tmp.z);
+	while (--i > 0)
+	{
+		color_tmp[i - 1] = color_scale(color_tmp[i - 1], 1 - ref_tmp[i - 1]) + color_scale(color_tmp[i], ref_tmp[i - 1]);
+	}
 	// printf("%d %d\n", x, y);
+	color = color_tmp[0];
 	arr[pixel] = color;
 }
 
 //Не работает рекурсия, надо как-то заменить для зеркального отражения объектов на других объектах
 //Реализовать path tracing
 //Как пускать не 1 луч в пиксель, а 4 луча на границах для точности
+//Разбиение экрана на блоки
