@@ -6,7 +6,7 @@
 /*   By: deladia <deladia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/25 21:18:10 by deladia           #+#    #+#             */
-/*   Updated: 2019/12/11 16:37:34 by deladia          ###   ########.fr       */
+/*   Updated: 2020/01/10 21:16:00 by deladia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -177,7 +177,7 @@ typedef struct			s_cl
 	cl_kernel			kernel;
 	size_t				global_work_size[1];
 	cl_device_id		device_id;
-	cl_mem				memobjs[4];
+	cl_mem				memobjs[5];
 	char 				*program_source;
 	size_t 				program_size;
 }						t_cl;
@@ -189,6 +189,7 @@ typedef struct 			s_sdl
 	SDL_Texture			*texture;
 	SDL_Event			event;
 	int					*pixels;
+	int					*background;
 }						t_sdl;
 
 typedef struct 			s_rtv1

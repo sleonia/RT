@@ -6,7 +6,7 @@
 /*   By: deladia <deladia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/28 19:00:37 by deladia           #+#    #+#             */
-/*   Updated: 2020/01/09 05:50:56 by deladia          ###   ########.fr       */
+/*   Updated: 2020/01/10 21:19:07 by deladia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,10 @@ int		set_arg_1(t_cl *cl, t_sdl *sdl, t_scene *scene)
 									sizeof(t_light) * 3, scene->light, 0, NULL,
 									NULL)) != 0)
 		func_error(-10);
+	if ((ret = clEnqueueWriteBuffer(cl->cmd_queue, cl->memobjs[4], CL_TRUE, 0, 
+									sizeof(cl_int) * HEIGHT * WIDTH, (cl_int *)sdl->background, 0, NULL, 
+									NULL)) != 0)
+		func_error(-10);	
 	if ((ret = clEnqueueNDRangeKernel(cl->cmd_queue, cl->kernel, 1, NULL,
 									  cl->global_work_size, NULL, 0, NULL, NULL)) != 0)
 		func_error(-11);
@@ -54,6 +58,7 @@ int		set_arg(t_cl *cl, t_sdl *sdl, t_scene *scene)
 	ret |= clSetKernelArg(cl->kernel, 1, sizeof(cl_mem), &cl->memobjs[1]);
 	ret |= clSetKernelArg(cl->kernel, 2, sizeof(cl_mem), &cl->memobjs[2]);
 	ret |= clSetKernelArg(cl->kernel, 3, sizeof(cl_mem), &cl->memobjs[3]);
+	ret |= clSetKernelArg(cl->kernel, 4, sizeof(cl_mem), &cl->memobjs[4]);
 	// ret |= clSetKernelArg(cl->kernel, 1, sizeof(int), &side_x);
 	// ret |= clSetKernelArg(cl->kernel, 2, sizeof(int), &side_y);
 	// ret |= clSetKernelArg(cl->kernel, 3, sizeof(double), &fract->x);
@@ -107,6 +112,8 @@ int		create_cl_1(t_cl *cl, t_scene *scene)
 	if ((cl->memobjs[2] = clCreateBuffer(cl->context, CL_MEM_READ_WRITE | CL_MEM_COPY_HOST_PTR, sizeof(t_object) * 6, scene->object, &ret)) && ret != 0)
 		func_error(-5);
 	if ((cl->memobjs[3] = clCreateBuffer(cl->context, CL_MEM_READ_WRITE | CL_MEM_COPY_HOST_PTR, sizeof(t_light) * 3, scene->light, &ret)) && ret != 0)
+		func_error(-5);
+	if ((cl->memobjs[4] = clCreateBuffer(cl->context, CL_MEM_READ_WRITE, sizeof(cl_int) * WIDTH * HEIGHT, NULL, &ret)) && ret != 0)
 		func_error(-5);
 	return (0);
 }

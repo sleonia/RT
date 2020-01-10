@@ -320,7 +320,7 @@ static t_help			 trace_ray(float3 *o, float3 *d, float t_min, float t_max, __glo
 	return (help);
 }
 
-__kernel void RT(__global int *arr, __global t_cam *cam, __global t_object *object, __global t_light *light)
+__kernel void RT(__global int *arr, __global t_cam *cam, __global t_object *object, __global t_light *light, __global int *background)
 {
 	int 	x;
 	int 	y;
@@ -342,7 +342,7 @@ __kernel void RT(__global int *arr, __global t_cam *cam, __global t_object *obje
 	ref_tmp[0] = help.ref;
 	while (i < 3)
 	{
-		help = trace_ray(&help.p, &help.r, 0.1f, INFINITY, object, light);
+		help = trace_ray(&help.p, &help.r, 0.001f, INFINITY, object, light);
 		if (help.ref == 0)
 		{
 			color_tmp[i] = help.color;
@@ -357,10 +357,15 @@ __kernel void RT(__global int *arr, __global t_cam *cam, __global t_object *obje
 	{
 		color_tmp[i - 1] = color_scale(color_tmp[i - 1], 1 - ref_tmp[i - 1]) + color_scale(color_tmp[i], ref_tmp[i - 1]);
 	}
+	// if (color_tmp[0] == BLACK)
+	// {
+	// 	color_tmp[0] = background[pixel];
+	// }
 	arr[pixel] = color_tmp[0];
 }
 
-//Не работает рекурсия, надо как-то заменить для зеркального отражения объектов на других объектах
+//Заменил рекурсию на цикл, надо все проверить почему при маленьком tmin рассыпается
 //Реализовать path tracing
 //Как пускать не 1 луч в пиксель, а 4 луча на границах для точности
 //Разбиение экрана на блоки
+//Дерьмовый бэкграунд

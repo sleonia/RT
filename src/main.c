@@ -6,7 +6,7 @@
 /*   By: deladia <deladia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/24 12:57:07 by deladia           #+#    #+#             */
-/*   Updated: 2020/01/09 05:51:42 by deladia          ###   ########.fr       */
+/*   Updated: 2020/01/10 21:19:53 by deladia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,19 +94,56 @@ void	init_object(t_object **object)
 	// init_cone_param(object[6], (t_cone_params){{0, 3, 5},{0, 1, 0}, 0.2, 0xFF00FF, 500, 0.4});
 }
 
+int			*try_to_back(t_sdl *sdl)
+{
+	int i = 0;
+	int j = 0;
+	SDL_Surface *back;
+	SDL_Surface *src;
+	SDL_Texture *text;
+	int			*ptr;
+	int x = 0;
+
+	back = SDL_LoadBMP("./backgraund12.bmp");
+	if (back == NULL)
+	{
+		printf("%s\n", SDL_GetError());
+		return (NULL);
+	}
+	back = SDL_ConvertSurfaceFormat(back, SDL_PIXELFORMAT_ARGB8888, NULL);
+	ptr = (int *)back->pixels;
+	// printf("%d %d\n", back->w, back->h);
+	while (i < back->h)
+	{
+		j = 0;
+		while (j < back->w)
+		{
+			// printf("%d\n", ptr[i * back->w + j]);
+			sdl->pixels[i * back->w + j] = ptr[i * back->w + j];
+			// printf("%d %d\n", j, i);
+			j++;
+		}
+		i++;
+	}	
+	return (ptr);
+}
+
 int			main(void)
 {
 	t_rtv1		*rtv1;
 
 	rtv1 = (t_rtv1 *)ft_memalloc(sizeof(t_rtv1));
 	rtv1->sdl = (t_sdl *)ft_memalloc((sizeof(t_sdl)));
+	
 	sdl_init(rtv1->sdl);
+	
 	rtv1->scene = (t_scene *)ft_memalloc(sizeof(t_scene));
 	rtv1->scene->cam.pos = (cl_float3){0.0, 0.0, 0.0};
 	init_object(&rtv1->scene->object);
 	init_light(&rtv1->scene->light);
 	rtv1->opencl = (t_cl *)ft_memalloc(sizeof(t_cl));
 	read_kernel(rtv1->opencl);
+	rtv1->sdl->background = try_to_back(rtv1->sdl);
 	create_cl(rtv1->opencl, rtv1->sdl, rtv1->scene);
 	sdl_control(rtv1->sdl, rtv1->scene, rtv1->opencl);
 	return (0);
