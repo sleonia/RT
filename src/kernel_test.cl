@@ -1,4 +1,10 @@
 #include "./includes/kernel.h"
+#include "./includes/rtv1.h"
+
+static float3	normalize(float3 vec)
+{
+	return (vec / sqrt(vec.x * vec.x + vec.y * vec.y + vec.z * vec.z));
+}
 
 static int 		color_scale(int	color, float c)
 {
@@ -86,27 +92,26 @@ static float3		get_obj_normal(float3 *p, t_return *ret, float3 *o, float3 *d, __
 	return (n);
 }
 /////////////////////////////////////////////////////////////////////
-static float2	intersect_ray_sphere(float3 *o, float3 *d, __global t_object *sphere)
+static int	intersect_ray_sphere(float3 *o, float3 *d, __global t_object *sphere, float *dist_i)
 {
 	float3		oc;
 	float		k1;
 	float		k2;
 	float		k3;
-	float2	res;
 
 	oc = *o - sphere->center;
 	k1 = dot(*d, *d);
 	k2 = 2 * dot(oc, *d);
 	k3 = dot(oc, oc) - sphere->radius * sphere->radius;
 	if (k2 * k2 - 4 * k1 * k3 < 0)
-	{
-		res.x = INFINITY;
-		res.y = INFINITY;
-		return (res);
-	}
-	res.x = (-k2 + sqrt(k2 * k2 - 4 * k1 * k3)) / (2 * k1);
-	res.y = (-k2 - sqrt(k2 * k2 - 4 * k1 * k3)) / (2 * k1);
-	return (res);
+		return (0);
+	*dist_i = (-k2 - sqrt(k2 * k2 - 4 * k1 * k3)) / (2 * k1);
+	if (*dist_i > 0.00001)
+		return (1);
+	*dist_i = (-k2 + sqrt(k2 * k2 - 4 * k1 * k3)) / (2 * k1);
+	if (*dist_i > 0.00001)
+		return (2);
+	return (0);
 }
 
 static float2    intersect_ray_cylinder(float3 *o, float3 *d, __global t_object *cyl)
@@ -125,8 +130,8 @@ static float2    intersect_ray_cylinder(float3 *o, float3 *d, __global t_object 
 	discr = b * b - a * c;
 	if (discr < 0.0 )
 	{
-		res.x = INFINITY;
-		res.y = INFINITY;
+		res.x = MAX_DIST;
+		res.y = MAX_DIST;
 	}
 	else
 	{
@@ -136,19 +141,17 @@ static float2    intersect_ray_cylinder(float3 *o, float3 *d, __global t_object 
 	return (res);
 }
 
-static float2	intersect_ray_plane(float3 *o, float3 *d, __global t_object *pl)
+static int	intersect_ray_plane(float3 *o, float3 *d, __global t_object *pl, float *dist_i)
 {
 	float3		oc;
 	float3		min;
-	float		t;
-	float2		res;
 
 	oc = *o - pl->center;
 	min = oc * (-1);
-	t = dot(min, pl->axis) / dot(*d, pl->axis);
-	res.x = t;
-	res.y = INFINITY;
-	return (res);
+	*dist_i = dot(min, pl->axis) / dot(*d, pl->axis);
+	if ((*dist_i < 0.f))
+		return (0);
+	return (1);
 }
 
 static float2    intersect_ray_cone(float3 *o, float3 *d, __global t_object *cone)
@@ -167,8 +170,8 @@ static float2    intersect_ray_cone(float3 *o, float3 *d, __global t_object *con
 	discr = b * b - a * c;
 	if (discr < 0.0 )
 	{
-		res.x = INFINITY;
-		res.y = INFINITY;
+		res.x = MAX_DIST;
+		res.y = MAX_DIST;
 	}
 	else
 	{
@@ -190,31 +193,76 @@ static float2	get_intersect(float3 *o, float3 *d, __global t_object *obj)
 		return (intersect_ray_cylinder(o, d, obj));
 }
 ////////////////////////////////////////////////////////////////////
-static t_return	closest_intersection(float3 *o, float3 *d, float t_min, float t_max, __global t_object *object)
+static int	closest_intersection(float3 *o, float3 *d, float t_min, float t_max, int count_obj, __global t_object *obj, t_lighting *lighting)
 {
-	float2	res;
-	int 		i;
-	t_return	ret;
+	// float2	res;
+	// int 		i;
+	// t_return	ret;
 
-	ret.closest_t = INFINITY;
-	ret.closest_object = -1;
+	float		dist;
+	int			i;
+	int			t12;
+	float		dist_i;
+
+	dist = MAX_DIST + 1.f;
 	i = 0;
-	while (i < 6)
+	while (i < count_obj)
 	{
-		res = get_intersect(o, d, &object[i]);
-		if (res.y >= t_min && res.y <= t_max && res.y < ret.closest_t)
+		if (obj->type == o_sphere)
 		{
-			ret.closest_t = res.y;
-			ret.closest_object = i;
+			dist_i = 0.f;
+			t12 = intersect_ray_sphere(o, d, obj[i], &dist_i);
+			if (t12 && dist_i < dist)
+			{
+				dist = dist_i;
+				lighting->hit = o + d * dist_i;
+				lighting->n = normalize(lighting->hit - obj[i].center);
+				if (t12 == 2)
+					lighting->n *= -1.f;
+				lighting->mat = obj[i].material;
+				//условие для uv mapping и наличия текстуры
+			}
 		}
-		if (res.x >= t_min && res.x <= t_max && res.x < ret.closest_t)
+		else if (obj->type == o_plane)
 		{
-			ret.closest_t = res.x;
-			ret.closest_object = i;
-		}	
+			dist_i = 0.f;
+			t12 = intersect_ray_plane(o, d, obj[i], &dist_i);
+			if (t12 && dist_i < dist)
+			{
+				dist = dist_i;
+				lighting->hit = o + d * dist_i;
+				lighting->n = obj[i].normal;
+				if (dot(d, lighting->n) > 0.f)
+					lighting->n *= -1.f;
+				lighting->mat = obj[i].material;
+				//условие для uv mapping и наличия текстуры
+		}
+		///////////////ДОДЕЛАТЬ
+		else if (obj->type == o_cone)
+		{
+			dist_i = 0.f;
+			t12 = intersect_ray_cone(o, d, obj[i], &dist_i);
+		}
+		else if (obj->type == o_cylinder)
+		{
+			dist_i = 0.f;
+			t12 = intersect_ray_cylinder(o, d, obj[i], &dist_i);
+		}
+		//////////////////
+		// res = get_intersect(o, d, &object[i]);
+		// if (res.y >= t_min && res.y <= t_max && res.y < ret.closest_t)
+		// {
+		// 	ret.closest_t = res.y;
+		// 	ret.closest_object = i;
+		// }
+		// if (res.x >= t_min && res.x <= t_max && res.x < ret.closest_t)
+		// {
+		// 	ret.closest_t = res.x;
+		// 	ret.closest_object = i;
+		// }	
 		i++;
 	}
-	return (ret);
+	return (dist < MAX_DIST);
 }
 /////////////////////////////////////
 static float3		reflect_ray(float3 *r, float3 *n)
@@ -229,13 +277,14 @@ static float		computer_lighting(float3 *p, float3 *n, float3 *v, int specular, _
 {
 	float3		l;
 	float3		r;
-	float3		buf;
+	// float3		buf;
 	float		intens;
 	float		n_dot_l;
 	float		r_dot_v;
 	float		t_max;
 	int 		i;
 	t_return	shadow;
+	t_lighting	shadow_lighting;
 
 	i = 0;
 	intens = 0.0;
@@ -254,12 +303,12 @@ static float		computer_lighting(float3 *p, float3 *n, float3 *v, int specular, _
 			else if (light[i].type == 'D')
 			{
 				l = light[i].pos;
-				t_max = INFINITY;
+				t_max = MAX_DIST;
 			}
 			// Проверка тени
 			if (t_max)
 			{
-				shadow = closest_intersection(p, &l, 0.001, t_max, object);
+				shadow = closest_intersection(p, &l, 0.001, t_max, 6, object, &shadow_lighting);
 				if (shadow.closest_object != -1)
 				{
 					i++;
@@ -286,7 +335,7 @@ static float		computer_lighting(float3 *p, float3 *n, float3 *v, int specular, _
 	return (intens);
 }
 
-static t_help			 trace_ray(float3 *o, float3 *d, float t_min, float t_max, __global t_object *object, __global t_light *light)
+static t_help			 trace_ray(float3 *o, float3 *d, float t_min, float t_max, int count_obj, __global t_object *object, __global t_light *light, t_lighting *lighting)
 {
 	float3		p;
 	float3		n;
@@ -297,7 +346,10 @@ static t_help			 trace_ray(float3 *o, float3 *d, float t_min, float t_max, __glo
 	t_return	ret;
 	t_help		help;
 
-	ret = closest_intersection(o, d, t_min, t_max, object);
+	if (closest_intersection(o, d, t_min, t_max, count_obj, object, lighting))
+	{
+
+	}
 	if (ret.closest_object ==  -1)
 	{
 		help.color = BLACK;
@@ -320,7 +372,7 @@ static t_help			 trace_ray(float3 *o, float3 *d, float t_min, float t_max, __glo
 	return (help);
 }
 
-__kernel void RT(__global int *arr, __global t_cam *cam, __global t_object *object, __global t_light *light, __global int *background)
+__kernel void RT(__global int *arr, __global t_cam *cam, __global t_object *object, __global t_light *light, __global int *skybox, int count_obj)
 {
 	int 	x;
 	int 	y;
@@ -329,38 +381,54 @@ __kernel void RT(__global int *arr, __global t_cam *cam, __global t_object *obje
 	float3	o;
 	float3	ref_tmp;
 	int3	color_tmp;
+	float3	color;
 	t_help	help;
+	t_lighting	lighting;
 
 	pixel = get_global_id(0);
 	x = pixel % WIDTH - WIDTH / 2;
 	y = HEIGHT / 2 - pixel / WIDTH;
-	d = matrix_rotation(cam->a, cam->b, canvas_to_viewport(x, y));
 	o = (float3)cam->pos;
+////////////
+	d = matrix_rotation(cam->a, cam->b, canvas_to_viewport(x, y));
+//////////
+	////Два цикла с fsaa (сглаживание)
+	////пересчет d с условиями сглаживания и поворота камеры
 	int i = 1;
-	help = trace_ray(&o, &d, 1.0f, INFINITY, object, light);
-	color_tmp[0] = help.color;
-	ref_tmp[0] = help.ref;
-	while (i < 3)
+	//Отправлять размеры текстуры, колличество объектов и количество источников света и саму текстуру
+
+		//условие что пересеклось
+	if (1)
 	{
-		help = trace_ray(&help.p, &help.r, 0.001f, INFINITY, object, light);
-		// if (help.ref == 0)
-		// {
-		// 	color_tmp[i] = help.color;
-		// 	i++;
-		// 	break ;
-		// }		
-		color_tmp[i] = help.color;
-		ref_tmp[i] = help.ref;
-		i++;
+		help = trace_ray(&o, &d, 1.0f, MAX_DIST, count_obj, object, light, &lighting);
+		color_tmp[0] = help.color;
+		ref_tmp[0] = help.ref;
+		while (i < 3)
+		{
+			help = trace_ray(&help.p, &help.r, 0.001f, MAX_DIST, count_obj, object, light, &lighting);
+			// if (help.ref == 0)
+			// {
+			// 	color_tmp[i] = help.color;
+			// 	i++;
+			// 	break ;
+			// }		
+			color_tmp[i] = help.color;
+			ref_tmp[i] = help.ref;
+			i++;
+		}
+		while (--i > 0)
+		{
+			color_tmp[i - 1] = color_scale(color_tmp[i - 1], 1 - ref_tmp[i - 1]) + color_scale(color_tmp[i], ref_tmp[i - 1]);
+		}
 	}
-	while (--i > 0)
+	//skybox
+	else if (0)
 	{
-		color_tmp[i - 1] = color_scale(color_tmp[i - 1], 1 - ref_tmp[i - 1]) + color_scale(color_tmp[i], ref_tmp[i - 1]);
+
 	}
-	// if (color_tmp[0] == BLACK)
-	// {
-	// 	color_tmp[0] = background[pixel];
-	// }
+	else
+		color += 0;
+	//скейл цвета по сглаживанию
 	arr[pixel] = color_tmp[0];
 }
 

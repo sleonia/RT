@@ -6,7 +6,7 @@
 /*   By: deladia <deladia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/24 12:57:07 by deladia           #+#    #+#             */
-/*   Updated: 2020/01/10 21:31:54 by deladia          ###   ########.fr       */
+/*   Updated: 2020/01/11 20:55:03 by deladia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,13 +54,6 @@ void	init_object(t_object **object)
 	// (*object)[3].specular = 300;
 	// (*object)[3].center = (cl_float3){0, -5001, 0};
 	// (*object)[3].radius = 5000.0f;
-
-	cl_float3			pos;
-	cl_float3			axis;
-	float				tan;
-	int					color;
-	int					specular;
-	float				reflective;
 
 	(*object)[3].type = o_cone;
 	(*object)[3].color = 0xFFFF00;
@@ -144,6 +137,7 @@ int			main(void)
 	rtv1->opencl = (t_cl *)ft_memalloc(sizeof(t_cl));
 	read_kernel(rtv1->opencl);
 	rtv1->sdl->background = try_to_back(rtv1->sdl);
+	rtv1->scene->count_objects = 6;
 	create_cl(rtv1->opencl, rtv1->sdl, rtv1->scene);
 	sdl_control(rtv1->sdl, rtv1->scene, rtv1->opencl);
 	return (0);

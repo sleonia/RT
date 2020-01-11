@@ -6,7 +6,7 @@
 /*   By: deladia <deladia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/25 21:18:10 by deladia           #+#    #+#             */
-/*   Updated: 2020/01/10 21:16:00 by deladia          ###   ########.fr       */
+/*   Updated: 2020/01/11 20:54:33 by deladia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,90 +26,119 @@
 # define D 1
 # define WHITE 0xFFFFFF
 # define BLACK 0x000000
-# include "kernel.h"
-// typedef struct			s_result
-// {
-// 	double 				t1;
-// 	double 				t2;
-// }						t_result;
 
-// typedef struct 			s_light
-// {
-// 	char 				type;
-// 	double 				intensity;
-// 	t_pos				position;
-// }						t_light;
+typedef struct			s_material
+{
+# ifndef OPENCL___
+	cl_float3			color;
+# else
+	float3				color;
+# endif
+	float				refraction;
+	float				reflection;
+	int					texture_id;
+}						t_material;
 
-// typedef struct 			s_cylinder
-// {
-// 	t_pos				center;
-// 	t_pos				axis;
-// 	double				radius;
-// }						t_cylinder;
+typedef struct			s_cam
+{
+# ifndef OPENCL___
+	cl_float3			pos;
+# else
+	float3				pos;
+# endif
+	float				a;
+	float				b;
+}						t_cam;
 
-// typedef struct 			s_cone
-// {
-// 	t_pos				center;
-// 	t_pos				axis;
-// 	double				tan;
-// }						t_cone;
+typedef struct			s_help
+{
+# ifndef OPENCL___
+	cl_float3			p;
+	cl_float3			r;
+# else
+	float3				p;
+	float3				r;
+# endif
+	int					color;
+	float				ref;
+}						t_help;
 
-// typedef struct 			s_plane
-// {
-// 	t_pos				center;
-// 	t_pos				normal;
-// }						t_plane;
+typedef struct 			s_light
+{
+# ifndef OPENCL___
+	cl_float3			pos;
+# else
+	float3				pos;
+# endif
+	float 				intensity;
+	char 				type;
+}						t_light;
 
-// typedef struct 			s_sphere
-// {
-// 	t_pos				center;
-// 	double				radius;
-// }						t_sphere;
+typedef struct 			s_light_off
+{
+	int					ambient;
+	int					point;
+	int					directional;
+	int					reflect;
+}						t_light_off;
 
-// union					u_objects
-// {
-// 	t_sphere			sphere;
-// 	t_cylinder			cylinder;
-// 	t_cone				cone;
-// 	t_plane				plane;
-// };
+enum					e_obj_type
+{
+	o_sphere = 1,
+	o_cylinder,
+	o_cone,
+	o_plane,
+};
 
-// enum					e_obj_type
-// {
-// 	o_sphere = 1,
-// 	o_cylinder,
-// 	o_cone,
-// 	o_plane,
-// };
+typedef struct			s_object
+{
+# ifndef OPENCL___
+	// union u_objects		*objects;
+	cl_float3			center;
+	cl_float3			axis;
+	float				radius;
+# else
+	float3				center;
+	float3				axis;
+	float				radius;
+# endif
+	enum e_obj_type		type;
+	int					color;///////////
+	int					specular;////////
+	float				reflective;
+	float				tan;
+	t_material			material;
+}						t_object;
 
-// typedef struct			s_object
-// {
-// 	union u_objects		*objects;
-// 	enum e_obj_type		type;
-// 	int					color;
-// 	int					specular;
-// 	double				reflective;
-// }						t_object;
+typedef struct			s_return
+{
+	int					closest_object;
+	float				closest_t;
+}						t_return;
 
-// typedef struct			s_return
-// {
-// 	t_object			*closest_object;
-// 	double				closest_t;
-// }						t_return;
-
-// typedef struct			s_cam
-// {
-// 	t_pos				position;
-// 	double 				a;
-// 	double 				b;
-// }						t_cam;
+typedef struct			s_scene
+{
+# ifndef OPENCL___
+	cl_float3			view;
+# else
+	float3				view;
+# endif
+	t_light				*light;
+	t_cam				cam;
+	t_object			*object;
+	t_light_off			off;
+	int					count_objects;
+}						t_scene;
 
 typedef struct			s_cylinder_params
 {
-	// t_pos				pos;
-	// t_pos				axis;
+# ifndef OPENCL___
 	cl_float3			pos;
 	cl_float3			axis;
+# else
+	float3			pos;
+	float3			axis;
+# endif
 	float				radius;
 	int					color;
 	int					specular;
@@ -118,10 +147,13 @@ typedef struct			s_cylinder_params
 
 typedef struct			s_cone_params
 {
-	// t_pos				pos;
-	// t_pos				axis;
+# ifndef OPENCL___
 	cl_float3			pos;
 	cl_float3			axis;
+# else
+	float3			pos;
+	float3			axis;
+# endif
 	float				tan;
 	int					color;
 	int					specular;
@@ -130,19 +162,25 @@ typedef struct			s_cone_params
 
 typedef struct			s_plane_params
 {
-	// t_pos				pos;
+# ifndef OPENCL___
 	cl_float3			pos;
+	cl_float3			normal;
+# else
+	float3				pos;
+	float3				normal;
+# endif
 	int					color;
 	int					specular;
 	float				reflective;
-	cl_float3			normal;
-	// t_pos				normal;
 }						t_plane_params;
 
 typedef struct			s_sphere_params
 {
-	// t_pos				pos;
+# ifndef OPENCL___
 	cl_float3			pos;
+# else
+	float3				pos;
+# endif
 	float				radius;
 	int					color;
 	int					specular;
@@ -165,6 +203,7 @@ typedef struct			s_sphere_params
 // 	t_object			**object;
 // 	t_light_off			*off;
 // }						t_scene;
+
 # ifndef OPENCL___
 typedef struct			s_cl
 {
@@ -177,7 +216,7 @@ typedef struct			s_cl
 	cl_kernel			kernel;
 	size_t				global_work_size[1];
 	cl_device_id		device_id;
-	cl_mem				memobjs[5];
+	cl_mem				memobjs[6];
 	char 				*program_source;
 	size_t 				program_size;
 }						t_cl;

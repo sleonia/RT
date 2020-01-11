@@ -6,7 +6,7 @@
 /*   By: deladia <deladia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/07 19:06:17 by deladia           #+#    #+#             */
-/*   Updated: 2019/12/11 16:12:44 by deladia          ###   ########.fr       */
+/*   Updated: 2020/01/11 17:08:21 by deladia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int		read_kernel(t_cl *cl)
 
 	if (!(cl->program_source = (char *)ft_memalloc(sizeof(char))))
 		ft_error("Memory not allocated");
-	if ((fd = open("./src/kernel.cl", O_RDONLY)) < 0)
+	if ((fd = open("./src/kernel_test.cl", O_RDONLY)) < 0)
 		ft_error("Can't open file");
 	while ((ret = read(fd, line, 32)) > 0)
 	{
