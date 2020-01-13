@@ -1,5 +1,6 @@
 {
     "files.associations": {
-        "rtv1.h": "c"
-    }
+		"rtv1.h": "c",
+		"ios": "c"
+	}
 }

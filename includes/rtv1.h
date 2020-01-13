@@ -6,7 +6,7 @@
 /*   By: deladia <deladia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/25 21:18:10 by deladia           #+#    #+#             */
-/*   Updated: 2020/01/11 20:54:33 by deladia          ###   ########.fr       */
+/*   Updated: 2020/01/14 01:16:46 by deladia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,16 @@
 typedef struct			s_material
 {
 # ifndef OPENCL___
+	cl_float2			al;
 	cl_float3			color;
 # else
+	float2				al;
 	float3				color;
 # endif
+	float				sp_ex;
 	float				refraction;
 	float				reflection;
+	int					specular;
 	int					texture_id;
 }						t_material;
 
@@ -103,9 +107,6 @@ typedef struct			s_object
 	float				radius;
 # endif
 	enum e_obj_type		type;
-	int					color;///////////
-	int					specular;////////
-	float				reflective;
 	float				tan;
 	t_material			material;
 }						t_object;
