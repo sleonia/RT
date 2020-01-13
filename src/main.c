@@ -6,7 +6,7 @@
 /*   By: deladia <deladia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/24 12:57:07 by deladia           #+#    #+#             */
-/*   Updated: 2020/01/14 02:01:25 by deladia          ###   ########.fr       */
+/*   Updated: 2020/01/14 02:23:37 by deladia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,10 +96,11 @@ typedef struct			s_object
 	(*object)[4].material.al = (cl_float2){1.0, 0.4};
 	(*object)[4].center = (cl_float3){0, 0, 5};
 	(*object)[4].axis = (cl_float3){0, 1, 0};
+	(*object)[4].radius = 1.0f;
 	(*object)[4].tan = 0.25;
 
 	(*object)[5].type = o_cylinder;
-	(*object)[5].material.color = (cl_float3){1, 1, 1};
+	(*object)[5].material.color = (cl_float3){1, 1, 0};
 	(*object)[5].material.reflection = 0.3f;
 	(*object)[5].material.sp_ex = 50.0f;
 	(*object)[5].material.al = (cl_float2){1.0, 0.4};

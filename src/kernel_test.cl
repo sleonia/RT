@@ -155,28 +155,27 @@ static int	intersect_ray_sphere(float3 o, float3 d, __global t_object *sphere, f
 
 static int    intersect_ray_cylinder(float3 o, float3 d, __global t_object *cyl, float *dist_i)
 {
-	float3 oc;
-	float  a;
-	float  b;
-	float  c;
-	float  discr;
+	float	b;
 	float3	s;
+	float3	q;
+	float	c;
+	float	discriminate;
 
-	oc = o - cyl->center;
-	a = dot(d, d) - dot(d, cyl->axis) * dot(d, cyl->axis);
-	b = dot(d, oc) - dot(d, cyl->axis) * dot(oc, cyl->axis);
-	c = dot(oc, oc) - dot(oc, cyl->axis) * dot(oc, cyl->axis) - cyl->radius * cyl->radius;
-	s = d - cyl->center * dot(d, cyl->center);
-	discr = b * b - a * c;
-	if (fabs(discr) < 0.00001f)
+	s = d - cyl->axis * dot(d, cyl->axis);
+	q = o - cyl->center;
+	q = q - cyl->axis * dot(q, cyl->axis);
+	b = 2 * dot(s, q);
+	c = dot(q, q) - cyl->radius * cyl->radius;
+	discriminate = b * b - 4 * dot(s, s) * c;
+	if (fabs(discriminate) < 0.000001f)
 		return (0);
-	if (discr < 0.f)
+	if (discriminate < 0.f)
 		return (0);
-	*dist_i = (-b - sqrt(discr)) / (2 * dot(s, s));
-	if (*dist_i > 0.00001f)
+	*dist_i = (-b - sqrt(discriminate)) / (2 * dot(s, s));
+	if (*dist_i > 0.f)
 		return (1);
-	*dist_i = (-b + sqrt(discr)) / (2 * dot(s, s));
-	if (*dist_i > 0.00001f)
+	*dist_i = (-b + sqrt(discriminate)) / (2 * dot(s, s));
+	if (*dist_i > 0)
 		return (2);
 	return (0);
 }
@@ -424,7 +423,7 @@ static int	closest_intersection(float3 o, float3 d, int count_obj, __global t_ob
 // 	return (intens);
 // }
 
-static float3		computer_lighting_1(float3 *d, t_lighting *lighting, __global t_object *obj, __global t_light *l, int count_obj, int count_light, float ambient)
+static float3		computer_lighting_1(float3 d, t_lighting *lighting, __global t_object *obj, __global t_light *l, int count_obj, int count_light, float ambient)
 {
 	float		light_dist = 0;
 	float3		light_dir = (float3)0;
@@ -447,7 +446,7 @@ static float3		computer_lighting_1(float3 *d, t_lighting *lighting, __global t_o
 			if (!closest_intersection(tmp, -light_dir, count_obj, obj, &shadow_lighting) ||	(ft_length(shadow_lighting.hit - l[i].pos) > light_dist - 0.1f && ft_length(shadow_lighting.hit - l[i].pos) < light_dist + 0.1f))
 			{
 				a += dot(light_dir, lighting->n) * l[i].intensity;
-				b += pow(max(0.f, -dot(lighting->n * 2.f * dot(light_dir, lighting->n) - light_dir, *d)), lighting->mat.sp_ex) * l[i].intensity;
+				b += pow(max(0.f, -dot(lighting->n * 2.f * dot(light_dir, lighting->n) - light_dir, d)), lighting->mat.sp_ex) * l[i].intensity;
 			}
 		}
 		i++;
@@ -460,7 +459,7 @@ static float3		computer_lighting_1(float3 *d, t_lighting *lighting, __global t_o
 	return (r);
 }
 
-static int			 trace_ray(float3 *o, float3 *d, int count_obj, int count_light, float ambient, __global t_object *object, __global t_light *light, t_lighting *lighting, float3 *color)
+static int			 trace_ray(float3 o, float3 d, int count_obj, int count_light, float ambient, __global t_object *object, __global t_light *light, t_lighting *lighting, float3 *color)
 {
 	// float3		p;
 	// float3		n;
@@ -471,7 +470,7 @@ static int			 trace_ray(float3 *o, float3 *d, int count_obj, int count_light, fl
 	// t_return	ret;
 	// t_help		help;
 
-	if (closest_intersection(*o, *d, count_obj, object, lighting))
+	if (closest_intersection(o, d, count_obj, object, lighting))
 	{
 		*color += computer_lighting_1(d, lighting, object, light, count_obj, count_light, ambient);
 	}
@@ -531,7 +530,7 @@ __kernel void RT(__global int *arr, __global t_cam *cam, __global t_object *obje
 	{
 		float ambient = 0.2f;
 		int count_light = 1;
-		trace_ray(&o, &d, count_obj, count_light, ambient, object, light, &lighting, &color);
+		trace_ray(o, d, count_obj, count_light, ambient, object, light, &lighting, &color);
 		// color_tmp[0] = help.color;
 		// ref_tmp[0] = help.ref;
 		// while (i < 3)
