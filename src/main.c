@@ -6,7 +6,7 @@
 /*   By: deladia <deladia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/24 12:57:07 by deladia           #+#    #+#             */
-/*   Updated: 2020/01/14 02:23:37 by deladia          ###   ########.fr       */
+/*   Updated: 2020/01/14 02:25:31 by deladia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -165,7 +165,7 @@ int			*try_to_back(t_sdl *sdl)
 		printf("%s\n", SDL_GetError());
 		return (NULL);
 	}
-	back = SDL_ConvertSurfaceFormat(back, SDL_PIXELFORMAT_ARGB8888, NULL);
+	back = SDL_ConvertSurfaceFormat(back, SDL_PIXELFORMAT_ARGB8888, 0);
 	ptr = (int *)back->pixels;
 	// printf("%d %d\n", back->w, back->h);
 	while (i < back->h)
