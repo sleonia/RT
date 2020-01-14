@@ -6,7 +6,7 @@
 /*   By: deladia <deladia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/25 21:18:10 by deladia           #+#    #+#             */
-/*   Updated: 2020/01/14 01:16:46 by deladia          ###   ########.fr       */
+/*   Updated: 2020/01/14 20:08:07 by deladia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,14 @@ typedef struct			s_cam
 {
 # ifndef OPENCL___
 	cl_float3			pos;
+	cl_float3			v1;
+	cl_float3			v2;
+	cl_float3			center;
 # else
 	float3				pos;
+	float3				v1;
+	float3				v2;
+	float3				center;
 # endif
 	float				a;
 	float				b;
@@ -215,7 +221,8 @@ typedef struct			s_cl
 	cl_command_queue	cmd_queue;
 	cl_program			program;
 	cl_kernel			kernel;
-	size_t				global_work_size[1];
+	size_t				global_work_size[2];
+	size_t				local_work_size[2];
 	cl_device_id		device_id;
 	cl_mem				memobjs[6];
 	char 				*program_source;
@@ -251,6 +258,14 @@ void                    func_error(int err);
 int						read_kernel(t_cl *cl);
 int						create_cl(t_cl *cl, t_sdl *sdl, t_scene *scene);
 int						set_arg(t_cl *cl, t_sdl *sdl, t_scene *scene);
+
+void		calc_screen(t_cam *cam);
+void		cl_to_norm(cl_float3 *v);
+cl_float3	cl_mult_n(cl_float3 v1, float n);
+float		cl_length(cl_float3 v);
+cl_float3	cl_minus(cl_float3 v1, cl_float3 v2);
+cl_float3	cl_sum(cl_float3 v1, cl_float3 v2);
+cl_float3	cl_cross(cl_float3 v1, cl_float3 v2);
 # endif
 
 #endif

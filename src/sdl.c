@@ -6,7 +6,7 @@
 /*   By: deladia <deladia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/24 12:43:04 by deladia           #+#    #+#             */
-/*   Updated: 2020/01/10 20:23:54 by deladia          ###   ########.fr       */
+/*   Updated: 2020/01/14 21:12:40 by deladia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,18 +93,26 @@ int			sdl_control(t_sdl *sdl, t_scene *scene, t_cl *cl)
 				if (sdl->event.key.keysym.scancode == SDL_SCANCODE_Z)
 				{
 					scene->cam.a += 0.1;
+					if (scene->cam.a > (float)M_PI - 0.00001f)
+						scene->cam.a -= 2 * (float)M_PI;
 				}
 				if (sdl->event.key.keysym.scancode == SDL_SCANCODE_X)
 				{
 					scene->cam.a -= 0.1;
+					if (scene->cam.a < -(float)M_PI + 0.00001f)
+						scene->cam.a += -2 * (float)M_PI;
 				}
 				if (sdl->event.key.keysym.scancode == SDL_SCANCODE_Q)
 				{
-					scene->cam.b -= 0.1;
+					// scene->cam.b -= 0.1;
+					if ((scene->cam.b - 0.2) >= -M_PI / 2 - 0.00001f)
+						scene->cam.b -= 0.2;
 				}
 				if (sdl->event.key.keysym.scancode == SDL_SCANCODE_E)
 				{
-					scene->cam.b += 0.1;
+					// scene->cam.b += 0.1;
+					if ((scene->cam.b + 0.2) <= M_PI / 2 - 0.00001f)
+						scene->cam.b += 0.2;
 				}
 				if (sdl->event.key.keysym.scancode == SDL_SCANCODE_P)
 				{
@@ -134,6 +142,7 @@ int			sdl_control(t_sdl *sdl, t_scene *scene, t_cl *cl)
 					else
 						scene->off.reflect = 0;
 				}
+				calc_screen(&scene->cam);
 				set_arg(cl, sdl, scene);
 				sdl_update(sdl);
 			}

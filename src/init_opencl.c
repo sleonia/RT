@@ -6,7 +6,7 @@
 /*   By: deladia <deladia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/28 19:00:37 by deladia           #+#    #+#             */
-/*   Updated: 2020/01/14 01:07:32 by deladia          ###   ########.fr       */
+/*   Updated: 2020/01/14 21:13:04 by deladia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,8 @@ int		set_arg_1(t_cl *cl, t_sdl *sdl, t_scene *scene)
 	// 								sizeof(cl_int), (cl_int)scene->count_objects, 0, NULL, 
 	// 								NULL)) != 0)
 	// 	func_error(-10);
-	if ((ret = clEnqueueNDRangeKernel(cl->cmd_queue, cl->kernel, 1, NULL,
-									  cl->global_work_size, NULL, 0, NULL, NULL)) != 0)
+	// не добавляется локал ворк сайз
+	if ((ret = clEnqueueNDRangeKernel(cl->cmd_queue, cl->kernel, 2, NULL, cl->global_work_size, NULL, 0, NULL, NULL)) != 0)
 		func_error(-11);
 	if ((ret = clEnqueueReadBuffer(cl->cmd_queue, cl->memobjs[0], CL_TRUE, 0,
 								   HEIGHT * WIDTH * sizeof(cl_int), (cl_int *)sdl->pixels, 0, NULL,
@@ -109,7 +109,11 @@ int		create_cl_1(t_cl *cl, t_scene *scene)
 	}
 	if ((cl->kernel = clCreateKernel(cl->program, "RT", &ret)) && ret != 0)
 		func_error(-8);
-	cl->global_work_size[0] = WIDTH * HEIGHT;
+	// cl->global_work_size[0] = WIDTH * HEIGHT;
+	cl->global_work_size[0] = WIDTH;
+	cl->global_work_size[1] = HEIGHT;
+	cl->local_work_size[0] = 16;
+	cl->local_work_size[1] = 16;
 	if ((cl->memobjs[0] = clCreateBuffer(cl->context, CL_MEM_READ_WRITE, sizeof(cl_int) * WIDTH * HEIGHT, NULL, &ret)) && ret != 0)
 		func_error(-5);
 	if ((cl->memobjs[1] = clCreateBuffer(cl->context, CL_MEM_READ_WRITE | CL_MEM_COPY_HOST_PTR, sizeof(t_cam), &scene->cam, &ret)) && ret != 0)

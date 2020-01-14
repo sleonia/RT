@@ -11,6 +11,13 @@ static float	ft_length(float3 v)
 	return (sqrt(v.x * v.x + v.y * v.y + v.z * v.z));
 }
 
+static float	reverse(int n)
+{
+	if (n != 0)
+		return (1.0f / n);
+	return (0);
+}
+
 static int  ft_sign(float a)
 {
 	if (a > 0.001)
@@ -510,14 +517,27 @@ __kernel void RT(__global int *arr, __global t_cam *cam, __global t_object *obje
 	float3	color = (float3)0;
 	// t_help	help;
 	t_lighting	lighting;
+	int count_light = 1;
+	float	ambient = 0.2;
+	float cache_width = 1.f / WIDTH;
+	int		fsaa = 4;
 
-	pixel = get_global_id(0);
-	x = pixel % WIDTH - WIDTH / 2;
-	y = HEIGHT / 2 - pixel / WIDTH;
+	// pixel = get_global_id(0);
+	// x = pixel % WIDTH - WIDTH / 2;
+	// y = HEIGHT / 2 - pixel / WIDTH;
+	// y = HEIGHT / 2 - pixel / WIDTH;
+	x = get_global_id(0);
+	y = get_global_id(1);
 	o = (float3)cam->pos;
 ////////////
-	d = matrix_rotation(cam->a, cam->b, canvas_to_viewport(x, y));
-	d = normalize(d);
+	// d = matrix_rotation(cam->a, cam->b, canvas_to_viewport(x, y));
+	for (int i = -fsaa * 0.5f; i <= fsaa * 0.5f; i++)
+	{
+		for (int j = -fsaa * 0.5f; j <= fsaa * 0.5f; j++)
+		{
+			d = (*cam).v1 * ((float) (x + i * reverse(fsaa)) * cache_width - 0.5f) - (*cam).v2 * ((float) (y + j * reverse(fsaa)) * cache_width - 0.5f);
+			d = d - (*cam).center;
+			d = normalize(d);
 //////////
 	////Два цикла с fsaa (сглаживание)
 	////пересчет d с условиями сглаживания и поворота камеры
@@ -526,11 +546,15 @@ __kernel void RT(__global int *arr, __global t_cam *cam, __global t_object *obje
 	//Отправлять размеры текстуры, колличество объектов и количество источников света и саму текстуру
 
 		//условие что пересеклось
-	if (1)
-	{
-		float ambient = 0.2f;
-		int count_light = 1;
-		trace_ray(o, d, count_obj, count_light, ambient, object, light, &lighting, &color);
+			if (closest_intersection(o, d, count_obj, object, &lighting))
+			{
+				color += computer_lighting_1(d, &lighting, object, light, count_obj, count_light, ambient);
+			}
+//	// if (1)
+//	// {
+//	// 	float ambient = 0.2f;
+//	// 	int count_light = 1;
+//	// 	trace_ray(o, d, count_obj, count_light, ambient, object, light, &lighting, &color);
 		// color_tmp[0] = help.color;
 		// ref_tmp[0] = help.ref;
 		// while (i < 3)
@@ -550,15 +574,19 @@ __kernel void RT(__global int *arr, __global t_cam *cam, __global t_object *obje
 		// {
 		// 	color_tmp[i - 1] = color_scale(color_tmp[i - 1], 1 - ref_tmp[i - 1]) + color_scale(color_tmp[i], ref_tmp[i - 1]);
 		// }
-	}
+	// }
 	//skybox
 	// else if (0)
 	// {
 
 	// }
-	else
-		color += 0;
+			else
+				color += 0;
+		}
+	}
+	color = color / ((fsaa + 1) * (fsaa + 1));
 	//скейл цвета по сглаживанию    !!!!!!!!!!!!!!!!
+	pixel = y * WIDTH + x;
 	arr[pixel] = get_color(color);
 }
 
