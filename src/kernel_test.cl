@@ -46,9 +46,9 @@ static int		get_color(float3 v)
 		v *= 1.f / e;
 	start = 0;
 	end = 0xFFFFFF;
-	red = get_light((start >> 16) & 0xFF, (end >> 16) & 0xFF, v.x);
-	green = get_light((start >> 8) & 0xFF, (end >> 8) & 0xFF, v.y);
-	blue = get_light(start & 0xFF, end & 0xFF, v.z);
+	red = get_light(RED(start), RED(end), v.x);
+	green = get_light(GREEN(start), GREEN(end), v.y);
+	blue = get_light(BLUE(start), BLUE(end), v.z);
 	return ((red << 16) | (green << 8) | blue);
 }
 
@@ -88,15 +88,15 @@ static float		vector_len(float3 o)
 	return(sqrt(o.x * o.x + o.y * o.y + o.z * o.z));
 }
 
-static float3		canvas_to_viewport(int x, int y)
-{
-	float3	vec;
+// static float3		canvas_to_viewport(int x, int y)
+// {
+// 	float3	vec;
 
-	vec.x = (float)x * VW / WIDTH;
-	vec.y = (float)y * VH / HEIGHT;
-	vec.z = D;
-	return (vec);
-}
+// 	vec.x = (float)x * VW / WIDTH;
+// 	vec.y = (float)y * VH / HEIGHT;
+// 	vec.z = D;
+// 	return (vec);
+// }
 
 ////////////////////////////////////////////////////////
 static float3	get_cone_normal(float3 *start_ray, float3 *ray, __global t_object *obj, float intersect_dist)
@@ -575,11 +575,36 @@ __kernel void RT(__global int *arr, __global t_cam *cam, __global t_object *obje
 		// 	color_tmp[i - 1] = color_scale(color_tmp[i - 1], 1 - ref_tmp[i - 1]) + color_scale(color_tmp[i], ref_tmp[i - 1]);
 		// }
 	// }
-	//skybox
-	// else if (0)
-	// {
+		// skybox
+			else if (1)
+			{
+				float3	vec;
+				float 	v;
+				float 	u;
 
-	// }
+				vec = -d;
+				u = 0.5f + (atan2(vec.x, vec.y) / (2.f * M_PI_F));
+				v = 0.5f + (asin(vec.z) / M_PI_F);
+				float2 uv = (float2)(u, v);
+
+				int	coord;
+				int coord_x;
+				int coord_y;
+				float3 color_uv;
+
+				coord_x = (int)(uv.x * 8192);
+				coord_y = (int)(uv.y * 4096) * 8192;
+				coord = coord_x + coord_y;
+				// coord += prev_texture_size[screen->skybox_id];
+
+				color_uv.x = (RED(skybox[coord]));
+				color_uv.y = (GREEN(skybox[coord]));
+				color_uv.z = (BLUE(skybox[coord]));
+				color_uv.x *= 0.00392156862f;
+				color_uv.y *= 0.00392156862f;
+				color_uv.z *= 0.00392156862f;
+				color += color_uv;
+			}
 			else
 				color += 0;
 		}

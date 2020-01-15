@@ -6,7 +6,7 @@
 /*   By: deladia <deladia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/24 12:57:07 by deladia           #+#    #+#             */
-/*   Updated: 2020/01/14 21:08:09 by deladia          ###   ########.fr       */
+/*   Updated: 2020/01/15 23:09:52 by deladia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ typedef struct			s_object
 	(*object)[0].material.reflection = 0.2f;
 	(*object)[0].material.sp_ex = 50.0f;
 	(*object)[0].material.al = (cl_float2){1.0, 1.0};
-	(*object)[0].center = (cl_float3){0, -1, 3};
+	(*object)[0].center = (cl_float3){40.0, 20.0, 5};
 	(*object)[0].radius = 1.0f;
 
 	(*object)[1].type = o_sphere;
@@ -80,14 +80,14 @@ typedef struct			s_object
 	(*object)[2].center = (cl_float3){-2, 0, 4};
 	(*object)[2].radius = 1.0f;
 
-	(*object)[3].type = o_plane;
-	(*object)[3].material.color = (cl_float3){1, 0, 1};
-	(*object)[3].material.reflection = 0.3f;
-	(*object)[3].material.sp_ex = 50.0f;
-	(*object)[3].material.al = (cl_float2){1.0, 0.4};
-	(*object)[3].center = (cl_float3){0, 0, 5};
-	(*object)[3].axis = (cl_float3){0, 0, 1};
-	(*object)[3].tan = 10;
+	// (*object)[3].type = o_plane;
+	// (*object)[3].material.color = (cl_float3){1, 0, 1};
+	// (*object)[3].material.reflection = 0.3f;
+	// (*object)[3].material.sp_ex = 50.0f;
+	// (*object)[3].material.al = (cl_float2){1.0, 0.4};
+	// (*object)[3].center = (cl_float3){0, 0, 5};
+	// (*object)[3].axis = (cl_float3){0, 0, 1};
+	// (*object)[3].tan = 10;
 
 	(*object)[4].type = o_cone;
 	(*object)[4].material.color = (cl_float3){1, 0, 1};
@@ -149,17 +149,15 @@ typedef struct			s_object
 	// init_cone_param(object[6], (t_cone_params){{0, 3, 5},{0, 1, 0}, 0.2, 0xFF00FF, 500, 0.4});
 }
 
-int			*try_to_back(t_sdl *sdl)
+int			*fill_texture_for_skybox(t_sdl *sdl)
 {
 	int i = 0;
 	int j = 0;
 	SDL_Surface *back;
-	SDL_Surface *src;
-	SDL_Texture *text;
 	int			*ptr;
 	int x = 0;
 
-	back = SDL_LoadBMP("./backgraund12.bmp");
+	back = SDL_LoadBMP("./wood.bmp");
 	if (back == NULL)
 	{
 		printf("%s\n", SDL_GetError());
@@ -168,18 +166,6 @@ int			*try_to_back(t_sdl *sdl)
 	back = SDL_ConvertSurfaceFormat(back, SDL_PIXELFORMAT_ARGB8888, 0);
 	ptr = (int *)back->pixels;
 	// printf("%d %d\n", back->w, back->h);
-	while (i < back->h)
-	{
-		j = 0;
-		while (j < back->w)
-		{
-			// printf("%d\n", ptr[i * back->w + j]);
-			sdl->pixels[i * back->w + j] = ptr[i * back->w + j];
-			// printf("%d %d\n", j, i);
-			j++;
-		}
-		i++;
-	}	
 	return (ptr);
 }
 
@@ -195,16 +181,18 @@ int			main(void)
 	sdl_init(rtv1->sdl);
 	
 	rtv1->scene = (t_scene *)ft_memalloc(sizeof(t_scene));
-	rtv1->scene->cam.pos = (cl_float3){0.0, 0.0, 0.0};
-	rtv1->scene->cam.a = 90.0;
-	rtv1->scene->cam.b = 0.0;
+	rtv1->scene->cam.pos = (cl_float3){0.0, 0.0, -5.0};
+	rtv1->scene->cam.a = 90.0f * M_PI / 180;
+	rtv1->scene->cam.b = 90.0f * M_PI / 180;
 	init_object(&rtv1->scene->object);
 	init_light(&rtv1->scene->light);
 	rtv1->opencl = (t_cl *)ft_memalloc(sizeof(t_cl));
 	read_kernel(rtv1->opencl);
-	rtv1->sdl->background = try_to_back(rtv1->sdl);
 	rtv1->scene->count_objects = 6;
 
+	rtv1->sdl->background = fill_texture_for_skybox(rtv1->sdl);
+
+	calc_screen(&rtv1->scene->cam);
 
 	create_cl(rtv1->opencl, rtv1->sdl, rtv1->scene);
 	sdl_control(rtv1->sdl, rtv1->scene, rtv1->opencl);

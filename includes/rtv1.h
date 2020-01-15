@@ -6,7 +6,7 @@
 /*   By: deladia <deladia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/25 21:18:10 by deladia           #+#    #+#             */
-/*   Updated: 2020/01/14 20:08:07 by deladia          ###   ########.fr       */
+/*   Updated: 2020/01/15 23:06:41 by deladia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,22 @@
 #include <math.h>
 #include <OpenCL/opencl.h>
 # endif
-# define WIDTH 1250
-# define HEIGHT 1000
-# define VW 1.25
-# define VH 1
-# define D 1
+# define WIDTH 1280
+# define HEIGHT 1024
+// # define VW 1.25
+// # define VH 1
+// # define D 1
 # define WHITE 0xFFFFFF
 # define BLACK 0x000000
+
+//кажется херня
+//не получится отправить массив структур внутри с массивом цветов
+typedef struct			s_texture
+{
+	int					*arr_for_color;
+	int					texture_wight;
+	int					texture_heght;
+}						t_texture;
 
 typedef struct			s_material
 {
@@ -81,7 +90,7 @@ typedef struct 			s_light
 	float3				pos;
 # endif
 	float 				intensity;
-	char 				type;
+	// char 				type;
 }						t_light;
 
 typedef struct 			s_light_off
@@ -143,8 +152,8 @@ typedef struct			s_cylinder_params
 	cl_float3			pos;
 	cl_float3			axis;
 # else
-	float3			pos;
-	float3			axis;
+	float3				pos;
+	float3				axis;
 # endif
 	float				radius;
 	int					color;
@@ -158,8 +167,8 @@ typedef struct			s_cone_params
 	cl_float3			pos;
 	cl_float3			axis;
 # else
-	float3			pos;
-	float3			axis;
+	float3				pos;
+	float3				axis;
 # endif
 	float				tan;
 	int					color;

@@ -14,7 +14,7 @@ cl_float3	spher_norm(cl_float3 v)
 {
 	cl_float3	n;
 
-	if ((fabsf(v.z) < 1e-5f))
+	if ((fabsf(v.z) < 0.00001f))
 	{
 		n.x = 0.f;
 		n.y = 0.f;
@@ -46,4 +46,7 @@ void		calc_screen(t_cam *cam)
 	(*cam).v1 = v[0];
 	(*cam).v2 = v[1];
 	(*cam).center = v[2];
+	// printf("v1 = %f %f %f\n", v[0].x, v[0].y, v[0].z);
+	// printf("v2 = %f %f %f\n", v[1].x, v[1].y, v[1].z);
+	// printf("center = %f %f %f\n", v[2].x, v[2].y, v[2].z);
 }
