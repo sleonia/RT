@@ -38,7 +38,7 @@ void		calc_screen(t_cam *cam)
 	check = cl_sum(check, (*cam).pos);
 	v[2] = cl_minus((*cam).pos, check);
 	v[1] = spher_norm(v[2]);
-	if ((*cam).b > (float)M_PI_2 - 0.00001f)
+	if ((*cam).b > 0.00001f)
 		v[1] = cl_mult_n(v[1], (-1));
 	v[0] = cl_cross(v[2], v[1]);
 	cl_to_norm(&v[0]);

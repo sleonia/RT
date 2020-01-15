@@ -6,7 +6,7 @@
 /*   By: deladia <deladia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/24 12:57:07 by deladia           #+#    #+#             */
-/*   Updated: 2020/01/15 23:09:52 by deladia          ###   ########.fr       */
+/*   Updated: 2020/01/15 23:53:23 by deladia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -181,9 +181,9 @@ int			main(void)
 	sdl_init(rtv1->sdl);
 	
 	rtv1->scene = (t_scene *)ft_memalloc(sizeof(t_scene));
-	rtv1->scene->cam.pos = (cl_float3){0.0, 0.0, -5.0};
+	rtv1->scene->cam.pos = (cl_float3){0.0, 0.0, -30.0};
 	rtv1->scene->cam.a = 90.0f * M_PI / 180;
-	rtv1->scene->cam.b = 90.0f * M_PI / 180;
+	rtv1->scene->cam.b = 0.001f * M_PI / 180;
 	init_object(&rtv1->scene->object);
 	init_light(&rtv1->scene->light);
 	rtv1->opencl = (t_cl *)ft_memalloc(sizeof(t_cl));

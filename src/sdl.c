@@ -6,7 +6,7 @@
 /*   By: deladia <deladia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/24 12:43:04 by deladia           #+#    #+#             */
-/*   Updated: 2020/01/15 21:18:29 by deladia          ###   ########.fr       */
+/*   Updated: 2020/01/16 00:04:24 by deladia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,20 +105,20 @@ int			sdl_control(t_sdl *sdl, t_scene *scene, t_cl *cl)
 				if (sdl->event.key.keysym.scancode == SDL_SCANCODE_Q)
 				{
 					// scene->cam.b -= 0.1;
-					// if ((scene->cam.b) >= (float)0.00001f)
-						// scene->cam.b -= 0.2;
-					scene->cam.b += 0.1;
-					if (scene->cam.b > (float)M_PI - 0.00001f)
-						scene->cam.b -= 2 * (float)M_PI;
+					if ((scene->cam.b) - 0.1 >= -(float)M_PI_2 + 0.00001f)
+						scene->cam.b -= 0.1;
+					// scene->cam.b += 0.1;
+					// if (scene->cam.b > (float)M_PI - 0.00001f)
+					// 	scene->cam.b -= 2 * (float)M_PI;
 				}
 				if (sdl->event.key.keysym.scancode == SDL_SCANCODE_E)
 				{
 					// scene->cam.b += 0.1;
-					// if ((scene->cam.b) <= (float)M_PI + 0.00001f)
-						// scene->cam.b += 0.2;
-					scene->cam.b -= 0.1;
-					if (scene->cam.b < -(float)M_PI + 0.00001f)
-						scene->cam.b += -2 * (float)M_PI;
+					if ((scene->cam.b) + 0.1 <= (float)M_PI_2 + 0.00001f)
+						scene->cam.b += 0.1;
+					// scene->cam.b -= 0.1;
+					// if (scene->cam.b < -(float)M_PI + 0.00001f)
+					// 	scene->cam.b += -2 * (float)M_PI;
 				}
 				if (sdl->event.key.keysym.scancode == SDL_SCANCODE_P)
 				{

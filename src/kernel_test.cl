@@ -583,17 +583,18 @@ __kernel void RT(__global int *arr, __global t_cam *cam, __global t_object *obje
 				float 	u;
 
 				vec = -d;
-				u = 0.5f + (atan2(vec.x, vec.y) / (2.f * M_PI_F));
-				v = 0.5f + (asin(vec.z) / M_PI_F);
-				float2 uv = (float2)(u, v);
+				// vec = normalize(vec);
+				u = 0.5f + (atan2(vec.x, vec.z) / (2.f * M_PI_F));
+				v = 0.5f + (asin(vec.y) / M_PI_F);
+				// float2 uv = (float2)(u, v);
 
 				int	coord;
 				int coord_x;
 				int coord_y;
 				float3 color_uv;
 
-				coord_x = (int)(uv.x * 8192);
-				coord_y = (int)(uv.y * 4096) * 8192;
+				coord_x = (int)(u * 8192);
+				coord_y = (int)(v * 4096) * 8192;
 				coord = coord_x + coord_y;
 				// coord += prev_texture_size[screen->skybox_id];
 
