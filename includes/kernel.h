@@ -6,7 +6,7 @@
 /*   By: deladia <deladia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/06 19:23:27 by deladia           #+#    #+#             */
-/*   Updated: 2020/01/15 23:06:46 by deladia          ###   ########.fr       */
+/*   Updated: 2020/01/16 18:12:53 by deladia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 # define BLUE(color) ((int)color & 0xFF)
 
 
-typedef struct			t_lighting
+typedef struct			t_hitting
 {
 # ifndef OPENCL___
 	cl_float3			n;
@@ -36,7 +36,7 @@ typedef struct			t_lighting
 	float3				hit;
 # endif
 	t_material			mat;
-}						t_lighting;
+}						t_hitting;
 
 
 

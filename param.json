@@ -1,20 +1,20 @@
 {
 	"camera":
 	{
-		"pos\tition":			[0, 0, 0],
-		"ang\/le_a":			0.0,
-		"ang\\le_b":			0.0
+		"postition":			[0, 0, 0],
+		"angle_a":				0.0,
+		"angle_b":				0.0
 	},
 	"light_1":
 	{
 		"type":					"point",
-		"inte\"\"nsity":		0.6,
+		"intensity":			0.6,
 		"position":				[3, 1, 0]
 	},
 	"light_2":
 	{
 		"type":					"ambient",
-		"inte\/nsity":			0.2
+		"intensity":			0.2
 	},
 	"light_3":
 	{
@@ -24,7 +24,7 @@
 	},
 	"figure":
 	{
-		"sphere_1":
+		"sphere":
 		{
 			"radius":				1,
 			"color":				[255, 0, 0],

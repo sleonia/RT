@@ -6,7 +6,7 @@
 /*   By: deladia <deladia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/24 12:57:07 by deladia           #+#    #+#             */
-/*   Updated: 2020/01/15 23:53:23 by deladia          ###   ########.fr       */
+/*   Updated: 2020/01/16 20:26:03 by deladia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,53 +61,53 @@ typedef struct			s_object
 	(*object)[0].material.reflection = 0.2f;
 	(*object)[0].material.sp_ex = 50.0f;
 	(*object)[0].material.al = (cl_float2){1.0, 1.0};
-	(*object)[0].center = (cl_float3){40.0, 20.0, 5};
-	(*object)[0].radius = 1.0f;
+	(*object)[0].object.sphere.center = (cl_float3){40.0, 20.0, 5};
+	(*object)[0].object.sphere.radius = 1.0f;
 
 	(*object)[1].type = o_sphere;
 	(*object)[1].material.color = (cl_float3){0, 0, 1};
 	(*object)[1].material.reflection = 0.2f;
 	(*object)[1].material.sp_ex = 50.0f;
 	(*object)[1].material.al = (cl_float2){1.0, 0.4};
-	(*object)[1].center = (cl_float3){2, 0, 4};
-	(*object)[1].radius = 1.0f;
+	(*object)[1].object.sphere.center = (cl_float3){2, 0, 4};
+	(*object)[1].object.sphere.radius = 1.0f;
 
 	(*object)[2].type = o_sphere;
 	(*object)[2].material.color = (cl_float3){0, 1, 0};
 	(*object)[2].material.reflection = 0.2f;
 	(*object)[2].material.sp_ex = 50.0f;
 	(*object)[2].material.al = (cl_float2){1.0, 0.4};
-	(*object)[2].center = (cl_float3){-2, 0, 4};
-	(*object)[2].radius = 1.0f;
+	(*object)[2].object.sphere.center = (cl_float3){-2, 0, 4};
+	(*object)[2].object.sphere.radius = 1.0f;
 
 	// (*object)[3].type = o_plane;
 	// (*object)[3].material.color = (cl_float3){1, 0, 1};
 	// (*object)[3].material.reflection = 0.3f;
 	// (*object)[3].material.sp_ex = 50.0f;
 	// (*object)[3].material.al = (cl_float2){1.0, 0.4};
-	// (*object)[3].center = (cl_float3){0, 0, 5};
-	// (*object)[3].axis = (cl_float3){0, 0, 1};
-	// (*object)[3].tan = 10;
+	// (*object)[3].object.plane.center = (cl_float3){0, 0, 5};
+	// (*object)[3].object.plane.axis = (cl_float3){0, 0, 1};
+	// (*object)[3].object.plane.dist_z = 10;
 
 	(*object)[4].type = o_cone;
 	(*object)[4].material.color = (cl_float3){1, 0, 1};
 	(*object)[4].material.reflection = 0.3f;
 	(*object)[4].material.sp_ex = 50.0f;
 	(*object)[4].material.al = (cl_float2){1.0, 0.4};
-	(*object)[4].center = (cl_float3){0, 0, 5};
-	(*object)[4].axis = (cl_float3){0, 1, 0};
-	(*object)[4].radius = 1.0f;
-	(*object)[4].tan = 0.25;
+	(*object)[4].object.cone.center = (cl_float3){0, 0, 5};
+	(*object)[4].object.cone.axis = (cl_float3){0, 1, 0};
+	(*object)[4].object.cone.radius = 1.0f;
+	(*object)[4].object.cone.tan = 0.25;
 
 	(*object)[5].type = o_cylinder;
 	(*object)[5].material.color = (cl_float3){1, 1, 0};
 	(*object)[5].material.reflection = 0.3f;
 	(*object)[5].material.sp_ex = 50.0f;
 	(*object)[5].material.al = (cl_float2){1.0, 0.4};
-	(*object)[5].center = (cl_float3){2, 0, 5};
-	(*object)[5].axis = (cl_float3){0, 1, 0};
-	(*object)[5].tan = 30;
-	(*object)[5].radius = 1.0f;
+	(*object)[5].object.cylinder.center = (cl_float3){2, 0, 5};
+	(*object)[5].object.cylinder.axis = (cl_float3){0, 1, 0};
+	(*object)[5].object.cylinder.param = 30;
+	(*object)[5].object.cylinder.radius = 1.0f;
 
 
 

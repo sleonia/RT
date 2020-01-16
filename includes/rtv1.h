@@ -6,7 +6,7 @@
 /*   By: deladia <deladia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/25 21:18:10 by deladia           #+#    #+#             */
-/*   Updated: 2020/01/15 23:06:41 by deladia          ###   ########.fr       */
+/*   Updated: 2020/01/16 20:25:56 by deladia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,64 @@ typedef struct			s_texture
 	int					texture_heght;
 }						t_texture;
 
+/////////////////////////////////////////////////
+typedef struct			s_cylinder
+{
+# ifndef OPENCL___
+	cl_float3			center;
+	cl_float3			axis;
+# else
+	float3				center;
+	float3				axis;
+# endif
+	float				radius;
+	float				param;
+}						t_cylinder;
+
+typedef struct			s_plane
+{
+# ifndef OPENCL___
+	cl_float3			center;
+	cl_float3			axis;
+# else
+	float3				center;
+	float3				axis;
+# endif
+	float				dist_z;
+}						t_plane;
+
+typedef struct			s_cone
+{
+# ifndef OPENCL___
+	cl_float3			center;
+	cl_float3			axis;
+# else
+	float3				center;
+	float3				axis;
+# endif
+	float				radius;
+	float				tan;
+}						t_cone;
+
+typedef struct			s_sphere
+{
+# ifndef OPENCL___
+	cl_float3			center;
+# else
+	float3				center;
+# endif
+	float				radius;
+}						t_sphere;
+
+union					u_objects
+{
+	t_sphere			sphere;
+	t_cylinder			cylinder;
+	t_cone				cone;
+	t_plane				plane;
+};
+
+///////////////////////////////////////
 typedef struct			s_material
 {
 # ifndef OPENCL___
@@ -111,19 +169,9 @@ enum					e_obj_type
 
 typedef struct			s_object
 {
-# ifndef OPENCL___
-	// union u_objects		*objects;
-	cl_float3			center;
-	cl_float3			axis;
-	float				radius;
-# else
-	float3				center;
-	float3				axis;
-	float				radius;
-# endif
 	enum e_obj_type		type;
-	float				tan;
 	t_material			material;
+	union u_objects		object;
 }						t_object;
 
 typedef struct			s_return
