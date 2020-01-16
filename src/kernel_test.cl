@@ -289,10 +289,6 @@ static int	closest_intersection(float3 o, float3 d, int count_obj, __global t_ob
 				if (t12 == 2)
 					light_hit->n *= -1.f;
 				light_hit->mat = obj[i].material;
-				if (light_dist->mat.texture_id != 0)
-				{
-
-				}
 				//условие для uv mapping и наличия текстуры
 			}
 		}
