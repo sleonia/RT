@@ -6,7 +6,7 @@
 /*   By: thorker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/28 22:37:18 by thorker           #+#    #+#             */
-/*   Updated: 2020/01/17 18:38:08 by thorker          ###   ########.fr       */
+/*   Updated: 2020/01/17 19:07:08 by thorker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,17 @@ void	*check_value(t_token **token, t_type *type)
 		if ((new_value = make_double(token)) != *token)
 			*type = Doub;
 	}
-	else if ((new_value = make_object(token)) != *token)
-		*type = Object;
-	else
+	else if (ft_strcmp((*token)->value, "{") == 0)
+	{
+		if ((new_value = make_object(token)) != *token)
+			*type = Object;
+	}
+	else if (ft_strcmp((*token)->value, "[") == 0)
+	{
+		if ((new_value = make_array(token)) != *token)
+			*type = Array;
+	}
+	else 
 		ft_putendl((*token)->value);
 	return (new_value);
 }
