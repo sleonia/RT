@@ -6,7 +6,7 @@
 /*   By: thorker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/04 01:50:08 by thorker           #+#    #+#             */
-/*   Updated: 2019/12/01 02:17:01 by thorker          ###   ########.fr       */
+/*   Updated: 2020/01/17 19:17:24 by thorker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,13 @@ typedef enum			e_type
 	Doub,
 	None
 }						t_type;
+
+typedef struct			s_array
+{
+	void				**value;
+	t_type				*type;
+	size_t				length;
+}
 
 typedef struct			s_key_value
 {
