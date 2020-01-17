@@ -11,7 +11,8 @@
 		},
 		"another_test_object":	{
 			"another_object":	{
-				"not":			1
+				"not":			1,
+				"nullW":		{ }
 			},
 			"hy":				"not_empty"
 		}
