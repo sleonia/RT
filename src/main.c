@@ -6,7 +6,7 @@
 /*   By: deladia <deladia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/24 12:57:07 by deladia           #+#    #+#             */
-/*   Updated: 2020/01/16 20:26:03 by deladia          ###   ########.fr       */
+/*   Updated: 2020/01/17 20:01:35 by deladia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	init_object(t_object **object)
 {
-	*object = (t_object *)ft_memalloc(sizeof(t_object) * 5);
+	*object = (t_object *)ft_memalloc(sizeof(t_object) * 6);
 
 	// object[4] = (t_object *)ft_memalloc(sizeof(t_object));
 	// object[5] = (t_object *)ft_memalloc(sizeof(t_object));
