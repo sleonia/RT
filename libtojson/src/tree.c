@@ -6,7 +6,7 @@
 /*   By: deladia <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/03 20:55:14 by delalia           #+#    #+#             */
-/*   Updated: 2020/01/17 18:54:35 by thorker          ###   ########.fr       */
+/*   Updated: 2020/01/18 17:50:36 by thorker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,10 +101,12 @@ void				*make_object(t_token **token)
 	t_key_value		*for_re;
 
 	//добавить переход на след токен
+	ft_putendl("kek");
 	if ((*token = (*token)->next) != 0 && ft_strcmp((*token)->value, "}") == 0)
 		return (0);
 	else if ((for_re = create_empty_struct()) == 0)
 		return (*token);
+	ft_putendl("kek2");
 	while (*token != 0)
 	{
 		if (ft_strcmp((*token)->value, "\"") == 0)
@@ -125,6 +127,7 @@ void				*make_object(t_token **token)
 		break ;
 	}
 	ft_return(&for_re);
+	ft_putendl((*token)->value);
 	return (*token);
 }
 //если возращаем null в make object нужно ли менять тип на NULL
