@@ -6,11 +6,6 @@ static float3	ft_normalize(float3 vec)
 	return (vec / sqrt(vec.x * vec.x + vec.y * vec.y + vec.z * vec.z));
 }
 
-static float	ft_length(float3 v)
-{
-	return (sqrt(v.x * v.x + v.y * v.y + v.z * v.z));
-}
-
 static float	reverse(int n)
 {
 	if (n != 0)
@@ -50,27 +45,6 @@ static int		get_color(float3 v)
 	green = get_light(GREEN(start), GREEN(end), v.y);
 	blue = get_light(BLUE(start), BLUE(end), v.z);
 	return ((red << 16) | (green << 8) | blue);
-}
-
-static float3		matrix_rotation(float a, float b, float3 vec)
-{
-	float	x;
-	float	z;
-	float	y;
-
-	x = vec.x;
-	y = vec.y;
-	z = vec.z;
-	vec.x = x * cos(b) + z * sin(b);
-	vec.y = (x * sin(b) - z * cos(b)) * sin(a) + y * cos(a);
-	vec.z = (z * cos(b) - x * sin(b)) * cos(a) + y * sin(a);
-	return (vec);
-}
-
-
-static float		vector_len(float3 o)
-{
-	return(sqrt(o.x * o.x + o.y * o.y + o.z * o.z));
 }
 
 static int	intersect_ray_sphere(float3 o, float3 d, __global t_sphere *sphere, float *dist_i)
@@ -360,7 +334,7 @@ static float3		computer_lighting(float3 d, t_hitting *light_hit, __global t_obje
 	while (i < count_light)
 	{
 		light_dir = ft_normalize(l[i].pos - light_hit->hit);
-		light_dist = ft_length(l[i].pos - light_hit->hit);
+		light_dist = length(l[i].pos - light_hit->hit);
 		if (dot(light_dir, light_hit->n) > 0)
 		{
 			float3 tmp = l[i].pos;			
@@ -455,6 +429,5 @@ __kernel void RT(__global int *arr, __global t_cam *cam, __global t_object *obje
 	arr[pixel] = get_color(color);
 }
 
-//Заменил рекурсию на цикл, надо все проверить почему при маленьком tmin рассыпается
 //Реализовать path tracing
 //Разбиение экрана на блоки
