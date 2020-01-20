@@ -6,7 +6,7 @@
 /*   By: deladia <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/06 23:27:09 by deladia           #+#    #+#             */
-/*   Updated: 2020/01/17 18:40:12 by thorker          ###   ########.fr       */
+/*   Updated: 2020/01/18 18:07:34 by thorker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,50 @@
 /*
 ** функция для печати всего дерева
 */
+
+void		ft_print_array(t_array *array)
+{
+	size_t i;
+
+	printf("[ ");
+	i = 0;
+	while (i < array->length)
+	{
+		if (array->type[i] == String)
+		{
+			printf("%s", array->value[i]);
+		}
+		else if (array->type[i] == Dec)
+		{
+			printf("%d",((int*)array->value[i])[0]);
+		}
+		else if (array->type[i] == Doub)
+		{
+			printf("%lf",((double*)array->value[i])[0]);
+		}
+		else if (array->type[i] == None)
+		{
+			printf("NULL");
+		}
+		else if (array->type[i] == Object)
+		{
+			printf("{");
+			if (array->value[i] == 0)
+				printf("NULL");
+			else
+				ft_print((t_key_value*)array->value[i]);
+			printf("}");
+		}
+		else if (array->type[i] == Array)
+		{
+			ft_print_array((t_array*)array->value[i]);
+		}
+		i++;
+		if (i != array->length)
+			printf(", ");
+	}
+	printf(" ]");
+}
 
 void		ft_print(t_key_value *tree)
 {
@@ -47,6 +91,12 @@ void		ft_print(t_key_value *tree)
 			else			
 				ft_print((t_key_value*)tree->value[i]);
 			printf("}\n");
+		}
+		else if (tree->type[i] == Array)
+		{
+			printf("key: %s\nvalue: ", tree->key[i]);
+			ft_print_array((t_array*)tree->value[i]);
+			printf("\n");
 		}
 		i++;
 	}

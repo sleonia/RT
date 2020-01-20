@@ -6,7 +6,7 @@
 /*   By: thorker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/26 17:14:59 by thorker           #+#    #+#             */
-/*   Updated: 2019/11/28 23:38:42 by thorker          ###   ########.fr       */
+/*   Updated: 2020/01/18 17:23:51 by thorker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,5 +82,39 @@ int			realloc_key_value(t_key_value *for_re,
 	*(for_re->key + i + 1) = 0;
 	*(for_re->value + i) = new_value;
 	*(for_re->type + i) = new_type;
+	return (1);
+}
+
+int		realloc_array(t_array *array, void *new_value, t_type new_type)
+{
+	size_t	i;
+	void	**new_array_value;
+	t_type	*new_array_type;
+
+	if ((new_array_value = (void**)malloc(sizeof(void*) * (array->length + 1))) == 0 |
+			(new_array_type = (t_type*)malloc(sizeof(t_type) * (array->length + 1))) == 0)
+	{
+		if (new_array_value != 0)
+			free(new_array_value);
+		if (new_array_type != 0)
+			free(new_array_type);
+		return (0);
+	}
+	i = 0;
+	while (i < array->length)
+	{
+		new_array_value[i] = array->value[i];
+		new_array_type[i] = array->type[i];
+		i++;
+	}
+	if (array->length != 0)
+		free(array->value);
+	if (array->length != 0)
+		free(array->type);
+	new_array_value[array->length] = new_value;
+	new_array_type[array->length] = new_type;
+	array->value = new_array_value;
+	array->type = new_array_type;
+	array->length = array->length + 1;
 	return (1);
 }

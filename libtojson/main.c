@@ -6,7 +6,7 @@
 /*   By: deladia <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/07 22:54:41 by deladia           #+#    #+#             */
-/*   Updated: 2019/12/01 03:09:06 by thorker          ###   ########.fr       */
+/*   Updated: 2020/01/18 19:48:17 by thorker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,14 @@ void	free_token(t_token **token)
 int		main(void)
 {
 	t_key_value	*tmp;
-	int 		ret;
-	int 		number;
-
+	t_key_value *node;
+	double		b;
+	int error;
 //	tmp = parse_json("../../../param.json");
 	tmp = parse_json("test.json");
-	ret = get_int(tmp, "angle_a", &number);
-	printf("ret = %d value = %d\n", ret, number);
+	error = get_node(tmp, "light_1", &node);
+	error = get_double(node, "intensity", &b);
+	printf("вот тот double %lf\n",b);
 	ft_print(tmp);
 	/*
 	char *line = 0;

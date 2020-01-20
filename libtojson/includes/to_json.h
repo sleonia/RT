@@ -6,7 +6,7 @@
 /*   By: thorker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/04 01:50:08 by thorker           #+#    #+#             */
-/*   Updated: 2020/01/17 19:17:24 by thorker          ###   ########.fr       */
+/*   Updated: 2020/01/18 19:45:00 by thorker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 # define WRONG_TYPE -1
 # define NOT_FOUND -2
 # define WRONG_CONTAINER -3
+# define BROKEN_NODE -4
 # include "libft.h"
 
 typedef enum			e_type
@@ -32,7 +33,7 @@ typedef struct			s_array
 	void				**value;
 	t_type				*type;
 	size_t				length;
-}
+}						t_array;
 
 typedef struct			s_key_value
 {
@@ -53,6 +54,10 @@ char					*make_string(char *str);
 int						realloc_key_value(t_key_value *for_re, char *new_key,
 		void *new_value, t_type new_type);
 int						get_int(t_key_value *node, char	*name, int *container);
+int     				get(t_key_value *tree, char *name, void **object);
+int                     get_str(t_key_value *tree, char *name, char **str);
+int                     get_double(t_key_value *tree, char *name, double *number);
+int                     get_node(t_key_value *tree, char *name, t_key_value **object);
 t_key_value				*parse_json(char *file_name);
 t_token					*ft_open(char *file);
 void					*make_object(t_token **token);
@@ -64,4 +69,6 @@ void					*make_digit(t_token **token);
 int						ft_str_isdigit(char *str);
 int						ft_str_isdouble(char *str);
 void					*make_double(t_token **token);
+void					*make_array(t_token **token);
+int 					realloc_array(t_array *array, void *new_value, t_type new_type);
 #endif
