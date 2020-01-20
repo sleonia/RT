@@ -17,8 +17,8 @@ cl_float3	spher_norm(cl_float3 vec)
 	if ((fabsf(vec.s[2]) < 0.00001f))
 	{
 		normal.s[0] = 0.f;
-		normal.s[1] = 0.f;
-		normal.s[2] = -1.f;
+		normal.s[1] = -1.f;
+		normal.s[2] = 0.f;
 	}
 	else
 	{
