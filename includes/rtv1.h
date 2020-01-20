@@ -6,7 +6,7 @@
 /*   By: deladia <deladia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/25 21:18:10 by deladia           #+#    #+#             */
-/*   Updated: 2020/01/20 10:28:07 by deladia          ###   ########.fr       */
+/*   Updated: 2020/01/20 12:14:59 by deladia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,16 +27,6 @@
 # define WHITE 0xFFFFFF
 # define BLACK 0x000000
 
-//кажется херня
-//не получится отправить массив структур внутри с массивом цветов
-typedef struct			s_texture
-{
-	int					*arr_for_color;
-	int					texture_wight;
-	int					texture_heght;
-}						t_texture;
-
-/////////////////////////////////////////////////
 typedef struct			s_cylinder
 {
 # ifndef OPENCL___
@@ -93,7 +83,6 @@ union					u_objects
 	t_plane				plane;
 };
 
-///////////////////////////////////////
 typedef struct			s_material
 {
 # ifndef OPENCL___
@@ -114,31 +103,18 @@ typedef struct			s_cam
 {
 # ifndef OPENCL___
 	cl_float3			pos;
-	cl_float3			v1;
-	cl_float3			v2;
-	cl_float3			center;
+	cl_float3			ox;
+	cl_float3			oy;
+	cl_float3			oz;
 # else
 	float3				pos;
-	float3				v1;
-	float3				v2;
-	float3				center;
+	float3				ox;
+	float3				oy;
+	float3				oz;
 # endif
 	float				phi;
 	float				tetta;
 }						t_cam;
-
-typedef struct			s_help
-{
-# ifndef OPENCL___
-	cl_float3			p;
-	cl_float3			r;
-# else
-	float3				p;
-	float3				r;
-# endif
-	int					color;
-	float				ref;
-}						t_help;
 
 typedef struct 			s_light
 {
@@ -148,7 +124,6 @@ typedef struct 			s_light
 	float3				pos;
 # endif
 	float 				intensity;
-	// char 				type;
 }						t_light;
 
 typedef struct 			s_light_off
@@ -174,24 +149,14 @@ typedef struct			s_object
 	union u_objects		object;
 }						t_object;
 
-typedef struct			s_return
-{
-	int					closest_object;
-	float				closest_t;
-}						t_return;
-
 typedef struct			s_scene
 {
-# ifndef OPENCL___
-	cl_float3			view;
-# else
-	float3				view;
-# endif
 	t_light				*light;
 	t_cam				cam;
 	t_object			*object;
 	t_light_off			off;
 	int					count_objects;
+	int					count_lights;
 }						t_scene;
 
 typedef struct			s_cylinder_params
@@ -259,15 +224,6 @@ typedef struct			s_sphere_params
 // 	int					reflect;
 // }						t_light_off;
 
-// typedef struct			s_scene
-// {
-// 	t_pos				*view;
-// 	t_cam				*cam;
-// 	t_light				**light;
-// 	t_object			**object;
-// 	t_light_off			*off;
-// }						t_scene;
-
 # ifndef OPENCL___
 typedef struct			s_cl
 {
@@ -316,13 +272,12 @@ int						read_kernel(t_cl *cl);
 int						create_cl(t_cl *cl, t_sdl *sdl, t_scene *scene);
 int						set_arg(t_cl *cl, t_sdl *sdl, t_scene *scene);
 
-void		calc_screen(t_cam *cam);
-void		cl_to_norm(cl_float3 *v);
-cl_float3	cl_mult_n(cl_float3 v1, float n);
-float		cl_length(cl_float3 v);
-cl_float3	cl_minus(cl_float3 v1, cl_float3 v2);
-cl_float3	cl_sum(cl_float3 v1, cl_float3 v2);
-cl_float3	cl_cross(cl_float3 v1, cl_float3 v2);
+void					calc_screen(t_cam *cam);
+void					cl_to_norm(cl_float3 *v);
+cl_float3				cl_mult_n(cl_float3 v1, float n);
+float					cl_length(cl_float3 v);
+cl_float3				cl_minus(cl_float3 v1, cl_float3 v2);
+cl_float3				cl_sum(cl_float3 v1, cl_float3 v2);
+cl_float3				cl_cross(cl_float3 v1, cl_float3 v2);
 # endif
-
 #endif

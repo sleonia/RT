@@ -32,24 +32,24 @@ cl_float3	spher_norm(cl_float3 vec)
 void		calc_screen(t_cam *cam)
 {
 	cl_float3	dec_coor;
-	cl_float3	v1;
-	cl_float3	v2;
-	cl_float3	center;
+	cl_float3	ox;
+	cl_float3	oy;
+	cl_float3	oz;
 
 	if ((*cam).tetta == 0.0f)
 		(*cam).tetta = 0.0001;
 	dec_coor = spherical_coor((*cam).phi, (*cam).tetta);
 	dec_coor = cl_sum(dec_coor, (*cam).pos);
-	center = cl_minus((*cam).pos, dec_coor);
-	v2 = spher_norm(center);
+	oz = cl_minus((*cam).pos, dec_coor);
+	oy = spher_norm(oz);
 	if ((*cam).tetta > (float)M_PI_2 - 0.00001f)
-		v2 = cl_mult_n(v2, (-1));
-	v1 = cl_cross(center, v2);
-	cl_to_norm(&v1);
-	cl_to_norm(&v2);
-	(*cam).v1 = v1;
-	(*cam).v2 = v2;
-	(*cam).center = center;
+		oy = cl_mult_n(oy, (-1));
+	ox = cl_cross(oz, oy);
+	cl_to_norm(&ox);
+	cl_to_norm(&oy);
+	(*cam).ox = ox;
+	(*cam).oy = oy;
+	(*cam).oz = oz;
 	// printf("v1 = %f %f %f\n", v1.x, v1.y, v1.z);
 	// printf("v2 = %f %f %f\n", v2.x, v2.y, v2.z);
 	// printf("center = %f %f %f\n", center.x, center.y, center.z);

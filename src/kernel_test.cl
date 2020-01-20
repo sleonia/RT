@@ -599,8 +599,8 @@ __kernel void RT(__global int *arr, __global t_cam *cam, __global t_object *obje
 	{
 		for (int j = -fsaa * 0.5f; j <= fsaa * 0.5f; j++)
 		{
-			d = (*cam).v1 * ((float) (x + i * reverse(fsaa)) * cache_width - 0.5f) - (*cam).v2 * ((float) (y + j * reverse(fsaa)) * cache_width - 0.5f);
-			d = d - (*cam).center;
+			d = (*cam).ox * ((float) (x + i * reverse(fsaa)) * cache_width - 0.5f) - (*cam).oy * ((float) (y + j * reverse(fsaa)) * cache_width - 0.5f);
+			d = d - (*cam).oz;
 			d = normalize(d);
 //////////
 
