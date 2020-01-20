@@ -6,7 +6,7 @@
 /*   By: deladia <deladia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/24 12:43:04 by deladia           #+#    #+#             */
-/*   Updated: 2020/01/20 11:11:46 by deladia          ###   ########.fr       */
+/*   Updated: 2020/01/20 12:16:25 by deladia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,34 +119,6 @@ int			sdl_control(t_sdl *sdl, t_scene *scene, t_cl *cl)
 					// scene->cam.b -= 0.1;
 					// if (scene->cam.b < -(float)M_PI + 0.00001f)
 					// 	scene->cam.b += -2 * (float)M_PI;
-				}
-				if (sdl->event.key.keysym.scancode == SDL_SCANCODE_P)
-				{
-					if (!scene->off.point)
-						scene->off.point = 1;
-					else
-						scene->off.point = 0;
-				}
-				if (sdl->event.key.keysym.scancode == SDL_SCANCODE_I)
-				{
-					if (!scene->off.ambient)
-						scene->off.ambient = 1;
-					else
-						scene->off.ambient = 0;
-				}
-				if (sdl->event.key.keysym.scancode == SDL_SCANCODE_O)
-				{
-					if (!scene->off.directional)
-						scene->off.directional = 1;
-					else
-						scene->off.directional = 0;
-				}
-				if (sdl->event.key.keysym.scancode == SDL_SCANCODE_U)
-				{
-					if (!scene->off.reflect)
-						scene->off.reflect = 1;
-					else
-						scene->off.reflect = 0;
 				}
 				calc_screen(&scene->cam);
 				set_arg(cl, sdl, scene);

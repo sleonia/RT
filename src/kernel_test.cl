@@ -52,21 +52,6 @@ static int		get_color(float3 v)
 	return ((red << 16) | (green << 8) | blue);
 }
 
-// static int 		color_scale(int	color, float c)
-// {
-// 	int 	red;
-// 	int 	green;
-// 	int 	blue;
-
-// 	red = (color & 0xFF0000) >> 16;
-// 	red = (int)((float)red * c);
-// 	green = (color & 0x00FF00) >> 8;
-// 	green = (int)((float)green * c);
-// 	blue = (color & 0x0000FF);
-// 	blue = (int)((float)blue * c);
-// 	return ((red << 16) | (green << 8) | blue);
-// }
-
 static float3		matrix_rotation(float a, float b, float3 vec)
 {
 	float	x;
@@ -88,56 +73,6 @@ static float		vector_len(float3 o)
 	return(sqrt(o.x * o.x + o.y * o.y + o.z * o.z));
 }
 
-// static float3		canvas_to_viewport(int x, int y)
-// {
-// 	float3	vec;
-
-// 	vec.x = (float)x * VW / WIDTH;
-// 	vec.y = (float)y * VH / HEIGHT;
-// 	vec.z = D;
-// 	return (vec);
-// }
-
-////////////////////////////////////////////////////////
-// static float3	get_cone_normal(float3 *start_ray, float3 *ray, __global t_object *obj, float intersect_dist)
-// {
-// 	float3	ret_normal;
-// 	float3	oc;
-// 	float	m;
-
-// 	oc = *start_ray - obj->center;
-// 	m = dot(*ray, obj->axis) * intersect_dist + dot(oc, obj->axis);
-// 	ret_normal = (((*ray * intersect_dist) + oc) - (obj->axis * (1 + obj->tan * obj->tan) * m));
-// 	return (ret_normal);
-// }
-
-// static float3	get_cylinder_normal(__global t_object *obj, float3 *intersect_point)
-// {
-// 	float3	n;
-// 	float3	v;
-
-// 	v = *intersect_point - obj->center;
-// 	n = obj->axis * dot(v, obj->axis);
-// 	n = v - n;
-// 	return (n);
-// }
-
-// static float3		get_obj_normal(float3 *p, t_return *ret, float3 *o, float3 *d, __global t_object *obj)
-// {
-// 	float3		n;
-
-// 	if (obj[ret->closest_object].type == o_sphere)
-// 		n = *p - obj[ret->closest_object].center;
-// 	else if (obj[ret->closest_object].type == o_plane)
-// 		n = obj[ret->closest_object].axis;
-// 	else if (obj[ret->closest_object].type == o_cone)
-// 		n = get_cone_normal(o, d, obj, ret->closest_t);
-// 	else if (obj[ret->closest_object].type == o_cylinder)
-// 		n = get_cylinder_normal(obj, p);
-// 	n = n / vector_len(n);
-// 	return (n);
-// }
-/////////////////////////////////////////////////////////////////////
 static int	intersect_ray_sphere(float3 o, float3 d, __global t_sphere *sphere, float *dist_i)
 {
 	float3		oc;
@@ -189,15 +124,6 @@ static int    intersect_ray_cylinder(float3 o, float3 d, __global t_cylinder *cy
 
 static int	intersect_ray_plane(float3 o, float3 d, __global t_plane *pl, float *dist_i)
 {
-	// float3		oc;
-	// float3		min;
-
-	// oc = *o - pl->center;
-	// min = oc * (-1);
-	// *dist_i = dot(min, pl->axis) / dot(*d, pl->axis);
-	// if ((*dist_i < 0.f))
-	// 	return (0);
-	// return (1);
 	float	a = 0;
 
 	pl->axis = ft_normalize(pl->axis);
@@ -248,46 +174,9 @@ static int   intersect_ray_cone(float3 o, float3 d, __global t_cone *cone, float
 			return (2);
 		return (1);
 	}
-	// oc = o - cone->center;
-	// a = dot(d, d) - (1 + cone->tan * cone->tan) * dot(d, cone->axis) * dot(d, cone->axis);
-	// c = dot(oc, oc) - (1 + cone->tan * cone->tan) * dot(oc, cone->axis) * dot(oc, cone->axis);
-	// b = dot(d, oc) - (1 + cone->tan * cone->tan) * dot(d, cone->axis) * dot(oc, cone->axis);
-	// discr = b * b - a * c;
-	// if (discr < 0.f )
-	// 	return (0);
-	// t1 = (-b - sqrt(discr))/(a);
-	// t2 = (-b + sqrt(discr))/(a);
-	// if (fabs(t1 - t2) < 0.000001)
-	// 	return (0);
-	// *dist_i = min(t1, t2);
-	// if (*dist_i > 0.f)
-	// {
-	// 	if (acos(fabs(dot(d, cone->axis))) > cone->tan)
-	// 		return (1);
-	// 	return (2);
-	// }
-	// *dist_i = max(t1, t2);
-	// if (*dist_i > 0.f)
-	// {
-	// 	if (acos(fabs(dot(d, cone->axis))) > cone->tan)
-	// 		return (2);
-	// 	return (1);
-	// }
 	return (0);
 }
 
-// static float2	get_intersect(float3 *o, float3 *d, __global t_object *obj)
-// {
-// 	if (obj->type == o_sphere)
-// 		return (intersect_ray_sphere(o, d, obj));
-// 	else if (obj->type == o_plane)
-// 		return (intersect_ray_plane(o, d, obj));
-// 	else if (obj->type == o_cone)
-// 		return (intersect_ray_cone(o, d, obj));
-// 	else
-// 		return (intersect_ray_cylinder(o, d, obj));
-// }
-////////////////////////////////////////////////////////////////////
 static int	closest_intersection(float3 o, float3 d, int count_obj, __global t_object *obj, t_hitting *light_hit)
 {
 	float		dist;
@@ -432,7 +321,7 @@ static int	closest_intersection(float3 o, float3 d, int count_obj, __global t_ob
 	}
 	return (dist < MAX_DIST);
 }
-/////////////////////////////////////
+
 static float3		reflect_ray(float3 r, float3 n)
 {
 	return (r - n * 2 * dot(r, n));
@@ -454,68 +343,6 @@ static float3 refract_ray(const float3 I, float3 N, float refractive_index)
 	const float	cosT = sqrt(1.f - sinT2);
 	return  (n * I + (n * cosI - cosT) * N);
 }
-///////////////////////////////////////////////////
-// static float		computer_lighting(float3 *p, float3 *n, float3 *v, int specular, __global t_object *object, __global t_light *light)
-// {
-// 	float3		l;
-// 	float3		r;
-// 	// float3		buf;
-// 	float		intens;
-// 	float		n_dot_l;
-// 	float		r_dot_v;
-// 	float		t_max;
-// 	int 		i;
-// 	t_return	shadow;
-// 	t_hitting	shadow_hit;
-
-// 	i = 0;
-// 	intens = 0.0;
-// 	l = 0;
-// 	while (i < 3)
-// 	{
-// 		if (light[i].type == 'A')
-// 			intens += light[i].intensity;
-// 		else
-// 		{
-// 			if (light[i].type == 'P')
-// 			{
-// 				l = light[i].pos - *p;
-// 				t_max = 1.0;
-// 			}
-// 			else if (light[i].type == 'D')
-// 			{
-// 				l = light[i].pos;
-// 				t_max = MAX_DIST;
-// 			}
-// 			// Проверка тени
-// 			if (t_max)
-// 			{
-// 				shadow = closest_intersection(p, &l, 0.001, t_max, 6, object, &shadow_hit);
-// 				if (shadow.closest_object != -1)
-// 				{
-// 					i++;
-// 					continue ;
-// 				}
-// 				// Диффузность
-// 				n_dot_l = dot(*n, l);
-// 				if (n_dot_l > 0)
-// 					intens += light[i].intensity * n_dot_l / (vector_len(*n) * vector_len(l));
-// 				// Блеск
-// 				if (specular != -1)
-// 				{
-// 					r = reflect_ray(&l, n);
-// 					r_dot_v = dot(r, *v);
-// 					if (r_dot_v > 0)
-// 						intens += light[i].intensity * pow(r_dot_v / (vector_len(r) * vector_len(*v)), specular);
-// 				}
-// 			}
-// 		}
-// 		i++;
-// 	}
-// 	if (intens > 1.0)
-// 		return (1.0);
-// 	return (intens);
-// }
 
 static float3		computer_lighting(float3 d, t_hitting *light_hit, __global t_object *obj, __global t_light *l, int count_obj, int count_light, float ambient)
 {
@@ -575,10 +402,7 @@ __kernel void RT(__global int *arr, __global t_cam *cam, __global t_object *obje
 	int		pixel;
 	float3	d;
 	float3	o;
-	// float3	ref_tmp;
-	// int3	color_tmp;
 	float3	color = (float3)0;
-	// t_help	help;
 	t_hitting	light_hit;
 	int count_light = 1;
 	float	ambient = 0.2f;
@@ -587,14 +411,10 @@ __kernel void RT(__global int *arr, __global t_cam *cam, __global t_object *obje
 	int		tex_width = 8192;
 	int		tex_height = 4096;
 	int		cnt_reflection = 0;
-	float3	mask = (float3)1;
 
 	x = get_global_id(0);
 	y = get_global_id(1);
 	o = (float3)cam->pos;
-
-	// d = matrix_rotation(cam->phi, cam->tetta, cam->pos);
-
 	for (int i = -fsaa * 0.5f; i <= fsaa * 0.5f; i++)
 	{
 		for (int j = -fsaa * 0.5f; j <= fsaa * 0.5f; j++)
@@ -602,11 +422,7 @@ __kernel void RT(__global int *arr, __global t_cam *cam, __global t_object *obje
 			d = (*cam).ox * ((float) (x + i * reverse(fsaa)) * cache_width - 0.5f) - (*cam).oy * ((float) (y + j * reverse(fsaa)) * cache_width - 0.5f);
 			d = d - (*cam).oz;
 			d = normalize(d);
-//////////
-
-	// int i = 1;
 	//Отправлять размеры текстуры, колличество объектов и количество источников света и саму текстуру
-
 			while (cnt_reflection < 4)
 			{
 				cnt_reflection++;
@@ -631,36 +447,6 @@ __kernel void RT(__global int *arr, __global t_cam *cam, __global t_object *obje
 					color += uv_mapping_for_skybox(skybox, d, tex_width, tex_height);
 				}
 			}
-//	// if (1)
-//	// {
-//	// 	float ambient = 0.2f;
-//	// 	int count_light = 1;
-//	// 	trace_ray(o, d, count_obj, count_light, ambient, object, light, &light_hit, &color);
-		// color_tmp[0] = help.color;
-		// ref_tmp[0] = help.ref;
-		// while (i < 3)
-		// {
-		// 	help = trace_ray(&help.p, &help.r, count_obj, object, light, &light_hit, &color);
-		// 	// if (help.ref == 0)
-		// 	// {
-		// 	// 	color_tmp[i] = help.color;
-		// 	// 	i++;
-		// 	// 	break ;
-		// 	// }		
-		// 	color_tmp[i] = help.color;
-		// 	ref_tmp[i] = help.ref;
-		// 	i++;
-		// }
-		// while (--i > 0)
-		// {
-		// 	color_tmp[i - 1] = color_scale(color_tmp[i - 1], 1 - ref_tmp[i - 1]) + color_scale(color_tmp[i], ref_tmp[i - 1]);
-		// }
-	// }
-		// skybox
-			// else if (1)
-			// {			
-			// 	color += uv_mapping_for_skybox(skybox, d, tex_width, tex_height);
-			// }
 		}
 	}
 	color = color / cnt_reflection;

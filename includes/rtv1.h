@@ -6,7 +6,7 @@
 /*   By: deladia <deladia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/25 21:18:10 by deladia           #+#    #+#             */
-/*   Updated: 2020/01/20 12:14:59 by deladia          ###   ########.fr       */
+/*   Updated: 2020/01/20 12:16:17 by deladia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,14 +126,6 @@ typedef struct 			s_light
 	float 				intensity;
 }						t_light;
 
-typedef struct 			s_light_off
-{
-	int					ambient;
-	int					point;
-	int					directional;
-	int					reflect;
-}						t_light_off;
-
 enum					e_obj_type
 {
 	o_sphere = 1,
@@ -154,7 +146,6 @@ typedef struct			s_scene
 	t_light				*light;
 	t_cam				cam;
 	t_object			*object;
-	t_light_off			off;
 	int					count_objects;
 	int					count_lights;
 }						t_scene;
@@ -215,14 +206,6 @@ typedef struct			s_sphere_params
 	int					specular;
 	float				reflective;
 }						t_sphere_params;
-
-// typedef struct 			s_light_off
-// {
-// 	int					ambient;
-// 	int					point;
-// 	int					directional;
-// 	int					reflect;
-// }						t_light_off;
 
 # ifndef OPENCL___
 typedef struct			s_cl
