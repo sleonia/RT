@@ -6,7 +6,7 @@
 /*   By: deladia <deladia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/25 21:18:10 by deladia           #+#    #+#             */
-/*   Updated: 2020/01/16 20:25:56 by deladia          ###   ########.fr       */
+/*   Updated: 2020/01/20 06:09:53 by deladia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ typedef struct			s_cylinder
 	float3				axis;
 # endif
 	float				radius;
-	float				param;
+	float				length;
 }						t_cylinder;
 
 typedef struct			s_plane
@@ -71,7 +71,7 @@ typedef struct			s_cone
 	float3				center;
 	float3				axis;
 # endif
-	float				radius;
+	float				length;
 	float				tan;
 }						t_cone;
 
@@ -123,8 +123,8 @@ typedef struct			s_cam
 	float3				v2;
 	float3				center;
 # endif
-	float				a;
-	float				b;
+	float				phi;
+	float				tetta;
 }						t_cam;
 
 typedef struct			s_help

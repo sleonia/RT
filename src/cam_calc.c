@@ -1,51 +1,53 @@
 #include "rtv1.h"
 
-cl_float3	spherical(float phi, float tetta)
+cl_float3	spherical_coor(float phi, float tetta)
 {
-	cl_float3	v;
+	cl_float3	vec;
 
-	v.x = sinf(tetta) * cosf(phi);
-	v.y = sinf(tetta) * sinf(phi);
-	v.z = cosf(tetta);
-	return (v);
+	vec.s[0] = sinf(tetta) * cosf(phi);
+	vec.s[1] = sinf(tetta) * sinf(phi);
+	vec.s[2] = cosf(tetta);
+	return (vec);
 }
 
-cl_float3	spher_norm(cl_float3 v)
+cl_float3	spher_norm(cl_float3 vec)
 {
-	cl_float3	n;
+	cl_float3	normal;
 
-	if ((fabsf(v.z) < 0.00001f))
+	if ((fabsf(vec.s[2]) < 0.00001f))
 	{
-		n.x = 0.f;
-		n.y = 0.f;
-		n.z = -1.f;
+		normal.s[0] = 0.f;
+		normal.s[1] = 0.f;
+		normal.s[2] = -1.f;
 	}
 	else
 	{
-		n.x = v.x;
-		n.y = v.y;
-		n.z = -(v.x * v.x + v.y * v.y) / v.z;
+		normal.s[0] = vec.s[0];
+		normal.s[1] = vec.s[1];
+		normal.s[2] = -(vec.s[0] * vec.s[0] + vec.s[1] * vec.s[1]) / vec.s[2];
 	}
-	return (n);
+	return (normal);
 }
 
 void		calc_screen(t_cam *cam)
 {
-	cl_float3	check;
-	cl_float3	v[3];
+	cl_float3	dec_coor;
+	cl_float3	v1;
+	cl_float3	v2;
+	cl_float3	center;
 
-	check = spherical((*cam).a, (*cam).b);
-	check = cl_sum(check, (*cam).pos);
-	v[2] = cl_minus((*cam).pos, check);
-	v[1] = spher_norm(v[2]);
-	if ((*cam).b > 0.00001f)
-		v[1] = cl_mult_n(v[1], (-1));
-	v[0] = cl_cross(v[2], v[1]);
-	cl_to_norm(&v[0]);
-	cl_to_norm(&v[1]);
-	(*cam).v1 = v[0];
-	(*cam).v2 = v[1];
-	(*cam).center = v[2];
+	dec_coor = spherical_coor((*cam).phi, (*cam).tetta);
+	dec_coor = cl_sum(dec_coor, (*cam).pos);
+	center = cl_minus((*cam).pos, dec_coor);
+	v2 = spher_norm(center);
+	if ((*cam).tetta > 0.00001f)
+		v2 = cl_mult_n(v2, (-1));
+	v1 = cl_cross(center, v2);
+	cl_to_norm(&v1);
+	cl_to_norm(&v2);
+	(*cam).v1 = v1;
+	(*cam).v2 = v2;
+	(*cam).center = center;
 	// printf("v1 = %f %f %f\n", v[0].x, v[0].y, v[0].z);
 	// printf("v2 = %f %f %f\n", v[1].x, v[1].y, v[1].z);
 	// printf("center = %f %f %f\n", v[2].x, v[2].y, v[2].z);

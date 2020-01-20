@@ -6,7 +6,7 @@
 /*   By: deladia <deladia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/24 12:43:04 by deladia           #+#    #+#             */
-/*   Updated: 2020/01/16 20:12:49 by deladia          ###   ########.fr       */
+/*   Updated: 2020/01/18 16:27:45 by deladia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,21 +92,21 @@ int			sdl_control(t_sdl *sdl, t_scene *scene, t_cl *cl)
 				}
 				if (sdl->event.key.keysym.scancode == SDL_SCANCODE_Z)
 				{
-					scene->cam.a += 0.1;
-					if (scene->cam.a > (float)M_PI - 0.00001f)
-						scene->cam.a -= 2 * (float)M_PI;
+					scene->cam.phi += 0.1;
+					if (scene->cam.phi > (float)M_PI - 0.00001f)
+						scene->cam.phi -= 2 * (float)M_PI;
 				}
 				if (sdl->event.key.keysym.scancode == SDL_SCANCODE_X)
 				{
-					scene->cam.a -= 0.1;
-					if (scene->cam.a < -(float)M_PI + 0.00001f)
-						scene->cam.a += -2 * (float)M_PI;
+					scene->cam.phi -= 0.1;
+					if (scene->cam.phi < -(float)M_PI + 0.00001f)
+						scene->cam.phi += -2 * (float)M_PI;
 				}
 				if (sdl->event.key.keysym.scancode == SDL_SCANCODE_Q)
 				{
 					// scene->cam.b -= 0.1;
-					if ((scene->cam.b) - 0.1 >= -(float)M_PI_2 + 0.00001f)
-						scene->cam.b -= 0.1;
+					if ((scene->cam.tetta) - 0.1 >= -(float)M_PI_2 + 0.00001f)
+						scene->cam.tetta -= 0.1;
 					// scene->cam.b += 0.1;
 					// if (scene->cam.b > (float)M_PI - 0.00001f)
 					// 	scene->cam.b -= 2 * (float)M_PI;
@@ -114,8 +114,8 @@ int			sdl_control(t_sdl *sdl, t_scene *scene, t_cl *cl)
 				if (sdl->event.key.keysym.scancode == SDL_SCANCODE_E)
 				{
 					// scene->cam.b += 0.1;
-					if ((scene->cam.b) + 0.1 <= (float)M_PI_2 + 0.00001f)
-						scene->cam.b += 0.1;
+					if ((scene->cam.tetta) + 0.1 <= (float)M_PI_2 + 0.00001f)
+						scene->cam.tetta += 0.1;
 					// scene->cam.b -= 0.1;
 					// if (scene->cam.b < -(float)M_PI + 0.00001f)
 					// 	scene->cam.b += -2 * (float)M_PI;
