@@ -6,7 +6,7 @@
 /*   By: deladia <deladia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/28 19:00:37 by deladia           #+#    #+#             */
-/*   Updated: 2020/01/15 22:59:52 by deladia          ###   ########.fr       */
+/*   Updated: 2020/01/20 12:19:50 by deladia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,6 @@ int		set_arg_1(t_cl *cl, t_sdl *sdl, t_scene *scene)
 									sizeof(cl_int) * 8192 * 4096, (cl_int *)sdl->background, 0, NULL, 
 									NULL)) != 0)
 		func_error(-10);
-	// if ((ret = clEnqueueWriteBuffer(cl->cmd_queue, cl->memobjs[5], CL_TRUE, 0, 
-	// 								sizeof(cl_int), (cl_int)scene->count_objects, 0, NULL, 
-	// 								NULL)) != 0)
-	// 	func_error(-10);
 	// не добавляется локал ворк сайз
 	if ((ret = clEnqueueNDRangeKernel(cl->cmd_queue, cl->kernel, 2, NULL, cl->global_work_size, NULL, 0, NULL, NULL)) != 0)
 		func_error(-11);
@@ -64,19 +60,6 @@ int		set_arg(t_cl *cl, t_sdl *sdl, t_scene *scene)
 	ret |= clSetKernelArg(cl->kernel, 3, sizeof(cl_mem), &cl->memobjs[3]);
 	ret |= clSetKernelArg(cl->kernel, 4, sizeof(cl_mem), &cl->memobjs[4]);
 	ret |= clSetKernelArg(cl->kernel, 5, sizeof(cl_int), &scene->count_objects);
-	// ret |= clSetKernelArg(cl->kernel, 1, sizeof(int), &side_x);
-	// ret |= clSetKernelArg(cl->kernel, 2, sizeof(int), &side_y);
-	// ret |= clSetKernelArg(cl->kernel, 3, sizeof(double), &fract->x);
-	// ret |= clSetKernelArg(cl->kernel, 4, sizeof(double), &fract->y);
-	// ret |= clSetKernelArg(cl->kernel, 5, sizeof(int), &fract->repeat);
-	// ret |= clSetKernelArg(cl->kernel, 6, sizeof(int), &fract->color);
-	// ret |= clSetKernelArg(cl->kernel, 7, sizeof(double), &fract->xmin);
-	// ret |= clSetKernelArg(cl->kernel, 8, sizeof(double), &fract->xmax);
-	// ret |= clSetKernelArg(cl->kernel, 9, sizeof(double), &fract->ymin);
-	// ret |= clSetKernelArg(cl->kernel, 10, sizeof(double), &fract->ymax);
-	// ret |= clSetKernelArg(cl->kernel, 11, sizeof(char), &fract->key1);
-	// ret |= clSetKernelArg(cl->kernel, 12, sizeof(int), &fract->mouse_jul_x);
-	// ret |= clSetKernelArg(cl->kernel, 13, sizeof(int), &fract->mouse_jul_y);
 	if (ret != 0)
 		func_error(-9);
 	set_arg_1(cl, sdl, scene);
@@ -103,13 +86,11 @@ int		create_cl_1(t_cl *cl, t_scene *scene)
 			clGetProgramBuildInfo(cl->program, cl->device_id, CL_PROGRAM_BUILD_LOG, log_size, log, NULL);
 			printf("build program - ERROR (%d)\n", ret);
 			printf("%s\n", log);
-			// func_error(-7);
 			exit(-1);
 		}
 	}
 	if ((cl->kernel = clCreateKernel(cl->program, "RT", &ret)) && ret != 0)
 		func_error(-8);
-	// cl->global_work_size[0] = WIDTH * HEIGHT;
 	cl->global_work_size[0] = WIDTH;
 	cl->global_work_size[1] = HEIGHT;
 	cl->local_work_size[0] = 16;
@@ -124,8 +105,6 @@ int		create_cl_1(t_cl *cl, t_scene *scene)
 		func_error(-5);
 	if ((cl->memobjs[4] = clCreateBuffer(cl->context, CL_MEM_READ_WRITE, sizeof(cl_int) * 8192 * 4096, NULL, &ret)) && ret != 0)
 		func_error(-5);
-	// if ((cl->memobjs[5] = clCreateBuffer(cl->context, CL_MEM_READ_WRITE, sizeof(cl_int), NULL, &ret)) && ret != 0)
-	// 	func_error(-5);
 	return (0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: deladia <deladia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/24 12:43:04 by deladia           #+#    #+#             */
-/*   Updated: 2020/01/20 12:16:25 by deladia          ###   ########.fr       */
+/*   Updated: 2020/01/20 12:19:14 by deladia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,17 +24,6 @@ void		ft_error(char *str)
 	ft_putendl(str);
 	exit(1);
 }
-
-//void		ft_free(t_rtv1 *rtv1)
-//{
-//	free(rtv1->sdl);
-//	free(rtv1->scene->cam);
-//	free(rtv1->scene->view);
-//	free(rtv1->scene->figure->sphere);
-//	free(rtv1->scene->figure);
-//	free(rtv1->scene);
-//	free(rtv1);
-//}
 
 int 		sdl_update(t_sdl *sdl)
 {
@@ -104,21 +93,13 @@ int			sdl_control(t_sdl *sdl, t_scene *scene, t_cl *cl)
 				}
 				if (sdl->event.key.keysym.scancode == SDL_SCANCODE_Q)
 				{
-					// scene->cam.b -= 0.1;
 					if ((scene->cam.tetta) - 0.1 >= 0.00001f)
 						scene->cam.tetta -= 0.1;
-					// scene->cam.b += 0.1;
-					// if (scene->cam.b > (float)M_PI - 0.00001f)
-					// 	scene->cam.b -= 2 * (float)M_PI;
 				}
 				if (sdl->event.key.keysym.scancode == SDL_SCANCODE_E)
 				{
-					// scene->cam.b += 0.1;
 					if ((scene->cam.tetta) + 0.1 <= (float)M_PI + 0.00001f)
 						scene->cam.tetta += 0.1;
-					// scene->cam.b -= 0.1;
-					// if (scene->cam.b < -(float)M_PI + 0.00001f)
-					// 	scene->cam.b += -2 * (float)M_PI;
 				}
 				calc_screen(&scene->cam);
 				set_arg(cl, sdl, scene);

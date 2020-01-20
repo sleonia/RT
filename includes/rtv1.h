@@ -6,7 +6,7 @@
 /*   By: deladia <deladia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/25 21:18:10 by deladia           #+#    #+#             */
-/*   Updated: 2020/01/20 12:16:17 by deladia          ###   ########.fr       */
+/*   Updated: 2020/01/20 12:20:29 by deladia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,11 @@
 #include <SDL.h>
 #include <math.h>
 #include <OpenCL/opencl.h>
-# endif
 # define WIDTH 1280
 # define HEIGHT 1024
-// # define VW 1.25
-// # define VH 1
-// # define D 1
 # define WHITE 0xFFFFFF
 # define BLACK 0x000000
+# endif
 
 typedef struct			s_cylinder
 {

@@ -6,7 +6,7 @@
 /*   By: deladia <deladia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/06 19:23:27 by deladia           #+#    #+#             */
-/*   Updated: 2020/01/16 18:12:53 by deladia          ###   ########.fr       */
+/*   Updated: 2020/01/20 12:20:10 by deladia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,6 @@
 # include "rtv1.h"
 # define WIDTH 1280
 # define HEIGHT 1024
-// # define VW 1.25
-// # define VH 1
-// # define D 1
 # define WHITE 0xFFFFFF
 # define BLACK 0x000000
 # define MAX_DIST 10000.f
@@ -37,63 +34,5 @@ typedef struct			t_hitting
 # endif
 	t_material			mat;
 }						t_hitting;
-
-
-
-// typedef struct 			s_cylinder
-// {
-// # ifndef OPENCL___	
-// 	cl_float3			center;
-// 	cl_float3			axis;
-// # else
-// 	float3				center;
-// 	float3				axis;
-// # endif
-// 	float				radius;
-// }						t_cylinder;
-
-// typedef struct 			s_cone
-// {
-// # ifndef OPENCL___	
-// 	cl_float3			center;
-// 	cl_float3			axis;
-// # else
-// 	float3				center;
-// 	float3				axis;
-// # endif
-// 	float				tan;
-// }						t_cone;
-
-// typedef struct 			s_plane
-// {
-// # ifndef OPENCL___
-// 	cl_float3			center;
-// 	cl_float3			normal;
-// # else
-// 	float3				normal;
-// 	float3				center;
-// # endif
-// }						t_plane;
-
-// typedef struct 			s_sphere
-// {
-// # ifndef OPENCL___
-// 	cl_float3			center;
-// 	float				radius;
-// # else
-// 	float3				center;
-// 	float				radius;
-// # endif
-
-// }						t_sphere;
-
-// union					u_objects
-// {
-// 	t_sphere			sphere;
-// 	t_cylinder			cylinder;
-// 	t_cone				cone;
-// 	t_plane				plane;
-// };
-
 
 #endif
