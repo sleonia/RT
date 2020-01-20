@@ -631,13 +631,12 @@ __kernel void RT(__global int *arr, __global t_cam *cam, __global t_object *obje
 					if (light_hit.mat.reflection > 0.f)
 					{
 						o = light_hit.hit;
-						d = ft_normalize(light_hit.mat.reflection * ft_normalize(reflect_ray(d, light_hit.n)));
+						d = ft_normalize(reflect_ray(d, light_hit.n));
 					}
 					else if (light_hit.mat.refraction > 0.f)
 					{
 						o = light_hit.hit - light_hit.n * 0.003f;
-						d = ft_normalize(ft_normalize(refract_ray(d, light_hit.n, light_hit.mat.refraction)));
-						float	cos_n = fabs(dot(d, light_hit.n));
+						d = ft_normalize(refract_ray(d, light_hit.n, light_hit.mat.refraction));
 					}
 					else
 						break ;
