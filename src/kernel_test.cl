@@ -305,6 +305,8 @@ static float3 refract_ray(const float3 I, float3 N, float refractive_index)
 {
 	float		n = refractive_index;
 	float		cosI = -(dot(N, I));
+	float		sinT2;
+	float		cosT;
 
 	if (cosI < 0.f)
 		cosI = -cosI;
@@ -313,9 +315,9 @@ static float3 refract_ray(const float3 I, float3 N, float refractive_index)
 		n = 1.f / n;
 		N = -N;
 	}
-	float		sinT2 = n * n * (1.f - cosI * cosI);
-	const float	cosT = sqrt(1.f - sinT2);
-	return  (n * I + (n * cosI - cosT) * N);
+	sinT2 = n * n * (1.f - cosI * cosI);
+	cosT = sqrt(1.f - sinT2);
+	return (n * I + (n * cosI - cosT) * N);
 }
 
 static float3		computer_lighting(float3 d, t_hitting *light_hit, __global t_object *obj, __global t_light *l, int count_obj, int count_light, float ambient)
@@ -344,7 +346,7 @@ static float3		computer_lighting(float3 d, t_hitting *light_hit, __global t_obje
 				b += pow(max(0.f, -dot(light_hit->n * 2.f * dot(light_dir, light_hit->n) - light_dir, d)), light_hit->mat.sp_ex) * l[i].intensity;
 			}
 		}
-		++i;
+		i++;
 	}
 	r = light_hit->mat.color * (a + ambient) * light_hit->mat.al.x + (float3)(1) * light_hit->mat.al.y * b;
 	e = max(max(r.x, r.y), r.z);
