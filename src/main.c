@@ -6,7 +6,7 @@
 /*   By: deladia <deladia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/24 12:57:07 by deladia           #+#    #+#             */
-/*   Updated: 2020/01/20 09:48:15 by deladia          ###   ########.fr       */
+/*   Updated: 2020/01/20 11:14:03 by deladia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ typedef struct			s_object
 	(*object)[0].type = o_sphere;
 	(*object)[0].material.color = (cl_float3){1, 0, 0};
 	(*object)[0].material.reflection = 0.9f; // от 0.9 до 1.0
-	(*object)[0].material.refraction = 1.8f; // от 1.0 до 1.5
+	(*object)[0].material.refraction = 1.3f; // от 1.0 до 1.3
 	(*object)[0].material.sp_ex = 50.0f;
 	(*object)[0].material.al = (cl_float2){1.0, 1.0};
 	(*object)[0].object.sphere.center = (cl_float3){0.0, -2.0, 3};
@@ -68,7 +68,7 @@ typedef struct			s_object
 	(*object)[1].type = o_sphere;
 	(*object)[1].material.color = (cl_float3){0, 0, 1};
 	(*object)[1].material.reflection = 0.0f;
-	(*object)[1].material.refraction = 1.5f;
+	(*object)[1].material.refraction = 1.055f;
 	(*object)[1].material.sp_ex = 50.0f;
 	(*object)[1].material.al = (cl_float2){1.0, 0.4};
 	(*object)[1].object.sphere.center = (cl_float3){4, 0, 8};
@@ -77,7 +77,7 @@ typedef struct			s_object
 	(*object)[2].type = o_sphere;
 	(*object)[2].material.color = (cl_float3){0, 1, 0};
 	(*object)[2].material.reflection = 0.0f;
-	(*object)[2].material.refraction = 1.3f;
+	(*object)[2].material.refraction = 1.055f;
 	(*object)[2].material.sp_ex = 50.0f;
 	(*object)[2].material.al = (cl_float2){1.0, 0.4};
 	(*object)[2].object.sphere.center = (cl_float3){-4, 0, 8};
@@ -186,7 +186,7 @@ int			main(void)
 	rtv1->scene = (t_scene *)ft_memalloc(sizeof(t_scene));
 	rtv1->scene->cam.pos = (cl_float3){0.0, 0.0, -10.0};
 	rtv1->scene->cam.phi = 90.0f * M_PI / 180;
-	rtv1->scene->cam.tetta = 0.001f * M_PI / 180;
+	rtv1->scene->cam.tetta = 90.0f * M_PI / 180;
 	init_object(&rtv1->scene->object);
 	init_light(&rtv1->scene->light);
 	rtv1->opencl = (t_cl *)ft_memalloc(sizeof(t_cl));

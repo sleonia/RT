@@ -557,25 +557,14 @@ static float3	uv_mapping_for_skybox(__global int *skybox, float3 d, int tex_widt
 	float3	vec;
 	float 	v;
 	float 	u;
-	// int		coord_x;
-	// int		coord_y;
 	int		coord;
 
 	vec = -d;
-	// vec = normalize(vec);
 	u = 0.5f + (atan2(vec.x, vec.z) / (2.f * M_PI_F));
 	v = 0.5f + (asin(vec.y) / M_PI_F);
-	// float2 uv = (float2)(u, v);
-
-
-	// coord_x = (int)(u * tex_width);
-	// coord_y = (int)(v * tex_height) * tex_width;
 	coord = (int)(u * tex_width) + (int)(v * tex_height) * tex_width;
 	// coord += prev_texture_size[screen->skybox_id];
 
-	// color_uv.x = (RED(skybox[coord])) * 0.00392156862f;
-	// color_uv.y = (GREEN(skybox[coord])) * 0.00392156862f;
-	// color_uv.z = (BLUE(skybox[coord])) * 0.00392156862f;
 	return ((float3){(RED(skybox[coord]) * 0.00392156862f), (GREEN(skybox[coord]) * 0.00392156862f), (BLUE(skybox[coord]) * 0.00392156862f)});
 }
 
@@ -600,16 +589,12 @@ __kernel void RT(__global int *arr, __global t_cam *cam, __global t_object *obje
 	int		cnt_reflection = 0;
 	float3	mask = (float3)1;
 
-	// pixel = get_global_id(0);
-	// x = pixel % WIDTH - WIDTH / 2;
-	// y = HEIGHT / 2 - pixel / WIDTH;
-	// y = HEIGHT / 2 - pixel / WIDTH;
 	x = get_global_id(0);
 	y = get_global_id(1);
 	o = (float3)cam->pos;
-////////////
 
-	// d = matrix_rotation(cam->a, cam->b, canvas_to_viewport(x, y));
+	// d = matrix_rotation(cam->phi, cam->tetta, cam->pos);
+
 	for (int i = -fsaa * 0.5f; i <= fsaa * 0.5f; i++)
 	{
 		for (int j = -fsaa * 0.5f; j <= fsaa * 0.5f; j++)
@@ -622,10 +607,10 @@ __kernel void RT(__global int *arr, __global t_cam *cam, __global t_object *obje
 	// int i = 1;
 	//Отправлять размеры текстуры, колличество объектов и количество источников света и саму текстуру
 
-			while (cnt_reflection < 3)
+			while (cnt_reflection < 4)
 			{
 				cnt_reflection++;
-				if (closest_intersection(o, d, count_obj, object, &light_hit) && cnt_reflection != 2)
+				if (closest_intersection(o, d, count_obj, object, &light_hit) && cnt_reflection != 4)
 				{
 					color += computer_lighting(d, &light_hit, object, light, count_obj, count_light, ambient);
 					if (light_hit.mat.reflection > 0.f)
