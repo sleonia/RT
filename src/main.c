@@ -6,7 +6,7 @@
 /*   By: deladia <deladia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/24 12:57:07 by deladia           #+#    #+#             */
-/*   Updated: 2020/01/20 07:05:08 by deladia          ###   ########.fr       */
+/*   Updated: 2020/01/20 09:48:15 by deladia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,27 +58,30 @@ typedef struct			s_object
 }						t_object;
 	(*object)[0].type = o_sphere;
 	(*object)[0].material.color = (cl_float3){1, 0, 0};
-	(*object)[0].material.reflection = 0.2f;
+	(*object)[0].material.reflection = 0.9f; // от 0.9 до 1.0
+	(*object)[0].material.refraction = 1.8f; // от 1.0 до 1.5
 	(*object)[0].material.sp_ex = 50.0f;
 	(*object)[0].material.al = (cl_float2){1.0, 1.0};
-	(*object)[0].object.sphere.center = (cl_float3){40.0, 20.0, 5};
-	(*object)[0].object.sphere.radius = 1.0f;
+	(*object)[0].object.sphere.center = (cl_float3){0.0, -2.0, 3};
+	(*object)[0].object.sphere.radius = 3.0f;
 
 	(*object)[1].type = o_sphere;
 	(*object)[1].material.color = (cl_float3){0, 0, 1};
-	(*object)[1].material.reflection = 0.2f;
+	(*object)[1].material.reflection = 0.0f;
+	(*object)[1].material.refraction = 1.5f;
 	(*object)[1].material.sp_ex = 50.0f;
 	(*object)[1].material.al = (cl_float2){1.0, 0.4};
-	(*object)[1].object.sphere.center = (cl_float3){2, 0, 4};
-	(*object)[1].object.sphere.radius = 1.0f;
+	(*object)[1].object.sphere.center = (cl_float3){4, 0, 8};
+	(*object)[1].object.sphere.radius = 3.0f;
 
 	(*object)[2].type = o_sphere;
 	(*object)[2].material.color = (cl_float3){0, 1, 0};
-	(*object)[2].material.reflection = 0.2f;
+	(*object)[2].material.reflection = 0.0f;
+	(*object)[2].material.refraction = 1.3f;
 	(*object)[2].material.sp_ex = 50.0f;
 	(*object)[2].material.al = (cl_float2){1.0, 0.4};
-	(*object)[2].object.sphere.center = (cl_float3){-2, 0, 4};
-	(*object)[2].object.sphere.radius = 1.0f;
+	(*object)[2].object.sphere.center = (cl_float3){-4, 0, 8};
+	(*object)[2].object.sphere.radius = 3.0f;
 
 	// (*object)[3].type = o_plane;
 	// (*object)[3].material.color = (cl_float3){1, 0, 1};
@@ -89,25 +92,25 @@ typedef struct			s_object
 	// (*object)[3].object.plane.axis = (cl_float3){0, 0, 1};
 	// (*object)[3].object.plane.dist_z = 10;
 
-	(*object)[4].type = o_cone;
-	(*object)[4].material.color = (cl_float3){1, 0, 1};
-	(*object)[4].material.reflection = 0.3f;
-	(*object)[4].material.sp_ex = 50.0f;
-	(*object)[4].material.al = (cl_float2){1.0, 0.4};
-	(*object)[4].object.cone.center = (cl_float3){0, 0, 5};
-	(*object)[4].object.cone.axis = (cl_float3){0, 1, 0};
-	(*object)[4].object.cone.length = 10.0f;
-	(*object)[4].object.cone.tan = 0.25;
+	// (*object)[4].type = o_cone;
+	// (*object)[4].material.color = (cl_float3){1, 0, 1};
+	// (*object)[4].material.reflection = 0.3f;
+	// (*object)[4].material.sp_ex = 50.0f;
+	// (*object)[4].material.al = (cl_float2){1.0, 0.4};
+	// (*object)[4].object.cone.center = (cl_float3){0, 0, 5};
+	// (*object)[4].object.cone.axis = (cl_float3){0, 1, 0};
+	// (*object)[4].object.cone.length = 10.0f;
+	// (*object)[4].object.cone.tan = 0.25;
 
-	(*object)[5].type = o_cylinder;
-	(*object)[5].material.color = (cl_float3){1, 1, 0};
-	(*object)[5].material.reflection = 0.3f;
-	(*object)[5].material.sp_ex = 50.0f;
-	(*object)[5].material.al = (cl_float2){1.0, 0.4};
-	(*object)[5].object.cylinder.center = (cl_float3){2, 0, 5};
-	(*object)[5].object.cylinder.axis = (cl_float3){0, 1, 0};
-	(*object)[5].object.cylinder.length = 10;
-	(*object)[5].object.cylinder.radius = 1.0f;
+	// (*object)[5].type = o_cylinder;
+	// (*object)[5].material.color = (cl_float3){1, 1, 0};
+	// (*object)[5].material.reflection = 0.3f;
+	// (*object)[5].material.sp_ex = 50.0f;
+	// (*object)[5].material.al = (cl_float2){1.0, 0.4};
+	// (*object)[5].object.cylinder.center = (cl_float3){2, 0, 5};
+	// (*object)[5].object.cylinder.axis = (cl_float3){0, 1, 0};
+	// (*object)[5].object.cylinder.length = 10;
+	// (*object)[5].object.cylinder.radius = 1.0f;
 
 
 
@@ -181,7 +184,7 @@ int			main(void)
 	sdl_init(rtv1->sdl);
 	
 	rtv1->scene = (t_scene *)ft_memalloc(sizeof(t_scene));
-	rtv1->scene->cam.pos = (cl_float3){0.0, 0.0, -5.0};
+	rtv1->scene->cam.pos = (cl_float3){0.0, 0.0, -10.0};
 	rtv1->scene->cam.phi = 90.0f * M_PI / 180;
 	rtv1->scene->cam.tetta = 0.001f * M_PI / 180;
 	init_object(&rtv1->scene->object);

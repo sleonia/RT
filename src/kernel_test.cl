@@ -433,13 +433,27 @@ static int	closest_intersection(float3 o, float3 d, int count_obj, __global t_ob
 	return (dist < MAX_DIST);
 }
 /////////////////////////////////////
-// static float3		reflect_ray(float3 *r, float3 *n)
-// {
-// 	float3	ret;
-	
-// 	ret = *n * 2 * dot(*r, *n) - *r;
-// 	return (ret);
-// }
+static float3		reflect_ray(float3 r, float3 n)
+{
+	return (r - n * 2 * dot(r, n));
+}
+
+static float3 refract_ray(const float3 I, float3 N, float refractive_index)
+{
+	float		n = refractive_index;
+	float		cosI = -(dot(N, I));
+
+	if (cosI < 0.f)
+		cosI = -cosI;
+	else
+	{
+		n = 1.f / n;
+		N = -N;
+	}
+	float		sinT2 = n * n * (1.f - cosI * cosI);
+	const float	cosT = sqrt(1.f - sinT2);
+	return  (n * I + (n * cosI - cosT) * N);
+}
 ///////////////////////////////////////////////////
 // static float		computer_lighting(float3 *p, float3 *n, float3 *v, int specular, __global t_object *object, __global t_light *light)
 // {
@@ -581,6 +595,10 @@ __kernel void RT(__global int *arr, __global t_cam *cam, __global t_object *obje
 	float	ambient = 0.2f;
 	float cache_width = 1.f / WIDTH;
 	int		fsaa = 0;
+	int		tex_width = 8192;
+	int		tex_height = 4096;
+	int		cnt_reflection = 0;
+	float3	mask = (float3)1;
 
 	// pixel = get_global_id(0);
 	// x = pixel % WIDTH - WIDTH / 2;
@@ -604,9 +622,30 @@ __kernel void RT(__global int *arr, __global t_cam *cam, __global t_object *obje
 	// int i = 1;
 	//Отправлять размеры текстуры, колличество объектов и количество источников света и саму текстуру
 
-			if (closest_intersection(o, d, count_obj, object, &light_hit))
+			while (cnt_reflection < 3)
 			{
-				color += computer_lighting(d, &light_hit, object, light, count_obj, count_light, ambient);
+				cnt_reflection++;
+				if (closest_intersection(o, d, count_obj, object, &light_hit) && cnt_reflection != 2)
+				{
+					color += computer_lighting(d, &light_hit, object, light, count_obj, count_light, ambient);
+					if (light_hit.mat.reflection > 0.f)
+					{
+						o = light_hit.hit;
+						d = ft_normalize(light_hit.mat.reflection * ft_normalize(reflect_ray(d, light_hit.n)));
+					}
+					else if (light_hit.mat.refraction > 0.f)
+					{
+						o = light_hit.hit - light_hit.n * 0.003f;
+						d = ft_normalize(ft_normalize(refract_ray(d, light_hit.n, light_hit.mat.refraction)));
+						float	cos_n = fabs(dot(d, light_hit.n));
+					}
+					else
+						break ;
+				}
+				else if (1)
+				{			
+					color += uv_mapping_for_skybox(skybox, d, tex_width, tex_height);
+				}
 			}
 //	// if (1)
 //	// {
@@ -634,14 +673,13 @@ __kernel void RT(__global int *arr, __global t_cam *cam, __global t_object *obje
 		// }
 	// }
 		// skybox
-			else if (1)
-			{			
-				color += uv_mapping_for_skybox(skybox, d, 8192, 4096);
-			}
-			else
-				color += 0;
+			// else if (1)
+			// {			
+			// 	color += uv_mapping_for_skybox(skybox, d, tex_width, tex_height);
+			// }
 		}
 	}
+	color = color / cnt_reflection;
 	color = color / ((fsaa + 1) * (fsaa + 1));
 	pixel = y * WIDTH + x;
 	arr[pixel] = get_color(color);
