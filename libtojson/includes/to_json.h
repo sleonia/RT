@@ -6,7 +6,7 @@
 /*   By: thorker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/04 01:50:08 by thorker           #+#    #+#             */
-/*   Updated: 2020/01/20 23:06:58 by thorker          ###   ########.fr       */
+/*   Updated: 2020/01/22 01:24:17 by thorker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@
 # define BROKEN_ARRAY -5
 # define OUT_OF_RANGE -6
 # include "libft.h"
-
 typedef enum			e_type
 {
 	Object = 1,
@@ -37,6 +36,10 @@ typedef struct			s_array
 	size_t				length;
 }						t_array;
 
+/*
+** Структура для хранения массива триплетов: ключ , значение, тип.
+*/
+
 typedef struct			s_key_value
 {
 	char				**key;
@@ -50,6 +53,7 @@ typedef struct			s_token
 	t_type				type;
 	struct s_token		*next;
 }						t_token;
+
 int						getf_int_array(t_array *array,
 		size_t item, int *number);
 int						getf_double_array(t_array *array,
@@ -87,4 +91,8 @@ void					*make_double(t_token **token);
 void					*make_array(t_token **token);
 int						realloc_array(t_array *array,
 		void *new_value, t_type new_type);
+void					*ft_find(t_key_value *tree,
+		char *name, t_type type, int *error);
+void					*find_in_array(t_array *array,
+		size_t item, t_type type, int *error);
 #endif

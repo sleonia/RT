@@ -6,7 +6,7 @@
 /*   By: thorker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/26 17:14:59 by thorker           #+#    #+#             */
-/*   Updated: 2020/01/21 01:16:56 by thorker          ###   ########.fr       */
+/*   Updated: 2020/01/21 22:51:39 by thorker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 ** Замена старых массивов на новые
 */
 
-static void	ft_free(t_key_value *for_re,
+static void		ft_free(t_key_value *for_re,
 		char **new_key_array,
 		void **new_value_array,
 		t_type *new_type_array)
@@ -34,7 +34,7 @@ static void	ft_free(t_key_value *for_re,
 ** выделение памяти, проверка маллоко, копирование данных в новые массивы
 */
 
-static int	realloc_struct(t_key_value *for_re, size_t i)
+static int		realloc_struct(t_key_value *for_re, size_t i)
 {
 	char	**new_key_array;
 	void	**new_value_array;
@@ -66,7 +66,7 @@ static int	realloc_struct(t_key_value *for_re, size_t i)
 ** функция в которой выделяется новая память для расширенного массива
 */
 
-int			realloc_key_value(t_key_value *for_re,
+int				realloc_key_value(t_key_value *for_re,
 		char *new_key,
 		void *new_value,
 		t_type new_type)
@@ -85,9 +85,36 @@ int			realloc_key_value(t_key_value *for_re,
 	return (1);
 }
 
-int			realloc_array(t_array *array, void *new_value, t_type new_type)
+/*
+** Копирование старых объектов в новый массив
+*/
+
+static void		cpy_array(t_array *array,
+		void **new_array_value,
+		t_type *new_array_type)
 {
 	size_t	i;
+
+	i = 0;
+	while (i < array->length)
+	{
+		new_array_value[i] = array->value[i];
+		new_array_type[i] = array->type[i];
+		i++;
+	}
+	if (array->length != 0)
+	{
+		free(array->value);
+		free(array->type);
+	}
+}
+
+/*
+** Перевыделение памяти и добавление нового элемента в массив
+*/
+
+int				realloc_array(t_array *array, void *new_value, t_type new_type)
+{
 	void	**new_array_value;
 	t_type	*new_array_type;
 
@@ -102,17 +129,7 @@ int			realloc_array(t_array *array, void *new_value, t_type new_type)
 			free(new_array_type);
 		return (0);
 	}
-	i = 0;
-	while (i < array->length)
-	{
-		new_array_value[i] = array->value[i];
-		new_array_type[i] = array->type[i];
-		i++;
-	}
-	if (array->length != 0)
-		free(array->value);
-	if (array->length != 0)
-		free(array->type);
+	cpy_array(array, new_array_value, new_array_type);
 	new_array_value[array->length] = new_value;
 	new_array_type[array->length] = new_type;
 	array->value = new_array_value;
