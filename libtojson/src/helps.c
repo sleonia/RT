@@ -6,7 +6,7 @@
 /*   By: thorker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/11 05:48:25 by thorker           #+#    #+#             */
-/*   Updated: 2020/01/18 17:25:15 by thorker          ###   ########.fr       */
+/*   Updated: 2020/01/21 00:02:24 by thorker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,8 +73,8 @@ char	*make_string(char *str)
 /*
 **	создает массив
 */
-//добавить отчистку при ошибке
-void	*make_array(t_token	**token)
+
+void	*make_array(t_token **token)
 {
 	t_array	*array;
 	t_type	type;
@@ -82,21 +82,16 @@ void	*make_array(t_token	**token)
 
 	if ((*token)->next == 0 || (array = (t_array*)malloc(sizeof(t_array))) == 0)
 		return (*token);
-	*token = (*token)->next;
 	array->length = 0;
-	while (*token != 0)
+	while (*token != 0 && (*token)->next != 0)
 	{
+		*token = (*token)->next;
 		type = 0;
 		value = check_value(token, &type);
-		if (type == 0 || *token == 0)
-			break ;
-		if (realloc_array(array, value, type) == 0)
+		if ((type == 0 | *token == 0) && realloc_array(array, value, type) == 0)
 			break ;
 		if (ft_strcmp((*token)->value, ",") == 0)
-		{
-			*token = (*token)->next;
 			continue;
-		}
 		if (ft_strcmp((*token)->value, "]") == 0)
 		{
 			*token = (*token)->next;
@@ -104,17 +99,6 @@ void	*make_array(t_token	**token)
 		}
 		break ;
 	}
-	//free(array) всего массива.
+	ft_return_array(&array);
 	return (*token);
 }
-
-
-
-
-
-
-
-
-
-
-

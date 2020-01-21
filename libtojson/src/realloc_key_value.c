@@ -6,7 +6,7 @@
 /*   By: thorker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/26 17:14:59 by thorker           #+#    #+#             */
-/*   Updated: 2020/01/18 17:23:51 by thorker          ###   ########.fr       */
+/*   Updated: 2020/01/21 01:16:56 by thorker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,14 +85,16 @@ int			realloc_key_value(t_key_value *for_re,
 	return (1);
 }
 
-int		realloc_array(t_array *array, void *new_value, t_type new_type)
+int			realloc_array(t_array *array, void *new_value, t_type new_type)
 {
 	size_t	i;
 	void	**new_array_value;
 	t_type	*new_array_type;
 
-	if ((new_array_value = (void**)malloc(sizeof(void*) * (array->length + 1))) == 0 |
-			(new_array_type = (t_type*)malloc(sizeof(t_type) * (array->length + 1))) == 0)
+	if ((new_array_value =
+				(void**)malloc(sizeof(void*) * (array->length + 1))) == 0 |
+			(new_array_type =
+			(t_type*)malloc(sizeof(t_type) * (array->length + 1))) == 0)
 	{
 		if (new_array_value != 0)
 			free(new_array_value);

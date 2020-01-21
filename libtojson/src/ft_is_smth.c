@@ -6,7 +6,7 @@
 /*   By: thorker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/28 22:52:36 by thorker           #+#    #+#             */
-/*   Updated: 2020/01/18 18:06:33 by thorker          ###   ########.fr       */
+/*   Updated: 2020/01/20 23:22:32 by thorker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 ** проверяет является ли строка числом
 */
 
-int		ft_str_isdigit(char *str)
+int			ft_str_isdigit(char *str)
 {
 	size_t	i;
 	int		sign;
@@ -41,10 +41,20 @@ int		ft_str_isdigit(char *str)
 }
 
 /*
+**	вспомагательная функция для проверки + и - в double
+*/
+
+static void	check_plus_minus(char **str)
+{
+	if (**str == '-' || **str == '+')
+		*str = *str + 1;
+}
+
+/*
 ** проверяет является ли строка double
 */
 
-int		ft_str_isdouble(char *str)
+int			ft_str_isdouble(char *str)
 {
 	size_t	i;
 	int		flag;
@@ -53,6 +63,7 @@ int		ft_str_isdouble(char *str)
 		return (0);
 	i = 0;
 	flag = 0;
+	check_plus_minus(&str);
 	while (*(str + i) != 0)
 	{
 		if (ft_isdigit(*(str + i)) == 0)
@@ -73,7 +84,7 @@ int		ft_str_isdouble(char *str)
 ** Проверяет последовательность токенов на синтаксис строки
 */
 
-int		ft_token_isstr(t_token **token)
+int			ft_token_isstr(t_token **token)
 {
 	if (ft_strcmp((*token)->value, "\"") != 0 ||
 			(*token = (*token)->next) == 0 ||

@@ -6,17 +6,36 @@
 /*   By: thorker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/28 22:37:18 by thorker           #+#    #+#             */
-/*   Updated: 2020/01/18 17:21:40 by thorker          ###   ########.fr       */
+/*   Updated: 2020/01/20 23:55:42 by thorker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "to_json.h"
 
 /*
+** Вспомогательная функция для нормы
+*/
+
+static void	*check_value2(t_token **token, t_type *type, void *new_value)
+{
+	if (ft_strcmp((*token)->value, "{") == 0)
+	{
+		if ((new_value = make_object(token)) != *token)
+			*type = Object;
+	}
+	else if (ft_strcmp((*token)->value, "[") == 0)
+	{
+		if ((new_value = make_array(token)) != *token)
+			*type = Array;
+	}
+	return (new_value);
+}
+
+/*
 ** Проверяет возможные типы переменных и вызывает соответсвующие функции
 */
 
-void	*check_value(t_token **token, t_type *type)
+void		*check_value(t_token **token, t_type *type)
 {
 	void	*new_value;
 
@@ -38,18 +57,7 @@ void	*check_value(t_token **token, t_type *type)
 		if ((new_value = make_double(token)) != *token)
 			*type = Doub;
 	}
-	else if (ft_strcmp((*token)->value, "{") == 0)
-	{
-		if ((new_value = make_object(token)) != *token)
-			*type = Object;
-	}
-	else if (ft_strcmp((*token)->value, "[") == 0)
-	{
-		if ((new_value = make_array(token)) != *token)
-			*type = Array;
-	}
-	else 
-		ft_putendl((*token)->value);
+	else
+		new_value = check_value2(token, type, new_value);
 	return (new_value);
 }
-//соединить ли is digit и make digit

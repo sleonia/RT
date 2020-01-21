@@ -6,7 +6,7 @@
 /*   By: deladia <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/03 20:55:14 by delalia           #+#    #+#             */
-/*   Updated: 2020/01/18 17:50:36 by thorker          ###   ########.fr       */
+/*   Updated: 2020/01/21 00:29:23 by thorker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,34 +100,25 @@ void				*make_object(t_token **token)
 {
 	t_key_value		*for_re;
 
-	//добавить переход на след токен
-	ft_putendl("kek");
-	if ((*token = (*token)->next) != 0 && ft_strcmp((*token)->value, "}") == 0)
+	if (ft_strcmp((*token)->next->value, "}") == 0 &&
+			(*token = ((*token)->next->next)))
 		return (0);
 	else if ((for_re = create_empty_struct()) == 0)
 		return (*token);
-	ft_putendl("kek2");
-	while (*token != 0)
+	while (*token != 0 && (*token)->next != 0)
 	{
+		*token = (*token)->next;
 		if (ft_strcmp((*token)->value, "\"") == 0)
 		{
 			if (check_value_and_name(for_re, token) == 0)
 				break ;
 			if (ft_strcmp((*token)->value, ",") == 0)
-			{
-				*token = (*token)->next;
 				continue;
-			}
 		}
-		if (ft_strcmp((*token)->value, "}") == 0)
-		{
-			*token = (*token)->next;
+		if (ft_strcmp((*token)->value, "}") == 0 && (*token = (*token)->next))
 			return (for_re);
-		}
 		break ;
 	}
 	ft_return(&for_re);
-	ft_putendl((*token)->value);
 	return (*token);
 }
-//если возращаем null в make object нужно ли менять тип на NULL
