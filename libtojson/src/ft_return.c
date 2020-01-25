@@ -6,11 +6,43 @@
 /*   By: deladia <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/06 21:54:38 by deladia           #+#    #+#             */
-/*   Updated: 2019/12/01 02:43:44 by thorker          ###   ########.fr       */
+/*   Updated: 2020/01/21 22:23:12 by thorker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "to_json.h"
+
+/*
+**	Чистит всю структуру массива
+*/
+
+void	ft_return_array(t_array **array)
+{
+	size_t	i;
+
+	i = 0;
+	while (i < (*array)->length)
+	{
+		if ((*array)->value[i] == NULL)
+			continue ;
+		if ((*array)->type[i] == Object)
+			ft_return((t_key_value**)((*array)->value + i));
+		else if ((*array)->type[i] == Array)
+			ft_return_array((t_array**)((*array)->value + i));
+		else
+			ft_memdel((*array)->value + i);
+		i++;
+	}
+	if ((*array)->length != 0)
+	{
+		free((*array)->value);
+		(*array)->value = 0;
+		free((*array)->type);
+		(*array)->type = 0;
+	}
+	free(*array);
+	*array = 0;
+}
 
 /*
 ** Функция для чистки всей структуры в случе ошибки
@@ -22,10 +54,7 @@ void	ft_return(t_key_value **tree)
 
 	i = 0;
 	while ((*tree)->key[i])
-	{
-		free((*tree)->key[i]);
-		*((*tree)->key + i++) = 0;
-	}
+		ft_strdel((*tree)->key + i++);
 	free((*tree)->key);
 	while (--i >= 0)
 	{
@@ -33,6 +62,8 @@ void	ft_return(t_key_value **tree)
 			continue ;
 		if ((*tree)->type[i] == Object)
 			ft_return((t_key_value**)((*tree)->value + i));
+		else if ((*tree)->type[i] == Array)
+			ft_return_array((t_array**)((*tree)->value + i));
 		else
 			free((*tree)->value[i]);
 		*((*tree)->value + i) = 0;

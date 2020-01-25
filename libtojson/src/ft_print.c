@@ -6,14 +6,14 @@
 /*   By: deladia <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/06 23:27:09 by deladia           #+#    #+#             */
-/*   Updated: 2020/01/18 18:07:34 by thorker          ###   ########.fr       */
+/*   Updated: 2020/01/21 22:21:43 by thorker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "to_json.h"
 
 /*
-** функция для печати всего дерева
+** функция для печати массива
 */
 
 void		ft_print_array(t_array *array)
@@ -59,6 +59,10 @@ void		ft_print_array(t_array *array)
 	}
 	printf(" ]");
 }
+
+/*
+**	функция для печати всего массива
+*/
 
 void		ft_print(t_key_value *tree)
 {

@@ -6,40 +6,16 @@
 /*   By: deladia <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/26 16:32:42 by deladia           #+#    #+#             */
-/*   Updated: 2020/01/18 19:49:13 by thorker          ###   ########.fr       */
+/*   Updated: 2020/01/22 01:23:58 by thorker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "to_json.h"
 
-void	*ft_find(t_key_value *tree, char *name, t_type type, int *error)
-{
-	int	i;
+/*
+** Находит по name пару и кладет в контейнер number целое число
+*/
 
-	i = 0;
-	if (tree == 0 || tree->key == 0 || tree->value == 0 || tree->type == 0 ||
-			name == 0)
-	{
-		*error = BROKEN_NODE;
-		return (0);
-	}
-	while (tree->key[i])
-	{
-		if (ft_strcmp(tree->key[i], name) == 0)
-		{
-			if (tree->type[i] == type || type == 0)
-				return (tree->value[i]);
-			else
-			{
-				*error = WRONG_TYPE;
-				return (0);
-			}
-		}
-		i++;
-	}
-	*error = (NOT_FOUND);
-	return (0);
-}
 int		get_int(t_key_value *tree, char *name, int *number)
 {
 	int		error;
@@ -53,6 +29,10 @@ int		get_int(t_key_value *tree, char *name, int *number)
 		*number = *((int*)container);
 	return (error);
 }
+
+/*
+** Находит по name пару и кладет в контейнер object ссылку на объект
+*/
 
 int		get_node(t_key_value *tree, char *name, t_key_value **object)
 {
@@ -68,6 +48,10 @@ int		get_node(t_key_value *tree, char *name, t_key_value **object)
 	return (error);
 }
 
+/*
+** Находит по name пару и кладет в контейнер number вещественное число
+*/
+
 int		get_double(t_key_value *tree, char *name, double *number)
 {
 	int		error;
@@ -81,6 +65,10 @@ int		get_double(t_key_value *tree, char *name, double *number)
 		*number = *((double*)container);
 	return (error);
 }
+
+/*
+** Находит по name пару и кладет в контейнер str копию строки
+*/
 
 int		get_str(t_key_value *tree, char *name, char **str)
 {
@@ -96,16 +84,20 @@ int		get_str(t_key_value *tree, char *name, char **str)
 	return (error);
 }
 
-int		get(t_key_value *tree, char *name, void **object)
+/*
+** Находит по name пару и кладет в контейнер array ссылку на массив
+*/
+
+int		get_array(t_key_value *tree, char *name, t_array **array)
 {
 	int		error;
 	void	*container;
 
 	error = 0;
-	if (object == NULL)
+	if (array == NULL)
 		return (WRONG_CONTAINER);
-	container = ft_find(tree, name, 0, &error);
+	container = ft_find(tree, name, Array, &error);
 	if (error == 0)
-		*object = container;
+		*array = (t_array*)container;
 	return (error);
 }

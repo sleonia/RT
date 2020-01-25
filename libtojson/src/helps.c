@@ -5,116 +5,66 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: thorker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/11 05:48:25 by thorker           #+#    #+#             */
-/*   Updated: 2020/01/18 17:25:15 by thorker          ###   ########.fr       */
+/*   Created: 2020/01/21 21:11:44 by thorker           #+#    #+#             */
+/*   Updated: 2020/01/21 22:46:39 by thorker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "to_json.h"
 
-void	*make_double(t_token **token)
-{
-	double *new_value;
-
-	if ((new_value = (double*)malloc(sizeof(double))) == 0)
-		return (*token);
-	*new_value = ft_atof((*token)->value);
-	*token = (*token)->next;
-	return ((void*)new_value);
-}
-
 /*
-** создает число и двигает токен
+** Поиск и проверка типа пары значения по имени в объекте
 */
 
-void	*make_digit(t_token **token)
+void	*ft_find(t_key_value *tree, char *name, t_type type, int *error)
 {
-	int	*new_value;
+	int	i;
 
-	if ((new_value = (int*)malloc(sizeof(int))) == 0)
-		return (*token);
-	*new_value = ft_atoi((*token)->value);
-	*token = (*token)->next;
-	return ((void*)new_value);
-}
-
-/*
-** создает строку и убирает знаки экранирования
-*/
-
-char	*make_string(char *str)
-{
-	char	*new_key;
-	size_t	k;
-	size_t	i;
-
-	k = 0;
 	i = 0;
-	while (*(str + k) != 0)
+	if (tree == 0 || tree->key == 0 || tree->value == 0 || tree->type == 0 ||
+			name == 0)
 	{
-		if (*(str + k) == '\\' && *(str + ++k) == 0)
-			return (0);
-		k++;
+		*error = BROKEN_NODE;
+		return (0);
+	}
+	while (tree->key[i])
+	{
+		if (ft_strcmp(tree->key[i], name) == 0)
+		{
+			if (tree->type[i] == type || type == 0)
+				return (tree->value[i]);
+			else
+			{
+				*error = WRONG_TYPE;
+				return (0);
+			}
+		}
 		i++;
 	}
-	if ((new_key = ft_strnew(i)) == 0)
-		return (0);
-	i = 0;
-	k = 0;
-	while (*(str + k) != 0)
-	{
-		if (*(str + k) == '\\')
-			k++;
-		*(new_key + i++) = *(str + k++);
-	}
-	return (new_key);
+	*error = (NOT_FOUND);
+	return (0);
 }
 
 /*
-**	создает массив
+** Поиск и проверка типа значения по номеру в массиве
 */
-//добавить отчистку при ошибке
-void	*make_array(t_token	**token)
+
+void	*find_in_array(t_array *array, size_t item, t_type type, int *error)
 {
-	t_array	*array;
-	t_type	type;
-	void	*value;
-
-	if ((*token)->next == 0 || (array = (t_array*)malloc(sizeof(t_array))) == 0)
-		return (*token);
-	*token = (*token)->next;
-	array->length = 0;
-	while (*token != 0)
+	if (array == 0)
 	{
-		type = 0;
-		value = check_value(token, &type);
-		if (type == 0 || *token == 0)
-			break ;
-		if (realloc_array(array, value, type) == 0)
-			break ;
-		if (ft_strcmp((*token)->value, ",") == 0)
-		{
-			*token = (*token)->next;
-			continue;
-		}
-		if (ft_strcmp((*token)->value, "]") == 0)
-		{
-			*token = (*token)->next;
-			return (array);
-		}
-		break ;
+		*error = BROKEN_ARRAY;
+		return (0);
 	}
-	//free(array) всего массива.
-	return (*token);
+	if (item >= array->length)
+	{
+		*error = OUT_OF_RANGE;
+		return (0);
+	}
+	if (type != 0 && array->type[item] != type)
+	{
+		*error = WRONG_TYPE;
+		return (0);
+	}
+	return (array->value[item]);
 }
-
-
-
-
-
-
-
-
-
-
-
