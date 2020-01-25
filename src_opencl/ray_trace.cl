@@ -107,7 +107,7 @@ static float3		computer_lighting(float3 d, t_hitting *light_hit, __global t_obje
 	return (r);
 }
 
-__kernel void RT(__global int *arr, __global t_cam *cam, __global t_object *object, __global t_light *light, __global int *skybox, int count_obj, int count_light)
+__kernel void RT(__global int *arr, __global t_cam *cam, __global t_object *object, __global t_light *light, __global int *skybox, int tex_width, int tex_height, int count_obj, int count_light)
 {
 	int 	x;
 	int 	y;
@@ -116,11 +116,9 @@ __kernel void RT(__global int *arr, __global t_cam *cam, __global t_object *obje
 	float3	o;
 	float3	color = (float3)0;
 	t_hitting	light_hit;
-	float	ambient = 0.2f;
+	float	ambient = 0.0f;
 	float cache_width = 1.f / WIDTH;
 	int		fsaa = 2;
-	int		tex_width = 8192;
-	int		tex_height = 4096;
 	int		cnt_reflection = 0;
 	float3	tmp_color;
 
@@ -145,6 +143,7 @@ __kernel void RT(__global int *arr, __global t_cam *cam, __global t_object *obje
 					tmp_color += computer_lighting(d, &light_hit, object, light, count_obj, count_light, ambient);
 					if (light_hit.mat.reflection > 0.00001f)
 					{
+						//если сделать о - light_hit.hit, то чиниться plane, но ломается точка обзора
 						o = light_hit.hit;
 						d = ft_normalize(reflect_ray(d, light_hit.n));
 					}

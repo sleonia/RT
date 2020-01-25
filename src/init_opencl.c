@@ -6,7 +6,7 @@
 /*   By: deladia <deladia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/28 19:00:37 by deladia           #+#    #+#             */
-/*   Updated: 2020/01/25 07:55:40 by deladia          ###   ########.fr       */
+/*   Updated: 2020/01/25 11:23:22 by deladia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int		set_arg_1(t_cl *cl, t_sdl *sdl, t_scene *scene)
 									NULL)) != 0)
 		func_error(-10);
 	if ((ret = clEnqueueWriteBuffer(cl->cmd_queue, cl->memobjs[4], CL_TRUE, 0, 
-									sizeof(cl_int) * 8192 * 4096, (cl_int *)sdl->background, 0, NULL, 
+									sizeof(cl_int) * scene->background_w * scene->background_h, (cl_int *)scene->background, 0, NULL, 
 									NULL)) != 0)
 		func_error(-10);
 	// не добавляется локал ворк сайз
@@ -59,8 +59,10 @@ int		set_arg(t_cl *cl, t_sdl *sdl, t_scene *scene)
 	ret |= clSetKernelArg(cl->kernel, 2, sizeof(cl_mem), &cl->memobjs[2]);
 	ret |= clSetKernelArg(cl->kernel, 3, sizeof(cl_mem), &cl->memobjs[3]);
 	ret |= clSetKernelArg(cl->kernel, 4, sizeof(cl_mem), &cl->memobjs[4]);
-	ret |= clSetKernelArg(cl->kernel, 5, sizeof(cl_int), &scene->count_objects);
-	ret |= clSetKernelArg(cl->kernel, 6, sizeof(cl_int), &scene->count_lights);
+	ret |= clSetKernelArg(cl->kernel, 5, sizeof(cl_int), &scene->background_w);
+	ret |= clSetKernelArg(cl->kernel, 6, sizeof(cl_int), &scene->background_h);
+	ret |= clSetKernelArg(cl->kernel, 7, sizeof(cl_int), &scene->count_objects);
+	ret |= clSetKernelArg(cl->kernel, 8, sizeof(cl_int), &scene->count_lights);
 	if (ret != 0)
 		func_error(-9);
 	set_arg_1(cl, sdl, scene);
@@ -104,7 +106,7 @@ int		create_cl_1(t_cl *cl, t_scene *scene)
 		func_error(-5);
 	if ((cl->memobjs[3] = clCreateBuffer(cl->context, CL_MEM_READ_WRITE | CL_MEM_COPY_HOST_PTR, sizeof(t_light) * 1, scene->light, &ret)) && ret != 0)
 		func_error(-5);
-	if ((cl->memobjs[4] = clCreateBuffer(cl->context, CL_MEM_READ_WRITE, sizeof(cl_int) * 8192 * 4096, NULL, &ret)) && ret != 0)
+	if ((cl->memobjs[4] = clCreateBuffer(cl->context, CL_MEM_READ_WRITE, sizeof(cl_int) * scene->background_w * scene->background_h, NULL, &ret)) && ret != 0)
 		func_error(-5);
 	return (0);
 }

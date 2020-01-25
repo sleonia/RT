@@ -16,10 +16,10 @@ static int	intersect_ray_sphere(float3 o, float3 d, __global t_sphere *sphere, f
 	if (k2 * k2 - 4 * k1 * k3 < 0)
 		return (0);
 	*dist_i = (-k2 - sqrt(k2 * k2 - 4 * k1 * k3)) / (2 * k1);
-	if (*dist_i > 0.00001)
+	if (*dist_i > 0.002f)
 		return (1);
 	*dist_i = (-k2 + sqrt(k2 * k2 - 4 * k1 * k3)) / (2 * k1);
-	if (*dist_i > 0.00001)
+	if (*dist_i > 0.002f)
 		return (2);
 	return (0);
 }
@@ -43,10 +43,10 @@ static int    intersect_ray_cylinder(float3 o, float3 d, __global t_cylinder *cy
 	if (discriminate < 0.f)
 		return (0);
 	*dist_i = (-b - sqrt(discriminate)) / (2 * dot(s, s));
-	if (*dist_i > 0.f)
+	if (*dist_i > 0.002f)
 		return (1);
 	*dist_i = (-b + sqrt(discriminate)) / (2 * dot(s, s));
-	if (*dist_i > 0)
+	if (*dist_i > 0.002)
 		return (2);
 	return (0);
 }
@@ -61,7 +61,7 @@ static int	intersect_ray_plane(float3 o, float3 d, __global t_plane *pl, float *
 	if (fabs(a) < 0.000001f)
 		return (0);
 	*dist_i = (pl->dist - dot(o, pl->axis)) / a;
-	if ((*dist_i) < 0.f)
+	if ((*dist_i) < 0.02f)
 		return (0);
 	return (1);
 }
@@ -87,17 +87,17 @@ static int   intersect_ray_cone(float3 o, float3 d, __global t_cone *cone, float
 		return (0);
 	t1 = (-b + sqrt(discriminate)) / (2.f * a);
 	t2 = (-b - sqrt(discriminate)) / (2.f * a);
-	if (fabs(t1 - t2) < 0.000001f)
+	if (fabs(t1 - t2) < 0.002f)
 		return (0);
 	*dist_i = min(t1, t2);
-	if (*dist_i > 0.f)
+	if (*dist_i > 0.002f)
 	{
 		if (acos(fabs(dot(d, cone->axis))) > cone->tan)
 			return (1);
 		return (2);
 	}
 	*dist_i = max(t1, t2);
-	if (*dist_i > 0.f)
+	if (*dist_i > 0.002f)
 	{
 		if (acos(fabs(dot(d, cone->axis))) > cone->tan)
 			return (2);
@@ -141,9 +141,13 @@ int	closest_intersection(float3 o, float3 d, int count_obj, __global t_object *o
 			{
 				dist = dist_i;
 				light_hit->hit = o + d * dist_i;
+				// light_hit->hit += 0.00001f;		
 				light_hit->n = obj[i].object.plane.axis;
 				if (dot(d, light_hit->n) > 0.f)
+				{
+					// light_hit->hit -= 0.00002f;
 					light_hit->n *= -1.f;
+				}
 				light_hit->mat = obj[i].material;
 				//условие для uv mapping и наличия текстуры
 			}
@@ -175,7 +179,7 @@ int	closest_intersection(float3 o, float3 d, int count_obj, __global t_object *o
 				{
 					o = light_hit->hit + 0.001f * d;
 					t12 = intersect_ray_cone(o, d, &(obj + i)->object.cone, &dist_i);
-					dist = dist +dist_i;
+					dist = dist + dist_i;
 					if (dist < dist_tmp)
 					{
 						light_hit->hit = o + d * dist_i;
@@ -213,7 +217,7 @@ int	closest_intersection(float3 o, float3 d, int count_obj, __global t_object *o
 
 				dist_tmp = dist;
 				dist = dist_i;
-				light_hit->hit = o + d * dist_i;
+				light_hit->hit = o + d * dist_i * 0.9998f;
 				v = light_hit->hit - obj[i].object.cylinder.center;
 				light_hit->n = obj[i].object.cylinder.axis * dot(v, obj[i].object.cylinder.axis);
 				light_hit->n = ft_normalize(v - light_hit->n);

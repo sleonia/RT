@@ -9,4 +9,4 @@ rtv1
 /libtojson/object
 /libtojson/cmake-build-debug/
 /libtojson/main.c
-
+*.bmp

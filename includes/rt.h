@@ -131,6 +131,9 @@ typedef struct			s_scene
 	t_cam				cam;
 	int					count_objects;
 	int					count_lights;
+	int					*background;
+	int					background_w;
+	int					background_h;
 }						t_scene;
 
 typedef struct			s_cylinder_params
@@ -216,7 +219,6 @@ typedef struct 			s_sdl
 	SDL_Texture			*texture;
 	SDL_Event			event;
 	int					*pixels;
-	int					*background;
 }						t_sdl;
 
 typedef struct 			s_rt
