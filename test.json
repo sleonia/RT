@@ -2,7 +2,7 @@
 	"camera":
 	{
 		"postition":				[0, 0, 0],
-		"angle_a":					0.0,
+		"angle_a":					0.02,
 		"angle_b":					0.0
 	},
 	"light":
@@ -24,7 +24,7 @@
 	},
 	"figure":
 	{
-		"sphere":
+		"sphere_1":
 		{
 			"radius":				1,
 			"color":				[255, 0, 0],

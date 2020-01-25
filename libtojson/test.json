@@ -26,8 +26,8 @@
 	{
 		"sphere_1":
 		{
-			"radius":				1,
-			"color":				[255, 0, 0],
+			"radius_1":				1,
+			"color":				"0xFF0000",
 			"specular":				500,
 			"reflective":			0.2,
 			"position":				[0, -1, 3]
