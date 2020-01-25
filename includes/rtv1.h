@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rtv1.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: deladia <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: ccriston <ccriston@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/25 21:18:10 by deladia           #+#    #+#             */
-/*   Updated: 2019/11/04 02:47:37 by deladia          ###   ########.fr       */
+/*   Updated: 2020/01/25 14:36:10 by ccriston         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define RTV1_RTV1_H
 
 # include "libft.h"
+# include "to_json.h"
 # include <SDL.h>
 # include <math.h>
 # define WIDTH 1000
@@ -271,5 +272,6 @@ t_object				*init_cone(t_object *obj, t_cone_params params);
 void					scene_2(t_scene *scene);
 void					scene_3(t_scene *scene);
 void					scene_4(t_scene *scene);
+void					find_all(t_scene *scene);
 
 #endif

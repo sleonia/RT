@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: deladia <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: ccriston <ccriston@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/24 12:57:07 by deladia           #+#    #+#             */
-/*   Updated: 2019/11/08 17:51:21 by deladia          ###   ########.fr       */
+/*   Updated: 2020/01/25 13:54:06 by ccriston         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ int		validate(t_scene *scene, int ac, char **av)
 	return (1);
 }
 
-int		main(int ac, char **av)
+int		main()
 {
 	t_rtv1		*rtv1;
 
@@ -79,8 +79,9 @@ int		main(int ac, char **av)
 	rtv1->scene->cam = (t_cam *)ft_memalloc(sizeof(t_cam));
 	rtv1->scene->view = (t_pos *)ft_memalloc(sizeof(t_pos));
 	rtv1->scene->off = (t_light_off *)ft_memalloc(sizeof(t_light_off));
-	if (!(validate(rtv1->scene, ac, av)))
-		exit(0);
+	find_all(rtv1->scene);
+	//if (!(validate(rtv1->scene, ac, av)))
+	//	exit(0);
 	trace_start(rtv1->sdl, rtv1->scene);
 	return (0);
 }

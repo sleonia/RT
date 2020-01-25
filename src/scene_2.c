@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   scena_2.c                                          :+:      :+:    :+:   */
+/*   scene_2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: deladia <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: ccriston <ccriston@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/08 16:55:25 by deladia           #+#    #+#             */
-/*   Updated: 2019/11/08 16:55:33 by deladia          ###   ########.fr       */
+/*   Updated: 2020/01/17 19:12:10 by ccriston         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void		scene_2(t_scene *scene)
 	light = NULL;
 	light = init_lights(light, (t_light_params){'P', 0.8,
 		(t_pos){2.0, 2.0, 0.0}});
-	object = init_sphere(object, (t_sphere_params){{0.0, 0.0, 3.0},
+	object = init_sphere(object, (t_sphere_params){{0.0, 0.0, 0.0},
 		1.0, 0xFF00F0, 100, 0.2});
 	scene->object = object;
 	scene->light = light;
