@@ -122,10 +122,10 @@ __kernel void RT(__global int *arr, __global t_cam *cam, __global t_object *obje
 	int		tex_width = 6284;
 	int		tex_height = 3142;
 	int		cnt_reflection = 0;
+	float3	tmp_color;
 
 	x = get_global_id(0);
 	y = get_global_id(1);
-	o = (float3)cam->pos;
 	for (int i = -fsaa * 0.5f; i <= fsaa * 0.5f; i++)
 	{
 		for (int j = -fsaa * 0.5f; j <= fsaa * 0.5f; j++)
@@ -133,19 +133,22 @@ __kernel void RT(__global int *arr, __global t_cam *cam, __global t_object *obje
 			d = (*cam).ox * ((float) (x + i * reverse(fsaa)) * cache_width - 0.5f) - (*cam).oy * ((float) (y + j * reverse(fsaa)) * cache_width - 0.5f);
 			d = d - (*cam).oz;
 			d = normalize(d);
-	//Отправлять размеры текстуры, колличество объектов и количество источников света и саму текстуру
+			o = (float3)cam->pos;
+	//Отправлять размеры текстуры и саму текстуру
+			tmp_color = (float3)0;
+			cnt_reflection = 0;
 			while (cnt_reflection < 4)
 			{
 				cnt_reflection++;
-				if (closest_intersection(o, d, count_obj, object, &light_hit) && cnt_reflection != 4)
+				if (closest_intersection(o, d, count_obj, object, &light_hit))
 				{
-					color += computer_lighting(d, &light_hit, object, light, count_obj, count_light, ambient);
-					if (light_hit.mat.reflection > 0.f)
+					tmp_color += computer_lighting(d, &light_hit, object, light, count_obj, count_light, ambient);
+					if (light_hit.mat.reflection > 0.00001f)
 					{
 						o = light_hit.hit;
 						d = ft_normalize(reflect_ray(d, light_hit.n));
 					}
-					else if (light_hit.mat.refraction > 0.f)
+					else if (light_hit.mat.refraction > 0.00001f)
 					{
 						o = light_hit.hit - light_hit.n * 0.003f;
 						d = ft_normalize(refract_ray(d, light_hit.n, light_hit.mat.refraction));
@@ -155,12 +158,15 @@ __kernel void RT(__global int *arr, __global t_cam *cam, __global t_object *obje
 				}
 				else if (1)
 				{			
-					color += uv_mapping_for_skybox(skybox, d, tex_width, tex_height);
+					tmp_color += uv_mapping_for_skybox(skybox, d, tex_width, tex_height);
+					break ;
 				}
 			}
+			tmp_color /= cnt_reflection;
+			color += tmp_color;
 		}
 	}
-	color = color / ((float)cnt_reflection / (float)((fsaa + 1) * (fsaa + 1)));
+	// color = color / (float)cnt_reflection;
 	color = color / ((fsaa + 1) * (fsaa + 1));
 	pixel = y * WIDTH + x;
 	arr[pixel] = get_color(color);

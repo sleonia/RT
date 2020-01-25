@@ -6,7 +6,7 @@
 /*   By: deladia <deladia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/24 12:57:07 by deladia           #+#    #+#             */
-/*   Updated: 2020/01/25 04:04:10 by deladia          ###   ########.fr       */
+/*   Updated: 2020/01/25 06:20:00 by deladia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,68 +16,28 @@ void	init_object(t_object **object)
 {
 	*object = (t_object *)ft_memalloc(sizeof(t_object) * 6);
 
-	// object[4] = (t_object *)ft_memalloc(sizeof(t_object));
-	// object[5] = (t_object *)ft_memalloc(sizeof(t_object));
-	// object[6] = (t_object *)ft_memalloc(sizeof(t_object));
-	
-	// (*object)[0].objects = (union u_objects *)ft_memalloc(sizeof(union u_objects));
-	// (*object)[1].objects = (union u_objects *)ft_memalloc(sizeof(union u_objects));
-	// (*object)[2].objects = (union u_objects *)ft_memalloc(sizeof(union u_objects));
-	// (*object)[3].objects = (union u_objects *)ft_memalloc(sizeof(union u_objects));
-	// object[4]->objects = (union u_objects *)ft_memalloc(sizeof(union u_objects));
-	// object[5]->objects = (union u_objects *)ft_memalloc(sizeof(union u_objects));
-	// object[6]->objects = (union u_objects *)ft_memalloc(sizeof(union u_objects));
-
-	typedef struct			s_material
-{
-# ifndef OPENCL___
-	cl_float3			color;
-# else
-	float3				color;
-# endif
-	float				refraction;
-	float				reflection;
-	int					texture_id;
-}						t_material;
-
-typedef struct			s_object
-{
-# ifndef OPENCL___
-	// union u_objects		*objects;
-	cl_float3			center;
-	cl_float3			axis;
-	float				radius;
-# else
-	float3				center;
-	float3				axis;
-	float				radius;
-# endif
-	enum e_obj_type		type;
-	float				tan;
-	t_material			material;
-}						t_object;
 	(*object)[0].type = o_sphere;
-	(*object)[0].material.color = (cl_float3){1, 1, 1};
+	(*object)[0].material.color = (cl_float3){1, 0, 0};
 	(*object)[0].material.reflection = 0.9f; // от 0.9 до 1.0
-	(*object)[0].material.refraction = 1.3f; // от 1.0 до 1.3
+	(*object)[0].material.refraction = 0.0f; // от 1.0 до 1.3
 	(*object)[0].material.sp_ex = 50.0f;
 	(*object)[0].material.al = (cl_float2){1.0, 1.0};
 	(*object)[0].object.sphere.center = (cl_float3){0.0, -2.0, 3};
 	(*object)[0].object.sphere.radius = 3.0f;
 
 	(*object)[1].type = o_sphere;
-	(*object)[1].material.color = (cl_float3){1, 1, 1};
-	(*object)[1].material.reflection = 0.0f;
-	(*object)[1].material.refraction = 1.055f;
+	(*object)[1].material.color = (cl_float3){0, 1, 0};
+	(*object)[1].material.reflection = 0.9f;
+	(*object)[1].material.refraction = 0.0f;
 	(*object)[1].material.sp_ex = 50.0f;
 	(*object)[1].material.al = (cl_float2){1.0, 0.4};
 	(*object)[1].object.sphere.center = (cl_float3){4, 0, 8};
 	(*object)[1].object.sphere.radius = 3.0f;
 
 	(*object)[2].type = o_sphere;
-	(*object)[2].material.color = (cl_float3){1, 1, 1};
-	(*object)[2].material.reflection = 0.0f;
-	(*object)[2].material.refraction = 1.055f;
+	(*object)[2].material.color = (cl_float3){0, 0, 1};
+	(*object)[2].material.reflection = 0.9f;
+	(*object)[2].material.refraction = 0.0f;
 	(*object)[2].material.sp_ex = 50.0f;
 	(*object)[2].material.al = (cl_float2){1.0, 0.4};
 	(*object)[2].object.sphere.center = (cl_float3){-4, 0, 8};
@@ -85,7 +45,8 @@ typedef struct			s_object
 
 	// (*object)[3].type = o_plane;
 	// (*object)[3].material.color = (cl_float3){1, 0, 1};
-	// (*object)[3].material.reflection = 0.3f;
+	// (*object)[3].material.reflection = 0.f;
+	// (*object)[3].material.refraction = 0.f;
 	// (*object)[3].material.sp_ex = 50.0f;
 	// (*object)[3].material.al = (cl_float2){1.0, 0.4};
 	// (*object)[3].object.plane.center = (cl_float3){0, 0, 5};
@@ -94,7 +55,8 @@ typedef struct			s_object
 
 	// (*object)[4].type = o_cone;
 	// (*object)[4].material.color = (cl_float3){1, 0, 1};
-	// (*object)[4].material.reflection = 0.3f;
+	// (*object)[4].material.reflection = 0.0f;
+	// (*object)[4].material.refraction = 0.f;
 	// (*object)[4].material.sp_ex = 50.0f;
 	// (*object)[4].material.al = (cl_float2){1.0, 0.4};
 	// (*object)[4].object.cone.center = (cl_float3){0, 0, 5};
@@ -104,7 +66,8 @@ typedef struct			s_object
 
 	// (*object)[5].type = o_cylinder;
 	// (*object)[5].material.color = (cl_float3){1, 1, 0};
-	// (*object)[5].material.reflection = 0.3f;
+	// (*object)[5].material.refraction = 0.f;
+	// (*object)[5].material.reflection = 0.0f;
 	// (*object)[5].material.sp_ex = 50.0f;
 	// (*object)[5].material.al = (cl_float2){1.0, 0.4};
 	// (*object)[5].object.cylinder.center = (cl_float3){2, 0, 5};
