@@ -118,9 +118,9 @@ __kernel void RT(__global int *arr, __global t_cam *cam, __global t_object *obje
 	t_hitting	light_hit;
 	float	ambient = 0.2f;
 	float cache_width = 1.f / WIDTH;
-	int		fsaa = 0;
-	int		tex_width = 8192;
-	int		tex_height = 4096;
+	int		fsaa = 2;
+	int		tex_width = 6284;
+	int		tex_height = 3142;
 	int		cnt_reflection = 0;
 
 	x = get_global_id(0);
@@ -160,7 +160,7 @@ __kernel void RT(__global int *arr, __global t_cam *cam, __global t_object *obje
 			}
 		}
 	}
-	color = color / cnt_reflection;
+	color = color / ((float)cnt_reflection / (float)((fsaa + 1) * (fsaa + 1)));
 	color = color / ((fsaa + 1) * (fsaa + 1));
 	pixel = y * WIDTH + x;
 	arr[pixel] = get_color(color);

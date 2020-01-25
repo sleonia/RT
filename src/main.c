@@ -6,7 +6,7 @@
 /*   By: deladia <deladia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/24 12:57:07 by deladia           #+#    #+#             */
-/*   Updated: 2020/01/25 03:19:09 by deladia          ###   ########.fr       */
+/*   Updated: 2020/01/25 04:04:10 by deladia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ typedef struct			s_object
 	t_material			material;
 }						t_object;
 	(*object)[0].type = o_sphere;
-	(*object)[0].material.color = (cl_float3){1, 0, 0};
+	(*object)[0].material.color = (cl_float3){1, 1, 1};
 	(*object)[0].material.reflection = 0.9f; // от 0.9 до 1.0
 	(*object)[0].material.refraction = 1.3f; // от 1.0 до 1.3
 	(*object)[0].material.sp_ex = 50.0f;
@@ -66,7 +66,7 @@ typedef struct			s_object
 	(*object)[0].object.sphere.radius = 3.0f;
 
 	(*object)[1].type = o_sphere;
-	(*object)[1].material.color = (cl_float3){0, 0, 1};
+	(*object)[1].material.color = (cl_float3){1, 1, 1};
 	(*object)[1].material.reflection = 0.0f;
 	(*object)[1].material.refraction = 1.055f;
 	(*object)[1].material.sp_ex = 50.0f;
@@ -75,7 +75,7 @@ typedef struct			s_object
 	(*object)[1].object.sphere.radius = 3.0f;
 
 	(*object)[2].type = o_sphere;
-	(*object)[2].material.color = (cl_float3){0, 1, 0};
+	(*object)[2].material.color = (cl_float3){1, 1, 1};
 	(*object)[2].material.reflection = 0.0f;
 	(*object)[2].material.refraction = 1.055f;
 	(*object)[2].material.sp_ex = 50.0f;
@@ -158,7 +158,7 @@ int			*fill_texture_for_skybox(void)
 	SDL_Surface *tmp;
 	int			*ptr;
 
-	back = SDL_LoadBMP("./wood.bmp");
+	back = SDL_LoadBMP("./7.bmp");
 	if (back == NULL)
 	{
 		ft_putendl(SDL_GetError());
@@ -170,7 +170,7 @@ int			*fill_texture_for_skybox(void)
 	ft_memcpy(ptr, (int *)back->pixels, back->w * back->h * sizeof(int));
 	SDL_FreeSurface(back);
 	SDL_FreeSurface(tmp);
-	// printf("%d %d\n", back->w, back->h);
+	printf("%d %d\n", back->w, back->h);
 	return (ptr);
 }
 
