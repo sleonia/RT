@@ -53,14 +53,14 @@ static int    intersect_ray_cylinder(float3 o, float3 d, __global t_cylinder *cy
 
 static int	intersect_ray_plane(float3 o, float3 d, __global t_plane *pl, float *dist_i)
 {
-	float	a = 0;
+	float	a;
 
 	pl->axis = ft_normalize(pl->axis);
 	d = ft_normalize(d);
 	a = dot(d, pl->axis);
 	if (fabs(a) < 0.000001f)
 		return (0);
-	*dist_i = (pl->dist_z - dot(o, pl->axis)) / a;
+	*dist_i = (pl->dist - dot(o, pl->axis)) / a;
 	if ((*dist_i) < 0.f)
 		return (0);
 	return (1);

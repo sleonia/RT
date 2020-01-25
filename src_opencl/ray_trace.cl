@@ -119,8 +119,8 @@ __kernel void RT(__global int *arr, __global t_cam *cam, __global t_object *obje
 	float	ambient = 0.2f;
 	float cache_width = 1.f / WIDTH;
 	int		fsaa = 2;
-	int		tex_width = 6284;
-	int		tex_height = 3142;
+	int		tex_width = 8192;
+	int		tex_height = 4096;
 	int		cnt_reflection = 0;
 	float3	tmp_color;
 
@@ -134,7 +134,7 @@ __kernel void RT(__global int *arr, __global t_cam *cam, __global t_object *obje
 			d = d - (*cam).oz;
 			d = normalize(d);
 			o = (float3)cam->pos;
-	//Отправлять размеры текстуры и саму текстуру
+			//Отправлять размеры текстуры и саму текстуру
 			tmp_color = (float3)0;
 			cnt_reflection = 0;
 			while (cnt_reflection < 4)
@@ -162,12 +162,12 @@ __kernel void RT(__global int *arr, __global t_cam *cam, __global t_object *obje
 					break ;
 				}
 			}
-			tmp_color /= cnt_reflection;
+			tmp_color /= (float)cnt_reflection;
 			color += tmp_color;
 		}
 	}
 	// color = color / (float)cnt_reflection;
-	color = color / ((fsaa + 1) * (fsaa + 1));
+	color = color / (float)((fsaa + 1) * (fsaa + 1));
 	pixel = y * WIDTH + x;
 	arr[pixel] = get_color(color);
 }

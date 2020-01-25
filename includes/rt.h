@@ -28,13 +28,11 @@ typedef struct			s_cylinder
 typedef struct			s_plane
 {
 # ifndef OPENCL___
-	cl_float3			center;
 	cl_float3			axis;
 # else
-	float3				center;
 	float3				axis;
 # endif
-	float				dist_z;
+	float				dist;
 }						t_plane;
 
 typedef struct			s_cone

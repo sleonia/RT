@@ -6,7 +6,7 @@
 /*   By: deladia <deladia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/24 12:57:07 by deladia           #+#    #+#             */
-/*   Updated: 2020/01/25 06:20:00 by deladia          ###   ########.fr       */
+/*   Updated: 2020/01/25 08:22:11 by deladia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	init_object(t_object **object)
 	(*object)[0].object.sphere.radius = 3.0f;
 
 	(*object)[1].type = o_sphere;
-	(*object)[1].material.color = (cl_float3){0, 1, 0};
+	(*object)[1].material.color = (cl_float3){1, 1, 1};
 	(*object)[1].material.reflection = 0.9f;
 	(*object)[1].material.refraction = 0.0f;
 	(*object)[1].material.sp_ex = 50.0f;
@@ -43,19 +43,19 @@ void	init_object(t_object **object)
 	(*object)[2].object.sphere.center = (cl_float3){-4, 0, 8};
 	(*object)[2].object.sphere.radius = 3.0f;
 
-	// (*object)[3].type = o_plane;
-	// (*object)[3].material.color = (cl_float3){1, 0, 1};
-	// (*object)[3].material.reflection = 0.f;
-	// (*object)[3].material.refraction = 0.f;
-	// (*object)[3].material.sp_ex = 50.0f;
-	// (*object)[3].material.al = (cl_float2){1.0, 0.4};
+	(*object)[3].type = o_plane;
+	(*object)[3].material.color = (cl_float3){1, 0, 1};
+	(*object)[3].material.reflection = 0.9f;
+	(*object)[3].material.refraction = 0.f;
+	(*object)[3].material.sp_ex = 50.0f;
+	(*object)[3].material.al = (cl_float2){1.0, 0.4};
 	// (*object)[3].object.plane.center = (cl_float3){0, 0, 5};
-	// (*object)[3].object.plane.axis = (cl_float3){0, 0, 1};
-	// (*object)[3].object.plane.dist_z = 10;
+	(*object)[3].object.plane.axis = (cl_float3){0, 0, 1};
+	(*object)[3].object.plane.dist = 8;
 
 	// (*object)[4].type = o_cone;
 	// (*object)[4].material.color = (cl_float3){1, 0, 1};
-	// (*object)[4].material.reflection = 0.0f;
+	// (*object)[4].material.reflection = 0.f;
 	// (*object)[4].material.refraction = 0.f;
 	// (*object)[4].material.sp_ex = 50.0f;
 	// (*object)[4].material.al = (cl_float2){1.0, 0.4};
@@ -121,7 +121,7 @@ int			*fill_texture_for_skybox(void)
 	SDL_Surface *tmp;
 	int			*ptr;
 
-	back = SDL_LoadBMP("./7.bmp");
+	back = SDL_LoadBMP("./wood.bmp");
 	if (back == NULL)
 	{
 		ft_putendl(SDL_GetError());
