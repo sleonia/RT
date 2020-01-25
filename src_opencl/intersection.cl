@@ -141,9 +141,13 @@ int	closest_intersection(float3 o, float3 d, int count_obj, __global t_object *o
 			{
 				dist = dist_i;
 				light_hit->hit = o + d * dist_i;
+				light_hit->hit += 0.00001f;		
 				light_hit->n = obj[i].object.plane.axis;
 				if (dot(d, light_hit->n) > 0.f)
+				{
+					light_hit->hit -= 0.00002f;
 					light_hit->n *= -1.f;
+				}
 				light_hit->mat = obj[i].material;
 				//условие для uv mapping и наличия текстуры
 			}

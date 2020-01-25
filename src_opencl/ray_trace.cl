@@ -118,7 +118,7 @@ __kernel void RT(__global int *arr, __global t_cam *cam, __global t_object *obje
 	t_hitting	light_hit;
 	float	ambient = 0.2f;
 	float cache_width = 1.f / WIDTH;
-	int		fsaa = 2;
+	int		fsaa = 0;
 	int		tex_width = 8192;
 	int		tex_height = 4096;
 	int		cnt_reflection = 0;
@@ -145,6 +145,7 @@ __kernel void RT(__global int *arr, __global t_cam *cam, __global t_object *obje
 					tmp_color += computer_lighting(d, &light_hit, object, light, count_obj, count_light, ambient);
 					if (light_hit.mat.reflection > 0.00001f)
 					{
+						//если сделать о - light_hit.hit, то чиниться plane, но ломается точка обзора
 						o = light_hit.hit;
 						d = ft_normalize(reflect_ray(d, light_hit.n));
 					}
