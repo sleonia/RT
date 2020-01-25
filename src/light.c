@@ -6,11 +6,11 @@
 /*   By: deladia <deladia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/24 13:05:14 by deladia           #+#    #+#             */
-/*   Updated: 2020/01/20 12:35:46 by deladia          ###   ########.fr       */
+/*   Updated: 2020/01/25 01:17:54 by deladia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "rtv1.h"
+#include "rt.h"
 
 void		init_light(t_light **light)
 {

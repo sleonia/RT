@@ -6,11 +6,11 @@
 /*   By: deladia <deladia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/24 12:57:07 by deladia           #+#    #+#             */
-/*   Updated: 2020/01/20 11:14:03 by deladia          ###   ########.fr       */
+/*   Updated: 2020/01/25 03:19:09 by deladia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "rtv1.h"
+#include "rt.h"
 
 void	init_object(t_object **object)
 {
@@ -152,52 +152,70 @@ typedef struct			s_object
 	// init_cone_param(object[6], (t_cone_params){{0, 3, 5},{0, 1, 0}, 0.2, 0xFF00FF, 500, 0.4});
 }
 
-int			*fill_texture_for_skybox(t_sdl *sdl)
+int			*fill_texture_for_skybox(void)
 {
-	int i = 0;
-	int j = 0;
 	SDL_Surface *back;
+	SDL_Surface *tmp;
 	int			*ptr;
-	int x = 0;
 
 	back = SDL_LoadBMP("./wood.bmp");
 	if (back == NULL)
 	{
-		printf("%s\n", SDL_GetError());
+		ft_putendl(SDL_GetError());
 		return (NULL);
 	}
-	back = SDL_ConvertSurfaceFormat(back, SDL_PIXELFORMAT_ARGB8888, 0);
-	ptr = (int *)back->pixels;
+	tmp = back;
+	back = SDL_ConvertSurfaceFormat(tmp, SDL_PIXELFORMAT_ARGB8888, 0);
+	ptr = (int *)ft_memalloc(sizeof(int) * back->w * back->h);
+	ft_memcpy(ptr, (int *)back->pixels, back->w * back->h * sizeof(int));
+	SDL_FreeSurface(back);
+	SDL_FreeSurface(tmp);
 	// printf("%d %d\n", back->w, back->h);
 	return (ptr);
 }
 
+char		**init_files_cl(void)
+{
+	char		**files;
 
+	files = (char **)ft_memalloc(sizeof(char *) * 4);
+	files[0] = "./src_opencl/intersection.cl";
+	files[1] = "./src_opencl/uv_mapping.cl";
+	files[2] = "./src_opencl/ray_trace.cl";
+	files[3] = NULL;
+	return (files);
+}
 
 int			main(void)
 {
-	t_rtv1		*rtv1;
+	t_rt		*rt;
+	char		**files;
 
-	rtv1 = (t_rtv1 *)ft_memalloc(sizeof(t_rtv1));
-	rtv1->sdl = (t_sdl *)ft_memalloc((sizeof(t_sdl)));
+	rt = (t_rt *)ft_memalloc(sizeof(t_rt));
+	rt->sdl = (t_sdl *)ft_memalloc((sizeof(t_sdl)));
 	
-	sdl_init(rtv1->sdl);
+	sdl_init(rt->sdl);
 	
-	rtv1->scene = (t_scene *)ft_memalloc(sizeof(t_scene));
-	rtv1->scene->cam.pos = (cl_float3){0.0, 0.0, -10.0};
-	rtv1->scene->cam.phi = 90.0f * M_PI / 180;
-	rtv1->scene->cam.tetta = 90.0f * M_PI / 180;
-	init_object(&rtv1->scene->object);
-	init_light(&rtv1->scene->light);
-	rtv1->opencl = (t_cl *)ft_memalloc(sizeof(t_cl));
-	read_kernel(rtv1->opencl);
-	rtv1->scene->count_objects = 6;
+	rt->scene = (t_scene *)ft_memalloc(sizeof(t_scene));
+	rt->scene->cam.pos = (cl_float3){0.0, 0.0, -10.0};
+	rt->scene->cam.phi = 90.0f * M_PI / 180;
+	rt->scene->cam.tetta = 90.0f * M_PI / 180;
+	init_object(&rt->scene->object);
+	init_light(&rt->scene->light);
+	rt->opencl = (t_cl *)ft_memalloc(sizeof(t_cl));
 
-	rtv1->sdl->background = fill_texture_for_skybox(rtv1->sdl);
 
-	calc_screen(&rtv1->scene->cam);
+	files = init_files_cl();
+	read_kernel(rt->opencl, files);
 
-	create_cl(rtv1->opencl, rtv1->sdl, rtv1->scene);
-	sdl_control(rtv1->sdl, rtv1->scene, rtv1->opencl);
+	rt->scene->count_objects = 6;
+	rt->scene->count_lights = 1;
+
+	rt->sdl->background = fill_texture_for_skybox();
+
+	calc_screen(&rt->scene->cam);
+
+	create_cl(rt->opencl, rt->sdl, rt->scene);
+	sdl_control(rt->sdl, rt->scene, rt->opencl);
 	return (0);
 }

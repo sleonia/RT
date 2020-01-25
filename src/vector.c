@@ -1,4 +1,4 @@
-#include "rtv1.h"
+#include "rt.h"
 
 cl_float3	cl_sum(cl_float3 v1, cl_float3 v2)
 {

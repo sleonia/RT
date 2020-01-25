@@ -6,11 +6,11 @@
 /*   By: deladia <deladia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/06 19:11:41 by deladia           #+#    #+#             */
-/*   Updated: 2019/12/06 21:30:47 by deladia          ###   ########.fr       */
+/*   Updated: 2020/01/25 01:17:41 by deladia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "rtv1.h"
+#include "rt.h"
 
 void	func_error_1(int err)
 {

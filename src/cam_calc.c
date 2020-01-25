@@ -1,4 +1,4 @@
-#include "rtv1.h"
+#include "rt.h"
 
 cl_float3	spherical_coor(float phi, float tetta)
 {

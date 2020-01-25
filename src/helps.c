@@ -6,11 +6,11 @@
 /*   By: deladia <deladia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/24 10:59:13 by deladia           #+#    #+#             */
-/*   Updated: 2019/12/07 22:17:00 by deladia          ###   ########.fr       */
+/*   Updated: 2020/01/25 01:17:46 by deladia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "rtv1.h"
+#include "rt.h"
 
 int 		*put_pixel(double x, double y, int color, t_sdl *sdl)
 {

@@ -6,11 +6,11 @@
 /*   By: deladia <deladia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/28 19:00:37 by deladia           #+#    #+#             */
-/*   Updated: 2020/01/20 12:19:50 by deladia          ###   ########.fr       */
+/*   Updated: 2020/01/25 02:42:45 by deladia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "rtv1.h"
+#include "rt.h"
 
 int		set_arg_1(t_cl *cl, t_sdl *sdl, t_scene *scene)
 {
@@ -60,6 +60,7 @@ int		set_arg(t_cl *cl, t_sdl *sdl, t_scene *scene)
 	ret |= clSetKernelArg(cl->kernel, 3, sizeof(cl_mem), &cl->memobjs[3]);
 	ret |= clSetKernelArg(cl->kernel, 4, sizeof(cl_mem), &cl->memobjs[4]);
 	ret |= clSetKernelArg(cl->kernel, 5, sizeof(cl_int), &scene->count_objects);
+	ret |= clSetKernelArg(cl->kernel, 6, sizeof(cl_int), &scene->count_lights);
 	if (ret != 0)
 		func_error(-9);
 	set_arg_1(cl, sdl, scene);
@@ -72,8 +73,8 @@ int		create_cl_1(t_cl *cl, t_scene *scene)
 	char	*log;
 	size_t	log_size;
 
-	if ((cl->program = clCreateProgramWithSource(cl->context, 1, (const char **)
-			&cl->program_source, (const size_t *)&cl->program_size, &ret))
+	if ((cl->program = clCreateProgramWithSource(cl->context, cl->count_files, (const char **)
+			cl->program_source, (const size_t *)cl->program_size, &ret))
 		&& ret != 0)
 		func_error(-6);
 	if ((ret = clBuildProgram(cl->program, 1, &cl->device_id, "-DOPENCL___ -I include/ ", NULL, NULL))

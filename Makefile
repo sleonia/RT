@@ -6,11 +6,11 @@
 #    By: deladia <deladia@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/31 15:32:23 by thorker           #+#    #+#              #
-#    Updated: 2020/01/14 20:04:23 by deladia          ###   ########.fr        #
+#    Updated: 2020/01/25 01:16:07 by deladia          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = RTv1
+NAME = RT
 FLAG = -g 
 SRC_DIR = src
 OBJ_DIR = objects

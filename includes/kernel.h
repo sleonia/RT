@@ -6,13 +6,13 @@
 /*   By: deladia <deladia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/06 19:23:27 by deladia           #+#    #+#             */
-/*   Updated: 2020/01/20 12:20:10 by deladia          ###   ########.fr       */
+/*   Updated: 2020/01/25 02:30:12 by deladia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef KERNEL_H
 # define KERNEL_H
-# include "rtv1.h"
+# include "rt.h"
 # define WIDTH 1280
 # define HEIGHT 1024
 # define WHITE 0xFFFFFF
@@ -35,4 +35,8 @@ typedef struct			t_hitting
 	t_material			mat;
 }						t_hitting;
 
+int						closest_intersection(float3 o, float3 d, int count_obj, __global t_object *obj, t_hitting *light_hit);
+float3					uv_mapping_for_skybox(__global int *skybox, float3 d, int tex_width, int tex_height);
+int						ft_sign(float a);
+float3					ft_normalize(float3 vec);
 #endif

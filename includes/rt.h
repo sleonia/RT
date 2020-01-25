@@ -1,17 +1,5 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   rtv1.h                                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: deladia <deladia@student.42.fr>            +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/25 21:18:10 by deladia           #+#    #+#             */
-/*   Updated: 2020/01/20 12:20:29 by deladia          ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
-#ifndef RTV1_RTV1_H
-# define RTV1_RTV1_H
+#ifndef RT_RT_H
+# define RT_RT_H
 
 # ifndef OPENCL___
 #include "libft.h"
@@ -141,8 +129,8 @@ typedef struct			s_object
 typedef struct			s_scene
 {
 	t_light				*light;
-	t_cam				cam;
 	t_object			*object;
+	t_cam				cam;
 	int					count_objects;
 	int					count_lights;
 }						t_scene;
@@ -218,8 +206,9 @@ typedef struct			s_cl
 	size_t				local_work_size[2];
 	cl_device_id		device_id;
 	cl_mem				memobjs[6];
-	char 				*program_source;
-	size_t 				program_size;
+	char 				**program_source;
+	size_t 				*program_size;
+	size_t				count_files;
 }						t_cl;
 
 typedef struct 			s_sdl
@@ -232,12 +221,12 @@ typedef struct 			s_sdl
 	int					*background;
 }						t_sdl;
 
-typedef struct 			s_rtv1
+typedef struct 			s_rt
 {
 	t_sdl				*sdl;
 	t_cl				*opencl;
 	t_scene				*scene;
-}						t_rtv1;
+}						t_rt;
 # endif
 
 # ifndef OPENCL___
@@ -248,7 +237,7 @@ void					init_object(t_object **object);
 void 					ft_error(char *str);
 int						trace_start(t_sdl *sdl, t_scene *scene);
 void                    func_error(int err);
-int						read_kernel(t_cl *cl);
+int						read_kernel(t_cl *cl, char **files_cl);
 int						create_cl(t_cl *cl, t_sdl *sdl, t_scene *scene);
 int						set_arg(t_cl *cl, t_sdl *sdl, t_scene *scene);
 
