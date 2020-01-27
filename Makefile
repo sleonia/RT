@@ -6,7 +6,7 @@
 #    By: deladia <deladia@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/31 15:32:23 by thorker           #+#    #+#              #
-#    Updated: 2020/01/27 03:43:55 by thorker          ###   ########.fr        #
+#    Updated: 2020/01/27 04:06:40 by thorker          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,19 +28,21 @@ LIB = -L $(LIB_DIR)/ -lft -L $(JSON_LIB_DIR)/ -ltojson
 FRWR = -framework SDL2 -F ./framework -framework OpenCL \
 	   -framework SDL2_image
 OBJ = $(addprefix $(OBJ_DIR)/, $(SRC:.c=.o))
-
+.PHONY: libft libtojson all clean fclean re
 all: $(NAME)
 
-$(NAME): libft parser $(OBJ_DIR) $(OBJ)
+$(NAME): $(OBJ_DIR) $(OBJ)
+	make $(LIB_DIR)
+	make $(JSON_LIB_DIR)
 	$(CC) $(FLAG) $(OBJ) $(INC) $(LIB) $(FRWR) -o $(NAME)
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(HEADERS)
 	$(CC) $(FLAG) $(INC) -c $< -o $@
 
-libft:
+$(LIB_DIR):
 	make -C $(LIB_DIR)/
 
-parser:
+$(JSON_LIB_DIR):
 	make -C $(JSON_LIB_DIR)/
 
 $(OBJ_DIR):
