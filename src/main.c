@@ -6,7 +6,7 @@
 /*   By: deladia <deladia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/24 12:57:07 by deladia           #+#    #+#             */
-/*   Updated: 2020/01/27 09:14:56 by deladia          ###   ########.fr       */
+/*   Updated: 2020/01/27 09:59:58 by deladia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,31 +19,31 @@ void	init_object(t_object **object)
 
 	(*object)[0].type = o_sphere;
 	(*object)[0].material.color = (cl_float3){1, 0, 0};
-	(*object)[0].material.reflection = 0.f; // от 0.1 до 1.0
+	(*object)[0].material.reflection = 0.1f; // от 0.1 до 1.0
 	(*object)[0].material.refraction = 0.0f; // от 1.0 до 1.3
 	(*object)[0].material.specular = 50.0f;
 	(*object)[0].material.ambient = 1.0;
-	(*object)[0].material.ambient = 1.0;
+	(*object)[0].material.ambient = 0.4;
 	(*object)[0].object.sphere.center = (cl_float3){0.0, -2.0, 3};
 	(*object)[0].object.sphere.radius = 3.0f;
 
 	(*object)[1].type = o_sphere;
 	(*object)[1].material.color = (cl_float3){0, 1, 0};
-	(*object)[1].material.reflection = 0.f;
+	(*object)[1].material.reflection = 0.1f;
 	(*object)[1].material.refraction = 0.0f;
 	(*object)[1].material.specular = 100.0f;
 	(*object)[1].material.ambient = 1.0;
-	(*object)[1].material.ambient = 1.0;
+	(*object)[1].material.ambient = 0.4;
 	(*object)[1].object.sphere.center = (cl_float3){4, 0, 8};
 	(*object)[1].object.sphere.radius = 3.0f;
 
 	(*object)[2].type = o_sphere;
 	(*object)[2].material.color = (cl_float3){0, 0, 1};
-	(*object)[2].material.reflection = 0.f;
+	(*object)[2].material.reflection = 0.1f;
 	(*object)[2].material.refraction = 0.0f;
 	(*object)[2].material.specular = 100.0f;
 	(*object)[2].material.ambient = 1.0;
-	(*object)[2].material.ambient = 1.0;
+	(*object)[2].material.ambient = 0.4;
 	(*object)[2].object.sphere.center = (cl_float3){-4, 0, 8};
 	(*object)[2].object.sphere.radius = 3.0f;
 
