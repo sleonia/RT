@@ -6,7 +6,7 @@
 /*   By: deladia <deladia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/24 12:57:07 by deladia           #+#    #+#             */
-/*   Updated: 2020/01/27 05:28:35 by deladia          ###   ########.fr       */
+/*   Updated: 2020/01/27 08:00:28 by deladia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,11 @@
 
 void	init_object(t_object **object)
 {
-	*object = (t_object *)ft_memalloc(sizeof(t_object) * 6);
+	*object = (t_object *)ft_memalloc(sizeof(t_object) * 3);
 
 	(*object)[0].type = o_sphere;
 	(*object)[0].material.color = (cl_float3){1, 0, 0};
-	(*object)[0].material.reflection = 0.5f; // от 0.1 до 1.0
+	(*object)[0].material.reflection = 0.1f; // от 0.1 до 1.0
 	(*object)[0].material.refraction = 0.0f; // от 1.0 до 1.3
 	(*object)[0].material.sp_ex = 50.0f;
 	(*object)[0].material.al = (cl_float2){1.0, 1.0};
@@ -37,7 +37,7 @@ void	init_object(t_object **object)
 
 	(*object)[2].type = o_sphere;
 	(*object)[2].material.color = (cl_float3){0, 0, 1};
-	(*object)[2].material.reflection = 0.5f;
+	(*object)[2].material.reflection = 0.9f;
 	(*object)[2].material.refraction = 0.0f;
 	(*object)[2].material.sp_ex = 50.0f;
 	(*object)[2].material.al = (cl_float2){1.0, 1.0};
@@ -81,18 +81,23 @@ int			*fill_texture_for_skybox(t_scene *scene)
 	SDL_Surface *back;
 	SDL_Surface *tmp;
 
-	back = IMG_Load("./textures/miami.jpg");
+	back = IMG_Load("./textures/sample.jpg");
 	if (back == NULL)
 	{
+		// system("osascript -e 'tell app \"System Events\" to display dialog \"Things are broke \\r \\rPress OK to launch Google\" buttons {\"Cancel\", \"OK\"}\'");
+		// system("osascript -e \'display notification\" \
+// Error input!\" with title \"Warning!\"\'");
 		ft_putendl(SDL_GetError());
 		return (NULL);
 	}
 	tmp = back;
 	back = SDL_ConvertSurfaceFormat(tmp, SDL_PIXELFORMAT_ARGB8888, 0);
-	scene->background = (int *)ft_memalloc(sizeof(int) * back->w * back->h);
-	scene->background_h = back->h;
-	scene->background_w = back->w;
-	ft_memcpy(scene->background, (int *)back->pixels, back->w * back->h * sizeof(int));
+	scene->texture = (int *)ft_memalloc(sizeof(int) * back->w * back->h);
+	scene->texture_param = (int *)ft_memalloc(sizeof(int) * 3);
+	scene->texture_param[0] = 0;
+	scene->texture_param[1] = back->w;
+	scene->texture_param[2] = back->h;
+	ft_memcpy(scene->texture, (int *)back->pixels, back->w * back->h * sizeof(int));
 	SDL_FreeSurface(back);
 	SDL_FreeSurface(tmp);
 	// printf("%d %d\n", back->w, back->h);
@@ -137,6 +142,10 @@ int			main(void)
 	rt->scene->count_lights = 1;
 
 	fill_texture_for_skybox(rt->scene);
+	// printf("%d %d\n", rt->scene->texture_param[1], rt->scene->texture_param[2]);
+	rt->scene->texture_length = rt->scene->texture_param[1] * rt->scene->texture_param[2];
+	rt->scene->texture_cnt = 3;
+	rt->scene->skybox_id = 0;
 
 	calc_screen(&rt->scene->cam);
 

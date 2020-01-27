@@ -107,7 +107,7 @@ static float3		computer_lighting(float3 d, t_hitting *light_hit, __global t_obje
 	return (r);
 }
 
-__kernel void RT(__global int *arr, __global t_cam *cam, __global t_object *object, __global t_light *light, __global int *skybox, int tex_width, int tex_height, int count_obj, int count_light)
+__kernel void RT(__global int *arr, __global t_cam *cam, __global t_object *object, __global t_light *light, __global int *texture, __global int *texture_param, int count_obj, int count_light, int skybox_id)
 {
 	int 	x;
 	int 	y;
@@ -155,9 +155,10 @@ __kernel void RT(__global int *arr, __global t_cam *cam, __global t_object *obje
 					else
 						break ;
 				}
-				else if (1)
-				{			
-					tmp_color += uv_mapping_for_skybox(skybox, d, tex_width, tex_height);
+				else if (!skybox_id != -1)
+				{
+					// printf("%d\n", skybox_id);
+					tmp_color += uv_mapping_for_skybox(texture, d, texture_param, skybox_id);
 					break ;
 				}
 			}

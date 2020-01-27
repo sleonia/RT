@@ -6,7 +6,7 @@
 /*   By: deladia <deladia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 04:06:50 by thorker           #+#    #+#             */
-/*   Updated: 2020/01/27 04:13:52 by deladia          ###   ########.fr       */
+/*   Updated: 2020/01/27 07:07:33 by deladia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,9 +144,11 @@ typedef struct			s_scene
 	t_cam				cam;
 	int					count_objects;
 	int					count_lights;
-	int					*background;
-	int					background_w;
-	int					background_h;
+	int					*texture;
+	int					*texture_param;
+	int					texture_length;
+	int					texture_cnt;
+	int					skybox_id;	
 }						t_scene;
 
 typedef struct			s_cylinder_params

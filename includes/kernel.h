@@ -6,7 +6,7 @@
 /*   By: deladia <deladia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/06 19:23:27 by deladia           #+#    #+#             */
-/*   Updated: 2020/01/25 02:30:12 by deladia          ###   ########.fr       */
+/*   Updated: 2020/01/27 07:10:27 by deladia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ typedef struct			t_hitting
 }						t_hitting;
 
 int						closest_intersection(float3 o, float3 d, int count_obj, __global t_object *obj, t_hitting *light_hit);
-float3					uv_mapping_for_skybox(__global int *skybox, float3 d, int tex_width, int tex_height);
+float3					uv_mapping_for_skybox(__global int *skybox, float3 d, __global int *tex_param, int text_id);
 int						ft_sign(float a);
 float3					ft_normalize(float3 vec);
 #endif
