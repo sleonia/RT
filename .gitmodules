@@ -1,0 +1,3 @@
+[submodule "libtojson"]
+	path = libtojson
+	url = https://github.com/DCCXXVI726/parserJson.git
