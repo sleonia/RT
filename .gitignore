@@ -3,7 +3,7 @@
 .DS_Store
 .idea
 /objects
-rtv1
+RT
 *.a
 /libft/object
 /libtojson/object
