@@ -6,12 +6,12 @@
 #    By: deladia <deladia@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/31 15:32:23 by thorker           #+#    #+#              #
-#    Updated: 2020/01/27 04:06:40 by thorker          ###   ########.fr        #
+#    Updated: 2020/01/27 04:11:49 by deladia          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = RT
-FLAG = -g -O3
+FLAG = -g
 HEADERS = includes/rt.h
 SRC_DIR = src
 OBJ_DIR = objects
