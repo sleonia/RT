@@ -82,5 +82,12 @@
 			"reflective":			0.1,
 			"position":				[0, 0, 20]
 		}
+	},
+	"music":
+	{
+		"0":						"./music/brain_perfect.mp3",
+		"1":						"./music/far_out_on_my_own_feat_karra.mp3",
+		"2":						"./music/seize_the_day.mp3",
+		"3":						"./music/lord_of_the_rings.mp3"
 	}
 }
