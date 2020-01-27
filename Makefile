@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: deladia <deladia@student.42.fr>            +#+  +:+       +#+         #
+#    By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/31 15:32:23 by thorker           #+#    #+#              #
-#    Updated: 2020/01/27 04:11:49 by deladia          ###   ########.fr        #
+#    Updated: 2020/01/27 11:48:55 by sleonia          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,15 +18,18 @@ OBJ_DIR = objects
 LIB_DIR = libft
 FRWR_DIR = framework
 JSON_LIB_DIR = libtojson
-SRC = vector.c cam_calc.c sdl.c light.c main.c init_opencl.c read_kernel.c errors_for_opencl.c
+SRC = vector.c cam_calc.c sdl.c light.c main.c init_opencl.c read_kernel.c errors_for_opencl.c music_manager.c
 INC = -I $(LIB_DIR)/includes/ \
 	  -I ./includes \
-	  -I $(FRWR_DIR)/SDL2.framework/Versions/A/Headers \
-	  -I $(FRWR_DIR)/SDL2_image.framework/Versions/A/Headers \
+	  -I $(FRWR_DIR)/SDL2.framework/Versions/A/Headers 			\
+	  -I $(FRWR_DIR)/SDL2_image.framework/Versions/A/Headers 	\
+	  -I $(FRWR_DIR)/SDL2_mixer.framework/Versions/A/Headers 	\
+	  -F $(FRWR_DIR)/											\
 	  -I $(JSON_LIB_DIR)/includes/
 LIB = -L $(LIB_DIR)/ -lft -L $(JSON_LIB_DIR)/ -ltojson
-FRWR = -framework SDL2 -F ./framework -framework OpenCL \
-	   -framework SDL2_image
+FRWR = -F ./framework -framework OpenCL \
+	   -framework SDL2 -framework SDL2_image 	\
+            -framework SDL2_ttf -framework SDL2_mixer -rpath frameworks/
 OBJ = $(addprefix $(OBJ_DIR)/, $(SRC:.c=.o))
 .PHONY: libft libtojson all clean fclean re
 all: $(NAME)

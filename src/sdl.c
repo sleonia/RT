@@ -3,14 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   sdl.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: deladia <deladia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/24 12:43:04 by deladia           #+#    #+#             */
-/*   Updated: 2020/01/25 01:18:12 by deladia          ###   ########.fr       */
+/*   Updated: 2020/01/27 16:49:24 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
+#define STB_IMAGE_IMPLEMENTATION
+#include "stb_image.h"
+#define STB_IMAGE_WRITE_IMPLEMENTATION
+#include "stb_image_write.h"
 
 void		sdl_error(char *str)
 {
@@ -34,6 +38,76 @@ int 		sdl_update(t_sdl *sdl)
 	return (0);
 }
 
+static void			set_window_icon(t_sdl *sdl)
+{
+	SDL_Surface		*sur_win;
+	SDL_Surface		*sur_img;
+	SDL_Surface		*conv_sur_img;
+
+	if (!(sur_win = SDL_CreateRGBSurface(0, WIDTH, HEIGHT, 32, 0xFF000000,
+										0x00FF0000, 0x0000FF00, 0x000000FF)))
+		ft_error((char *)SDL_GetError());
+	if (!(sur_img = IMG_Load("./textures/icon.jpg")))
+		ft_error((char *)SDL_GetError());
+	if (!(conv_sur_img = SDL_ConvertSurface(sur_img, sur_win->format, 0)))
+		ft_error((char *)SDL_GetError());
+	SDL_FreeSurface(sur_win);
+	SDL_FreeSurface(sur_img);
+	SDL_SetWindowIcon(sdl->window, conv_sur_img);
+	SDL_FreeSurface(conv_sur_img);
+}
+
+static void			init_sdl_music(t_sdl *sdl)
+{
+	if (SDL_Init(SDL_INIT_AUDIO | SDL_INIT_VIDEO) < 0)
+		ft_error((char *)SDL_GetError());
+	Mix_OpenAudio(22050, AUDIO_S16SYS, 2, 640);
+	sdl->volume = 60;
+	Mix_VolumeMusic(sdl->volume);
+	if (!(sdl->music[0] = Mix_LoadMUS("./music/brain_perfect.mp3")))
+		ft_error((char *)SDL_GetError());
+	if (!(sdl->music[1] = Mix_LoadMUS("./music/far_out_on_my_own_feat_karra.mp3")))
+		ft_error((char *)SDL_GetError());
+	if (!(sdl->music[2] = Mix_LoadMUS("./music/lord_of_the_rings.mp3")))
+		ft_error((char *)SDL_GetError());
+	if (!(sdl->music[3] = Mix_LoadMUS("./music/seize_the_day.mp3")))
+		ft_error((char *)SDL_GetError());
+}
+
+cl_int3				int_to_rgb(int src_color)
+{
+	cl_int3			color;
+
+	color.x = (src_color >> 16) & 0xFF;
+	color.y = (src_color >> 8) & 0xFF;
+	color.z = (src_color) & 0xFF;
+	return (color);
+}
+
+void	save_helper(t_sdl *sdl)
+{
+	uint8_t			*rgb_image;
+	cl_int3	color;
+	int		i;
+	int		j;
+
+	i = -1;
+	rgb_image = ft_memalloc(WIDTH * HEIGHT * 3);
+	while (++i < WIDTH)
+	{
+		j = -1;
+		while (++j < HEIGHT)
+		{
+			color = int_to_rgb(sdl->pixels[j * WIDTH + i]);
+			rgb_image[3 * (j * WIDTH + i)] = (uint8_t)color.x;
+			rgb_image[3 * (j * WIDTH + i) + 1] = (uint8_t)color.y;
+			rgb_image[3 * (j * WIDTH + i) + 2] = (uint8_t)color.z;
+		}
+	}
+	stbi_write_png("sky2.png", WIDTH, HEIGHT, 3, rgb_image, WIDTH * 3);
+}
+
+
 /*
 ** 	Бесконечный цикл реагирующий на нажатие клавишь и обновляющий после этого текстуру
 */
@@ -42,6 +116,7 @@ int			sdl_control(t_sdl *sdl, t_scene *scene, t_cl *cl)
 	char	quit;
 
 	quit = 0;
+	// save_helper(sdl);
 	sdl_update(sdl);
 	while (!quit)
 	{
@@ -101,6 +176,10 @@ int			sdl_control(t_sdl *sdl, t_scene *scene, t_cl *cl)
 					if ((scene->cam.tetta) + 0.1 <= (float)M_PI + 0.00001f)
 						scene->cam.tetta += 0.1;
 				}
+				if (sdl->event.key.keysym.scancode == SDL_SCANCODE_SPACE)
+				{
+					save_helper(sdl);
+				}
 				calc_screen(&scene->cam);
 				set_arg(cl, sdl, scene);
 				sdl_update(sdl);
@@ -140,5 +219,7 @@ int			sdl_init(t_sdl *sdl)
 	SDL_RenderClear(sdl->render);
 	SDL_RenderCopy(sdl->render, sdl->texture, NULL, NULL);
 	SDL_RenderPresent(sdl->render);
+	set_window_icon(sdl);
+	init_sdl_music(sdl);
 	return (0);
 }

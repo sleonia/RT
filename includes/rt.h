@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rt.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: deladia <deladia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 04:06:50 by thorker           #+#    #+#             */
-/*   Updated: 2020/01/27 09:13:58 by deladia          ###   ########.fr       */
+/*   Updated: 2020/01/27 16:06:28 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,12 @@
 # ifndef OPENCL___
 #include "libft.h"
 #include <SDL.h>
+// #include "stb_image.h"
+// #include "stb_image_write.h"
 #include <SDL_image.h>
+#include <SDL_mixer.h>
 #include <math.h>
+#include <time.h>
 #include <OpenCL/opencl.h>
 # define WIDTH 1280
 # define HEIGHT 1024
@@ -231,8 +235,11 @@ typedef struct 			s_sdl
 	SDL_Window			*window;
 	SDL_Renderer		*render;
 	SDL_Texture			*texture;
+	Mix_Music			*music[4];
 	SDL_Event			event;
 	int					*pixels;
+	int					volume;
+	
 }						t_sdl;
 
 typedef struct 			s_rt
@@ -245,6 +252,7 @@ typedef struct 			s_rt
 
 # ifndef OPENCL___
 int						sdl_init(t_sdl *sdl);
+void					change_music(t_rt *rt);
 int						sdl_control(t_sdl *sdl, t_scene *scene, t_cl *cl);
 void					init_light(t_light **light);
 void					init_object(t_object **object);

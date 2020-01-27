@@ -3,10 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: deladia <deladia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/24 12:57:07 by deladia           #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2020/01/27 21:59:22 by deladia          ###   ########.fr       */
+=======
+/*   Updated: 2020/01/27 11:50:14 by sleonia          ###   ########.fr       */
+>>>>>>> 43ffead22934c03322bf2024f7f1832168972732
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,7 +133,7 @@ int			main(void)
 	rt->sdl = (t_sdl *)ft_memalloc((sizeof(t_sdl)));
 	
 	sdl_init(rt->sdl);
-	
+	change_music(rt);
 	rt->scene = (t_scene *)ft_memalloc(sizeof(t_scene));
 	rt->scene->cam.pos = (cl_float3){0.0, 0.0, -10.0};
 	rt->scene->cam.phi = 90.0f * M_PI / 180;
