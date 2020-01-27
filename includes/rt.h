@@ -6,7 +6,7 @@
 /*   By: deladia <deladia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 04:06:50 by thorker           #+#    #+#             */
-/*   Updated: 2020/01/27 07:07:33 by deladia          ###   ########.fr       */
+/*   Updated: 2020/01/27 09:13:58 by deladia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,16 +82,15 @@ union					u_objects
 typedef struct			s_material
 {
 # ifndef OPENCL___
-	cl_float2			al;
 	cl_float3			color;
 # else
-	float2				al;
 	float3				color;
 # endif
-	float				sp_ex;
+	float				ambient;
+	float				diffuse;
+	float				specular; //от 0 до 100
 	float				refraction;
 	float				reflection;
-	int					specular;
 	int					texture_id;
 }						t_material;
 
@@ -144,11 +143,11 @@ typedef struct			s_scene
 	t_cam				cam;
 	int					count_objects;
 	int					count_lights;
+	int					skybox_id;	
 	int					*texture;
 	int					*texture_param;
 	int					texture_length;
 	int					texture_cnt;
-	int					skybox_id;	
 }						t_scene;
 
 typedef struct			s_cylinder_params

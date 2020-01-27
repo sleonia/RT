@@ -343,7 +343,7 @@ static float3		computer_lighting(float3 d, t_hitting *light_hit, __global t_obje
 			if (!closest_intersection(tmp, -light_dir, count_obj, obj, &shadow_hit) ||	(length(shadow_hit.hit - l[i].pos) > light_dist - 0.1f && length(shadow_hit.hit - l[i].pos) < light_dist + 0.1f))
 			{
 				a += dot(light_dir, light_hit->n) * l[i].intensity;
-				b += pow(max(0.f, -dot(light_hit->n * 2.f * dot(light_dir, light_hit->n) - light_dir, d)), light_hit->mat.sp_ex) * l[i].intensity;
+				b += pow(max(0.f, -dot(light_hit->n * 2.f * dot(light_dir, light_hit->n) - light_dir, d)), light_hit->mat.specular) * l[i].intensity;
 			}
 		}
 		i++;

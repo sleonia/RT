@@ -6,7 +6,7 @@
 /*   By: deladia <deladia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/24 12:57:07 by deladia           #+#    #+#             */
-/*   Updated: 2020/01/27 08:00:28 by deladia          ###   ########.fr       */
+/*   Updated: 2020/01/27 09:14:56 by deladia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,28 +19,31 @@ void	init_object(t_object **object)
 
 	(*object)[0].type = o_sphere;
 	(*object)[0].material.color = (cl_float3){1, 0, 0};
-	(*object)[0].material.reflection = 0.1f; // от 0.1 до 1.0
+	(*object)[0].material.reflection = 0.f; // от 0.1 до 1.0
 	(*object)[0].material.refraction = 0.0f; // от 1.0 до 1.3
-	(*object)[0].material.sp_ex = 50.0f;
-	(*object)[0].material.al = (cl_float2){1.0, 1.0};
+	(*object)[0].material.specular = 50.0f;
+	(*object)[0].material.ambient = 1.0;
+	(*object)[0].material.ambient = 1.0;
 	(*object)[0].object.sphere.center = (cl_float3){0.0, -2.0, 3};
 	(*object)[0].object.sphere.radius = 3.0f;
 
 	(*object)[1].type = o_sphere;
 	(*object)[1].material.color = (cl_float3){0, 1, 0};
-	(*object)[1].material.reflection = 0.5f;
+	(*object)[1].material.reflection = 0.f;
 	(*object)[1].material.refraction = 0.0f;
-	(*object)[1].material.sp_ex = 50.0f;
-	(*object)[1].material.al = (cl_float2){1.0, 1.0};
+	(*object)[1].material.specular = 100.0f;
+	(*object)[1].material.ambient = 1.0;
+	(*object)[1].material.ambient = 1.0;
 	(*object)[1].object.sphere.center = (cl_float3){4, 0, 8};
 	(*object)[1].object.sphere.radius = 3.0f;
 
 	(*object)[2].type = o_sphere;
 	(*object)[2].material.color = (cl_float3){0, 0, 1};
-	(*object)[2].material.reflection = 0.9f;
+	(*object)[2].material.reflection = 0.f;
 	(*object)[2].material.refraction = 0.0f;
-	(*object)[2].material.sp_ex = 50.0f;
-	(*object)[2].material.al = (cl_float2){1.0, 1.0};
+	(*object)[2].material.specular = 100.0f;
+	(*object)[2].material.ambient = 1.0;
+	(*object)[2].material.ambient = 1.0;
 	(*object)[2].object.sphere.center = (cl_float3){-4, 0, 8};
 	(*object)[2].object.sphere.radius = 3.0f;
 
@@ -48,7 +51,7 @@ void	init_object(t_object **object)
 	// (*object)[3].material.color = (cl_float3){1, 0, 1};
 	// (*object)[3].material.reflection = 0.9f;
 	// (*object)[3].material.refraction = 0.f;
-	// (*object)[3].material.sp_ex = 10.0f;
+	// (*object)[3].material.specular = 10.0f;
 	// (*object)[3].material.al = (cl_float2){1.0, 0.0};
 	// (*object)[3].object.plane.axis = (cl_float3){0, 0, 1};
 	// (*object)[3].object.plane.dist = 8;
@@ -57,7 +60,7 @@ void	init_object(t_object **object)
 	// (*object)[4].material.color = (cl_float3){1, 0, 1};
 	// (*object)[4].material.reflection = 0.9f;
 	// (*object)[4].material.refraction = 0.f;
-	// (*object)[4].material.sp_ex = 50.0f;
+	// (*object)[4].material.specular = 50.0f;
 	// (*object)[4].material.al = (cl_float2){1.0, 0.4};
 	// (*object)[4].object.cone.center = (cl_float3){0, 0, 5};
 	// (*object)[4].object.cone.axis = (cl_float3){0, 1, 0};
@@ -68,7 +71,7 @@ void	init_object(t_object **object)
 	// (*object)[5].material.color = (cl_float3){1, 1, 0};
 	// (*object)[5].material.refraction = 0.0f;
 	// (*object)[5].material.reflection = 0.9f;
-	// (*object)[5].material.sp_ex = 50.0f;
+	// (*object)[5].material.specular = 50.0f;
 	// (*object)[5].material.al = (cl_float2){1.0, 0.4};
 	// (*object)[5].object.cylinder.center = (cl_float3){2, 0, 5};
 	// (*object)[5].object.cylinder.axis = (cl_float3){0, 1, 0};
@@ -140,12 +143,12 @@ int			main(void)
 
 	rt->scene->count_objects = 6;
 	rt->scene->count_lights = 1;
+	rt->scene->texture_cnt = 3;
+	rt->scene->skybox_id = 0;
 
 	fill_texture_for_skybox(rt->scene);
 	// printf("%d %d\n", rt->scene->texture_param[1], rt->scene->texture_param[2]);
 	rt->scene->texture_length = rt->scene->texture_param[1] * rt->scene->texture_param[2];
-	rt->scene->texture_cnt = 3;
-	rt->scene->skybox_id = 0;
 
 	calc_screen(&rt->scene->cam);
 

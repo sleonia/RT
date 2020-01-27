@@ -6,7 +6,7 @@
 /*   By: deladia <deladia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/28 19:00:37 by deladia           #+#    #+#             */
-/*   Updated: 2020/01/27 07:57:04 by deladia          ###   ########.fr       */
+/*   Updated: 2020/01/27 08:45:01 by deladia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int		set_arg_1(t_cl *cl, t_sdl *sdl, t_scene *scene)
 	if ((ret = clEnqueueWriteBuffer(cl->cmd_queue, cl->memobjs[5], CL_TRUE, 0, 
 									sizeof(cl_int) * scene->texture_cnt * 3, (cl_int *)scene->texture_param, 0, NULL, 
 									NULL)) != 0)
-		func_error(-10);	
+		func_error(-10);
 	// не добавляется локал ворк сайз
 	if ((ret = clEnqueueNDRangeKernel(cl->cmd_queue, cl->kernel, 2, NULL, cl->global_work_size, NULL, 0, NULL, NULL)) != 0)
 		func_error(-11);
@@ -66,7 +66,7 @@ int		set_arg(t_cl *cl, t_sdl *sdl, t_scene *scene)
 	ret |= clSetKernelArg(cl->kernel, 5, sizeof(cl_mem), &cl->memobjs[5]);
 	ret |= clSetKernelArg(cl->kernel, 6, sizeof(cl_int), &scene->count_objects);
 	ret |= clSetKernelArg(cl->kernel, 7, sizeof(cl_int), &scene->count_lights);
-	ret |= clSetKernelArg(cl->kernel, 8, sizeof(int), &scene->skybox_id);
+	ret |= clSetKernelArg(cl->kernel, 8, sizeof(cl_int), &scene->skybox_id);
 	if (ret != 0)
 		func_error(-9);
 	set_arg_1(cl, sdl, scene);

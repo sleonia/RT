@@ -95,12 +95,12 @@ static float3		computer_lighting(float3 d, t_hitting *light_hit, __global t_obje
 			if (!closest_intersection(tmp, -light_dir, count_obj, obj, &shadow_hit) ||	(length(shadow_hit.hit - l[i].pos) > light_dist - 0.1f && length(shadow_hit.hit - l[i].pos) < light_dist + 0.1f))
 			{
 				a += dot(light_dir, light_hit->n) * l[i].intensity;
-				b += pow(max(0.f, -dot(light_hit->n * 2.f * dot(light_dir, light_hit->n) - light_dir, d)), light_hit->mat.sp_ex) * l[i].intensity;
+				b += pow(max(0.f, -dot(light_hit->n * 2.f * dot(light_dir, light_hit->n) - light_dir, d)), light_hit->mat.specular) * l[i].intensity;
 			}
 		}
 		i++;
 	}
-	r = light_hit->mat.color * (a + ambient) * light_hit->mat.al.x + (float3)(1) * light_hit->mat.al.y * b;
+	r = light_hit->mat.color * (a + ambient) * light_hit->mat.ambient + (float3)(1) * light_hit->mat.diffuse * b;
 	e = max(max(r.x, r.y), r.z);
 	if (e > 1.f)
 		return (r * (1.f / e));
@@ -155,11 +155,10 @@ __kernel void RT(__global int *arr, __global t_cam *cam, __global t_object *obje
 					else
 						break ;
 				}
-				else if (!skybox_id != -1)
+				else if (skybox_id != -1)
 				{
-					// printf("%d\n", skybox_id);
 					tmp_color += uv_mapping_for_skybox(texture, d, texture_param, skybox_id);
-					break ;
+					// break ;
 				}
 			}
 			tmp_color /= (float)cnt_reflection;
