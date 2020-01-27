@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 04:06:50 by thorker           #+#    #+#             */
-/*   Updated: 2020/01/27 11:48:40 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/01/27 16:06:28 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 # ifndef OPENCL___
 #include "libft.h"
 #include <SDL.h>
+// #include "stb_image.h"
+// #include "stb_image_write.h"
 #include <SDL_image.h>
 #include <SDL_mixer.h>
 #include <math.h>
