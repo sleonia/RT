@@ -6,7 +6,7 @@
 /*   By: deladia <deladia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/28 19:00:37 by deladia           #+#    #+#             */
-/*   Updated: 2020/01/27 08:45:01 by deladia          ###   ########.fr       */
+/*   Updated: 2020/01/27 21:00:12 by deladia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int		set_arg_1(t_cl *cl, t_sdl *sdl, t_scene *scene)
 									NULL)) != 0)
 		func_error(-10);
 	if ((ret = clEnqueueWriteBuffer(cl->cmd_queue, cl->memobjs[2], CL_TRUE, 0,
-									sizeof(t_object) * 3, scene->object, 0, NULL,
+									sizeof(t_object) * 6, scene->object, 0, NULL,
 									NULL)) != 0)
 		func_error(-10);
 	if ((ret = clEnqueueWriteBuffer(cl->cmd_queue, cl->memobjs[3], CL_TRUE, 0,
@@ -106,7 +106,7 @@ int		create_cl_1(t_cl *cl, t_scene *scene)
 		func_error(-5);
 	if ((cl->memobjs[1] = clCreateBuffer(cl->context, CL_MEM_READ_WRITE | CL_MEM_COPY_HOST_PTR, sizeof(t_cam), &scene->cam, &ret)) && ret != 0)
 		func_error(-5);
-	if ((cl->memobjs[2] = clCreateBuffer(cl->context, CL_MEM_READ_WRITE | CL_MEM_COPY_HOST_PTR, sizeof(t_object) * 3, scene->object, &ret)) && ret != 0)
+	if ((cl->memobjs[2] = clCreateBuffer(cl->context, CL_MEM_READ_WRITE | CL_MEM_COPY_HOST_PTR, sizeof(t_object) * 6, scene->object, &ret)) && ret != 0)
 		func_error(-5);
 	if ((cl->memobjs[3] = clCreateBuffer(cl->context, CL_MEM_READ_WRITE | CL_MEM_COPY_HOST_PTR, sizeof(t_light) * 1, scene->light, &ret)) && ret != 0)
 		func_error(-5);
