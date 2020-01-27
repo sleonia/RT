@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rt.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thorker <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: deladia <deladia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 04:06:50 by thorker           #+#    #+#             */
-/*   Updated: 2020/01/27 04:06:52 by thorker          ###   ########.fr       */
+/*   Updated: 2020/01/27 04:13:52 by deladia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # ifndef OPENCL___
 #include "libft.h"
 #include <SDL.h>
+#include <SDL_image.h>
 #include <math.h>
 #include <OpenCL/opencl.h>
 # define WIDTH 1280

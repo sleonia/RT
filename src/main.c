@@ -6,7 +6,7 @@
 /*   By: deladia <deladia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/24 12:57:07 by deladia           #+#    #+#             */
-/*   Updated: 2020/01/25 15:20:10 by deladia          ###   ########.fr       */
+/*   Updated: 2020/01/27 05:28:35 by deladia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,28 +19,28 @@ void	init_object(t_object **object)
 
 	(*object)[0].type = o_sphere;
 	(*object)[0].material.color = (cl_float3){1, 0, 0};
-	(*object)[0].material.reflection = 0.9f; // от 0.9 до 1.0
+	(*object)[0].material.reflection = 0.5f; // от 0.1 до 1.0
 	(*object)[0].material.refraction = 0.0f; // от 1.0 до 1.3
 	(*object)[0].material.sp_ex = 50.0f;
-	(*object)[0].material.al = (cl_float2){1.0, 0.0};
+	(*object)[0].material.al = (cl_float2){1.0, 1.0};
 	(*object)[0].object.sphere.center = (cl_float3){0.0, -2.0, 3};
 	(*object)[0].object.sphere.radius = 3.0f;
 
 	(*object)[1].type = o_sphere;
-	(*object)[1].material.color = (cl_float3){1, 1, 1};
-	(*object)[1].material.reflection = 0.9f;
+	(*object)[1].material.color = (cl_float3){0, 1, 0};
+	(*object)[1].material.reflection = 0.5f;
 	(*object)[1].material.refraction = 0.0f;
 	(*object)[1].material.sp_ex = 50.0f;
-	(*object)[1].material.al = (cl_float2){1.0, 0.0};
+	(*object)[1].material.al = (cl_float2){1.0, 1.0};
 	(*object)[1].object.sphere.center = (cl_float3){4, 0, 8};
 	(*object)[1].object.sphere.radius = 3.0f;
 
 	(*object)[2].type = o_sphere;
 	(*object)[2].material.color = (cl_float3){0, 0, 1};
-	(*object)[2].material.reflection = 1.f;
-	(*object)[2].material.refraction = 1.055f;
+	(*object)[2].material.reflection = 0.5f;
+	(*object)[2].material.refraction = 0.0f;
 	(*object)[2].material.sp_ex = 50.0f;
-	(*object)[2].material.al = (cl_float2){1.0, 0.0};
+	(*object)[2].material.al = (cl_float2){1.0, 1.0};
 	(*object)[2].object.sphere.center = (cl_float3){-4, 0, 8};
 	(*object)[2].object.sphere.radius = 3.0f;
 
@@ -81,7 +81,7 @@ int			*fill_texture_for_skybox(t_scene *scene)
 	SDL_Surface *back;
 	SDL_Surface *tmp;
 
-	back = SDL_LoadBMP("./larkspur.bmp");
+	back = IMG_Load("./textures/miami.jpg");
 	if (back == NULL)
 	{
 		ft_putendl(SDL_GetError());
