@@ -6,7 +6,7 @@
 #    By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/31 15:32:23 by thorker           #+#    #+#              #
-#    Updated: 2020/01/28 19:22:24 by sleonia          ###   ########.fr        #
+#    Updated: 2020/01/28 20:52:40 by sleonia          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,10 +32,9 @@ OBJ_HOOKS_FILES = $(addprefix $(OBJ_DIR), $(HOOKS_FILES:.c=.o))
 # =========== #
 
 INIT_FILES =							\
-			init_cl.c					\
 			init_light.c				\
-			init_opencl.c				\
-			init_opencl_arg.c			\
+			init_cl.c				\
+			init_cl_arg.c			\
 			init_rt.c					\
 			init_sdl.c					\
 			init_texture.c				\
@@ -63,6 +62,7 @@ OBJ_MATH_UTILS_FILES = $(addprefix $(OBJ_DIR), $(MATH_UTILS_FILES:.c=.o))
 
 PARSE_FILES =							\
 			parse_assets.c				\
+			parse_opencl_files.c		\
 
 PARSE_DIR = ./src/parse/
 

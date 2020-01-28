@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 04:06:50 by thorker           #+#    #+#             */
-/*   Updated: 2020/01/28 19:55:34 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/01/28 20:49:40 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -276,7 +276,7 @@ void					rotation(SDL_Event event, t_sdl *sdl, t_cam *cam);
 char					**init_files_cl(void);
 void					init_light(t_light **light);
 int						set_opencl_arg(t_cl *cl, t_sdl *sdl, t_scene *scene);
-int						create_cl(t_cl *cl, t_sdl *sdl, t_scene *scene);
+t_cl					*init_cl(t_key_value *json, t_rt *rt);
 t_rt					*init_rt(char **av);
 t_sdl					*init_sdl(t_key_value *json);
 int						*fill_texture_for_object(char *texture_path,
@@ -318,6 +318,7 @@ int						parse_volume_json(t_key_value *assets);
 char					*parse_textures_json(t_key_value *assets, t_sdl *sdl);
 char					*parse_icon_json(t_key_value *assets, t_sdl *sdl);
 t_key_value				*parse_assets(t_key_value *json, t_sdl *sdl);
+char					**parse_opencl_files_json(t_key_value *json);
 /*
 **						sdl_utils
 */

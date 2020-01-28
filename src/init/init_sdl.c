@@ -6,17 +6,17 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/28 10:20:37 by sleonia           #+#    #+#             */
-/*   Updated: 2020/01/28 19:55:53 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/01/28 20:34:54 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-static void			init_sdl_music(t_sdl *sdl, t_key_value *assets)
+static void			init_sdl_music(t_key_value *assets, t_sdl *sdl)
 {
 	int				i;
 
-	// i = 0;
+	i = 0;
 	while (++i < MAX_NBR_OF_SONGS)
 		sdl->music[i] = NULL;
 	Mix_OpenAudio(22050, AUDIO_S16SYS, 2, 640);
@@ -26,16 +26,18 @@ static void			init_sdl_music(t_sdl *sdl, t_key_value *assets)
 	Mix_VolumeMusic(sdl->volume);
 }
 
-static void			set_window_icon(t_sdl *sdl, t_key_value *assets)
+static void			set_window_icon(t_key_value *assets, t_sdl *sdl)
 {
+	char			*icon;
 	SDL_Surface		*sur_win;
 	SDL_Surface		*sur_img;
 	SDL_Surface		*conv_sur_img;
 
+	icon = parse_icon_json(assets, sdl);
 	if (!(sur_win = SDL_CreateRGBSurface(0, WIDTH, HEIGHT, 32, 0xFF000000,
 										0x00FF0000, 0x0000FF00, 0x000000FF)))
 		ft_error((char *)SDL_GetError());
-	if (!(sur_img = IMG_Load("./textures/icon.jpg")))
+	if (!(sur_img = IMG_Load(icon)))
 		ft_error((char *)SDL_GetError());
 	if (!(conv_sur_img = SDL_ConvertSurface(sur_img, sur_win->format, 0)))
 		ft_error((char *)SDL_GetError());
@@ -43,11 +45,26 @@ static void			set_window_icon(t_sdl *sdl, t_key_value *assets)
 	SDL_FreeSurface(sur_img);
 	SDL_SetWindowIcon(sdl->window, conv_sur_img);
 	SDL_FreeSurface(conv_sur_img);
+	ft_strdel(&icon);
+}
+
+static void			init_sdl_2(t_key_value *json, t_sdl *sdl)
+{
+	t_key_value		*assets;
+
+	if (!(sdl->pixels = (int *)ft_memalloc(sizeof(int) * WIDTH * HEIGHT)))
+		ft_error((char *)SDL_GetError());
+	SDL_UpdateTexture(sdl->texture, NULL, sdl->pixels, WIDTH * sizeof(int));
+	SDL_RenderClear(sdl->render);
+	SDL_RenderCopy(sdl->render, sdl->texture, NULL, NULL);
+	SDL_RenderPresent(sdl->render);
+	assets = parse_assets(json, sdl);
+	set_window_icon(assets, sdl);
+	init_sdl_music(assets, sdl);
 }
 
 t_sdl				*init_sdl(t_key_value *json)
 {
-	t_key_value		*assets;
 	t_sdl			*sdl;
 
 	sdl = (t_sdl *)ft_memalloc((sizeof(t_sdl)));
@@ -64,14 +81,6 @@ t_sdl				*init_sdl(t_key_value *json)
 										SDL_TEXTUREACCESS_STREAMING,
 										WIDTH, HEIGHT)))
 		ft_error((char *)SDL_GetError());
-	if (!(sdl->pixels = (int *)ft_memalloc(sizeof(int) * WIDTH * HEIGHT)))
-		ft_error((char *)SDL_GetError());
-	SDL_UpdateTexture(sdl->texture, NULL, sdl->pixels, WIDTH * sizeof(int));
-	SDL_RenderClear(sdl->render);
-	SDL_RenderCopy(sdl->render, sdl->texture, NULL, NULL);
-	SDL_RenderPresent(sdl->render);
-	assets = parse_assets(json, sdl);
-	set_window_icon(sdl, assets);
-	init_sdl_music(sdl, assets);
+	init_sdl_2(json, sdl);
 	return (sdl);
 }

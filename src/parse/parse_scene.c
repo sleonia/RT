@@ -1,26 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_rt.c                                          :+:      :+:    :+:   */
+/*   parse_scene.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/28 10:16:20 by sleonia           #+#    #+#             */
-/*   Updated: 2020/01/28 20:52:25 by sleonia          ###   ########.fr       */
+/*   Created: 2020/01/28 20:46:46 by sleonia           #+#    #+#             */
+/*   Updated: 2020/01/28 20:51:58 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-t_rt		*init_rt(char **av)
+t_cam				*parse_cam_json(t_key_value *json, t_rt *rt)
 {
-	t_rt	*rt;
+	t_key_value		*cam;
 
-	rt = (t_rt *)ft_memalloc(sizeof(t_rt));
-	if (!(rt->json = parse_json(av[1])))
-		ft_error(ERROR_INPUT);
-	// rt->scene = ;
-	// rt->opencl = init_cl(rt->json, rt);
-	rt->sdl = init_sdl(rt->json);
-	return (rt);
+	if (get_node(json, "camera", &cam) != 0)
+		ft_error("get_node: camera");
+	
+	return (cam);
 }

@@ -1,4 +1,10 @@
 {
+	"opencl":
+	{
+		"file_0":					"./src_opencl/intersection.cl",
+		"file_1":					"./src_opencl/uv_mapping.cl",
+		"file_2":					"./src_opencl/ray_trace.cl"
+	},
 	"camera":
 	{
 		"postition":				[0, 0, 0],
@@ -26,10 +32,7 @@
 	{
 		"songs":
 		{
-			"song_0":				"./music/brain_perfect.mp3",
-			"song_1":				"./music/far_out_on_my_own_feat_karra.mp3",
-			"song_2":				"./music/seize_the_day.mp3",
-			"song_3":				"./music/lord_of_the_rings.mp3"
+			"song_0":				"./music/lord_of_the_rings.mp3"
 		},
 		"icons":
 		{

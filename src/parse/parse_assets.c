@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/28 18:49:49 by sleonia           #+#    #+#             */
-/*   Updated: 2020/01/28 19:56:49 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/01/28 20:34:33 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ char				*parse_icon_json(t_key_value *assets, t_sdl *sdl)
 
 	if (get_node(assets, "icons", &icons) != 0)
 		ft_error("Error icons");
-	if (!get_str(assets, "icon_0", &texture_name))
+	if (get_str(icons, "icon_0", &texture_name) != 0)
 		ft_error("Error icon_0");
 	return (texture_name);
 }

@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/24 12:57:07 by deladia           #+#    #+#             */
-/*   Updated: 2020/01/28 19:09:52 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/01/28 20:34:49 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ int			main(int ac, char **av)
 		ft_error(ERROR_INPUT);
 	rt = init_rt(av);
 	change_music(rt);
+	// calc_screen(&rt->scene->cam);
 	sdl_loop(rt->sdl, rt->scene, rt->opencl);
 	return (0);
 }
