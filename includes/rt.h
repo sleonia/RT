@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 04:06:50 by thorker           #+#    #+#             */
-/*   Updated: 2020/01/28 14:28:33 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/01/28 19:55:34 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@
 # include "rt_error.h"
 # include <SDL.h>
 # include "audio.h"
-// # include "stb_image.h"
-// # include "stb_image_write.h"
+# include "to_json.h"
 # include <SDL_image.h>
 # include <SDL_mixer.h>
+# include <stdbool.h>
 # include <math.h>
 # include <time.h>
 # include <OpenCL/opencl.h>
@@ -30,6 +30,7 @@
 # define WHITE 0xFFFFFF
 # define BLACK 0x000000
 # define STEP 0.1
+# define MAX_NBR_OF_SONGS 20
 # endif
 
 typedef struct			s_cylinder
@@ -231,6 +232,7 @@ typedef struct			s_cl
 	char 				**program_source;
 	size_t 				*program_size;
 	size_t				count_files;
+	char				**files;
 }						t_cl;
 
 typedef struct 			s_sdl
@@ -238,7 +240,7 @@ typedef struct 			s_sdl
 	SDL_Window			*window;
 	SDL_Renderer		*render;
 	SDL_Texture			*texture;
-	Mix_Music			*music[4];
+	Mix_Music			*music[MAX_NBR_OF_SONGS];
 	SDL_Event			event;
 	int					*pixels;
 	int					volume;
@@ -250,6 +252,7 @@ typedef struct 			s_rt
 	t_sdl				*sdl;
 	t_cl				*opencl;
 	t_scene				*scene;
+	t_key_value			*json;
 }						t_rt;
 # endif
 
@@ -274,8 +277,8 @@ char					**init_files_cl(void);
 void					init_light(t_light **light);
 int						set_opencl_arg(t_cl *cl, t_sdl *sdl, t_scene *scene);
 int						create_cl(t_cl *cl, t_sdl *sdl, t_scene *scene);
-t_rt					*init_rt(void);
-t_sdl					*init_sdl(void);
+t_rt					*init_rt(char **av);
+t_sdl					*init_sdl(t_key_value *json);
 int						*fill_texture_for_object(char *texture_path,
 											int *texture_pixels,
 											int *texture_param);
@@ -308,6 +311,14 @@ float					cl_length(cl_float3 v);
 */
 
 /*
+**						parse
+*/
+void					parse_songs_json(t_key_value *assets, t_sdl *sdl);
+int						parse_volume_json(t_key_value *assets);
+char					*parse_textures_json(t_key_value *assets, t_sdl *sdl);
+char					*parse_icon_json(t_key_value *assets, t_sdl *sdl);
+t_key_value				*parse_assets(t_key_value *json, t_sdl *sdl);
+/*
 **						sdl_utils
 */
 void					change_music(t_rt *rt);
@@ -319,6 +330,7 @@ void 					sdl_update(t_sdl *sdl);
 **						utils
 */
 void					ft_error(char *str);
+char					*get_next_name(char *name);
 cl_int3					int_to_rgb(int src_color);
 int 					*put_pixel(double x, double y, int color, t_sdl *sdl);
 int						read_kernel(t_cl *cl, char **files_cl);

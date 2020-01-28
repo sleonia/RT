@@ -1,11 +1,12 @@
 {
-    "files.associations": {
+	"files.associations": {
 		"rtv1.h": "c",
 		"ios": "c",
 		"algorithm": "c",
 		"stb_image_write.h": "c",
 		"stb_image.h": "c",
-		"stdlib.h": "c"
-	},
-	"C_Cpp.errorSquiggles": "Enabled"
+		"stdlib.h": "c",
+		"complex": "c",
+		"typeinfo": "c"
+	}
 }

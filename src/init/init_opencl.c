@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/28 19:00:37 by deladia           #+#    #+#             */
-/*   Updated: 2020/01/28 13:29:57 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/01/28 14:53:00 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,4 +109,13 @@ int				create_cl(t_cl *cl, t_sdl *sdl, t_scene *scene)
 	create_cl_1(cl, scene);
 	set_opencl_arg(cl, sdl, scene);
 	return (0);
+}
+
+t_cl			*init_opencl(void)
+{
+	t_cl		*opencl;
+
+	opencl = (t_cl *)ft_memalloc(sizeof(t_cl));
+	opencl->files = init_files_cl();
+	return (opencl);
 }

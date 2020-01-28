@@ -6,7 +6,7 @@
 #    By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/31 15:32:23 by thorker           #+#    #+#              #
-#    Updated: 2020/01/28 14:27:56 by sleonia          ###   ########.fr        #
+#    Updated: 2020/01/28 19:22:24 by sleonia          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,13 +52,21 @@ MATH_UTILS_FILES =						\
 			cam_calc.c					\
 			cl_vectors_1.c				\
 			cl_vectors_2.c				\
-			vectors_1.c					\
-			vectors_2.c					\
-			vectors_3.c					\
 
 MATH_UTILS_DIR = ./src/math_utils/
 
 OBJ_MATH_UTILS_FILES = $(addprefix $(OBJ_DIR), $(MATH_UTILS_FILES:.c=.o))
+
+# =========== #
+#    PARSE 	  #
+# =========== #
+
+PARSE_FILES =							\
+			parse_assets.c				\
+
+PARSE_DIR = ./src/parse/
+
+OBJ_PARSE_FILES = $(addprefix $(OBJ_DIR), $(PARSE_FILES:.c=.o))
 
 # =========== #
 #  SDL_UTILS  #
@@ -80,6 +88,7 @@ OBJ_SDL_UTILS_FILES = $(addprefix $(OBJ_DIR), $(SDL_UTILS_FILES:.c=.o))
 
 UTILS_FILES =							\
 			ft_error.c					\
+			get_next_name.c				\
 			int_to_rgb.c				\
 			put_pixel.c					\
 			read_kernel.c				\
@@ -125,6 +134,7 @@ OBJ = 									\
 		$(OBJ_INIT_FILES)				\
 		$(OBJ_MATH_UTILS_FILES)			\
 		$(OBJ_SDL_UTILS_FILES)			\
+		$(OBJ_PARSE_FILES)				\
 		$(OBJ_UTILS_FILES)				\
 		$(OBJ_MAIN_FILES)				\
 
@@ -132,11 +142,7 @@ OBJ_DIR = ./objects/
 
 SRC_DIR = ./src/
 
-LIBFT =	./libft/libft.a
-
 SDL2_AUDIO = ./Simple-SDL2-Audio/libsdl_audio.a
-
-JSON_LIB_DIR = libtojson
 
 INC_SDL = 	-I framework/SDL2.framework/Versions/A/Headers 			\
 			-I framework/SDL2_image.framework/Versions/A/Headers 	\
@@ -153,7 +159,7 @@ COMPILE_FLAGS = -g
 
 COMPILE = gcc $(COMPILE_FLAGS) -I $(INCLUDES) $(INC_SDL) -I $(LIBFT_INC) -I $(LIBTOJSON_INC) -I $(SDL2_AUDIO_INC) $(INC_SDL)
 
-RT_LIBS = -L $(LIBFT_DIR) -lft -L $(SDL2_AUDIO_DIR) -lsdl_audio -L $(JSON_LIB_DIR) -ltojson
+RT_LIBS = -L $(LIBFT_DIR) -lft -L $(SDL2_AUDIO_DIR) -lsdl_audio -L $(LIBTOJSON_DIR) -ltojson
 
 all: $(NAME)
 
@@ -173,7 +179,13 @@ $(OBJ_DIR)%.o: $(INIT_DIR)%.c
 $(OBJ_DIR)%.o: $(MATH_UTILS_DIR)%.c
 	@$(COMPILE) -c $< -o $@
 
+$(OBJ_DIR)%.o: $(PARSE_DIR)%.c
+	@$(COMPILE) -c $< -o $@
+
 $(OBJ_DIR)%.o: $(SDL_UTILS_DIR)%.c
+	@$(COMPILE) -c $< -o $@
+
+$(OBJ_DIR)%.o: $(PARSE_DIR)%.c
 	@$(COMPILE) -c $< -o $@
 
 $(OBJ_DIR)%.o: $(UTILS_DIR)%.c
@@ -184,7 +196,7 @@ $(OBJ_DIR)%.o: $(MAIN_DIR)%.c
 
 lib_refresh:
 	@make -C $(LIBFT_DIR)
-	@make -C $(JSON_LIB_DIR)
+	@make -C $(LIBTOJSON_DIR)
 	@make -C $(SDL2_AUDIO_DIR)
 
 clean:

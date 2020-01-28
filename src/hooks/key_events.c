@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/28 11:42:59 by sleonia           #+#    #+#             */
-/*   Updated: 2020/01/28 13:10:19 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/01/28 17:09:18 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ void			key_events(char *quit, t_sdl *sdl,
 	{
 		if (sdl->event.key.keysym.scancode == SDL_SCANCODE_ESCAPE)
 			*quit = 1;
-		move(sdl->event, sdl, &(scene->cam));
-		rotation(sdl->event, sdl, &(scene->cam));
+		// move(sdl->event, sdl, &(scene->cam));
+		// rotation(sdl->event, sdl, &(scene->cam));
 		// if (sdl->event.key.keysym.scancode == SDL_SCANCODE_SPACE)
 			// save_helper(sdl);
 	}

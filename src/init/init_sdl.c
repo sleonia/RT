@@ -6,32 +6,27 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/28 10:20:37 by sleonia           #+#    #+#             */
-/*   Updated: 2020/01/28 11:27:09 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/01/28 19:55:53 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-static void			init_sdl_music(t_sdl *sdl)
+static void			init_sdl_music(t_sdl *sdl, t_key_value *assets)
 {
-	if (SDL_Init(SDL_INIT_AUDIO | SDL_INIT_VIDEO) < 0)
-		ft_error((char *)SDL_GetError());
+	int				i;
+
+	// i = 0;
+	while (++i < MAX_NBR_OF_SONGS)
+		sdl->music[i] = NULL;
 	Mix_OpenAudio(22050, AUDIO_S16SYS, 2, 640);
 	initAudio();
-	sdl->volume = 0;
-	// sdl->volume = 60;
+	parse_songs_json(assets, sdl);
+	sdl->volume = parse_volume_json(assets);
 	Mix_VolumeMusic(sdl->volume);
-	if (!(sdl->music[0] = Mix_LoadMUS("./music/brain_perfect.mp3")))
-		ft_error((char *)SDL_GetError());
-	if (!(sdl->music[1] = Mix_LoadMUS("./music/far_out_on_my_own_feat_karra.mp3")))
-		ft_error((char *)SDL_GetError());
-	if (!(sdl->music[2] = Mix_LoadMUS("./music/lord_of_the_rings.mp3")))
-		ft_error((char *)SDL_GetError());
-	if (!(sdl->music[3] = Mix_LoadMUS("./music/seize_the_day.mp3")))
-		ft_error((char *)SDL_GetError());
 }
 
-static void			set_window_icon(t_sdl *sdl)
+static void			set_window_icon(t_sdl *sdl, t_key_value *assets)
 {
 	SDL_Surface		*sur_win;
 	SDL_Surface		*sur_img;
@@ -50,8 +45,9 @@ static void			set_window_icon(t_sdl *sdl)
 	SDL_FreeSurface(conv_sur_img);
 }
 
-t_sdl				*init_sdl(void)
+t_sdl				*init_sdl(t_key_value *json)
 {
+	t_key_value		*assets;
 	t_sdl			*sdl;
 
 	sdl = (t_sdl *)ft_memalloc((sizeof(t_sdl)));
@@ -74,7 +70,8 @@ t_sdl				*init_sdl(void)
 	SDL_RenderClear(sdl->render);
 	SDL_RenderCopy(sdl->render, sdl->texture, NULL, NULL);
 	SDL_RenderPresent(sdl->render);
-	set_window_icon(sdl);
-	init_sdl_music(sdl);
+	assets = parse_assets(json, sdl);
+	set_window_icon(sdl, assets);
+	init_sdl_music(sdl, assets);
 	return (sdl);
 }
