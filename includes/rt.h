@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 04:06:50 by thorker           #+#    #+#             */
-/*   Updated: 2020/01/28 03:10:54 by thorker          ###   ########.fr       */
+/*   Updated: 2020/01/28 10:00:35 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,17 @@
 # define RT_RT_H
 
 # ifndef OPENCL___
-#include "libft.h"
-#include "rt_error.h"
-#include <SDL.h>
-// #include "stb_image.h"
-// #include "stb_image_write.h"
-#include <SDL_image.h>
-#include <SDL_mixer.h>
-#include <math.h>
-#include <time.h>
-#include <OpenCL/opencl.h>
+# include "libft.h"
+# include "rt_error.h"
+# include <SDL.h>
+# include "../Simple-SDL2-Audio/audio.h"
+// # include "stb_image.h"
+// # include "stb_image_write.h"
+# include <SDL_image.h>
+# include <SDL_mixer.h>
+# include <math.h>
+# include <time.h>
+# include <OpenCL/opencl.h>
 # define WIDTH 1280
 # define HEIGHT 1024
 # define WHITE 0xFFFFFF

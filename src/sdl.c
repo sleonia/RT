@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/24 12:43:04 by deladia           #+#    #+#             */
-/*   Updated: 2020/01/28 01:24:58 by thorker          ###   ########.fr       */
+/*   Updated: 2020/01/28 10:07:47 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,9 @@ static void			init_sdl_music(t_sdl *sdl)
 	if (SDL_Init(SDL_INIT_AUDIO | SDL_INIT_VIDEO) < 0)
 		ft_error((char *)SDL_GetError());
 	Mix_OpenAudio(22050, AUDIO_S16SYS, 2, 640);
-	sdl->volume = 60;
+	initAudio();
+	sdl->volume = 0;
+	// sdl->volume = 60;
 	Mix_VolumeMusic(sdl->volume);
 	if (!(sdl->music[0] = Mix_LoadMUS("./music/brain_perfect.mp3")))
 		ft_error((char *)SDL_GetError());
@@ -167,6 +169,7 @@ int			sdl_control(t_sdl *sdl, t_scene *scene, t_cl *cl)
 	SDL_DestroyTexture(sdl->texture);
 	SDL_DestroyRenderer(sdl->render);
 	SDL_DestroyWindow(sdl->window);
+	endAudio();
 	SDL_Quit();
 	exit(0);
 	return (0);
