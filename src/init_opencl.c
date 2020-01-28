@@ -6,7 +6,7 @@
 /*   By: deladia <deladia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/28 19:00:37 by deladia           #+#    #+#             */
-/*   Updated: 2020/01/27 21:00:12 by deladia          ###   ########.fr       */
+/*   Updated: 2020/01/28 23:00:39 by deladia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,11 @@ int		set_arg_1(t_cl *cl, t_sdl *sdl, t_scene *scene)
 									NULL)) != 0)
 		func_error(-10);
 	if ((ret = clEnqueueWriteBuffer(cl->cmd_queue, cl->memobjs[2], CL_TRUE, 0,
-									sizeof(t_object) * 6, scene->object, 0, NULL,
+									sizeof(t_object) * scene->count_objects, scene->object, 0, NULL,
 									NULL)) != 0)
 		func_error(-10);
 	if ((ret = clEnqueueWriteBuffer(cl->cmd_queue, cl->memobjs[3], CL_TRUE, 0,
-									sizeof(t_light) * 1, scene->light, 0, NULL,
+									sizeof(t_light) * scene->count_lights, scene->light, 0, NULL,
 									NULL)) != 0)
 		func_error(-10);
 	if ((ret = clEnqueueWriteBuffer(cl->cmd_queue, cl->memobjs[4], CL_TRUE, 0, 
@@ -41,7 +41,7 @@ int		set_arg_1(t_cl *cl, t_sdl *sdl, t_scene *scene)
 									NULL)) != 0)
 		func_error(-10);
 	// не добавляется локал ворк сайз
-	if ((ret = clEnqueueNDRangeKernel(cl->cmd_queue, cl->kernel, 2, NULL, cl->global_work_size, NULL, 0, NULL, NULL)) != 0)
+	if ((ret = clEnqueueNDRangeKernel(cl->cmd_queue, cl->kernel, 2, NULL, cl->global_work_size, cl->local_work_size, 0, NULL, NULL)) != 0)
 		func_error(-11);
 	if ((ret = clEnqueueReadBuffer(cl->cmd_queue, cl->memobjs[0], CL_TRUE, 0,
 								   HEIGHT * WIDTH * sizeof(cl_int), (cl_int *)sdl->pixels, 0, NULL,
@@ -106,9 +106,9 @@ int		create_cl_1(t_cl *cl, t_scene *scene)
 		func_error(-5);
 	if ((cl->memobjs[1] = clCreateBuffer(cl->context, CL_MEM_READ_WRITE | CL_MEM_COPY_HOST_PTR, sizeof(t_cam), &scene->cam, &ret)) && ret != 0)
 		func_error(-5);
-	if ((cl->memobjs[2] = clCreateBuffer(cl->context, CL_MEM_READ_WRITE | CL_MEM_COPY_HOST_PTR, sizeof(t_object) * 6, scene->object, &ret)) && ret != 0)
+	if ((cl->memobjs[2] = clCreateBuffer(cl->context, CL_MEM_READ_WRITE | CL_MEM_COPY_HOST_PTR, sizeof(t_object) * scene->count_objects, scene->object, &ret)) && ret != 0)
 		func_error(-5);
-	if ((cl->memobjs[3] = clCreateBuffer(cl->context, CL_MEM_READ_WRITE | CL_MEM_COPY_HOST_PTR, sizeof(t_light) * 1, scene->light, &ret)) && ret != 0)
+	if ((cl->memobjs[3] = clCreateBuffer(cl->context, CL_MEM_READ_WRITE | CL_MEM_COPY_HOST_PTR, sizeof(t_light) * scene->count_lights, scene->light, &ret)) && ret != 0)
 		func_error(-5);
 	if ((cl->memobjs[4] = clCreateBuffer(cl->context, CL_MEM_READ_WRITE, sizeof(cl_int) * scene->texture_length, NULL, &ret)) && ret != 0)
 		func_error(-5);

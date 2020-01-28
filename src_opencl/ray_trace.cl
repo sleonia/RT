@@ -72,7 +72,7 @@ static float3 refract_ray(const float3 I, float3 N, float refractive_index)
 	return (n * I + (n * cosI - cosT) * N);
 }
 
-static float3		computer_lighting(float3 d, t_hitting *light_hit, __global t_object *obj, __global t_light *l, int count_obj, int count_light, float ambient)
+static float3		computer_lighting(float3 d, t_hitting *light_hit, __global t_object *obj, __global t_light *l, int count_obj, int count_light, float ambient, __global int *texture, __global int *texture_param)
 {
 	float		light_dist = 0;
 	float3		light_dir = (float3)0;
@@ -92,7 +92,7 @@ static float3		computer_lighting(float3 d, t_hitting *light_hit, __global t_obje
 		if (dot(light_dir, light_hit->n) > 0)
 		{
 			float3 tmp = l[i].pos;			
-			if (!closest_intersection(tmp, -light_dir, count_obj, obj, &shadow_hit) ||	(length(shadow_hit.hit - l[i].pos) > light_dist - 0.1f && length(shadow_hit.hit - l[i].pos) < light_dist + 0.1f))
+			if (!closest_intersection(tmp, -light_dir, count_obj, obj, &shadow_hit, texture, texture_param) ||	(length(shadow_hit.hit - l[i].pos) > light_dist - 0.1f && length(shadow_hit.hit - l[i].pos) < light_dist + 0.1f))
 			{
 				a += dot(light_dir, light_hit->n) * l[i].intensity;
 				b += pow(max(0.f, -dot(light_hit->n * 2.f * dot(light_dir, light_hit->n) - light_dir, d)), light_hit->mat.specular) * l[i].intensity;
@@ -118,7 +118,7 @@ __kernel void RT(__global int *arr, __global t_cam *cam, __global t_object *obje
 	t_hitting	light_hit;
 	float	ambient = 0.2f;
 	float cache_width = 1.f / WIDTH;
-	int		fsaa = 2;
+	int		fsaa = 0;
 	int		cnt_reflection = 0;
 	float3	tmp_color;
 
@@ -138,9 +138,9 @@ __kernel void RT(__global int *arr, __global t_cam *cam, __global t_object *obje
 			while (cnt_reflection < 4)
 			{
 				cnt_reflection++;
-				if (closest_intersection(o, d, count_obj, object, &light_hit))
+				if (closest_intersection(o, d, count_obj, object, &light_hit, texture, texture_param))
 				{
-					tmp_color += computer_lighting(d, &light_hit, object, light, count_obj, count_light, ambient);
+					tmp_color += computer_lighting(d, &light_hit, object, light, count_obj, count_light, ambient, texture, texture_param);
 					if (light_hit.mat.reflection > 0.00001f)
 					{
 						tmp_color *= (1 - light_hit.mat.reflection);

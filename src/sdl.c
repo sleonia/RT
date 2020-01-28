@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sdl.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: deladia <deladia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/24 12:43:04 by deladia           #+#    #+#             */
-/*   Updated: 2020/01/28 10:07:47 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/01/28 23:10:21 by deladia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,6 +154,14 @@ int			sdl_control(t_sdl *sdl, t_scene *scene, t_cl *cl)
 				{
 					if ((scene->cam.tetta) + 0.1 <= (float)M_PI + 0.00001f)
 						scene->cam.tetta += 0.1;
+				}
+				if (sdl->event.key.keysym.scancode == SDL_SCANCODE_R)
+				{
+					scene->cam.pos.y += 0.1;
+				}
+				if (sdl->event.key.keysym.scancode == SDL_SCANCODE_F)
+				{
+					scene->cam.pos.y -= 0.1;
 				}
 				if (sdl->event.key.keysym.scancode == SDL_SCANCODE_SPACE)
 				{

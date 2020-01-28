@@ -6,7 +6,7 @@
 /*   By: deladia <deladia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/06 19:23:27 by deladia           #+#    #+#             */
-/*   Updated: 2020/01/27 08:58:24 by deladia          ###   ########.fr       */
+/*   Updated: 2020/01/29 00:52:17 by deladia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,12 @@ typedef struct			t_hitting
 	t_material			mat;
 }						t_hitting;
 
-int						closest_intersection(float3 o, float3 d, int count_obj, __global t_object *obj, t_hitting *light_hit);
+int						closest_intersection(float3 o, float3 d, int count_obj, __global t_object *obj, t_hitting *light_hit, __global int *texture, __global int *texture_param);
 float3					uv_mapping_for_skybox(__global int *skybox, float3 d, __global int *tex_param, const int text_id);
 int						ft_sign(float a);
 float3					ft_normalize(float3 vec);
+float2					uv_mapping_for_sphere(t_hitting *light_hit);
+float2					uv_mapping_for_plane(t_hitting *light_hit);
+float2					uv_mapping_for_cylinder(t_hitting *light_hit, __global t_object *obj);
+void					normalize_coord_for_texture(float2 uv, float3 *color, __global int *texture,  __global int *texture_param, int texture_id);
 #endif

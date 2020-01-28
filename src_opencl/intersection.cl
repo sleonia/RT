@@ -106,13 +106,14 @@ static int   intersect_ray_cone(float3 o, float3 d, __global t_cone *cone, float
 	return (0);
 }
 
-int	closest_intersection(float3 o, float3 d, int count_obj, __global t_object *obj, t_hitting *light_hit)
+int	closest_intersection(float3 o, float3 d, int count_obj, __global t_object *obj, t_hitting *light_hit, __global int *texture, __global int *texture_param)
 {
 	float		dist;
 	int			i;
 	int			t12;
 	float		dist_i;
 	float3		v;
+	float2		uv;
 
 	dist = MAX_DIST + 1.f;
 	i = 0;
@@ -130,7 +131,12 @@ int	closest_intersection(float3 o, float3 d, int count_obj, __global t_object *o
 				if (t12 == 2)
 					light_hit->n *= -1.f;
 				light_hit->mat = obj[i].material;
-				//условие для uv mapping и наличия текстуры
+				if (obj[i].material.texture_id != -1)
+				{
+					uv = uv_mapping_for_sphere(light_hit);
+					normalize_coord_for_texture(uv, &light_hit->mat.color, texture,  texture_param, obj[i].material.texture_id);
+				}
+				
 			}
 		}
 		else if (obj[i].type == o_plane)
@@ -149,7 +155,12 @@ int	closest_intersection(float3 o, float3 d, int count_obj, __global t_object *o
 					light_hit->n *= -1.f;
 				}
 				light_hit->mat = obj[i].material;
-				//условие для uv mapping и наличия текстуры
+				//условие для uv mapping и наличия текстуры	
+				if (obj[i].material.texture_id != -1)
+				{
+					uv = uv_mapping_for_plane(light_hit);
+					normalize_coord_for_texture(uv, &light_hit->mat.color, texture,  texture_param, obj[i].material.texture_id);
+				}				
 			}
 		}
 		else if (obj[i].type == o_cone)
@@ -224,6 +235,11 @@ int	closest_intersection(float3 o, float3 d, int count_obj, __global t_object *o
 				if (t12 == 2)
 					light_hit->n *= -1;
 				light_hit->mat = obj[i].material;
+				// if (obj[i].material.texture_id != -1)
+				// {
+				// 	uv = uv_mapping_for_cylinder(light_hit, (obj + i));
+				// 	normalize_coord_for_texture(uv, &light_hit->mat.color, texture,  texture_param, obj[i].material.texture_id);
+				// }
 				//условие для uv mapping и наличия текстуры
 				if (length(light_hit->hit - obj[i].object.cylinder.center) > obj[i].object.cylinder.length)
 				{
@@ -235,6 +251,11 @@ int	closest_intersection(float3 o, float3 d, int count_obj, __global t_object *o
 						light_hit->hit = o + d * dist_i;
 						light_hit->mat = obj[i].material;
 						//условие для uv mapping и наличия текстуры
+						// if (obj[i].material.texture_id != -1)
+						// {
+						// 	uv = uv_mapping_for_cylinder(light_hit, (obj + i));
+						// 	normalize_coord_for_texture(uv, &light_hit->mat.color, texture,  texture_param, obj[i].material.texture_id);
+						// }
 						v = light_hit->hit - obj[i].object.cylinder.center;
 						light_hit->n = obj[i].object.cylinder.axis * dot(v, obj[i].object.cylinder.axis);
 						light_hit->n = -ft_normalize(v - light_hit->n);
