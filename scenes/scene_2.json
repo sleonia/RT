@@ -50,7 +50,7 @@
 				"refraction":				0,
 				"texture":				"./texture/hz.jpg"
 			}			
-		}
+		},
 		"plane_1":
 		{
 			"axi":				[0, -1, 0],
@@ -65,7 +65,7 @@
 				"refraction":				0,
 				"texture":				"./texture/hz.jpg"
 			}			
-		}
+		},
 		"cone_1":
 		{
 			"center":			[0, 0, 10],
@@ -82,7 +82,7 @@
 				"refraction":				0,
 				"texture":				"./texture/hz.jpg"
 			}			
-		}
+		},
 		"cylinder_1":
 		{
 			"center":			[0, 0, 10],
