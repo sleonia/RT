@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 04:06:50 by thorker           #+#    #+#             */
-/*   Updated: 2020/01/28 10:00:35 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/01/28 14:28:33 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include "libft.h"
 # include "rt_error.h"
 # include <SDL.h>
-# include "../Simple-SDL2-Audio/audio.h"
+# include "audio.h"
 // # include "stb_image.h"
 // # include "stb_image_write.h"
 # include <SDL_image.h>
@@ -254,26 +254,75 @@ typedef struct 			s_rt
 # endif
 
 # ifndef OPENCL___
-int						sdl_init(t_sdl *sdl);
-void					change_music(t_rt *rt);
-int						sdl_control(t_sdl *sdl, t_scene *scene, t_cl *cl);
-void					init_light(t_light **light);
-void					init_object(t_object **object);
-void 					ft_error(char *str);
-int						trace_start(t_sdl *sdl, t_scene *scene);
-void                    func_error(int err);
-int						read_kernel(t_cl *cl, char **files_cl);
-int						create_cl(t_cl *cl, t_sdl *sdl, t_scene *scene);
-int						set_arg(t_cl *cl, t_sdl *sdl, t_scene *scene);
 
+/*
+**						hooks
+*/
+void					events_processing(char *quit, t_sdl *sdl,
+								t_scene *scene, t_cl *cl);
+void					key_events(char *quit, t_sdl *sdl,
+								t_scene *scene, t_cl *cl);
+void					mouse_events(char *quit, t_sdl *sdl,
+								t_scene *scene, t_cl *cl);
+void					move(SDL_Event event, t_sdl *sdl, t_cam *cam);
+void					rotation(SDL_Event event, t_sdl *sdl, t_cam *cam);
+
+/*
+**						init
+*/
+char					**init_files_cl(void);
+void					init_light(t_light **light);
+int						set_opencl_arg(t_cl *cl, t_sdl *sdl, t_scene *scene);
+int						create_cl(t_cl *cl, t_sdl *sdl, t_scene *scene);
+t_rt					*init_rt(void);
+t_sdl					*init_sdl(void);
+int						*fill_texture_for_object(char *texture_path,
+											int *texture_pixels,
+											int *texture_param);
+
+/*
+**						math_utils
+*/
+cl_float3				spherical_coor(float phi, float tetta);
+cl_float3				spher_norm(cl_float3 vec);
 void					calc_screen(t_cam *cam);
-void					cl_to_norm(cl_float3 *v);
 cl_float3				cl_mult_n(cl_float3 v1, float n);
-float					cl_length(cl_float3 v);
-cl_float3				cl_minus(cl_float3 v1, cl_float3 v2);
-cl_float3				cl_sum(cl_float3 v1, cl_float3 v2);
+void					cl_to_norm(cl_float3 *v);
 cl_float3				cl_cross(cl_float3 v1, cl_float3 v2);
-void					move(SDL_Event event, t_cam *cam);
+cl_float3				cl_sum(cl_float3 v1, cl_float3 v2);
+cl_float3				cl_minus(cl_float3 v1, cl_float3 v2);
+float					cl_length(cl_float3 v);
+
+/*
+** t_pos					vector_minus(t_pos *o, t_pos *center);
+** t_pos					vector_pus(t_pos *o, t_pos *center);
+** t_pos					*vector_on_vector(t_pos *a, t_pos *b, t_pos *ab);
+** t_pos					*matrix_on_vector(double a, double b, t_pos *vec);
+** double					ft_dot(t_pos *a, t_pos *b);
+** t_pos					v_plus(t_pos v1, t_pos v2);
+** t_pos					v_minus(t_pos v1, t_pos v2);
+** t_pos					*insert(int x, int y, int z, t_pos *pos);
+** t_pos					vector_on_number(t_pos *o, double nbr);
+** t_pos					vector_div(t_pos *o, double nbr);
+** double					vector_len(t_pos *o);
+*/
+
+/*
+**						sdl_utils
+*/
+void					change_music(t_rt *rt);
+void					sdl_loop(t_sdl *sdl, t_scene *scene, t_cl *cl);
+void					sdl_quit(t_sdl *sdl);
+void 					sdl_update(t_sdl *sdl);
+
+/*
+**						utils
+*/
+void					ft_error(char *str);
+cl_int3					int_to_rgb(int src_color);
+int 					*put_pixel(double x, double y, int color, t_sdl *sdl);
+int						read_kernel(t_cl *cl, char **files_cl);
 int						realloc_img(t_scene *scene, char *file_name);
+
 # endif
 #endif

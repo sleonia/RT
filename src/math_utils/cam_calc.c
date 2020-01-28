@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   cam_calc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thorker <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 04:07:05 by thorker           #+#    #+#             */
-/*   Updated: 2020/01/27 04:07:07 by thorker          ###   ########.fr       */
+/*   Updated: 2020/01/28 11:59:53 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-cl_float3	spherical_coor(float phi, float tetta)
+cl_float3		spherical_coor(float phi, float tetta)
 {
 	cl_float3	vec;
 
@@ -22,7 +22,7 @@ cl_float3	spherical_coor(float phi, float tetta)
 	return (vec);
 }
 
-cl_float3	spher_norm(cl_float3 vec)
+cl_float3		spher_norm(cl_float3 vec)
 {
 	cl_float3	normal;
 
@@ -41,7 +41,7 @@ cl_float3	spher_norm(cl_float3 vec)
 	return (normal);
 }
 
-void		calc_screen(t_cam *cam)
+void			calc_screen(t_cam *cam)
 {
 	cl_float3	dec_coor;
 	cl_float3	ox;

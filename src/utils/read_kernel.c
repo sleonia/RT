@@ -3,28 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   read_kernel.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: deladia <deladia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/07 19:06:17 by deladia           #+#    #+#             */
-/*   Updated: 2020/01/25 02:52:18 by deladia          ###   ########.fr       */
+/*   Updated: 2020/01/28 12:08:22 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-int		get_count_files_cl(char **file)
+int				get_count_files_cl(char **file)
 {
-	int		i;
+	int			i;
 
-	i = 0;
-	while (file[i])
-	{
-		i++;
-	}
+	i = -1;
+	while (file[++i])
+		;
 	return (i);
 }
 
-int		ft_read_kernel(char *files_cl, size_t *program_size, char **program_source)
+int				ft_read_kernel(char *files_cl,
+							size_t *program_size,
+							char **program_source)
 {
 	int			fd;
 	ssize_t		ret;
@@ -46,10 +46,12 @@ int		ft_read_kernel(char *files_cl, size_t *program_size, char **program_source)
 	return (0);
 }
 
-void	contain_program_source(char **program_source, size_t *program_size, char **files_cl, int cnt_files)
+void			contain_program_source(char **program_source,
+									size_t *program_size,
+									char **files_cl, int cnt_files)
 {
-	int		i;
-	int		ret;
+	int			i;
+	int			ret;
 
 	i = 0;
 	while (i < cnt_files)
@@ -59,13 +61,16 @@ void	contain_program_source(char **program_source, size_t *program_size, char **
 	}
 }
 
-int		read_kernel(t_cl *cl, char **files_cl)
+int				read_kernel(t_cl *cl, char **files_cl)
 {
 	cl->count_files = get_count_files_cl(files_cl);
-	if (!(cl->program_source = (char **)ft_memalloc(sizeof(char *) * cl->count_files)))
+	if (!(cl->program_source = (char **)ft_memalloc(sizeof(char *)
+											* cl->count_files)))
 		ft_error("Memory not allocated");
-	if (!(cl->program_size = (size_t *)ft_memalloc(sizeof(size_t) * cl->count_files)))
+	if (!(cl->program_size = (size_t *)ft_memalloc(sizeof(size_t)
+											* cl->count_files)))
 		ft_error("Memory not allocated");
-	contain_program_source(cl->program_source, cl->program_size, files_cl, cl->count_files);
+	contain_program_source(cl->program_source, cl->program_size,
+						files_cl, cl->count_files);
 	return (0);
 }

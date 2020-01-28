@@ -6,5 +6,6 @@
 		"stb_image_write.h": "c",
 		"stb_image.h": "c",
 		"stdlib.h": "c"
-	}
+	},
+	"C_Cpp.errorSquiggles": "Enabled"
 }
