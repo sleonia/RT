@@ -1,27 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_rt.c                                          :+:      :+:    :+:   */
+/*   init_scene.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/28 10:16:20 by sleonia           #+#    #+#             */
-/*   Updated: 2020/01/28 21:39:35 by sleonia          ###   ########.fr       */
+/*   Created: 2020/01/28 20:55:29 by sleonia           #+#    #+#             */
+/*   Updated: 2020/01/28 21:50:07 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-t_rt		*init_rt(char **av)
+t_scene		*init_scene(t_key_value *json, t_rt *rt)
 {
-	t_rt	*rt;
+	t_scene	*scene;
 
-	rt = (t_rt *)ft_memalloc(sizeof(t_rt));
-	if (!(rt->json = parse_json(av[1])))
-		ft_error(ERROR_INPUT);
-	rt->scene = init_scene(rt->json, rt);
-	// rt->opencl = init_cl(rt->json, rt);
-	rt->sdl = init_sdl(rt->json);
-	// printf("%f   %f\n", rt->scene->cam.phi, rt->scene->cam.tetta);
-	return (rt);
+	scene = (t_scene *)ft_memalloc(sizeof(t_scene));
+	parse_cam_json(json, scene);
+	// printf("%f  %f\n", scene->cam.phi, scene->cam.tetta);
+	return (scene);
 }

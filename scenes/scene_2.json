@@ -7,9 +7,9 @@
 	},
 	"camera":
 	{
-		"postition":				[0, 0, 0],
-		"angle_a":					0.0,
-		"angle_b":					0.0
+		"postition":				[0.0, 0.0, -10.0],
+		"phi":						1.5707963268,
+		"tetta":					1.5707963268
 	},
 	"light_0":
 	{

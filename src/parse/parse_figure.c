@@ -1,27 +1,13 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_rt.c                                          :+:      :+:    :+:   */
+/*   parse_figure.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/28 10:16:20 by sleonia           #+#    #+#             */
-/*   Updated: 2020/01/28 21:39:35 by sleonia          ###   ########.fr       */
+/*   Created: 2020/01/28 21:51:06 by sleonia           #+#    #+#             */
+/*   Updated: 2020/01/28 21:51:19 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
-
-t_rt		*init_rt(char **av)
-{
-	t_rt	*rt;
-
-	rt = (t_rt *)ft_memalloc(sizeof(t_rt));
-	if (!(rt->json = parse_json(av[1])))
-		ft_error(ERROR_INPUT);
-	rt->scene = init_scene(rt->json, rt);
-	// rt->opencl = init_cl(rt->json, rt);
-	rt->sdl = init_sdl(rt->json);
-	// printf("%f   %f\n", rt->scene->cam.phi, rt->scene->cam.tetta);
-	return (rt);
-}

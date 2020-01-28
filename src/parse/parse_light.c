@@ -1,23 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_scene.c                                      :+:      :+:    :+:   */
+/*   parse_light.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/28 20:46:46 by sleonia           #+#    #+#             */
-/*   Updated: 2020/01/28 20:51:58 by sleonia          ###   ########.fr       */
+/*   Created: 2020/01/28 21:50:31 by sleonia           #+#    #+#             */
+/*   Updated: 2020/01/28 21:53:17 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-t_cam				*parse_cam_json(t_key_value *json, t_rt *rt)
+void			parse_light_json(t_key_value *json, t_scene *scene)
 {
-	t_key_value		*cam;
-
-	if (get_node(json, "camera", &cam) != 0)
-		ft_error("get_node: camera");
 	
-	return (cam);
 }
