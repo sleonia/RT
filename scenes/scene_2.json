@@ -15,6 +15,7 @@
 	{
 		"texture":				"./textures/hz.jpg",
 		"ambient":						0.2,
+		"fsaa":					2
 	},
 	"light":
 	{
