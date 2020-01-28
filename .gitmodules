@@ -1,3 +1,6 @@
 [submodule "libtojson"]
 	path = libtojson
 	url = https://github.com/DCCXXVI726/parserJson.git
+[submodule "libft"]
+	path = libft
+	url = https://github.com/deladia/libft.git
