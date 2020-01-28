@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 04:06:50 by thorker           #+#    #+#             */
-/*   Updated: 2020/01/28 21:42:29 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/01/28 21:55:16 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -321,7 +321,8 @@ char					*parse_icon_json(t_key_value *assets, t_sdl *sdl);
 t_key_value				*parse_assets(t_key_value *json, t_sdl *sdl);
 
 void					parse_cam_json(t_key_value *json, t_scene *scene);
-
+void					parse_figure_json(t_key_value *json, t_scene *scene);
+void					parse_light_json(t_key_value *json, t_scene *scene);
 char					**parse_opencl_files_json(t_key_value *json);
 /*
 **						sdl_utils
