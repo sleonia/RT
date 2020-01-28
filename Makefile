@@ -6,19 +6,19 @@
 #    By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/31 15:32:23 by thorker           #+#    #+#              #
-#    Updated: 2020/01/27 11:48:55 by sleonia          ###   ########.fr        #
+#    Updated: 2020/01/28 03:46:00 by thorker          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = RT
 FLAG = -g
-HEADERS = includes/rt.h
+HEADERS = includes/rt.h includes/rt_error.h
 SRC_DIR = src
 OBJ_DIR = objects
 LIB_DIR = libft
 FRWR_DIR = framework
 JSON_LIB_DIR = libtojson
-SRC = vector.c cam_calc.c sdl.c light.c main.c init_opencl.c read_kernel.c errors_for_opencl.c music_manager.c
+SRC = realloc_img.c move.c vector.c cam_calc.c sdl.c light.c main.c init_opencl.c read_kernel.c errors_for_opencl.c music_manager.c
 INC = -I $(LIB_DIR)/includes/ \
 	  -I ./includes \
 	  -I $(FRWR_DIR)/SDL2.framework/Versions/A/Headers 			\

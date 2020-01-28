@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 04:06:50 by thorker           #+#    #+#             */
-/*   Updated: 2020/01/27 16:06:28 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/01/28 03:10:54 by thorker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # ifndef OPENCL___
 #include "libft.h"
+#include "rt_error.h"
 #include <SDL.h>
 // #include "stb_image.h"
 // #include "stb_image_write.h"
@@ -27,6 +28,7 @@
 # define HEIGHT 1024
 # define WHITE 0xFFFFFF
 # define BLACK 0x000000
+# define STEP 0.1
 # endif
 
 typedef struct			s_cylinder
@@ -270,5 +272,7 @@ float					cl_length(cl_float3 v);
 cl_float3				cl_minus(cl_float3 v1, cl_float3 v2);
 cl_float3				cl_sum(cl_float3 v1, cl_float3 v2);
 cl_float3				cl_cross(cl_float3 v1, cl_float3 v2);
+void					move(SDL_Event event, t_cam *cam);
+int						realloc_img(t_scene *scene, char *file_name);
 # endif
 #endif

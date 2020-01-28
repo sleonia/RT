@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/24 12:43:04 by deladia           #+#    #+#             */
-/*   Updated: 2020/01/27 16:49:24 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/01/28 01:24:58 by thorker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,48 +130,25 @@ int			sdl_control(t_sdl *sdl, t_scene *scene, t_cl *cl)
 				//сравниваем с тем что нажато и делаем то что нужно
 				if (sdl->event.key.keysym.scancode == SDL_SCANCODE_ESCAPE)
 					quit = 1;
-				if (sdl->event.key.keysym.scancode == SDL_SCANCODE_W)
-				{
-					scene->cam.pos.s[2] += 0.1;
-				}
-				if (sdl->event.key.keysym.scancode == SDL_SCANCODE_S)
-				{
-					scene->cam.pos.s[2] -= 0.1;
-				}
-				if (sdl->event.key.keysym.scancode == SDL_SCANCODE_A)
-				{
-					scene->cam.pos.s[0] -= 0.1;
-				}
-				if (sdl->event.key.keysym.scancode == SDL_SCANCODE_D)
-				{
-					scene->cam.pos.s[0]+= 0.1;
-				}
-				if (sdl->event.key.keysym.scancode == SDL_SCANCODE_R)
-				{
-					scene->cam.pos.s[1] += 0.1;
-				}
-				if (sdl->event.key.keysym.scancode == SDL_SCANCODE_F)
-				{
-					scene->cam.pos.s[1] -= 0.1;
-				}
-				if (sdl->event.key.keysym.scancode == SDL_SCANCODE_Z)
+				move(sdl->event, &(scene->cam));
+				if (sdl->event.key.keysym.scancode == SDL_SCANCODE_Q)
 				{
 					scene->cam.phi += 0.1;
 					if (scene->cam.phi > (float)M_PI - 0.00001f)
 						scene->cam.phi -= 2 * (float)M_PI;
 				}
-				if (sdl->event.key.keysym.scancode == SDL_SCANCODE_X)
+				if (sdl->event.key.keysym.scancode == SDL_SCANCODE_E)
 				{
 					scene->cam.phi -= 0.1;
 					if (scene->cam.phi < -(float)M_PI + 0.00001f)
 						scene->cam.phi += -2 * (float)M_PI;
 				}
-				if (sdl->event.key.keysym.scancode == SDL_SCANCODE_Q)
+				if (sdl->event.key.keysym.scancode == SDL_SCANCODE_Z)
 				{
 					if ((scene->cam.tetta) - 0.1 >= 0.00001f)
 						scene->cam.tetta -= 0.1;
 				}
-				if (sdl->event.key.keysym.scancode == SDL_SCANCODE_E)
+				if (sdl->event.key.keysym.scancode == SDL_SCANCODE_X)
 				{
 					if ((scene->cam.tetta) + 0.1 <= (float)M_PI + 0.00001f)
 						scene->cam.tetta += 0.1;
