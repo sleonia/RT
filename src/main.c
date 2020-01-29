@@ -6,7 +6,7 @@
 /*   By: deladia <deladia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/24 12:57:07 by deladia           #+#    #+#             */
-/*   Updated: 2020/01/29 03:43:06 by deladia          ###   ########.fr       */
+/*   Updated: 2020/01/29 04:38:07 by deladia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	init_object(t_object **object)
 	(*object)[0].material.diffuse = 0.4;
 	(*object)[0].object.sphere.center = (cl_float3){0.0, -2.0, 3.0};
 	(*object)[0].object.sphere.radius = 2.0f;
-	(*object)[0].material.texture_id = -1;
+	(*object)[0].material.texture_id = 1;
 
 	// (*object)[10].type = o_sphere;
 	// (*object)[10].material.color = (cl_float3){1, 1, 1};
@@ -62,7 +62,7 @@ void	init_object(t_object **object)
 
 	(*object)[1].type = o_sphere;
 	(*object)[1].material.color = (cl_float3){1, 1, 1};
-	(*object)[1].material.reflection = 0.0f;
+	(*object)[1].material.reflection = 0.1f;
 	(*object)[1].material.refraction = 0.0f;
 	(*object)[1].material.specular = 100.0f;
 	(*object)[1].material.ambient = 1.0;
@@ -73,7 +73,7 @@ void	init_object(t_object **object)
 
 	(*object)[2].type = o_sphere;
 	(*object)[2].material.color = (cl_float3){1, 1, 1};
-	(*object)[2].material.reflection = 0.0f;
+	(*object)[2].material.reflection = 0.1f;
 	(*object)[2].material.refraction = 0.0f;
 	(*object)[2].material.specular = 100.0f;
 	(*object)[2].material.ambient = 1.0;
@@ -148,30 +148,33 @@ void	init_object(t_object **object)
 	// (*object)[8].object.plane.dist = 15;
 	// (*object)[8].material.texture_id = 0;
 
-	// (*object)[8].type = o_cone;
-	// (*object)[8].material.color = (cl_float3){1, 0, 1};
-	// (*object)[8].material.reflection = 0.9f;
-	// (*object)[8].material.refraction = 0.f;
-	// (*object)[8].material.specular = 50.0f;
-	// (*object)[8].material.ambient = 1.0;
-	// (*object)[8].material.diffuse = 0.4;
-	// (*object)[8].object.cone.center = (cl_float3){0, 0, 5};
-	// (*object)[8].object.cone.axis = (cl_float3){0, 1, 0};
-	// (*object)[8].object.cone.length = 10.0f;
-	// (*object)[8].object.cone.tan = 0.25;
+	(*object)[4].type = o_cone;
+	(*object)[4].material.color = (cl_float3){1, 0, 1};
+	(*object)[4].material.reflection = 0.0f;
+	(*object)[4].material.refraction = 0.f;
+	(*object)[4].material.specular = 50.0f;
+	(*object)[4].material.ambient = 1.0;
+	(*object)[4].material.diffuse = 0.4;
+	(*object)[4].object.cone.center = (cl_float3){0, 0, 5};
+	(*object)[4].object.cone.axis = (cl_float3){1, 1, 0};
+	cl_to_norm(&(*object)[4].object.cone.axis);
+	(*object)[4].object.cone.length = 10.0f;
+	(*object)[4].object.cone.tan = 0.25;
+	(*object)[4].material.texture_id = 0;
 
-	// (*object)[10].type = o_cylinder;
-	// (*object)[10].material.color = (cl_float3){1, 1, 0};
-	// (*object)[10].material.refraction = 0.0f;
-	// (*object)[10].material.reflection = 0.f;
-	// (*object)[10].material.specular = 50.0f;
-	// (*object)[10].material.ambient = 1.0;
-	// (*object)[10].material.diffuse = 0.4;
-	// (*object)[10].object.cylinder.center = (cl_float3){0, 8, 8};
-	// (*object)[10].object.cylinder.axis = (cl_float3){0, 1, 0};
-	// (*object)[10].object.cylinder.length = 10;
-	// (*object)[10].object.cylinder.radius = 1.0f;
-	// (*object)[10].material.texture_id = -1;
+	(*object)[3].type = o_cylinder;
+	(*object)[3].material.color = (cl_float3){1, 1, 0};
+	(*object)[3].material.refraction = 0.0f;
+	(*object)[3].material.reflection = 0.f;
+	(*object)[3].material.specular = 50.0f;
+	(*object)[3].material.ambient = 1.0;
+	(*object)[3].material.diffuse = 0.4;
+	(*object)[3].object.cylinder.center = (cl_float3){0, 8, 8};
+	(*object)[3].object.cylinder.axis = (cl_float3){1, 1, 0};
+	cl_to_norm(&(*object)[3].object.cylinder.axis);
+	(*object)[3].object.cylinder.length = 10;
+	(*object)[3].object.cylinder.radius = 1.0f;
+	(*object)[3].material.texture_id = 0;
 
 	// (*object)[9].type = o_cylinder;
 	// (*object)[9].material.color = (cl_float3){1, 1, 0};
@@ -282,6 +285,8 @@ int			main(void)
 
 	// fill_texture_for_skybox(rt->scene);
 	realloc_img(rt->scene, "./textures/sample.jpg");
+	realloc_img(rt->scene, "./textures/marble.jpg");
+
 
 
 

@@ -46,8 +46,19 @@ static int    intersect_ray_cylinder(float3 o, float3 d, __global t_cylinder *cy
 	if (*dist_i > 0.002f)
 		return (1);
 	*dist_i = (-b + sqrt(discriminate)) / (2 * dot(s, s));
-	if (*dist_i > 0.002)
+	if (*dist_i > 0.002f)
 		return (2);
+
+		///////////////////
+	// q = vector_minus(o, &cylinder->center);
+	// disc.a = 1.0 - dot(d, &cylinder->axis) * dot(d, &cylinder->axis);
+	// disc.b = dot(d, &q) - dot(d, &cylinder->axis) * dot(&q, &cylinder->axis);
+	// disc.c = dot(&q, &q) - dot(&q, &cylinder->axis)
+	// 		* dot(&q, &cylinder->axis) - cylinder->radius * cylinder->radius;
+	// disc.discriminant = disc.b * disc.b - disc.a * disc.c;
+	// if (disc.discriminant < 0.0)
+	// 	return (res);
+	// res.t1 = (-disc.b - sqrt(disc.discriminant)) / disc.a;
 	return (0);
 }
 
@@ -238,19 +249,19 @@ int	closest_intersection(float3 o, float3 d, int count_obj, __global t_object *o
 
 				dist_tmp = dist;
 				dist = dist_i;
-				light_hit->hit = o + d * dist_i * 0.9998f;
+				light_hit->hit = o + d * dist_i;
 				v = light_hit->hit - obj[i].object.cylinder.center;
 				light_hit->n = obj[i].object.cylinder.axis * dot(v, obj[i].object.cylinder.axis);
-				light_hit->n = ft_normalize(v - light_hit->n);
+				light_hit->n = normalize(v - light_hit->n);
 				if (t12 == 2)
 					light_hit->n *= -1;
 				light_hit->mat = obj[i].material;
+				//условие для uv mapping и наличия текстуры
 				if (obj[i].material.texture_id != -1)
 				{
 					uv = uv_mapping_for_cylinder(light_hit, &(obj + i)->object.cylinder);
 					normalize_coord_for_texture(uv, &light_hit->mat.color, texture,  texture_param, obj[i].material.texture_id);
 				}
-				//условие для uv mapping и наличия текстуры
 				if (length(light_hit->hit - obj[i].object.cylinder.center) > obj[i].object.cylinder.length)
 				{
 					o = light_hit->hit + 0.001f * d;
@@ -268,7 +279,7 @@ int	closest_intersection(float3 o, float3 d, int count_obj, __global t_object *o
 						}
 						v = light_hit->hit - obj[i].object.cylinder.center;
 						light_hit->n = obj[i].object.cylinder.axis * dot(v, obj[i].object.cylinder.axis);
-						light_hit->n = -ft_normalize(v - light_hit->n);
+						light_hit->n = -normalize(v - light_hit->n);
 					}
 					if (length(light_hit->hit - obj[i].object.cylinder.center) > obj[i].object.cylinder.length || dist > dist_tmp)
 					{
