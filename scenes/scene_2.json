@@ -103,12 +103,12 @@
 	{
 		"songs":
 		[
-			"song_0":				"./music/lord_of_the_rings.mp3"
-			"song_1":				"./music/lord_of_the_rings.mp3"
+			"./music/lord_of_the_rings.mp3",
+			"./music/lord_of_the_rings.mp3"
 		],
 		"icons":
 		[
-			"icon_0":				"./textures/icon.jpg"
+			"icon_0":				"./textures/icon.jpg",
 			"icon_1":				"./textures/icon.jpg"
 		],
 		"volume":					"10"
