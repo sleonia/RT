@@ -6,7 +6,7 @@
 /*   By: deladia <deladia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/24 12:57:07 by deladia           #+#    #+#             */
-/*   Updated: 2020/01/29 04:38:07 by deladia          ###   ########.fr       */
+/*   Updated: 2020/01/29 04:52:05 by deladia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -203,47 +203,6 @@ void	init_object(t_object **object)
 	// (*object)[10].material.texture_id = -1;
 }
 
-int			*fill_texture_for_skybox(t_scene *scene)
-{
-	SDL_Surface *back;
-	SDL_Surface *tmp;
-	SDL_Surface *back1;
-	SDL_Surface *tmp1;
-
-	back = IMG_Load("./textures/tat2.jpg");
-	if (back == NULL)
-	{
-		ft_putendl(SDL_GetError());
-		return (NULL);
-	}
-	back1 = IMG_Load("./textures/tat3.jpg");
-	if (back == NULL)
-	{
-		ft_putendl(SDL_GetError());
-		return (NULL);
-	}
-	tmp = back;
-	tmp1 = back1;
-	back = SDL_ConvertSurfaceFormat(tmp, SDL_PIXELFORMAT_ARGB8888, 0);
-	back1 = SDL_ConvertSurfaceFormat(tmp1, SDL_PIXELFORMAT_ARGB8888, 0);
-	scene->texture = (int *)ft_memalloc(sizeof(int) * (back->w * back->h + back1->w * back1->h));
-	scene->texture_param = (int *)ft_memalloc(sizeof(int) * 6);
-	scene->texture_param[0] = 0;
-	scene->texture_param[1] = back->w;
-	scene->texture_param[2] = back->h;
-	scene->texture_param[3] = back->w * back->h;
-	scene->texture_param[4] = back1->w;
-	scene->texture_param[5] = back1->h;
-	ft_memcpy(scene->texture, (int *)back->pixels, back->w * back->h * sizeof(int));
-	ft_memcpy(&scene->texture[back->w * back->h * sizeof(int)], (int *)back1->pixels, back1->w * back1->h * sizeof(int));
-	SDL_FreeSurface(back);
-	SDL_FreeSurface(tmp);
-	SDL_FreeSurface(back1);
-	SDL_FreeSurface(tmp1);
-	// printf("%d %d\n", back->w, back->h);
-	return (0);
-}
-
 char		**init_files_cl(void)
 {
 	char		**files;
@@ -279,19 +238,12 @@ int			main(void)
 
 	rt->scene->count_objects = 11;
 	rt->scene->count_lights = 1;
-	// rt->scene->texture_cnt = 2;
 	rt->scene->skybox_id = 0;
 	init_object(&rt->scene->object);
 
-	// fill_texture_for_skybox(rt->scene);
 	realloc_img(rt->scene, "./textures/sample.jpg");
 	realloc_img(rt->scene, "./textures/marble.jpg");
 
-
-
-
-
-	// rt->scene->texture_length = rt->scene->texture_param[1] * rt->scene->texture_param[2];
 
 	calc_screen(&rt->scene->cam);
 
