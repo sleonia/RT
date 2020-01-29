@@ -33,9 +33,9 @@
 		}
 	],
 	"figure":
-	{
-		"sphere_1":
+	[
 		{
+			"type":					"sphere",
 			"radius":				1.0,
 			"center":				[0, -1, 3],
 			"material":
@@ -49,8 +49,8 @@
 				"texture":				"./texture/hz.jpg"
 			}			
 		},
-		"plane_1":
 		{
+			"type":				"plane",
 			"axi":				[0, -1, 0],
 			"dist":				10.0,
 			"material":
@@ -64,8 +64,8 @@
 				"texture":				"./texture/hz.jpg"
 			}			
 		},
-		"cone_1":
 		{
+			"type":				"cone",
 			"center":			[0, 0, 10],
 			"axi":				[0, -1, 0],
 			"length":				10.0,
@@ -81,8 +81,8 @@
 				"texture":				"./texture/hz.jpg"
 			}			
 		},
-		"cylinder_1":
 		{
+			"type":				"cylinder",
 			"center":			[0, 0, 10],
 			"axi":				[0, -1, 0],
 			"length":				10.0,
@@ -98,17 +98,19 @@
 				"texture":				"./texture/hz.jpg"
 			}			
 		}
-	},
+	],
 	"assets":
 	{
 		"songs":
-		{
+		[
 			"song_0":				"./music/lord_of_the_rings.mp3"
-		},
+			"song_1":				"./music/lord_of_the_rings.mp3"
+		],
 		"icons":
-		{
+		[
 			"icon_0":				"./textures/icon.jpg"
-		},
+			"icon_1":				"./textures/icon.jpg"
+		],
 		"volume":					"10"
 	}
 }
