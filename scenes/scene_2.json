@@ -108,8 +108,8 @@
 		],
 		"icons":
 		[
-			"icon_0":				"./textures/icon.jpg",
-			"icon_1":				"./textures/icon.jpg"
+			"./textures/icon.jpg",
+			"./textures/icon.jpg"
 		],
 		"volume":					"10"
 	}
