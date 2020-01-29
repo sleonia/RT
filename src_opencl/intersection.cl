@@ -48,17 +48,6 @@ static int    intersect_ray_cylinder(float3 o, float3 d, __global t_cylinder *cy
 	*dist_i = (-b + sqrt(discriminate)) / (2 * dot(s, s));
 	if (*dist_i > 0.002f)
 		return (2);
-
-		///////////////////
-	// q = vector_minus(o, &cylinder->center);
-	// disc.a = 1.0 - dot(d, &cylinder->axis) * dot(d, &cylinder->axis);
-	// disc.b = dot(d, &q) - dot(d, &cylinder->axis) * dot(&q, &cylinder->axis);
-	// disc.c = dot(&q, &q) - dot(&q, &cylinder->axis)
-	// 		* dot(&q, &cylinder->axis) - cylinder->radius * cylinder->radius;
-	// disc.discriminant = disc.b * disc.b - disc.a * disc.c;
-	// if (disc.discriminant < 0.0)
-	// 	return (res);
-	// res.t1 = (-disc.b - sqrt(disc.discriminant)) / disc.a;
 	return (0);
 }
 
