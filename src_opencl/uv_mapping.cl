@@ -2,24 +2,12 @@
 #include "./includes/kernel.h"
 #include "./includes/rt.h"
 
-static float3			vec_change(t_hitting *lighting, __global t_object *obj)
+static float3			vec_change(t_hitting *lighting, float3 n, float3 vec)
 {
-    float3	n;
-    float3	vec;
     float	cos_x,		cos_z;
     float3	new_vec,	new_n;
     float	alpha_x,	alpha_z;
 
-	if (obj->type == o_cylinder)
-	{
-		n = obj->object.cylinder.axis;
-		vec = obj->object.cylinder.center;
-	}
-	else if (obj->type == o_cone)
-	{
-		n = obj->object.cylinder.axis;
-		vec = obj->object.cylinder.center;
-	}
     if (length((float2)(n.x, n.y)) < 1e-5f)
         return (vec);
     else
@@ -59,7 +47,7 @@ static float3			vec_change(t_hitting *lighting, __global t_object *obj)
 
 void	normalize_coord_for_texture(float2 uv, float3 *color, __global int *texture,  __global int *texture_param, int texture_id)
 {
-	int	coord;
+	int		coord;
 	int		tex_width;
 	int		tex_height;
 
@@ -99,7 +87,7 @@ float2			uv_mapping_for_sphere(t_hitting *light_hit)
 	float 	u;
 
 	vec = light_hit->n;
-	u = 0.5f + (atan2(vec.x, vec.z) / (2.f * M_PI_F));
+	u = 0.5f + (atan2(vec.x, -vec.z) / (2.f * M_PI_F));
 	v = 0.5f - (asin(vec.y) / M_PI_F);
 	return ((float2){u, v});
 }
@@ -114,25 +102,50 @@ float2			uv_mapping_for_plane(t_hitting *light_hit)
 
     vec = light_hit->hit;
 
-	if (light_hit->n.x != 0.0f || light_hit->n.y != 0.0f)
-		normvec = normalize((float3) {light_hit->n.y, -light_hit->n.x, 0.0f});
+	if (light_hit->n.x != 0.0f)
+		normvec = normalize((float3) {0.0f, light_hit->n.z, light_hit->n.x});
 	else
-		normvec = (float3) {0.0f, 1.0f, 0.0f};
-
+		normvec = (float3) {1.0f, 0.0f, 0.0f};
+	
+	if (light_hit->n.z >= 0.0f)
+		light_hit->n.z *= -1;
 	crossvec = cross(light_hit->n, normvec);
 	u = 0.5f + fmod(dot(normvec, vec), 16.0f) / 32.f;
 	v = 0.5f + fmod(dot(crossvec, vec), 16.0f) / 32.f;
 	return ((float2){u, v});
 }
 
-float2			uv_mapping_for_cylinder(t_hitting *light_hit, __global t_object *obj)
+
+//доделать
+float2 			uv_mapping_for_cone(t_hitting *light_hit, __global t_cone *cone)
+{
+	float3	vec;
+	float 	v;
+	float 	u;
+	float p;
+
+	vec = light_hit->hit;
+	// vec = vec_change(light_hit, cone->axis, cone->center);
+	p = (vec.x / vec.y) / tan(cone->tan);
+	if (vec.z > 0.f)
+		u = acos(p);
+	else
+		u = 2.f * M_PI - acos(p);
+	u /= (2.f * M_PI);
+	v = 0.5f - modf(vec.y * 100.f / 1024.f, &v) / 2.f;
+	return ((float2) {u, v});
+}
+
+//доделать
+float2			uv_mapping_for_cylinder(t_hitting *light_hit, __global t_cylinder *cylinder)
 {
 	float3	vec;
 	float 	v;
 	float 	u;
 
-	vec = vec_change(light_hit, obj);
-	u = 0.5f + (atan2(vec.x, vec.y) / (2.f * M_PI_F));
-    v = 0.5f - (modf(vec.z / obj->object.cylinder.radius * 250.f / 1024.f, &v) / 2.f);
+	vec = light_hit->hit;
+	// vec = vec_change(light_hit, cylinder->axis, cylinder->center);
+	u = 0.5f + (atan2(vec.x, vec.z) / (2.f * M_PI_F));
+    v = 0.5f - (modf(vec.y / cylinder->radius * 250.f / 1024.f, &v) / 2.f);
 	return ((float2){u, v});
 }

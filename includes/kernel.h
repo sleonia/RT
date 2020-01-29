@@ -6,7 +6,7 @@
 /*   By: deladia <deladia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/06 19:23:27 by deladia           #+#    #+#             */
-/*   Updated: 2020/01/29 00:52:17 by deladia          ###   ########.fr       */
+/*   Updated: 2020/01/29 01:17:22 by deladia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ int						ft_sign(float a);
 float3					ft_normalize(float3 vec);
 float2					uv_mapping_for_sphere(t_hitting *light_hit);
 float2					uv_mapping_for_plane(t_hitting *light_hit);
-float2					uv_mapping_for_cylinder(t_hitting *light_hit, __global t_object *obj);
+float2 			uv_mapping_for_cone(t_hitting *light_hit, __global t_cone *cone);
+float2			uv_mapping_for_cylinder(t_hitting *light_hit, __global t_cylinder *cylinder);
 void					normalize_coord_for_texture(float2 uv, float3 *color, __global int *texture,  __global int *texture_param, int texture_id);
 #endif
