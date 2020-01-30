@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_opencl_files_json.c                               :+:      :+:    :+:   */
+/*   parse_opencl_files.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/28 10:19:02 by sleonia           #+#    #+#             */
-/*   Updated: 2020/01/28 20:49:23 by sleonia          ###   ########.fr       */
+/*   Created: 2020/01/30 16:55:40 by sleonia           #+#    #+#             */
+/*   Updated: 2020/01/30 16:55:47 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ char				**parse_opencl_files_json(t_key_value *json)
 
 	i = -1;
 	if (!(files = (char **)ft_memalloc(sizeof(char *) * 4)))
-		ft_error("Malloc");		
+		ft_error("Malloc");
 	if (get_node(json, "opencl", &opencl) != 0)
 		ft_error("get_node: opencl");
 	file_name = ft_strdup("file_0");

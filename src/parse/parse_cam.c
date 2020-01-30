@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_cam_json.c                                   :+:      :+:    :+:   */
+/*   parse_cam.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/28 20:46:46 by sleonia           #+#    #+#             */
-/*   Updated: 2020/01/28 21:50:12 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/01/30 16:00:22 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,4 @@ void				parse_cam_json(t_key_value *json, t_scene *scene)
 	scene->cam.pos = **(cl_float3 **)(array->value);
 	scene->cam.phi = (float)phi;
 	scene->cam.tetta = (float)tetta;
-	// printf("%f %f %f\n", ((float **)array->value)[0][0], ((float **)array->value)[0][1], ((float **)array->value)[0][2]);
-	// printf("%f %f\n", phi, tetta);
 }

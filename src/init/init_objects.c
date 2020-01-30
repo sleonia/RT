@@ -1,18 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_light.c                                      :+:      :+:    :+:   */
+/*   init_objects.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/28 21:50:31 by sleonia           #+#    #+#             */
-/*   Updated: 2020/01/28 21:53:17 by sleonia          ###   ########.fr       */
+/*   Created: 2020/01/30 16:59:09 by sleonia           #+#    #+#             */
+/*   Updated: 2020/01/30 17:03:04 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-void			parse_light_json(t_key_value *json, t_scene *scene)
+void	init_objects(t_object **object, int nbr)
 {
-	
+	if (!(*object = (t_object *)ft_memalloc(sizeof(t_object) * (nbr + 1))))
+		ft_error("MALLOC_ERROR");
 }

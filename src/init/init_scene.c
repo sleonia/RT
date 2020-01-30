@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/28 20:55:29 by sleonia           #+#    #+#             */
-/*   Updated: 2020/01/28 21:50:07 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/01/30 17:03:44 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ t_scene		*init_scene(t_key_value *json, t_rt *rt)
 
 	scene = (t_scene *)ft_memalloc(sizeof(t_scene));
 	parse_cam_json(json, scene);
-	// printf("%f  %f\n", scene->cam.phi, scene->cam.tetta);
+	parse_skybox_json(json, scene);
+	parse_light_json(json, scene);
+	parse_objects_json(json, scene);
 	return (scene);
 }

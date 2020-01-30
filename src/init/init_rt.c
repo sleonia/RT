@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/28 10:16:20 by sleonia           #+#    #+#             */
-/*   Updated: 2020/01/28 21:39:35 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/01/30 16:01:14 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,5 @@ t_rt		*init_rt(char **av)
 	rt->scene = init_scene(rt->json, rt);
 	// rt->opencl = init_cl(rt->json, rt);
 	rt->sdl = init_sdl(rt->json);
-	// printf("%f   %f\n", rt->scene->cam.phi, rt->scene->cam.tetta);
 	return (rt);
 }

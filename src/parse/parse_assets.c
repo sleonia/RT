@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/28 18:49:49 by sleonia           #+#    #+#             */
-/*   Updated: 2020/01/30 07:48:48 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/01/30 16:56:12 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ void				parse_songs_json(t_key_value *assets, t_sdl *sdl)
 	i = -1;
 	if (get_array(assets, "songs", &songs) != 0)
 		ft_error("Error songs");
-	// printf("%zu\n", songs->length);
 	while (++i < songs->length)
 	{
 		if (!(sdl->music[i] = Mix_LoadMUS(((char **)(songs->value))[i])))
@@ -52,7 +51,6 @@ char				*parse_icon_json(t_key_value *assets, t_sdl *sdl)
 
 char				*parse_textures_json(t_key_value *assets, t_sdl *sdl)
 {
-	//что-то придумать
 	return (NULL);
 }
 
