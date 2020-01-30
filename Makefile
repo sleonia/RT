@@ -6,7 +6,7 @@
 #    By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/31 15:32:23 by thorker           #+#    #+#              #
-#    Updated: 2020/01/30 17:04:07 by sleonia          ###   ########.fr        #
+#    Updated: 2020/01/30 17:19:23 by sleonia          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -66,6 +66,7 @@ PARSE_FILES =							\
 			parse_assets.c				\
 			parse_cam.c					\
 			parse_objects.c				\
+			parse_objects_2.c			\
 			parse_lights.c				\
 			parse_opencl_files.c		\
 			parse_skybox.c				\

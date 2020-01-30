@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 04:06:50 by thorker           #+#    #+#             */
-/*   Updated: 2020/01/30 17:09:14 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/01/30 17:48:17 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -313,6 +313,13 @@ void					parse_light_json(t_key_value *json, t_scene *scene);
 void					parse_objects_json(t_key_value *json, t_scene *scene);
 char					**parse_opencl_files_json(t_key_value *json);
 void					parse_skybox_json(t_key_value *json, t_scene *scene);
+
+void					parse_sphere_json(t_key_value *obj, t_sphere *sphere);
+void					parse_plane_json(t_key_value *obj, t_plane *plane);
+void					parse_cone_json(t_key_value *obj, t_cone *cone);
+void					parse_cylinder_json(t_key_value *obj,
+											t_cylinder *cylinder);
+
 /*
 **						sdl_utils
 */

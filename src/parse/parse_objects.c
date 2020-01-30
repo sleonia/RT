@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/28 21:51:06 by sleonia           #+#    #+#             */
-/*   Updated: 2020/01/30 17:16:40 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/01/30 17:51:08 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,11 @@ static int			check_type(char *type)
 	else if (ft_strcmp(type, "plane") == 0)
 		return (o_plane);
 	return (0);
+}
+
+void				parse_material_json(t_key_value *obj_json, t_object *obj)
+{
+
 }
 
 void				parse_objects_json(t_key_value *json, t_scene *scene)
@@ -43,22 +48,18 @@ void				parse_objects_json(t_key_value *json, t_scene *scene)
 		if (getf_object_array(obj_array, i, &obj) != 0)
 			ft_error("Error getf_object_array: obj");
 
-		if (get_str(obj, "type", &str_value))
+		if (get_str(obj, "type", &str_value) != 0)
 			ft_error("Error get_double: intensity");
 		if (!(scene->object[i].type = check_type(str_value)))
 			ft_error("Error type object");
-		if (scene->object[i].type == o_sphere)
-			;// parse_sphere_json();
-		if (scene->object[i].type == o_cylinder)
-			;// parse_cylinder_json();
-		if (scene->object[i].type == o_cone)
-			;// parse_cone_json();
-		if (scene->object[i].type == o_plane)
-			;// parse_plane_json();
-		// scene->light[i].intensity = value;
-		// if (get_array(obj, "position", &pos))
-		// 	ft_error("Error get_array: position");
-		// scene->light[i].pos = **(cl_float3 **)(pos->value);
+		// if (scene->object[i].type == o_sphere)
+		// 	parse_sphere_json(obj, scene->object);
+		// if (scene->object[i].type == o_cylinder)
+		// 	parse_cylinder_json(obj, scene->object);
+		// if (scene->object[i].type == o_cone)
+		// 	parse_cone_json(obj, scene->object);
+		// if (scene->object[i].type == o_plane)
+		// 	parse_plane_json(obj, scene->object);
 	}
 	scene->count_lights = obj_array->length;
 }
