@@ -28,7 +28,6 @@ static void		cl_create_buffer(t_cl *cl, t_scene *scene)
 			CL_MEM_READ_WRITE | CL_MEM_COPY_HOST_PTR,
 			sizeof(t_object) * 6, scene->object, &ret)) && ret != 0)
 		ft_error("clCreateBuffer");
-	ft_putchar(';');
 	if ((cl->memobjs[3] = clCreateBuffer(cl->context,
 			CL_MEM_READ_WRITE | CL_MEM_COPY_HOST_PTR,
 			sizeof(t_light) * 1, scene->light, &ret)) && ret != 0)

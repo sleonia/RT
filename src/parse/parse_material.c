@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 20:25:59 by sleonia           #+#    #+#             */
-/*   Updated: 2020/01/31 00:23:40 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/01/31 00:31:12 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,28 +35,11 @@ static void			set_default_value(int i, t_scene *scene, t_rt *rt)
 	show_error_in_material(rt);
 }
 
-void			parse_material_json(int i, t_key_value *obj,
-									t_scene *scene, t_rt *rt)
+static void			parse_material_json1(int i, t_key_value *material,
+										t_scene *scene)
 {
-	t_array		*array;
-	t_key_value	*material;
-	bool		error;
-	double		d_value;
-	char		*s_value;
-
-	error = false;
-	if (get_node(obj, "material", &material) != 0)
-	{
-		set_default_value(i, scene, rt);
-		return ;
-	}
-	if (get_array(material, "color", &array) != 0)
-	{
-		error = true;
-		scene->object[i].material.color = (cl_float3){255, 0, 0};
-	}
-	else
-		scene->object[i].material.color = **(cl_float3 **)(array->value);
+	double			d_value;
+	
 	if (get_double(material, "ambient", &d_value) != 0)
 		scene->object[i].material.ambient = 0;
 	else
@@ -77,6 +60,25 @@ void			parse_material_json(int i, t_key_value *obj,
 		scene->object[i].material.refraction = 0;
 	else
 		scene->object[i].material.refraction = (float)d_value;
+}
+
+void					parse_material_json(int i, t_key_value *obj,
+											t_scene *scene, t_rt *rt)
+{
+	t_array				*array;
+	t_key_value			*material;
+	char				*s_value;
+
+	if (get_node(obj, "material", &material) != 0)
+	{
+		set_default_value(i, scene, rt);
+		return ;
+	}
+	if (get_array(material, "color", &array) != 0)
+		scene->object[i].material.color = (cl_float3){255, 0, 0};
+	else
+		scene->object[i].material.color = **(cl_float3 **)(array->value);
+	parse_material_json1(i, material, scene);
 	if (get_str(material, "texture", &s_value))
 		scene->object[i].material.texture_id = -1;
 	else

@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/28 21:51:06 by sleonia           #+#    #+#             */
-/*   Updated: 2020/01/31 00:25:08 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/01/31 01:36:16 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,5 @@ void				parse_objects_json(t_key_value *json,
 		}
 		parse_material_json(i, obj, scene, rt);
 	}
-	printf("%f\n%f\n%f\n%f\n", scene->object[0].material.ambient, scene->object[1].material.ambient, scene->object[2].material.ambient, scene->object[3].material.ambient);
-	scene->count_lights = obj_array->length;
+	scene->count_objects = obj_array->length;
 }

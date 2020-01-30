@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/28 21:50:31 by sleonia           #+#    #+#             */
-/*   Updated: 2020/01/30 23:48:12 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/01/31 01:43:28 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static void			show_error_in_light(t_rt *rt)
 {
 	system("osascript -e \'display notification\" \
 		Used default value!\" with title \"Error light!\"\'");
-	playSound(rt->sdl->sounds[0], 100);
+	playSound(rt->sdl->sounds[0], 10);
 	SDL_Delay(1500);
 }
 
@@ -35,14 +35,14 @@ static bool			parse_light_json2(int i, t_key_value *light_obj,
 	double			value;
 
 	error = false;
-	if (get_double(light_obj, "intensity", &value))
+	if (get_double(light_obj, "intensity", &value) != 0)
 	{
 		scene->light[i].intensity = 0;
 		error = true;
 	}
 	else
 		scene->light[i].intensity = value;
-	if (get_array(light_obj, "position", &pos))
+	if (get_array(light_obj, "position", &pos) != 0)
 	{
 		scene->light[i].pos = (cl_float3){0, 0, 0};
 		error = true;

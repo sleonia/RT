@@ -7,85 +7,31 @@
 	},
 	"skybox":
 	{
-		"texture":					"./textures/hz.jpg",
+		"texture":					"./textures/sample.jpg",
 		"ambient":					0.2,
 		"fsaa":						2
 	},
 	"light":
 	[
 		{
-			"intensity":			0.6,
-			"position":				[3, 1, 0]
-		},
-		{
-			"intensity":			0.7,
-			"position":				[4, 2, 1]
+			"intensity":			1,
+			"position":				[3, 1, -10]
 		}
 	],
 	"figure":
 	[
 		{
 			"type":					"sphere",
-			"radius":				1.0,
-			"center":				[0, -1, 3],
+			"radius":				3.0,
+			"center":				[0.0, -2.0, 3],
 			"material":
 			{
-				"color":			[255, 0, 0],
-				"ambient":			1.0,
+				"color":			[1, 0, 0],
+				"ambient":			0.4,
 				"diffuse":			0.4,
 				"specular":			50,
 				"reflection":		0.2,
-				"refraction":		0,
-				"texture":			"./texture/hz.jpg"
-			}
-		},
-		{
-			"type":					"cylinder",
-			"center":				[0, 0, 10],
-			"axis":					[0, -1, 0],
-			"length":				10.0,
-			"radius":				1.25,
-			"material":
-			{
-				"color":			[255, 0, 0],
-				"ambient":			2.0,
-				"diffuse":			0.4,
-				"specular":			50,
-				"reflection":		0.2,
-				"refraction":		0,
-				"texture":			"./texture/hz.jpg"
-			}
-		},
-		{
-			"type":					"cone",
-			"center":				[0, 0, 10],
-			"axis":					[0, -1, 0],
-			"length":				10.0,
-			"tan":					0.25,
-			"material":
-			{
-				"color":			[255, 0, 0],
-				"ambient":			3.0,
-				"diffuse":			0.4,
-				"specular":			50,
-				"reflection":		0.2,
-				"refraction":		0,
-				"texture":			"./texture/hz.jpg"
-			}
-		},
-		{
-			"type":					"plane",
-			"axis":					[0, -1, 0],
-			"dist":					10.0,
-			"material":
-			{
-				"color":			[255, 0, 0],
-				"ambient":			4.0,
-				"diffuse":			0.4,
-				"specular":			50,
-				"reflection":		0.2,
-				"refraction":		0,
-				"texture":			"./texture/hz.jpg"
+				"refraction":		0
 			}
 		}
 	],
