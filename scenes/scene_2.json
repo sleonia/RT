@@ -13,23 +13,15 @@
 	},
 	"scene":
 	{
-		"texture":				"./textures/hz.jpg",
-		"ambient":						0.2,
-		"fsaa":					2
+		"texture":					"./textures/hz.jpg",
+		"ambient":					0.2,
+		"fsaa":						2
 	},
 	"light":
 	[
 		{
-			"intensity":					0.6,
-			"position":					[3, 1, 0]
-		},
-		{
-			"intensity":					0.6,
-			"position":					[3, 1, 0]
-		},
-		{
-			"intensity":					0.6,
-			"position":					[3, 1, 0]
+			"intensity":			0.6,
+			"position":				[3, 1, 0]
 		}
 	],
 	"figure":
@@ -40,62 +32,13 @@
 			"center":				[0, -1, 3],
 			"material":
 			{
-				"color":				[255, 0, 0],
-				"ambient":				1.0,
-				"diffuse":				0.4,
-				"specular":				50,
-				"reflection":				0.2,
-				"refraction":				0,
-				"texture":				"./texture/hz.jpg"
-			}			
-		},
-		{
-			"type":				"plane",
-			"axi":				[0, -1, 0],
-			"dist":				10.0,
-			"material":
-			{
-				"color":				[255, 0, 0],
-				"ambient":				1.0,
-				"diffuse":				0.4,
-				"specular":				50,
-				"reflection":				0.2,
-				"refraction":				0,
-				"texture":				"./texture/hz.jpg"
-			}			
-		},
-		{
-			"type":				"cone",
-			"center":			[0, 0, 10],
-			"axi":				[0, -1, 0],
-			"length":				10.0,
-			"tan":				0.25,
-			"material":
-			{
-				"color":				[255, 0, 0],
-				"ambient":				1.0,
-				"diffuse":				0.4,
-				"specular":				50,
-				"reflection":				0.2,
-				"refraction":				0,
-				"texture":				"./texture/hz.jpg"
-			}			
-		},
-		{
-			"type":				"cylinder",
-			"center":			[0, 0, 10],
-			"axi":				[0, -1, 0],
-			"length":				10.0,
-			"radius":				1.25,
-			"material":
-			{
-				"color":				[255, 0, 0],
-				"ambient":				1.0,
-				"diffuse":				0.4,
-				"specular":				50,
-				"reflection":				0.2,
-				"refraction":				0,
-				"texture":				"./texture/hz.jpg"
+				"color":			[255, 0, 0],
+				"ambient":			1.0,
+				"diffuse":			0.4,
+				"specular":			50,
+				"reflection":		0.2,
+				"refraction":		0,
+				"texture":			"./texture/hz.jpg"
 			}			
 		}
 	],
@@ -103,14 +46,10 @@
 	{
 		"songs":
 		[
-			"./music/lord_of_the_rings.mp3",
-			"./music/lord_of_the_rings.mp3"
+									"./music/lord_of_the_rings.mp3",
+									"./music/lord_of_the_rings.mp3"
 		],
-		"icons":
-		[
-			"./textures/icon.jpg",
-			"./textures/icon.jpg"
-		],
+		"icon":						"./textures/icon.jpg",
 		"volume":					"10"
 	}
 }
