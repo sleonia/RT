@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 04:06:50 by thorker           #+#    #+#             */
-/*   Updated: 2020/01/30 17:48:17 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/01/30 20:32:18 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,6 +157,7 @@ typedef struct			s_scene
 	int					texture_length;
 	int					texture_cnt;
 	float				ambient;
+	int					fsaa;
 }						t_scene;
 
 typedef struct			s_cylinder_params

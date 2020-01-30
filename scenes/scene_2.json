@@ -1,10 +1,4 @@
 {
-	"opencl":
-	{
-		"file_0":					"./src_opencl/intersection.cl",
-		"file_1":					"./src_opencl/uv_mapping.cl",
-		"file_2":					"./src_opencl/ray_trace.cl"
-	},
 	"camera":
 	{
 		"postition":				[0.0, 0.0, -10.0],
@@ -46,9 +40,11 @@
 			}
 		},
 		{
-			"type":					"plane",
+			"type":					"cylinder",
+			"center":				[0, 0, 10],
 			"axis":					[0, -1, 0],
-			"dist":					10.0,
+			"length":				10.0,
+			"radius":				1.25,
 			"material":
 			{
 				"color":			[255, 0, 0],
@@ -63,7 +59,7 @@
 		{
 			"type":					"cone",
 			"center":				[0, 0, 10],
-			"axi":					[0, -1, 0],
+			"axis":					[0, -1, 0],
 			"length":				10.0,
 			"tan":					0.25,
 			"material":
@@ -78,11 +74,9 @@
 			}
 		},
 		{
-			"type":					"cylinder",
-			"center":				[0, 0, 10],
-			"axi":					[0, -1, 0],
-			"length":				10.0,
-			"radius":				1.25,
+			"type":					"plane",
+			"axis":					[0, -1, 0],
+			"dist":					10.0,
 			"material":
 			{
 				"color":			[255, 0, 0],

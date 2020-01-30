@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/28 20:46:46 by sleonia           #+#    #+#             */
-/*   Updated: 2020/01/30 16:00:22 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/01/30 20:52:43 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,12 @@ void				parse_cam_json(t_key_value *json, t_scene *scene)
 	double			tetta;
 	t_key_value		*cam_obj;
 	t_array			*array;
-
+	//вместо экзита заполнять дефолтом и показывать оповещение
 	if (get_node(json, "camera", &cam_obj) != 0)
+	{
+		// scene->cam.pos = 
 		ft_error("get_node: camera");
+	}
 	if (get_array(cam_obj, "postition", &array) != 0)
 		ft_error("get_array: postition");
 	if ((get_double(cam_obj, "phi", &phi)) != 0)
