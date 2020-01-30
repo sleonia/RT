@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/28 21:51:06 by sleonia           #+#    #+#             */
-/*   Updated: 2020/01/30 20:29:25 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/01/30 22:07:07 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,8 @@ static void			*parse_material_json(t_key_value *obj_json, int type)
 	return (0);
 }
 
-void				parse_objects_json(t_key_value *json, t_scene *scene)
+void				parse_objects_json(t_key_value *json,
+									t_scene *scene, t_rt *rt)
 {
 	int				i;
 	double			double_value;

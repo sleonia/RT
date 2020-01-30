@@ -95,6 +95,11 @@
 		[
 									"./music/lord_of_the_rings.mp3"
 		],
+		"sounds":
+		[
+									"./music/Boy_next_door.wav",
+									"./music/fisting-is-300.wav"
+		],
 		"icon":						"./textures/icon.jpg",
 		"volume":					"10"
 	}

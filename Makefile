@@ -6,7 +6,7 @@
 #    By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/31 15:32:23 by thorker           #+#    #+#              #
-#    Updated: 2020/01/30 17:19:23 by sleonia          ###   ########.fr        #
+#    Updated: 2020/01/30 21:57:36 by sleonia          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,8 +32,9 @@ OBJ_HOOKS_FILES = $(addprefix $(OBJ_DIR), $(HOOKS_FILES:.c=.o))
 # =========== #
 
 INIT_FILES =							\
-			init_cl.c					\
 			init_cl_arg.c				\
+			init_cl_files.c				\
+			init_cl.c					\
 			init_objects.c				\
 			init_lights.c				\
 			init_rt.c					\
@@ -68,7 +69,6 @@ PARSE_FILES =							\
 			parse_objects.c				\
 			parse_objects_2.c			\
 			parse_lights.c				\
-			parse_opencl_files.c		\
 			parse_skybox.c				\
 
 PARSE_DIR = ./src/parse/
@@ -95,6 +95,7 @@ OBJ_SDL_UTILS_FILES = $(addprefix $(OBJ_DIR), $(SDL_UTILS_FILES:.c=.o))
 
 UTILS_FILES =							\
 			ft_error.c					\
+			ft_len_arr.c				\
 			get_next_name.c				\
 			int_to_rgb.c				\
 			put_pixel.c					\

@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/28 18:49:49 by sleonia           #+#    #+#             */
-/*   Updated: 2020/01/30 16:56:12 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/01/30 21:40:29 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,23 @@ void				parse_songs_json(t_key_value *assets, t_sdl *sdl)
 	}
 }
 
+void				parse_sounds_json(t_key_value *assets, t_sdl *sdl)
+{
+	int				i;
+	char			*arg;
+	char			*sounds_name;
+	t_array			*sounds;
+
+	i = -1;
+	if (get_array(assets, "sounds", &sounds) != 0)
+		ft_error("Error sounds");
+	while (++i < sounds->length)
+	{
+		if (!(sdl->sounds[i] = ((char **)(sounds->value))[i]))
+			ft_error((char *)SDL_GetError());
+	}
+}
+
 int					parse_volume_json(t_key_value *assets)
 {
 	int				volume;
@@ -47,11 +64,6 @@ char				*parse_icon_json(t_key_value *assets, t_sdl *sdl)
 	if (get_str(assets, "icon", &icon_name) != 0)
 		ft_error("Error icon");
 	return (icon_name);
-}
-
-char				*parse_textures_json(t_key_value *assets, t_sdl *sdl)
-{
-	return (NULL);
 }
 
 t_key_value			*parse_assets(t_key_value *json, t_sdl *sdl)

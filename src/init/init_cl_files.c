@@ -1,39 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_opencl_files.c                               :+:      :+:    :+:   */
+/*   init_cl_files.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 16:55:40 by sleonia           #+#    #+#             */
-/*   Updated: 2020/01/30 16:55:47 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/01/30 20:56:07 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-char				**parse_opencl_files_json(t_key_value *json)
+char				**init_cl_files(void)
 {
-	int				i;
 	char			**files;
-	char			*arg;
-	char			*file_name;
-	t_key_value		*opencl;
 
-	i = -1;
-	if (!(files = (char **)ft_memalloc(sizeof(char *) * 4)))
-		ft_error("Malloc");
-	if (get_node(json, "opencl", &opencl) != 0)
-		ft_error("get_node: opencl");
-	file_name = ft_strdup("file_0");
-	while (get_str(opencl, file_name, &arg) == 0)
-	{
-		if (!arg)
-			ft_error("Error arg");
-		files[++i] = arg;
-		if (!(file_name = get_next_name(file_name)))
-			ft_error("Error songs_name");
-	}
-	ft_strdel(&file_name);
+	files = (char **)ft_memalloc(sizeof(char *) * 4);
+	files[0] = "./src_opencl/intersection.cl";
+	files[1] = "./src_opencl/uv_mapping.cl";
+	files[2] = "./src_opencl/ray_trace.cl";
+	files[3] = NULL;
 	return (files);
 }

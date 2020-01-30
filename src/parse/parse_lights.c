@@ -1,18 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_light.c                                      :+:      :+:    :+:   */
+/*   parse_lights.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/28 21:50:31 by sleonia           #+#    #+#             */
-/*   Updated: 2020/01/30 16:55:14 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/01/30 22:07:22 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-void				parse_light_json(t_key_value *json, t_scene *scene)
+void				parse_light_json(t_key_value *json,
+									t_scene *scene, t_rt *rt)
 {
 	int				i;
 	double			value;

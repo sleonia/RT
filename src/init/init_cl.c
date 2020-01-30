@@ -105,7 +105,7 @@ t_cl			*init_cl(t_key_value *json, t_rt *rt)
 	t_cl		*opencl;
 
 	opencl = (t_cl *)ft_memalloc(sizeof(t_cl));
-	opencl->files = parse_opencl_files_json(json);
+	opencl->files = init_cl_files();
 	// for (int i = 0; opencl->files[i]; i++)
 		// printf("%s\n", opencl->files[i]);
 	read_kernel(opencl, opencl->files);

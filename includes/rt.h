@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 04:06:50 by thorker           #+#    #+#             */
-/*   Updated: 2020/01/30 20:32:18 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/01/30 22:06:44 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -243,6 +243,8 @@ typedef struct 			s_sdl
 	SDL_Renderer		*render;
 	SDL_Texture			*texture;
 	Mix_Music			*music[MAX_NBR_OF_SONGS];
+	// char				*sounds;
+	char				*sounds[MAX_NBR_OF_SONGS];
 	SDL_Event			event;
 	int					*pixels;
 	int					volume;
@@ -275,7 +277,7 @@ void					rotation(SDL_Event event, t_sdl *sdl, t_cam *cam);
 /*
 **						init
 */
-char					**init_files_cl(void);
+char					**init_cl_files(void);
 void					init_light(t_light **light, int nbr);
 void					init_objects(t_object **object, int nbr);
 int						set_opencl_arg(t_cl *cl, t_sdl *sdl, t_scene *scene);
@@ -303,17 +305,19 @@ float					cl_length(cl_float3 v);
 /*
 **						parse
 */
+void					parse_sounds_json(t_key_value *assets, t_sdl *sdl);
 void					parse_songs_json(t_key_value *assets, t_sdl *sdl);
 int						parse_volume_json(t_key_value *assets);
-char					*parse_textures_json(t_key_value *assets, t_sdl *sdl);
 char					*parse_icon_json(t_key_value *assets, t_sdl *sdl);
 t_key_value				*parse_assets(t_key_value *json, t_sdl *sdl);
 
-void					parse_cam_json(t_key_value *json, t_scene *scene);
-void					parse_light_json(t_key_value *json, t_scene *scene);
-void					parse_objects_json(t_key_value *json, t_scene *scene);
-char					**parse_opencl_files_json(t_key_value *json);
-void					parse_skybox_json(t_key_value *json, t_scene *scene);
+void					parse_cam_json(t_key_value *json,
+										t_scene *scene, t_rt *rt);
+void					parse_light_json(t_key_value *json, t_scene *scene, t_rt *rt);
+void					parse_objects_json(t_key_value *json,
+										t_scene *scene, t_rt *rt);
+void					parse_skybox_json(t_key_value *json,
+										t_scene *scene, t_rt *rt);
 
 void					parse_sphere_json(t_key_value *obj, t_sphere *sphere);
 void					parse_plane_json(t_key_value *obj, t_plane *plane);
@@ -333,6 +337,7 @@ void 					sdl_update(t_sdl *sdl);
 **						utils
 */
 void					ft_error(char *str);
+int						ft_len_arr(char **arr);
 char					*get_next_name(char *name);
 cl_int3					int_to_rgb(int src_color);
 int 					*put_pixel(double x, double y, int color, t_sdl *sdl);
