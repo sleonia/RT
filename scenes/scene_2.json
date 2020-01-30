@@ -11,45 +11,13 @@
 		"phi":						1.5707963268,
 		"tetta":					1.5707963268
 	},
-	"scene":
-	{
-		"texture":					"./textures/hz.jpg",
-		"ambient":					0.2,
-		"fsaa":						2
-	},
-	"light":
-	[
-		{
-			"intensity":			0.6,
-			"position":				[3, 1, 0]
-		}
-	],
-	"figure":
-	[
-		{
-			"type":					"sphere",
-			"radius":				1.0,
-			"center":				[0, -1, 3],
-			"material":
-			{
-				"color":			[255, 0, 0],
-				"ambient":			1.0,
-				"diffuse":			0.4,
-				"specular":			50,
-				"reflection":		0.2,
-				"refraction":		0,
-				"texture":			"./texture/hz.jpg"
-			}			
-		}
-	],
 	"assets":
 	{
 		"songs":
 		[
-									"./music/lord_of_the_rings.mp3",
-									"./music/lord_of_the_rings.mp3"
+			"./music/lord_of_the_rings.mp3"
 		],
 		"icon":						"./textures/icon.jpg",
 		"volume":					"10"
 	}
-}
+} 

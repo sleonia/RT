@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 04:06:50 by thorker           #+#    #+#             */
-/*   Updated: 2020/01/28 21:42:29 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/01/30 08:24:44 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@
 # include <math.h>
 # include <time.h>
 # include <OpenCL/opencl.h>
-# define WIDTH 1280
-# define HEIGHT 1024
+# define WIDTH 1920
+# define HEIGHT 1080
 # define WHITE 0xFFFFFF
 # define BLACK 0x000000
 # define STEP 0.1
@@ -296,20 +296,6 @@ cl_float3				cl_cross(cl_float3 v1, cl_float3 v2);
 cl_float3				cl_sum(cl_float3 v1, cl_float3 v2);
 cl_float3				cl_minus(cl_float3 v1, cl_float3 v2);
 float					cl_length(cl_float3 v);
-
-/*
-** t_pos					vector_minus(t_pos *o, t_pos *center);
-** t_pos					vector_pus(t_pos *o, t_pos *center);
-** t_pos					*vector_on_vector(t_pos *a, t_pos *b, t_pos *ab);
-** t_pos					*matrix_on_vector(double a, double b, t_pos *vec);
-** double					ft_dot(t_pos *a, t_pos *b);
-** t_pos					v_plus(t_pos v1, t_pos v2);
-** t_pos					v_minus(t_pos v1, t_pos v2);
-** t_pos					*insert(int x, int y, int z, t_pos *pos);
-** t_pos					vector_on_number(t_pos *o, double nbr);
-** t_pos					vector_div(t_pos *o, double nbr);
-** double					vector_len(t_pos *o);
-*/
 
 /*
 **						parse

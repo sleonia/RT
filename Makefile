@@ -6,7 +6,7 @@
 #    By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/31 15:32:23 by thorker           #+#    #+#              #
-#    Updated: 2020/01/28 21:52:33 by sleonia          ###   ########.fr        #
+#    Updated: 2020/01/30 08:24:23 by sleonia          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -118,14 +118,16 @@ OBJ_MAIN_FILES = $(addprefix $(OBJ_DIR), $(MAIN_FILES:.c=.o))
 #	INCLUDES  #
 # =========== #
 
-INCLUDES_FILE = 						\
+INCLUDES_FILES_LIST =					\
 			kernel.h					\
 			rt.h						\
 			rt_error.h					\
 			stb_image.h					\
 			stb_image_write.h			\
 
-INCLUDES = 	./includes/
+INCLUDES_DIR = 	./includes/
+
+INCLUDES_FILES = $(addprefix $(INCLUDES_DIR), $(INCLUDES_FILES_LIST))
 
 # =========== #
 #	BUILD	  #
@@ -161,41 +163,41 @@ FRAME = 	-F framework/ -framework SDL2 -framework SDL2_image 	\
 COMPILE_FLAGS = -g
 # COMPILE_FLAGS = -Wall -Werror -Wextra -Ofast -g
 
-COMPILE = gcc $(COMPILE_FLAGS) -I $(INCLUDES) $(INC_SDL) -I $(LIBFT_INC) -I $(LIBTOJSON_INC) -I $(SDL2_AUDIO_INC) $(INC_SDL)
+COMPILE = gcc $(COMPILE_FLAGS) -I $(INCLUDES_DIR) $(INC_SDL) -I $(LIBFT_INC) -I $(LIBTOJSON_INC) -I $(SDL2_AUDIO_INC) $(INC_SDL)
 
 RT_LIBS = -L $(LIBFT_DIR) -lft -L $(SDL2_AUDIO_DIR) -lsdl_audio -L $(LIBTOJSON_DIR) -ltojson
 
 all: $(NAME)
 
-$(NAME): $(OBJ_DIR) $(OBJ)
+$(NAME): $(OBJ_DIR) $(OBJ) $(INCLUDES_FILES)
 	@make lib_refresh
 	@$(COMPILE) $(RT_LIBS) $(OBJ) -o $(NAME) $(FRAME)
 
 $(OBJ_DIR):
 	@mkdir -p $(OBJ_DIR)
 
-$(OBJ_DIR)%.o: $(HOOKS_DIR)%.c
+$(OBJ_DIR)%.o: $(HOOKS_DIR)%.c $(INCLUDES_FILES)
 	@$(COMPILE) -c $< -o $@
 
-$(OBJ_DIR)%.o: $(INIT_DIR)%.c
+$(OBJ_DIR)%.o: $(INIT_DIR)%.c $(INCLUDES_FILES)
 	@$(COMPILE) -c $< -o $@
 
-$(OBJ_DIR)%.o: $(MATH_UTILS_DIR)%.c
+$(OBJ_DIR)%.o: $(MATH_UTILS_DIR)%.c $(INCLUDES_FILES)
 	@$(COMPILE) -c $< -o $@
 
-$(OBJ_DIR)%.o: $(PARSE_DIR)%.c
+$(OBJ_DIR)%.o: $(PARSE_DIR)%.c $(INCLUDES_FILES)
 	@$(COMPILE) -c $< -o $@
 
-$(OBJ_DIR)%.o: $(SDL_UTILS_DIR)%.c
+$(OBJ_DIR)%.o: $(SDL_UTILS_DIR)%.c $(INCLUDES_FILES)
 	@$(COMPILE) -c $< -o $@
 
-$(OBJ_DIR)%.o: $(PARSE_DIR)%.c
+$(OBJ_DIR)%.o: $(PARSE_DIR)%.c $(INCLUDES_FI)
 	@$(COMPILE) -c $< -o $@
 
-$(OBJ_DIR)%.o: $(UTILS_DIR)%.c
+$(OBJ_DIR)%.o: $(UTILS_DIR)%.c $(INCLUDES_FI)
 	@$(COMPILE) -c $< -o $@
 
-$(OBJ_DIR)%.o: $(MAIN_DIR)%.c
+$(OBJ_DIR)%.o: $(MAIN_DIR)%.c $(INCLUDES_FI)
 	@$(COMPILE) -c $< -o $@
 
 lib_refresh:

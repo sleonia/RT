@@ -9,5 +9,6 @@
 		"complex": "c",
 		"typeinfo": "c",
 		"type_traits": "c"
-	}
+	},
+	"C_Cpp.errorSquiggles": "Disabled"
 }
