@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/28 21:50:31 by sleonia           #+#    #+#             */
-/*   Updated: 2020/01/30 22:51:56 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/01/30 23:48:12 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,14 +38,14 @@ static bool			parse_light_json2(int i, t_key_value *light_obj,
 	if (get_double(light_obj, "intensity", &value))
 	{
 		scene->light[i].intensity = 0;
-		*error = true;
+		error = true;
 	}
 	else
 		scene->light[i].intensity = value;
 	if (get_array(light_obj, "position", &pos))
 	{
 		scene->light[i].pos = (cl_float3){0, 0, 0};
-		*error = true;
+		error = true;
 	}
 	else
 		scene->light[i].pos = **(cl_float3**)(pos->value);
@@ -76,8 +76,8 @@ void				parse_light_json(t_key_value *json,
 			return ;
 		}
 		error = parse_light_json2(i, light_obj, scene);
+		if (error)
+			show_error_in_light(rt);
 	}
-	if (error)
-		show_error_in_light(rt);
 	scene->count_lights = light_array->length;
 }

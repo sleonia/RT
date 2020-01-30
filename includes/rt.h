@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 04:06:50 by thorker           #+#    #+#             */
-/*   Updated: 2020/01/30 22:06:44 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/01/31 00:19:16 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -313,7 +313,10 @@ t_key_value				*parse_assets(t_key_value *json, t_sdl *sdl);
 
 void					parse_cam_json(t_key_value *json,
 										t_scene *scene, t_rt *rt);
-void					parse_light_json(t_key_value *json, t_scene *scene, t_rt *rt);
+void					parse_light_json(t_key_value *json,
+										t_scene *scene, t_rt *rt);
+void					parse_material_json(int i, t_key_value *obj,
+										t_scene *scene, t_rt *rt);
 void					parse_objects_json(t_key_value *json,
 										t_scene *scene, t_rt *rt);
 void					parse_skybox_json(t_key_value *json,

@@ -6,7 +6,7 @@
 #    By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/31 15:32:23 by thorker           #+#    #+#              #
-#    Updated: 2020/01/30 21:57:36 by sleonia          ###   ########.fr        #
+#    Updated: 2020/01/31 00:20:00 by sleonia          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -66,9 +66,10 @@ OBJ_MATH_UTILS_FILES = $(addprefix $(OBJ_DIR), $(MATH_UTILS_FILES:.c=.o))
 PARSE_FILES =							\
 			parse_assets.c				\
 			parse_cam.c					\
-			parse_objects.c				\
-			parse_objects_2.c			\
 			parse_lights.c				\
+			parse_material.c			\
+			parse_objects_2.c			\
+			parse_objects.c				\
 			parse_skybox.c				\
 
 PARSE_DIR = ./src/parse/

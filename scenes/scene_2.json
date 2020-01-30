@@ -48,7 +48,7 @@
 			"material":
 			{
 				"color":			[255, 0, 0],
-				"ambient":			1.0,
+				"ambient":			2.0,
 				"diffuse":			0.4,
 				"specular":			50,
 				"reflection":		0.2,
@@ -65,7 +65,7 @@
 			"material":
 			{
 				"color":			[255, 0, 0],
-				"ambient":			1.0,
+				"ambient":			3.0,
 				"diffuse":			0.4,
 				"specular":			50,
 				"reflection":		0.2,
@@ -80,7 +80,7 @@
 			"material":
 			{
 				"color":			[255, 0, 0],
-				"ambient":			1.0,
+				"ambient":			4.0,
 				"diffuse":			0.4,
 				"specular":			50,
 				"reflection":		0.2,

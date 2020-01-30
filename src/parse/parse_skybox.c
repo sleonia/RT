@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 15:30:28 by sleonia           #+#    #+#             */
-/*   Updated: 2020/01/30 22:47:02 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/01/30 23:48:26 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,6 @@ void				parse_skybox_json(t_key_value *json, t_scene *scene, t_rt *rt)
 	char			*skybox_texture;
 	t_key_value		*skybox;
 
-	error = false;
 	if (get_node(json, "skybox", &skybox) != 0)
 	{
 		set_default_value(scene, rt);
