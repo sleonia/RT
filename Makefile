@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+         #
+#    By: deladia <deladia@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/31 15:32:23 by thorker           #+#    #+#              #
-#    Updated: 2020/01/28 21:52:33 by sleonia          ###   ########.fr        #
+#    Updated: 2020/01/31 07:01:39 by deladia          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,9 +32,11 @@ OBJ_HOOKS_FILES = $(addprefix $(OBJ_DIR), $(HOOKS_FILES:.c=.o))
 # =========== #
 
 INIT_FILES =							\
-			init_light.c				\
-			init_cl.c					\
 			init_cl_arg.c				\
+			init_cl_files.c				\
+			init_cl.c					\
+			init_objects.c				\
+			init_lights.c				\
 			init_rt.c					\
 			init_scene.c				\
 			init_sdl.c					\
@@ -64,9 +66,12 @@ OBJ_MATH_UTILS_FILES = $(addprefix $(OBJ_DIR), $(MATH_UTILS_FILES:.c=.o))
 PARSE_FILES =							\
 			parse_assets.c				\
 			parse_cam.c					\
-			parse_figure.c				\
-			parse_light.c				\
-			parse_opencl_files.c		\
+			parse_lights.c				\
+			parse_material.c			\
+			parse_objects_2.c			\
+			parse_objects.c				\
+			parse_skybox.c				\
+			parse_texture.c				\
 
 PARSE_DIR = ./src/parse/
 
@@ -92,6 +97,7 @@ OBJ_SDL_UTILS_FILES = $(addprefix $(OBJ_DIR), $(SDL_UTILS_FILES:.c=.o))
 
 UTILS_FILES =							\
 			ft_error.c					\
+			ft_len_arr.c				\
 			get_next_name.c				\
 			int_to_rgb.c				\
 			put_pixel.c					\
@@ -118,14 +124,16 @@ OBJ_MAIN_FILES = $(addprefix $(OBJ_DIR), $(MAIN_FILES:.c=.o))
 #	INCLUDES  #
 # =========== #
 
-INCLUDES_FILE = 						\
+INCLUDES_FILES_LIST =					\
 			kernel.h					\
 			rt.h						\
 			rt_error.h					\
 			stb_image.h					\
 			stb_image_write.h			\
 
-INCLUDES = 	./includes/
+INCLUDES_DIR = 	./includes/
+
+INCLUDES_FILES = $(addprefix $(INCLUDES_DIR), $(INCLUDES_FILES_LIST))
 
 # =========== #
 #	BUILD	  #
@@ -161,41 +169,41 @@ FRAME = 	-F framework/ -framework SDL2 -framework SDL2_image 	\
 COMPILE_FLAGS = -g
 # COMPILE_FLAGS = -Wall -Werror -Wextra -Ofast -g
 
-COMPILE = gcc $(COMPILE_FLAGS) -I $(INCLUDES) $(INC_SDL) -I $(LIBFT_INC) -I $(LIBTOJSON_INC) -I $(SDL2_AUDIO_INC) $(INC_SDL)
+COMPILE = gcc $(COMPILE_FLAGS) -I $(INCLUDES_DIR) $(INC_SDL) -I $(LIBFT_INC) -I $(LIBTOJSON_INC) -I $(SDL2_AUDIO_INC) $(INC_SDL)
 
 RT_LIBS = -L $(LIBFT_DIR) -lft -L $(SDL2_AUDIO_DIR) -lsdl_audio -L $(LIBTOJSON_DIR) -ltojson
 
 all: $(NAME)
 
-$(NAME): $(OBJ_DIR) $(OBJ)
+$(NAME): $(OBJ_DIR) $(OBJ) $(INCLUDES_FILES)
 	@make lib_refresh
 	@$(COMPILE) $(RT_LIBS) $(OBJ) -o $(NAME) $(FRAME)
 
 $(OBJ_DIR):
 	@mkdir -p $(OBJ_DIR)
 
-$(OBJ_DIR)%.o: $(HOOKS_DIR)%.c
+$(OBJ_DIR)%.o: $(HOOKS_DIR)%.c $(INCLUDES_FILES)
 	@$(COMPILE) -c $< -o $@
 
-$(OBJ_DIR)%.o: $(INIT_DIR)%.c
+$(OBJ_DIR)%.o: $(INIT_DIR)%.c $(INCLUDES_FILES)
 	@$(COMPILE) -c $< -o $@
 
-$(OBJ_DIR)%.o: $(MATH_UTILS_DIR)%.c
+$(OBJ_DIR)%.o: $(MATH_UTILS_DIR)%.c $(INCLUDES_FILES)
 	@$(COMPILE) -c $< -o $@
 
-$(OBJ_DIR)%.o: $(PARSE_DIR)%.c
+$(OBJ_DIR)%.o: $(PARSE_DIR)%.c $(INCLUDES_FILES)
 	@$(COMPILE) -c $< -o $@
 
-$(OBJ_DIR)%.o: $(SDL_UTILS_DIR)%.c
+$(OBJ_DIR)%.o: $(SDL_UTILS_DIR)%.c $(INCLUDES_FILES)
 	@$(COMPILE) -c $< -o $@
 
-$(OBJ_DIR)%.o: $(PARSE_DIR)%.c
+$(OBJ_DIR)%.o: $(PARSE_DIR)%.c $(INCLUDES_FI)
 	@$(COMPILE) -c $< -o $@
 
-$(OBJ_DIR)%.o: $(UTILS_DIR)%.c
+$(OBJ_DIR)%.o: $(UTILS_DIR)%.c $(INCLUDES_FI)
 	@$(COMPILE) -c $< -o $@
 
-$(OBJ_DIR)%.o: $(MAIN_DIR)%.c
+$(OBJ_DIR)%.o: $(MAIN_DIR)%.c $(INCLUDES_FI)
 	@$(COMPILE) -c $< -o $@
 
 lib_refresh:

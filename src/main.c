@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: deladia <deladia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/24 12:57:07 by deladia           #+#    #+#             */
-/*   Updated: 2020/01/28 20:34:49 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/01/31 05:22:38 by deladia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ int			main(int ac, char **av)
 		ft_error(ERROR_INPUT);
 	rt = init_rt(av);
 	change_music(rt);
-	// calc_screen(&rt->scene->cam);
+	calc_screen(&rt->scene->cam);
+	set_opencl_arg(rt->opencl, rt->sdl, rt->scene);
 	sdl_loop(rt->sdl, rt->scene, rt->opencl);
 	return (0);
 }

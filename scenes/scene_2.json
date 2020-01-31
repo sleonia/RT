@@ -1,53 +1,71 @@
 {
-	"opencl":
-	{
-		"file_0":					"./src_opencl/intersection.cl",
-		"file_1":					"./src_opencl/uv_mapping.cl",
-		"file_2":					"./src_opencl/ray_trace.cl"
-	},
 	"camera":
 	{
-		"postition":				[0.0, 0.0, -10.0],
-		"phi":						1.5707963268,
-		"tetta":					1.5707963268
+		"position":					[1.570796, 0.5, -10.5],
+		"phi":						90.0,
+		"tetta":					90.0
 	},
-	"scene":
+	"textures":
+	[
+		"./textures/sample.jpg",
+		"./textures/larkspur.jpg"
+	],
+	"skybox":
 	{
-		"texture":					"./textures/hz.jpg",
+		"texture_id":				0,
 		"ambient":					0.2,
 		"fsaa":						2
 	},
 	"light":
 	[
 		{
-			"intensity":			0.6,
-			"position":				[3, 1, 0]
+			"intensity":			0.2,
+			"position":				[3.5, 1.6, -10.0]
 		}
 	],
 	"figure":
 	[
 		{
 			"type":					"sphere",
-			"radius":				1.0,
-			"center":				[0, -1, 3],
+			"radius":				3.0,
+			"center":				[4.0, 0.0, 10.0],
 			"material":
 			{
-				"color":			[255, 0, 0],
+				"color":			[255.5, 255.5, 0],
 				"ambient":			1.0,
 				"diffuse":			0.4,
 				"specular":			50,
-				"reflection":		0.2,
-				"refraction":		0,
-				"texture":			"./texture/hz.jpg"
-			}			
+				"reflection":		0.0,
+				"refraction":		0.0,
+				"texture_id":		1
+			}
+		},
+		{
+			"type":					"sphere",
+			"radius":				3.0,
+			"center":				[-4.0, 0.0, 10.0],
+			"material":
+			{
+				"color":			[255.5, 0, 0],
+				"ambient":			1.0,
+				"diffuse":			0.4,
+				"specular":			50,
+				"reflection":		0.0,
+				"refraction":		0.0,
+				"texture_id":		1
+			}
 		}
 	],
 	"assets":
 	{
 		"songs":
 		[
-									"./music/lord_of_the_rings.mp3",
 									"./music/lord_of_the_rings.mp3"
+		],
+		"sounds":
+		[
+									"./music/Boy_next_door.wav",
+									"./music/fisting-is-300.wav"
 		],
 		"icon":						"./textures/icon.jpg",
 		"volume":					"10"

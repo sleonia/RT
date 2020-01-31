@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_assets.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: deladia <deladia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/28 18:49:49 by sleonia           #+#    #+#             */
-/*   Updated: 2020/01/28 20:34:33 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/01/31 06:59:05 by deladia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,23 +17,33 @@ void				parse_songs_json(t_key_value *assets, t_sdl *sdl)
 	int				i;
 	char			*arg;
 	char			*songs_name;
-	t_key_value		*songs;
+	t_array			*songs;
 
 	i = -1;
-	if (get_node(assets, "songs", &songs) != 0)
+	if (get_array(assets, "songs", &songs) != 0)
 		ft_error("Error songs");
-	songs_name = ft_strdup("song_0");
-	while (get_str(songs, songs_name, &arg) == 0)
+	while (++i < songs->length)
 	{
-		if (!arg)
-			ft_error("Error arg");
-		if (!(sdl->music[++i] = Mix_LoadMUS(arg)))
+		if (!(sdl->music[i] = Mix_LoadMUS(((char **)(songs->value))[i])))
 			ft_error((char *)SDL_GetError());
-		if (!(songs_name = get_next_name(songs_name)))
-			ft_error("Error songs_name");
-		ft_strdel(&arg);
 	}
-	ft_strdel(&songs_name);
+}
+
+void				parse_sounds_json(t_key_value *assets, t_sdl *sdl)
+{
+	int				i;
+	// char			*arg;
+	char			*sounds_name;
+	t_array			*sounds;
+
+	i = -1;
+	if (get_array(assets, "sounds", &sounds) != 0)
+		ft_error("Error sounds");
+	while (++i < sounds->length)
+	{
+		if (!(sdl->sounds[i] = ((char **)(sounds->value))[i]))
+			ft_error((char *)SDL_GetError());
+	}
 }
 
 int					parse_volume_json(t_key_value *assets)
@@ -48,20 +58,12 @@ int					parse_volume_json(t_key_value *assets)
 
 char				*parse_icon_json(t_key_value *assets, t_sdl *sdl)
 {
-	char			*texture_name;
+	char			*icon_name;
 	t_key_value		*icons;
 
-	if (get_node(assets, "icons", &icons) != 0)
-		ft_error("Error icons");
-	if (get_str(icons, "icon_0", &texture_name) != 0)
-		ft_error("Error icon_0");
-	return (texture_name);
-}
-
-char				*parse_textures_json(t_key_value *assets, t_sdl *sdl)
-{
-	//что-то придумать
-	return (NULL);
+	if (get_str(assets, "icon", &icon_name) != 0)
+		ft_error("Error icon");
+	return (icon_name);
 }
 
 t_key_value			*parse_assets(t_key_value *json, t_sdl *sdl)

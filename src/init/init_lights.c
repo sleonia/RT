@@ -1,25 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   events_processing.c                                :+:      :+:    :+:   */
+/*   init_lights.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: deladia <deladia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/28 11:38:10 by sleonia           #+#    #+#             */
-/*   Updated: 2020/01/31 01:36:35 by sleonia          ###   ########.fr       */
+/*   Created: 2019/10/24 13:05:14 by deladia           #+#    #+#             */
+/*   Updated: 2020/01/31 08:19:42 by deladia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-void			events_processing(char *quit, t_sdl *sdl,
-								t_scene *scene, t_cl *cl)
+void		init_light(t_light **light, int nbr)
 {
-	while (SDL_PollEvent(&sdl->event))
-	{
-		if (sdl->event.type == SDL_QUIT)
-			*quit = 1;
-		key_events(quit, sdl, scene, cl);
-		// mouse_events(quit, sdl, scene, cl);
-	}
+	if (!(*light = (t_light *)ft_memalloc(sizeof(t_light) * (nbr))))
+		ft_error("MALLOC_ERROR");
 }

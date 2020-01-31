@@ -1,26 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_light.c                                       :+:      :+:    :+:   */
+/*   init_cl_files.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/24 13:05:14 by deladia           #+#    #+#             */
-/*   Updated: 2020/01/28 12:18:36 by sleonia          ###   ########.fr       */
+/*   Created: 2020/01/30 16:55:40 by sleonia           #+#    #+#             */
+/*   Updated: 2020/01/30 20:56:07 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-void		init_light(t_light **light)
+char				**init_cl_files(void)
 {
-	*light = (t_light *)ft_memalloc(sizeof(t_light) * 3);
-	// (*light)[0].type = 'A';
-	// (*light)[0].intensity = 0.2;
-	(*light)[0].pos = (cl_float3){3, 1, -10};
-	// (*light)[0].type = 'P';
-	(*light)[0].intensity = 1.0;
-// 	(*light)[2].type = 'D';
-// 	(*light)[2].intensity = 0.2;
-// 	(*light)[2].pos = (cl_float3){1, 4, 4};
+	char			**files;
+
+	files = (char **)ft_memalloc(sizeof(char *) * 4);
+	files[0] = "./src_opencl/intersection.cl";
+	files[1] = "./src_opencl/uv_mapping.cl";
+	files[2] = "./src_opencl/ray_trace.cl";
+	files[3] = NULL;
+	return (files);
 }
