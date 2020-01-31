@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_objects.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: deladia <deladia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/28 21:51:06 by sleonia           #+#    #+#             */
-/*   Updated: 2020/01/31 01:36:16 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/01/31 04:07:47 by deladia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ void				parse_objects_json(t_key_value *json,
 	{
 		if (getf_object_array(obj_array, i, &obj) != 0)
 			ft_error("Error getf_object_array: obj");
+		//ЧТО? str_value = "sphere";
 		if (get_str(obj, "type", &str_value) != 0)
 			str_value = "sphere";
 		if (!check_type(i, str_value, scene, obj))

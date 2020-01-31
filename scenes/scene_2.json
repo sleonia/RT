@@ -1,9 +1,9 @@
 {
 	"camera":
 	{
-		"postition":				[0.0, 0.0, -10.0],
-		"phi":						1.5707963268,
-		"tetta":					1.5707963268
+		"position":				[0.5, 0.5, -10.5],
+		"phi":						1.570796,
+		"tetta":					1.570796
 	},
 	"skybox":
 	{
@@ -14,7 +14,7 @@
 	"light":
 	[
 		{
-			"intensity":			1,
+			"intensity":			0.2,
 			"position":				[3, 1, -10]
 		}
 	],
@@ -23,15 +23,15 @@
 		{
 			"type":					"sphere",
 			"radius":				3.0,
-			"center":				[0.0, -2.0, 3],
+			"center":				[0.0, 0.0, 20.555],
 			"material":
 			{
 				"color":			[1, 0, 0],
 				"ambient":			0.4,
 				"diffuse":			0.4,
 				"specular":			50,
-				"reflection":		0.2,
-				"refraction":		0
+				"reflection":		0.0,
+				"refraction":		0.0
 			}
 		}
 	],

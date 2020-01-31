@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_objects.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: deladia <deladia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 16:59:09 by sleonia           #+#    #+#             */
-/*   Updated: 2020/01/30 17:03:04 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/01/31 04:05:40 by deladia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,6 @@
 
 void	init_objects(t_object **object, int nbr)
 {
-	if (!(*object = (t_object *)ft_memalloc(sizeof(t_object) * (nbr + 1))))
+	if (!(*object = (t_object *)ft_memalloc(sizeof(t_object) * nbr)))
 		ft_error("MALLOC_ERROR");
 }
