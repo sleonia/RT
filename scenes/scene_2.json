@@ -1,9 +1,9 @@
 {
 	"camera":
 	{
-		"position":				[0.5, 0.5, -10.5],
-		"phi":						1.570796,
-		"tetta":					1.570796
+		"position":				[1.570796, 0.5, -10.5],
+		"phi":						90.0,
+		"tetta":					90.0
 	},
 	"skybox":
 	{
@@ -15,7 +15,7 @@
 	[
 		{
 			"intensity":			0.2,
-			"position":				[3, 1, -10]
+			"position":				[3.5, 1.6, -10.0]
 		}
 	],
 	"figure":
@@ -23,10 +23,24 @@
 		{
 			"type":					"sphere",
 			"radius":				3.0,
-			"center":				[0.0, 0.0, 20.555],
+			"center":				[4.0, 0.0, 10.0],
 			"material":
 			{
-				"color":			[1, 0, 0],
+				"color":			[255.5, 255.5, 0],
+				"ambient":			0.4,
+				"diffuse":			0.4,
+				"specular":			50,
+				"reflection":		0.0,
+				"refraction":		0.0
+			}
+		},
+		{
+			"type":					"sphere",
+			"radius":				3.0,
+			"center":				[-4.0, 0.0, 10.0],
+			"material":
+			{
+				"color":			[255.5, 0, 0],
 				"ambient":			0.4,
 				"diffuse":			0.4,
 				"specular":			50,

@@ -6,7 +6,7 @@
 /*   By: deladia <deladia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/28 20:46:46 by sleonia           #+#    #+#             */
-/*   Updated: 2020/01/31 04:25:17 by deladia          ###   ########.fr       */
+/*   Updated: 2020/01/31 06:25:33 by deladia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,14 +43,29 @@ void				parse_cam_json2(t_key_value *cam_obj, t_scene *scene,
 		scene->cam.phi = 1.570796;
 	}
 	else
-		scene->cam.phi = (float)phi;
+		scene->cam.phi = (float)phi * M_PI / 180;
 	if ((get_double(cam_obj, "tetta", &tetta)) != 0)
 	{
 		*error = true;
 		scene->cam.tetta = 1.570796;
 	}
 	else
-		scene->cam.tetta = (float)tetta;
+		scene->cam.tetta = (float)tetta * M_PI / 180;
+}
+
+void				parse_array_of_float(t_array *array, cl_float3 *pos)
+{
+	size_t			i;
+	double			container;
+
+	i = -1;
+	while (++i < array->length)
+	{
+		if (getf_double_array(array, i, &container) != 0)
+			pos->s[i] = 0.f;
+		else
+			pos->s[i] = (cl_float)container;
+	}
 }
 
 void				parse_cam_json(t_key_value *json, t_scene *scene, t_rt *rt)
@@ -58,7 +73,6 @@ void				parse_cam_json(t_key_value *json, t_scene *scene, t_rt *rt)
 	bool			error;
 	t_key_value		*cam_obj;
 	t_array			*array;
-	int				i;
 
 	error = false;
 	if (get_node(json, "camera", &cam_obj) != 0)
@@ -72,12 +86,7 @@ void				parse_cam_json(t_key_value *json, t_scene *scene, t_rt *rt)
 		error = true;
 	}
 	else
-	{
-		i = -1;
-		while (i < array->length)
-			getf_double_array(array, i, &scene->cam.pos.s[i]);
-	}
-	printf("%f %f %f\n", scene->cam.pos.x, scene->cam.pos.y, scene->cam.pos.z);
+		parse_array_of_float(array, &scene->cam.pos);
 	parse_cam_json2(cam_obj, scene, &error, rt);
 	if (error)
 		show_error_in_cam(rt);

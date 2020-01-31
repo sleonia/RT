@@ -10,7 +10,8 @@
 		"typeinfo": "c",
 		"type_traits": "c",
 		"to_json.h": "c",
-		"__tuple": "c"
+		"__tuple": "c",
+		"array": "c"
 	},
 	"C_Cpp.errorSquiggles": "Disabled"
 }

@@ -6,7 +6,7 @@
 /*   By: deladia <deladia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 04:06:50 by thorker           #+#    #+#             */
-/*   Updated: 2020/01/31 03:41:56 by deladia          ###   ########.fr       */
+/*   Updated: 2020/01/31 05:56:53 by deladia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -256,6 +256,7 @@ typedef struct 			s_rt
 	t_sdl				*sdl;
 	t_cl				*opencl;
 	t_scene				*scene;
+	//Нахуя?
 	t_key_value			*json;
 }						t_rt;
 # endif
@@ -307,6 +308,7 @@ float					cl_length(cl_float3 v);
 */
 void					parse_sounds_json(t_key_value *assets, t_sdl *sdl);
 void					parse_songs_json(t_key_value *assets, t_sdl *sdl);
+void					parse_array_of_float(t_array *array, cl_float3 *pos);
 int						parse_volume_json(t_key_value *assets);
 char					*parse_icon_json(t_key_value *assets, t_sdl *sdl);
 t_key_value				*parse_assets(t_key_value *json, t_sdl *sdl);

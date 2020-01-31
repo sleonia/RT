@@ -6,7 +6,7 @@
 /*   By: deladia <deladia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 17:19:10 by sleonia           #+#    #+#             */
-/*   Updated: 2020/01/31 04:10:20 by deladia          ###   ########.fr       */
+/*   Updated: 2020/01/31 06:26:56 by deladia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,10 @@ void			parse_sphere_json(t_key_value *obj, t_sphere *sphere)
 
 	if (get_double(obj, "radius", &value))
 		ft_error("Error get_double: radius");
-	sphere->radius = value;
+	sphere->radius = (float)value;
 	if (get_array(obj, "center", &pos))
 		ft_error("Error get_array: center");
-	sphere->center = **(cl_float3 **)(pos->value);
+	parse_array_of_float(pos, &sphere->center);
 }
 
 void			parse_plane_json(t_key_value *obj, t_plane *plane)
@@ -32,7 +32,8 @@ void			parse_plane_json(t_key_value *obj, t_plane *plane)
 
 	if (get_array(obj, "axis", &pos))
 		ft_error("Error get_array: axis");
-	plane->axis = **(cl_float3 **)(pos->value);
+	parse_array_of_float(pos, &plane->axis);
+	cl_to_norm(&plane->axis);
 	if (get_double(obj, "dist", &value))
 		ft_error("Error get_double: dist");
 	plane->dist = value;
@@ -45,10 +46,11 @@ void			parse_cone_json(t_key_value *obj, t_cone *cone)
 
 	if (get_array(obj, "center", &pos))
 		ft_error("Error get_array: center");
-	cone->center = **(cl_float3 **)(pos->value);
+	parse_array_of_float(pos, &cone->center);
 	if (get_array(obj, "axis", &pos))
 		ft_error("Error get_array: axis");
-	cone->axis = **(cl_float3 **)(pos->value);
+	parse_array_of_float(pos, &cone->axis);
+	cl_to_norm(&cone->axis);
 	if (get_double(obj, "length", &value))
 		ft_error("Error get_double: length");
 	cone->length = value;
@@ -64,10 +66,11 @@ void			parse_cylinder_json(t_key_value *obj, t_cylinder *cylinder)
 
 	if (get_array(obj, "center", &pos))
 		ft_error("Error get_array: center");
-	cylinder->center = **(cl_float3 **)(pos->value);
+	parse_array_of_float(pos, &cylinder->center);
 	if (get_array(obj, "axis", &pos))
 		ft_error("Error get_array: axis");
-	cylinder->axis = **(cl_float3 **)(pos->value);
+	parse_array_of_float(pos, &cylinder->axis);
+	cl_to_norm(&cylinder->axis);
 	if (get_double(obj, "length", &value))
 		ft_error("Error get_double: length");
 	cylinder->length = value;

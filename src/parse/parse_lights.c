@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_lights.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: deladia <deladia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/28 21:50:31 by sleonia           #+#    #+#             */
-/*   Updated: 2020/01/31 01:43:28 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/01/31 05:53:04 by deladia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static bool			parse_light_json2(int i, t_key_value *light_obj,
 		error = true;
 	}
 	else
-		scene->light[i].pos = **(cl_float3**)(pos->value);
+		parse_array_of_float(pos, &scene->light[i].pos);
 	return (error);
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_material.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: deladia <deladia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 20:25:59 by sleonia           #+#    #+#             */
-/*   Updated: 2020/01/31 00:31:12 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/01/31 06:26:52 by deladia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static void			parse_material_json1(int i, t_key_value *material,
 										t_scene *scene)
 {
 	double			d_value;
-	
+
 	if (get_double(material, "ambient", &d_value) != 0)
 		scene->object[i].material.ambient = 0;
 	else
@@ -62,12 +62,12 @@ static void			parse_material_json1(int i, t_key_value *material,
 		scene->object[i].material.refraction = (float)d_value;
 }
 
-void					parse_material_json(int i, t_key_value *obj,
+void				parse_material_json(int i, t_key_value *obj,
 											t_scene *scene, t_rt *rt)
 {
-	t_array				*array;
-	t_key_value			*material;
-	char				*s_value;
+	t_array			*array;
+	t_key_value		*material;
+	char			*s_value;
 
 	if (get_node(obj, "material", &material) != 0)
 	{
@@ -75,12 +75,16 @@ void					parse_material_json(int i, t_key_value *obj,
 		return ;
 	}
 	if (get_array(material, "color", &array) != 0)
-		scene->object[i].material.color = (cl_float3){255, 0, 0};
+		scene->object[i].material.color = (cl_float3){1.f, 1.f, 1.f};
 	else
-		scene->object[i].material.color = **(cl_float3 **)(array->value);
+	{
+		parse_array_of_float(array, &scene->object[i].material.color);
+		// scene->object[i].material.color = cl_mult_n(scene->object[i].material.color, 1.f / 255.f);
+	}
 	parse_material_json1(i, material, scene);
 	if (get_str(material, "texture", &s_value))
 		scene->object[i].material.texture_id = -1;
 	else
 		realloc_img(scene, s_value);
+		//scene->object[i].material.texture_id = ???
 }
