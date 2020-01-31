@@ -6,7 +6,7 @@
 /*   By: deladia <deladia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 04:06:50 by thorker           #+#    #+#             */
-/*   Updated: 2020/01/31 06:56:26 by deladia          ###   ########.fr       */
+/*   Updated: 2020/01/31 10:22:44 by deladia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -256,8 +256,6 @@ typedef struct 			s_rt
 	t_sdl				*sdl;
 	t_cl				*opencl;
 	t_scene				*scene;
-	//Нахуя?
-	t_key_value			*json;
 }						t_rt;
 # endif
 

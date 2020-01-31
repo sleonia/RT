@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_sdl.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: deladia <deladia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/28 10:20:37 by sleonia           #+#    #+#             */
-/*   Updated: 2020/01/30 21:22:50 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/01/31 10:25:05 by deladia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,8 @@ t_sdl				*init_sdl(t_key_value *json)
 {
 	t_sdl			*sdl;
 
-	sdl = (t_sdl *)ft_memalloc((sizeof(t_sdl)));
+	if ((sdl = (t_sdl *)ft_memalloc((sizeof(t_sdl)))) == NULL)
+		ft_error(ERROR_INPUT);
 	if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_EVENTS) != 0)
 		ft_error((char *)SDL_GetError());
 	if (!(sdl->window = SDL_CreateWindow("Hello World!", SDL_WINDOWPOS_CENTERED,
