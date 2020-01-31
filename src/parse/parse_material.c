@@ -6,7 +6,7 @@
 /*   By: deladia <deladia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 20:25:59 by sleonia           #+#    #+#             */
-/*   Updated: 2020/01/31 06:55:55 by deladia          ###   ########.fr       */
+/*   Updated: 2020/01/31 07:52:39 by deladia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static void			show_error_in_material(t_rt *rt)
 
 static void			set_default_value(int i, t_scene *scene, t_rt *rt)
 {
-	scene->object[i].material.color = (cl_float3){255, 0, 0};
+	scene->object[i].material.color = (cl_float3){1.f, 1.f, 1.f};
 	scene->object[i].material.ambient = 0;
 	scene->object[i].material.diffuse = 0;
 	scene->object[i].material.specular = 0;
@@ -82,7 +82,7 @@ void				parse_material_json(int i, t_key_value *obj,
 		// scene->object[i].material.color = cl_mult_n(scene->object[i].material.color, 1.f / 255.f);
 	}
 	parse_material_json1(i, material, scene);
-	if (get_int(material, "texture_id", &value))
+	if (get_int(material, "texture_id", &value) || (value >= scene->texture_cnt))
 		scene->object[i].material.texture_id = -1;
 	else
 		scene->object[i].material.texture_id = value;

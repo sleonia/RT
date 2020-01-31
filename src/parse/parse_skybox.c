@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_skybox.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: deladia <deladia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 15:30:28 by sleonia           #+#    #+#             */
-/*   Updated: 2020/01/30 23:48:26 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/01/31 07:52:03 by deladia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ static void			parse_skybox_json2(t_key_value *skybox,
 {
 	double			ambient;
 
-	scene->skybox_id = scene->texture_cnt - 1;
 	if (get_double(skybox, "ambient", &ambient) != 0)
 	{
 		scene->ambient = 0;
@@ -50,7 +49,7 @@ static void			parse_skybox_json2(t_key_value *skybox,
 
 void				parse_skybox_json(t_key_value *json, t_scene *scene, t_rt *rt)
 {
-	char			*skybox_texture;
+	int				texture_id;
 	t_key_value		*skybox;
 
 	if (get_node(json, "skybox", &skybox) != 0)
@@ -58,12 +57,9 @@ void				parse_skybox_json(t_key_value *json, t_scene *scene, t_rt *rt)
 		set_default_value(scene, rt);
 		return ;
 	}
-	if (get_str(skybox, "texture", &skybox_texture) != 0)
-	{
+	if (get_int(skybox, "texture_id", &texture_id) || (texture_id >= scene->texture_cnt))
 		scene->skybox_id = -1;
-	}
 	else
-		if (realloc_img(scene, skybox_texture) != 0)
-			ft_error("Error realloc_img");
+		scene->skybox_id = texture_id;
 	parse_skybox_json2(skybox, scene, rt);
 }
