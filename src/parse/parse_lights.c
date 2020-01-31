@@ -6,7 +6,7 @@
 /*   By: deladia <deladia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/28 21:50:31 by sleonia           #+#    #+#             */
-/*   Updated: 2020/01/31 05:53:04 by deladia          ###   ########.fr       */
+/*   Updated: 2020/01/31 08:22:19 by deladia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static bool			parse_light_json2(int i, t_key_value *light_obj,
 		error = true;
 	}
 	else
-		scene->light[i].intensity = value;
+		scene->light[i].intensity = (float)value;
 	if (get_array(light_obj, "position", &pos) != 0)
 	{
 		scene->light[i].pos = (cl_float3){0, 0, 0};

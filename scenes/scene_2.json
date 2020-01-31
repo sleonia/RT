@@ -1,7 +1,7 @@
 {
 	"camera":
 	{
-		"position":				[1.570796, 0.5, -10.5],
+		"position":					[1.570796, 0.5, -10.5],
 		"phi":						90.0,
 		"tetta":					90.0
 	},
@@ -32,7 +32,7 @@
 			"material":
 			{
 				"color":			[255.5, 255.5, 0],
-				"ambient":			0.4,
+				"ambient":			1.0,
 				"diffuse":			0.4,
 				"specular":			50,
 				"reflection":		0.0,
@@ -47,7 +47,7 @@
 			"material":
 			{
 				"color":			[255.5, 0, 0],
-				"ambient":			0.4,
+				"ambient":			1.0,
 				"diffuse":			0.4,
 				"specular":			50,
 				"reflection":		0.0,

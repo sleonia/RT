@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_light.c                                       :+:      :+:    :+:   */
+/*   init_lights.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: deladia <deladia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/24 13:05:14 by deladia           #+#    #+#             */
-/*   Updated: 2020/01/30 16:51:35 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/01/31 08:19:42 by deladia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,6 @@
 
 void		init_light(t_light **light, int nbr)
 {
-	if (!(*light = (t_light *)ft_memalloc(sizeof(t_light) * (nbr + 1))))
+	if (!(*light = (t_light *)ft_memalloc(sizeof(t_light) * (nbr))))
 		ft_error("MALLOC_ERROR");
 }
