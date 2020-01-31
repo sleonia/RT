@@ -6,7 +6,7 @@
 /*   By: deladia <deladia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 20:25:59 by sleonia           #+#    #+#             */
-/*   Updated: 2020/01/31 07:52:39 by deladia          ###   ########.fr       */
+/*   Updated: 2020/01/31 08:56:19 by deladia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ void				parse_material_json(int i, t_key_value *obj,
 	else
 	{
 		parse_array_of_float(array, &scene->object[i].material.color);
-		// scene->object[i].material.color = cl_mult_n(scene->object[i].material.color, 1.f / 255.f);
+		scene->object[i].material.color = cl_mult_n(scene->object[i].material.color, 1.f / 255.f);
 	}
 	parse_material_json1(i, material, scene);
 	if (get_int(material, "texture_id", &value) || (value >= scene->texture_cnt))

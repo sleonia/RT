@@ -19,7 +19,7 @@
 	"light":
 	[
 		{
-			"intensity":			0.2,
+			"intensity":			0.8,
 			"position":				[3.5, 1.6, -10.0]
 		}
 	],
@@ -31,10 +31,10 @@
 			"center":				[4.0, 0.0, 10.0],
 			"material":
 			{
-				"color":			[255.5, 255.5, 0],
+				"color":			[255.0, 255.0, 0.0],
 				"ambient":			1.0,
 				"diffuse":			0.4,
-				"specular":			50,
+				"specular":			100.0,
 				"reflection":		0.0,
 				"refraction":		0.0,
 				"texture_id":		1
@@ -46,10 +46,10 @@
 			"center":				[-4.0, 0.0, 10.0],
 			"material":
 			{
-				"color":			[255.5, 0, 0],
+				"color":			[255.0, 0.0, 0.0],
 				"ambient":			1.0,
 				"diffuse":			0.4,
-				"specular":			50,
+				"specular":			50.0,
 				"reflection":		0.0,
 				"refraction":		0.0,
 				"texture_id":		1
