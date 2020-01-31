@@ -2,7 +2,7 @@
 #include "./includes/kernel.h"
 #include "./includes/rt.h"
 
-static float3			vec_change(t_hitting *lighting, float3 n, float3 vec)
+static float3			vec_change(float3 n, float3 vec)
 {
     float	cos_x,		cos_z;
     float3	new_vec,	new_n;
@@ -125,7 +125,7 @@ float2 			uv_mapping_for_cone(t_hitting *light_hit, __global t_cone *cone)
 	float p;
 
 	vec = light_hit->hit;
-	// vec = vec_change(light_hit, cone->axis, cone->center);
+	// vec = vec_change(cone->axis, cone->center);
 	p = (vec.x / vec.y) / tan(cone->tan);
 	if (vec.z > 0.f)
 		u = acos(p);
@@ -144,7 +144,7 @@ float2			uv_mapping_for_cylinder(t_hitting *light_hit, __global t_cylinder *cyli
 	float 	u;
 
 	vec = light_hit->hit;
-	// vec = vec_change(light_hit, cylinder->axis, cylinder->center);
+	// vec = vec_change(cylinder->axis, cylinder->center);
 	u = 0.5f + (atan2(vec.x, vec.z) / (2.f * M_PI_F));
     v = 0.5f - (modf(vec.y / cylinder->radius * 250.f / 1024.f, &v) / 2.f);
 	return ((float2){u, v});
