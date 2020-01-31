@@ -6,7 +6,7 @@
 /*   By: deladia <deladia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 20:25:59 by sleonia           #+#    #+#             */
-/*   Updated: 2020/01/31 06:26:52 by deladia          ###   ########.fr       */
+/*   Updated: 2020/01/31 06:55:55 by deladia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void				parse_material_json(int i, t_key_value *obj,
 {
 	t_array			*array;
 	t_key_value		*material;
-	char			*s_value;
+	int				value;
 
 	if (get_node(obj, "material", &material) != 0)
 	{
@@ -82,9 +82,8 @@ void				parse_material_json(int i, t_key_value *obj,
 		// scene->object[i].material.color = cl_mult_n(scene->object[i].material.color, 1.f / 255.f);
 	}
 	parse_material_json1(i, material, scene);
-	if (get_str(material, "texture", &s_value))
+	if (get_int(material, "texture_id", &value))
 		scene->object[i].material.texture_id = -1;
 	else
-		realloc_img(scene, s_value);
-		//scene->object[i].material.texture_id = ???
+		scene->object[i].material.texture_id = value;
 }

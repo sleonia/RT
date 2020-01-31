@@ -6,7 +6,7 @@
 /*   By: deladia <deladia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 04:06:50 by thorker           #+#    #+#             */
-/*   Updated: 2020/01/31 05:56:53 by deladia          ###   ########.fr       */
+/*   Updated: 2020/01/31 06:56:26 by deladia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -297,7 +297,7 @@ cl_float3				spherical_coor(float phi, float tetta);
 cl_float3				spher_norm(cl_float3 vec);
 void					calc_screen(t_cam *cam);
 cl_float3				cl_mult_n(cl_float3 v1, float n);
-void					cl_to_norm(cl_float3 *v);
+void					cl_normlize(cl_float3 *v);
 cl_float3				cl_cross(cl_float3 v1, cl_float3 v2);
 cl_float3				cl_sum(cl_float3 v1, cl_float3 v2);
 cl_float3				cl_minus(cl_float3 v1, cl_float3 v2);
@@ -310,6 +310,7 @@ void					parse_sounds_json(t_key_value *assets, t_sdl *sdl);
 void					parse_songs_json(t_key_value *assets, t_sdl *sdl);
 void					parse_array_of_float(t_array *array, cl_float3 *pos);
 int						parse_volume_json(t_key_value *assets);
+void					parse_texture(t_key_value *json, t_scene *scene, t_rt *rt);
 char					*parse_icon_json(t_key_value *assets, t_sdl *sdl);
 t_key_value				*parse_assets(t_key_value *json, t_sdl *sdl);
 

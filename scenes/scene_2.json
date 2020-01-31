@@ -5,9 +5,14 @@
 		"phi":						90.0,
 		"tetta":					90.0
 	},
+	"textures":
+	[
+		"./textures/sample.jpg",
+		"./textures/larkspur.jpg"
+	],
 	"skybox":
 	{
-		"texture":					"./textures/sample.jpg",
+		"texture_id":				0,
 		"ambient":					0.2,
 		"fsaa":						2
 	},
@@ -31,7 +36,8 @@
 				"diffuse":			0.4,
 				"specular":			50,
 				"reflection":		0.0,
-				"refraction":		0.0
+				"refraction":		0.0,
+				"texture_id":		1
 			}
 		},
 		{
@@ -45,7 +51,8 @@
 				"diffuse":			0.4,
 				"specular":			50,
 				"reflection":		0.0,
-				"refraction":		0.0
+				"refraction":		0.0,
+				"texture_id":		1
 			}
 		}
 	],

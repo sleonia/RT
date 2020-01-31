@@ -6,7 +6,7 @@
 /*   By: deladia <deladia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 04:07:05 by thorker           #+#    #+#             */
-/*   Updated: 2020/01/31 03:43:05 by deladia          ###   ########.fr       */
+/*   Updated: 2020/01/31 06:42:11 by deladia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,8 @@ void			calc_screen(t_cam *cam)
 	if ((*cam).tetta > (float)M_PI_2 - 0.00001f)
 		oy = cl_mult_n(oy, (-1));
 	ox = cl_cross(oz, oy);
-	cl_to_norm(&ox);
-	cl_to_norm(&oy);
+	cl_normlize(&ox);
+	cl_normlize(&oy);
 	(*cam).ox = ox;
 	(*cam).oy = oy;
 	(*cam).oz = oz;

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+         #
+#    By: deladia <deladia@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/31 15:32:23 by thorker           #+#    #+#              #
-#    Updated: 2020/01/31 00:32:31 by sleonia          ###   ########.fr        #
+#    Updated: 2020/01/31 07:01:39 by deladia          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -71,6 +71,7 @@ PARSE_FILES =							\
 			parse_objects_2.c			\
 			parse_objects.c				\
 			parse_skybox.c				\
+			parse_texture.c				\
 
 PARSE_DIR = ./src/parse/
 
