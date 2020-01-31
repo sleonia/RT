@@ -135,8 +135,7 @@ int	closest_intersection(float3 o, float3 d, int count_obj, __global t_object *o
 				{
 					uv = uv_mapping_for_sphere(light_hit);
 					normalize_coord_for_texture(uv, &light_hit->mat.color, texture,  texture_param, obj[i].material.texture_id);
-				}
-				
+				}				
 			}
 		}
 		else if (obj[i].type == o_plane)
