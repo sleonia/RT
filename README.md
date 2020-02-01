@@ -1,3 +1,3 @@
-# RTv1
+# RT
 
-### RTv1 in progress!
+### RT in progress!
