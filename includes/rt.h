@@ -3,23 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   rt.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: deladia <deladia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 04:06:50 by thorker           #+#    #+#             */
-/*   Updated: 2020/02/01 07:58:00 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/01 10:01:09 by deladia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef RT_RT_H
 # define RT_RT_H
 
-# ifdef __APPLE__
-#  include <OpenCL/opencl.h>
-# else
-#  include <CL/cl.h>
-# endif
 
 #ifndef OPENCL___
+#include <OpenCL/opencl.h>
 #include "libft.h"
 #include "rt_error.h"
 #include <SDL.h>
