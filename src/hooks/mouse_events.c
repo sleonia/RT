@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/28 11:50:12 by sleonia           #+#    #+#             */
-/*   Updated: 2020/01/28 11:50:45 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/01 07:45:47 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,5 +15,4 @@
 void			mouse_events(char *quit, t_sdl *sdl,
 								t_scene *scene, t_cl *cl)
 {
-
 }

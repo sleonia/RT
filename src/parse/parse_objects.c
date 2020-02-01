@@ -6,14 +6,13 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/28 21:51:06 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/01 05:52:25 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/01 07:40:15 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-
-static void			check_type1(char *type, t_object *scene_obj, 
+static void			check_type1(char *type, t_object *scene_obj,
 							t_key_value *obj)
 {
 	union u_objects	object;

@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/01 05:01:29 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/01 07:31:47 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/01 07:39:35 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ static char		*get_data(void)
 	time_t		current_time;
 
 	current_time = time(NULL);
-
 	if (current_time == ((time_t)-1))
 		exit(EXIT_FAILURE);
 	str_time = ctime(&current_time);
@@ -47,7 +46,7 @@ static char		*make_screen_name(void)
 {
 	char		*old_str_time;
 	char		*new_str_time;
-	
+
 	if (!(old_str_time = get_data()))
 		return (0);
 	replace_symbs(&old_str_time, ':', '_');
@@ -61,7 +60,6 @@ static char		*make_screen_name(void)
 	}
 	ft_strdel(&old_str_time);
 	return (new_str_time);
-	return (old_str_time);
 }
 
 void			save_image(t_sdl *sdl)
@@ -73,10 +71,9 @@ void			save_image(t_sdl *sdl)
 	uint8_t		*rgb_image;
 
 	i = -1;
-	if (!(screen_name = make_screen_name()))
+	if (!(screen_name = make_screen_name())
+		|| !(rgb_image = ft_memalloc(WIDTH * HEIGHT * 3)))
 		return ;
-	if (!(rgb_image = ft_memalloc(WIDTH * HEIGHT * 3)))
-		ft_error("MALLOC_ERROR");
 	while (++i < HEIGHT)
 	{
 		k = -1;
@@ -90,7 +87,6 @@ void			save_image(t_sdl *sdl)
 	}
 	stbi_write_png(screen_name, WIDTH, HEIGHT, 3, rgb_image, WIDTH * 3);
 	system("afplay /System/Library/Sounds/Pop.aiff");
-	free(rgb_image);
-	rgb_image = NULL;
+	ft_memdel((void **)&rgb_image);
 	ft_strdel(&screen_name);
 }

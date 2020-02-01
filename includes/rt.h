@@ -6,25 +6,31 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 04:06:50 by thorker           #+#    #+#             */
-/*   Updated: 2020/02/01 06:40:11 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/01 07:58:00 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef RT_RT_H
 # define RT_RT_H
 
-# ifndef OPENCL___
-# include "libft.h"
-# include "rt_error.h"
-# include <SDL.h>
-# include "audio.h"
-# include "to_json.h"
-# include <SDL_image.h>
-# include <SDL_mixer.h>
-# include <stdbool.h>
-# include <math.h>
-# include <time.h>
-# include <OpenCL/opencl.h>
+# ifdef __APPLE__
+#  include <OpenCL/opencl.h>
+# else
+#  include <CL/cl.h>
+# endif
+
+#ifndef OPENCL___
+#include "libft.h"
+#include "rt_error.h"
+#include <SDL.h>
+#include "audio.h"
+#include "to_json.h"
+#include <SDL_image.h>
+#include <SDL_mixer.h>
+#include <stdbool.h>
+#include <math.h>
+#include <time.h>
+
 # define WIDTH			1280
 # define HEIGHT			1024
 # define WHITE			0xFFFFFF
@@ -232,13 +238,13 @@ typedef struct			s_cl
 	size_t				local_work_size[2];
 	cl_device_id		device_id;
 	cl_mem				memobjs[6];
-	char 				**program_source;
-	size_t 				*program_size;
+	char				**program_source;
+	size_t				*program_size;
 	size_t				count_files;
 	char				**files;
 }						t_cl;
 
-typedef struct 			s_sdl
+typedef struct			s_sdl
 {
 	SDL_Window			*window;
 	SDL_Renderer		*render;
@@ -248,10 +254,9 @@ typedef struct 			s_sdl
 	SDL_Event			event;
 	int					*pixels;
 	int					volume;
-	
 }						t_sdl;
 
-typedef struct 			s_rt
+typedef struct			s_rt
 {
 	t_sdl				*sdl;
 	t_cl				*opencl;
@@ -308,7 +313,8 @@ void					parse_sounds_json(t_key_value *assets, t_sdl *sdl);
 void					parse_music_json(t_key_value *assets, t_sdl *sdl);
 void					parse_array_of_float(t_array *array, cl_float3 *pos);
 int						parse_volume_json(t_key_value *assets);
-void					parse_texture(t_key_value *json, t_scene *scene, char *sounds[]);
+void					parse_texture(t_key_value *json, t_scene *scene,
+										char *sounds[]);
 char					*parse_icon_json(t_key_value *assets, t_sdl *sdl);
 t_key_value				*parse_assets(t_key_value *json, t_sdl *sdl);
 
@@ -335,17 +341,18 @@ void					parse_cylinder_json(t_key_value *obj,
 void					change_music(Mix_Music *music[]);
 void					sdl_loop(t_sdl *sdl, t_scene *scene, t_cl *cl);
 void					sdl_quit(t_sdl *sdl);
-void 					sdl_update(t_sdl *sdl);
+void					sdl_update(t_sdl *sdl);
 
 /*
 **						utils
 */
+
 void					func_error(int err);
 void					ft_error(char *str);
-int						ft_len_arr(char **arr);
+int						ft_len_arr(void **arr);
 char					*get_next_name(char *name);
 cl_int3					int_to_rgb(int src_color);
-int 					*put_pixel(double x, double y, int color, t_sdl *sdl);
+int						*put_pixel(double x, double y, int color, t_sdl *sdl);
 int						read_kernel(t_cl *cl, char **files_cl);
 int						realloc_img(t_scene *scene, char *file_name);
 void					save_image(t_sdl *sdl);
