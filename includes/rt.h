@@ -6,7 +6,7 @@
 /*   By: deladia <deladia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 04:06:50 by thorker           #+#    #+#             */
-/*   Updated: 2020/02/01 10:26:35 by deladia          ###   ########.fr       */
+/*   Updated: 2020/02/01 10:31:52 by deladia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,14 +25,15 @@
 #  include <stdbool.h>
 #  include <math.h>
 #  include <time.h>
-#  define WIDTH			1280
-#  define HEIGHT		1024
-#  define WHITE			0xFFFFFF
-#  define BLACK			0x000000
 #  define STEP			0.1
 #  define NBR_OF_SONGS	20
 #  define DISPLAY_NOT	"osascript -e \'display notification\""
 # endif
+# define WIDTH 1280
+# define HEIGHT 1024
+# define RED(color) (((int)color >> 16) & 0xFF)
+# define GREEN(color) (((int)color >> 8) & 0xFF)
+# define BLUE(color) ((int)color & 0xFF)
 
 typedef struct			s_cylinder
 {
