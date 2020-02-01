@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   errors_for_opencl.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: deladia <deladia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/06 19:11:41 by deladia           #+#    #+#             */
-/*   Updated: 2020/01/25 01:17:41 by deladia          ###   ########.fr       */
+/*   Updated: 2020/02/01 04:19:01 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-void	func_error_1(int err)
+static void		func_error_1(int err)
 {
 	if (err == -7)
 		ft_putstr("Building program error");
@@ -28,7 +28,7 @@ void	func_error_1(int err)
 		ft_putstr("Read buffer error");
 }
 
-void	func_error(int err)
+void			func_error(int err)
 {
 	if (err == -1)
 		ft_putstr("Platform ID error");
@@ -43,5 +43,5 @@ void	func_error(int err)
 	else if (err == -6)
 		ft_putstr("Creation program error");
 	func_error_1(err);
-	exit(1);
+	exit(0);
 }

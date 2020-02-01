@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   cam_calc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thorker <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: deladia <deladia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 04:07:05 by thorker           #+#    #+#             */
-/*   Updated: 2020/01/27 04:07:07 by thorker          ###   ########.fr       */
+/*   Updated: 2020/01/31 06:42:11 by deladia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-cl_float3	spherical_coor(float phi, float tetta)
+cl_float3		spherical_coor(float phi, float tetta)
 {
 	cl_float3	vec;
 
@@ -22,7 +22,7 @@ cl_float3	spherical_coor(float phi, float tetta)
 	return (vec);
 }
 
-cl_float3	spher_norm(cl_float3 vec)
+cl_float3		spher_norm(cl_float3 vec)
 {
 	cl_float3	normal;
 
@@ -41,7 +41,7 @@ cl_float3	spher_norm(cl_float3 vec)
 	return (normal);
 }
 
-void		calc_screen(t_cam *cam)
+void			calc_screen(t_cam *cam)
 {
 	cl_float3	dec_coor;
 	cl_float3	ox;
@@ -57,12 +57,9 @@ void		calc_screen(t_cam *cam)
 	if ((*cam).tetta > (float)M_PI_2 - 0.00001f)
 		oy = cl_mult_n(oy, (-1));
 	ox = cl_cross(oz, oy);
-	cl_to_norm(&ox);
-	cl_to_norm(&oy);
+	cl_normlize(&ox);
+	cl_normlize(&oy);
 	(*cam).ox = ox;
 	(*cam).oy = oy;
 	(*cam).oz = oz;
-	// printf("v1 = %f %f %f\n", v1.x, v1.y, v1.z);
-	// printf("v2 = %f %f %f\n", v2.x, v2.y, v2.z);
-	// printf("center = %f %f %f\n", center.x, center.y, center.z);
 }

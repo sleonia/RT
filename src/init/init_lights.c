@@ -1,27 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   init_lights.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: deladia <deladia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/24 12:57:07 by deladia           #+#    #+#             */
-/*   Updated: 2020/02/01 13:03:31 by deladia          ###   ########.fr       */
+/*   Created: 2019/10/24 13:05:14 by deladia           #+#    #+#             */
+/*   Updated: 2020/02/01 13:02:19 by deladia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-int			main(int ac, char **av)
+void		init_light(t_light **light, int nbr)
 {
-	t_rt		*rt;
-
-	if (ac != 2)
-		ft_error(ERROR_INPUT);
-	rt = init_rt(av);
-	change_music(rt->sdl->music);
-	calc_screen(&rt->scene->cam);
-	set_opencl_arg(rt->opencl, rt->sdl, rt->scene);
-	sdl_loop(rt->sdl, rt->scene, rt->opencl);
-	return (0);
+	if (!(*light = (t_light *)ft_memalloc(sizeof(t_light) * (nbr))))
+		ft_error("MALLOC_ERROR");
 }

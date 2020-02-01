@@ -1,10 +1,37 @@
 {
-    "files.associations": {
+	"files.associations": {
 		"rtv1.h": "c",
 		"ios": "c",
 		"algorithm": "c",
 		"stb_image_write.h": "c",
 		"stb_image.h": "c",
-		"stdlib.h": "c"
-	}
+		"stdlib.h": "c",
+		"complex": "c",
+		"typeinfo": "c",
+		"type_traits": "c",
+		"to_json.h": "c",
+		"__tuple": "c",
+		"array": "c",
+		"__bit_reference": "c",
+		"__functional_base": "c",
+		"atomic": "c",
+		"bitset": "c",
+		"chrono": "c",
+		"__memory": "c",
+		"functional": "c",
+		"iterator": "c",
+		"limits": "c",
+		"locale": "c",
+		"memory": "c",
+		"ratio": "c",
+		"system_error": "c",
+		"tuple": "c",
+		"vector": "c",
+		"utility": "c",
+		"__locale": "c",
+		"__string": "c",
+		"string_view": "c",
+		"string": "c"
+	},
+	"C_Cpp.errorSquiggles": "Disabled"
 }

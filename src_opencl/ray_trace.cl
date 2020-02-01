@@ -107,7 +107,7 @@ static float3		computer_lighting(float3 d, t_hitting *light_hit, __global t_obje
 	return (r);
 }
 
-__kernel void RT(__global int *arr, __global t_cam *cam, __global t_object *object, __global t_light *light, __global int *texture, __global int *texture_param, int count_obj, int count_light, int skybox_id)
+__kernel void RT(__global int *arr, __global t_cam *cam, __global t_object *object, __global t_light *light, __global int *texture, __global int *texture_param, int count_obj, int count_light, int skybox_id, int fsaa, float	ambient)
 {
 	int 	x;
 	int 	y;
@@ -116,9 +116,7 @@ __kernel void RT(__global int *arr, __global t_cam *cam, __global t_object *obje
 	float3	o;
 	float3	color = (float3)0;
 	t_hitting	light_hit;
-	float	ambient = 0.2f;
 	float cache_width = 1.f / WIDTH;
-	int		fsaa = 0;
 	int		cnt_reflection = 0;
 	float3	tmp_color;
 

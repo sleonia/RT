@@ -1,27 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   init_scene.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: deladia <deladia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/24 12:57:07 by deladia           #+#    #+#             */
-/*   Updated: 2020/02/01 13:03:31 by deladia          ###   ########.fr       */
+/*   Created: 2020/01/28 20:55:29 by sleonia           #+#    #+#             */
+/*   Updated: 2020/02/01 12:39:40 by deladia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-int			main(int ac, char **av)
+t_scene		*init_scene(t_key_value *json, char *sounds[])
 {
-	t_rt		*rt;
+	t_scene	*scene;
 
-	if (ac != 2)
+	if ((scene = (t_scene *)ft_memalloc(sizeof(t_scene))) == NULL)
 		ft_error(ERROR_INPUT);
-	rt = init_rt(av);
-	change_music(rt->sdl->music);
-	calc_screen(&rt->scene->cam);
-	set_opencl_arg(rt->opencl, rt->sdl, rt->scene);
-	sdl_loop(rt->sdl, rt->scene, rt->opencl);
-	return (0);
+	parse_cam_json(json, scene, sounds);
+	parse_texture(json, scene, sounds);
+	parse_skybox_json(json, scene, sounds);
+	parse_light_json(json, scene, sounds);
+	parse_objects_json(json, scene, sounds);
+	return (scene);
 }

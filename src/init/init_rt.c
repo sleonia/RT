@@ -1,27 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   init_rt.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: deladia <deladia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/24 12:57:07 by deladia           #+#    #+#             */
-/*   Updated: 2020/02/01 13:03:31 by deladia          ###   ########.fr       */
+/*   Created: 2020/01/28 10:16:20 by sleonia           #+#    #+#             */
+/*   Updated: 2020/02/01 12:45:16 by deladia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-int			main(int ac, char **av)
+t_rt				*init_rt(char **av)
 {
-	t_rt		*rt;
+	t_rt			*rt;
+	t_key_value		*json;
 
-	if (ac != 2)
+	if ((rt = (t_rt *)ft_memalloc(sizeof(t_rt))) == NULL)
+		ft_error(ERROR_MALLOC);
+	if (!(json = parse_json(av[1])))
 		ft_error(ERROR_INPUT);
-	rt = init_rt(av);
-	change_music(rt->sdl->music);
-	calc_screen(&rt->scene->cam);
-	set_opencl_arg(rt->opencl, rt->sdl, rt->scene);
-	sdl_loop(rt->sdl, rt->scene, rt->opencl);
-	return (0);
+	rt->sdl = init_sdl(json);
+	rt->scene = init_scene(json, rt->sdl->sounds);
+	rt->opencl = init_cl(json, rt);
+	ft_return(&json);
+	return (rt);
 }

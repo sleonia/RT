@@ -1,26 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   light.c                                            :+:      :+:    :+:   */
+/*   show_error.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: deladia <deladia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/24 13:05:14 by deladia           #+#    #+#             */
-/*   Updated: 2020/01/29 03:15:57 by deladia          ###   ########.fr       */
+/*   Created: 2020/02/01 02:35:38 by sleonia           #+#    #+#             */
+/*   Updated: 2020/02/01 11:06:37 by deladia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-void		init_light(t_light **light)
+void				show_error(char *error, char *sounds[])
 {
-	*light = (t_light *)ft_memalloc(sizeof(t_light) * 3);
-	// (*light)[0].type = 'A';
-	// (*light)[0].intensity = 0.2;
-	(*light)[0].pos = (cl_float3){0, 1, -100};
-	// (*light)[0].type = 'P';
-	(*light)[0].intensity = 1.0;
-// 	(*light)[2].type = 'D';
-// 	(*light)[2].intensity = 0.2;
-// 	(*light)[2].pos = (cl_float3){1, 4, 4};
+	int				id;
+	char			*sh_command;
+
+	sh_command = ft_strjoin(DISPLAY_NOT, error);
+	system(sh_command);
+	srand(time(NULL));
+	id = rand() % ft_len_arr((void **)sounds);
+	if (id == 0)
+		return ;
+	playSound(sounds[id], 100);
+	SDL_Delay(1500);
+	ft_strdel(&sh_command);
 }

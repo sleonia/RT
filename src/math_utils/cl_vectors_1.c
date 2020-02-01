@@ -1,27 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   cl_vectors_1.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: deladia <deladia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/24 12:57:07 by deladia           #+#    #+#             */
-/*   Updated: 2020/02/01 13:03:31 by deladia          ###   ########.fr       */
+/*   Created: 2020/01/28 12:29:13 by sleonia           #+#    #+#             */
+/*   Updated: 2020/01/31 06:40:51 by deladia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-int			main(int ac, char **av)
+cl_float3	cl_mult_n(cl_float3 v1, float n)
 {
-	t_rt		*rt;
+	cl_float3 v;
 
-	if (ac != 2)
-		ft_error(ERROR_INPUT);
-	rt = init_rt(av);
-	change_music(rt->sdl->music);
-	calc_screen(&rt->scene->cam);
-	set_opencl_arg(rt->opencl, rt->sdl, rt->scene);
-	sdl_loop(rt->sdl, rt->scene, rt->opencl);
-	return (0);
+	v.x = v1.x * n;
+	v.y = v1.y * n;
+	v.z = v1.z * n;
+	return (v);
+}
+
+void		cl_normlize(cl_float3 *v)
+{
+	float l;
+
+	l = cl_length(*v);
+	v->x = v->x / l;
+	v->y = v->y / l;
+	v->z = v->z / l;
+}
+
+cl_float3	cl_cross(cl_float3 v1, cl_float3 v2)
+{
+	cl_float3	v;
+
+	v.x = v1.y * v2.z - v1.z * v2.y;
+	v.y = v1.z * v2.x - v1.x * v2.z;
+	v.z = v1.x * v2.y - v1.y * v2.x;
+	return (v);
 }
