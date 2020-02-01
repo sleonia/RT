@@ -3,36 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   parse_cam.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: deladia <deladia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/28 20:46:46 by sleonia           #+#    #+#             */
-/*   Updated: 2020/01/31 08:16:48 by deladia          ###   ########.fr       */
+/*   Updated: 2020/02/01 03:45:46 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-static void			show_error_in_cam(t_rt *rt)
-{
-	system("osascript -e \'display notification\" \
-		Used default value!\" with title \"Error camera!\"\'");
-	if (ft_len_arr(rt->sdl->sounds) >= 1)
-		playSound(rt->sdl->sounds[1], 100);
-	else
-		playSound(rt->sdl->sounds[0], 100);
-	SDL_Delay(1500);
-}
-
-static void			set_default_value(t_scene *scene, t_rt *rt)
+static void			set_default_value(t_scene *scene, char *sounds[])
 {
 	scene->cam.pos = (cl_float3){0, 0, 0};
 	scene->cam.phi = 1.570796;
 	scene->cam.tetta = 1.570796;
-	show_error_in_cam(rt);
+	show_error(E_CAM, sounds);
 }
 
 void				parse_cam_json2(t_key_value *cam_obj, t_scene *scene,
-								bool *error, t_rt *rt)
+								bool *error, char *sounds[])
 {
 	double			phi;
 	double			tetta;
@@ -68,7 +57,8 @@ void				parse_array_of_float(t_array *array, cl_float3 *pos)
 	}
 }
 
-void				parse_cam_json(t_key_value *json, t_scene *scene, t_rt *rt)
+void				parse_cam_json(t_key_value *json, t_scene *scene,
+								char *sounds[])
 {
 	bool			error;
 	t_key_value		*cam_obj;
@@ -77,7 +67,7 @@ void				parse_cam_json(t_key_value *json, t_scene *scene, t_rt *rt)
 	error = false;
 	if (get_node(json, "camera", &cam_obj) != 0)
 	{
-		set_default_value(scene, rt);
+		set_default_value(scene, sounds);
 		return ;
 	}
 	if (get_array(cam_obj, "position", &array) != 0)
@@ -87,7 +77,7 @@ void				parse_cam_json(t_key_value *json, t_scene *scene, t_rt *rt)
 	}
 	else
 		parse_array_of_float(array, &scene->cam.pos);
-	parse_cam_json2(cam_obj, scene, &error, rt);
+	parse_cam_json2(cam_obj, scene, &error, sounds);
 	if (error)
-		show_error_in_cam(rt);
+		show_error(E_CAM, sounds);
 }

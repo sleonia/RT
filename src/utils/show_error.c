@@ -1,27 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_scene.c                                       :+:      :+:    :+:   */
+/*   show_error.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/28 20:55:29 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/01 03:52:27 by sleonia          ###   ########.fr       */
+/*   Created: 2020/02/01 02:35:38 by sleonia           #+#    #+#             */
+/*   Updated: 2020/02/01 03:06:45 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-t_scene		*init_scene(t_key_value *json, char *sounds[])
+void				show_error(char *error, char *sounds[])
 {
-	t_scene	*scene;
+	int				id;
+	char			*sh_command;
 
-	if ((scene = (t_scene *)ft_memalloc(sizeof(t_scene))) == NULL)
-		ft_error(ERROR_INPUT);
-	parse_cam_json(json, scene, sounds);
-	parse_texture(json, scene, sounds);
-	parse_skybox_json(json, scene, sounds);
-	parse_light_json(json, scene, sounds);
-	parse_objects_json(json, scene, sounds);
-	return (scene);
+	sh_command = ft_strjoin(DISPLAY_NOT, E_CAM);
+	system(sh_command);
+	srand(time(NULL));
+	id = rand() % ft_len_arr(sounds);
+	if (id == 0)
+		return ;
+	playSound(sounds[id], 100);
+	SDL_Delay(1500);
+	ft_strdel(&sh_command);
 }

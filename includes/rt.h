@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rt.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: deladia <deladia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 04:06:50 by thorker           #+#    #+#             */
-/*   Updated: 2020/01/31 10:22:44 by deladia          ###   ########.fr       */
+/*   Updated: 2020/02/01 03:44:21 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,13 @@
 # include <math.h>
 # include <time.h>
 # include <OpenCL/opencl.h>
-# define WIDTH 1280
-# define HEIGHT 1024
-# define WHITE 0xFFFFFF
-# define BLACK 0x000000
-# define STEP 0.1
-# define MAX_NBR_OF_SONGS 20
+# define WIDTH			1280
+# define HEIGHT			1024
+# define WHITE			0xFFFFFF
+# define BLACK			0x000000
+# define STEP			0.1
+# define NBR_OF_SONGS	20
+# define DISPLAY_NOT	"osascript -e \'display notification\""
 # endif
 
 typedef struct			s_cylinder
@@ -242,9 +243,8 @@ typedef struct 			s_sdl
 	SDL_Window			*window;
 	SDL_Renderer		*render;
 	SDL_Texture			*texture;
-	Mix_Music			*music[MAX_NBR_OF_SONGS];
-	// char				*sounds;
-	char				*sounds[MAX_NBR_OF_SONGS];
+	Mix_Music			*music[NBR_OF_SONGS];
+	char				*sounds[NBR_OF_SONGS];
 	SDL_Event			event;
 	int					*pixels;
 	int					volume;
@@ -282,7 +282,7 @@ void					init_objects(t_object **object, int nbr);
 int						set_opencl_arg(t_cl *cl, t_sdl *sdl, t_scene *scene);
 t_cl					*init_cl(t_key_value *json, t_rt *rt);
 t_rt					*init_rt(char **av);
-t_scene					*init_scene(t_key_value *json, t_rt *rt);
+t_scene					*init_scene(t_key_value *json, char *sounds[]);
 t_sdl					*init_sdl(t_key_value *json);
 int						*fill_texture_for_object(char *texture_path,
 											int *texture_pixels,
@@ -308,20 +308,20 @@ void					parse_sounds_json(t_key_value *assets, t_sdl *sdl);
 void					parse_songs_json(t_key_value *assets, t_sdl *sdl);
 void					parse_array_of_float(t_array *array, cl_float3 *pos);
 int						parse_volume_json(t_key_value *assets);
-void					parse_texture(t_key_value *json, t_scene *scene, t_rt *rt);
+void					parse_texture(t_key_value *json, t_scene *scene, char *sounds[]);
 char					*parse_icon_json(t_key_value *assets, t_sdl *sdl);
 t_key_value				*parse_assets(t_key_value *json, t_sdl *sdl);
 
 void					parse_cam_json(t_key_value *json,
-										t_scene *scene, t_rt *rt);
+										t_scene *scene, char *sounds[]);
 void					parse_light_json(t_key_value *json,
-										t_scene *scene, t_rt *rt);
+										t_scene *scene, char *sounds[]);
 void					parse_material_json(int i, t_key_value *obj,
-										t_scene *scene, t_rt *rt);
+										t_scene *scene, char *sounds[]);
 void					parse_objects_json(t_key_value *json,
-										t_scene *scene, t_rt *rt);
+										t_scene *scene, char *sounds[]);
 void					parse_skybox_json(t_key_value *json,
-										t_scene *scene, t_rt *rt);
+										t_scene *scene, char *sounds[]);
 
 void					parse_sphere_json(t_key_value *obj, t_sphere *sphere);
 void					parse_plane_json(t_key_value *obj, t_plane *plane);
@@ -332,7 +332,7 @@ void					parse_cylinder_json(t_key_value *obj,
 /*
 **						sdl_utils
 */
-void					change_music(t_rt *rt);
+void					change_music(Mix_Music *music[]);
 void					sdl_loop(t_sdl *sdl, t_scene *scene, t_cl *cl);
 void					sdl_quit(t_sdl *sdl);
 void 					sdl_update(t_sdl *sdl);
@@ -347,6 +347,7 @@ cl_int3					int_to_rgb(int src_color);
 int 					*put_pixel(double x, double y, int color, t_sdl *sdl);
 int						read_kernel(t_cl *cl, char **files_cl);
 int						realloc_img(t_scene *scene, char *file_name);
+void					show_error(char *error, char *sounds[]);
 
 # endif
 #endif

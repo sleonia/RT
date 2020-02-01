@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: deladia <deladia@student.42.fr>            +#+  +:+       +#+         #
+#    By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/31 15:32:23 by thorker           #+#    #+#              #
-#    Updated: 2020/01/31 07:01:39 by deladia          ###   ########.fr        #
+#    Updated: 2020/02/01 02:45:23 by sleonia          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -103,6 +103,7 @@ UTILS_FILES =							\
 			put_pixel.c					\
 			read_kernel.c				\
 			realloc_img.c				\
+			show_error.c				\
 
 UTILS_DIR = ./src/utils/
 

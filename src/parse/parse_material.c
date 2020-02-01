@@ -3,27 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   parse_material.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: deladia <deladia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 20:25:59 by sleonia           #+#    #+#             */
-/*   Updated: 2020/01/31 08:56:19 by deladia          ###   ########.fr       */
+/*   Updated: 2020/02/01 03:47:49 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-static void			show_error_in_material(t_rt *rt)
+static void			show_error_in_material(char *sounds[])
 {
 	system("osascript -e \'display notification\" \
 		Used default value!\" with title \"Error object!\"\'");
-	if (ft_len_arr(rt->sdl->sounds) >= 1)
-		playSound(rt->sdl->sounds[1], 100);
+	if (ft_len_arr(sounds) >= 1)
+		playSound(sounds[1], 100);
 	else
-		playSound(rt->sdl->sounds[0], 100);
+		playSound(sounds[0], 100);
 	SDL_Delay(1500);
 }
 
-static void			set_default_value(int i, t_scene *scene, t_rt *rt)
+static void			set_default_value(int i, t_scene *scene, char *sounds[])
 {
 	scene->object[i].material.color = (cl_float3){1.f, 1.f, 1.f};
 	scene->object[i].material.ambient = 0;
@@ -32,7 +32,7 @@ static void			set_default_value(int i, t_scene *scene, t_rt *rt)
 	scene->object[i].material.reflection = 0;
 	scene->object[i].material.refraction = 0;
 	scene->object[i].material.texture_id = -1;
-	show_error_in_material(rt);
+	show_error_in_material(sounds);
 }
 
 static void			parse_material_json1(int i, t_key_value *material,
@@ -63,7 +63,7 @@ static void			parse_material_json1(int i, t_key_value *material,
 }
 
 void				parse_material_json(int i, t_key_value *obj,
-											t_scene *scene, t_rt *rt)
+											t_scene *scene, char *sounds[])
 {
 	t_array			*array;
 	t_key_value		*material;
@@ -71,7 +71,7 @@ void				parse_material_json(int i, t_key_value *obj,
 
 	if (get_node(obj, "material", &material) != 0)
 	{
-		set_default_value(i, scene, rt);
+		set_default_value(i, scene, sounds);
 		return ;
 	}
 	if (get_array(material, "color", &array) != 0)

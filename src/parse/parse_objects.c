@@ -3,27 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   parse_objects.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: deladia <deladia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/28 21:51:06 by sleonia           #+#    #+#             */
-/*   Updated: 2020/01/31 04:07:47 by deladia          ###   ########.fr       */
+/*   Updated: 2020/02/01 03:49:28 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-static void			show_error_in_obj(t_rt *rt)
+static void			show_error_in_obj(char *sounds[])
 {
 	system("osascript -e \'display notification\" \
 		Used default value!\" with title \"Error object!\"\'");
-	if (ft_len_arr(rt->sdl->sounds) >= 1)
-		playSound(rt->sdl->sounds[1], 100);
+	if (ft_len_arr(sounds) >= 1)
+		playSound(sounds[1], 100);
 	else
-		playSound(rt->sdl->sounds[0], 100);
+		playSound(sounds[0], 100);
 	SDL_Delay(1500);
 }
 
-static bool			check_type1(int i, char *type,
+static void			check_type1(int i, char *type,
 							t_scene *scene, t_key_value *obj)
 {
 	union u_objects	object;
@@ -40,12 +40,9 @@ static bool			check_type1(int i, char *type,
 		parse_plane_json(obj, &object.plane);
 		scene->object[i].object.plane = object.plane;
 	}
-	else
-		return (false);
-	return (true);
 }
 
-static bool			check_type(int i, char *type,
+static void			check_type(int i, char *type,
 							t_scene *scene, t_key_value *obj)
 {
 	union u_objects	object;
@@ -62,13 +59,11 @@ static bool			check_type(int i, char *type,
 		parse_cylinder_json(obj, &object.cylinder);
 		scene->object[i].object.cylinder = object.cylinder;
 	}
-	else
-		return (check_type1(i, type, scene, obj));
-	return (true);
+	check_type1(i, type, scene, obj);
 }
 
 void				parse_objects_json(t_key_value *json,
-									t_scene *scene, t_rt *rt)
+									t_scene *scene, char *sounds[])
 {
 	int				i;
 	char			*str_value;
@@ -87,12 +82,17 @@ void				parse_objects_json(t_key_value *json,
 		//ЧТО? str_value = "sphere";
 		if (get_str(obj, "type", &str_value) != 0)
 			str_value = "sphere";
-		if (!check_type(i, str_value, scene, obj))
-		{
-			show_error_in_obj(rt);
-			continue ;
-		}
-		parse_material_json(i, obj, scene, rt);
+		// if (!check_type(i, str_value, scene, obj))
+		// {
+		// 	show_error_in_obj(sounds);
+		// 	continue ;
+		// }
+		check_type(i, str_value, scene, obj);
+		// {
+			// show_error_in_obj(sounds);
+			// continue ;
+		// }
+		parse_material_json(i, obj, scene, sounds);
 	}
 	scene->count_objects = obj_array->length;
 }

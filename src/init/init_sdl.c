@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_sdl.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: deladia <deladia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/28 10:20:37 by sleonia           #+#    #+#             */
-/*   Updated: 2020/01/31 10:25:05 by deladia          ###   ########.fr       */
+/*   Updated: 2020/02/01 03:10:45 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static void			init_sdl_music(t_key_value *assets, t_sdl *sdl)
 	int				i;
 
 	i = 0;
-	while (++i < MAX_NBR_OF_SONGS)
+	while (++i < NBR_OF_SONGS)
 		sdl->music[i] = NULL;
 	Mix_OpenAudio(22050, AUDIO_S16SYS, 2, 640);
 	initAudio();

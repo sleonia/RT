@@ -3,28 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   parse_lights.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: deladia <deladia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/28 21:50:31 by sleonia           #+#    #+#             */
-/*   Updated: 2020/01/31 08:36:25 by deladia          ###   ########.fr       */
+/*   Updated: 2020/02/01 03:36:18 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-static void			show_error_in_light(t_rt *rt)
-{
-	system("osascript -e \'display notification\" \
-		Used default value!\" with title \"Error light!\"\'");
-	playSound(rt->sdl->sounds[0], 10);
-	SDL_Delay(1500);
-}
-
-static void			set_default_value(int i, t_scene *scene, t_rt *rt)
+static void			set_default_value(int i, t_scene *scene, char *sounds[])
 {
 	scene->light[i].intensity = 0;
 	scene->light[i].pos = (cl_float3){0, 0, 0};
-	show_error_in_light(rt);
+	show_error(E_LIGHT, sounds);
 }
 
 static bool			parse_light_json2(int i, t_key_value *light_obj,
@@ -53,7 +45,7 @@ static bool			parse_light_json2(int i, t_key_value *light_obj,
 }
 
 void				parse_light_json(t_key_value *json,
-									t_scene *scene, t_rt *rt)
+									t_scene *scene, char *sounds[])
 {
 	int				i;
 	bool			error;
@@ -64,7 +56,7 @@ void				parse_light_json(t_key_value *json,
 	if (get_array(json, "light", &light_array) != 0)
 	{
 		init_light(&scene->light, 1);
-		set_default_value(0, scene, rt);
+		set_default_value(0, scene, sounds);
 		return ;
 	}
 	init_light(&scene->light, light_array->length);
@@ -72,12 +64,12 @@ void				parse_light_json(t_key_value *json,
 	{
 		if (getf_object_array(light_array, i, &light_obj) != 0)
 		{
-			set_default_value(i, scene, rt);
+			set_default_value(i, scene, sounds);
 			return ;
 		}
 		error = parse_light_json2(i, light_obj, scene);
 		if (error)
-			show_error_in_light(rt);
+			show_error(E_LIGHT, sounds);
 	}
 	scene->count_lights = light_array->length;
 }
