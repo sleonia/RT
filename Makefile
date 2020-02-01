@@ -6,7 +6,7 @@
 #    By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/31 15:32:23 by thorker           #+#    #+#              #
-#    Updated: 2020/01/28 10:00:31 by sleonia          ###   ########.fr        #
+#    Updated: 2020/02/01 07:26:30 by deladia          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ FRWR_DIR = framework
 JSON_LIB_DIR = libtojson
 SDL_AUDIO_PATH = ./Simple-SDL2-Audio/
 
-SRC =															\
+SRC =	filter.c														\
 		realloc_img.c											\
 		move.c													\
 		vector.c												\

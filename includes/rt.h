@@ -6,7 +6,7 @@
 /*   By: deladia <deladia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 04:06:50 by thorker           #+#    #+#             */
-/*   Updated: 2020/02/01 07:00:47 by deladia          ###   ########.fr       */
+/*   Updated: 2020/02/01 07:43:16 by deladia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,15 @@
 # include <math.h>
 # include <time.h>
 # include <OpenCL/opencl.h>
+# define STEP 0.1
+# define NEGATIVE -101
+# define SEPIA -102
+# endif
 # define WIDTH 1280
 # define HEIGHT 1024
-# define WHITE 0xFFFFFF
-# define BLACK 0x000000
-# define STEP 0.1
-# endif
+# define RED(color) (((int)color >> 16) & 0xFF)
+# define GREEN(color) (((int)color >> 8) & 0xFF)
+# define BLUE(color) ((int)color & 0xFF)
 
 typedef struct			s_cylinder
 {
@@ -219,5 +222,6 @@ cl_float3				cl_sum(cl_float3 v1, cl_float3 v2);
 cl_float3				cl_cross(cl_float3 v1, cl_float3 v2);
 void					move(SDL_Event event, t_cam *cam);
 int						realloc_img(t_scene *scene, char *file_name);
+int						filter(int	*pixels, char flag);
 # endif
 #endif

@@ -6,7 +6,7 @@
 /*   By: deladia <deladia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/24 12:43:04 by deladia           #+#    #+#             */
-/*   Updated: 2020/01/28 23:10:21 by deladia          ###   ########.fr       */
+/*   Updated: 2020/02/01 07:43:36 by deladia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,8 +116,10 @@ void	save_helper(t_sdl *sdl)
 int			sdl_control(t_sdl *sdl, t_scene *scene, t_cl *cl)
 {
 	char	quit;
+	char	filter_flag;
 
 	quit = 0;
+	filter_flag = 0;
 	// save_helper(sdl);
 	sdl_update(sdl);
 	while (!quit)
@@ -167,8 +169,21 @@ int			sdl_control(t_sdl *sdl, t_scene *scene, t_cl *cl)
 				{
 					save_helper(sdl);
 				}
+				if (sdl->event.key.keysym.scancode == SDL_SCANCODE_N)
+				{
+					filter_flag = NEGATIVE;
+				}
+				if (sdl->event.key.keysym.scancode == SDL_SCANCODE_M)
+				{
+					filter_flag = SEPIA;
+				}
+				if (sdl->event.key.keysym.scancode == SDL_SCANCODE_B)
+				{
+					filter_flag = 0;
+				}
 				calc_screen(&scene->cam);
 				set_arg(cl, sdl, scene);
+				filter(sdl->pixels, filter_flag);
 				sdl_update(sdl);
 			}
 		}
