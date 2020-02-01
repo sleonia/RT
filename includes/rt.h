@@ -6,7 +6,7 @@
 /*   By: deladia <deladia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 04:06:50 by thorker           #+#    #+#             */
-/*   Updated: 2020/01/28 22:14:06 by deladia          ###   ########.fr       */
+/*   Updated: 2020/02/01 07:00:47 by deladia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ typedef struct			s_material
 # endif
 	float				ambient;
 	float				diffuse;
-	float				specular; //от 0 до 100
+	float				specular;
 	float				refraction;
 	float				reflection;
 	int					texture_id;
@@ -157,63 +157,6 @@ typedef struct			s_scene
 	int					texture_cnt;
 	float				ambient;
 }						t_scene;
-
-typedef struct			s_cylinder_params
-{
-# ifndef OPENCL___
-	cl_float3			pos;
-	cl_float3			axis;
-# else
-	float3				pos;
-	float3				axis;
-# endif
-	float				radius;
-	int					color;
-	int					specular;
-	float				reflective;
-}						t_cylinder_params;
-
-typedef struct			s_cone_params
-{
-# ifndef OPENCL___
-	cl_float3			pos;
-	cl_float3			axis;
-# else
-	float3				pos;
-	float3				axis;
-# endif
-	float				tan;
-	int					color;
-	int					specular;
-	float				reflective;
-}						t_cone_params;
-
-typedef struct			s_plane_params
-{
-# ifndef OPENCL___
-	cl_float3			pos;
-	cl_float3			normal;
-# else
-	float3				pos;
-	float3				normal;
-# endif
-	int					color;
-	int					specular;
-	float				reflective;
-}						t_plane_params;
-
-typedef struct			s_sphere_params
-{
-# ifndef OPENCL___
-	cl_float3			pos;
-# else
-	float3				pos;
-# endif
-	float				radius;
-	int					color;
-	int					specular;
-	float				reflective;
-}						t_sphere_params;
 
 # ifndef OPENCL___
 typedef struct			s_cl
