@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_assets.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: deladia <deladia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/28 18:49:49 by sleonia           #+#    #+#             */
-/*   Updated: 2020/01/31 06:59:05 by deladia          ###   ########.fr       */
+/*   Updated: 2020/02/01 04:14:39 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ void				parse_songs_json(t_key_value *assets, t_sdl *sdl)
 void				parse_sounds_json(t_key_value *assets, t_sdl *sdl)
 {
 	int				i;
-	// char			*arg;
 	char			*sounds_name;
 	t_array			*sounds;
 

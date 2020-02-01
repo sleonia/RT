@@ -6,11 +6,12 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/28 01:35:40 by thorker           #+#    #+#             */
-/*   Updated: 2020/01/30 15:47:08 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/01 04:38:50 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
+
 /*
 **	Создает новый массив текстур
 **	копирует старый массив
@@ -67,7 +68,7 @@ int			realloc_img(t_scene *scene, char *file_name)
 	int			*texture_param;
 
 	if (file_name == 0 || (image = IMG_Load(file_name)) == 0)
-		return (CANT_OPEN_IMAGE);
+		return (CANT_OPEN_IMG);
 	if ((texture = new_texture(scene, image)) == 0 |
 			(texture_param = new_texture_param(scene, image)) == 0)
 	{

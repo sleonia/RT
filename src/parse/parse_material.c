@@ -6,64 +6,53 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 20:25:59 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/01 03:47:49 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/01 04:49:19 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-static void			show_error_in_material(char *sounds[])
+static void			set_default_value(t_object *object, char *sounds[])
 {
-	system("osascript -e \'display notification\" \
-		Used default value!\" with title \"Error object!\"\'");
-	if (ft_len_arr(sounds) >= 1)
-		playSound(sounds[1], 100);
-	else
-		playSound(sounds[0], 100);
-	SDL_Delay(1500);
+	object->material.color = (cl_float3){1.f, 1.f, 1.f};
+	object->material.ambient = 0;
+	object->material.diffuse = 0;
+	object->material.specular = 0;
+	object->material.reflection = 0;
+	object->material.refraction = 0;
+	object->material.texture_id = -1;
+	show_error(E_MAT, sounds);
 }
 
-static void			set_default_value(int i, t_scene *scene, char *sounds[])
-{
-	scene->object[i].material.color = (cl_float3){1.f, 1.f, 1.f};
-	scene->object[i].material.ambient = 0;
-	scene->object[i].material.diffuse = 0;
-	scene->object[i].material.specular = 0;
-	scene->object[i].material.reflection = 0;
-	scene->object[i].material.refraction = 0;
-	scene->object[i].material.texture_id = -1;
-	show_error_in_material(sounds);
-}
-
-static void			parse_material_json1(int i, t_key_value *material,
-										t_scene *scene)
+static void			parse_material_json1(t_key_value *material,
+									t_object *object)
 {
 	double			d_value;
 
 	if (get_double(material, "ambient", &d_value) != 0)
-		scene->object[i].material.ambient = 0;
+		object->material.ambient = 0;
 	else
-		scene->object[i].material.ambient = (float)d_value;
+		object->material.ambient = (float)d_value;
 	if (get_double(material, "diffuse", &d_value) != 0)
-		scene->object[i].material.diffuse = 0;
+		object->material.diffuse = 0;
 	else
-		scene->object[i].material.diffuse = (float)d_value;
+		object->material.diffuse = (float)d_value;
 	if (get_double(material, "specular", &d_value) != 0)
-		scene->object[i].material.specular = 0;
+		object->material.specular = 0;
 	else
-		scene->object[i].material.specular = (float)d_value;
+		object->material.specular = (float)d_value;
 	if (get_double(material, "reflection", &d_value))
-		scene->object[i].material.reflection = 0;
+		object->material.reflection = 0;
 	else
-		scene->object[i].material.reflection = (float)d_value;
+		object->material.reflection = (float)d_value;
 	if (get_double(material, "refraction", &d_value))
-		scene->object[i].material.refraction = 0;
+		object->material.refraction = 0;
 	else
-		scene->object[i].material.refraction = (float)d_value;
+		object->material.refraction = (float)d_value;
 }
 
-void				parse_material_json(int i, t_key_value *obj,
-											t_scene *scene, char *sounds[])
+void				parse_material_json(t_key_value *obj, t_object *object,
+									int texture_cnt, char *sounds[])
 {
 	t_array			*array;
 	t_key_value		*material;
@@ -71,19 +60,21 @@ void				parse_material_json(int i, t_key_value *obj,
 
 	if (get_node(obj, "material", &material) != 0)
 	{
-		set_default_value(i, scene, sounds);
+		set_default_value(object, sounds);
 		return ;
 	}
 	if (get_array(material, "color", &array) != 0)
-		scene->object[i].material.color = (cl_float3){1.f, 1.f, 1.f};
+		object->material.color = (cl_float3){1.f, 1.f, 1.f};
 	else
 	{
-		parse_array_of_float(array, &scene->object[i].material.color);
-		scene->object[i].material.color = cl_mult_n(scene->object[i].material.color, 1.f / 255.f);
+		parse_array_of_float(array, &object->material.color);
+		object->material.color =
+			cl_mult_n(object->material.color, 1.f / 255.f);
 	}
-	parse_material_json1(i, material, scene);
-	if (get_int(material, "texture_id", &value) || (value >= scene->texture_cnt))
-		scene->object[i].material.texture_id = -1;
+	parse_material_json1(material, object);
+	if (get_int(material, "texture_id", &value)
+		|| (value >= texture_cnt))
+		object->material.texture_id = -1;
 	else
-		scene->object[i].material.texture_id = value;
+		object->material.texture_id = value;
 }

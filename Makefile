@@ -5,8 +5,8 @@
 #                                                     +:+ +:+         +:+      #
 #    By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2019/10/31 15:32:23 by thorker           #+#    #+#              #
-#    Updated: 2020/02/01 02:45:23 by sleonia          ###   ########.fr        #
+#    Created: 2020/02/01 04:18:29 by sleonia           #+#    #+#              #
+#    Updated: 2020/02/01 04:22:34 by sleonia          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,7 +40,6 @@ INIT_FILES =							\
 			init_rt.c					\
 			init_scene.c				\
 			init_sdl.c					\
-			init_texture.c				\
 
 INIT_DIR = ./src/init/
 
@@ -96,6 +95,7 @@ OBJ_SDL_UTILS_FILES = $(addprefix $(OBJ_DIR), $(SDL_UTILS_FILES:.c=.o))
 # =========== #
 
 UTILS_FILES =							\
+			errors_for_opencl.c			\
 			ft_error.c					\
 			ft_len_arr.c				\
 			get_next_name.c				\

@@ -21,6 +21,14 @@
 		{
 			"intensity":			0.8,
 			"position":				[3.5, 1.6, -10.0]
+		},
+		{
+			"intensity":			2.8,
+			"position":				[-3.5, 1.6, -10.0]
+		},
+		{
+			"intensity":			2.8,
+			"position":				[3.5, 1.6, 10.0]
 		}
 	],
 	"figure":

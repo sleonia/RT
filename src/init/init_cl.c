@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_cl.c                                      :+:      :+:    :+:   */
+/*   init_cl.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/28 19:00:37 by deladia           #+#    #+#             */
-/*   Updated: 2020/01/28 20:42:59 by sleonia          ###   ########.fr       */
+/*   Created: 2020/02/01 04:21:09 by sleonia           #+#    #+#             */
+/*   Updated: 2020/02/01 04:23:16 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,8 @@ static void		cl_create_buffer(t_cl *cl, t_scene *scene)
 			CL_MEM_READ_WRITE | CL_MEM_COPY_HOST_PTR,
 			sizeof(t_light) * 1, scene->light, &ret)) && ret != 0)
 		ft_error("clCreateBuffer");
-	if ((cl->memobjs[4] = clCreateBuffer(cl->context,
-			CL_MEM_READ_WRITE, sizeof(cl_int) * scene->texture_length,
-			NULL, &ret)) && ret != 0)
+	if ((cl->memobjs[4] = clCreateBuffer(cl->context, CL_MEM_READ_WRITE,
+		sizeof(cl_int) * scene->texture_length, NULL, &ret)) && ret != 0)
 		ft_error("clCreateBuffer");
 	if ((cl->memobjs[5] = clCreateBuffer(cl->context,
 			CL_MEM_READ_WRITE, sizeof(cl_int) * scene->texture_cnt * 3,
@@ -106,8 +105,6 @@ t_cl			*init_cl(t_key_value *json, t_rt *rt)
 	if ((opencl = (t_cl *)ft_memalloc(sizeof(t_cl))) == NULL)
 		ft_error(ERROR_INPUT);
 	opencl->files = init_cl_files();
-	// for (int i = 0; opencl->files[i]; i++)
-		// printf("%s\n", opencl->files[i]);
 	read_kernel(opencl, opencl->files);
 	create_cl(opencl, rt->sdl, rt->scene);
 	return (opencl);

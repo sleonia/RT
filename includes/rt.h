@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 04:06:50 by thorker           #+#    #+#             */
-/*   Updated: 2020/02/01 03:44:21 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/01 04:45:34 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -316,8 +316,8 @@ void					parse_cam_json(t_key_value *json,
 										t_scene *scene, char *sounds[]);
 void					parse_light_json(t_key_value *json,
 										t_scene *scene, char *sounds[]);
-void					parse_material_json(int i, t_key_value *obj,
-										t_scene *scene, char *sounds[]);
+void					parse_material_json(t_key_value *obj, t_object *object,
+										int texture_cnt, char *sounds[]);
 void					parse_objects_json(t_key_value *json,
 										t_scene *scene, char *sounds[]);
 void					parse_skybox_json(t_key_value *json,
@@ -340,6 +340,7 @@ void 					sdl_update(t_sdl *sdl);
 /*
 **						utils
 */
+void					func_error(int err);
 void					ft_error(char *str);
 int						ft_len_arr(char **arr);
 char					*get_next_name(char *name);
