@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/28 10:20:37 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/01 03:10:45 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/01 05:10:11 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static void			init_sdl_music(t_key_value *assets, t_sdl *sdl)
 		sdl->music[i] = NULL;
 	Mix_OpenAudio(22050, AUDIO_S16SYS, 2, 640);
 	initAudio();
-	parse_songs_json(assets, sdl);
+	parse_music_json(assets, sdl);
 	sdl->volume = parse_volume_json(assets);
 	Mix_VolumeMusic(sdl->volume);
 	parse_sounds_json(assets, sdl);
@@ -34,7 +34,8 @@ static void			set_window_icon(t_key_value *assets, t_sdl *sdl)
 	SDL_Surface		*sur_img;
 	SDL_Surface		*conv_sur_img;
 
-	icon = parse_icon_json(assets, sdl);
+	if (!(icon = parse_icon_json(assets, sdl)))
+		return ;
 	if (!(sur_win = SDL_CreateRGBSurface(0, WIDTH, HEIGHT, 32, 0xFF000000,
 										0x00FF0000, 0x0000FF00, 0x000000FF)))
 		ft_error((char *)SDL_GetError());

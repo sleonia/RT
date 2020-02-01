@@ -6,25 +6,25 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/28 18:49:49 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/01 04:14:39 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/01 05:11:27 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-void				parse_songs_json(t_key_value *assets, t_sdl *sdl)
+void				parse_music_json(t_key_value *assets, t_sdl *sdl)
 {
 	int				i;
 	char			*arg;
-	char			*songs_name;
-	t_array			*songs;
+	char			*music_name;
+	t_array			*music;
 
 	i = -1;
-	if (get_array(assets, "songs", &songs) != 0)
-		ft_error("Error songs");
-	while (++i < songs->length)
+	if (get_array(assets, "music", &music) != 0)
+		ft_error("\033[31mError music\033[0m");
+	while (++i < music->length)
 	{
-		if (!(sdl->music[i] = Mix_LoadMUS(((char **)(songs->value))[i])))
+		if (!(sdl->music[i] = Mix_LoadMUS(((char **)(music->value))[i])))
 			ft_error((char *)SDL_GetError());
 	}
 }
@@ -37,7 +37,7 @@ void				parse_sounds_json(t_key_value *assets, t_sdl *sdl)
 
 	i = -1;
 	if (get_array(assets, "sounds", &sounds) != 0)
-		ft_error("Error sounds");
+		ft_error("\033[31mError sounds\033[0m");
 	while (++i < sounds->length)
 	{
 		if (!(sdl->sounds[i] = ((char **)(sounds->value))[i]))
@@ -51,7 +51,7 @@ int					parse_volume_json(t_key_value *assets)
 	t_key_value		*volume_obj;
 
 	if (!get_int(assets, "volume", &volume))
-		ft_error("Error songs");
+		return (59);
 	return (volume);
 }
 
@@ -61,7 +61,7 @@ char				*parse_icon_json(t_key_value *assets, t_sdl *sdl)
 	t_key_value		*icons;
 
 	if (get_str(assets, "icon", &icon_name) != 0)
-		ft_error("Error icon");
+		return (NULL);
 	return (icon_name);
 }
 
@@ -70,6 +70,6 @@ t_key_value			*parse_assets(t_key_value *json, t_sdl *sdl)
 	t_key_value		*assets;
 
 	if (get_node(json, "assets", &assets) != 0)
-		ft_error("ERROR_INPUT1");
+		ft_error("\033[31mError assets\033[0m");
 	return (assets);
 }

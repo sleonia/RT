@@ -1,5 +1,5 @@
 {
-	"camera":
+	"casmera":
 	{
 		"position":					[1.570796, 0.5, -10.5],
 		"phi":						90.0,
@@ -7,8 +7,8 @@
 	},
 	"textures":
 	[
-		"./textures/sample.jpg",
-		"./textures/larkspur.jpg"
+		"./assets/textures/sample.jpg",
+		"./assets/textures/larkspur.jpg"
 	],
 	"skybox":
 	{
@@ -66,16 +66,16 @@
 	],
 	"assets":
 	{
-		"songs":
+		"music":
 		[
-									"./music/seize_the_day.mp3"
+									"./assets/music/seize_the_day.mp3"
 		],
 		"sounds":
 		[
-									"./music/fisting-is-300.wav",
-									"./music/Boy_next_door.wav"
+									"./assets/sounds/fisting-is-300.wav",
+									"./assets/sounds/Boy_next_door.wav"
 		],
-		"icon":						"./textures/icon.jpg",
+		"icon":						"./assets/icons/shrek.jpg",
 		"volume":					"10"
 	}
 }

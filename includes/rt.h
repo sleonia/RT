@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 04:06:50 by thorker           #+#    #+#             */
-/*   Updated: 2020/02/01 04:45:34 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/01 05:08:26 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -305,7 +305,7 @@ float					cl_length(cl_float3 v);
 **						parse
 */
 void					parse_sounds_json(t_key_value *assets, t_sdl *sdl);
-void					parse_songs_json(t_key_value *assets, t_sdl *sdl);
+void					parse_music_json(t_key_value *assets, t_sdl *sdl);
 void					parse_array_of_float(t_array *array, cl_float3 *pos);
 int						parse_volume_json(t_key_value *assets);
 void					parse_texture(t_key_value *json, t_scene *scene, char *sounds[]);
