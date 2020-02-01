@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rt.h                                               :+:      :+:    :+:   */
+/*   rtv1.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: deladia <deladia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 04:06:50 by thorker           #+#    #+#             */
-/*   Updated: 2020/02/01 13:30:40 by deladia          ###   ########.fr       */
+/*   Updated: 2020/02/01 15:04:15 by deladia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef RT_RT_H
-# define RT_RT_H
+#ifndef RTV1_RTV1_H
+# define RTV1_RTV1_H
 
 # ifndef OPENCL___
 #  include "libft.h"
@@ -247,6 +247,7 @@ void					rotation(SDL_Event event, t_sdl *sdl, t_cam *cam);
 */
 
 char					**init_cl_files(void);
+void					create_cl(t_cl *cl, t_sdl *sdl, t_scene *scene);
 void					init_light(t_light **light, int nbr);
 void					init_objects(t_object **object, int nbr);
 int						set_opencl_arg(t_cl *cl, t_sdl *sdl, t_scene *scene);
@@ -266,7 +267,7 @@ cl_float3				spherical_coor(float phi, float tetta);
 cl_float3				spher_norm(cl_float3 vec);
 void					calc_screen(t_cam *cam);
 cl_float3				cl_mult_n(cl_float3 v1, float n);
-void					cl_normlize(cl_float3 *v);
+void					cl_normalize(cl_float3 *v);
 cl_float3				cl_cross(cl_float3 v1, cl_float3 v2);
 cl_float3				cl_sum(cl_float3 v1, cl_float3 v2);
 cl_float3				cl_minus(cl_float3 v1, cl_float3 v2);

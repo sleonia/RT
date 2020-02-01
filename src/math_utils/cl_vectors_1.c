@@ -6,7 +6,7 @@
 /*   By: deladia <deladia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/28 12:29:13 by sleonia           #+#    #+#             */
-/*   Updated: 2020/01/31 06:40:51 by deladia          ###   ########.fr       */
+/*   Updated: 2020/02/01 15:22:34 by deladia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ cl_float3	cl_mult_n(cl_float3 v1, float n)
 	return (v);
 }
 
-void		cl_normlize(cl_float3 *v)
+void		cl_normalize(cl_float3 *v)
 {
 	float l;
 

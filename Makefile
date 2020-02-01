@@ -6,7 +6,7 @@
 #    By: deladia <deladia@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/01 04:18:29 by sleonia           #+#    #+#              #
-#    Updated: 2020/02/01 13:09:30 by deladia          ###   ########.fr        #
+#    Updated: 2020/02/01 15:26:11 by deladia          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -218,11 +218,13 @@ clean:
 	@clear
 	@rm -rf $(OBJ_DIR)
 	@make clean -C $(LIBFT_DIR)
+	@make clean -C $(LIBTOJSON_DIR)
 	@make clean -C $(SDL2_AUDIO_DIR)
 
 fclean: clean
 	@rm -rf $(NAME)
-	@make clean -C $(LIBFT_DIR)
+	@make fclean -C $(LIBFT_DIR)
+	@make fclean -C $(LIBTOJSON_DIR)
 	@make fclean -C $(SDL2_AUDIO_DIR)
 
 re: fclean $(NAME)

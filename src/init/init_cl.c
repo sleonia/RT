@@ -3,14 +3,33 @@
 /*                                                        :::      ::::::::   */
 /*   init_cl.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: deladia <deladia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/01 04:21:09 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/01 04:23:16 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/01 15:22:34 by deladia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
+
+static void		cl_create_buffer_1(t_cl *cl, t_scene *scene)
+{
+	cl_int		ret;
+
+	ret = 0;
+	if ((cl->memobjs[3] = clCreateBuffer(cl->context,
+			CL_MEM_READ_WRITE | CL_MEM_COPY_HOST_PTR,
+			sizeof(t_light) * scene->count_lights, scene->light, &ret))
+			&& ret != 0)
+		ft_error("clCreateBuffer");
+	if ((cl->memobjs[4] = clCreateBuffer(cl->context, CL_MEM_READ_WRITE,
+		sizeof(cl_int) * scene->texture_length, NULL, &ret)) && ret != 0)
+		ft_error("clCreateBuffer");
+	if ((cl->memobjs[5] = clCreateBuffer(cl->context,
+			CL_MEM_READ_WRITE, sizeof(cl_int) * scene->texture_cnt * 3,
+			NULL, &ret)) && ret != 0)
+		ft_error("clCreateBuffer");
+}
 
 static void		cl_create_buffer(t_cl *cl, t_scene *scene)
 {
@@ -26,19 +45,10 @@ static void		cl_create_buffer(t_cl *cl, t_scene *scene)
 		ft_error("clCreateBuffer");
 	if ((cl->memobjs[2] = clCreateBuffer(cl->context,
 			CL_MEM_READ_WRITE | CL_MEM_COPY_HOST_PTR,
-			sizeof(t_object) * 6, scene->object, &ret)) && ret != 0)
+			sizeof(t_object) * scene->count_objects, scene->object, &ret))
+			&& ret != 0)
 		ft_error("clCreateBuffer");
-	if ((cl->memobjs[3] = clCreateBuffer(cl->context,
-			CL_MEM_READ_WRITE | CL_MEM_COPY_HOST_PTR,
-			sizeof(t_light) * 1, scene->light, &ret)) && ret != 0)
-		ft_error("clCreateBuffer");
-	if ((cl->memobjs[4] = clCreateBuffer(cl->context, CL_MEM_READ_WRITE,
-		sizeof(cl_int) * scene->texture_length, NULL, &ret)) && ret != 0)
-		ft_error("clCreateBuffer");
-	if ((cl->memobjs[5] = clCreateBuffer(cl->context,
-			CL_MEM_READ_WRITE, sizeof(cl_int) * scene->texture_cnt * 3,
-			NULL, &ret)) && ret != 0)
-		ft_error("clCreateBuffer");
+	cl_create_buffer_1(cl, scene);
 }
 
 static void		print_build_error(t_cl *cl, cl_int ret, size_t log_size)
@@ -78,7 +88,7 @@ static void		create_cl_1(t_cl *cl, t_scene *scene)
 	cl_create_buffer(cl, scene);
 }
 
-static void		create_cl(t_cl *cl, t_sdl *sdl, t_scene *scene)
+void			create_cl(t_cl *cl, t_sdl *sdl, t_scene *scene)
 {
 	int			ret;
 
@@ -96,16 +106,4 @@ static void		create_cl(t_cl *cl, t_sdl *sdl, t_scene *scene)
 		ft_error("clCreateCommandQueue");
 	create_cl_1(cl, scene);
 	set_opencl_arg(cl, sdl, scene);
-}
-
-t_cl			*init_cl(t_key_value *json, t_rt *rt)
-{
-	t_cl		*opencl;
-
-	if ((opencl = (t_cl *)ft_memalloc(sizeof(t_cl))) == NULL)
-		ft_error(ERROR_INPUT);
-	opencl->files = init_cl_files();
-	read_kernel(opencl, opencl->files);
-	create_cl(opencl, rt->sdl, rt->scene);
-	return (opencl);
 }

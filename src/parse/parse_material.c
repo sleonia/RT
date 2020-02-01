@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_material.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: deladia <deladia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 20:25:59 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/01 04:49:19 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/01 15:22:34 by deladia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 static void			set_default_value(t_object *object, char *sounds[])
 {
 	object->material.color = (cl_float3){1.f, 1.f, 1.f};
-	object->material.ambient = 0;
-	object->material.diffuse = 0;
-	object->material.specular = 0;
+	object->material.ambient = 1.0;
+	object->material.diffuse = 0.4;
+	object->material.specular = 50;
 	object->material.reflection = 0;
 	object->material.refraction = 0;
 	object->material.texture_id = -1;

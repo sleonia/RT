@@ -1,6 +1,6 @@
 {
 	"files.associations": {
-		"rtv1.h": "c",
+		"rt.h": "c",
 		"ios": "c",
 		"algorithm": "c",
 		"stb_image_write.h": "c",
