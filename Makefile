@@ -6,7 +6,7 @@
 #    By: deladia <deladia@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/01 04:18:29 by sleonia           #+#    #+#              #
-#    Updated: 2020/02/01 15:26:11 by deladia          ###   ########.fr        #
+#    Updated: 2020/02/01 15:36:26 by deladia          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -101,7 +101,6 @@ UTILS_FILES =							\
 			ft_len_arr.c				\
 			get_next_name.c				\
 			int_to_rgb.c				\
-			put_pixel.c					\
 			read_kernel.c				\
 			realloc_img.c				\
 			save_image.c				\

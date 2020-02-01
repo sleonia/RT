@@ -6,7 +6,7 @@
 /*   By: deladia <deladia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/28 11:38:10 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/01 13:36:06 by deladia          ###   ########.fr       */
+/*   Updated: 2020/02/01 15:35:58 by deladia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,7 @@ void			events_processing(char *flag, t_sdl *sdl,
 	{
 		if (sdl->event.type == SDL_QUIT)
 			*flag = 1;
-		if (key_events(flag, sdl, scene, cl) ||
-		mouse_events(flag, sdl, scene, cl))
+		if (key_events(flag, sdl, scene) || mouse_events(flag, sdl, scene))
 		{
 			calc_screen(&scene->cam);
 			set_opencl_arg(cl, sdl, scene);

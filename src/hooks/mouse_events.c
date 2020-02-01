@@ -6,14 +6,15 @@
 /*   By: deladia <deladia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/28 11:50:12 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/01 13:31:16 by deladia          ###   ########.fr       */
+/*   Updated: 2020/02/01 15:36:17 by deladia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-int			mouse_events(char *quit, t_sdl *sdl,
-								t_scene *scene, t_cl *cl)
+int			mouse_events(char *flag, t_sdl *sdl,
+								t_scene *scene)
 {
+	
 	return (0);
 }

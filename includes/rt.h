@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rtv1.h                                             :+:      :+:    :+:   */
+/*   rt.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: deladia <deladia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 04:06:50 by thorker           #+#    #+#             */
-/*   Updated: 2020/02/01 15:04:15 by deladia          ###   ########.fr       */
+/*   Updated: 2020/02/01 15:35:13 by deladia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -236,9 +236,9 @@ typedef struct			s_rt
 void					events_processing(char *quit, t_sdl *sdl,
 								t_scene *scene, t_cl *cl);
 int						key_events(char *quit, t_sdl *sdl,
-								t_scene *scene, t_cl *cl);
+								t_scene *scene);
 int						mouse_events(char *quit, t_sdl *sdl,
-								t_scene *scene, t_cl *cl);
+								t_scene *scene);
 void					move(SDL_Event event, t_sdl *sdl, t_cam *cam);
 void					rotation(SDL_Event event, t_sdl *sdl, t_cam *cam);
 
