@@ -6,7 +6,7 @@
 /*   By: deladia <deladia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/01 04:22:13 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/01 13:33:23 by deladia          ###   ########.fr       */
+/*   Updated: 2020/02/01 13:36:45 by deladia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static void		set_arg_2(t_cl *cl, t_sdl *sdl, t_scene *scene)
 									NULL)) != 0)
 		func_error(-10);
 	if ((ret = clEnqueueNDRangeKernel(cl->cmd_queue, cl->kernel, 2, NULL,
-							cl->global_work_size, cl->local_work_size, 0, NULL, NULL)) != 0)
+			cl->global_work_size, cl->local_work_size, 0, NULL, NULL)) != 0)
 		func_error(-10);
 	if ((ret = clEnqueueReadBuffer(cl->cmd_queue, cl->memobjs[0], CL_TRUE, 0,
 									HEIGHT * WIDTH * sizeof(cl_int),
