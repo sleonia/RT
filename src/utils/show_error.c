@@ -6,7 +6,7 @@
 /*   By: deladia <deladia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/01 02:35:38 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/01 10:01:33 by deladia          ###   ########.fr       */
+/*   Updated: 2020/02/01 11:06:37 by deladia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void				show_error(char *error, char *sounds[])
 	int				id;
 	char			*sh_command;
 
-	sh_command = ft_strjoin(DISPLAY_NOT, E_CAM);
+	sh_command = ft_strjoin(DISPLAY_NOT, error);
 	system(sh_command);
 	srand(time(NULL));
 	id = rand() % ft_len_arr((void **)sounds);
