@@ -6,7 +6,7 @@
 #    By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/01 04:18:29 by sleonia           #+#    #+#              #
-#    Updated: 2020/02/01 04:22:34 by sleonia          ###   ########.fr        #
+#    Updated: 2020/02/01 06:39:40 by sleonia          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -103,6 +103,7 @@ UTILS_FILES =							\
 			put_pixel.c					\
 			read_kernel.c				\
 			realloc_img.c				\
+			save_image.c				\
 			show_error.c				\
 
 UTILS_DIR = ./src/utils/

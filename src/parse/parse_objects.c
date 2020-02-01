@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/28 21:51:06 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/01 04:47:29 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/01 05:52:25 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ void				parse_objects_json(t_key_value *json, t_scene *scene,
 		check_type(str_value, &(scene->object[i]), json_obj);
 		parse_material_json(json_obj, &(scene->object[i]),
 							scene->texture_cnt, sounds);
+		ft_strdel(&str_value);
 	}
 	scene->count_objects = json_obj_array->length;
 }

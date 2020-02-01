@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/28 10:16:20 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/01 03:45:01 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/01 05:55:06 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,5 +24,6 @@ t_rt				*init_rt(char **av)
 	rt->sdl = init_sdl(json);
 	rt->scene = init_scene(json, rt->sdl->sounds);
 	rt->opencl = init_cl(json, rt);
+	ft_return(&json);
 	return (rt);
 }

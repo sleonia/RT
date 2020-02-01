@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 04:06:50 by thorker           #+#    #+#             */
-/*   Updated: 2020/02/01 05:08:26 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/01 06:40:11 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -348,6 +348,7 @@ cl_int3					int_to_rgb(int src_color);
 int 					*put_pixel(double x, double y, int color, t_sdl *sdl);
 int						read_kernel(t_cl *cl, char **files_cl);
 int						realloc_img(t_scene *scene, char *file_name);
+void					save_image(t_sdl *sdl);
 void					show_error(char *error, char *sounds[]);
 
 # endif
