@@ -6,45 +6,46 @@
 /*   By: deladia <deladia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 04:06:50 by thorker           #+#    #+#             */
-/*   Updated: 2020/02/01 10:01:09 by deladia          ###   ########.fr       */
+/*   Updated: 2020/02/01 10:24:32 by deladia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef RT_RT_H
 # define RT_RT_H
 
-
-#ifndef OPENCL___
-#include <OpenCL/opencl.h>
-#include "libft.h"
-#include "rt_error.h"
-#include <SDL.h>
-#include "audio.h"
-#include "to_json.h"
-#include <SDL_image.h>
-#include <SDL_mixer.h>
-#include <stdbool.h>
-#include <math.h>
-#include <time.h>
-
-# define WIDTH			1280
-# define HEIGHT			1024
-# define WHITE			0xFFFFFF
-# define BLACK			0x000000
-# define STEP			0.1
-# define NBR_OF_SONGS	20
-# define DISPLAY_NOT	"osascript -e \'display notification\""
+# ifndef OPENCL___
+#  include <OpenCL/opencl.h>
+#  include "libft.h"
+#  include "rt_error.h"
+#  include <SDL.h>
+#  include "audio.h"
+#  include "to_json.h"
+#  include <SDL_image.h>
+#  include <SDL_mixer.h>
+#  include <stdbool.h>
+#  include <math.h>
+#  include <time.h>
+#  define WIDTH			1280
+#  define HEIGHT			1024
+#  define WHITE			0xFFFFFF
+#  define BLACK			0x000000
+#  define STEP			0.1
+#  define NBR_OF_SONGS	20
+#  define DISPLAY_NOT	"osascript -e \'display notification\""
 # endif
 
 typedef struct			s_cylinder
 {
 # ifndef OPENCL___
+
 	cl_float3			center;
 	cl_float3			axis;
 # else
+
 	float3				center;
 	float3				axis;
 # endif
+
 	float				radius;
 	float				length;
 }						t_cylinder;
@@ -52,22 +53,28 @@ typedef struct			s_cylinder
 typedef struct			s_plane
 {
 # ifndef OPENCL___
+
 	cl_float3			axis;
 # else
+
 	float3				axis;
 # endif
+
 	float				dist;
 }						t_plane;
 
 typedef struct			s_cone
 {
 # ifndef OPENCL___
+
 	cl_float3			center;
 	cl_float3			axis;
 # else
+
 	float3				center;
 	float3				axis;
 # endif
+
 	float				length;
 	float				tan;
 }						t_cone;
@@ -75,10 +82,13 @@ typedef struct			s_cone
 typedef struct			s_sphere
 {
 # ifndef OPENCL___
+
 	cl_float3			center;
 # else
+
 	float3				center;
 # endif
+
 	float				radius;
 }						t_sphere;
 
@@ -93,13 +103,16 @@ union					u_objects
 typedef struct			s_material
 {
 # ifndef OPENCL___
+
 	cl_float3			color;
 # else
+
 	float3				color;
 # endif
+
 	float				ambient;
 	float				diffuse;
-	float				specular; //от 0 до 100
+	float				specular;
 	float				refraction;
 	float				reflection;
 	int					texture_id;
@@ -108,28 +121,34 @@ typedef struct			s_material
 typedef struct			s_cam
 {
 # ifndef OPENCL___
+
 	cl_float3			pos;
 	cl_float3			ox;
 	cl_float3			oy;
 	cl_float3			oz;
 # else
+
 	float3				pos;
 	float3				ox;
 	float3				oy;
 	float3				oz;
 # endif
+
 	float				phi;
 	float				tetta;
 }						t_cam;
 
-typedef struct 			s_light
+typedef struct			s_light
 {
 # ifndef OPENCL___
+
 	cl_float3			pos;
 # else
+
 	float3				pos;
 # endif
-	float 				intensity;
+
+	float				intensity;
 }						t_light;
 
 enum					e_obj_type
@@ -154,7 +173,7 @@ typedef struct			s_scene
 	t_cam				cam;
 	int					count_objects;
 	int					count_lights;
-	int					skybox_id;	
+	int					skybox_id;
 	int					*texture;
 	int					*texture_param;
 	int					texture_length;
@@ -166,12 +185,15 @@ typedef struct			s_scene
 typedef struct			s_cylinder_params
 {
 # ifndef OPENCL___
+
 	cl_float3			pos;
 	cl_float3			axis;
 # else
+
 	float3				pos;
 	float3				axis;
 # endif
+
 	float				radius;
 	int					color;
 	int					specular;
@@ -181,12 +203,15 @@ typedef struct			s_cylinder_params
 typedef struct			s_cone_params
 {
 # ifndef OPENCL___
+
 	cl_float3			pos;
 	cl_float3			axis;
 # else
+
 	float3				pos;
 	float3				axis;
 # endif
+
 	float				tan;
 	int					color;
 	int					specular;
@@ -196,12 +221,15 @@ typedef struct			s_cone_params
 typedef struct			s_plane_params
 {
 # ifndef OPENCL___
+
 	cl_float3			pos;
 	cl_float3			normal;
 # else
+
 	float3				pos;
 	float3				normal;
 # endif
+
 	int					color;
 	int					specular;
 	float				reflective;
@@ -210,10 +238,13 @@ typedef struct			s_plane_params
 typedef struct			s_sphere_params
 {
 # ifndef OPENCL___
+
 	cl_float3			pos;
 # else
+
 	float3				pos;
 # endif
+
 	float				radius;
 	int					color;
 	int					specular;
@@ -221,6 +252,7 @@ typedef struct			s_sphere_params
 }						t_sphere_params;
 
 # ifndef OPENCL___
+
 typedef struct			s_cl
 {
 	cl_platform_id		platform_id;
@@ -348,7 +380,6 @@ void					ft_error(char *str);
 int						ft_len_arr(void **arr);
 char					*get_next_name(char *name);
 cl_int3					int_to_rgb(int src_color);
-int						*put_pixel(double x, double y, int color, t_sdl *sdl);
 int						read_kernel(t_cl *cl, char **files_cl);
 int						realloc_img(t_scene *scene, char *file_name);
 void					save_image(t_sdl *sdl);

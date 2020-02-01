@@ -118,7 +118,7 @@ __kernel void RT(__global int *arr, __global t_cam *cam, __global t_object *obje
 	t_hitting	light_hit;
 	float	ambient = 0.2f;
 	float cache_width = 1.f / WIDTH;
-	int		fsaa = 2;
+	int		fsaa = 0;
 	int		cnt_reflection = 0;
 	float3	tmp_color;
 

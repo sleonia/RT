@@ -43,7 +43,7 @@
 				"ambient":			1.0,
 				"diffuse":			0.4,
 				"specular":			100.0,
-				"reflection":		0.0,
+				"reflection":		0.9,
 				"refraction":		0.0,
 				"texture_id":		1
 			}
@@ -58,7 +58,7 @@
 				"ambient":			1.0,
 				"diffuse":			0.4,
 				"specular":			50.0,
-				"reflection":		0.0,
+				"reflection":		0.9,
 				"refraction":		0.0,
 				"texture_id":		1
 			}
