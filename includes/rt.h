@@ -6,7 +6,7 @@
 /*   By: deladia <deladia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 04:06:50 by thorker           #+#    #+#             */
-/*   Updated: 2020/02/01 10:24:32 by deladia          ###   ########.fr       */
+/*   Updated: 2020/02/01 10:26:35 by deladia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 #  include <math.h>
 #  include <time.h>
 #  define WIDTH			1280
-#  define HEIGHT			1024
+#  define HEIGHT		1024
 #  define WHITE			0xFFFFFF
 #  define BLACK			0x000000
 #  define STEP			0.1
@@ -297,6 +297,7 @@ typedef struct			s_rt
 /*
 **						hooks
 */
+
 void					events_processing(char *quit, t_sdl *sdl,
 								t_scene *scene, t_cl *cl);
 void					key_events(char *quit, t_sdl *sdl,
@@ -309,6 +310,7 @@ void					rotation(SDL_Event event, t_sdl *sdl, t_cam *cam);
 /*
 **						init
 */
+
 char					**init_cl_files(void);
 void					init_light(t_light **light, int nbr);
 void					init_objects(t_object **object, int nbr);
@@ -324,6 +326,7 @@ int						*fill_texture_for_object(char *texture_path,
 /*
 **						math_utils
 */
+
 cl_float3				spherical_coor(float phi, float tetta);
 cl_float3				spher_norm(cl_float3 vec);
 void					calc_screen(t_cam *cam);
@@ -337,6 +340,7 @@ float					cl_length(cl_float3 v);
 /*
 **						parse
 */
+
 void					parse_sounds_json(t_key_value *assets, t_sdl *sdl);
 void					parse_music_json(t_key_value *assets, t_sdl *sdl);
 void					parse_array_of_float(t_array *array, cl_float3 *pos);
@@ -366,6 +370,7 @@ void					parse_cylinder_json(t_key_value *obj,
 /*
 **						sdl_utils
 */
+
 void					change_music(Mix_Music *music[]);
 void					sdl_loop(t_sdl *sdl, t_scene *scene, t_cl *cl);
 void					sdl_quit(t_sdl *sdl);
