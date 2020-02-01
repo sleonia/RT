@@ -6,12 +6,12 @@
 /*   By: deladia <deladia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 04:06:50 by thorker           #+#    #+#             */
-/*   Updated: 2020/02/01 15:35:13 by deladia          ###   ########.fr       */
+/*   Updated: 2020/02/01 15:39:00 by deladia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef RTV1_RTV1_H
-# define RTV1_RTV1_H
+#ifndef RT_RT_H
+# define RT_RT_H
 
 # ifndef OPENCL___
 #  include "libft.h"
