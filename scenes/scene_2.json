@@ -62,6 +62,55 @@
 				"refraction":		0.0,
 				"texture_id":		1
 			}
+		},
+		{
+			"type":					"plane",
+			"axis":					[0.0, 1.0, 1.0],
+			"dist":					30.0,
+			"material":
+			{
+				"color":			[255.0, 0.0, 0.0],
+				"ambient":			1.0,
+				"diffuse":			0.4,
+				"specular":			50.0,
+				"reflection":		0.0,
+				"refraction":		0.0,
+				"texture_id":		-1
+			}
+		},
+		{
+			"type":					"cone",
+			"axis":					[1.0, 1.0, 0.0],
+			"center":				[4.0, 0.0, 10.0],
+			"length":				30.0,
+			"tan":					0.25,
+			"material":
+			{
+				"color":			[255.0, 0.0, 255.0],
+				"ambient":			1.0,
+				"diffuse":			0.4,
+				"specular":			50.0,
+				"reflection":		0.0,
+				"refraction":		0.0,
+				"texture_id":		-1
+			}
+		},
+		{
+			"type":					"cylinder",
+			"axis":					[-1.0, 1.0, 0.0],
+			"center":				[-4.0, 0.0, 10.0],
+			"length":				3000.0,
+			"radius":				2.0,
+			"material":
+			{
+				"color":			[255.0, 0.0, 255.0],
+				"ambient":			1.0,
+				"diffuse":			0.4,
+				"specular":			50.0,
+				"reflection":		0.0,
+				"refraction":		0.0,
+				"texture_id":		-1
+			}
 		}
 	],
 	"assets":
