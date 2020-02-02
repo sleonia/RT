@@ -13,21 +13,21 @@
 	"skybox":
 	{
 		"texture_id":				0,
-		"ambient":					0.8,
+		"ambient":					0.2,
 		"fsaa":						2
 	},
 	"light":
 	[
 		{
-			"intensity":			0.8,
+			"intensity":			0.4,
 			"position":				[3.5, 1.6, -10.0]
 		},
 		{
-			"intensity":			2.8,
+			"intensity":			0.4,
 			"position":				[-3.5, 1.6, -10.0]
 		},
 		{
-			"intensity":			2.8,
+			"intensity":			0.8,
 			"position":				[3.5, 1.6, 10.0]
 		}
 	],
