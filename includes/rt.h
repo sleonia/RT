@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rt.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: deladia <deladia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 04:06:50 by thorker           #+#    #+#             */
-/*   Updated: 2020/02/01 15:39:00 by deladia          ###   ########.fr       */
+/*   Updated: 2020/02/02 20:59:00 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -251,7 +251,7 @@ void					create_cl(t_cl *cl, t_sdl *sdl, t_scene *scene);
 void					init_light(t_light **light, int nbr);
 void					init_objects(t_object **object, int nbr);
 int						set_opencl_arg(t_cl *cl, t_sdl *sdl, t_scene *scene);
-t_cl					*init_cl(t_key_value *json, t_rt *rt);
+t_cl					*init_cl(t_rt *rt);
 t_rt					*init_rt(char **av);
 t_scene					*init_scene(t_key_value *json, char *sounds[]);
 t_sdl					*init_sdl(t_key_value *json);

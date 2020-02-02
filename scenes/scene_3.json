@@ -1,0 +1,58 @@
+{
+	"camera":
+	{
+		"position":					[1.570796, 0.5, -10.5],
+		"phi":						90.0,
+		"tetta":					90.0
+	},
+	"textures":
+	[
+		"./assets/textures/sample.jpg",
+		"./assets/textures/larkspur.jpg"
+	],
+	"skybox":
+	{
+		"texture_id":				0,
+		"ambient":					0.2,
+		"fsaa":						0
+	},
+	"light":
+	[
+		{
+			"intensity":			0.4,
+			"position":				[3.5, 1.6, -10.0]
+		}
+	],
+	"figure":
+	[
+		{
+			"type":					"sphere",
+			"radius":				3.0,
+			"center":				[4.0, 0.0, 10.0],
+			"material":
+			{
+				"color":			[255.0, 255.0, 0.0],
+				"ambient":			1,
+				"diffuse":			1,
+				"specular":			1.0,
+				"reflection":		1,
+				"refraction":		1,
+				"texture_id":		1
+			}
+		}
+	],
+	"assets":
+	{
+		"music":
+		[
+									"./assets/music/Somebody_once_told_me.mp3"
+		],
+		"sounds":
+		[
+									"./assets/sounds/fisting-is-300.wav",
+									"./assets/sounds/Boy_next_door.wav"
+		],
+		"icon":						"./assets/icons/shrek.jpg",
+		"volume":					0
+	}
+}

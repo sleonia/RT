@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_assets.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: deladia <deladia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/28 18:49:49 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/01 15:22:34 by deladia          ###   ########.fr       */
+/*   Updated: 2020/02/02 18:15:43 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int					parse_volume_json(t_key_value *assets)
 	int				volume;
 	t_key_value		*volume_obj;
 
-	if (!get_int(assets, "volume", &volume))
+	if (get_int(assets, "volume", &volume) != 0)
 		return (59);
 	return (volume);
 }

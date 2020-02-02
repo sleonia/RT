@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sdl_loop.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: deladia <deladia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/28 11:30:45 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/01 13:27:30 by deladia          ###   ########.fr       */
+/*   Updated: 2020/02/02 20:43:56 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,22 @@
 void		sdl_loop(t_sdl *sdl, t_scene *scene, t_cl *cl)
 {
 	char	flag;
-
 	flag = 0;
+	SDL_Event		event;
+	Uint32			timeout;
+
+	SDL_SetRelativeMouseMode(SDL_TRUE);
 	sdl_update(sdl);
 	while (flag != 1)
 	{
-		events_processing(&flag, sdl, scene, cl);
+		timeout = SDL_GetTicks() + 30;
+		while (SDL_PollEvent(&sdl->event) && (sdl->event.type == SDL_KEYUP
+			|| !SDL_TICKS_PASSED(SDL_GetTicks(), timeout)))
+		{
+			events_processing(&flag, sdl, scene, cl);
+		}
+		if (sdl->event.type == SDL_QUIT)
+			break ;
 	}
 	sdl_quit(sdl);
 }
