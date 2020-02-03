@@ -7,8 +7,8 @@
 	},
 	"textures":
 	[
-		"./assets/textures/sample.jpg",
-		"./assets/textures/larkspur.jpg"
+		"./assets/textures/larkspur.jpg",
+		"./assets/textures/sample.jpg"
 	],
 	"skybox":
 	{
@@ -32,12 +32,27 @@
 			"material":
 			{
 				"color":			[255.0, 255.0, 0.0],
-				"ambient":			1,
-				"diffuse":			1,
+				"ambient":			1.0,
+				"diffuse":			1.0,
 				"specular":			1.0,
-				"reflection":		1,
-				"refraction":		1,
+				"reflection":		0.9,
+				"refraction":		0.0,
 				"texture_id":		1
+			}
+		},
+		{
+			"type":					"sphere",
+			"radius":				3.0,
+			"center":				[-4.0, 0.0, 10.0],
+			"material":
+			{
+				"color":			[255.0, 255.0, 0.0],
+				"ambient":			1.0,
+				"diffuse":			1.0,
+				"specular":			1.0,
+				"reflection":		0.0,
+				"refraction":		1.055,
+				"texture_id":		-1
 			}
 		}
 	],

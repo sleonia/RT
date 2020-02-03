@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rt.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: deladia <deladia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 04:06:50 by thorker           #+#    #+#             */
-/*   Updated: 2020/02/02 20:59:00 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/03 15:17:28 by deladia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -255,6 +255,7 @@ t_cl					*init_cl(t_rt *rt);
 t_rt					*init_rt(char **av);
 t_scene					*init_scene(t_key_value *json, char *sounds[]);
 t_sdl					*init_sdl(t_key_value *json);
+void					print_build_error(t_cl *cl, cl_int ret, size_t log_size);
 int						*fill_texture_for_object(char *texture_path,
 											int *texture_pixels,
 											int *texture_param);

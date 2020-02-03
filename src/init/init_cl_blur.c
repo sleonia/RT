@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_cl.c                                          :+:      :+:    :+:   */
+/*   init_cl_blur.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: deladia <deladia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/02/01 04:21:09 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/03 15:17:02 by deladia          ###   ########.fr       */
+/*   Created: 2020/02/03 15:15:57 by deladia           #+#    #+#             */
+/*   Updated: 2020/02/03 15:39:16 by deladia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-static void		cl_create_buffer_1(t_cl *cl, t_scene *scene)
+static void		cl_create_buffer_blur_1(t_cl *cl, t_scene *scene)
 {
 	cl_int		ret;
 
@@ -31,7 +31,7 @@ static void		cl_create_buffer_1(t_cl *cl, t_scene *scene)
 		ft_error("clCreateBuffer");
 }
 
-static void		cl_create_buffer(t_cl *cl, t_scene *scene)
+static void		cl_create_buffer_blur(t_cl *cl, t_scene *scene)
 {
 	cl_int		ret;
 
@@ -48,30 +48,17 @@ static void		cl_create_buffer(t_cl *cl, t_scene *scene)
 			sizeof(t_object) * scene->count_objects, scene->object, &ret))
 			&& ret != 0)
 		ft_error("clCreateBuffer");
-	cl_create_buffer_1(cl, scene);
+	cl_create_buffer_blur_1(cl, scene);
 }
 
-void			print_build_error(t_cl *cl, cl_int ret, size_t log_size)
-{
-	char		*log;
-
-	clGetProgramBuildInfo(cl->program, cl->device_id,
-						CL_PROGRAM_BUILD_LOG, 0, NULL, &log_size);
-	log = (char*)malloc(log_size);
-	clGetProgramBuildInfo(cl->program, cl->device_id,
-						CL_PROGRAM_BUILD_LOG, log_size, log, NULL);
-	ft_putstr("build program - ERROR(");
-	ft_putnbr(ret);
-	ft_putstr(")\n");
-	ft_putendl(log);
-	exit(-1);
-}
-
-static void		create_cl_1(t_cl *cl, t_scene *scene)
+void			create_cl_blur(t_cl *cl, t_scene *scene)
 {
 	cl_int		ret;
 	size_t		log_size;
 
+	//free cl->program_source;
+	//free cl->program_size;
+	read_kernel(cl, files_cl);
 	if ((cl->program = clCreateProgramWithSource(cl->context, cl->count_files,
 						(const char **)cl->program_source,
 						(const size_t *)cl->program_size, &ret)) && ret != 0)
@@ -79,31 +66,7 @@ static void		create_cl_1(t_cl *cl, t_scene *scene)
 	if ((ret = clBuildProgram(cl->program, 1, &cl->device_id,
 						"-DOPENCL___ -I include/ ", NULL, NULL)) != 0)
 		print_build_error(cl, ret, log_size);
-	if ((cl->kernel = clCreateKernel(cl->program, "RT", &ret)) && ret != 0)
+	if ((cl->kernel = clCreateKernel(cl->program, "blur", &ret)) && ret != 0)
 		ft_error("clBuildProgram");
-	cl->global_work_size[0] = WIDTH;
-	cl->global_work_size[1] = HEIGHT;
-	cl->local_work_size[0] = 16;
-	cl->local_work_size[1] = 16;
-	cl_create_buffer(cl, scene);
-}
-
-void			create_cl(t_cl *cl, t_sdl *sdl, t_scene *scene)
-{
-	int			ret;
-
-	if ((ret = clGetPlatformIDs(1, &cl->platform_id, &cl->ret_num_platforms))
-		!= 0)
-		ft_error("clGetPlatformIDs");
-	if ((ret = clGetDeviceIDs(cl->platform_id, CL_DEVICE_TYPE_GPU, 1,
-							&cl->device_id, &cl->ret_num_devices)) != 0)
-		ft_error("clGetDeviceIDs");
-	if ((cl->context = clCreateContext(NULL, 1, &cl->device_id,
-									NULL, NULL, &ret)) && ret != 0)
-		ft_error("clCreateContext");
-	if ((cl->cmd_queue = clCreateCommandQueue(cl->context, cl->device_id,
-											0, &ret)) && ret != 0)
-		ft_error("clCreateCommandQueue");
-	create_cl_1(cl, scene);
-	set_opencl_arg(cl, sdl, scene);
+	cl_create_buffer_blur(cl, scene);
 }
