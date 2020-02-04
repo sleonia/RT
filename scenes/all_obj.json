@@ -1,0 +1,126 @@
+{
+	"camera":
+	{
+		"position":					[0.0, 0.0, -30.0],
+		"phi":						90.0,
+		"tetta":					90.0
+	},
+	"textures":
+	[
+		"./assets/textures/sample.jpg",
+		"./assets/textures/larkspur.jpg"
+	],
+	"skybox":
+	{
+		"texture_id":				0,
+		"ambient":					0.2,
+		"fsaa":						2
+	},
+	"light":
+	[
+		{
+			"intensity":			0.2,
+			"position":				[3.5, 1.6, -10.0]
+		},
+		{
+			"intensity":			0.2,
+			"position":				[-3.5, 1.6, -10.0]
+		}
+	],
+	"figure":
+	[
+		{
+			"type":					"sphere",
+			"radius":				3.0,
+			"center":				[4.0, 0.0, 10.0],
+			"material":
+			{
+				"color":			[105.0, 105.0, 100.0],
+				"ambient":			1.0,
+				"diffuse":			0.4,
+				"specular":			100.0,
+				"reflection":		0.0,
+				"refraction":		0.0,
+				"texture_id":		-1
+			}
+		},
+		{
+			"type":					"sphere",
+			"radius":				3.0,
+			"center":				[-4.0, 0.0, 10.0],
+			"material":
+			{
+				"color":			[255.0, 0.0, 0.0],
+				"ambient":			1.0,
+				"diffuse":			0.4,
+				"specular":			50.0,
+				"reflection":		0.0,
+				"refraction":		0.0,
+				"texture_id":		-1
+			}
+		},
+		{
+			"type":					"plane",
+			"axis":					[0.0, 1.0, 1.0],
+			"dist":					30.0,
+			"material":
+			{
+				"color":			[255.0, 0.0, 0.0],
+				"ambient":			1.0,
+				"diffuse":			0.4,
+				"specular":			50.0,
+				"reflection":		0.0,
+				"refraction":		0.0,
+				"texture_id":		-1
+			}
+		},
+		{
+			"type":					"cone",
+			"axis":					[1.0, 1.0, 0.0],
+			"center":				[4.0, 0.0, 10.0],
+			"length":				30.0,
+			"tan":					0.25,
+			"material":
+			{
+				"color":			[255.0, 0.0, 255.0],
+				"ambient":			1.0,
+				"diffuse":			0.4,
+				"specular":			50.0,
+				"reflection":		0.0,
+				"refraction":		0.0,
+				"texture_id":		-1
+			}
+		},
+		{
+			"type":					"cylinder",
+			"axis":					[-1.0, 1.0, 0.0],
+			"center":				[-4.0, 0.0, 10.0],
+			"length":				3000.0,
+			"radius":				2.0,
+			"material":
+			{
+				"color":			[255.0, 0.0, 255.0],
+				"ambient":			1.0,
+				"diffuse":			0.4,
+				"specular":			50.0,
+				"reflection":		0.0,
+				"refraction":		0.0,
+				"texture_id":		-1
+			}
+		}
+	],
+	"assets":
+	{
+		"music":
+		[
+									"./assets/music/seize_the_day.mp3"
+		],
+		"sounds":
+		[
+									"./assets/sounds/fisting-is-300.wav",
+									"./assets/sounds/Boy_next_door.wav"
+		],
+		"icon":						"./assets/icons/shrek.jpg",
+		"volume":					"128"
+	}
+}

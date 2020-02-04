@@ -14,7 +14,7 @@
 	{
 		"texture_id":				0,
 		"ambient":					0.2,
-		"fsaa":						2
+		"fsaa":						4
 	},
 	"light":
 	[
@@ -33,9 +33,9 @@
 			{
 				"color":			[255.0, 255.0, 0.0],
 				"ambient":			1.0,
-				"diffuse":			1.0,
-				"specular":			1.0,
-				"reflection":		0.9,
+				"diffuse":			0.4,
+				"specular":			50.0,
+				"reflection":		0.0,
 				"refraction":		0.0,
 				"texture_id":		1
 			}
@@ -47,9 +47,9 @@
 			"material":
 			{
 				"color":			[255.0, 255.0, 0.0],
-				"ambient":			0.0,
-				"diffuse":			0.0,
-				"specular":			0.0,
+				"ambient":			1.0,
+				"diffuse":			0.4,
+				"specular":			50.0,
 				"reflection":		0.0,
 				"refraction":		0.0,
 				"texture_id":		-1

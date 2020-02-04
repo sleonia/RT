@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mouse_events.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: deladia <deladia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/28 11:50:12 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/04 11:56:08 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/04 14:00:58 by deladia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ int			mouse_events(char *flag, t_sdl *sdl, t_scene *scene)
 			rotation1(4, sdl, &(scene->cam));
 		if (y < (HEIGHT >> 1))
 			rotation1(3, sdl, &(scene->cam));
+		scene->move_on = 1;
 		return (1);
 	}
 	if (sdl->event.button.button == SDL_BUTTON_RIGHT)

@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/28 11:42:59 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/04 14:57:43 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/04 14:59:08 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,6 +147,7 @@ int				key_events(char *flag, t_rt *rt)
 		rotation(rt->sdl->event, rt->sdl, &(rt->scene->cam));
 		if (rt->sdl->event.key.keysym.scancode == SDL_SCANCODE_SPACE)
 			save_image(rt->sdl);
+		rt->scene->move_on = 1;
 		return (1);
 	}
 	return (0);
