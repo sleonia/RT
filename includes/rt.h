@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rt.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: deladia <deladia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 04:06:50 by thorker           #+#    #+#             */
-/*   Updated: 2020/02/03 15:17:28 by deladia          ###   ########.fr       */
+/*   Updated: 2020/02/04 12:47:02 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -233,10 +233,8 @@ typedef struct			s_rt
 **						hooks
 */
 
-void					events_processing(char *quit, t_sdl *sdl,
-								t_scene *scene, t_cl *cl);
-int						key_events(char *quit, t_sdl *sdl,
-								t_scene *scene);
+void					events_processing(char *quit, t_rt *rt);
+int						key_events(char *quit, t_rt *rt);
 int						mouse_events(char *quit, t_sdl *sdl,
 								t_scene *scene);
 void					move(SDL_Event event, t_sdl *sdl, t_cam *cam);
@@ -309,7 +307,7 @@ void					parse_cylinder_json(t_key_value *obj,
 */
 
 void					change_music(Mix_Music *music[]);
-void					sdl_loop(t_sdl *sdl, t_scene *scene, t_cl *cl);
+void					sdl_loop(t_rt *rt);
 void					sdl_quit(t_sdl *sdl);
 void					sdl_update(t_sdl *sdl);
 

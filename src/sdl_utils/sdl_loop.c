@@ -6,31 +6,31 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/28 11:30:45 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/04 09:17:29 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/04 12:41:30 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-void		sdl_loop(t_sdl *sdl, t_scene *scene, t_cl *cl)
+void		sdl_loop(t_rt *rt)
 {
-	char	flag;
-	flag = 0;
+	char			flag;
 	SDL_Event		event;
 	Uint32			timeout;
 
+	flag = 0;
 	SDL_SetRelativeMouseMode(SDL_TRUE);
-	sdl_update(sdl);
+	sdl_update(rt->sdl);
 	while (flag != 1)
 	{
 		timeout = SDL_GetTicks() + 30;
-		while (SDL_PollEvent(&sdl->event) && (sdl->event.type == SDL_KEYUP
+		while (SDL_PollEvent(&rt->sdl->event) && (rt->sdl->event.type == SDL_KEYUP
 			|| !SDL_TICKS_PASSED(SDL_GetTicks(), timeout)))
 		{
-			events_processing(&flag, sdl, scene, cl);
+			events_processing(&flag, rt);
 		}
-		if (sdl->event.type == SDL_QUIT)
+		if (rt->sdl->event.type == SDL_QUIT)
 			break ;
 	}
-	sdl_quit(sdl);
+	sdl_quit(rt->sdl);
 }
