@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/28 11:50:12 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/02 20:59:54 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/04 11:56:08 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,17 +44,18 @@ int			mouse_events(char *flag, t_sdl *sdl, t_scene *scene)
 	int		x;
 	int		y;
 
+	SDL_GetMouseState(&x, &y);
+	SDL_WarpMouseInWindow(sdl->window, 640, 512);
 	if (sdl->event.button.button == SDL_BUTTON_LEFT)
 	{
-		SDL_GetMouseState(&x, &y);
-		if (x > (WIDTH >> 1))
+		if (x < (WIDTH >> 1))
 			rotation1(1, sdl, &(scene->cam));
-		else if (x < (WIDTH >> 1))
+		if (x > (WIDTH >> 1))
 			rotation1(2, sdl, &(scene->cam));
 		if (y > (HEIGHT >> 1))
-			rotation1(3, sdl, &(scene->cam));
-		else if (y < (HEIGHT >> 1))
 			rotation1(4, sdl, &(scene->cam));
+		if (y < (HEIGHT >> 1))
+			rotation1(3, sdl, &(scene->cam));
 		return (1);
 	}
 	if (sdl->event.button.button == SDL_BUTTON_RIGHT)
