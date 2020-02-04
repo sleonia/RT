@@ -14,7 +14,7 @@
 	{
 		"texture_id":				0,
 		"ambient":					0.2,
-		"fsaa":						0
+		"fsaa":						2
 	},
 	"light":
 	[
@@ -68,6 +68,6 @@
 									"./assets/sounds/Boy_next_door.wav"
 		],
 		"icon":						"./assets/icons/shrek.jpg",
-		"volume":					0
+		"volume":					50
 	}
 }
