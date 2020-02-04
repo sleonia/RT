@@ -6,7 +6,7 @@
 /*   By: deladia <deladia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 15:30:28 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/01 15:22:34 by deladia          ###   ########.fr       */
+/*   Updated: 2020/02/04 13:33:58 by deladia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ static void			parse_skybox_json2(t_key_value *skybox,
 		scene->fsaa = 0;
 		show_error(E_SKYBOX, sounds);
 	}
+	scene->move_on = 0;
 }
 
 void				parse_skybox_json(t_key_value *json, t_scene *scene,

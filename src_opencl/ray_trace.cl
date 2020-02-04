@@ -92,7 +92,7 @@ static float3		computer_lighting(float3 d, t_hitting *light_hit, __global t_obje
 		if (dot(light_dir, light_hit->n) > 0)
 		{
 			float3 tmp = l[i].pos;			
-			if (!closest_intersection(tmp, -light_dir, count_obj, obj, &shadow_hit, texture, texture_param) ||	(length(shadow_hit.hit - l[i].pos) > light_dist - 0.1f && length(shadow_hit.hit - l[i].pos) < light_dist + 0.1f))
+			if (!closest_intersection(tmp, -light_dir, count_obj, obj, &shadow_hit, texture, texture_param, 0) ||	(length(shadow_hit.hit - l[i].pos) > light_dist - 0.1f && length(shadow_hit.hit - l[i].pos) < light_dist + 0.1f))
 			{
 				a += dot(light_dir, light_hit->n) * l[i].intensity;
 				b += pow(max(0.f, -dot(light_hit->n * 2.f * dot(light_dir, light_hit->n) - light_dir, d)), light_hit->mat.specular) * l[i].intensity;
@@ -107,7 +107,7 @@ static float3		computer_lighting(float3 d, t_hitting *light_hit, __global t_obje
 	return (r);
 }
 
-__kernel void RT(__global int *arr, __global t_cam *cam, __global t_object *object, __global t_light *light, __global int *texture, __global int *texture_param, int count_obj, int count_light, int skybox_id, int fsaa, float	ambient)
+__kernel void RT(__global int *arr, __global t_cam *cam, __global t_object *object, __global t_light *light, __global int *texture, __global int *texture_param, int count_obj, int count_light, int skybox_id, int fsaa, float	ambient, int move_on)
 {
 	int 	x;
 	int 	y;
@@ -117,11 +117,17 @@ __kernel void RT(__global int *arr, __global t_cam *cam, __global t_object *obje
 	float3	color = (float3)0;
 	t_hitting	light_hit;
 	float cache_width = 1.f / WIDTH;
-	int		cnt_reflection = 0;
+	int		cnt_reflection;
 	float3	tmp_color;
+	int		depth = 4;
 
 	x = get_global_id(0);
 	y = get_global_id(1);
+	if (move_on == 1)
+	{
+		fsaa = 0;
+		depth = 1;
+	}
 	for (int i = -fsaa * 0.5f; i <= fsaa * 0.5f; i++)
 	{
 		for (int j = -fsaa * 0.5f; j <= fsaa * 0.5f; j++)
@@ -133,10 +139,10 @@ __kernel void RT(__global int *arr, __global t_cam *cam, __global t_object *obje
 			//Отправлять размеры текстуры и саму текстуру
 			tmp_color = (float3)0;
 			cnt_reflection = 0;
-			while (cnt_reflection < 4)
+			while (cnt_reflection < depth)
 			{
 				cnt_reflection++;
-				if (closest_intersection(o, d, count_obj, object, &light_hit, texture, texture_param))
+				if (closest_intersection(o, d, count_obj, object, &light_hit, texture, texture_param, move_on))
 				{
 					tmp_color += computer_lighting(d, &light_hit, object, light, count_obj, count_light, ambient, texture, texture_param);
 					if (light_hit.mat.reflection > 0.00001f)
@@ -153,7 +159,7 @@ __kernel void RT(__global int *arr, __global t_cam *cam, __global t_object *obje
 					else
 						break ;
 				}
-				else if (skybox_id != -1)
+				else if (skybox_id != -1 && !move_on)
 				{
 					tmp_color += uv_mapping_for_skybox(texture, d, texture_param, skybox_id);
 					// break ;

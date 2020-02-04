@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key_events.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: deladia <deladia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/28 11:42:59 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/04 12:47:29 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/04 14:01:52 by deladia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ int				key_events(char *flag, t_rt *rt)
 		rotation(rt->sdl->event, rt->sdl, &(rt->scene->cam));
 		if (rt->sdl->event.key.keysym.scancode == SDL_SCANCODE_SPACE)
 			save_image(rt->sdl);
+		rt->scene->move_on = 1;
 		return (1);
 	}
 	return (0);

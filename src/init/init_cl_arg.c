@@ -6,7 +6,7 @@
 /*   By: deladia <deladia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/01 04:22:13 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/01 15:22:34 by deladia          ###   ########.fr       */
+/*   Updated: 2020/02/04 13:34:15 by deladia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,8 @@ int				set_opencl_arg(t_cl *cl, t_sdl *sdl, t_scene *scene)
 	ret |= clSetKernelArg(cl->kernel, 7, sizeof(cl_int), &scene->count_lights);
 	ret |= clSetKernelArg(cl->kernel, 8, sizeof(cl_int), &scene->skybox_id);
 	ret |= clSetKernelArg(cl->kernel, 9, sizeof(cl_int), &scene->fsaa);
-	ret |= clSetKernelArg(cl->kernel, 10, sizeof(cl_int), &scene->ambient);
+	ret |= clSetKernelArg(cl->kernel, 10, sizeof(cl_float), &scene->ambient);
+	ret |= clSetKernelArg(cl->kernel, 11, sizeof(cl_int), &scene->move_on);
 	if (ret != 0)
 		func_error(-9);
 	set_arg_1(cl, sdl, scene);
