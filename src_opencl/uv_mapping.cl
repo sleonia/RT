@@ -42,6 +42,9 @@ static float3			vec_change(float3 n, float3 vec)
     vec.y = dot((float3)(0.f, 1.f, 0.f), new_vec);
     vec.z = dot((float3)(sin_alpha_z, 0.f, cos_alpha_z), new_vec);
 
+	new_vec.x = vec.y;
+	new_vec.y = vec.z;
+	new_vec.z = vec.x;
     return (vec);
 }
 
