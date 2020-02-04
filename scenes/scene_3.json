@@ -51,7 +51,7 @@
 				"diffuse":			0.4,
 				"specular":			50.0,
 				"reflection":		0.0,
-				"refraction":		1.055,
+				"refraction":		0.0,
 				"texture_id":		-1
 			}
 		}
