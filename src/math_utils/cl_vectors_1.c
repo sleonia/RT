@@ -6,7 +6,7 @@
 /*   By: deladia <deladia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/28 12:29:13 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/01 15:22:34 by deladia          ###   ########.fr       */
+/*   Updated: 2020/02/04 15:52:19 by deladia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,4 +40,9 @@ cl_float3	cl_cross(cl_float3 v1, cl_float3 v2)
 	v.y = v1.z * v2.x - v1.x * v2.z;
 	v.z = v1.x * v2.y - v1.y * v2.x;
 	return (v);
+}
+
+float		dot(cl_float3 a, cl_float3 b)
+{
+	return (a.x * b.x + a.y * b.y + a.z * b.z);
 }

@@ -6,7 +6,7 @@
 #    By: deladia <deladia@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/01 04:18:29 by sleonia           #+#    #+#              #
-#    Updated: 2020/02/01 15:36:26 by deladia          ###   ########.fr        #
+#    Updated: 2020/02/04 16:02:50 by deladia          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,6 +22,7 @@ HOOKS_FILES =							\
 			mouse_events.c				\
 			move.c						\
 			rotation.c					\
+			get_object.c				\
 
 HOOKS_DIR = ./src/hooks/
 

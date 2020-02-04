@@ -6,7 +6,7 @@
 /*   By: deladia <deladia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 04:06:50 by thorker           #+#    #+#             */
-/*   Updated: 2020/02/04 13:33:31 by deladia          ###   ########.fr       */
+/*   Updated: 2020/02/04 16:58:30 by deladia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@
 #  define SEPIA -102
 #  define NBR_OF_SONGS	20
 #  define DISPLAY_NOT	"osascript -e \'display notification\""
+#  define MIN(a,b) (((a)<(b))?(a):(b))
+#  define MAX(a,b) (((a)>(b))?(a):(b))
 # endif
 # define WIDTH 1280
 # define HEIGHT 1024
@@ -240,6 +242,7 @@ int						mouse_events(char *quit, t_sdl *sdl,
 								t_scene *scene);
 void					move(SDL_Event event, t_sdl *sdl, t_cam *cam);
 void					rotation(SDL_Event event, t_sdl *sdl, t_cam *cam);
+t_object				*get_object(t_scene *scene);
 
 /*
 **						init
@@ -272,6 +275,7 @@ cl_float3				cl_cross(cl_float3 v1, cl_float3 v2);
 cl_float3				cl_sum(cl_float3 v1, cl_float3 v2);
 cl_float3				cl_minus(cl_float3 v1, cl_float3 v2);
 float					cl_length(cl_float3 v);
+float					dot(cl_float3 a, cl_float3 b);
 
 /*
 **						parse
