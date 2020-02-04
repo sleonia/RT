@@ -6,7 +6,7 @@
 /*   By: deladia <deladia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 04:06:50 by thorker           #+#    #+#             */
-/*   Updated: 2020/02/04 17:37:18 by deladia          ###   ########.fr       */
+/*   Updated: 2020/02/04 18:30:15 by deladia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@
 # endif
 # define WIDTH 1280
 # define HEIGHT 1024
+# define MAX_DIST 10000.f
 # define RED(color) (((int)color >> 16) & 0xFF)
 # define GREEN(color) (((int)color >> 8) & 0xFF)
 # define BLUE(color) ((int)color & 0xFF)
