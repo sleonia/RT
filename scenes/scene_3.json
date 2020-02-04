@@ -47,11 +47,11 @@
 			"material":
 			{
 				"color":			[255.0, 255.0, 0.0],
-				"ambient":			1.0,
-				"diffuse":			1.0,
-				"specular":			1.0,
+				"ambient":			0.0,
+				"diffuse":			0.0,
+				"specular":			0.0,
 				"reflection":		0.0,
-				"refraction":		1.055,
+				"refraction":		0.0,
 				"texture_id":		-1
 			}
 		}
@@ -68,6 +68,6 @@
 									"./assets/sounds/Boy_next_door.wav"
 		],
 		"icon":						"./assets/icons/shrek.jpg",
-		"volume":					50
+		"volume":					0
 	}
 }
