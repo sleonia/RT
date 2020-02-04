@@ -6,9 +6,10 @@
 /*   By: deladia <deladia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 04:06:50 by thorker           #+#    #+#             */
-/*   Updated: 2020/02/04 16:58:30 by deladia          ###   ########.fr       */
+/*   Updated: 2020/02/04 16:59:55 by deladia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #ifndef RT_RT_H
 # define RT_RT_H
@@ -18,9 +19,10 @@
 #  include "to_json.h"
 #  include "rt_error.h"
 #  include <SDL.h>
-#  include "../Simple-SDL2-Audio/audio.h"
 #  include <SDL_image.h>
 #  include <SDL_mixer.h>
+#  include <SDL_ttf.h>
+#  include "../Simple-SDL2-Audio/audio.h"
 #  include <math.h>
 #  include <time.h>
 #  include <OpenCL/opencl.h>
@@ -33,6 +35,7 @@
 #  define DISPLAY_NOT	"osascript -e \'display notification\""
 #  define MIN(a,b) (((a)<(b))?(a):(b))
 #  define MAX(a,b) (((a)>(b))?(a):(b))
+#  define FONT			"assets/fonts/open-sans/OpenSans-Regular.ttf"
 # endif
 # define WIDTH 1280
 # define HEIGHT 1024
@@ -219,7 +222,12 @@ typedef struct			s_sdl
 	char				*sounds[NBR_OF_SONGS];
 	SDL_Event			event;
 	int					*pixels;
+	SDL_Surface			*sur;
 	int					volume;
+	bool				help_screen_flag;
+	TTF_Font			*font;
+	int					font_size;
+	SDL_Color			font_color;
 }						t_sdl;
 
 typedef struct			s_rt
@@ -312,6 +320,7 @@ void					parse_cylinder_json(t_key_value *obj,
 */
 
 void					change_music(Mix_Music *music[]);
+int						render_help_screen(t_sdl *sdl);
 void					sdl_loop(t_rt *rt);
 void					sdl_quit(t_sdl *sdl);
 void					sdl_update(t_sdl *sdl);
@@ -328,6 +337,7 @@ cl_int3					int_to_rgb(int src_color);
 int						read_kernel(t_cl *cl, char **files_cl);
 int						realloc_img(t_scene *scene, char *file_name);
 int						filter(int	*pixels, char flag);
+int						realloc_obj(SDL_Event event, t_rt *rt);
 void					save_image(t_sdl *sdl);
 void					show_error(char *error, char *sounds[]);
 

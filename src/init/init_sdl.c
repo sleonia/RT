@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/28 10:20:37 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/02 20:35:14 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/04 16:49:44 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,19 +50,29 @@ static void			set_window_icon(t_key_value *assets, t_sdl *sdl)
 	ft_strdel(&icon);
 }
 
+static void			init_ttf(t_sdl *sdl)
+{
+	if (TTF_Init() == -1)
+		ft_error((char *)SDL_GetError());
+	sdl->font_size = 25;
+	if (!(sdl->font = TTF_OpenFont(FONT, sdl->font_size)))
+		ft_error((char *)SDL_GetError());
+	sdl->font_color = (SDL_Color){255, 255, 255, 0};
+}
+
 static void			init_sdl_2(t_key_value *json, t_sdl *sdl)
 {
 	t_key_value		*assets;
 
-	if (!(sdl->pixels = (int *)ft_memalloc(sizeof(int) * WIDTH * HEIGHT)))
-		ft_error((char *)SDL_GetError());
-	SDL_UpdateTexture(sdl->texture, NULL, sdl->pixels, WIDTH * sizeof(int));
+	SDL_UpdateTexture(sdl->texture, NULL, sdl->sur->pixels,
+					WIDTH * sizeof(int));
 	SDL_RenderClear(sdl->render);
 	SDL_RenderCopy(sdl->render, sdl->texture, NULL, NULL);
 	SDL_RenderPresent(sdl->render);
 	assets = parse_assets(json, sdl);
 	set_window_icon(assets, sdl);
 	init_sdl_music(assets, sdl);
+	init_ttf(sdl);
 }
 
 t_sdl				*init_sdl(t_key_value *json)
@@ -84,6 +94,10 @@ t_sdl				*init_sdl(t_key_value *json)
 										SDL_TEXTUREACCESS_STREAMING,
 										WIDTH, HEIGHT)))
 		ft_error((char *)SDL_GetError());
+	if (!(sdl->sur = SDL_CreateRGBSurface(0, WIDTH,
+			HEIGHT, 32, 0xFF000000, 0x00FF0000, 0x0000FF00, 0x000000FF)))
+		ft_error((char *)SDL_GetError());
+	sdl->help_screen_flag = true;
 	init_sdl_2(json, sdl);
 	return (sdl);
 }

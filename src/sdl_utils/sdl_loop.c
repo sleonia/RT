@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sdl_loop.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: deladia <deladia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/28 11:30:45 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/04 14:02:54 by deladia          ###   ########.fr       */
+/*   Updated: 2020/02/04 15:14:58 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,9 @@ void		sdl_loop(t_rt *rt)
 	while (flag != 1)
 	{
 		timeout = SDL_GetTicks() + 30;
-		while (SDL_PollEvent(&rt->sdl->event) && (rt->sdl->event.type == SDL_KEYUP
-			|| !SDL_TICKS_PASSED(SDL_GetTicks(), timeout)))
+		while (SDL_PollEvent(&rt->sdl->event)
+			&& (rt->sdl->event.type == SDL_KEYUP
+				|| !SDL_TICKS_PASSED(SDL_GetTicks(), timeout)))
 		{
 			events_processing(&flag, rt);
 		}

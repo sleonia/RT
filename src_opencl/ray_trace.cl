@@ -159,7 +159,8 @@ __kernel void RT(__global int *arr, __global t_cam *cam, __global t_object *obje
 					else
 						break ;
 				}
-				else if (skybox_id != -1 && !move_on)
+				// else if (skybox_id != -1 && !move_on)
+				else if (skybox_id != -1)
 				{
 					tmp_color += uv_mapping_for_skybox(texture, d, texture_param, skybox_id);
 					// break ;
