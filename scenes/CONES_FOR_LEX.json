@@ -1,7 +1,7 @@
 {
 	"camera":
 	{
-		"position":					[1.570796, 0.5, -10.5],
+		"position":					[0.0, 0.0, -100.0],
 		"phi":						90.0,
 		"tetta":					90.0
 	},
@@ -14,7 +14,7 @@
 	{
 		"texture_id":				0,
 		"ambient":					0.2,
-		"fsaa":						2
+		"fsaa":						0
 	},
 	"light":
 	[
@@ -34,31 +34,18 @@
 	"figure":
 	[
 		{
-			"type":					"sphere",
-			"radius":				3.0,
-			"center":				[4.0, 0.0, 10.0],
+			"type":					"cone",
+			"axis":					[-1.0, 1.0, 0.0],
+			"center":				[0.0, 0.0, 10.0],
+			"length":				30.0,
+			"tan":					0.25,
 			"material":
 			{
 				"color":			[255.0, 255.0, 0.0],
 				"ambient":			1.0,
 				"diffuse":			0.4,
-				"specular":			100.0,
-				"reflection":		0.1,
-				"refraction":		0.0,
-				"texture_id":		1
-			}
-		},
-		{
-			"type":					"sphere",
-			"radius":				3.0,
-			"center":				[-4.0, 0.0, 10.0],
-			"material":
-			{
-				"color":			[255.0, 0.0, 0.0],
-				"ambient":			1.0,
-				"diffuse":			0.4,
 				"specular":			50.0,
-				"reflection":		0.1,
+				"reflection":		0.0,
 				"refraction":		0.0,
 				"texture_id":		1
 			}
@@ -66,26 +53,9 @@
 		{
 			"type":					"cone",
 			"axis":					[1.0, 1.0, 0.0],
-			"center":				[4.0, 0.0, 10.0],
+			"center":				[0.0, 0.0, 10.0],
 			"length":				30.0,
 			"tan":					0.25,
-			"material":
-			{
-				"color":			[255.0, 0.0, 255.0],
-				"ambient":			0.0,
-				"diffuse":			0.4,
-				"specular":			50.0,
-				"reflection":		0.9,
-				"refraction":		0.0,
-				"texture_id":		-1
-			}
-		},
-		{
-			"type":					"cylinder",
-			"axis":					[-1.0, 1.0, 0.0],
-			"center":				[-4.0, 0.0, 10.0],
-			"length":				3000.0,
-			"radius":				2.0,
 			"material":
 			{
 				"color":			[255.0, 0.0, 255.0],
@@ -94,7 +64,41 @@
 				"specular":			50.0,
 				"reflection":		0.0,
 				"refraction":		0.0,
-				"texture_id":		-1
+				"texture_id":		1
+			}
+		},
+		{
+			"type":					"cone",
+			"axis":					[1.0, 0.0, 0.0],
+			"center":				[0.0, 0.0, 10.0],
+			"length":				30.0,
+			"tan":					0.25,
+			"material":
+			{
+				"color":			[255.0, 0.0, 255.0],
+				"ambient":			1.0,
+				"diffuse":			0.4,
+				"specular":			50.0,
+				"reflection":		0.0,
+				"refraction":		0.0,
+				"texture_id":		1
+			}
+		},
+		{
+			"type":					"cone",
+			"axis":					[0.0, 1.0, 0.0],
+			"center":				[0.0, 0.0, 10.0],
+			"length":				30.0,
+			"tan":					0.25,
+			"material":
+			{
+				"color":			[255.0, 0.0, 255.0],
+				"ambient":			1.0,
+				"diffuse":			0.4,
+				"specular":			50.0,
+				"reflection":		0.0,
+				"refraction":		0.0,
+				"texture_id":		1
 			}
 		}
 	],
