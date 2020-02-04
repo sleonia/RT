@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/01 05:01:29 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/01 07:39:35 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/04 16:16:04 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ void			save_image(t_sdl *sdl)
 		k = -1;
 		while (++k < WIDTH)
 		{
-			color = int_to_rgb(sdl->pixels[k * WIDTH + i]);
+			color = int_to_rgb(((int *)(sdl->sur->pixels))[k * WIDTH + i]);
 			rgb_image[3 * (k * WIDTH + i)] = (uint8_t)color.x;
 			rgb_image[3 * (k * WIDTH + i) + 1] = (uint8_t)color.y;
 			rgb_image[3 * (k * WIDTH + i) + 2] = (uint8_t)color.z;
