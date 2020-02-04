@@ -6,7 +6,7 @@
 /*   By: deladia <deladia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 04:06:50 by thorker           #+#    #+#             */
-/*   Updated: 2020/02/04 16:59:55 by deladia          ###   ########.fr       */
+/*   Updated: 2020/02/04 17:37:18 by deladia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -250,7 +250,7 @@ int						mouse_events(char *quit, t_sdl *sdl,
 								t_scene *scene);
 void					move(SDL_Event event, t_sdl *sdl, t_cam *cam);
 void					rotation(SDL_Event event, t_sdl *sdl, t_cam *cam);
-t_object				*get_object(t_scene *scene);
+t_object				*get_object(t_scene *scene, int x, int y);
 
 /*
 **						init

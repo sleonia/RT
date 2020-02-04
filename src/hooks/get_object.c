@@ -104,10 +104,8 @@ static int   intersect_ray_cone(cl_float3 o, cl_float3 d, t_cone *cone, float *d
 	return (0);
 }
 
-t_object		*get_object(t_scene *scene)
+t_object		*get_object(t_scene *scene, int x, int y)
 {
-	int			x;
-	int			y;
 	cl_float3	d;
 	t_object	*closest;
 	t_object	*obj;
@@ -117,11 +115,11 @@ t_object		*get_object(t_scene *scene)
 	int			t12;
 	cl_float3	o;
 
-	d = cl_minus(cl_mult_n(scene->cam.ox, (float)x * 1.f / WIDTH), cl_mult_n(scene->cam.oy, (float)y * 1.f / WIDTH));
+	d = cl_minus(cl_mult_n(scene->cam.ox, ((float)x * 1.f / WIDTH) - 0.5f), cl_mult_n(scene->cam.oy, ((float)y * 1.f / WIDTH) -0.5f));
 	d = cl_minus(d, scene->cam.oz);
 	cl_normalize(&d);
 	o = (cl_float3)scene->cam.pos;
-	*obj = *scene->object;
+	obj = scene->object;
 	dist = 10000.f + 1.f;
 	i = 0;
 	while (i < scene->count_objects)
@@ -133,7 +131,7 @@ t_object		*get_object(t_scene *scene)
 			if (t12 && dist_i < dist)
 			{
 				dist = dist_i;
-				closest = &obj[i];
+				*closest = obj[i];
 			}
 		}
 		else if (obj[i].type == o_plane)
@@ -143,7 +141,7 @@ t_object		*get_object(t_scene *scene)
 			if (t12 && dist_i < dist)
 			{
 				dist = dist_i;
-				closest = &obj[i];		
+				*closest = obj[i];		
 			}
 		}
 		else if (obj[i].type == o_cone)
@@ -153,7 +151,7 @@ t_object		*get_object(t_scene *scene)
 			if (t12 && dist_i < dist)
 			{
 				dist = dist_i;
-				closest = &obj[i];
+				*closest = obj[i];
 			}
 		}
 		else if (obj[i].type == o_cylinder)
@@ -163,10 +161,12 @@ t_object		*get_object(t_scene *scene)
 			if (t12 && dist_i < dist)
 			{
 				dist = dist_i;
-				closest = &obj[i];
+				*closest = obj[i];
 			}
 		}	
 		i++;
 	}
-	return (closest);
+	if (dist < 10000.f)
+		return (closest);
+	return (NULL);
 }
