@@ -55,8 +55,8 @@ static int	intersect_ray_plane(float3 o, float3 d, __global t_plane *pl, float *
 {
 	float	a;
 
-	pl->axis = ft_normalize(pl->axis);
-	d = ft_normalize(d);
+	pl->axis = normalize(pl->axis);
+	d = normalize(d);
 	a = dot(d, pl->axis);
 	if (fabs(a) < 0.000001f)
 		return (0);
@@ -127,7 +127,7 @@ int	closest_intersection(float3 o, float3 d, int count_obj, __global t_object *o
 			{
 				dist = dist_i;
 				light_hit->hit = o + d * dist_i;
-				light_hit->n = ft_normalize(light_hit->hit - obj[i].object.sphere.center);
+				light_hit->n = normalize(light_hit->hit - obj[i].object.sphere.center);
 				if (t12 == 2)
 					light_hit->n *= -1.f;
 				light_hit->mat = obj[i].material;
@@ -177,10 +177,10 @@ int	closest_intersection(float3 o, float3 d, int count_obj, __global t_object *o
 				dist_tmp = dist;
 				dist = dist_i;
 				light_hit->hit = o + d * dist_i;
-				v = ft_normalize(light_hit->hit - obj[i].object.cone.center);
+				v = normalize(light_hit->hit - obj[i].object.cone.center);
 				light_hit->n = obj[i].object.cone.axis;
 				light_hit->n = light_hit->n * ft_sign(dot(v, obj[i].object.cone.axis));
-				light_hit->n = ft_normalize(v * dot(v, light_hit->n) - light_hit->n);
+				light_hit->n = normalize(v * dot(v, light_hit->n) - light_hit->n);
 				if (t12 == 2)
 					light_hit->n *= -1;
 				light_hit->mat = obj[i].material;
@@ -205,10 +205,10 @@ int	closest_intersection(float3 o, float3 d, int count_obj, __global t_object *o
 							uv = uv_mapping_for_cone(light_hit, &(obj + i)->object.cone);
 							normalize_coord_for_texture(uv, &light_hit->mat.color, texture,  texture_param, obj[i].material.texture_id);
 						}
-						v = ft_normalize(light_hit->hit - obj[i].object.cone.center);
+						v = normalize(light_hit->hit - obj[i].object.cone.center);
 						light_hit->n = obj[i].object.cone.axis;
 						light_hit->n = light_hit->n * ft_sign(dot(v, obj[i].object.cone.axis));
-						light_hit->n = ft_normalize(v * dot(v, light_hit->n) - light_hit->n);
+						light_hit->n = normalize(v * dot(v, light_hit->n) - light_hit->n);
 						if (t12 == 2)
 							light_hit->n = -light_hit->n;
 					}

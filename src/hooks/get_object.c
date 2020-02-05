@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_object.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: deladia <deladia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/04 18:38:23 by deladia           #+#    #+#             */
-/*   Updated: 2020/02/05 15:00:37 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/05 18:59:30 by deladia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -176,7 +176,7 @@ t_object		*get_object(t_scene *scene, int x, int y)
 			t12 = intersect_ray_cylinder(scene->cam.pos, d,
 				&(scene->object + i)->object.cylinder, &dist.y);
 			if (t12 && dist.y < dist.x)
-		{
+			{
 				dist.x = dist.y;
 				closest = &(scene->object[i]);
 			}

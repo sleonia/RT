@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mouse_events.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: deladia <deladia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/28 11:50:12 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/05 19:26:01 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/05 19:44:24 by deladia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ int			mouse_events(char *flag, t_sdl *sdl, t_object **hi_lited_object, t_scene *
 {
 	int			x;
 	int			y;
-	t_object	*obj;
 
 	SDL_GetMouseState(&x, &y);		
 	if (sdl->event.button.button == SDL_BUTTON_LEFT)
@@ -62,9 +61,8 @@ int			mouse_events(char *flag, t_sdl *sdl, t_object **hi_lited_object, t_scene *
 	}
 	if (sdl->event.button.button == SDL_BUTTON_RIGHT)
 	{
-		if ((obj = get_object(scene, x, y)) != NULL)
-			*hi_lited_object = obj;
-		return (1);
+		if ((*hi_lited_object = get_object(scene, x, y)) != NULL)
+			return (1);
 	}
     if(sdl->event.type == SDL_MOUSEWHEEL)
     {

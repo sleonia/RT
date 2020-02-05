@@ -2,11 +2,6 @@
 #include "./includes/kernel.h"
 #include "./includes/rt.h"
 
-float3	ft_normalize(float3 vec)
-{
-	return (vec / sqrt(vec.x * vec.x + vec.y * vec.y + vec.z * vec.z));
-}
-
 static float	reverse(int n)
 {
 	if (n != 0)
@@ -87,7 +82,7 @@ static float3		computer_lighting(float3 d, t_hitting *light_hit, __global t_obje
 	shadow_hit.hit = (float3)0;
 	while (i < count_light)
 	{
-		light_dir = ft_normalize(l[i].pos - light_hit->hit);
+		light_dir = normalize(l[i].pos - light_hit->hit);
 		light_dist = length(l[i].pos - light_hit->hit);
 		if (dot(light_dir, light_hit->n) > 0)
 		{
@@ -149,12 +144,12 @@ __kernel void RT(__global int *arr, __global t_cam *cam, __global t_object *obje
 					{
 						tmp_color *= (1 - light_hit.mat.reflection);
 						o = light_hit.hit;
-						d = ft_normalize(reflect_ray(d, light_hit.n));
+						d = normalize(reflect_ray(d, light_hit.n));
 					}
 					else if (light_hit.mat.refraction > 0.00001f)
 					{
 						o = light_hit.hit - light_hit.n * 0.003f;
-						d = ft_normalize(refract_ray(d, light_hit.n, light_hit.mat.refraction));
+						d = normalize(refract_ray(d, light_hit.n, light_hit.mat.refraction));
 					}
 					else
 						break ;
