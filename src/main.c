@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/24 12:57:07 by deladia           #+#    #+#             */
-/*   Updated: 2020/02/05 23:45:05 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/06 00:20:21 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ void	init(t_windows *win)
 
 	win->mWidth = 0;
 	win->mHeight = 0;
+
 	if (!(win->mWindow = SDL_CreateWindow( "SDL Tutorial", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, WIDTH, HEIGHT, SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE )))
 		exit (1);
 	win->mMouseFocus = true;
@@ -68,12 +69,13 @@ void	init(t_windows *win)
 		exit (1);
 	SDL_SetRenderDrawColor(win->mRenderer, 0xFF, 0xFF, 0xFF, 0xFF );
 	win->mWindowID = SDL_GetWindowID(win->mWindow);
+	win->mMinimized = false;
 	win->mShown = true;
 }
 
 void	render(t_windows *win)
 {
-	if (win->mMinimized)
+	if (!win->mMinimized)
 	{
 		SDL_SetRenderDrawColor(win->mRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
 		SDL_RenderClear(win->mRenderer);
@@ -107,12 +109,16 @@ int main( int argc, char* args[])
 	SDL_Event e;
 	while( !quit )
 	{
-		// while( SDL_PollEvent( &e ) != 0 )
-		// {
-		// 	//
-		// }
+		while( SDL_PollEvent( &e ) != 0 )
+		{
+			if (e.type == SDL_QUIT)
+			{
+				quit = true;
+			}
+		}
 		for (size_t i = 0; i < 3; i++)
 		{
+			// printf("%d %p\n", i, win[i]);
 			render(win[i]);
 		}
 		bool allWindowsClosed = true;
