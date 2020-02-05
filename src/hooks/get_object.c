@@ -6,20 +6,21 @@
 /*   By: deladia <deladia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/04 18:38:23 by deladia           #+#    #+#             */
-/*   Updated: 2020/02/04 18:41:28 by deladia          ###   ########.fr       */
+/*   Updated: 2020/02/05 13:54:56 by deladia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-static int	intersect_ray_sphere(cl_float3 o, cl_float3 d, t_sphere *sphere, float *dist_i)
+static int		intersect_ray_sphere(cl_float3 o, cl_float3 d,
+								t_sphere *sphere, float *dist_i)
 {
 	cl_float3	oc;
 	float		k1;
 	float		k2;
 	float		k3;
 
-	oc = cl_minus(o,sphere->center);
+	oc = cl_minus(o, sphere->center);
 	k1 = dot(d, d);
 	k2 = 2 * dot(oc, d);
 	k3 = dot(oc, oc) - sphere->radius * sphere->radius;
@@ -34,7 +35,8 @@ static int	intersect_ray_sphere(cl_float3 o, cl_float3 d, t_sphere *sphere, floa
 	return (0);
 }
 
-static int    intersect_ray_cylinder(cl_float3 o, cl_float3 d, t_cylinder *cyl, float *dist_i)
+static int		intersect_ray_cylinder(cl_float3 o, cl_float3 d,
+									t_cylinder *cyl, float *dist_i)
 {
 	cl_float3	s;
 	cl_float3	q;
@@ -61,7 +63,8 @@ static int    intersect_ray_cylinder(cl_float3 o, cl_float3 d, t_cylinder *cyl, 
 	return (0);
 }
 
-static int	intersect_ray_plane(cl_float3 o, cl_float3 d, t_plane *pl, float *dist_i)
+static int		intersect_ray_plane(cl_float3 o, cl_float3 d, t_plane *pl,
+														float *dist_i)
 {
 	float	a;
 
@@ -76,19 +79,26 @@ static int	intersect_ray_plane(cl_float3 o, cl_float3 d, t_plane *pl, float *dis
 	return (1);
 }
 
-static int   intersect_ray_cone(cl_float3 o, cl_float3 d, t_cone *cone, float *dist_i)
+static int		intersect_ray_cone(cl_float3 o, cl_float3 d,
+									t_cone *cone, float *dist_i)
 {
 	cl_float3	s;
 	cl_float3	q;
 	cl_float3	abc;
-	float	 	discriminate;
+	float		discriminate;
 	cl_float2	t12;
 
 	s = cl_minus(d, cl_mult_n(cone->axis, dot(d, cone->axis)));
-	q = cl_minus(o, cl_minus(cone->center, cl_mult_n(cone->axis, dot((cl_minus(o, cone->center)), cone->axis))));
-	abc.x = cos(cone->tan) * cos(cone->tan) * dot(s, s) - sin(cone->tan) * sin(cone->tan) * dot(d, cone->axis) * dot(d, cone->axis);
-	abc.y = 2 * cos(cone->tan) * cos(cone->tan) * dot(s, q) - 2 * sin(cone->tan) *	sin(cone->tan) * dot(d, cone->axis) * dot(cl_minus(o, cone->center), cone->axis);
-	abc.z = cos(cone->tan) * cos(cone->tan) * dot(q, q) - sin(cone->tan) *	sin(cone->tan) * dot(cl_minus(o, cone->center), cone->axis) * dot(cl_minus(o, cone->center), cone->axis);
+	q = cl_minus(o, cl_minus(cone->center, cl_mult_n(cone->axis,
+			dot((cl_minus(o, cone->center)), cone->axis))));
+	abc.x = cos(cone->tan) * cos(cone->tan) * dot(s, s) - sin(cone->tan)
+			* sin(cone->tan) * dot(d, cone->axis) * dot(d, cone->axis);
+	abc.y = 2 * cos(cone->tan) * cos(cone->tan) * dot(s, q) - 2 * sin(cone->tan)
+		* sin(cone->tan) * dot(d, cone->axis) * dot(cl_minus(o, cone->center),
+		cone->axis);
+	abc.z = cos(cone->tan) * cos(cone->tan) * dot(q, q) - sin(cone->tan)
+		* sin(cone->tan) * dot(cl_minus(o, cone->center), cone->axis)
+		* dot(cl_minus(o, cone->center), cone->axis);
 	discriminate = abc.y * abc.y - 4 * abc.x * abc.z;
 	if (discriminate < 0.f)
 		return (0);
@@ -115,61 +125,65 @@ t_object		*get_object(t_scene *scene, int x, int y)
 {
 	cl_float3	d;
 	t_object	*closest;
-	float		dist;
-	float		dist_i;
+	cl_float2	dist;
 	int			i;
 	int			t12;
 
-	d = cl_minus(cl_mult_n(scene->cam.ox, ((float)x * 1.f / WIDTH) - 0.5f), cl_mult_n(scene->cam.oy, ((float)y * 1.f / WIDTH) -0.5f));
+	d = cl_minus(cl_mult_n(scene->cam.ox, ((float)x * 1.f / WIDTH) - 0.5f),
+		cl_mult_n(scene->cam.oy, ((float)y * 1.f / WIDTH) - 0.5f));
 	d = cl_minus(d, scene->cam.oz);
 	cl_normalize(&d);
-	dist = MAX_DIST + 1.f;
+	dist.x = MAX_DIST + 1.f;
 	i = 0;
 	while (i < scene->count_objects)
 	{
 		if (scene->object[i].type == o_sphere)
 		{
-			dist_i = 0.f;
-			t12 = intersect_ray_sphere(scene->cam.pos, d, &(scene->object + i)->object.sphere, &dist_i);
-			if (t12 && dist_i < dist)
+			dist.y = 0.f;
+			t12 = intersect_ray_sphere(scene->cam.pos, d,
+				&(scene->object + i)->object.sphere, &dist.y);
+			if (t12 && dist.y < dist.x)
 			{
-				dist = dist_i;
+				dist.x = dist.y;
 				*closest = scene->object[i];
 			}
 		}
 		else if (scene->object[i].type == o_plane)
 		{
-			dist_i = 0.f;
-			t12 = intersect_ray_plane(scene->cam.pos, d, &(scene->object + i)->object.plane, &dist_i);
-			if (t12 && dist_i < dist)
+			dist.y = 0.f;
+			t12 = intersect_ray_plane(scene->cam.pos, d,
+				&(scene->object + i)->object.plane, &dist.y);
+			if (t12 && dist.y < dist.x)
 			{
-				dist = dist_i;
-				*closest = scene->object[i];		
+				dist.x = dist.y;
+				*closest = scene->object[i];
 			}
 		}
 		else if (scene->object[i].type == o_cone)
 		{
-			dist_i = 0.f;
-			t12 = intersect_ray_cone(scene->cam.pos, d, &(scene->object + i)->object.cone, &dist_i);
-			if (t12 && dist_i < dist)
+			dist.y = 0.f;
+			t12 = intersect_ray_cone(scene->cam.pos, d,
+				&(scene->object + i)->object.cone, &dist.y);
+			if (t12 && dist.y < dist.x)
 			{
-				dist = dist_i;
+				dist.x = dist.y;
 				*closest = scene->object[i];
 			}
 		}
 		else if (scene->object[i].type == o_cylinder)
 		{
-			dist_i = 0.f;
-			t12 = intersect_ray_cylinder(scene->cam.pos, d, &(scene->object + i)->object.cylinder, &dist_i);
-			if (t12 && dist_i < dist)
+			dist.y = 0.f;
+			t12 = intersect_ray_cylinder(scene->cam.pos, d,
+				&(scene->object + i)->object.cylinder, &dist.y);
+			if (t12 && dist.y < dist.x)
 			{
-				dist = dist_i;
+				dist.x = dist.y;
 				*closest = scene->object[i];
 			}
-		}	
+		}
 		i++;
 	}
-	if (dist < MAX_DIST)
+	if (dist.x < MAX_DIST)
 		return (closest);
 	return (NULL);
 }
