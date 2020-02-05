@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/28 11:50:12 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/05 15:40:09 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/05 15:58:07 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,15 +63,18 @@ int			mouse_events(char *flag, t_sdl *sdl, t_scene *scene)
 	if (sdl->event.button.button == SDL_BUTTON_RIGHT)
 	{
 		if ((obj = get_object(scene, x, y)) != NULL)
-		{
 			scene->hi_lited_object = obj;
-			// printf("%d\n", obj->type);
-			// if (obj->type == o_sphere)
-				// obj->material.color = (cl_float3){1.f, 1.f, 1.f};
-		}
 		else
 			scene->hi_lited_object = NULL;
 		return (1);
+	}
+    if(sdl->event.type == SDL_MOUSEWHEEL)
+    {
+		if(sdl->event.wheel.y > 0)
+			sdl->event.key.keysym.scancode = SDL_SCANCODE_W;
+		else if(sdl->event.wheel.y < 0)
+			sdl->event.key.keysym.scancode = SDL_SCANCODE_S;
+			move(sdl->event, sdl, &(scene->cam));
 	}
 	return (0);
 }
