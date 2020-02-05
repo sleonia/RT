@@ -6,7 +6,7 @@
 #    By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/01 04:18:29 by sleonia           #+#    #+#              #
-#    Updated: 2020/02/05 17:51:02 by sleonia          ###   ########.fr        #
+#    Updated: 2020/02/05 20:26:22 by sleonia          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -174,7 +174,7 @@ FRAME = 	-F framework/ -framework SDL2 -framework SDL2_image 	\
 COMPILE_FLAGS = -g
 # COMPILE_FLAGS = -Wall -Werror -Wextra -Ofast -g
 
-COMPILE = gcc $(COMPILE_FLAGS) -I $(INCLUDES_DIR) $(INC_SDL) -I $(LIBFT_INC) -I $(LIBTOJSON_INC) -I $(SDL2_AUDIO_INC) $(INC_SDL)
+COMPILE = gcc $(COMPILE_FLAGS) -I $(INCLUDES_DIR) $(INC_SDL) -I $(LIBFT_INC) -I $(LIBTOJSON_INC) -I $(SDL2_AUDIO_INC)
 
 RT_LIBS = -L $(LIBFT_DIR) -lft -L $(SDL2_AUDIO_DIR) -lsdl_audio -L $(LIBTOJSON_DIR) -ltojson
 
