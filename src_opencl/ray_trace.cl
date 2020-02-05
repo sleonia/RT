@@ -23,7 +23,7 @@ static int		get_light(int start, int end, float percentage)
 	return ((int)((1 - percentage) * start + percentage * end));
 }
 
-static int		get_color(float3 v)
+int				get_color(float3 v)
 {
 	int     red;
 	int     green;
@@ -169,6 +169,3 @@ __kernel void RT(__global int *arr, __global t_cam *cam, __global t_object *obje
 	pixel = y * WIDTH + x;
 	arr[pixel] = get_color(color);
 }
-
-//Реализовать path tracing
-//Разбиение экрана на блоки

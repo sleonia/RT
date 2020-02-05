@@ -18,7 +18,7 @@ static float3	color_vec(int color)
 	return (vector);
 }
 
-__kernel void	blur_x(__global int *input_pixels, __global int *output_pixels)
+void	blur_x(__global int *input_pixels, __global int *output_pixels)
 {
 	int			x;
 	int			y;
@@ -45,7 +45,7 @@ __kernel void	blur_x(__global int *input_pixels, __global int *output_pixels)
 	output_pixels[pixel] = get_color(color / sum);
 }
 
-__kernel void	blur_y(__global int *input_pixels, __global int *output_pixels)
+void	blur_y(__global int *input_pixels, __global int *output_pixels)
 {
 	int			x;
 	int			y;

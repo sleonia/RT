@@ -6,7 +6,7 @@
 /*   By: deladia <deladia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 16:55:40 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/05 19:34:38 by deladia          ###   ########.fr       */
+/*   Updated: 2020/02/05 23:06:16 by deladia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ char			**init_cl_files(void)
 	files[0] = "./src_opencl/intersection.cl";
 	files[1] = "./src_opencl/uv_mapping.cl";
 	files[2] = "./src_opencl/ray_trace.cl";
-	// files[3] = "./src_opencl/blur.cl";
+	files[3] = "./src_opencl/blur.cl";
 	files[4] = NULL;
 	return (files);
 }
