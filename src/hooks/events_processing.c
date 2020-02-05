@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/28 11:38:10 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/05 18:23:32 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/05 19:25:58 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,14 +32,11 @@
 // 		sdl_update(rt->sdl);
 // 	}	
 // }
-void			events_processing(char *flag, t_rt *rt)
+void			events_processing(char *flag, t_object **hi_lited_object, t_rt *rt)
 {
-	t_object			*hi_lited_object;
-
-	hi_lited_object = NULL;
 	if (rt->sdl->event.type == SDL_QUIT)
 			*flag = 1;
-	if (key_events(flag, hi_lited_object, rt) || mouse_events(flag, rt->sdl, hi_lited_object, rt->scene))
+	if (key_events(flag, *hi_lited_object, rt) || mouse_events(flag, rt->sdl, hi_lited_object, rt->scene))
 	{
 		calc_screen(&rt->scene->cam);
 		set_opencl_arg(rt->opencl, rt->sdl, rt->scene);

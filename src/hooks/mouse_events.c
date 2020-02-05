@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/28 11:50:12 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/05 18:28:01 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/05 19:26:01 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static void			mouse_rotation(int flag, t_sdl *sdl, t_cam *cam)
 }
 
 
-int			mouse_events(char *flag, t_sdl *sdl, t_object *hi_lited_object, t_scene *scene)
+int			mouse_events(char *flag, t_sdl *sdl, t_object **hi_lited_object, t_scene *scene)
 {
 	int			x;
 	int			y;
@@ -63,12 +63,7 @@ int			mouse_events(char *flag, t_sdl *sdl, t_object *hi_lited_object, t_scene *s
 	if (sdl->event.button.button == SDL_BUTTON_RIGHT)
 	{
 		if ((obj = get_object(scene, x, y)) != NULL)
-		{
-			hi_lited_object = obj;
-			printf("%d\n", obj->type);
-		}
-		else
-			hi_lited_object = NULL;
+			*hi_lited_object = obj;
 		return (1);
 	}
     if(sdl->event.type == SDL_MOUSEWHEEL)

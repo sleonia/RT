@@ -7,7 +7,7 @@
 	},
 	"textures":
 	[
-		"./assets/textures/059_hdrmaps_com_free.exr",
+		"./assets/textures/shrek.jpg",
 		"./assets/textures/larkspur.jpg",
 		"./assets/textures/sample.jpg"
 	],
@@ -36,7 +36,7 @@
 				"ambient":			1.0,
 				"diffuse":			0.4,
 				"specular":			50.0,
-				"reflection":		0.0,
+				"reflection":		0.9,
 				"refraction":		0.0,
 				"texture_id":		1
 			}
@@ -51,7 +51,7 @@
 				"ambient":			1.0,
 				"diffuse":			0.4,
 				"specular":			50.0,
-				"reflection":		0.0,
+				"reflection":		0.9,
 				"refraction":		0.0,
 				"texture_id":		-1
 			}
