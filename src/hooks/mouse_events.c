@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mouse_events.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: deladia <deladia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/28 11:50:12 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/04 17:57:39 by deladia          ###   ########.fr       */
+/*   Updated: 2020/02/05 15:40:09 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,14 @@ int			mouse_events(char *flag, t_sdl *sdl, t_scene *scene)
 	if (sdl->event.button.button == SDL_BUTTON_RIGHT)
 	{
 		if ((obj = get_object(scene, x, y)) != NULL)
-			printf("%d\n", obj->type);		
+		{
+			scene->hi_lited_object = obj;
+			// printf("%d\n", obj->type);
+			// if (obj->type == o_sphere)
+				// obj->material.color = (cl_float3){1.f, 1.f, 1.f};
+		}
+		else
+			scene->hi_lited_object = NULL;
 		return (1);
 	}
 	return (0);

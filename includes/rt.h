@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rt.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: deladia <deladia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 04:06:50 by thorker           #+#    #+#             */
-/*   Updated: 2020/02/04 18:30:15 by deladia          ###   ########.fr       */
+/*   Updated: 2020/02/05 15:40:20 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -181,6 +181,7 @@ typedef struct			s_scene
 	t_light				*light;
 	t_object			*object;
 	t_cam				cam;
+	t_object			*hi_lited_object;
 	int					count_objects;
 	int					count_lights;
 	int					skybox_id;

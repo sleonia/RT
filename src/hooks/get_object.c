@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_object.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: deladia <deladia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/04 18:38:23 by deladia           #+#    #+#             */
-/*   Updated: 2020/02/05 13:54:56 by deladia          ###   ########.fr       */
+/*   Updated: 2020/02/05 15:00:37 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,7 +145,7 @@ t_object		*get_object(t_scene *scene, int x, int y)
 			if (t12 && dist.y < dist.x)
 			{
 				dist.x = dist.y;
-				*closest = scene->object[i];
+				closest = &(scene->object[i]);
 			}
 		}
 		else if (scene->object[i].type == o_plane)
@@ -156,7 +156,7 @@ t_object		*get_object(t_scene *scene, int x, int y)
 			if (t12 && dist.y < dist.x)
 			{
 				dist.x = dist.y;
-				*closest = scene->object[i];
+				closest = &(scene->object[i]);
 			}
 		}
 		else if (scene->object[i].type == o_cone)
@@ -167,7 +167,7 @@ t_object		*get_object(t_scene *scene, int x, int y)
 			if (t12 && dist.y < dist.x)
 			{
 				dist.x = dist.y;
-				*closest = scene->object[i];
+				closest = &(scene->object[i]);
 			}
 		}
 		else if (scene->object[i].type == o_cylinder)
@@ -176,9 +176,9 @@ t_object		*get_object(t_scene *scene, int x, int y)
 			t12 = intersect_ray_cylinder(scene->cam.pos, d,
 				&(scene->object + i)->object.cylinder, &dist.y);
 			if (t12 && dist.y < dist.x)
-			{
+		{
 				dist.x = dist.y;
-				*closest = scene->object[i];
+				closest = &(scene->object[i]);
 			}
 		}
 		i++;
