@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: deladia <deladia@student.42.fr>            +#+  +:+       +#+         #
+#    By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/01 04:18:29 by sleonia           #+#    #+#              #
-#    Updated: 2020/02/04 17:00:11 by deladia          ###   ########.fr        #
+#    Updated: 2020/02/05 17:51:02 by sleonia          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -82,6 +82,7 @@ OBJ_PARSE_FILES = $(addprefix $(OBJ_DIR), $(PARSE_FILES:.c=.o))
 # =========== #
 
 SDL_UTILS_FILES =						\
+			draw_line.c					\
 			music_manager.c				\
 			render_help_screen.c		\
 			sdl_loop.c					\
@@ -101,7 +102,6 @@ UTILS_FILES =							\
 			filter.c					\
 			ft_error.c					\
 			ft_len_arr.c				\
-			get_next_name.c				\
 			int_to_rgb.c				\
 			read_kernel.c				\
 			realloc_img.c				\

@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 04:06:50 by thorker           #+#    #+#             */
-/*   Updated: 2020/02/05 15:40:20 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/05 18:25:06 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -181,7 +181,6 @@ typedef struct			s_scene
 	t_light				*light;
 	t_object			*object;
 	t_cam				cam;
-	t_object			*hi_lited_object;
 	int					count_objects;
 	int					count_lights;
 	int					skybox_id;
@@ -247,10 +246,11 @@ typedef struct			s_rt
 */
 
 void					events_processing(char *quit, t_rt *rt);
-int						key_events(char *quit, t_rt *rt);
+int						key_events(char *quit, t_object *hi_lited_object,
+								t_rt *rt);
 int						mouse_events(char *quit, t_sdl *sdl,
-								t_scene *scene);
-void					move(SDL_Event event, t_sdl *sdl, t_cam *cam);
+								t_object *hi_lited_object, t_scene *scene);
+void					move(SDL_Event event, t_cam *cam);
 void					rotation(SDL_Event event, t_sdl *sdl, t_cam *cam);
 t_object				*get_object(t_scene *scene, int x, int y);
 
@@ -321,6 +321,7 @@ void					parse_cylinder_json(t_key_value *obj,
 **						sdl_utils
 */
 
+// void					draw_line(t_rect tmp, int color, t_sdl *sdl);
 void					change_music(Mix_Music *music[]);
 int						render_help_screen(t_sdl *sdl);
 void					sdl_loop(t_rt *rt);

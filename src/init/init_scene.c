@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/28 20:55:29 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/05 15:40:09 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/05 18:23:21 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,5 @@ t_scene		*init_scene(t_key_value *json, char *sounds[])
 	parse_skybox_json(json, scene, sounds);
 	parse_light_json(json, scene, sounds);
 	parse_objects_json(json, scene, sounds);
-	scene->hi_lited_object = NULL;
 	return (scene);
 }

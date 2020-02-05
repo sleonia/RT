@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   move.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: deladia <deladia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/28 00:00:22 by thorker           #+#    #+#             */
-/*   Updated: 2020/02/04 14:01:27 by deladia          ###   ########.fr       */
+/*   Updated: 2020/02/05 16:18:48 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static void		move_help(float *d, SDL_Event event, t_cam *cam)
 	cam->pos.s[1] += d[1];
 }
 
-void			move(SDL_Event event, t_sdl *sdl, t_cam *cam)
+void			move(SDL_Event event, t_cam *cam)
 {
 	float		d[3];
 

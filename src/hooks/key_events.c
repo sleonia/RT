@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/28 11:42:59 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/05 15:41:09 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/05 18:28:34 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,21 +20,37 @@ static void		arrows_processing(SDL_Event event, t_object *hi_lited_object)
 	{
 		if (hi_lited_object->type == o_sphere)
 			hi_lited_object->object.sphere.center.v4[1] -= 0.05;
+		if (hi_lited_object->type == o_cylinder)
+			hi_lited_object->object.cylinder.center.v4[1] -= 0.05;
+		if (hi_lited_object->type == o_cone)
+			hi_lited_object->object.cone.center.v4[1] -= 0.05;
 	}
 	if (event.key.keysym.scancode == SDL_SCANCODE_UP)
 	{
 		if (hi_lited_object->type == o_sphere)
 			hi_lited_object->object.sphere.center.v4[1] += 0.05;
+		if (hi_lited_object->type == o_cylinder)
+			hi_lited_object->object.cylinder.center.v4[1] += 0.05;
+		if (hi_lited_object->type == o_cone)
+			hi_lited_object->object.cone.center.v4[1] += 0.05;
 	}
 	if (event.key.keysym.scancode == SDL_SCANCODE_LEFT)
 	{
 		if (hi_lited_object->type == o_sphere)
 			hi_lited_object->object.sphere.center.v4[0] -= 0.05;
+		if (hi_lited_object->type == o_cylinder)
+			hi_lited_object->object.cylinder.center.v4[0] -= 0.05;
+		if (hi_lited_object->type == o_cone)
+			hi_lited_object->object.cone.center.v4[0] -= 0.05;
 	}
-	if (event.key.keysym.scancode == SDL_SCANCODE_RIGHT)
+if (event.key.keysym.scancode == SDL_SCANCODE_RIGHT)
 	{
 		if (hi_lited_object->type == o_sphere)
 			hi_lited_object->object.sphere.center.v4[0] += 0.05;
+		if (hi_lited_object->type == o_cylinder)
+			hi_lited_object->object.cylinder.center.v4[0] += 0.05;
+		if (hi_lited_object->type == o_cone)
+			hi_lited_object->object.cone.center.v4[0] += 0.05;
 	}
 }
 
@@ -52,7 +68,7 @@ static void		add_obj(SDL_Event event, t_rt *rt)
 		ft_error("clCreateBuffer");
 }
 
-int				key_events(char *flag, t_rt *rt)
+int				key_events(char *flag, t_object *hi_lited_object, t_rt *rt)
 {
 	if (rt->sdl->event.type == SDL_KEYDOWN)
 	{
@@ -73,10 +89,10 @@ int				key_events(char *flag, t_rt *rt)
 			|| rt->sdl->event.key.keysym.scancode == SDL_SCANCODE_KP_2
 			|| rt->sdl->event.key.keysym.scancode == SDL_SCANCODE_KP_3)
 			add_obj(rt->sdl->event, rt);
-		move(rt->sdl->event, rt->sdl, &(rt->scene->cam));
+		move(rt->sdl->event, &(rt->scene->cam));
 		rotation(rt->sdl->event, rt->sdl, &(rt->scene->cam));
 
-		arrows_processing(rt->sdl->event, rt->scene->hi_lited_object);
+		arrows_processing(rt->sdl->event, hi_lited_object);
 
 		if (rt->sdl->event.key.keysym.scancode == SDL_SCANCODE_SPACE)
 			save_image(rt->sdl);

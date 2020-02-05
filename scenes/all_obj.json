@@ -98,14 +98,14 @@
 	{
 		"music":
 		[
-									"./assets/music/seize_the_day.mp3"
+									"./assets/music/epicsaxguy.mp3"
 		],
 		"sounds":
 		[
 									"./assets/sounds/fisting-is-300.wav",
 									"./assets/sounds/Boy_next_door.wav"
 		],
-		"icon":						"./assets/icons/shrek.jpg",
+		"icon":						"./assets/icons/gendalf.jpg",
 		"volume":					"128"
 	}
 }

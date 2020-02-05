@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/04 12:44:26 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/04 15:10:42 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/05 18:02:44 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static void		new_cylinder(t_object *obj)
 	obj->object.cylinder.center = (cl_float3){rand() % 5,
 											rand() % 3,
 											rand() % 10};
-	obj->object.cylinder.length = rand() % 4;
+	obj->object.cylinder.length = rand() % 4 + 2;
 	obj->object.cylinder.radius = 2;
 	obj->material.color = (cl_float3){(float)(rand() % 255) / 255.0,
 									(float)(rand() % 255) / 255.0,
