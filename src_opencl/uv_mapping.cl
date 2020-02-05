@@ -127,8 +127,7 @@ float2 			uv_mapping_for_cone(t_hitting *light_hit, __global t_cone *cone)
 	float 	u;
 	float p;
 
-	vec = light_hit->hit;
-	// vec = vec_change(cone->axis, cone->center);
+	vec = vec_change(cone->axis, light_hit->hit);
 	p = (vec.x / vec.y) / tan(cone->tan);
 	if (vec.z > 0.f)
 		u = acos(p);
@@ -146,8 +145,7 @@ float2			uv_mapping_for_cylinder(t_hitting *light_hit, __global t_cylinder *cyli
 	float 	v;
 	float 	u;
 
-	vec = light_hit->hit;
-	// vec = vec_change(cylinder->axis, cylinder->center);
+	vec = vec_change(cylinder->axis, light_hit->hit);
 	u = 0.5f + (atan2(vec.x, vec.z) / (2.f * M_PI_F));
     v = 0.5f - (modf(vec.y / cylinder->radius * 250.f / 1024.f, &v) / 2.f);
 	return ((float2){u, v});
