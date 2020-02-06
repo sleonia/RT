@@ -118,8 +118,6 @@ float2			uv_mapping_for_plane(t_hitting *light_hit)
 	return ((float2){u, v});
 }
 
-
-//доделать
 float2 			uv_mapping_for_cone(t_hitting *light_hit, __global t_cone *cone)
 {
 	float3	vec;
@@ -138,7 +136,6 @@ float2 			uv_mapping_for_cone(t_hitting *light_hit, __global t_cone *cone)
 	return ((float2) {u, v});
 }
 
-//доделать
 float2			uv_mapping_for_cylinder(t_hitting *light_hit, __global t_cylinder *cylinder)
 {
 	float3	vec;

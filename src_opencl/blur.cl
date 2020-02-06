@@ -2,10 +2,9 @@
 #include "./includes/kernel.h"
 #include "./includes/rt.h"
 
-//почему 1000?!
 static float	coef(int x, int sigma)
 {
-	return(1000.f / (sqrt(2 * M_PI_F) * sigma) * exp(-(float)(x * x) / (2 * sigma * sigma)));
+	return(1.f / (sqrt(2 * M_PI_F) * sigma) * exp(-(float)(x * x) / (2 * sigma * sigma)));
 }
 
 static float3	color_vec(int color)
@@ -23,7 +22,7 @@ __kernel void	blur_x(__global int *input_pixels, __global int *output_pixels)
 	int			x;
 	int			y;
 	int			pixel;
-	int			sigma = 2;
+	int			sigma = 4;
 	float3		color = (float3)0;
 	float		sum = 0;
 	float		coeff;
@@ -50,7 +49,7 @@ __kernel void	blur_y(__global int *input_pixels, __global int *output_pixels)
 	int			x;
 	int			y;
 	int			pixel;
-	int			sigma = 2;
+	int			sigma = 4;
 	float3		color = (float3) 0;
 	float		sum = 0;
 	float		coeff;

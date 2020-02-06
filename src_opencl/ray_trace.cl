@@ -169,3 +169,4 @@ __kernel void RT(__global int *arr, __global t_cam *cam, __global t_object *obje
 	pixel = y * WIDTH + x;
 	arr[pixel] = get_color(color);
 }
+

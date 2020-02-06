@@ -6,7 +6,7 @@
 /*   By: deladia <deladia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 04:06:50 by thorker           #+#    #+#             */
-/*   Updated: 2020/02/05 22:39:16 by deladia          ###   ########.fr       */
+/*   Updated: 2020/02/06 21:25:23 by deladia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -207,7 +207,7 @@ typedef struct			s_cl
 	size_t				global_work_size[2];
 	size_t				local_work_size[2];
 	cl_device_id		device_id;
-	cl_mem				memobjs[6];
+	cl_mem				memobjs[7];
 	char				**program_source;
 	size_t				*program_size;
 	size_t				count_files;
@@ -259,11 +259,13 @@ t_object				*get_object(t_scene *scene, int x, int y);
 */
 
 char					**init_cl_files(void);
-void					create_cl_blur(t_cl *cl, t_scene *scene);
+void					create_kernel_blur(t_cl *cl, t_scene *scene);
+void					create_kernel_rt(t_cl *cl, t_scene *scene);
 void					create_cl(t_cl *cl, t_sdl *sdl, t_scene *scene);
 void					init_light(t_light **light, int nbr);
 void					init_objects(t_object **object, int nbr);
 int						set_opencl_arg(t_cl *cl, t_sdl *sdl, t_scene *scene);
+int						set_opencl_arg_for_blur(t_cl *cl, t_sdl *sdl, t_scene *scene);
 t_cl					*init_cl(t_rt *rt);
 t_rt					*init_rt(char **av);
 t_scene					*init_scene(t_key_value *json, char *sounds[]);
