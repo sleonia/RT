@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: deladia <deladia@student.42.fr>            +#+  +:+       +#+         #
+#    By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/01 04:18:29 by sleonia           #+#    #+#              #
-#    Updated: 2020/02/05 22:33:30 by deladia          ###   ########.fr        #
+#    Updated: 2020/02/06 22:36:40 by sleonia          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -168,9 +168,12 @@ INC_SDL = 	-I framework/SDL2.framework/Versions/A/Headers 			\
 			-I framework/SDL2_mixer.framework/Versions/A/Headers/ 	\
 			-F framework/
 
+INC_GL = -framework OpenGL -framework Cocoa -framework IOKit
+
 FRAME = 	-F framework/ -framework SDL2 -framework SDL2_image 	\
             -framework SDL2_ttf -framework SDL2_mixer				\
-			-rpath framework/ -framework OpenCL
+			-rpath framework/ -framework OpenCL						\
+			-framework OpenGL -framework Cocoa -framework IOKit		\
 
 COMPILE_FLAGS = -g
 # COMPILE_FLAGS = -Wall -Werror -Wextra -Ofast -g

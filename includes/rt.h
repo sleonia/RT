@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rt.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: deladia <deladia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 04:06:50 by thorker           #+#    #+#             */
-/*   Updated: 2020/02/05 22:39:16 by deladia          ###   ########.fr       */
+/*   Updated: 2020/02/06 22:13:58 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 #  include <SDL_mixer.h>
 #  include <SDL_ttf.h>
 #  include "../Simple-SDL2-Audio/audio.h"
+#  include "../nuklear_cross/nuklear_cross.h"
 #  include <math.h>
 #  include <time.h>
 #  include <OpenCL/opencl.h>
