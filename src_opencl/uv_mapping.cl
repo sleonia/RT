@@ -45,7 +45,7 @@ static float3			vec_change(float3 n, float3 vec)
 	new_vec.x = vec.y;
 	new_vec.y = vec.z;
 	new_vec.z = vec.x;
-    return (vec);
+    return (new_vec);
 }
 
 void	normalize_coord_for_texture(float2 uv, float3 *color, __global int *texture,  __global int *texture_param, int texture_id)
