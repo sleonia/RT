@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 04:06:50 by thorker           #+#    #+#             */
-/*   Updated: 2020/02/07 00:32:21 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/07 00:53:31 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -349,6 +349,8 @@ int						filter(int	*pixels, char flag);
 int						realloc_obj(SDL_Event event, t_rt *rt);
 void					save_image(t_sdl *sdl);
 void					show_error(char *error, char *sounds[]);
+
+void mainLoop(void* loopArg);
 
 # endif
 #endif

@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/24 12:57:07 by deladia           #+#    #+#             */
-/*   Updated: 2020/02/07 00:29:49 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/07 00:52:08 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 
 #if defined(NKC_EXAMPLE)
 #include "rt.h"
-#include <stdio.h>
 
 int			main(int ac, char **av)
 {

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mouse_events.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: deladia <deladia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/28 11:50:12 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/05 19:44:24 by deladia          ###   ########.fr       */
+/*   Updated: 2020/02/07 01:05:36 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int			mouse_events(char *flag, t_sdl *sdl, t_object **hi_lited_object, t_scene *
 	int			x;
 	int			y;
 
-	SDL_GetMouseState(&x, &y);		
+	SDL_GetMouseState(&x, &y);
 	if (sdl->event.button.button == SDL_BUTTON_LEFT)
 	{
 		SDL_WarpMouseInWindow(sdl->window, 640, 512);

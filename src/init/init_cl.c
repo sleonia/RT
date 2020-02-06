@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_cl.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: deladia <deladia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/01 04:21:09 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/06 22:15:47 by deladia          ###   ########.fr       */
+/*   Updated: 2020/02/07 01:27:08 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,6 @@ void			create_kernel_rt(t_cl *cl, t_scene *scene)
 	ret |= clReleaseKernel(cl->kernel);
 	if ((cl->kernel = clCreateKernel(cl->program, "RT", &ret)) && ret != 0)
 		ft_error("clBuildProgram");
-	
 }
 
 static void		create_cl_1(t_cl *cl, t_scene *scene)

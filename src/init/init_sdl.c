@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/28 10:20:37 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/06 18:40:33 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/07 01:27:46 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,9 @@ t_sdl				*init_sdl(t_key_value *json)
 		ft_error(ERROR_INPUT);
 	if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_EVENTS) != 0)
 		ft_error((char *)SDL_GetError());
-	if (!(sdl->window = SDL_CreateWindow("Hello World!", 350,
+	if (!SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "2"))
+		ft_error((char *)SDL_GetError());
+	if (!(sdl->window = SDL_CreateWindow("RT", 350,
 			200, WIDTH, HEIGHT, SDL_WINDOW_SHOWN)))
 		ft_error((char *)SDL_GetError());
 	if (!(sdl->render = SDL_CreateRenderer(sdl->window, -1,
