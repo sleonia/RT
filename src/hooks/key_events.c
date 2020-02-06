@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key_events.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: deladia <deladia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/28 11:42:59 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/05 19:26:07 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/06 22:23:04 by deladia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,8 +78,8 @@ int				key_events(char *flag, t_object *hi_lited_object, t_rt *rt)
 			*flag = NEGATIVE;
 		if (rt->sdl->event.key.keysym.scancode == SDL_SCANCODE_M)
 			*flag = SEPIA;
-		if (rt->sdl->event.key.keysym.scancode == SDL_SCANCODE_B)
-			*flag = 0;
+		if (rt->sdl->event.key.keysym.scancode == SDL_SCANCODE_K)
+			*flag = BLUR;
 		if (rt->sdl->event.key.keysym.scancode == SDL_SCANCODE_B)
 			SDL_SetRelativeMouseMode(!SDL_GetRelativeMouseMode());
 		if (rt->sdl->event.key.keysym.scancode == SDL_SCANCODE_H)

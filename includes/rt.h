@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 04:06:50 by thorker           #+#    #+#             */
-/*   Updated: 2020/02/06 22:13:58 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/07 00:32:21 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 #  include "libft.h"
 #  include "to_json.h"
 #  include "rt_error.h"
+#  include "gui.h"
 #  include <SDL.h>
 #  include <SDL_image.h>
 #  include <SDL_mixer.h>
@@ -32,6 +33,7 @@
 #  define STEP 0.1
 #  define NEGATIVE -101
 #  define SEPIA -102
+#  define BLUR -103
 #  define NBR_OF_SONGS	20
 #  define DISPLAY_NOT	"osascript -e \'display notification\""
 #  define MIN(a,b) (((a)<(b))?(a):(b))
@@ -208,7 +210,7 @@ typedef struct			s_cl
 	size_t				global_work_size[2];
 	size_t				local_work_size[2];
 	cl_device_id		device_id;
-	cl_mem				memobjs[6];
+	cl_mem				memobjs[7];
 	char				**program_source;
 	size_t				*program_size;
 	size_t				count_files;
@@ -260,11 +262,13 @@ t_object				*get_object(t_scene *scene, int x, int y);
 */
 
 char					**init_cl_files(void);
-void					create_cl_blur(t_cl *cl, t_scene *scene);
+void					create_kernel_blur(t_cl *cl, t_scene *scene);
+void					create_kernel_rt(t_cl *cl, t_scene *scene);
 void					create_cl(t_cl *cl, t_sdl *sdl, t_scene *scene);
 void					init_light(t_light **light, int nbr);
 void					init_objects(t_object **object, int nbr);
 int						set_opencl_arg(t_cl *cl, t_sdl *sdl, t_scene *scene);
+int						set_opencl_arg_for_blur(t_cl *cl, t_sdl *sdl, t_scene *scene);
 t_cl					*init_cl(t_rt *rt);
 t_rt					*init_rt(char **av);
 t_scene					*init_scene(t_key_value *json, char *sounds[]);

@@ -6,7 +6,7 @@
 #    By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/01 04:18:29 by sleonia           #+#    #+#              #
-#    Updated: 2020/02/06 22:36:40 by sleonia          ###   ########.fr        #
+#    Updated: 2020/02/07 00:25:33 by sleonia          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -131,11 +131,10 @@ OBJ_MAIN_FILES = $(addprefix $(OBJ_DIR), $(MAIN_FILES:.c=.o))
 # =========== #
 
 INCLUDES_FILES_LIST =					\
+			gui.h						\
 			kernel.h					\
 			rt.h						\
 			rt_error.h					\
-			stb_image.h					\
-			stb_image_write.h			\
 
 INCLUDES_DIR = 	./includes/
 
@@ -156,6 +155,7 @@ OBJ = 									\
 		$(OBJ_UTILS_FILES)				\
 		$(OBJ_MAIN_FILES)				\
 
+
 OBJ_DIR = ./objects/
 
 SRC_DIR = ./src/
@@ -166,19 +166,17 @@ INC_SDL = 	-I framework/SDL2.framework/Versions/A/Headers 			\
 			-I framework/SDL2_image.framework/Versions/A/Headers 	\
 			-I framework/SDL2_ttf.framework/Versions/A/Headers 		\
 			-I framework/SDL2_mixer.framework/Versions/A/Headers/ 	\
-			-F framework/
-
-INC_GL = -framework OpenGL -framework Cocoa -framework IOKit
+			-F framework/											\
 
 FRAME = 	-F framework/ -framework SDL2 -framework SDL2_image 	\
             -framework SDL2_ttf -framework SDL2_mixer				\
 			-rpath framework/ -framework OpenCL						\
 			-framework OpenGL -framework Cocoa -framework IOKit		\
 
-COMPILE_FLAGS = -g
+COMPILE_FLAGS = -O2 -Ofast -g -DNKC_EXAMPLE
 # COMPILE_FLAGS = -Wall -Werror -Wextra -Ofast -g
 
-COMPILE = gcc $(COMPILE_FLAGS) -I $(INCLUDES_DIR) $(INC_SDL) -I $(LIBFT_INC) -I $(LIBTOJSON_INC) -I $(SDL2_AUDIO_INC) $(INC_SDL)
+COMPILE = gcc $(COMPILE_FLAGS) -I $(INCLUDES_DIR) $(INC_SDL) -I $(LIBFT_INC) -I $(LIBTOJSON_INC) -I $(SDL2_AUDIO_INC)
 
 RT_LIBS = -L $(LIBFT_DIR) -lft -L $(SDL2_AUDIO_DIR) -lsdl_audio -L $(LIBTOJSON_DIR) -ltojson
 

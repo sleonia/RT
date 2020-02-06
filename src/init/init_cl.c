@@ -6,7 +6,7 @@
 /*   By: deladia <deladia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/01 04:21:09 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/03 15:17:02 by deladia          ###   ########.fr       */
+/*   Updated: 2020/02/06 22:15:47 by deladia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,9 @@ static void		cl_create_buffer_1(t_cl *cl, t_scene *scene)
 	if ((cl->memobjs[5] = clCreateBuffer(cl->context,
 			CL_MEM_READ_WRITE, sizeof(cl_int) * scene->texture_cnt * 3,
 			NULL, &ret)) && ret != 0)
+		ft_error("clCreateBuffer");
+	if ((cl->memobjs[6] = clCreateBuffer(cl->context, CL_MEM_READ_WRITE,
+			sizeof(cl_int) * WIDTH * HEIGHT, NULL, &ret)) && ret != 0)
 		ft_error("clCreateBuffer");
 }
 
@@ -67,25 +70,32 @@ void			print_build_error(t_cl *cl, cl_int ret, size_t log_size)
 	exit(-1);
 }
 
+void			create_kernel_rt(t_cl *cl, t_scene *scene)
+{
+	cl_int		ret;
+
+	ret |= clReleaseKernel(cl->kernel);
+	if ((cl->kernel = clCreateKernel(cl->program, "RT", &ret)) && ret != 0)
+		ft_error("clBuildProgram");
+	
+}
+
 static void		create_cl_1(t_cl *cl, t_scene *scene)
 {
 	cl_int		ret;
 	size_t		log_size;
 
+	cl->global_work_size[0] = WIDTH;
+	cl->global_work_size[1] = HEIGHT;
+	cl->local_work_size[0] = 16;
+	cl->local_work_size[1] = 16;
 	if ((cl->program = clCreateProgramWithSource(cl->context, cl->count_files,
 						(const char **)cl->program_source,
 						(const size_t *)cl->program_size, &ret)) && ret != 0)
 		ft_error("clCreateProgramWithSource");
 	if ((ret = clBuildProgram(cl->program, 1, &cl->device_id,
 						"-DOPENCL___ -I include/ ", NULL, NULL)) != 0)
-		print_build_error(cl, ret, log_size);
-	if ((cl->kernel = clCreateKernel(cl->program, "RT", &ret)) && ret != 0)
-		ft_error("clBuildProgram");
-	cl->global_work_size[0] = WIDTH;
-	cl->global_work_size[1] = HEIGHT;
-	cl->local_work_size[0] = 16;
-	cl->local_work_size[1] = 16;
-	cl_create_buffer(cl, scene);
+		print_build_error(cl, ret, log_size);	
 }
 
 void			create_cl(t_cl *cl, t_sdl *sdl, t_scene *scene)
@@ -105,5 +115,5 @@ void			create_cl(t_cl *cl, t_sdl *sdl, t_scene *scene)
 											0, &ret)) && ret != 0)
 		ft_error("clCreateCommandQueue");
 	create_cl_1(cl, scene);
-	set_opencl_arg(cl, sdl, scene);
+	cl_create_buffer(cl, scene);
 }
