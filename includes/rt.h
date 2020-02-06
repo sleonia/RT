@@ -6,7 +6,7 @@
 /*   By: deladia <deladia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 04:06:50 by thorker           #+#    #+#             */
-/*   Updated: 2020/02/06 21:25:23 by deladia          ###   ########.fr       */
+/*   Updated: 2020/02/06 22:21:58 by deladia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@
 #  define STEP 0.1
 #  define NEGATIVE -101
 #  define SEPIA -102
+#  define BLUR -103
 #  define NBR_OF_SONGS	20
 #  define DISPLAY_NOT	"osascript -e \'display notification\""
 #  define MIN(a,b) (((a)<(b))?(a):(b))
