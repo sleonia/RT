@@ -21,6 +21,14 @@
 		{
 			"intensity":			0.4,
 			"position":				[3.5, 1.6, -10.0]
+		},
+		{
+			"intensity":			0.4,
+			"position":				[0.5, 1.6, -10.0]
+		},
+		{
+			"intensity":			0.4,
+			"position":				[3.5, 0.6, -10.0]
 		}
 	],
 	"figure":
@@ -37,7 +45,7 @@
 				"specular":			50.0,
 				"reflection":		0.1,
 				"refraction":		0.0,
-				"texture_id":		1
+				"texture_id":		-1
 			}
 		},
 		{

@@ -67,7 +67,7 @@ static float3 refract_ray(const float3 I, float3 N, float refractive_index)
 	return (n * I + (n * cosI - cosT) * N);
 }
 
-static float3		computer_lighting(float3 d, t_hitting *light_hit, __global t_object *obj, __global t_light *l, int count_obj, int count_light, float ambient, __global int *texture, __global int *texture_param)
+static float3		computer_lighting(float3 d, t_hitting *light_hit, __global t_object *obj, __global t_light *l, int count_obj, int count_light, float ambient, __global int *texture, __global int *texture_param, int move_on)
 {
 	float		light_dist = 0;
 	float3		light_dir = (float3)0;
@@ -80,6 +80,8 @@ static float3		computer_lighting(float3 d, t_hitting *light_hit, __global t_obje
 
 	shadow_hit.n = (float3)0;
 	shadow_hit.hit = (float3)0;
+	if (move_on == 1)
+		count_light = 1;
 	while (i < count_light)
 	{
 		light_dir = normalize(l[i].pos - light_hit->hit);
@@ -87,7 +89,7 @@ static float3		computer_lighting(float3 d, t_hitting *light_hit, __global t_obje
 		if (dot(light_dir, light_hit->n) > 0)
 		{
 			float3 tmp = l[i].pos;			
-			if (!closest_intersection(tmp, -light_dir, count_obj, obj, &shadow_hit, texture, texture_param, 0) ||	(length(shadow_hit.hit - l[i].pos) > light_dist - 0.1f && length(shadow_hit.hit - l[i].pos) < light_dist + 0.1f))
+			if (!closest_intersection(tmp, -light_dir, count_obj, obj, &shadow_hit, texture, texture_param, move_on) ||	(length(shadow_hit.hit - l[i].pos) > light_dist - 0.1f && length(shadow_hit.hit - l[i].pos) < light_dist + 0.1f))
 			{
 				a += dot(light_dir, light_hit->n) * l[i].intensity;
 				b += pow(max(0.f, -dot(light_hit->n * 2.f * dot(light_dir, light_hit->n) - light_dir, d)), light_hit->mat.specular) * l[i].intensity;
@@ -131,7 +133,6 @@ __kernel void RT(__global int *arr, __global t_cam *cam, __global t_object *obje
 			d = d - (*cam).oz;
 			d = normalize(d);
 			o = (float3)cam->pos;
-			//Отправлять размеры текстуры и саму текстуру
 			tmp_color = (float3)0;
 			cnt_reflection = 0;
 			while (cnt_reflection < depth)
@@ -139,7 +140,7 @@ __kernel void RT(__global int *arr, __global t_cam *cam, __global t_object *obje
 				cnt_reflection++;
 				if (closest_intersection(o, d, count_obj, object, &light_hit, texture, texture_param, move_on))
 				{
-					tmp_color += computer_lighting(d, &light_hit, object, light, count_obj, count_light, ambient, texture, texture_param);
+					tmp_color += computer_lighting(d, &light_hit, object, light, count_obj, count_light, ambient, texture, texture_param, move_on);
 					if (light_hit.mat.reflection > 0.00001f)
 					{
 						tmp_color *= (1 - light_hit.mat.reflection);
@@ -169,4 +170,3 @@ __kernel void RT(__global int *arr, __global t_cam *cam, __global t_object *obje
 	pixel = y * WIDTH + x;
 	arr[pixel] = get_color(color);
 }
-
