@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mouse_events.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: deladia <deladia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/28 11:50:12 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/07 20:02:05 by deladia          ###   ########.fr       */
+/*   Updated: 2020/02/08 01:28:59 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ bool			mouse_events(char *flag, t_sdl *sdl, t_object **hi_lited_object, t_scene 
 	SDL_GetMouseState(&x, &y);
 	if (sdl->event.button.button == SDL_BUTTON_LEFT)
 	{
-		SDL_WarpMouseInWindow(sdl->window, 640, 512);
+		SDL_WarpMouseInWindow(sdl->screen[0]->win, 640, 512);
 			mouse_rotation(&(scene->cam), x, y);
 		scene->move_on = 1;
 		return (true);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rt.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: deladia <deladia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 04:06:50 by thorker           #+#    #+#             */
-/*   Updated: 2020/02/07 20:30:39 by deladia          ###   ########.fr       */
+/*   Updated: 2020/02/08 01:37:39 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -245,21 +245,34 @@ typedef struct			s_cl
 	char				**files;
 }						t_cl;
 
+typedef struct			s_screen
+{
+	SDL_Window			*win;
+	SDL_Renderer		*render;
+	int					win_id;
+	int					m_width;
+	int					m_height;
+	bool				mouse_focus;
+	bool				keyboard_focus;
+	bool				full_screen;
+	bool				minimized;
+	bool				shown;
+}						t_screen;
+
 typedef struct			s_sdl
 {
-	SDL_Window			*window;
-	SDL_Renderer		*render;
+	t_screen			*screen[2];
 	SDL_Texture			*texture;
 	Mix_Music			*music[NBR_OF_SONGS];
 	char				*sounds[NBR_OF_SONGS];
 	SDL_Event			event;
-	int					*pixels;
 	SDL_Surface			*sur;
 	int					volume;
 	bool				help_screen_flag;
 	TTF_Font			*font;
 	int					font_size;
 	SDL_Color			font_color;
+	bool				relative_mouse_mode;
 }						t_sdl;
 
 typedef struct			s_rt

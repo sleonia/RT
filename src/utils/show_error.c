@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   show_error.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: deladia <deladia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/01 02:35:38 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/01 11:06:37 by deladia          ###   ########.fr       */
+/*   Updated: 2020/02/07 21:38:27 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ void				show_error(char *error, char *sounds[])
 
 	sh_command = ft_strjoin(DISPLAY_NOT, error);
 	system(sh_command);
-	srand(time(NULL));
 	id = rand() % ft_len_arr((void **)sounds);
 	if (id == 0)
 		return ;

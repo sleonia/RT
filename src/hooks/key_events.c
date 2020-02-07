@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/28 11:42:59 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/07 21:12:24 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/08 01:28:35 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,11 @@ bool			key_events(char *flag, t_object *hi_lited_object, t_rt *rt)
 		if (rt->sdl->event.key.keysym.scancode == SDL_SCANCODE_K)
 			*flag = BLUR;
 		if (rt->sdl->event.key.keysym.scancode == SDL_SCANCODE_B)
+		{
 			SDL_SetRelativeMouseMode(!SDL_GetRelativeMouseMode());
+			// rt->scene->skybox_id++;
+			// SDL_ShowSimpleMessageBox(0, "Mouse", "Left button was pressed!", sdl->screen[0]->win);
+		}
 		if (rt->sdl->event.key.keysym.scancode == SDL_SCANCODE_J)
 			*flag = 0;
 		if (rt->sdl->event.key.keysym.scancode == SDL_SCANCODE_H)
