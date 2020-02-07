@@ -10,3 +10,4 @@ RT
 /libtojson/cmake-build-debug/
 /libtojson/main.c
 *.bmp
+Simple-SDL2-Audio/audio.o

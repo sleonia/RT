@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/28 10:20:37 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/07 01:27:46 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/07 19:03:53 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ static void			init_sdl_2(t_key_value *json, t_sdl *sdl)
 {
 	t_key_value		*assets;
 
+    SDL_RenderSetScale(sdl->render, WIDTH, HEIGHT);
 	SDL_UpdateTexture(sdl->texture, NULL, sdl->sur->pixels,
 					WIDTH * sizeof(int));
 	SDL_RenderClear(sdl->render);

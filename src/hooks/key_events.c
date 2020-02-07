@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key_events.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: deladia <deladia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/28 11:42:59 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/07 11:50:08 by thorker          ###   ########.fr       */
+/*   Updated: 2020/02/07 19:32:59 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ static void		add_obj(SDL_Event event, t_rt *rt)
 		ft_error("clCreateBuffer");
 }
 
-int				key_events(char *flag, t_object *hi_lited_object, t_rt *rt)
+bool			key_events(char *flag, t_object *hi_lited_object, t_rt *rt)
 {
 	move(rt->sdl->event, &(rt->scene->cam), &(rt->scene->flag));
 	if (rt->sdl->event.type == SDL_KEYDOWN)
@@ -83,6 +83,8 @@ int				key_events(char *flag, t_object *hi_lited_object, t_rt *rt)
 			*flag = BLUR;
 		if (rt->sdl->event.key.keysym.scancode == SDL_SCANCODE_B)
 			SDL_SetRelativeMouseMode(!SDL_GetRelativeMouseMode());
+		if (rt->sdl->event.key.keysym.scancode == SDL_SCANCODE_J)
+			*flag = 0;
 		if (rt->sdl->event.key.keysym.scancode == SDL_SCANCODE_H)
 			rt->sdl->help_screen_flag = !rt->sdl->help_screen_flag;
 		if (rt->sdl->event.key.keysym.scancode == SDL_SCANCODE_KP_0
@@ -97,7 +99,7 @@ int				key_events(char *flag, t_object *hi_lited_object, t_rt *rt)
 		if (rt->sdl->event.key.keysym.scancode == SDL_SCANCODE_SPACE)
 			save_image(rt->sdl);
 		rt->scene->move_on = 1;
-		return (1);
+		return (true);
 	}
-	return (0);
+	return (false);
 }
