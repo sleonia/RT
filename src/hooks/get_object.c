@@ -6,7 +6,7 @@
 /*   By: deladia <deladia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/04 18:38:23 by deladia           #+#    #+#             */
-/*   Updated: 2020/02/07 20:03:55 by deladia          ###   ########.fr       */
+/*   Updated: 2020/02/07 20:31:16 by deladia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,6 +130,32 @@ static int		intersect_ray_cone(cl_float3 o, cl_float3 d,
 	return (0);
 }
 
+static int		intersect_ray_parab(cl_float3 o, cl_float3 d, t_parab *parab, float *dist_i)
+{
+	cl_float3	x;
+	float		a;
+	float		b;
+	float		c;
+	float		disc;
+
+	x = cl_minus(o, parab->center);
+	a = dot(d,d) - dot(d, parab->axis) * dot(d, parab->axis);
+	b = 2.f * dot(d,x) - 2.f * dot(d, parab->axis) * (dot(x, parab->axis) + 2.f * parab->k);
+	c = dot(x, x) - dot(x, parab->axis) * (dot(x, parab->axis) + 4.f * parab->k);
+	disc = b * b - 4.f * a * c;
+	if (disc < 0.00001f)
+		return (0);
+	*dist_i = (-b - sqrt(disc)) / (2.f * a);
+	if (*dist_i > 0.002f)
+		if ((dot(parab->axis, (cl_sum(cl_mult_n(d, *dist_i), cl_minus(o, parab->center)))) * dot(parab->axis, (cl_sum(cl_mult_n(d, *dist_i), cl_minus(o, parab->center))))) <= (parab->length) * (parab->length))
+			return (1);
+	*dist_i = (-b + sqrt(disc)) / (2.f * a);
+	if (*dist_i > 0.002f)
+		if ((dot(parab->axis, (cl_sum(cl_mult_n(d, *dist_i), cl_minus(o, parab->center)))) * dot(parab->axis, (cl_sum(cl_mult_n(d, *dist_i), cl_minus(o, parab->center))))) <= (parab->length) * (parab->length))
+			return (2);
+	return (0);
+}
+
 t_object		*get_object(t_scene *scene, int x, int y)
 {
 	cl_float3	d;
@@ -184,6 +210,17 @@ t_object		*get_object(t_scene *scene, int x, int y)
 			dist.y = 0.f;
 			t12 = intersect_ray_cylinder(scene->cam.pos, d,
 				&(scene->object + i)->object.cylinder, &dist.y);
+			if (t12 && dist.y < dist.x)
+			{
+				dist.x = dist.y;
+				closest = &(scene->object[i]);
+			}
+		}
+		else if (scene->object[i].type == o_parab)
+		{
+			dist.y = 0.f;
+			t12 = intersect_ray_parab(scene->cam.pos, d,
+				&(scene->object + i)->object.parab, &dist.y);
 			if (t12 && dist.y < dist.x)
 			{
 				dist.x = dist.y;

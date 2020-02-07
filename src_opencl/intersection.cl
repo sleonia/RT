@@ -116,6 +116,32 @@ static int   intersect_ray_cone(float3 o, float3 d, __global t_cone *cone, float
 	return (0);
 }
 
+static int	intersect_ray_parab(float3 o, float3 d, __global t_parab *parab, float *dist_i)
+{
+	float3	x;
+	float 	a;
+	float 	b;
+	float 	c;
+	float 	disc;
+
+	x = o - parab->center;
+	a = dot(d,d) - dot(d, parab->axis) * dot(d, parab->axis);
+	b = 2.f * dot(d,x) - 2.f * dot(d, parab->axis) * (dot(x, parab->axis) + 2.f * parab->k);
+	c = dot(x, x) - dot(x, parab->axis) * (dot(x, parab->axis) + 4.f * parab->k);
+	disc = b * b - 4.f * a * c;
+	if (disc < 0.00001f)
+		return (0);
+	*dist_i = (-b - sqrt(disc)) / (2.f * a);
+	if (*dist_i > 0.002f)
+		if ((dot(parab->axis, (d * *dist_i) + o - parab->center) * dot(parab->axis, (d * *dist_i) + o - parab->center)) <= (parab->length) * (parab->length))
+			return (1);
+	*dist_i = (-b + sqrt(disc)) / (2.f * a);
+	if (*dist_i > 0.002f)
+		if ((dot(parab->axis, (d * *dist_i) + o - parab->center) * dot(parab->axis, (d * *dist_i) + o - parab->center)) <= (parab->length) * (parab->length))
+			return (2);
+	return (0);
+}
+
 int	closest_intersection(float3 o, float3 d, int count_obj, __global t_object *obj, t_hitting *light_hit, __global int *texture, __global int *texture_param, int move_on)
 {
 	float		dist;
@@ -216,7 +242,25 @@ int	closest_intersection(float3 o, float3 d, int count_obj, __global t_object *o
 					normalize_coord_for_texture(uv, &light_hit->mat.color, texture,  texture_param, obj[i].material.texture_id);
 				}
 			}
-		}	
+		}
+		else if (obj[i].type == o_parab)
+		{
+			dist_i = 0.f;
+			t12 = intersect_ray_parab(o, d, &(obj + i)->object.parab, &dist_i);
+			if (t12 && dist_i < dist)
+			{
+				float	m;
+
+				dist = dist_i;
+				light_hit->hit = o + d * dist_i;				
+				m = dot(light_hit->hit - obj[i].object.parab.center, obj[i].object.parab.axis);
+				light_hit->n = normalize(light_hit->hit - obj[i].object.parab.center - obj[i].object.parab.axis * (m + obj[i].object.parab.k));
+				if (t12 == 2)
+					light_hit->n *= -1.f;
+				light_hit->mat = obj[i].material;
+				//uv mapping			
+			}
+		}
 		i++;
 	}
 	return (dist < MAX_DIST);

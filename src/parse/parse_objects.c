@@ -6,7 +6,7 @@
 /*   By: deladia <deladia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/28 21:51:06 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/01 15:22:34 by deladia          ###   ########.fr       */
+/*   Updated: 2020/02/07 20:28:41 by deladia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,12 @@ static void			check_type1(char *type, t_object *scene_obj,
 		scene_obj->type = o_plane;
 		parse_plane_json(obj, &object.plane);
 		scene_obj->object.plane = object.plane;
+	}
+	else if (ft_strcmp(type, "parab") == 0)
+	{
+		scene_obj->type = o_parab;
+		parse_parab_json(obj, &object.parab);
+		scene_obj->object.parab = object.parab;
 	}
 }
 

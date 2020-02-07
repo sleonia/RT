@@ -88,6 +88,22 @@
 				"refraction":		0.0,
 				"texture_id":		-1
 			}
+		},
+		{
+			"type":					"parab",
+			"axis":					[0.0, 1.0, 0.0],
+			"center":				[10.0, 0.0, 10.0],
+			"distance":				0.6,
+			"length":				30.0,
+			"material":
+			{
+				"color":			[205.0, 140.0, 205.0],
+				"ambient":			1.0,
+				"diffuse":			0.4,
+				"specular":			50.0,
+				"reflection":		0.0,
+				"refraction":		0.0
+			}
 		}
 	],
 	"assets":

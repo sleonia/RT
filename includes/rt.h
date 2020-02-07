@@ -6,7 +6,7 @@
 /*   By: deladia <deladia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 04:06:50 by thorker           #+#    #+#             */
-/*   Updated: 2020/02/07 20:03:17 by deladia          ###   ########.fr       */
+/*   Updated: 2020/02/07 20:30:39 by deladia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,12 +114,29 @@ typedef struct			s_sphere
 	float				radius;
 }						t_sphere;
 
+typedef struct			s_parab
+{
+# ifndef OPENCL___
+
+	cl_float3			center;
+	cl_float3			axis;
+# else
+
+	float3				center;
+	float3				axis;
+# endif
+
+	float				k;
+	float				length;
+}						t_parab;
+
 union					u_objects
 {
 	t_sphere			sphere;
 	t_cylinder			cylinder;
 	t_cone				cone;
 	t_plane				plane;
+	t_parab				parab;
 };
 
 typedef struct			s_material
@@ -179,6 +196,7 @@ enum					e_obj_type
 	o_cylinder,
 	o_cone,
 	o_plane,
+	o_parab
 };
 
 typedef struct			s_object
@@ -330,6 +348,7 @@ void					parse_skybox_json(t_key_value *json,
 void					parse_sphere_json(t_key_value *obj, t_sphere *sphere);
 void					parse_plane_json(t_key_value *obj, t_plane *plane);
 void					parse_cone_json(t_key_value *obj, t_cone *cone);
+void					parse_parab_json(t_key_value *obj, t_parab *parab);
 void					parse_cylinder_json(t_key_value *obj,
 											t_cylinder *cylinder);
 

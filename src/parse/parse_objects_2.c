@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_objects_2.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: deladia <deladia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 17:19:10 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/05 16:43:07 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/07 20:28:52 by deladia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,4 +77,24 @@ void			parse_cylinder_json(t_key_value *obj, t_cylinder *cylinder)
 	if (get_double(obj, "radius", &value))
 		ft_error("Error get_double: radius");
 	cylinder->radius = value;
+}
+
+void			parse_parab_json(t_key_value *obj, t_parab *parab)
+{
+	double		value;
+	t_array		*pos;
+
+	if (get_array(obj, "center", &pos))
+		ft_error("Error get_array: center");
+	parse_array_of_float(pos, &parab->center);
+	if (get_array(obj, "axis", &pos))
+		ft_error("Error get_array: axis");
+	parse_array_of_float(pos, &parab->axis);
+	cl_normalize(&parab->axis);
+	if (get_double(obj, "distance", &value))
+		ft_error("Error get_double: distance");
+	parab->k = (float)value;
+	if (get_double(obj, "length", &value))
+		ft_error("Error get_double: distance");
+	parab->length = (float)value;
 }
