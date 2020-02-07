@@ -6,7 +6,7 @@
 /*   By: deladia <deladia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/04 18:38:23 by deladia           #+#    #+#             */
-/*   Updated: 2020/02/07 20:31:16 by deladia          ###   ########.fr       */
+/*   Updated: 2020/02/07 21:25:57 by deladia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ static int		intersect_ray_cylinder(cl_float3 o, cl_float3 d,
 static int		intersect_ray_plane(cl_float3 o, cl_float3 d, t_plane *pl,
 														float *dist_i)
 {
-	float	a;
+	float		a;
 
 	cl_normalize(&pl->axis);
 	cl_normalize(&d);
