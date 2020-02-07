@@ -6,7 +6,7 @@
 /*   By: deladia <deladia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/04 18:38:23 by deladia           #+#    #+#             */
-/*   Updated: 2020/02/07 20:00:28 by deladia          ###   ########.fr       */
+/*   Updated: 2020/02/07 20:03:55 by deladia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,7 +142,6 @@ t_object		*get_object(t_scene *scene, int x, int y)
 		cl_mult_n(scene->cam.oy, ((float)y * 1.f / WIDTH) - 0.5f));
 	d = cl_minus(d, scene->cam.oz);
 	cl_normalize(&d);
-	printf("d.x %f d.y %f d.z %f\n", d.x, d.y, d.z);
 	dist.x = MAX_DIST + 1.f;
 	i = 0;
 	while (i < scene->count_objects)
