@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   events_processing.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: deladia <deladia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/28 11:38:10 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/07 11:50:10 by thorker          ###   ########.fr       */
+/*   Updated: 2020/02/07 14:18:13 by deladia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,7 @@ void			events_processing(char *flag, t_object **hi_lited_object, t_rt *rt)
 		set_opencl_arg(rt->opencl, rt->sdl, rt->scene);
 		filter(rt->sdl->sur->pixels, *flag);
 		if (*flag == BLUR && !rt->scene->move_on)
-		{
-			create_kernel_blur(rt->opencl, rt->scene);
-			set_opencl_arg_for_blur(rt->opencl, rt->sdl, rt->scene);
-		}
-	
+			create_kernel_blur(rt->opencl, rt->sdl);	
 		sdl_update(rt->sdl);
 	}
 	else
@@ -38,10 +34,7 @@ void			events_processing(char *flag, t_object **hi_lited_object, t_rt *rt)
 		set_opencl_arg(rt->opencl, rt->sdl, rt->scene);
 		filter(rt->sdl->sur->pixels, *flag);
 		if (*flag == BLUR && !rt->scene->move_on)
-		{
-			create_kernel_blur(rt->opencl, rt->scene);
-			set_opencl_arg_for_blur(rt->opencl, rt->sdl, rt->scene);
-		}
+			create_kernel_blur(rt->opencl, rt->sdl);
 		sdl_update(rt->sdl);
 	}
 }

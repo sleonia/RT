@@ -6,13 +6,13 @@
 /*   By: deladia <deladia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/03 15:15:57 by deladia           #+#    #+#             */
-/*   Updated: 2020/02/06 22:15:40 by deladia          ###   ########.fr       */
+/*   Updated: 2020/02/07 14:18:24 by deladia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-static void		set_arg_blur(t_cl *cl, t_sdl *sdl, t_scene *scene)
+static void		set_arg_blur(t_cl *cl, t_sdl *sdl)
 {
 	int		ret;
 	int		*output;
@@ -37,7 +37,7 @@ static void		set_arg_blur(t_cl *cl, t_sdl *sdl, t_scene *scene)
 		func_error(-12);
 }
 
-int				set_opencl_arg_for_blur(t_cl *cl, t_sdl *sdl, t_scene *scene)
+static int				set_opencl_arg_for_blur(t_cl *cl, t_sdl *sdl)
 {
 	cl_int		ret;
 
@@ -45,18 +45,20 @@ int				set_opencl_arg_for_blur(t_cl *cl, t_sdl *sdl, t_scene *scene)
 	ret |= clSetKernelArg(cl->kernel, 1, sizeof(cl_mem), &cl->memobjs[6]);
 	if (ret != 0)
 		func_error(-9);
-	set_arg_blur(cl, sdl, scene);
+	set_arg_blur(cl, sdl);
 	return (0);
 }
 
-void			create_kernel_blur(t_cl *cl, t_scene *scene)
+void			create_kernel_blur(t_cl *cl, t_sdl *sdl)
 {
 	cl_int		ret;
 
 	ret |= clReleaseKernel(cl->kernel);
 	if ((cl->kernel = clCreateKernel(cl->program, "blur_x", &ret)) && ret != 0)
 		ft_error("clBuildProgram");
+	set_opencl_arg_for_blur(cl, sdl);
 	ret |= clReleaseKernel(cl->kernel);
 	if ((cl->kernel = clCreateKernel(cl->program, "blur_y", &ret)) && ret != 0)
 		ft_error("clBuildProgram");
+	set_opencl_arg_for_blur(cl, sdl);
 }

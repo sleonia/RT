@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rt.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: deladia <deladia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 04:06:50 by thorker           #+#    #+#             */
-/*   Updated: 2020/02/07 12:48:19 by thorker          ###   ########.fr       */
+/*   Updated: 2020/02/07 14:18:29 by deladia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -273,13 +273,12 @@ t_object				*get_object(t_scene *scene, int x, int y);
 */
 
 char					**init_cl_files(void);
-void					create_kernel_blur(t_cl *cl, t_scene *scene);
+void					create_kernel_blur(t_cl *cl, t_sdl *sdl);
 void					create_kernel_rt(t_cl *cl, t_scene *scene);
 void					create_cl(t_cl *cl, t_sdl *sdl, t_scene *scene);
 void					init_light(t_light **light, int nbr);
 void					init_objects(t_object **object, int nbr);
 int						set_opencl_arg(t_cl *cl, t_sdl *sdl, t_scene *scene);
-int						set_opencl_arg_for_blur(t_cl *cl, t_sdl *sdl, t_scene *scene);
 t_cl					*init_cl(t_rt *rt);
 t_rt					*init_rt(char **av);
 t_scene					*init_scene(t_key_value *json, char *sounds[]);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_cl.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: deladia <deladia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/01 04:21:09 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/07 01:27:08 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/07 14:19:40 by deladia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ void			create_kernel_rt(t_cl *cl, t_scene *scene)
 		ft_error("clBuildProgram");
 }
 
-static void		create_cl_1(t_cl *cl, t_scene *scene)
+static void		create_cl_1(t_cl *cl)
 {
 	cl_int		ret;
 	size_t		log_size;
@@ -113,6 +113,6 @@ void			create_cl(t_cl *cl, t_sdl *sdl, t_scene *scene)
 	if ((cl->cmd_queue = clCreateCommandQueue(cl->context, cl->device_id,
 											0, &ret)) && ret != 0)
 		ft_error("clCreateCommandQueue");
-	create_cl_1(cl, scene);
+	create_cl_1(cl);
 	cl_create_buffer(cl, scene);
 }
