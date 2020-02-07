@@ -6,36 +6,25 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/28 11:50:12 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/07 01:05:36 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/07 13:05:39 by thorker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-static void			mouse_rotation(int flag, t_sdl *sdl, t_cam *cam)
+static void			mouse_rotation(t_cam *cam, int x, int y)
 {
-	if (sdl->event.key.keysym.scancode == (flag == 1))
-	{
-		cam->phi += 0.01;
-		if (cam->phi > (float)M_PI - 0.00001f)
-			cam->phi -= 1 * (float)M_PI;
-	}
-	if (sdl->event.key.keysym.scancode == (flag == 2))
-	{
-		cam->phi -= 0.01;
-		if (cam->phi < -(float)M_PI + 0.00001f)
-			cam->phi += -1 * (float)M_PI;
-	}
-	if (sdl->event.key.keysym.scancode == (flag == 3))
-	{
-		if ((cam->tetta) - 0.01 >= 0.00001f)
-			cam->tetta -= 0.01;
-	}
-	if (sdl->event.key.keysym.scancode == (flag == 4))
-	{
-		if ((cam->tetta) + 0.01 <= (float)M_PI + 0.00001f)
-			cam->tetta += 0.01;
-	}
+	float d_tetta;
+	d_tetta = (y - HEIGHT / 2) * 0.001f;
+	cam->phi -= (x - WIDTH / 2) * 0.001f;
+	if (cam->phi > (float)M_PI - 0.00001f)
+		cam->phi -= 1 * (float)M_PI;
+	if (cam->phi < -(float)M_PI + 0.00001f)
+		cam->phi += -1 * (float)M_PI;
+	if (d_tetta < 0  && (cam->tetta) + d_tetta >= 0.00001f)
+		cam->tetta += d_tetta;
+	if (d_tetta > 0 && (cam->tetta) + d_tetta <= (float)M_PI + 0.00001f)
+		cam->tetta += d_tetta;
 }
 
 
@@ -48,14 +37,7 @@ int			mouse_events(char *flag, t_sdl *sdl, t_object **hi_lited_object, t_scene *
 	if (sdl->event.button.button == SDL_BUTTON_LEFT)
 	{
 		SDL_WarpMouseInWindow(sdl->window, 640, 512);
-		if (x < (WIDTH >> 1))
-			mouse_rotation(1, sdl, &(scene->cam));
-		if (x > (WIDTH >> 1))
-			mouse_rotation(2, sdl, &(scene->cam));
-		if (y > (HEIGHT >> 1))
-			mouse_rotation(4, sdl, &(scene->cam));
-		if (y < (HEIGHT >> 1))
-			mouse_rotation(3, sdl, &(scene->cam));
+			mouse_rotation(&(scene->cam), x, y);
 		scene->move_on = 1;
 		return (1);
 	}
@@ -70,7 +52,7 @@ int			mouse_events(char *flag, t_sdl *sdl, t_object **hi_lited_object, t_scene *
 			sdl->event.key.keysym.scancode = SDL_SCANCODE_W;
 		else if(sdl->event.wheel.y < 0)
 			sdl->event.key.keysym.scancode = SDL_SCANCODE_S;
-			move(sdl->event, &(scene->cam));
+		move(sdl->event, &(scene->cam), &(scene->flag));
 	}
 	return (0);
 }

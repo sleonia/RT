@@ -6,7 +6,7 @@
 /*   By: deladia <deladia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/28 11:42:59 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/06 22:23:04 by deladia          ###   ########.fr       */
+/*   Updated: 2020/02/07 11:50:08 by thorker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ static void		add_obj(SDL_Event event, t_rt *rt)
 
 int				key_events(char *flag, t_object *hi_lited_object, t_rt *rt)
 {
+	move(rt->sdl->event, &(rt->scene->cam), &(rt->scene->flag));
 	if (rt->sdl->event.type == SDL_KEYDOWN)
 	{
 		if (rt->sdl->event.key.keysym.scancode == SDL_SCANCODE_ESCAPE)
@@ -89,7 +90,6 @@ int				key_events(char *flag, t_object *hi_lited_object, t_rt *rt)
 			|| rt->sdl->event.key.keysym.scancode == SDL_SCANCODE_KP_2
 			|| rt->sdl->event.key.keysym.scancode == SDL_SCANCODE_KP_3)
 			add_obj(rt->sdl->event, rt);
-		move(rt->sdl->event, &(rt->scene->cam));
 		rotation(rt->sdl->event, rt->sdl, &(rt->scene->cam));
 
 		arrows_processing(rt->sdl->event, hi_lited_object);

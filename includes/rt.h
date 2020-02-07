@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 04:06:50 by thorker           #+#    #+#             */
-/*   Updated: 2020/02/07 00:53:31 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/07 12:48:19 by thorker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,16 @@
 # define RED(color) (((int)color >> 16) & 0xFF)
 # define GREEN(color) (((int)color >> 8) & 0xFF)
 # define BLUE(color) ((int)color & 0xFF)
+
+typedef struct			s_move_flag
+{
+	char				w;
+	char				s;
+    char                d;
+    char                a;
+    char                v;
+    char                c;	
+}						t_move_flag;
 
 typedef struct			s_cylinder
 {
@@ -194,6 +204,7 @@ typedef struct			s_scene
 	float				ambient;
 	int					fsaa;
 	int					move_on;
+	t_move_flag			flag;
 }						t_scene;
 
 # ifndef OPENCL___
@@ -253,7 +264,7 @@ int						key_events(char *quit, t_object *hi_lited_object,
 								t_rt *rt);
 int						mouse_events(char *quit,t_sdl *sdl,
 								t_object **hi_lited_object, t_scene *scene);
-void					move(SDL_Event event, t_cam *cam);
+void					move(SDL_Event event, t_cam *cam, t_move_flag *flag);
 void					rotation(SDL_Event event, t_sdl *sdl, t_cam *cam);
 t_object				*get_object(t_scene *scene, int x, int y);
 

@@ -6,11 +6,21 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/28 20:55:29 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/05 18:23:21 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/07 11:37:24 by thorker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
+
+static void	init_flag(t_move_flag *flag)
+{
+	flag->w = 0;
+	flag->s = 0;
+	flag->d = 0;
+	flag->a = 0;
+	flag->v = 0;
+	flag->c = 0;
+}
 
 t_scene		*init_scene(t_key_value *json, char *sounds[])
 {
@@ -23,5 +33,6 @@ t_scene		*init_scene(t_key_value *json, char *sounds[])
 	parse_skybox_json(json, scene, sounds);
 	parse_light_json(json, scene, sounds);
 	parse_objects_json(json, scene, sounds);
+	init_flag(&(scene->flag));
 	return (scene);
 }
