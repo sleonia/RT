@@ -6,7 +6,7 @@
 #    By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/01 04:18:29 by sleonia           #+#    #+#              #
-#    Updated: 2020/02/07 19:23:33 by sleonia          ###   ########.fr        #
+#    Updated: 2020/02/08 02:43:15 by sleonia          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,11 +18,12 @@
 
 HOOKS_FILES =							\
 			events_processing.c			\
+			get_object.c				\
 			key_events.c				\
 			mouse_events.c				\
 			move.c						\
 			rotation.c					\
-			get_object.c				\
+			windows_events.c			\
 
 HOOKS_DIR = ./src/hooks/
 
@@ -86,7 +87,6 @@ OBJ_PARSE_FILES = $(addprefix $(OBJ_DIR), $(PARSE_FILES:.c=.o))
 SDL_UTILS_FILES =						\
 			draw_line.c					\
 			music_manager.c				\
-			render_help_screen.c		\
 			sdl_loop.c					\
 			sdl_quit.c					\
 			sdl_update.c				\

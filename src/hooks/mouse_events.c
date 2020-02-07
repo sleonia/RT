@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/28 11:50:12 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/08 01:28:59 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/08 02:50:32 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,26 +33,32 @@ bool			mouse_events(char *flag, t_sdl *sdl, t_object **hi_lited_object, t_scene 
 	int			x;
 	int			y;
 
-	SDL_GetMouseState(&x, &y);
-	if (sdl->event.button.button == SDL_BUTTON_LEFT)
+	// printf("%d\n", sdl->screen[0]->mouse_focus);
+	if (sdl->screen[0]->mouse_focus)
 	{
-		SDL_WarpMouseInWindow(sdl->screen[0]->win, 640, 512);
-			mouse_rotation(&(scene->cam), x, y);
-		scene->move_on = 1;
-		return (true);
-	}
-	if (sdl->event.button.button == SDL_BUTTON_RIGHT)
-	{
-		if ((*hi_lited_object = get_object(scene, x, y)) != NULL)
+		SDL_GetMouseState(&x, &y);
+		if (sdl->event.button.button == SDL_BUTTON_LEFT)
+		{
+			SDL_WarpMouseInWindow(sdl->screen[0]->win, 640, 512);
+				mouse_rotation(&(scene->cam), x, y);
+			scene->move_on = 1;
 			return (true);
+		}
+		if (sdl->event.button.button == SDL_BUTTON_RIGHT)
+		{
+			if ((*hi_lited_object = get_object(scene, x, y)) != NULL)
+				return (true);
+		}
+	    if(sdl->event.type == SDL_MOUSEWHEEL)
+	    {
+			if(sdl->event.wheel.y > 0)
+				sdl->event.key.keysym.scancode = SDL_SCANCODE_W;
+			else if(sdl->event.wheel.y < 0)
+				sdl->event.key.keysym.scancode = SDL_SCANCODE_S;
+			move(sdl->event, &(scene->cam), &(scene->flag));
+		}
 	}
-    if(sdl->event.type == SDL_MOUSEWHEEL)
-    {
-		if(sdl->event.wheel.y > 0)
-			sdl->event.key.keysym.scancode = SDL_SCANCODE_W;
-		else if(sdl->event.wheel.y < 0)
-			sdl->event.key.keysym.scancode = SDL_SCANCODE_S;
-		move(sdl->event, &(scene->cam), &(scene->flag));
-	}
+	else if (!sdl->screen[1]->mouse_focus)
+		return (false);
 	return (false);
 }

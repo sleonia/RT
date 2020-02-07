@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/28 11:42:59 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/08 01:28:35 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/08 02:51:21 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static void		arrows_processing(SDL_Event event, t_object *hi_lited_object)
 		if (hi_lited_object->type == o_parab)
 			hi_lited_object->object.parab.center.v4[0] -= 0.17;
 	}
-if (event.key.keysym.scancode == SDL_SCANCODE_RIGHT)
+	if (event.key.keysym.scancode == SDL_SCANCODE_RIGHT)
 	{
 		if (hi_lited_object->type == o_sphere)
 			hi_lited_object->object.sphere.center.v4[0] += 0.17;
@@ -78,41 +78,53 @@ static void		add_obj(SDL_Event event, t_rt *rt)
 
 bool			key_events(char *flag, t_object *hi_lited_object, t_rt *rt)
 {
-	move(rt->sdl->event, &(rt->scene->cam), &(rt->scene->flag));
-	if (rt->sdl->event.type == SDL_KEYDOWN)
+	// printf("%d\n", sdl->screen[0]->keyboard_focus);
+	if (rt->sdl->screen[0]->keyboard_focus)
 	{
-		if (rt->sdl->event.key.keysym.scancode == SDL_SCANCODE_ESCAPE)
-			*flag = 1;
-		if (rt->sdl->event.key.keysym.scancode == SDL_SCANCODE_N)
-			*flag = NEGATIVE;
-		if (rt->sdl->event.key.keysym.scancode == SDL_SCANCODE_M)
-			*flag = SEPIA;
-		if (rt->sdl->event.key.keysym.scancode == SDL_SCANCODE_K)
-			*flag = BLUR;
-		if (rt->sdl->event.key.keysym.scancode == SDL_SCANCODE_B)
+		move(rt->sdl->event, &(rt->scene->cam), &(rt->scene->flag));
+		if (rt->sdl->event.type == SDL_KEYDOWN)
 		{
-			SDL_SetRelativeMouseMode(!SDL_GetRelativeMouseMode());
-			// rt->scene->skybox_id++;
-			// SDL_ShowSimpleMessageBox(0, "Mouse", "Left button was pressed!", sdl->screen[0]->win);
+			if (rt->sdl->event.key.keysym.scancode == SDL_SCANCODE_ESCAPE)
+				*flag = 1;
+			if (rt->sdl->event.key.keysym.scancode == SDL_SCANCODE_N)
+				*flag = NEGATIVE;
+			if (rt->sdl->event.key.keysym.scancode == SDL_SCANCODE_M)
+				*flag = SEPIA;
+			if (rt->sdl->event.key.keysym.scancode == SDL_SCANCODE_K)
+				*flag = BLUR;
+			if (rt->sdl->event.key.keysym.scancode == SDL_SCANCODE_B)
+				SDL_SetRelativeMouseMode(!SDL_GetRelativeMouseMode());
+			if (rt->sdl->event.key.keysym.scancode == SDL_SCANCODE_H)
+				SDL_SetWindowTitle(rt->sdl->screen[0]->win, "Peer gay!");
+			if (rt->sdl->event.key.keysym.scancode == SDL_SCANCODE_H)
+				SDL_ShowSimpleMessageBox(0, "KEK", "KekWait", rt->sdl->screen[0]->win);
+			if (rt->sdl->event.key.keysym.scancode == SDL_SCANCODE_J)
+				*flag = 0;
+			if (rt->sdl->event.key.keysym.scancode == SDL_SCANCODE_KP_0
+				|| rt->sdl->event.key.keysym.scancode == SDL_SCANCODE_KP_1
+				|| rt->sdl->event.key.keysym.scancode == SDL_SCANCODE_KP_2
+				|| rt->sdl->event.key.keysym.scancode == SDL_SCANCODE_KP_3
+				|| rt->sdl->event.key.keysym.scancode == SDL_SCANCODE_KP_4)
+				add_obj(rt->sdl->event, rt);
+			if (rt->sdl->event.key.keysym.scancode == SDL_SCANCODE_1)
+			{
+				if (!rt->sdl->screen[0]->shown)
+					SDL_ShowWindow(rt->sdl->screen[0]->win);
+			}
+			if (rt->sdl->event.key.keysym.scancode == SDL_SCANCODE_2)
+			{
+				if (!rt->sdl->screen[1]->shown)
+					SDL_ShowWindow(rt->sdl->screen[1]->win);
+			}
+			rotation(rt->sdl->event, rt->sdl, &(rt->scene->cam));
+			arrows_processing(rt->sdl->event, hi_lited_object);
+			if (rt->sdl->event.key.keysym.scancode == SDL_SCANCODE_SPACE)
+				save_image(rt->sdl);
+			rt->scene->move_on = 1;
+			return (true);
 		}
-		if (rt->sdl->event.key.keysym.scancode == SDL_SCANCODE_J)
-			*flag = 0;
-		if (rt->sdl->event.key.keysym.scancode == SDL_SCANCODE_H)
-			rt->sdl->help_screen_flag = !rt->sdl->help_screen_flag;
-		if (rt->sdl->event.key.keysym.scancode == SDL_SCANCODE_KP_0
-			|| rt->sdl->event.key.keysym.scancode == SDL_SCANCODE_KP_1
-			|| rt->sdl->event.key.keysym.scancode == SDL_SCANCODE_KP_2
-			|| rt->sdl->event.key.keysym.scancode == SDL_SCANCODE_KP_3
-			|| rt->sdl->event.key.keysym.scancode == SDL_SCANCODE_KP_4)
-			add_obj(rt->sdl->event, rt);
-		rotation(rt->sdl->event, rt->sdl, &(rt->scene->cam));
-
-		arrows_processing(rt->sdl->event, hi_lited_object);
-
-		if (rt->sdl->event.key.keysym.scancode == SDL_SCANCODE_SPACE)
-			save_image(rt->sdl);
-		rt->scene->move_on = 1;
-		return (true);
 	}
+	else if (!rt->sdl->screen[1]->keyboard_focus)
+		return (false);
 	return (false);
 }

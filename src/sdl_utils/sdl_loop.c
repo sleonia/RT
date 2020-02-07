@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/28 11:30:45 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/08 01:34:49 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/08 01:50:35 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,6 @@ void		sdl_loop(t_rt *rt)
 	while (flag != 1)
 	{
 		events_processing(&flag, &hi_lited_object, rt);
-		if (rt->sdl->event.type == SDL_QUIT)
-			break ;
 	}
 	sdl_quit(rt->sdl);
 }

@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/28 12:09:13 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/08 01:28:16 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/08 02:06:15 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 
 void		sdl_update(t_sdl *sdl)
 {
-	if (sdl->help_screen_flag)
-		render_help_screen(sdl);
 	SDL_UpdateTexture(sdl->texture, NULL, sdl->sur->pixels,
 				WIDTH * sizeof(int));
 	SDL_RenderCopy(sdl->screen[0]->render, sdl->texture, NULL, NULL);

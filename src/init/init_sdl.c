@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/28 10:20:37 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/08 01:41:26 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/08 02:27:12 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,14 +79,12 @@ static void			init_sdl_2(t_key_value *json, t_sdl *sdl)
 void				init_screen(t_screen *screen, char *title, SDL_Rect rect)
 {
 	if (!(screen->win = SDL_CreateWindow(title, rect.x,
-			rect.y, rect.w, rect.h, SDL_WINDOW_SHOWN)))
+			rect.y, rect.w, rect.h, SDL_WINDOW_SHOWN | SDL_WINDOW_ALWAYS_ON_TOP)))
 		ft_error((char *)SDL_GetError());
 	if (!(screen->render = SDL_CreateRenderer(screen->win, -1,
 						SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC)))
 		ft_error((char *)SDL_GetError());
-	screen->win_id = 0;
-	screen->m_width = 0;
-	screen->m_height = 0;
+	screen->win_id = SDL_GetWindowID(screen->win);
 	screen->mouse_focus = 0;
 	screen->keyboard_focus = 0;
 	screen->full_screen = 0;
@@ -98,27 +96,26 @@ t_sdl				*init_sdl(t_key_value *json)
 {
 	t_sdl			*sdl;
 
-	if ((sdl = (t_sdl *)ft_memalloc((sizeof(t_sdl)))) == NULL)
+	if (!(sdl = (t_sdl *)ft_memalloc((sizeof(t_sdl)))))
 		ft_error(ERROR_INPUT);
 	if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_EVENTS) != 0)
 		ft_error((char *)SDL_GetError());	
-	if ((sdl->screen[0] = (t_screen *)ft_memalloc((sizeof(t_screen)))) == NULL)
+	if (!(sdl->screen[0] = (t_screen *)ft_memalloc((sizeof(t_screen)))))
 		ft_error(ERROR_INPUT);
-	if ((sdl->screen[1] = (t_screen *)ft_memalloc((sizeof(t_screen)))) == NULL)
+	if (!(sdl->screen[1] = (t_screen *)ft_memalloc((sizeof(t_screen)))))
 		ft_error(ERROR_INPUT);
-	if (!SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "2"))
+	if (!SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "1"))
 		ft_error((char *)SDL_GetError());
 	init_screen(sdl->screen[0], "RT", (SDL_Rect){350, 200, WIDTH, HEIGHT});
-	init_screen(sdl->screen[1], "ToolBar", (SDL_Rect){350 + WIDTH, HEIGHT, 500, HEIGHT});
+	init_screen(sdl->screen[1], "ToolBar",
+						(SDL_Rect){350 + WIDTH, 200, 500, HEIGHT});
 	if (!(sdl->texture = SDL_CreateTexture(sdl->screen[0]->render,
-										SDL_PIXELFORMAT_ARGB8888,
-										SDL_TEXTUREACCESS_STREAMING,
-										WIDTH, HEIGHT)))
+							SDL_PIXELFORMAT_ARGB8888,
+							SDL_TEXTUREACCESS_STREAMING, WIDTH, HEIGHT)))
 		ft_error((char *)SDL_GetError());
 	if (!(sdl->sur = SDL_CreateRGBSurface(0, WIDTH,
 			HEIGHT, 32, 0xFF000000, 0x00FF0000, 0x0000FF00, 0x000000FF)))
 		ft_error((char *)SDL_GetError());
-	sdl->help_screen_flag = true;
 	init_sdl_2(json, sdl);
 	return (sdl);
 }

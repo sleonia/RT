@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 04:06:50 by thorker           #+#    #+#             */
-/*   Updated: 2020/02/08 01:37:39 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/08 02:40:03 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -250,8 +250,6 @@ typedef struct			s_screen
 	SDL_Window			*win;
 	SDL_Renderer		*render;
 	int					win_id;
-	int					m_width;
-	int					m_height;
 	bool				mouse_focus;
 	bool				keyboard_focus;
 	bool				full_screen;
@@ -268,7 +266,6 @@ typedef struct			s_sdl
 	SDL_Event			event;
 	SDL_Surface			*sur;
 	int					volume;
-	bool				help_screen_flag;
 	TTF_Font			*font;
 	int					font_size;
 	SDL_Color			font_color;
@@ -290,13 +287,14 @@ typedef struct			s_rt
 */
 
 void					events_processing(char *quit, t_object **hi_lited_object, t_rt *rt);
+t_object				*get_object(t_scene *scene, int x, int y);
 bool					key_events(char *quit, t_object *hi_lited_object,
 								t_rt *rt);
 bool					mouse_events(char *quit,t_sdl *sdl,
 								t_object **hi_lited_object, t_scene *scene);
 void					move(SDL_Event event, t_cam *cam, t_move_flag *flag);
 void					rotation(SDL_Event event, t_sdl *sdl, t_cam *cam);
-t_object				*get_object(t_scene *scene, int x, int y);
+bool					window_events(SDL_Event event, t_screen *screen);
 
 /*
 **						init
@@ -369,7 +367,6 @@ void					parse_cylinder_json(t_key_value *obj,
 **						sdl_utils
 */
 
-// void					draw_line(t_rect tmp, int color, t_sdl *sdl);
 void					change_music(Mix_Music *music[]);
 int						render_help_screen(t_sdl *sdl);
 void					sdl_loop(t_rt *rt);
@@ -391,8 +388,6 @@ int						filter(int	*pixels, char flag);
 int						realloc_obj(SDL_Event event, t_rt *rt);
 void					save_image(t_sdl *sdl);
 void					show_error(char *error, char *sounds[]);
-
-void mainLoop(void* loopArg);
 
 # endif
 #endif
