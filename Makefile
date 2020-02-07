@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+         #
+#    By: deladia <deladia@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/01 04:18:29 by sleonia           #+#    #+#              #
-#    Updated: 2020/02/07 00:47:54 by sleonia          ###   ########.fr        #
+#    Updated: 2020/02/07 14:34:44 by deladia          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,7 +41,8 @@ INIT_FILES =							\
 			init_rt.c					\
 			init_scene.c				\
 			init_sdl.c					\
-			init_cl_blur.c				\
+			init_cl_blur_arg.c			\
+			init_kernel.c				\
 
 INIT_DIR = ./src/init/
 

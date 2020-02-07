@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_cl_blur.c                                     :+:      :+:    :+:   */
+/*   init_cl_blur_arg.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: deladia <deladia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/03 15:15:57 by deladia           #+#    #+#             */
-/*   Updated: 2020/02/07 14:18:24 by deladia          ###   ########.fr       */
+/*   Updated: 2020/02/07 14:38:06 by deladia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static void		set_arg_blur(t_cl *cl, t_sdl *sdl)
 		func_error(-12);
 }
 
-static int				set_opencl_arg_for_blur(t_cl *cl, t_sdl *sdl)
+int				set_opencl_arg_for_blur(t_cl *cl, t_sdl *sdl)
 {
 	cl_int		ret;
 
@@ -47,18 +47,4 @@ static int				set_opencl_arg_for_blur(t_cl *cl, t_sdl *sdl)
 		func_error(-9);
 	set_arg_blur(cl, sdl);
 	return (0);
-}
-
-void			create_kernel_blur(t_cl *cl, t_sdl *sdl)
-{
-	cl_int		ret;
-
-	ret |= clReleaseKernel(cl->kernel);
-	if ((cl->kernel = clCreateKernel(cl->program, "blur_x", &ret)) && ret != 0)
-		ft_error("clBuildProgram");
-	set_opencl_arg_for_blur(cl, sdl);
-	ret |= clReleaseKernel(cl->kernel);
-	if ((cl->kernel = clCreateKernel(cl->program, "blur_y", &ret)) && ret != 0)
-		ft_error("clBuildProgram");
-	set_opencl_arg_for_blur(cl, sdl);
 }

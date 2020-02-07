@@ -6,7 +6,7 @@
 /*   By: deladia <deladia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/01 04:21:09 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/07 14:19:40 by deladia          ###   ########.fr       */
+/*   Updated: 2020/02/07 14:36:57 by deladia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,15 +70,6 @@ void			print_build_error(t_cl *cl, cl_int ret, size_t log_size)
 	exit(-1);
 }
 
-void			create_kernel_rt(t_cl *cl, t_scene *scene)
-{
-	cl_int		ret;
-
-	ret |= clReleaseKernel(cl->kernel);
-	if ((cl->kernel = clCreateKernel(cl->program, "RT", &ret)) && ret != 0)
-		ft_error("clBuildProgram");
-}
-
 static void		create_cl_1(t_cl *cl)
 {
 	cl_int		ret;
@@ -94,7 +85,7 @@ static void		create_cl_1(t_cl *cl)
 		ft_error("clCreateProgramWithSource");
 	if ((ret = clBuildProgram(cl->program, 1, &cl->device_id,
 						"-DOPENCL___ -I include/ ", NULL, NULL)) != 0)
-		print_build_error(cl, ret, log_size);	
+		print_build_error(cl, ret, log_size);
 }
 
 void			create_cl(t_cl *cl, t_sdl *sdl, t_scene *scene)
