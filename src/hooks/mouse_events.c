@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/28 11:50:12 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/07 13:05:39 by thorker          ###   ########.fr       */
+/*   Updated: 2020/02/07 19:29:20 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static void			mouse_rotation(t_cam *cam, int x, int y)
 }
 
 
-int			mouse_events(char *flag, t_sdl *sdl, t_object **hi_lited_object, t_scene *scene)
+bool			mouse_events(char *flag, t_sdl *sdl, t_object **hi_lited_object, t_scene *scene)
 {
 	int			x;
 	int			y;
@@ -39,12 +39,12 @@ int			mouse_events(char *flag, t_sdl *sdl, t_object **hi_lited_object, t_scene *
 		SDL_WarpMouseInWindow(sdl->window, 640, 512);
 			mouse_rotation(&(scene->cam), x, y);
 		scene->move_on = 1;
-		return (1);
+		return (true);
 	}
 	if (sdl->event.button.button == SDL_BUTTON_RIGHT)
 	{
 		if ((*hi_lited_object = get_object(scene, x, y)) != NULL)
-			return (1);
+			return (true);
 	}
     if(sdl->event.type == SDL_MOUSEWHEEL)
     {
@@ -54,5 +54,5 @@ int			mouse_events(char *flag, t_sdl *sdl, t_object **hi_lited_object, t_scene *
 			sdl->event.key.keysym.scancode = SDL_SCANCODE_S;
 		move(sdl->event, &(scene->cam), &(scene->flag));
 	}
-	return (0);
+	return (false);
 }

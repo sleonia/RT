@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rt.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: deladia <deladia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 04:06:50 by thorker           #+#    #+#             */
-/*   Updated: 2020/02/07 14:33:53 by deladia          ###   ########.fr       */
+/*   Updated: 2020/02/07 19:26:56 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -260,9 +260,9 @@ typedef struct			s_rt
 */
 
 void					events_processing(char *quit, t_object **hi_lited_object, t_rt *rt);
-int						key_events(char *quit, t_object *hi_lited_object,
+bool					key_events(char *quit, t_object *hi_lited_object,
 								t_rt *rt);
-int						mouse_events(char *quit,t_sdl *sdl,
+bool					mouse_events(char *quit,t_sdl *sdl,
 								t_object **hi_lited_object, t_scene *scene);
 void					move(SDL_Event event, t_cam *cam, t_move_flag *flag);
 void					rotation(SDL_Event event, t_sdl *sdl, t_cam *cam);

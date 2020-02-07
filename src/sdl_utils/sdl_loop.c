@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/28 11:30:45 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/07 11:18:02 by thorker          ###   ########.fr       */
+/*   Updated: 2020/02/07 19:04:58 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ void		sdl_loop(t_rt *rt)
 {
 	char			flag;
 	SDL_Event		event;
-	Uint32			timeout;
 	t_object		*hi_lited_object;
 
 	hi_lited_object = NULL;
@@ -25,13 +24,7 @@ void		sdl_loop(t_rt *rt)
 	sdl_update(rt->sdl);
 	while (flag != 1)
 	{
-		timeout = SDL_GetTicks() + 30;
-		while (SDL_PollEvent(&rt->sdl->event)
-			&& (rt->sdl->event.type == SDL_KEYUP
-				|| !SDL_TICKS_PASSED(SDL_GetTicks(), timeout)))
-		{
-			events_processing(&flag, &hi_lited_object, rt);
-		}
+		events_processing(&flag, &hi_lited_object, rt);
 		if (rt->sdl->event.type == SDL_QUIT)
 			break ;
 	}
