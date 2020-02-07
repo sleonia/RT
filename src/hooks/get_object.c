@@ -6,7 +6,7 @@
 /*   By: deladia <deladia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/04 18:38:23 by deladia           #+#    #+#             */
-/*   Updated: 2020/02/07 14:39:50 by deladia          ###   ########.fr       */
+/*   Updated: 2020/02/07 20:00:28 by deladia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,11 +55,13 @@ static int		intersect_ray_cylinder(cl_float3 o, cl_float3 d,
 	if (discriminate < 0.f)
 		return (0);
 	*dist_i = (-b - sqrt(discriminate)) / (2 * dot(s, s));
-	if (*dist_i > 0.002f)
-		return (1);
+	if ((dot(cyl->axis, (cl_sum(cl_mult_n(d, *dist_i), cl_minus(o, cyl->center)))) * dot(cyl->axis, (cl_sum(cl_mult_n(d, *dist_i), cl_minus(o, cyl->center))))) <= (cyl->length / 2) * (cyl->length / 2))
+		if (*dist_i > 0.002f)
+			return (1);
 	*dist_i = (-b + sqrt(discriminate)) / (2 * dot(s, s));
-	if (*dist_i > 0.002f)
-		return (2);
+	if ((dot(cyl->axis, (cl_sum(cl_mult_n(d, *dist_i), cl_minus(o, cyl->center)))) * dot(cyl->axis, (cl_sum(cl_mult_n(d, *dist_i), cl_minus(o, cyl->center))))) <= (cyl->length / 2) * (cyl->length / 2))
+		if (*dist_i > 0.002f)
+			return (2);
 	return (0);
 }
 
@@ -85,11 +87,12 @@ static int		intersect_ray_cone(cl_float3 o, cl_float3 d,
 	cl_float3	s;
 	cl_float3	q;
 	cl_float3	abc;
-	float		discriminate;
 	cl_float2	t12;
+	float		discriminate;
 
 	s = cl_minus(d, cl_mult_n(cone->axis, dot(d, cone->axis)));
-	q = cl_minus(o, cl_minus(cone->center, cl_mult_n(cone->axis,
+	
+	q = cl_minus(o, cl_sum(cone->center, cl_mult_n(cone->axis,
 			dot((cl_minus(o, cone->center)), cone->axis))));
 	abc.x = cos(cone->tan) * cos(cone->tan) * dot(s, s) - sin(cone->tan)
 			* sin(cone->tan) * dot(d, cone->axis) * dot(d, cone->axis);
@@ -104,19 +107,25 @@ static int		intersect_ray_cone(cl_float3 o, cl_float3 d,
 		return (0);
 	t12.x = (-abc.y + sqrt(discriminate)) / (2.f * abc.x);
 	t12.y = (-abc.y - sqrt(discriminate)) / (2.f * abc.x);
-	*dist_i = MIN(t12.x, t12.y);
-	if (*dist_i > 0.002f)
+	*dist_i = (float)MIN(t12.x, t12.y);
+	if ((dot(cone->axis, (cl_sum(cl_mult_n(d, *dist_i), cl_minus(o, cone->center)))) * dot(cone->axis, (cl_sum(cl_mult_n(d, *dist_i), cl_minus(o, cone->center))))) <= (cone->length / 2) * (cone->length / 2))
 	{
-		if (acos(fabs(dot(d, cone->axis))) > cone->tan)
-			return (1);
-		return (2);
-	}
-	*dist_i = MAX(t12.x, t12.y);
-	if (*dist_i > 0.002f)
-	{
-		if (acos(fabs(dot(d, cone->axis))) > cone->tan)
+		if (*dist_i > 0.002f)
+		{
+			if (acos(fabs(dot(d, cone->axis))) > cone->tan)
+				return (1);
 			return (2);
-		return (1);
+		}
+	}
+	*dist_i = (float)MAX(t12.x, t12.y);
+	if ((dot(cone->axis, (cl_sum(cl_mult_n(d, *dist_i), cl_minus(o, cone->center)))) * dot(cone->axis, (cl_sum(cl_mult_n(d, *dist_i), cl_minus(o, cone->center))))) <= (cone->length / 2) * (cone->length / 2))
+	{
+		if (*dist_i > 0.002f)
+		{
+			if (acos(fabs(dot(d, cone->axis))) > cone->tan)
+				return (2);
+			return (1);
+		}
 	}
 	return (0);
 }
@@ -133,6 +142,7 @@ t_object		*get_object(t_scene *scene, int x, int y)
 		cl_mult_n(scene->cam.oy, ((float)y * 1.f / WIDTH) - 0.5f));
 	d = cl_minus(d, scene->cam.oz);
 	cl_normalize(&d);
+	printf("d.x %f d.y %f d.z %f\n", d.x, d.y, d.z);
 	dist.x = MAX_DIST + 1.f;
 	i = 0;
 	while (i < scene->count_objects)

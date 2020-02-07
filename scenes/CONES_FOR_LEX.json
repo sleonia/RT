@@ -21,39 +21,14 @@
 		{
 			"intensity":			0.4,
 			"position":				[3.5, 1.6, -10.0]
-		},
-		{
-			"intensity":			0.4,
-			"position":				[-3.5, 1.6, -10.0]
-		},
-		{
-			"intensity":			0.8,
-			"position":				[3.5, 1.6, 10.0]
 		}
 	],
 	"figure":
 	[
 		{
 			"type":					"cone",
-			"axis":					[-1.0, 1.0, 0.0],
-			"center":				[0.0, 0.0, 10.0],
-			"length":				30.0,
-			"tan":					0.25,
-			"material":
-			{
-				"color":			[255.0, 255.0, 0.0],
-				"ambient":			1.0,
-				"diffuse":			0.4,
-				"specular":			50.0,
-				"reflection":		0.0,
-				"refraction":		0.0,
-				"texture_id":		1
-			}
-		},
-		{
-			"type":					"cone",
 			"axis":					[1.0, 1.0, 0.0],
-			"center":				[0.0, 0.0, 10.0],
+			"center":				[4.0, 0.0, 10.0],
 			"length":				30.0,
 			"tan":					0.25,
 			"material":
@@ -64,32 +39,45 @@
 				"specular":			50.0,
 				"reflection":		0.0,
 				"refraction":		0.0,
-				"texture_id":		1
+				"texture_id":		-1
 			}
 		},
 		{
-			"type":					"cone",
-			"axis":					[1.0, 0.0, 0.0],
-			"center":				[0.0, 0.0, 10.0],
-			"length":				30.0,
-			"tan":					0.25,
+			"type":					"sphere",
+			"radius":				3.0,
+			"center":				[4.0, 0.0, 10.0],
 			"material":
 			{
-				"color":			[255.0, 0.0, 255.0],
+				"color":			[105.0, 105.0, 100.0],
 				"ambient":			1.0,
 				"diffuse":			0.4,
-				"specular":			50.0,
+				"specular":			100.0,
 				"reflection":		0.0,
 				"refraction":		0.0,
-				"texture_id":		1
+				"texture_id":		-1
 			}
 		},
 		{
-			"type":					"cone",
-			"axis":					[0.0, 1.0, 0.0],
-			"center":				[0.0, 0.0, 10.0],
-			"length":				30.0,
-			"tan":					0.25,
+			"type":					"sphere",
+			"radius":				3.0,
+			"center":				[-4.0, 0.0, 10.0],
+			"material":
+			{
+				"color":			[255.0, 0.0, 0.0],
+				"ambient":			1.0,
+				"diffuse":			0.4,
+				"specular":			50.0,
+				"reflection":		0.0,
+				"refraction":		0.0,
+				"texture_id":		-1
+			}
+		},
+		{
+			"type":					"cylinder",
+			"axis":					[-1.0, 1.0, 0.0],
+			"center":				[-4.0, 0.0, 10.0],
+			"length":				40.0,
+			"radius":				2.0,
 			"material":
 			{
 				"color":			[255.0, 0.0, 255.0],
@@ -98,7 +86,7 @@
 				"specular":			50.0,
 				"reflection":		0.0,
 				"refraction":		0.0,
-				"texture_id":		1
+				"texture_id":		-1
 			}
 		}
 	],
