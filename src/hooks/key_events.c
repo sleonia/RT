@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/28 11:42:59 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/08 03:23:06 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/08 04:00:48 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,9 +101,6 @@ bool			key_rt(SDL_Scancode scancode, char *flag, t_object *hi_lited_object, t_rt
 			|| scancode == SDL_SCANCODE_KP_2 || scancode == SDL_SCANCODE_KP_3
 			|| scancode == SDL_SCANCODE_KP_4)
 			add_obj(scancode, rt->scene, rt->cl);
-		if (scancode == SDL_SCANCODE_1)
-			if (!rt->sdl->screen[0]->shown)
-				SDL_ShowWindow(rt->sdl->screen[0]->win);
 		rotation(scancode, rt->sdl, &(rt->scene->cam));
 		arrows_processing(scancode, hi_lited_object);
 		if (scancode == SDL_SCANCODE_SPACE)
@@ -115,25 +112,52 @@ bool			key_rt(SDL_Scancode scancode, char *flag, t_object *hi_lited_object, t_rt
 
 bool			key_toolbar(SDL_Scancode scancode, char *flag, t_object *hi_lited_object, t_rt *rt)
 {
-	if (scancode == SDL_SCANCODE_2)
+	if (rt->sdl->event.type == SDL_KEYDOWN)
 	{
-		if (!rt->sdl->screen[1]->shown)
-			SDL_ShowWindow(rt->sdl->screen[1]->win);
+		if (scancode == SDL_SCANCODE_2)
+		{
+			if (!rt->sdl->screen[1]->shown)
+				SDL_ShowWindow(rt->sdl->screen[1]->win);
+		}
+		if (scancode == SDL_SCANCODE_ESCAPE)
+		{
+			*flag = 1;
+			
+		}
 	}
 	return (false);
 }
 
 bool			key_events(char *flag, t_object *hi_lited_object, t_rt *rt)
 {
+	int			index;
 	bool		ismove;
 
+	index = -1;
 	ismove = false;
 	// if (rt->sdl->event.type == SDL_KEYDOWN)
 	// {
 		if (rt->sdl->screen[0]->keyboard_focus)
-			ismove |= key_rt(rt->sdl->event.key.keysym.scancode, flag, hi_lited_object, rt);
-		else if (!rt->sdl->screen[1]->keyboard_focus)
-			ismove |= key_toolbar(rt->sdl->event.key.keysym.scancode, flag, hi_lited_object, rt);
+			ismove |= key_rt(rt->sdl->event.key.keysym.scancode, flag,
+							hi_lited_object, rt);
+		else if (rt->sdl->screen[1]->keyboard_focus)
+			ismove |= key_toolbar(rt->sdl->event.key.keysym.scancode, flag,
+								hi_lited_object, rt);
+		if (rt->sdl->event.key.keysym.scancode == SDL_SCANCODE_1)
+		{
+			if ((!rt->sdl->screen[1]->keyboard_focus || !rt->sdl->screen[1]->mouse_focus))
+				index = 1;
+			else if ((!rt->sdl->screen[0]->keyboard_focus || !rt->sdl->screen[0]->mouse_focus))
+				index = 0;
+			if (index != -1)
+			{
+				SDL_ShowWindow(rt->sdl->screen[index]->win);
+				SDL_RaiseWindow(rt->sdl->screen[index]->win);
+				rt->sdl->screen[index]->shown = true;
+				rt->sdl->screen[index]->keyboard_focus = true;
+				rt->sdl->screen[index]->mouse_focus = true;
+			}
+		}
 	// }
 	return (ismove);
 }
