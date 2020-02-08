@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 04:06:50 by thorker           #+#    #+#             */
-/*   Updated: 2020/02/08 02:40:03 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/08 03:17:56 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -275,7 +275,7 @@ typedef struct			s_sdl
 typedef struct			s_rt
 {
 	t_sdl				*sdl;
-	t_cl				*opencl;
+	t_cl				*cl;
 	t_scene				*scene;
 }						t_rt;
 # endif
@@ -293,7 +293,7 @@ bool					key_events(char *quit, t_object *hi_lited_object,
 bool					mouse_events(char *quit,t_sdl *sdl,
 								t_object **hi_lited_object, t_scene *scene);
 void					move(SDL_Event event, t_cam *cam, t_move_flag *flag);
-void					rotation(SDL_Event event, t_sdl *sdl, t_cam *cam);
+void					rotation(SDL_Scancode scancode, t_sdl *sdl, t_cam *cam);
 bool					window_events(SDL_Event event, t_screen *screen);
 
 /*
@@ -385,7 +385,7 @@ cl_int3					int_to_rgb(int src_color);
 int						read_kernel(t_cl *cl, char **files_cl);
 int						realloc_img(t_scene *scene, char *file_name);
 int						filter(int	*pixels, char flag);
-int						realloc_obj(SDL_Event event, t_rt *rt);
+int						realloc_obj(SDL_Scancode scancode, t_scene *scene);
 void					save_image(t_sdl *sdl);
 void					show_error(char *error, char *sounds[]);
 

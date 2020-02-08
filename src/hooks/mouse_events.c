@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/28 11:50:12 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/08 02:50:32 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/08 02:52:30 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ bool			mouse_events(char *flag, t_sdl *sdl, t_object **hi_lited_object, t_scene 
 	int			x;
 	int			y;
 
-	// printf("%d\n", sdl->screen[0]->mouse_focus);
 	if (sdl->screen[0]->mouse_focus)
 	{
 		SDL_GetMouseState(&x, &y);

@@ -6,34 +6,34 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/28 00:00:22 by thorker           #+#    #+#             */
-/*   Updated: 2020/02/07 12:30:44 by thorker          ###   ########.fr       */
+/*   Updated: 2020/02/08 03:19:28 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-static void		change_flag(SDL_Event event, t_move_flag *flag, char i)
+static void		change_flag(SDL_Scancode scancode, t_move_flag *flag, char i)
 {
-	if (event.key.keysym.scancode == SDL_SCANCODE_W)
+	if (scancode == SDL_SCANCODE_W)
 		flag->w = i;
-	if (event.key.keysym.scancode == SDL_SCANCODE_S)
+	if (scancode == SDL_SCANCODE_S)
 		flag->s = i;
-	if (event.key.keysym.scancode == SDL_SCANCODE_D)
+	if (scancode == SDL_SCANCODE_D)
 		flag->d = i;
-	if (event.key.keysym.scancode == SDL_SCANCODE_A)
+	if (scancode == SDL_SCANCODE_A)
 		flag->a = i;
-	if (event.key.keysym.scancode == SDL_SCANCODE_V)
+	if (scancode == SDL_SCANCODE_V)
 		flag->v = i;
-	if (event.key.keysym.scancode == SDL_SCANCODE_C)
+	if (scancode == SDL_SCANCODE_C)
 		flag->c = i;
 }
 
 static void     check_flag(SDL_Event event, t_move_flag *flag)
 {
 	if (event.type == SDL_KEYDOWN)
-		change_flag(event, flag, 1);
+		change_flag(event.key.keysym.scancode, flag, 1);
 	if (event.type == SDL_KEYUP)
-		change_flag(event, flag, 0);
+		change_flag(event.key.keysym.scancode, flag, 0);
 }
 
 static void		move_help(float *d, t_cam *cam, t_move_flag *flag)

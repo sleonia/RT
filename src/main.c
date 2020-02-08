@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/24 12:57:07 by deladia           #+#    #+#             */
-/*   Updated: 2020/02/07 23:53:48 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/08 02:55:05 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ int			main(int ac, char **av)
 	rt = init_rt(av);
 	change_music(rt->sdl->music);
 	calc_screen(&rt->scene->cam);
-	create_kernel_rt(rt->opencl, rt->scene);
-	set_opencl_arg(rt->opencl, rt->sdl, rt->scene);
+	create_kernel_rt(rt->cl, rt->scene);
+	set_opencl_arg(rt->cl, rt->sdl, rt->scene);
 	sdl_loop(rt);
 	return 0;
 }

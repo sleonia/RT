@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/04 12:44:26 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/07 21:36:44 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/08 03:15:01 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,31 +110,31 @@ static void		new_parab(t_object *obj)
 	obj->material.texture_id = -1;
 }
 
-int				realloc_obj(SDL_Event event, t_rt *rt)
+int				realloc_obj(SDL_Scancode scancode, t_scene *scene)
 {
 	int			i;
 	int			count_objects;
 	t_object	*object;
 
 	i = -1;
-	count_objects = rt->scene->count_objects;
-	rt->scene->count_objects += 1;
-	init_objects(&object, rt->scene->count_objects);
+	count_objects = scene->count_objects;
+	scene->count_objects += 1;
+	init_objects(&object, scene->count_objects);
 	while (++i < count_objects)
 	{
-		object[i] = rt->scene->object[i];
+		object[i] = scene->object[i];
 	}
-	if (event.key.keysym.scancode == SDL_SCANCODE_KP_0)
+	if (scancode == SDL_SCANCODE_KP_0)
 		new_sphere(&object[i]);
-	else if (event.key.keysym.scancode == SDL_SCANCODE_KP_1)
+	else if (scancode == SDL_SCANCODE_KP_1)
 		new_cylinder(&object[i]);
-	else if (event.key.keysym.scancode == SDL_SCANCODE_KP_2)
+	else if (scancode == SDL_SCANCODE_KP_2)
 		new_cone(&object[i]);
-	else if (event.key.keysym.scancode == SDL_SCANCODE_KP_3)
+	else if (scancode == SDL_SCANCODE_KP_3)
 		new_plane(&object[i]);
-	else if (event.key.keysym.scancode == SDL_SCANCODE_KP_4)
+	else if (scancode == SDL_SCANCODE_KP_4)
 		new_parab(&object[i]);
-	ft_memdel((void **)&rt->scene->object);
-	rt->scene->object = object;
+	ft_memdel((void **)&scene->object);
+	scene->object = object;
 	return (0);
 }
