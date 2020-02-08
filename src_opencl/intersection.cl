@@ -60,7 +60,6 @@ static int	intersect_ray_plane(float3 o, float3 d, __global t_plane *pl, float *
 	float	a;
 
 	pl->axis = normalize(pl->axis);
-	d = normalize(d);
 	a = dot(d, pl->axis);
 	if (fabs(a) < 0.000001f)
 		return (0);
