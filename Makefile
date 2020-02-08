@@ -6,11 +6,23 @@
 #    By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/01 04:18:29 by sleonia           #+#    #+#              #
-#    Updated: 2020/02/08 02:43:15 by sleonia          ###   ########.fr        #
+#    Updated: 2020/02/08 07:33:26 by sleonia          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 .PHONY: libft, libtojson, all, clean, fclean, re
+
+# =========== #
+#	GUI	  #
+# =========== #
+
+GUI_FILES =								\
+			gui_default_screen.c		\
+			gui_main.c					\
+
+GUI_DIR = ./src/gui/
+
+OBJ_GUI_FILES = $(addprefix $(OBJ_DIR), $(GUI_FILES:.c=.o))
 
 # =========== #
 #	HOOKS	  #
@@ -88,6 +100,7 @@ SDL_UTILS_FILES =						\
 			draw_line.c					\
 			music_manager.c				\
 			sdl_loop.c					\
+			sdl_putstr.c				\
 			sdl_quit.c					\
 			sdl_update.c				\
 
@@ -136,6 +149,8 @@ INCLUDES_FILES_LIST =					\
 			kernel.h					\
 			rt.h						\
 			rt_error.h					\
+			stb_image.h					\
+			stb_image_write.h			\
 
 INCLUDES_DIR = 	./includes/
 
@@ -148,6 +163,7 @@ INCLUDES_FILES = $(addprefix $(INCLUDES_DIR), $(INCLUDES_FILES_LIST))
 NAME = RT
 
 OBJ = 									\
+		$(OBJ_GUI_FILES)				\
 		$(OBJ_HOOKS_FILES)				\
 		$(OBJ_INIT_FILES)				\
 		$(OBJ_MATH_UTILS_FILES)			\
@@ -189,6 +205,9 @@ $(NAME): $(OBJ_DIR) $(OBJ) $(INCLUDES_FILES)
 
 $(OBJ_DIR):
 	@mkdir -p $(OBJ_DIR)
+
+$(OBJ_DIR)%.o: $(GUI_DIR)%.c $(INCLUDES_FILES)
+	@$(COMPILE) -c $< -o $@
 
 $(OBJ_DIR)%.o: $(HOOKS_DIR)%.c $(INCLUDES_FILES)
 	@$(COMPILE) -c $< -o $@

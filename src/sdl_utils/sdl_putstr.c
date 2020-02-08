@@ -1,29 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   sdl_putstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/24 12:57:07 by deladia           #+#    #+#             */
-/*   Updated: 2020/02/08 06:40:18 by sleonia          ###   ########.fr       */
+/*   Created: 2020/02/08 06:48:06 by sleonia           #+#    #+#             */
+/*   Updated: 2020/02/08 06:50:04 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-int			main(int ac, char **av)
+void			sdl_putstr(int x, int y, char *text, t_sdl *sdl)
 {
-  t_rt		*rt;
+	SDL_Rect	dest;
+	SDL_Surface	*txt_sur;
 
-  if (ac != 2)
-	ft_error(ERROR_INPUT);
-	rt = init_rt(av);
-	change_music(rt->sdl->music);
-	calc_screen(&rt->scene->cam);
-	create_kernel_rt(rt->cl, rt->scene);
-	set_opencl_arg(rt->cl, rt->sdl, rt->scene);
-	// SDL_SetWindowOpacity(rt->sdl->screen[0]->win, 0.5);
-	sdl_loop(rt);
-	return 0;
+	dest.x = x;
+	dest.y = y;
+	txt_sur = TTF_RenderText_Blended(sdl->font, text,
+										sdl->font_color);
+	SDL_BlitSurface(txt_sur, NULL, sdl->screen[1]->sur, &dest);
+	SDL_FreeSurface(txt_sur);
 }

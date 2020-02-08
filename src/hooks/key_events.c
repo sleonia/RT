@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/28 11:42:59 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/08 04:00:48 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/08 07:42:13 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,19 +110,51 @@ bool			key_rt(SDL_Scancode scancode, char *flag, t_object *hi_lited_object, t_rt
 	return (false);
 }
 
+void			str_pop_back(char *str)
+{
+	int			i;
+
+	i = -1;
+	while (str[++i])
+	{
+		if (!str[i + 1])
+		{
+			str[i] = '\0';
+			break ;
+		}
+	}
+}
+
 bool			key_toolbar(SDL_Scancode scancode, char *flag, t_object *hi_lited_object, t_rt *rt)
 {
 	if (rt->sdl->event.type == SDL_KEYDOWN)
 	{
-		if (scancode == SDL_SCANCODE_2)
-		{
-			if (!rt->sdl->screen[1]->shown)
-				SDL_ShowWindow(rt->sdl->screen[1]->win);
-		}
 		if (scancode == SDL_SCANCODE_ESCAPE)
-		{
 			*flag = 1;
-			
+		if (rt->sdl->event.key.keysym.sym == SDLK_BACKSPACE && ft_strlen(rt->sdl->gui->input_text) > 0)
+		{
+			str_pop_back(rt->sdl->gui->input_text);
+			rt->sdl->gui->render_text = true;
+		}
+		else if(rt->sdl->event.key.keysym.sym == SDLK_c && SDL_GetModState() & KMOD_CTRL )
+		{
+			SDL_SetClipboardText(rt->sdl->gui->input_text);
+		}
+		else if(rt->sdl->event.key.keysym.sym == SDLK_v && SDL_GetModState() & KMOD_CTRL )
+		{
+			rt->sdl->gui->input_text = SDL_GetClipboardText();
+			rt->sdl->gui->render_text = true;
+		}
+	}
+	else if(rt->sdl->event.type == SDL_TEXTINPUT)
+	{
+		if( !( SDL_GetModState() & KMOD_CTRL && (rt->sdl->event.text.text[ 0 ] == 'c' || rt->sdl->event.text.text[ 0 ] == 'C' || rt->sdl->event.text.text[ 0 ] == 'v' || rt->sdl->event.text.text[ 0 ] == 'V' ) ) )
+		{
+			//Append character
+			// rt->sdl->gui->input_text += rt->sdl->event.text.text;
+			// rt->sdl->gui->input_text += rt->sdl->event.text.text;
+			rt->sdl->gui->new_input_text = ft_strjoin(rt->sdl->gui->input_text, rt->sdl->event.text.text);
+			rt->sdl->gui->render_text = true;
 		}
 	}
 	return (false);
@@ -135,29 +167,26 @@ bool			key_events(char *flag, t_object *hi_lited_object, t_rt *rt)
 
 	index = -1;
 	ismove = false;
-	// if (rt->sdl->event.type == SDL_KEYDOWN)
-	// {
 		if (rt->sdl->screen[0]->keyboard_focus)
 			ismove |= key_rt(rt->sdl->event.key.keysym.scancode, flag,
 							hi_lited_object, rt);
 		else if (rt->sdl->screen[1]->keyboard_focus)
 			ismove |= key_toolbar(rt->sdl->event.key.keysym.scancode, flag,
 								hi_lited_object, rt);
-		if (rt->sdl->event.key.keysym.scancode == SDL_SCANCODE_1)
-		{
-			if ((!rt->sdl->screen[1]->keyboard_focus || !rt->sdl->screen[1]->mouse_focus))
-				index = 1;
-			else if ((!rt->sdl->screen[0]->keyboard_focus || !rt->sdl->screen[0]->mouse_focus))
-				index = 0;
-			if (index != -1)
-			{
-				SDL_ShowWindow(rt->sdl->screen[index]->win);
-				SDL_RaiseWindow(rt->sdl->screen[index]->win);
-				rt->sdl->screen[index]->shown = true;
-				rt->sdl->screen[index]->keyboard_focus = true;
-				rt->sdl->screen[index]->mouse_focus = true;
-			}
-		}
-	// }
+		// if (rt->sdl->event.key.keysym.scancode == SDL_SCANCODE_1) //фокус работает, но хуево работает
+		// {
+			// if ((!rt->sdl->screen[1]->keyboard_focus || !rt->sdl->screen[1]->mouse_focus))
+			// 	index = 1;
+			// else if ((!rt->sdl->screen[0]->keyboard_focus || !rt->sdl->screen[0]->mouse_focus))
+			// 	index = 0;
+			// if (index != -1)
+			// {
+			// 	SDL_ShowWindow(rt->sdl->screen[index]->win);
+			// 	SDL_RaiseWindow(rt->sdl->screen[index]->win);
+			// 	rt->sdl->screen[index]->shown = true;
+			// 	rt->sdl->screen[index]->keyboard_focus = true;
+			// 	rt->sdl->screen[index]->mouse_focus = true;
+			// }
+		// }
 	return (ismove);
 }

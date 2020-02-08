@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 04:06:50 by thorker           #+#    #+#             */
-/*   Updated: 2020/02/08 03:17:56 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/08 07:26:54 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@
 #  define DISPLAY_NOT	"osascript -e \'display notification\""
 #  define MIN(a,b) (((a)<(b))?(a):(b))
 #  define MAX(a,b) (((a)>(b))?(a):(b))
-#  define FONT			"assets/fonts/open-sans/OpenSans-Regular.ttf"
+#  define FONT			"assets/fonts/open-sans/OpenSans-Light.ttf"
 # endif
 # define WIDTH 1280
 # define HEIGHT 1024
@@ -249,6 +249,8 @@ typedef struct			s_screen
 {
 	SDL_Window			*win;
 	SDL_Renderer		*render;
+	SDL_Texture			*texture;
+	SDL_Surface			*sur;
 	int					win_id;
 	bool				mouse_focus;
 	bool				keyboard_focus;
@@ -259,17 +261,16 @@ typedef struct			s_screen
 
 typedef struct			s_sdl
 {
+	t_gui				*gui;
 	t_screen			*screen[2];
-	SDL_Texture			*texture;
 	Mix_Music			*music[NBR_OF_SONGS];
 	char				*sounds[NBR_OF_SONGS];
 	SDL_Event			event;
-	SDL_Surface			*sur;
 	int					volume;
 	TTF_Font			*font;
 	int					font_size;
 	SDL_Color			font_color;
-	bool				relative_mouse_mode;
+	bool				relative_mouse_mode; //не сработало, удалить
 }						t_sdl;
 
 typedef struct			s_rt
@@ -281,6 +282,12 @@ typedef struct			s_rt
 # endif
 
 # ifndef OPENCL___
+
+/*
+**						gui
+*/
+void					gui_default_screen(t_object **hi_lited_object, t_sdl *sdl);
+void					gui_main(t_object **hi_lited_object, t_sdl *sdl);
 
 /*
 **						hooks
@@ -368,10 +375,10 @@ void					parse_cylinder_json(t_key_value *obj,
 */
 
 void					change_music(Mix_Music *music[]);
-int						render_help_screen(t_sdl *sdl);
 void					sdl_loop(t_rt *rt);
+void					sdl_putstr(int x, int y, char *text, t_sdl *sdl);
 void					sdl_quit(t_sdl *sdl);
-void					sdl_update(t_sdl *sdl);
+void					sdl_update(t_object **hi_lited_object, t_sdl *sdl);
 
 /*
 **						utils

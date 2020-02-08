@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/28 10:20:37 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/08 02:27:12 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/08 07:37:55 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,10 +65,10 @@ static void			init_sdl_2(t_key_value *json, t_sdl *sdl)
 	t_key_value		*assets;
 
     SDL_RenderSetScale(sdl->screen[0]->render, WIDTH, HEIGHT);
-	SDL_UpdateTexture(sdl->texture, NULL, sdl->sur->pixels,
+	SDL_UpdateTexture(sdl->screen[0]->texture, NULL, sdl->screen[0]->sur->pixels,
 					WIDTH * sizeof(int));
 	SDL_RenderClear(sdl->screen[0]->render);
-	SDL_RenderCopy(sdl->screen[0]->render, sdl->texture, NULL, NULL);
+	SDL_RenderCopy(sdl->screen[0]->render, sdl->screen[0]->texture, NULL, NULL);
 	SDL_RenderPresent(sdl->screen[0]->render);
 	assets = parse_assets(json, sdl);
 	set_window_icon(assets, sdl);
@@ -84,6 +84,12 @@ void				init_screen(t_screen *screen, char *title, SDL_Rect rect)
 	if (!(screen->render = SDL_CreateRenderer(screen->win, -1,
 						SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC)))
 		ft_error((char *)SDL_GetError());
+	if (!(screen->texture = SDL_CreateTexture(screen->render,
+							SDL_PIXELFORMAT_ARGB8888,
+							SDL_TEXTUREACCESS_STREAMING, rect.w, rect.h)))
+		ft_error((char *)SDL_GetError());
+	if (!(screen->sur = SDL_CreateRGBSurface(0, rect.w, rect.h, 32, 0, 0, 0, 0)))
+		ft_error((char *)SDL_GetError());
 	screen->win_id = SDL_GetWindowID(screen->win);
 	screen->mouse_focus = 0;
 	screen->keyboard_focus = 0;
@@ -92,12 +98,24 @@ void				init_screen(t_screen *screen, char *title, SDL_Rect rect)
 	screen->shown = 0;
 }
 
+t_gui				*init_gui(void)
+{
+	t_gui			*gui;
+	
+	if (!(gui = (t_gui *)ft_memalloc((sizeof(t_gui)))))
+		ft_error(ERROR_INPUT);
+	gui->render_text = false;
+	gui->input_text = "KEK";
+	return (gui);
+}
+
 t_sdl				*init_sdl(t_key_value *json)
 {
 	t_sdl			*sdl;
 
 	if (!(sdl = (t_sdl *)ft_memalloc((sizeof(t_sdl)))))
 		ft_error(ERROR_INPUT);
+	sdl->gui = init_gui();
 	if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_EVENTS) != 0)
 		ft_error((char *)SDL_GetError());	
 	if (!(sdl->screen[0] = (t_screen *)ft_memalloc((sizeof(t_screen)))))
@@ -109,13 +127,6 @@ t_sdl				*init_sdl(t_key_value *json)
 	init_screen(sdl->screen[0], "RT", (SDL_Rect){350, 200, WIDTH, HEIGHT});
 	init_screen(sdl->screen[1], "ToolBar",
 						(SDL_Rect){350 + WIDTH, 200, 500, HEIGHT});
-	if (!(sdl->texture = SDL_CreateTexture(sdl->screen[0]->render,
-							SDL_PIXELFORMAT_ARGB8888,
-							SDL_TEXTUREACCESS_STREAMING, WIDTH, HEIGHT)))
-		ft_error((char *)SDL_GetError());
-	if (!(sdl->sur = SDL_CreateRGBSurface(0, WIDTH,
-			HEIGHT, 32, 0xFF000000, 0x00FF0000, 0x0000FF00, 0x000000FF)))
-		ft_error((char *)SDL_GetError());
 	init_sdl_2(json, sdl);
 	return (sdl);
 }

@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/01 05:01:29 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/07 19:25:11 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/08 06:31:24 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,12 +80,13 @@ void			save_image(t_sdl *sdl)
 		k = -1;
 		while (++k < WIDTH)
 		{
-			color = int_to_rgb(((int *)(sdl->sur->pixels))[k * WIDTH + i]);
+			color = int_to_rgb(((int *)(sdl->screen[0]->sur->pixels))[k * WIDTH + i]);
 			rgb_image[3 * (k * WIDTH + i)] = (uint8_t)color.x;
 			rgb_image[3 * (k * WIDTH + i) + 1] = (uint8_t)color.y;
 			rgb_image[3 * (k * WIDTH + i) + 2] = (uint8_t)color.z;
 		}
 	}
+	// printf("1 = %d\n2 = %d\n", rgb_image[3 * (k * WIDTH + i) + 2]);
 	stbi_write_png(screen_name, WIDTH, HEIGHT, 3, rgb_image, WIDTH * 3);
 	system("afplay /System/Library/Sounds/Pop.aiff");
 	ft_memdel((void **)&rgb_image);
