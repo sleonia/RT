@@ -45,7 +45,7 @@
 				"specular":			50.0,
 				"reflection":		0.0,
 				"refraction":		0.0,
-				"texture_id":		-1
+				"texture_id":		-2
 			}
 		},
 		{
@@ -58,9 +58,9 @@
 				"ambient":			1.0,
 				"diffuse":			0.4,
 				"specular":			50.0,
-				"reflection":		0.1,
+				"reflection":		0.0,
 				"refraction":		0.0,
-				"texture_id":		-1
+				"texture_id":		-3
 			}
 		},
 		{
@@ -73,9 +73,9 @@
 				"ambient":			1.0,
 				"diffuse":			0.4,
 				"specular":			50.0,
-				"reflection":		0.1,
+				"reflection":		0.0,
 				"refraction":		0.0,
-				"texture_id":		-1
+				"texture_id":		-4
 			}
 		}
 	],

@@ -166,7 +166,7 @@ int	closest_intersection(float3 o, float3 d, int count_obj, __global t_object *o
 				if (t12 == 2)
 					light_hit->n *= -1.f;
 				light_hit->mat = obj[i].material;
-				if (obj[i].material.texture_id != -1 && !move_on)
+				if (!move_on)
 				{
 					uv = uv_mapping_for_sphere(light_hit);
 					normalize_coord_for_texture(uv, &light_hit->mat.color, texture,  texture_param, obj[i].material.texture_id);
@@ -190,7 +190,7 @@ int	closest_intersection(float3 o, float3 d, int count_obj, __global t_object *o
 				}
 				light_hit->mat = obj[i].material;
 				//условие для uv mapping и наличия текстуры	
-				if (obj[i].material.texture_id != -1 && !move_on)
+				if (!move_on)
 				{
 					uv = uv_mapping_for_plane(light_hit);
 					normalize_coord_for_texture(uv, &light_hit->mat.color, texture,  texture_param, obj[i].material.texture_id);
@@ -213,7 +213,7 @@ int	closest_intersection(float3 o, float3 d, int count_obj, __global t_object *o
 					light_hit->n *= -1;
 				light_hit->mat = obj[i].material;
 				//условие для uv mapping и наличия текстуры
-				if (obj[i].material.texture_id != -1 && !move_on)
+				if (!move_on)
 				{
 					uv = uv_mapping_for_cone(light_hit, &(obj + i)->object.cone);
 					normalize_coord_for_texture(uv, &light_hit->mat.color, texture,  texture_param, obj[i].material.texture_id);
@@ -235,7 +235,7 @@ int	closest_intersection(float3 o, float3 d, int count_obj, __global t_object *o
 					light_hit->n *= -1;
 				light_hit->mat = obj[i].material;
 				//условие для uv mapping и наличия текстуры
-				if (obj[i].material.texture_id != -1 && !move_on)
+				if (!move_on)
 				{
 					uv = uv_mapping_for_cylinder(light_hit, &(obj + i)->object.cylinder);
 					normalize_coord_for_texture(uv, &light_hit->mat.color, texture,  texture_param, obj[i].material.texture_id);
