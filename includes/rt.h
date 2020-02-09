@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 04:06:50 by thorker           #+#    #+#             */
-/*   Updated: 2020/02/09 05:29:55 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/09 06:30:45 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -374,7 +374,6 @@ void					parse_cylinder_json(t_key_value *obj,
 
 void					fill_rect(SDL_Rect tmp, int color, SDL_Surface *sur);
 void					change_music(Mix_Music *music[]);
-void					render_borders(SDL_Color color, SDL_Rect rect, SDL_Surface *sur);
 void					render_button(t_button *button, t_sdl *sdl);
 void					sdl_loop(t_rt *rt);
 void					sdl_putstr(SDL_Rect	dest, char *text, t_ttf *ttf, SDL_Surface *sur);

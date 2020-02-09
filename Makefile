@@ -6,7 +6,7 @@
 #    By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/01 04:18:29 by sleonia           #+#    #+#              #
-#    Updated: 2020/02/09 04:58:32 by sleonia          ###   ########.fr        #
+#    Updated: 2020/02/09 06:30:54 by sleonia          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -100,7 +100,6 @@ OBJ_PARSE_FILES = $(addprefix $(OBJ_DIR), $(PARSE_FILES:.c=.o))
 SDL_UTILS_FILES =						\
 			fill_rect.c					\
 			music_manager.c				\
-			render_borders.c			\
 			render_button.c				\
 			sdl_loop.c					\
 			sdl_putstr.c				\
