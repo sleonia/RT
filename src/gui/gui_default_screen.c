@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/08 06:44:01 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/09 06:45:47 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/09 06:49:25 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,19 +91,19 @@ void		gui_default_screen(t_object **hi_lited_object, t_sdl *sdl)
 	sdl->gui->buttons[0]->rect_body = (SDL_Rect){5, 455, 400, 100};
 	render_button(sdl->gui->buttons[0], sdl);
 
-	sdl->gui->buttons[0]->text = "New object";
-	sdl->gui->buttons[0]->clr_button = (SDL_Color){209, 191, 155, 0};
-	sdl->gui->buttons[0]->clr_border = (SDL_Color){255, 0};
-	sdl->gui->buttons[0]->rect_borders = (SDL_Rect){0, 700, 210, 70};
-	sdl->gui->buttons[0]->rect_body = (SDL_Rect){5, 705, 200, 60};
-	render_button(sdl->gui->buttons[0], sdl);
+	sdl->gui->buttons[1]->text = "New object";
+	sdl->gui->buttons[1]->clr_button = (SDL_Color){209, 191, 155, 0};
+	sdl->gui->buttons[1]->clr_border = (SDL_Color){255, 0};
+	// sdl->gui->buttons[1]->rect_borders = (SDL_Rect){0, 700, 210, 70};
+	sdl->gui->buttons[1]->rect_body = (SDL_Rect){5, 705, 200, 60};
+	render_button(sdl->gui->buttons[1], sdl);
 
-	sdl->gui->buttons[0]->text = "Screenshot";
-	sdl->gui->buttons[0]->clr_button = (SDL_Color){209, 191, 155, 0};
-	sdl->gui->buttons[0]->clr_border = (SDL_Color){255, 0};
-	sdl->gui->buttons[0]->rect_borders = (SDL_Rect){300, 700, 210, 70};
-	sdl->gui->buttons[0]->rect_body = (SDL_Rect){305, 705, 200, 60};
-	render_button(sdl->gui->buttons[0], sdl);
+	sdl->gui->buttons[2]->text = "Screenshot";
+	sdl->gui->buttons[2]->clr_button = (SDL_Color){209, 191, 155, 0};
+	sdl->gui->buttons[2]->clr_border = (SDL_Color){255, 0};
+	// sdl->gui->buttons[2]->rect_borders = (SDL_Rect){300, 700, 210, 70};
+	sdl->gui->buttons[2]->rect_body = (SDL_Rect){305, 705, 200, 60};
+	render_button(sdl->gui->buttons[2], sdl);
 
 	// load_from_rendered_text(render, sdl->font, "SOSU", (SDL_Color){255, 255});
 	// load_from_rendered_text(render, sdl->font, (const char *)sdl->gui->input_text, (SDL_Color){255, 255});
