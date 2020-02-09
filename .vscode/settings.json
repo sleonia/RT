@@ -35,7 +35,8 @@
 		"audio.h": "c",
 		"nuklear_cross.h": "c",
 		"gui.h": "c",
-		"stdexcept": "c"
+		"stdexcept": "c",
+		"time.h": "c"
 	},
 	"C_Cpp.errorSquiggles": "Disabled"
 }

@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/28 11:42:59 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/08 07:42:13 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/09 02:27:33 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,8 +127,20 @@ void			str_pop_back(char *str)
 
 bool			key_toolbar(SDL_Scancode scancode, char *flag, t_object *hi_lited_object, t_rt *rt)
 {
+	if (hi_lited_object)
+		return false;
 	if (rt->sdl->event.type == SDL_KEYDOWN)
 	{
+
+		if (scancode == SDL_SCANCODE_1)
+			rt->sdl->gui->radio_btn[0] = !rt->sdl->gui->radio_btn[0];
+		if (scancode == SDL_SCANCODE_2)
+			rt->sdl->gui->radio_btn[1] = !rt->sdl->gui->radio_btn[1];
+		if (scancode == SDL_SCANCODE_3)
+			rt->sdl->gui->radio_btn[2] = !rt->sdl->gui->radio_btn[2];
+		if (scancode == SDL_SCANCODE_4)
+			rt->sdl->gui->radio_btn[3] = !rt->sdl->gui->radio_btn[3];
+
 		if (scancode == SDL_SCANCODE_ESCAPE)
 			*flag = 1;
 		if (rt->sdl->event.key.keysym.sym == SDLK_BACKSPACE && ft_strlen(rt->sdl->gui->input_text) > 0)
@@ -167,12 +179,12 @@ bool			key_events(char *flag, t_object *hi_lited_object, t_rt *rt)
 
 	index = -1;
 	ismove = false;
-		if (rt->sdl->screen[0]->keyboard_focus)
-			ismove |= key_rt(rt->sdl->event.key.keysym.scancode, flag,
+	if (rt->sdl->screen[0]->keyboard_focus)
+		ismove |= key_rt(rt->sdl->event.key.keysym.scancode, flag,
+						hi_lited_object, rt);
+	else if (rt->sdl->screen[1]->keyboard_focus)
+		ismove |= key_toolbar(rt->sdl->event.key.keysym.scancode, flag,
 							hi_lited_object, rt);
-		else if (rt->sdl->screen[1]->keyboard_focus)
-			ismove |= key_toolbar(rt->sdl->event.key.keysym.scancode, flag,
-								hi_lited_object, rt);
 		// if (rt->sdl->event.key.keysym.scancode == SDL_SCANCODE_1) //фокус работает, но хуево работает
 		// {
 			// if ((!rt->sdl->screen[1]->keyboard_focus || !rt->sdl->screen[1]->mouse_focus))

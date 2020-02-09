@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 04:06:50 by thorker           #+#    #+#             */
-/*   Updated: 2020/02/08 07:26:54 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/09 05:29:55 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@
 #  define DISPLAY_NOT	"osascript -e \'display notification\""
 #  define MIN(a,b) (((a)<(b))?(a):(b))
 #  define MAX(a,b) (((a)>(b))?(a):(b))
-#  define FONT			"assets/fonts/open-sans/OpenSans-Light.ttf"
+#  define FONT			"./assets/fonts/open-sans/OpenSans-Regular.ttf"
 # endif
 # define WIDTH 1280
 # define HEIGHT 1024
@@ -267,9 +267,6 @@ typedef struct			s_sdl
 	char				*sounds[NBR_OF_SONGS];
 	SDL_Event			event;
 	int					volume;
-	TTF_Font			*font;
-	int					font_size;
-	SDL_Color			font_color;
 	bool				relative_mouse_mode; //не сработало, удалить
 }						t_sdl;
 
@@ -316,6 +313,7 @@ void					init_objects(t_object **object, int nbr);
 int						set_opencl_arg(t_cl *cl, t_sdl *sdl, t_scene *scene);
 int						set_opencl_arg_for_blur(t_cl *cl, t_sdl *sdl);
 t_cl					*init_cl(t_rt *rt);
+t_gui					*init_gui(void);
 t_rt					*init_rt(char **av);
 t_scene					*init_scene(t_key_value *json, char *sounds[]);
 t_sdl					*init_sdl(t_key_value *json);
@@ -374,9 +372,12 @@ void					parse_cylinder_json(t_key_value *obj,
 **						sdl_utils
 */
 
+void					fill_rect(SDL_Rect tmp, int color, SDL_Surface *sur);
 void					change_music(Mix_Music *music[]);
+void					render_borders(SDL_Color color, SDL_Rect rect, SDL_Surface *sur);
+void					render_button(t_button *button, t_sdl *sdl);
 void					sdl_loop(t_rt *rt);
-void					sdl_putstr(int x, int y, char *text, t_sdl *sdl);
+void					sdl_putstr(SDL_Rect	dest, char *text, t_ttf *ttf, SDL_Surface *sur);
 void					sdl_quit(t_sdl *sdl);
 void					sdl_update(t_object **hi_lited_object, t_sdl *sdl);
 
@@ -393,6 +394,7 @@ int						read_kernel(t_cl *cl, char **files_cl);
 int						realloc_img(t_scene *scene, char *file_name);
 int						filter(int	*pixels, char flag);
 int						realloc_obj(SDL_Scancode scancode, t_scene *scene);
+int						rgb_to_int(int red, int green, int blue);
 void					save_image(t_sdl *sdl);
 void					show_error(char *error, char *sounds[]);
 

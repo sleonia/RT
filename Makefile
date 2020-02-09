@@ -6,7 +6,7 @@
 #    By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/01 04:18:29 by sleonia           #+#    #+#              #
-#    Updated: 2020/02/08 07:33:26 by sleonia          ###   ########.fr        #
+#    Updated: 2020/02/09 04:58:32 by sleonia          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,6 +49,7 @@ INIT_FILES =							\
 			init_cl_arg.c				\
 			init_cl_files.c				\
 			init_cl.c					\
+			init_gui.c					\
 			init_objects.c				\
 			init_lights.c				\
 			init_rt.c					\
@@ -97,8 +98,10 @@ OBJ_PARSE_FILES = $(addprefix $(OBJ_DIR), $(PARSE_FILES:.c=.o))
 # =========== #
 
 SDL_UTILS_FILES =						\
-			draw_line.c					\
+			fill_rect.c					\
 			music_manager.c				\
+			render_borders.c			\
+			render_button.c				\
 			sdl_loop.c					\
 			sdl_putstr.c				\
 			sdl_quit.c					\
@@ -121,6 +124,7 @@ UTILS_FILES =							\
 			read_kernel.c				\
 			realloc_img.c				\
 			realloc_obj.c				\
+			rgb_to_int.c				\
 			save_image.c				\
 			show_error.c				\
 

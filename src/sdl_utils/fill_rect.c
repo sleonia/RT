@@ -1,24 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sdl_putstr.c                                       :+:      :+:    :+:   */
+/*   fill_rect.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/02/08 06:48:06 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/09 05:31:21 by sleonia          ###   ########.fr       */
+/*   Created: 2020/02/05 17:50:14 by sleonia           #+#    #+#             */
+/*   Updated: 2020/02/09 04:28:15 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-void			sdl_putstr(SDL_Rect	rect, char *text, t_ttf *ttf, SDL_Surface *sur)
+void			fill_rect(SDL_Rect tmp, int color, SDL_Surface *sur)
 {
-	SDL_Surface	*txt_sur;
+	SDL_Rect	rect;
 
-	if (!(txt_sur = TTF_RenderText_Blended(ttf->font, text,
-										ttf->font_color)))
-		ft_error((char *)SDL_GetError());
-	SDL_BlitSurface(txt_sur, NULL, sur, &rect);
-	SDL_FreeSurface(txt_sur);
+	rect.x = tmp.x;
+	rect.y = tmp.y;
+	rect.h = tmp.h;
+	rect.w = tmp.w;
+	SDL_FillRect(sur, &rect, color);
 }

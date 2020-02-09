@@ -7,8 +7,8 @@
 	},
 	"textures":
 	[
-		"./assets/textures/shrek.jpg",
 		"./assets/textures/larkspur.jpg",
+		"./assets/textures/shrek.jpg",
 		"./assets/textures/sample.jpg"
 	],
 	"skybox":
@@ -28,7 +28,7 @@
 	[
 		{
 			"type":					"sphere",
-			"radius":				3.0,
+			"radius":				4.0,
 			"center":				[4.0, 0.0, 10.0],
 			"material":
 			{
@@ -36,9 +36,10 @@
 				"ambient":			1.0,
 				"diffuse":			0.4,
 				"specular":			50.0,
-				"reflection":		0.9,
+				"reflection":		0.0,
 				"refraction":		0.0,
-				"texture_id":		1
+				"texture_id":		1,
+				"texture":			"./assets/textures/shrek.jpg"
 			}
 		},
 		{
@@ -53,7 +54,7 @@
 				"specular":			50.0,
 				"reflection":		0.9,
 				"refraction":		0.0,
-				"texture_id":		-1
+				"texture_id":		1
 			}
 		}
 	],

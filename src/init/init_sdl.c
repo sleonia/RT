@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/28 10:20:37 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/08 07:37:55 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/09 05:37:08 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,16 +50,6 @@ static void			set_window_icon(t_key_value *assets, t_sdl *sdl)
 	ft_strdel(&icon);
 }
 
-static void			init_ttf(t_sdl *sdl)
-{
-	if (TTF_Init() == -1)
-		ft_error((char *)SDL_GetError());
-	sdl->font_size = 25;
-	if (!(sdl->font = TTF_OpenFont(FONT, sdl->font_size)))
-		ft_error((char *)SDL_GetError());
-	sdl->font_color = (SDL_Color){255, 255, 255, 0};
-}
-
 static void			init_sdl_2(t_key_value *json, t_sdl *sdl)
 {
 	t_key_value		*assets;
@@ -73,7 +63,6 @@ static void			init_sdl_2(t_key_value *json, t_sdl *sdl)
 	assets = parse_assets(json, sdl);
 	set_window_icon(assets, sdl);
 	init_sdl_music(assets, sdl);
-	init_ttf(sdl);
 }
 
 void				init_screen(t_screen *screen, char *title, SDL_Rect rect)
@@ -98,16 +87,6 @@ void				init_screen(t_screen *screen, char *title, SDL_Rect rect)
 	screen->shown = 0;
 }
 
-t_gui				*init_gui(void)
-{
-	t_gui			*gui;
-	
-	if (!(gui = (t_gui *)ft_memalloc((sizeof(t_gui)))))
-		ft_error(ERROR_INPUT);
-	gui->render_text = false;
-	gui->input_text = "KEK";
-	return (gui);
-}
 
 t_sdl				*init_sdl(t_key_value *json)
 {
