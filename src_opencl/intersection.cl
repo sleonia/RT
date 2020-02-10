@@ -141,6 +141,39 @@ static int	intersect_ray_parab(float3 o, float3 d, __global t_parab *parab, floa
 	return (0);
 }
 
+static int intersect_ray_torus(float3 o, float3 d, __global t_torus *tor, float *dist_i)
+{
+	int		i;
+	int		j;
+	float2	q = (float2)0.f;
+	float3	current_position = (float3)0.f;
+	float3	vec = (float3)0.f;
+	float3	p = (float3)0.f;
+	float3	n1 = (float3)0.f;
+	float	distance_to_closest = 0.f;
+
+	i = 0;
+	j = 1;
+	while (i < 4096)
+	{
+		current_position = o + (*dist_i) * d;
+		p = current_position - tor->center;
+		n1 = dot(p, tor->axis) * tor->axis;
+		vec = p - n1;
+		q = (float2)(length(vec) - tor->bigr, length(n1));
+		if ((j == 1) && ((length(q) - tor->r) < -0.00001f))
+			j = -1;
+		distance_to_closest = fabs(length(q) - tor->r);
+		if ((*dist_i) > MAX_DIST)
+			return (0);
+		if (distance_to_closest < 0.0001f)
+			return (j);
+		(*dist_i) += distance_to_closest;
+		i++;
+	}
+	return (0);
+}
+
 int	closest_intersection(float3 o, float3 d, int count_obj, __global t_object *obj, t_hitting *light_hit, __global int *texture, __global int *texture_param, int move_on)
 {
 	float		dist;
@@ -180,14 +213,10 @@ int	closest_intersection(float3 o, float3 d, int count_obj, __global t_object *o
 			if (t12 && dist_i < dist)
 			{
 				dist = dist_i;
-				light_hit->hit = o + d * dist_i;
-				// light_hit->hit += 0.00001f;		
+				light_hit->hit = o + d * dist_i;	
 				light_hit->n = obj[i].object.plane.axis;
 				if (dot(d, light_hit->n) > 0.f)
-				{
-					// light_hit->hit -= 0.00002f;
 					light_hit->n *= -1.f;
-				}
 				light_hit->mat = obj[i].material;
 				//условие для uv mapping и наличия текстуры	
 				if (obj[i].material.texture_id != -1 && !move_on)
@@ -258,6 +287,36 @@ int	closest_intersection(float3 o, float3 d, int count_obj, __global t_object *o
 					light_hit->n *= -1.f;
 				light_hit->mat = obj[i].material;
 				//uv mapping			
+			}
+		}
+		else if (obj[i].type == o_torus)
+		{
+			dist_i = 0.f;
+			t12 = intersect_ray_torus(o, d, &(obj + i)->object.torus, &dist_i);
+			if (t12 && dist_i < dist)
+			{
+				float	k;
+				float3	a;
+
+				dist = dist_i;
+				light_hit->hit = o + d * dist_i * 0.998f;
+				k = dot(light_hit->hit - (obj + i)->object.torus.center, (obj + i)->object.torus.axis);
+				a = light_hit->hit - (obj + i)->object.torus.axis * k;
+				a = a - (obj + i)->object.torus.center;
+				a = normalize(a);
+				a = a * (obj + i)->object.torus.bigr;
+				a = a + (obj + i)->object.torus.center;
+				light_hit->n = normalize(light_hit->hit - a);
+				if(fabs(k) < 0.001f)
+				{
+					if (length((obj + i)->object.torus.center - light_hit->hit) < (obj + i)->object.torus.bigr)
+						light_hit->n = normalize((obj + i)->object.torus.center - light_hit->hit);
+					else
+						light_hit->n = -normalize((obj + i)->object.torus.center - light_hit->hit);
+				}
+				if (t12 == -1)
+					light_hit->n = -light_hit->n;
+				light_hit->mat = obj[i].material;				
 			}
 		}
 		i++;

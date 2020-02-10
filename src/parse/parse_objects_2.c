@@ -6,7 +6,7 @@
 /*   By: deladia <deladia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 17:19:10 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/07 20:28:52 by deladia          ###   ########.fr       */
+/*   Updated: 2020/02/10 14:51:17 by deladia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,4 +97,24 @@ void			parse_parab_json(t_key_value *obj, t_parab *parab)
 	if (get_double(obj, "length", &value))
 		ft_error("Error get_double: distance");
 	parab->length = (float)value;
+}
+
+void			parse_torus_json(t_key_value *obj, t_torus *tor)
+{
+	double		value;
+	t_array		*pos;
+
+	if (get_array(obj, "center", &pos))
+		ft_error("Error get_array: center");
+	parse_array_of_float(pos, &tor->center);
+	if (get_array(obj, "axis", &pos))
+		ft_error("Error get_array: axis");
+	parse_array_of_float(pos, &tor->axis);
+	cl_normalize(&tor->axis);
+	if (get_double(obj, "bigr", &value))
+		ft_error("Error get_double: bigr");
+	tor->bigr = (float)value;
+	if (get_double(obj, "r", &value))
+		ft_error("Error get_double: r");
+	tor->r = (float)value;
 }

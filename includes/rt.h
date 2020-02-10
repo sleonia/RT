@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rt.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: deladia <deladia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 04:06:50 by thorker           #+#    #+#             */
-/*   Updated: 2020/02/09 06:30:45 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/10 14:51:48 by deladia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,6 +130,22 @@ typedef struct			s_parab
 	float				length;
 }						t_parab;
 
+typedef struct			s_torus
+{
+# ifndef OPENCL___
+
+	cl_float3			center;
+	cl_float3			axis;
+# else
+
+	float3				center;
+	float3				axis;
+# endif
+
+	float				bigr;
+	float				r;
+}						t_torus;
+
 union					u_objects
 {
 	t_sphere			sphere;
@@ -137,6 +153,7 @@ union					u_objects
 	t_cone				cone;
 	t_plane				plane;
 	t_parab				parab;
+	t_torus				torus;
 };
 
 typedef struct			s_material
@@ -196,7 +213,8 @@ enum					e_obj_type
 	o_cylinder,
 	o_cone,
 	o_plane,
-	o_parab
+	o_parab,
+	o_torus
 };
 
 typedef struct			s_object
@@ -365,6 +383,7 @@ void					parse_sphere_json(t_key_value *obj, t_sphere *sphere);
 void					parse_plane_json(t_key_value *obj, t_plane *plane);
 void					parse_cone_json(t_key_value *obj, t_cone *cone);
 void					parse_parab_json(t_key_value *obj, t_parab *parab);
+void					parse_torus_json(t_key_value *obj, t_torus *tor);
 void					parse_cylinder_json(t_key_value *obj,
 											t_cylinder *cylinder);
 

@@ -6,7 +6,7 @@
 /*   By: deladia <deladia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/28 21:51:06 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/07 20:28:41 by deladia          ###   ########.fr       */
+/*   Updated: 2020/02/10 14:50:54 by deladia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,12 @@ static void			check_type(char *type, t_object *scene_obj,
 		scene_obj->type = o_cylinder;
 		parse_cylinder_json(obj, &object.cylinder);
 		scene_obj->object.cylinder = object.cylinder;
+	}
+	else if (ft_strcmp(type, "torus") == 0)
+	{
+		scene_obj->type = o_torus;
+		parse_torus_json(obj, &object.torus);
+		scene_obj->object.torus = object.torus;
 	}
 	check_type1(type, scene_obj, obj);
 }
