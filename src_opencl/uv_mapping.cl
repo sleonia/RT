@@ -54,14 +54,46 @@ void	normalize_coord_for_texture(float2 uv, float3 *color, __global int *texture
 	int		tex_width;
 	int		tex_height;
 
-	tex_width = texture_param[texture_id * 3 + 1];
-	tex_height = texture_param[texture_id * 3 + 2];
-	coord = (int)(uv.x * tex_width) + (int)(uv.y * tex_height) * tex_width;
-	coord += texture_param[texture_id * 3];
-
-	color->x = (RED(texture[coord])) * 0.00392156862f;
-	color->y = (GREEN(texture[coord])) * 0.00392156862f;
-	color->z = (BLUE(texture[coord])) * 0.00392156862f;
+	if (texture_id >= 0)
+	{
+		tex_width = texture_param[texture_id * 3 + 1];
+		tex_height = texture_param[texture_id * 3 + 2];
+		coord = (int)(uv.x * tex_width) + (int)(uv.y * tex_height) * tex_width;
+		coord += texture_param[texture_id * 3];
+		color->x = (RED(texture[coord])) * 0.00392156862f;
+		color->y = (GREEN(texture[coord])) * 0.00392156862f;
+		color->z = (BLUE(texture[coord])) * 0.00392156862f;
+	}
+	if (texture_id == -2)
+	{
+		if ((((int)(uv.x * 100)) % 2  + ((int)(uv.y * 100)) % 2) % 2 == 1)
+		{
+			color->x = 1.0f;
+			color->y = 1.0f;
+			color->z = 1.0f;
+		}
+		else
+		{
+			color->x = 0.0f;
+			color->y = 0.0f;
+			color->z = 0.0f;
+		}
+	}
+	if (texture_id == -3)
+	{
+		if (fabs(sin(uv.x * 100) + cos(uv.y * 100)) < 0.3f)
+			color->x = 1.0f;
+		else
+			color->x = 0.0f;
+		color->y = 0.0f;
+		color->z = 0.0f;
+	}
+	if (texture_id == -4)
+	{
+		color->x = sin(3.14 / 2 * uv.y);
+		color->y = sin(3.14 / 2 * uv.y);
+		color->z = 0.0f;
+	}
 }
 
 float3	uv_mapping_for_skybox(__global int *texture, float3 d, __global int *tex_param, const int text_id)

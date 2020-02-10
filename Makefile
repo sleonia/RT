@@ -6,7 +6,7 @@
 #    By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/01 04:18:29 by sleonia           #+#    #+#              #
-#    Updated: 2020/02/09 06:30:54 by sleonia          ###   ########.fr        #
+#    Updated: 2020/02/10 09:26:56 by sleonia          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,6 +17,7 @@
 # =========== #
 
 GUI_FILES =								\
+			gui_buttons.c				\
 			gui_default_screen.c		\
 			gui_main.c					\
 
@@ -29,10 +30,14 @@ OBJ_GUI_FILES = $(addprefix $(OBJ_DIR), $(GUI_FILES:.c=.o))
 # =========== #
 
 HOOKS_FILES =							\
+			arrows_processing.c			\
 			events_processing.c			\
-			get_object.c				\
 			key_events.c				\
+			key_events_rt.c				\
+			key_events_toolbar.c		\
 			mouse_events.c				\
+			mouse_rt.c					\
+			mouse_toolbar.c				\
 			move.c						\
 			rotation.c					\
 			windows_events.c			\
@@ -119,6 +124,7 @@ UTILS_FILES =							\
 			filter.c					\
 			ft_error.c					\
 			ft_len_arr.c				\
+			get_object.c				\
 			int_to_rgb.c				\
 			read_kernel.c				\
 			realloc_img.c				\

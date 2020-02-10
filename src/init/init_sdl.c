@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/28 10:20:37 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/09 05:37:08 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/10 04:31:46 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,9 @@ static void			init_sdl_2(t_key_value *json, t_sdl *sdl)
 {
 	t_key_value		*assets;
 
-    SDL_RenderSetScale(sdl->screen[0]->render, WIDTH, HEIGHT);
-	SDL_UpdateTexture(sdl->screen[0]->texture, NULL, sdl->screen[0]->sur->pixels,
+	SDL_RenderSetScale(sdl->screen[0]->render, WIDTH, HEIGHT);
+	SDL_UpdateTexture(sdl->screen[0]->texture, NULL,
+					sdl->screen[0]->sur->pixels,
 					WIDTH * sizeof(int));
 	SDL_RenderClear(sdl->screen[0]->render);
 	SDL_RenderCopy(sdl->screen[0]->render, sdl->screen[0]->texture, NULL, NULL);
@@ -68,7 +69,7 @@ static void			init_sdl_2(t_key_value *json, t_sdl *sdl)
 void				init_screen(t_screen *screen, char *title, SDL_Rect rect)
 {
 	if (!(screen->win = SDL_CreateWindow(title, rect.x,
-			rect.y, rect.w, rect.h, SDL_WINDOW_SHOWN | SDL_WINDOW_ALWAYS_ON_TOP)))
+		rect.y, rect.w, rect.h, SDL_WINDOW_SHOWN | SDL_WINDOW_ALWAYS_ON_TOP)))
 		ft_error((char *)SDL_GetError());
 	if (!(screen->render = SDL_CreateRenderer(screen->win, -1,
 						SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC)))
@@ -77,7 +78,8 @@ void				init_screen(t_screen *screen, char *title, SDL_Rect rect)
 							SDL_PIXELFORMAT_ARGB8888,
 							SDL_TEXTUREACCESS_STREAMING, rect.w, rect.h)))
 		ft_error((char *)SDL_GetError());
-	if (!(screen->sur = SDL_CreateRGBSurface(0, rect.w, rect.h, 32, 0, 0, 0, 0)))
+	if (!(screen->sur = SDL_CreateRGBSurface(0, rect.w, rect.h,
+											32, 0, 0, 0, 0)))
 		ft_error((char *)SDL_GetError());
 	screen->win_id = SDL_GetWindowID(screen->win);
 	screen->mouse_focus = 0;
@@ -87,7 +89,6 @@ void				init_screen(t_screen *screen, char *title, SDL_Rect rect)
 	screen->shown = 0;
 }
 
-
 t_sdl				*init_sdl(t_key_value *json)
 {
 	t_sdl			*sdl;
@@ -96,7 +97,7 @@ t_sdl				*init_sdl(t_key_value *json)
 		ft_error(ERROR_INPUT);
 	sdl->gui = init_gui();
 	if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_EVENTS) != 0)
-		ft_error((char *)SDL_GetError());	
+		ft_error((char *)SDL_GetError());
 	if (!(sdl->screen[0] = (t_screen *)ft_memalloc((sizeof(t_screen)))))
 		ft_error(ERROR_INPUT);
 	if (!(sdl->screen[1] = (t_screen *)ft_memalloc((sizeof(t_screen)))))
