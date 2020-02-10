@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/08 06:44:01 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/10 08:34:17 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/10 09:27:12 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,6 +114,7 @@ void			gui_default_screen(char *flag,
 	gui_camera(sdl->gui, sdl->screen[1]->sur);
 	gui_skybox(sdl->gui, sdl->screen[1]->sur);
 	gui_mode(flag, sdl->gui, sdl->screen[1]->sur);
+	gui_bittons(sdl);
 	// render_borders((SDL_Color){255, 0}, (SDL_Rect){0, 3, 50, 20}, sdl);
 
 	// for (size_t i = 0; i < 4; i++)
@@ -128,29 +129,5 @@ void			gui_default_screen(char *flag,
 	// }
 	// // fill_rect((SDL_Rect){3, 3, 44, 14},
 	// 		// rgb_to_int(255, 255, 0), sur);
-	sdl->gui->buttons[0]->text = "Exit";
-	sdl->gui->buttons[0]->clr_button = (SDL_Color){0, 255, 0, 0};
-	sdl->gui->buttons[0]->clr_border = (SDL_Color){255, 0, 0, 0};
-	sdl->gui->buttons[0]->rect_borders = (SDL_Rect){0, 450, 410, 110};
-	sdl->gui->buttons[0]->rect_body = (SDL_Rect){5, 455, 400, 100};
-	render_button(sdl->gui->buttons[0], sdl);
 
-	sdl->gui->buttons[1]->text = "New object";
-	sdl->gui->buttons[1]->clr_button = (SDL_Color){209, 191, 155, 0};
-	sdl->gui->buttons[1]->clr_border = (SDL_Color){255, 0, 0, 0};
-	// sdl->gui->buttons[1]->rect_borders = (SDL_Rect){0, 700, 210, 70};
-	sdl->gui->buttons[1]->rect_body = (SDL_Rect){5, 705, 200, 60};
-	render_button(sdl->gui->buttons[1], sdl);
-
-	sdl->gui->buttons[2]->text = "Screenshot";
-	sdl->gui->buttons[2]->clr_button = (SDL_Color){209, 191, 155, 0};
-	sdl->gui->buttons[2]->clr_border = (SDL_Color){255, 0, 0, 0};
-	// sdl->gui->buttons[2]->rect_borders = (SDL_Rect){300, 700, 210, 70};
-	sdl->gui->buttons[2]->rect_body = (SDL_Rect){305, 705, 200, 60};
-	render_button(sdl->gui->buttons[2], sdl);
-
-	// load_from_rendered_text(render, sdl->font, "SOSU", (SDL_Color){255, 255});
-	// load_from_rendered_text(render, sdl->font, (const char *)sdl->gui->input_text, (SDL_Color){255, 255});
-	// SDL_StartTextInput();
-	// sdl_putstr((SDL_Rect){100, 10 0, 0}0, "PIDOR", gui->ttf[0], sur);
 }

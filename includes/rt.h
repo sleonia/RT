@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 04:06:50 by thorker           #+#    #+#             */
-/*   Updated: 2020/02/10 08:22:10 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/10 09:53:53 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -281,6 +281,7 @@ typedef struct			s_rt
 /*
 **						gui
 */
+void					gui_bittons(t_sdl *sdl);
 void					gui_default_screen(char *flag,
 										t_object **hi_lited_object,
 										t_sdl *sdl);
@@ -310,10 +311,9 @@ bool					key_toolbar(SDL_Scancode scancode,
 									char *flag,
 									t_object *hi_lited_object,
 									t_rt *rt);
-bool					mouse_events(char *quit,
-									t_sdl *sdl,
+bool					mouse_events(char *flag,
 									t_object **hi_lited_object,
-									t_scene *scene);
+									t_rt *rt);
 void					mouse_rotation(t_cam *cam, int x, int y);
 void					move(SDL_Event event, t_cam *cam, t_move_flag *flag);
 bool					mouse_rt(char *flag,
@@ -321,9 +321,8 @@ bool					mouse_rt(char *flag,
 								t_object **hi_lited_object,
 								t_scene *scene);
 bool					mouse_toolbar(char *flag,
-									t_sdl *sdl,
 									t_object **hi_lited_object,
-									t_scene *scene);
+									t_rt *rt);
 void					rotation(SDL_Scancode scancode, t_sdl *sdl, t_cam *cam);
 bool					window_events(char *flag,
 									SDL_Event event,

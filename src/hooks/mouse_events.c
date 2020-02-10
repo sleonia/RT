@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/28 11:50:12 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/10 07:59:53 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/10 11:13:05 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,17 +29,16 @@ void			mouse_rotation(t_cam *cam, int x, int y)
 
 
 bool			mouse_events(char *flag,
-							t_sdl *sdl,
 							t_object **hi_lited_object,
-							t_scene *scene)
+							t_rt *rt)
 {
 	// int			x;
 	// int			y;
 
 	// SDL_GetMouseState(&x, &y);
-	if (sdl->screen[0]->mouse_focus)
-		return (mouse_rt(flag, sdl, hi_lited_object, scene));
-	else if (sdl->screen[1]->mouse_focus)
-		return (mouse_toolbar(flag, sdl, hi_lited_object, scene));
+	if (rt->sdl->screen[0]->mouse_focus)
+		return (mouse_rt(flag, rt->sdl, hi_lited_object, rt->scene));
+	else if (rt->sdl->screen[1]->mouse_focus)
+		return (mouse_toolbar(flag, hi_lited_object, rt));
 	return (false);
 }
