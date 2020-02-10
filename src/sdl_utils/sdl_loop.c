@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/28 11:30:45 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/08 05:43:33 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/10 03:46:17 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ void		sdl_loop(t_rt *rt)
 	hi_lited_object = NULL;
 	flag = 0;
 	SDL_SetRelativeMouseMode(SDL_FALSE);
-	sdl_update(&hi_lited_object, rt->sdl);
-    SDL_ShowWindow(rt->sdl->screen[0]->win);
+	sdl_update(&flag, &hi_lited_object, rt->sdl);
+	SDL_ShowWindow(rt->sdl->screen[0]->win);
 	SDL_RaiseWindow(rt->sdl->screen[0]->win);
 	rt->sdl->screen[0]->shown = true;
 	while (flag != 1)
@@ -30,5 +30,4 @@ void		sdl_loop(t_rt *rt)
 		events_processing(&flag, &hi_lited_object, rt);
 	}
 	sdl_quit(rt->sdl);
-
 }

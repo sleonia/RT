@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 04:06:50 by thorker           #+#    #+#             */
-/*   Updated: 2020/02/09 06:30:45 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/10 03:45:01 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -378,7 +378,7 @@ void					render_button(t_button *button, t_sdl *sdl);
 void					sdl_loop(t_rt *rt);
 void					sdl_putstr(SDL_Rect	dest, char *text, t_ttf *ttf, SDL_Surface *sur);
 void					sdl_quit(t_sdl *sdl);
-void					sdl_update(t_object **hi_lited_object, t_sdl *sdl);
+void					sdl_update(char *flag, t_object **hi_lited_object, t_sdl *sdl);
 
 /*
 **						utils

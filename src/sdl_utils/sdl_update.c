@@ -6,13 +6,13 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/28 12:09:13 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/09 06:50:22 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/10 03:44:49 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-void		sdl_update(t_object **hi_lited_object, t_sdl *sdl) //кидать сюда флаг для меню
+void		sdl_update(char *flag, t_object **hi_lited_object, t_sdl *sdl)
 {
 	SDL_UpdateTexture(sdl->screen[0]->texture, NULL, sdl->screen[0]->sur->pixels,
 				WIDTH * sizeof(int));
