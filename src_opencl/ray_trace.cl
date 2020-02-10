@@ -156,10 +156,8 @@ __kernel void RT(__global int *arr, __global t_cam *cam, __global t_object *obje
 						break ;
 				}
 				else if (skybox_id != -1)
-				// else if (skybox_id != -1 && !move_on)
 				{
 					tmp_color += uv_mapping_for_skybox(texture, d, texture_param, skybox_id);
-					// break ;
 				}
 			}
 			tmp_color /= (float)cnt_reflection;

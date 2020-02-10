@@ -80,7 +80,7 @@
 			"type":					"cylinder",
 			"axis":					[-1.0, 1.0, 0.0],
 			"center":				[-4.0, 0.0, 10.0],
-			"length":				3000.0,
+			"length":				30.0,
 			"radius":				2.0,
 			"material":
 			{

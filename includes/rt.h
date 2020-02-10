@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rt.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: deladia <deladia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 04:06:50 by thorker           #+#    #+#             */
-/*   Updated: 2020/02/10 15:48:00 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/10 18:49:42 by deladia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -386,6 +386,7 @@ cl_float3				cl_sum(cl_float3 v1, cl_float3 v2);
 cl_float3				cl_minus(cl_float3 v1, cl_float3 v2);
 float					cl_length(cl_float3 v);
 float					dot(cl_float3 a, cl_float3 b);
+float					cl_length_v2(cl_float2 v);
 
 /*
 **						parse

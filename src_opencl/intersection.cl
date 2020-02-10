@@ -218,7 +218,6 @@ int	closest_intersection(float3 o, float3 d, int count_obj, __global t_object *o
 				if (dot(d, light_hit->n) > 0.f)
 					light_hit->n *= -1.f;
 				light_hit->mat = obj[i].material;
-				//условие для uv mapping и наличия текстуры	
 				if (!move_on)
 				{
 					uv = uv_mapping_for_plane(light_hit);
@@ -241,7 +240,6 @@ int	closest_intersection(float3 o, float3 d, int count_obj, __global t_object *o
 				if (t12 == 2)
 					light_hit->n *= -1;
 				light_hit->mat = obj[i].material;
-				//условие для uv mapping и наличия текстуры
 				if (!move_on)
 				{
 					uv = uv_mapping_for_cone(light_hit, &(obj + i)->object.cone);
@@ -263,7 +261,6 @@ int	closest_intersection(float3 o, float3 d, int count_obj, __global t_object *o
 				if (t12 == 2)
 					light_hit->n *= -1;
 				light_hit->mat = obj[i].material;
-				//условие для uv mapping и наличия текстуры
 				if (!move_on)
 				{
 					uv = uv_mapping_for_cylinder(light_hit, &(obj + i)->object.cylinder);
@@ -286,7 +283,6 @@ int	closest_intersection(float3 o, float3 d, int count_obj, __global t_object *o
 				if (t12 == 2)
 					light_hit->n *= -1.f;
 				light_hit->mat = obj[i].material;
-				//uv mapping			
 			}
 		}
 		else if (obj[i].type == o_torus)
