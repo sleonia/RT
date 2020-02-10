@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rt.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: deladia <deladia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 04:06:50 by thorker           #+#    #+#             */
-/*   Updated: 2020/02/10 15:15:40 by deladia          ###   ########.fr       */
+/*   Updated: 2020/02/10 15:48:00 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -299,14 +299,13 @@ typedef struct			s_rt
 /*
 **						gui
 */
-void					gui_bittons(t_sdl *sdl);
+void					gui_buttons(t_sdl *sdl);
 void					gui_default_screen(char *flag,
 										t_object **hi_lited_object,
 										t_sdl *sdl);
 void					gui_main(char *flag,
 								t_object **hi_lited_object,
 								t_sdl *sdl);
-
 /*
 **						hooks
 */
@@ -317,6 +316,9 @@ void					events_processing(char *quit,
 										t_object **hi_lited_object,
 										t_rt *rt);
 t_object				*get_object(t_scene *scene, int x, int y);
+char					*pop_back(char *str);
+int						get_width(t_textbox *textbox);
+int						get_height(t_textbox *t_textbox);
 void					add_obj(SDL_Scancode scancode, t_scene *scene, t_cl *cl);
 void					change_focus(t_sdl *sdl);
 bool					key_events(char *quit, t_object *hi_lited_object,

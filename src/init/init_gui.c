@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/09 04:48:59 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/10 08:09:55 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/10 15:42:51 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,12 +43,23 @@ static t_ttf		*init_ttf(char *font, int font_size, SDL_Color font_color)
 		ft_error((char *)SDL_GetError());
 	if (!(ttf = (t_ttf *)ft_memalloc((sizeof(t_ttf)))))
 		ft_error(ERROR_INPUT);
-	// ttf->text = NULL;
 	ttf->font_size = font_size;
 	if (!(ttf->font = TTF_OpenFont(font, ttf->font_size)))
 		ft_error((char *)SDL_GetError());
 	ttf->font_color = font_color;
 	return (ttf);
+}
+
+static void			init_textbox(t_gui *gui)
+{
+	int				i;
+
+	i = -1;
+	while (++i < COUNT_OF_TEXTBOX)
+	{
+		if (!(gui->textbox[i] = (t_textbox *)ft_memalloc(sizeof(t_textbox))))
+			ft_error(ERROR_MALLOC);
+	}
 }
 
 t_gui				*init_gui(void)
@@ -69,5 +80,6 @@ t_gui				*init_gui(void)
 		ft_error((char *)SDL_GetError());
 	init_buttons(gui);
 	init_radio_btn(gui->radio_btn);
+	init_textbox(gui);
 	return (gui);
 }

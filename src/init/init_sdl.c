@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/28 10:20:37 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/10 04:31:46 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/10 15:05:49 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,8 @@ static void			init_sdl_2(t_key_value *json, t_sdl *sdl)
 	SDL_RenderCopy(sdl->screen[0]->render, sdl->screen[0]->texture, NULL, NULL);
 	SDL_RenderPresent(sdl->screen[0]->render);
 	assets = parse_assets(json, sdl);
+	if(!(IMG_Init(IMG_INIT_PNG) & IMG_INIT_PNG))
+		ft_error((char *)SDL_GetError());
 	set_window_icon(assets, sdl);
 	init_sdl_music(assets, sdl);
 }

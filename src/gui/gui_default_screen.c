@@ -6,14 +6,11 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/08 06:44:01 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/10 13:18:47 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/10 15:01:23 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
-
-SDL_Texture	*texture;
-
 
 void			resize_surface(SDL_Rect srcrect, SDL_Rect dstrect,
 							SDL_Surface *dest_surf, SDL_Surface *src_surf)
@@ -113,9 +110,9 @@ void			gui_default_screen(char *flag,
 	gui_camera(sdl->gui, sdl->screen[1]->sur);
 	gui_skybox(sdl->gui, sdl->screen[1]->sur);
 	gui_mode(flag, sdl->gui, sdl->screen[1]->sur);
-	gui_bittons(sdl);
-	// render_borders((SDL_Color){255, 0}, (SDL_Rect){0, 3, 50, 20}, sdl);
+	gui_buttons(sdl);
 
+	
 	// for (size_t i = 0; i < 4; i++)
 	// {
 		

@@ -6,7 +6,7 @@
 #    By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/01 04:18:29 by sleonia           #+#    #+#              #
-#    Updated: 2020/02/10 09:26:56 by sleonia          ###   ########.fr        #
+#    Updated: 2020/02/10 15:48:23 by sleonia          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,6 +20,7 @@ GUI_FILES =								\
 			gui_buttons.c				\
 			gui_default_screen.c		\
 			gui_main.c					\
+			gui_textbox.c				\
 
 GUI_DIR = ./src/gui/
 
@@ -125,6 +126,7 @@ UTILS_FILES =							\
 			ft_error.c					\
 			ft_len_arr.c				\
 			get_object.c				\
+			gui_utils.c					\
 			int_to_rgb.c				\
 			read_kernel.c				\
 			realloc_img.c				\

@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/06 22:40:57 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/10 08:24:04 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/10 15:46:46 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,28 @@
 
 # define COUNT_OF_BUTTONS	10
 # define COUNT_OF_RADIO_BTN	4
+# define COUNT_OF_TEXTBOX	10
+
+enum						e_textbox_type
+{
+	phi,
+	position,
+	tetta,
+	id,
+	ambient,
+	fsaa,
+	new_obj
+};
+
+typedef struct				s_textbox
+{
+	SDL_Texture				*m_texture;
+	char					*text;
+	int						type;
+	int						m_width;
+	int						m_height;
+}							t_textbox;
+
 
 typedef struct				s_button
 {
@@ -48,6 +70,7 @@ typedef struct				s_gui
 	SDL_Surface				*scroller;
 	t_button				*buttons[COUNT_OF_BUTTONS];
 	t_ttf					*ttf[2];
+	t_textbox				*textbox[COUNT_OF_TEXTBOX];
 }							t_gui;
 
 #endif

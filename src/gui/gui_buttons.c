@@ -6,13 +6,13 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/10 09:25:09 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/10 09:49:52 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/10 15:03:37 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-void		gui_bittons(t_sdl *sdl)
+void		gui_buttons(t_sdl *sdl)
 {
 	sdl->gui->buttons[0]->text = "New object";
 	sdl->gui->buttons[0]->clr_button = (SDL_Color){32, 82, 43, 0};
