@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 04:06:50 by thorker           #+#    #+#             */
-/*   Updated: 2020/02/10 07:43:08 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/10 07:56:39 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -311,7 +311,16 @@ bool					mouse_events(char *quit,
 									t_sdl *sdl,
 									t_object **hi_lited_object,
 									t_scene *scene);
+void					mouse_rotation(t_cam *cam, int x, int y);
 void					move(SDL_Event event, t_cam *cam, t_move_flag *flag);
+bool					mouse_rt(char *flag,
+								t_sdl *sdl,
+								t_object **hi_lited_object,
+								t_scene *scene);
+bool					mouse_toolbar(char *flag,
+									t_sdl *sdl,
+									t_object **hi_lited_object,
+									t_scene *scene);
 void					rotation(SDL_Scancode scancode, t_sdl *sdl, t_cam *cam);
 bool					window_events(char *flag,
 									SDL_Event event,
