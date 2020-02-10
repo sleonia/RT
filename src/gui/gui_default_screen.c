@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/08 06:44:01 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/10 09:27:12 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/10 13:18:47 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,8 +108,7 @@ void			gui_default_screen(char *flag,
 								t_object **hi_lited_object,
 								t_sdl *sdl)
 {
-	if (*hi_lited_object)
-		;
+
 	sdl->gui->ttf[0]->font_color = (SDL_Color){209, 191, 155, 0};
 	gui_camera(sdl->gui, sdl->screen[1]->sur);
 	gui_skybox(sdl->gui, sdl->screen[1]->sur);
