@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/01 04:22:13 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/08 05:02:05 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/10 04:32:06 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,9 @@ static void		set_arg_2(t_cl *cl, t_sdl *sdl, t_scene *scene)
 			cl->global_work_size, cl->local_work_size, 0, NULL, NULL)) != 0)
 		func_error(-10);
 	if ((ret = clEnqueueReadBuffer(cl->cmd_queue, cl->memobjs[0], CL_TRUE, 0,
-									HEIGHT * WIDTH * sizeof(cl_int),
-									(cl_int *)sdl->screen[0]->sur->pixels, 0, NULL,
-									NULL)) != 0)
+								HEIGHT * WIDTH * sizeof(cl_int),
+								(cl_int *)sdl->screen[0]->sur->pixels, 0, NULL,
+								NULL)) != 0)
 		func_error(-12);
 }
 
@@ -44,8 +44,8 @@ static void		set_arg_1(t_cl *cl, t_sdl *sdl, t_scene *scene)
 	int		ret;
 
 	if ((ret = clEnqueueWriteBuffer(cl->cmd_queue, cl->memobjs[0], CL_TRUE, 0,
-									sizeof(cl_int) * HEIGHT * WIDTH,
-									(cl_int *)sdl->screen[0]->sur->pixels, 0, NULL,
+								sizeof(cl_int) * HEIGHT * WIDTH,
+								(cl_int *)sdl->screen[0]->sur->pixels, 0, NULL,
 								NULL)) != 0)
 		func_error(-10);
 	if ((ret = clEnqueueWriteBuffer(cl->cmd_queue, cl->memobjs[1], CL_TRUE, 0,

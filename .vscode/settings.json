@@ -38,5 +38,7 @@
 		"stdexcept": "c",
 		"time.h": "c"
 	},
-	"C_Cpp.errorSquiggles": "Disabled"
+    "C_Cpp.errorSquiggles": "Disabled",
+    "editor.insertSpaces": false,
+    "editor.detectIndentation": false
 }

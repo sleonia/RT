@@ -6,10 +6,9 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 04:06:50 by thorker           #+#    #+#             */
-/*   Updated: 2020/02/10 03:45:01 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/10 07:22:05 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #ifndef RT_RT_H
 # define RT_RT_H
@@ -50,10 +49,10 @@ typedef struct			s_move_flag
 {
 	char				w;
 	char				s;
-    char                d;
-    char                a;
-    char                v;
-    char                c;	
+	char				d;
+	char				a;
+	char				v;
+	char				c;
 }						t_move_flag;
 
 typedef struct			s_cylinder
@@ -283,22 +282,40 @@ typedef struct			s_rt
 /*
 **						gui
 */
-void					gui_default_screen(t_object **hi_lited_object, t_sdl *sdl);
+void					gui_default_screen(t_object **hi_lited_object,
+										t_sdl *sdl);
 void					gui_main(t_object **hi_lited_object, t_sdl *sdl);
 
 /*
 **						hooks
 */
 
-void					events_processing(char *quit, t_object **hi_lited_object, t_rt *rt);
+void					arrows_processing(SDL_Scancode scancode,
+										t_object *hi_lited_object);
+void					events_processing(char *quit,
+										t_object **hi_lited_object,
+										t_rt *rt);
 t_object				*get_object(t_scene *scene, int x, int y);
+void					add_obj(SDL_Scancode scancode, t_scene *scene, t_cl *cl);
 bool					key_events(char *quit, t_object *hi_lited_object,
 								t_rt *rt);
-bool					mouse_events(char *quit,t_sdl *sdl,
-								t_object **hi_lited_object, t_scene *scene);
+bool	        		key_rt(SDL_Scancode scancode,
+								char *flag,
+								t_object *hi_lited_object,
+								t_rt *rt);
+bool					key_toolbar(SDL_Scancode scancode,
+									char *flag,
+									t_object *hi_lited_object,
+									t_rt *rt);
+bool					mouse_events(char *quit,
+									t_sdl *sdl,
+									t_object **hi_lited_object,
+									t_scene *scene);
 void					move(SDL_Event event, t_cam *cam, t_move_flag *flag);
 void					rotation(SDL_Scancode scancode, t_sdl *sdl, t_cam *cam);
-bool					window_events(SDL_Event event, t_screen *screen);
+bool					window_events(char *flag,
+									SDL_Event event,
+									t_screen *screen);
 
 /*
 **						init
@@ -317,7 +334,9 @@ t_gui					*init_gui(void);
 t_rt					*init_rt(char **av);
 t_scene					*init_scene(t_key_value *json, char *sounds[]);
 t_sdl					*init_sdl(t_key_value *json);
-void					print_build_error(t_cl *cl, cl_int ret, size_t log_size);
+void					print_build_error(t_cl *cl,
+										cl_int ret,
+										size_t log_size);
 int						*fill_texture_for_object(char *texture_path,
 											int *texture_pixels,
 											int *texture_param);
@@ -376,9 +395,14 @@ void					fill_rect(SDL_Rect tmp, int color, SDL_Surface *sur);
 void					change_music(Mix_Music *music[]);
 void					render_button(t_button *button, t_sdl *sdl);
 void					sdl_loop(t_rt *rt);
-void					sdl_putstr(SDL_Rect	dest, char *text, t_ttf *ttf, SDL_Surface *sur);
+void					sdl_putstr(SDL_Rect	dest,
+								char *text,
+								t_ttf *ttf,
+								SDL_Surface *sur);
 void					sdl_quit(t_sdl *sdl);
-void					sdl_update(char *flag, t_object **hi_lited_object, t_sdl *sdl);
+void					sdl_update(char *flag,
+								t_object **hi_lited_object,
+								t_sdl *sdl);
 
 /*
 **						utils
@@ -394,7 +418,7 @@ int						realloc_img(t_scene *scene, char *file_name);
 int						filter(int	*pixels, char flag);
 int						realloc_obj(SDL_Scancode scancode, t_scene *scene);
 int						rgb_to_int(int red, int green, int blue);
-void					save_image(t_sdl *sdl);
+void					save_image(int *pixels);
 void					show_error(char *error, char *sounds[]);
 
 # endif

@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/09 04:48:59 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/09 05:59:19 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/10 04:36:56 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,16 @@ static void			init_buttons(t_gui *gui)
 			ft_error(ERROR_INPUT);
 	}
 }
-static void			radio_btn(t_gui *gui)
-{
 
+static void			init_radio_btn(bool *radio_btn)
+{
+	int				i;
+
+	i = -1;
+	while (++i < COUNT_OF_RADIO_BTN)
+	{
+		radio_btn[i] = false;
+	}
 }
 
 static t_ttf		*init_ttf(char *font, int font_size, SDL_Color font_color)
@@ -46,7 +53,7 @@ static t_ttf		*init_ttf(char *font, int font_size, SDL_Color font_color)
 t_gui				*init_gui(void)
 {
 	t_gui			*gui;
-	
+
 	if (!(gui = (t_gui *)ft_memalloc((sizeof(t_gui)))))
 		ft_error(ERROR_INPUT);
 	gui->ttf[0] = init_ttf(FONT, 24, (SDL_Color){255, 255, 255, 0});
@@ -59,8 +66,7 @@ t_gui				*init_gui(void)
 		ft_error((char *)SDL_GetError());
 	if (!(gui->scroller = IMG_Load("./assets/gui/scroller.png")))
 		ft_error((char *)SDL_GetError());
-	for (size_t i = 0; i < 4; i++)
-		gui->radio_btn[i] = false;
 	init_buttons(gui);
+	init_radio_btn(gui->radio_btn);
 	return (gui);
 }

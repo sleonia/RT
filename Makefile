@@ -6,7 +6,7 @@
 #    By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/01 04:18:29 by sleonia           #+#    #+#              #
-#    Updated: 2020/02/09 06:30:54 by sleonia          ###   ########.fr        #
+#    Updated: 2020/02/10 07:17:56 by sleonia          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,9 +29,12 @@ OBJ_GUI_FILES = $(addprefix $(OBJ_DIR), $(GUI_FILES:.c=.o))
 # =========== #
 
 HOOKS_FILES =							\
+			arrows_processing.c			\
 			events_processing.c			\
 			get_object.c				\
 			key_events.c				\
+			key_events_rt.c				\
+			key_events_toolbar.c		\
 			mouse_events.c				\
 			move.c						\
 			rotation.c					\

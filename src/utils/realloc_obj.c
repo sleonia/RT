@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/04 12:44:26 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/08 03:15:01 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/10 04:27:45 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,9 @@ static void		new_cylinder(t_object *obj)
 static void		new_cone(t_object *obj)
 {
 	obj->type = o_cone;
-	obj->object.cone.axis = (cl_float3){(float)(rand() % 14) + 0.5, (float)(rand() % 14) + 0.5, (float)(rand() % 14) + 0.5};
+	obj->object.cone.axis = (cl_float3){(float)(rand() % 14) + 0.5,
+									(float)(rand() % 14) + 0.5,
+									(float)(rand() % 14) + 0.5};
 	cl_normalize(&obj->object.cone.axis);
 	obj->object.cone.center = (cl_float3){rand() % 5,
 										rand() % 3,
@@ -91,14 +93,13 @@ static void		new_plane(t_object *obj)
 static void		new_parab(t_object *obj)
 {
 	obj->type = o_parab;
-	// obj->object.parab.axis = (cl_float3){0.0, 1.0, 0.0};
-	obj->object.parab.axis = (cl_float3){(float)(rand() % 14) + 0.5, (float)(rand() % 14) + 0.5, (float)(rand() % 14) + 0.5};
+	obj->object.parab.axis = (cl_float3){(float)(rand() % 14) + 0.5,
+										(float)(rand() % 14) + 0.5,
+										(float)(rand() % 14) + 0.5};
 	cl_normalize(&obj->object.parab.axis);
 	obj->object.parab.center = (cl_float3){rand() % 5, rand() % 5, rand() % 5};
-	// obj->object.parab.center = (cl_float3){rand() % 5, rand() % 3, rand() % 10};
 	obj->object.parab.k = 0.6;
 	obj->object.parab.length = 30;
-	// obj->object.parab.length = rand() % 30 + 5;
 	obj->material.color = (cl_float3){(float)(rand() % 255) / 255.0,
 									(float)(rand() % 255) / 255.0,
 									(float)(rand() % 255) / 255.0};
@@ -121,9 +122,7 @@ int				realloc_obj(SDL_Scancode scancode, t_scene *scene)
 	scene->count_objects += 1;
 	init_objects(&object, scene->count_objects);
 	while (++i < count_objects)
-	{
 		object[i] = scene->object[i];
-	}
 	if (scancode == SDL_SCANCODE_KP_0)
 		new_sphere(&object[i]);
 	else if (scancode == SDL_SCANCODE_KP_1)
