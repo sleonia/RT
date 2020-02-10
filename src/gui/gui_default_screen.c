@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/08 06:44:01 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/10 15:01:23 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/10 17:02:57 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,18 +101,59 @@ void			gui_camera(t_gui *gui, SDL_Surface *sur)
 	sdl_putstr((SDL_Rect){400, 15, 0, 0}, "tetta", gui->ttf[0], sur);
 }
 
+void			load_from_rendered_text(t_textbox *textbox,
+									char *text,
+									SDL_Renderer *render,
+									TTF_Font *font)
+{
+	SDL_Surface	*txt_sur;
+
+	if (!(txt_sur = TTF_RenderText_Solid(font, text, textbox->color)))
+		ft_error((char *)SDL_GetError());
+	if (!(textbox->m_texture = SDL_CreateTextureFromSurface(render, txt_sur)))
+		ft_error((char *)SDL_GetError());
+	textbox->m_width = txt_sur->w;
+	textbox->m_height = txt_sur->h;
+	SDL_FreeSurface(txt_sur);
+}
+
+void				render(t_textbox *textbox, int x, int y, SDL_Renderer *render)
+{
+	SDL_Rect			*clip;
+	double				angle;
+	SDL_Point			*center;
+	SDL_RendererFlip	flip;
+	SDL_Rect			render_quad;
+
+	clip = NULL;
+	angle = 0;
+	center = NULL;
+	flip = SDL_FLIP_NONE;
+	// render_quad = (SDL_Rect){x, y, textbox->m_width, textbox->m_height};
+	render_quad = (SDL_Rect){x, y, 50, 10};
+	if(clip != NULL)
+	{
+		render_quad.w = clip->w;
+		render_quad.h = clip->h;
+	}
+	SDL_RenderCopyEx(render, textbox->m_texture, clip, &render_quad, angle, center, flip);
+}
+
 void			gui_default_screen(char *flag,
 								t_object **hi_lited_object,
 								t_sdl *sdl)
 {
 
-	sdl->gui->ttf[0]->font_color = (SDL_Color){209, 191, 155, 0};
+	sdl->gui->ttf[0]->font_color = (SDL_Color){255, 255, 255, 0};
 	gui_camera(sdl->gui, sdl->screen[1]->sur);
 	gui_skybox(sdl->gui, sdl->screen[1]->sur);
 	gui_mode(flag, sdl->gui, sdl->screen[1]->sur);
 	gui_buttons(sdl);
 
-	
+	sdl->gui->textbox[0]->text = ft_strdup("LOL");
+	load_from_rendered_text(sdl->gui->textbox[0], sdl->gui->textbox[0]->text, sdl->screen[1]->render, sdl->gui->ttf[1]->font);
+	render(sdl->gui->textbox[0], 100, 100, sdl->screen[1]->render);
+	// printf("%s\n", sdl->gui->textbox[0]->text);
 	// for (size_t i = 0; i < 4; i++)
 	// {
 		

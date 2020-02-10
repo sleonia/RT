@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/28 11:30:45 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/10 03:46:17 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/10 16:50:36 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,11 @@ void		sdl_loop(t_rt *rt)
 	SDL_ShowWindow(rt->sdl->screen[0]->win);
 	SDL_RaiseWindow(rt->sdl->screen[0]->win);
 	rt->sdl->screen[0]->shown = true;
+	SDL_StartTextInput();
 	while (flag != 1)
 	{
 		events_processing(&flag, &hi_lited_object, rt);
 	}
+	SDL_StopTextInput();
 	sdl_quit(rt->sdl);
 }

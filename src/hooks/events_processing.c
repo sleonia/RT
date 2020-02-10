@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/28 11:38:10 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/10 13:06:33 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/10 16:48:16 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,5 +32,19 @@ void			events_processing(char *flag, t_object **hi_lited_object, t_rt *rt)
 	filter(rt->sdl->screen[0]->sur->pixels, *flag);
 	if (*flag == BLUR && !rt->scene->move_on)
 		create_kernel_blur(rt->cl, rt->sdl);
+	if(rt->sdl->gui->textbox[0]->render_text)
+	{
+		// ft_putstr("aa\n");
+		if(rt->sdl->gui->textbox[0]->text && rt->sdl->gui->textbox[0]->text[0])
+		{
+			load_from_rendered_text(rt->sdl->gui->textbox[0], rt->sdl->gui->textbox[0]->text, rt->sdl->screen[1]->render,  rt->sdl->gui->ttf[0]->font);
+		}
+		//Text is empty
+		else
+		{
+			//Render space texture
+			load_from_rendered_text(rt->sdl->gui->textbox[0], " ", rt->sdl->screen[1]->render,  rt->sdl->gui->ttf[0]->font);
+		}
+	}
 	sdl_update(flag, hi_lited_object, rt->sdl);
 }

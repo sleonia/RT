@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/06 22:40:57 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/10 15:46:46 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/10 16:15:57 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ typedef struct				s_textbox
 	int						type;
 	int						m_width;
 	int						m_height;
+	SDL_Color				color;
+	bool					render_text;
 }							t_textbox;
 
 
