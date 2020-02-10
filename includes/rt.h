@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 04:06:50 by thorker           #+#    #+#             */
-/*   Updated: 2020/02/10 07:22:05 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/10 07:43:08 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -266,7 +266,6 @@ typedef struct			s_sdl
 	char				*sounds[NBR_OF_SONGS];
 	SDL_Event			event;
 	int					volume;
-	bool				relative_mouse_mode; //не сработало, удалить
 }						t_sdl;
 
 typedef struct			s_rt
@@ -297,6 +296,7 @@ void					events_processing(char *quit,
 										t_rt *rt);
 t_object				*get_object(t_scene *scene, int x, int y);
 void					add_obj(SDL_Scancode scancode, t_scene *scene, t_cl *cl);
+void					change_focus(t_sdl *sdl);
 bool					key_events(char *quit, t_object *hi_lited_object,
 								t_rt *rt);
 bool	        		key_rt(SDL_Scancode scancode,
