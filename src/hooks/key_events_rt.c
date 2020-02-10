@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/10 07:16:36 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/10 07:47:15 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/10 13:09:31 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,9 @@ bool			key_rt(SDL_Scancode scancode,
 									rt->sdl->screen[0]->win);
 		if (scancode == SDL_SCANCODE_J)
 			*flag = 0;
-		if (scancode >= SDL_SCANCODE_KP_0 && scancode <= SDL_SCANCODE_KP_4)
+		if (scancode == SDL_SCANCODE_KP_0 || scancode == SDL_SCANCODE_KP_1
+			|| scancode == SDL_SCANCODE_KP_2 || scancode == SDL_SCANCODE_KP_3
+			|| scancode == SDL_SCANCODE_KP_4)
 			add_obj(scancode, rt->scene, rt->cl);
 		key_rt_2(scancode, hi_lited_object, rt->scene, rt->sdl);
 	}
