@@ -6,13 +6,13 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/08 06:54:01 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/09 05:35:31 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/10 08:04:48 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-void		gui_main(t_object **hi_lited_object, t_sdl *sdl)
+void		gui_main(char *flag, t_object **hi_lited_object, t_sdl *sdl)
 {
 	for (size_t i = 0; i < HEIGHT; i++)
 	{
@@ -20,7 +20,7 @@ void		gui_main(t_object **hi_lited_object, t_sdl *sdl)
 			((int *)(sdl->screen[1]->sur->pixels))[i * 500 + k] = 0x2C3852;
 	}
 	if (!*hi_lited_object)
-		gui_default_screen(hi_lited_object, sdl);
+		gui_default_screen(flag, hi_lited_object, sdl);
 	// else if ((*hi_lited_object)->type == o_sphere)
 	// 	sdl_putstr(100, 100, "0", sdl);
 	// else if ((*hi_lited_object)->type == o_cylinder)

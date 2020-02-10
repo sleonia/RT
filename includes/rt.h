@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 04:06:50 by thorker           #+#    #+#             */
-/*   Updated: 2020/02/10 07:56:39 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/10 08:22:10 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -281,9 +281,12 @@ typedef struct			s_rt
 /*
 **						gui
 */
-void					gui_default_screen(t_object **hi_lited_object,
+void					gui_default_screen(char *flag,
+										t_object **hi_lited_object,
 										t_sdl *sdl);
-void					gui_main(t_object **hi_lited_object, t_sdl *sdl);
+void					gui_main(char *flag,
+								t_object **hi_lited_object,
+								t_sdl *sdl);
 
 /*
 **						hooks
