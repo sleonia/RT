@@ -6,7 +6,7 @@
 #    By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/01 04:18:29 by sleonia           #+#    #+#              #
-#    Updated: 2020/02/10 15:48:23 by sleonia          ###   ########.fr        #
+#    Updated: 2020/02/10 16:29:00 by sleonia          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -125,6 +125,7 @@ UTILS_FILES =							\
 			filter.c					\
 			ft_error.c					\
 			ft_len_arr.c				\
+			ft_strjoin_free.c			\
 			get_object.c				\
 			gui_utils.c					\
 			int_to_rgb.c				\
