@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/08 06:44:01 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/10 17:02:57 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/12 00:58:41 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,8 @@ void			load_from_rendered_text(t_textbox *textbox,
 {
 	SDL_Surface	*txt_sur;
 
-	if (!(txt_sur = TTF_RenderText_Solid(font, text, textbox->color)))
+	// if (!(txt_sur = TTF_RenderText_Solid(font, text, textbox->color)))
+	if (!(txt_sur = TTF_RenderText_Solid(font, text, (SDL_Color){0, 0, 0, 0})))
 		ft_error((char *)SDL_GetError());
 	if (!(textbox->m_texture = SDL_CreateTextureFromSurface(render, txt_sur)))
 		ft_error((char *)SDL_GetError());
@@ -129,8 +130,8 @@ void				render(t_textbox *textbox, int x, int y, SDL_Renderer *render)
 	angle = 0;
 	center = NULL;
 	flip = SDL_FLIP_NONE;
-	// render_quad = (SDL_Rect){x, y, textbox->m_width, textbox->m_height};
-	render_quad = (SDL_Rect){x, y, 50, 10};
+	render_quad = (SDL_Rect){x, y, textbox->m_width, textbox->m_height};
+	// render_quad = (SDL_Rect){x, y, 50, 10};
 	if(clip != NULL)
 	{
 		render_quad.w = clip->w;
@@ -150,9 +151,8 @@ void			gui_default_screen(char *flag,
 	gui_mode(flag, sdl->gui, sdl->screen[1]->sur);
 	gui_buttons(sdl);
 
-	sdl->gui->textbox[0]->text = ft_strdup("LOL");
 	load_from_rendered_text(sdl->gui->textbox[0], sdl->gui->textbox[0]->text, sdl->screen[1]->render, sdl->gui->ttf[1]->font);
-	render(sdl->gui->textbox[0], 100, 100, sdl->screen[1]->render);
+	// render(sdl->gui->textbox[0], 100, 100, sdl->screen[1]->render);
 	// printf("%s\n", sdl->gui->textbox[0]->text);
 	// for (size_t i = 0; i < 4; i++)
 	// {
