@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/08 06:44:01 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/13 05:01:36 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/13 07:13:23 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,5 +93,5 @@ void			gui_default_screen(char *flag,
 	gui_mode(flag, sdl->gui, sdl->screen[1]->sur);
 	gui_buttons(sdl);
 
-	load_from_rendered_text(sdl->gui->textbox[0], sdl->gui->textbox[0]->text, sdl->screen[1]->render, sdl->gui->ttf[0]->font);
+	load_from_rendered_text(sdl->gui->textbox[0], sdl->gui->textbox[0]->text, sdl->screen[1]->render, sdl->gui->ttf[2]->font);
 }

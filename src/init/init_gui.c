@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/09 04:48:59 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/13 03:19:01 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/13 09:03:54 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,21 @@ static void			init_textbox(t_gui *gui)
 		if (!(gui->textbox[i] = (t_textbox *)ft_memalloc(sizeof(t_textbox))))
 			ft_error(ERROR_MALLOC);
 		gui->textbox[i]->color = (SDL_Color){255, 255, 255, 0};
-		gui->textbox[i]->text = ft_strnew(7);
+		gui->textbox[i]->text = ft_strnew(10);
+		if (i == Phi)
+			gui->textbox[i]->pos = (SDL_Rect){185, 50, 0, 0};
+		if (i == Position)
+			gui->textbox[i]->pos = (SDL_Rect){185, 50, 0, 0};
+		if (i == Tetta)
+			gui->textbox[i]->pos = (SDL_Rect){185, 50, 0, 0};
+		if (i == Id)
+			gui->textbox[i]->pos = (SDL_Rect){185, 50, 0, 0};
+		if (i == Ambient)
+			gui->textbox[i]->pos = (SDL_Rect){185, 50, 0, 0};
+		if (i == Fsaa)
+			gui->textbox[i]->pos = (SDL_Rect){185, 50, 0, 0};
+		if (i == New_obj)
+			gui->textbox[i]->pos = (SDL_Rect){185, 50, 0, 0};
 	}
 }
 
@@ -72,6 +86,7 @@ t_gui				*init_gui(void)
 		ft_error(ERROR_INPUT);
 	gui->ttf[0] = init_ttf(FONT, 24, (SDL_Color){255, 255, 255, 0});
 	gui->ttf[1] = init_ttf(FONT, 34, (SDL_Color){255, 255, 255, 0});
+	gui->ttf[2] = init_ttf(FONT, 14, (SDL_Color){255, 255, 255, 0});
 	gui->render_text = false;
 	gui->input_text = "KEK";
 	if (!(gui->radio = IMG_Load("./assets/gui/radio.png")))
@@ -79,6 +94,8 @@ t_gui				*init_gui(void)
 	if (!(gui->radio_click = IMG_Load("./assets/gui/radio_click.png")))
 		ft_error((char *)SDL_GetError());
 	if (!(gui->scroller = IMG_Load("./assets/gui/scroller.png")))
+		ft_error((char *)SDL_GetError());
+	if (!(gui->headband = IMG_Load("./assets/textures/pepe2.png")))
 		ft_error((char *)SDL_GetError());
 	init_buttons(gui);
 	init_radio_btn(gui->radio_btn);

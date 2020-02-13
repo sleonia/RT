@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/10 07:16:51 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/13 04:15:26 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/13 05:32:56 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,13 @@ bool			key_toolbar(SDL_Scancode scancode,
 
 	if (hi_lited_object)
 		return (false);
-	// ft_strdel(&rt->sdl->gui->textbox[0]->text);
-	// sprintf(rt->sdl->gui->textbox[0]->text, "%3.3f", rt->scene->cam.phi);
 	if (rt->sdl->event.type == SDL_KEYDOWN)
 	{
 		// printf("%d\n", scancode);
 		len = ft_strlen(rt->sdl->gui->textbox[0]->text);
 		if (scancode == SDL_SCANCODE_BACKSPACE && len > 1)
 		{
-			printf("|%s|\n", rt->sdl->gui->textbox[0]->text);
+			// printf("|%s|\n", rt->sdl->gui->textbox[0]->text);
 			rt->sdl->gui->textbox[0]->text = pop_back(rt->sdl->gui->textbox[0]->text);
 			rt->sdl->gui->textbox[0]->render_text = true;
 		}

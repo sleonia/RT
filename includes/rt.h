@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 04:06:50 by thorker           #+#    #+#             */
-/*   Updated: 2020/02/13 05:02:30 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/13 07:31:46 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,8 @@
 #  define NEGATIVE -101
 #  define SEPIA -102
 #  define BLUR -103
-#  define NBR_OF_SONGS	20
+#  define NBR_OF_SONGS		20
+#  define CNT_OF_DISPLAYS	2
 #  define DISPLAY_NOT	"osascript -e \'display notification\""
 #  define MIN(a,b) (((a)<(b))?(a):(b))
 #  define MAX(a,b) (((a)>(b))?(a):(b))
@@ -40,6 +41,8 @@
 # endif
 # define WIDTH 1280
 # define HEIGHT 1024
+# define TOOL_SCREEN_WIDTH 500
+# define TOOL_SCREEN_HEIGHT HEIGHT
 # define MAX_DIST 10000.f
 # define RED(color) (((int)color >> 16) & 0xFF)
 # define GREEN(color) (((int)color >> 8) & 0xFF)
@@ -299,7 +302,6 @@ typedef struct			s_rt
 /*
 **						gui
 */
-void				render(t_textbox *textbox, int x, int y, SDL_Renderer *render);
 void					gui_buttons(t_sdl *sdl);
 void					gui_default_screen(char *flag,
 										t_object **hi_lited_object,
@@ -458,7 +460,7 @@ int						filter(int	*pixels, char flag);
 int						realloc_obj(SDL_Scancode scancode, t_scene *scene);
 int						rgb_to_int(int red, int green, int blue);
 void					render_textbox(t_textbox *textbox,
-									int x, int y,
+									SDL_Rect pos,
 									SDL_Renderer *render);
 void					save_image(int *pixels);
 void					show_error(char *error, char *sounds[]);

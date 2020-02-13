@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/28 10:20:37 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/12 22:47:05 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/13 07:31:55 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ static void			init_sdl_music(t_key_value *assets, t_sdl *sdl)
 	parse_music_json(assets, sdl);
 	sdl->volume = parse_volume_json(assets);
 	Mix_VolumeMusic(sdl->volume);
+	parse_sounds_json(assets, sdl);
 }
 
 static void			set_window_icon(t_key_value *assets, t_sdl *sdl)
@@ -107,7 +108,7 @@ t_sdl				*init_sdl(t_key_value *json)
 		ft_error((char *)SDL_GetError());
 	init_screen(sdl->screen[0], "RT", (SDL_Rect){350, 200, WIDTH, HEIGHT});
 	init_screen(sdl->screen[1], "ToolBar",
-						(SDL_Rect){350 + WIDTH, 200, 500, HEIGHT});
+						(SDL_Rect){350 + WIDTH, 200, TOOL_SCREEN_WIDTH, HEIGHT});
 	init_sdl_2(json, sdl);
 	return (sdl);
 }

@@ -6,14 +6,14 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/13 05:01:21 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/13 05:01:57 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/13 07:25:11 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
 void					render_textbox(t_textbox *textbox,
-									int x, int y,
+									SDL_Rect pos,
 									SDL_Renderer *render)
 {
 	SDL_Rect			*clip;
@@ -26,7 +26,7 @@ void					render_textbox(t_textbox *textbox,
 	angle = 0;
 	center = NULL;
 	flip = SDL_FLIP_NONE;
-	render_quad = (SDL_Rect){x, y, textbox->m_width, textbox->m_height};
+	render_quad = (SDL_Rect){pos.x, pos.y, textbox->m_width, textbox->m_height};
 	if(clip != NULL)
 	{
 		render_quad.w = clip->w;
