@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/08 06:54:01 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/12 00:36:03 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/13 04:46:24 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void		draw_background(int *pixels)
 	}
 }
 
-void		gui_main(char *flag, t_object **hi_lited_object, t_sdl *sdl)
+void		gui_main(char *flag, t_object **hi_lited_object, t_sdl *sdl) //мб буду сюда кидать scene->move->on, чтобы при движении оптимизировать это
 {
 	draw_background(((int *)(sdl->screen[1]->sur->pixels)));
 	if (!*hi_lited_object)

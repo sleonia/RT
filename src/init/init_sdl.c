@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/28 10:20:37 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/10 15:05:49 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/12 22:47:05 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ static void			init_sdl_music(t_key_value *assets, t_sdl *sdl)
 	parse_music_json(assets, sdl);
 	sdl->volume = parse_volume_json(assets);
 	Mix_VolumeMusic(sdl->volume);
-	parse_sounds_json(assets, sdl);
 }
 
 static void			set_window_icon(t_key_value *assets, t_sdl *sdl)

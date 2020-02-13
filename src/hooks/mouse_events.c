@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/28 11:50:12 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/10 11:13:05 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/13 04:37:56 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,15 @@
 void			mouse_rotation(t_cam *cam, int x, int y)
 {
 	float		d_tetta;
-	d_tetta = (y - HEIGHT / 2) * 0.001f;
-	cam->phi -= (x - WIDTH / 2) * 0.001f;
-	if (cam->phi > (float)M_PI - 0.00001f)
+	d_tetta = (y - HEIGHT / 2) * 0.0001f;
+	cam->phi -= (x - WIDTH / 2) * 0.0001f;
+	if (cam->phi > (float)M_PI - 0.000001f)
 		cam->phi -= 1 * (float)M_PI;
-	if (cam->phi < -(float)M_PI + 0.00001f)
+	if (cam->phi < -(float)M_PI + 0.000001f)
 		cam->phi += -1 * (float)M_PI;
-	if (d_tetta < 0  && (cam->tetta) + d_tetta >= 0.00001f)
+	if (d_tetta < 0  && (cam->tetta) + d_tetta >= 0.000001f)
 		cam->tetta += d_tetta;
-	if (d_tetta > 0 && (cam->tetta) + d_tetta <= (float)M_PI + 0.00001f)
+	if (d_tetta > 0 && (cam->tetta) + d_tetta <= (float)M_PI + 0.000001f)
 		cam->tetta += d_tetta;
 }
 

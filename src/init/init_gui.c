@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/09 04:48:59 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/12 00:59:14 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/13 03:19:01 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,7 @@ static void			init_textbox(t_gui *gui)
 		if (!(gui->textbox[i] = (t_textbox *)ft_memalloc(sizeof(t_textbox))))
 			ft_error(ERROR_MALLOC);
 		gui->textbox[i]->color = (SDL_Color){255, 255, 255, 0};
-		gui->textbox[i]->text = ft_strnew(0);
-		gui->textbox[0]->text = ft_strdup("LOL");
+		gui->textbox[i]->text = ft_strnew(7);
 	}
 }
 

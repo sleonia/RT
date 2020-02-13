@@ -6,7 +6,7 @@
 #    By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/01 04:18:29 by sleonia           #+#    #+#              #
-#    Updated: 2020/02/10 16:29:00 by sleonia          ###   ########.fr        #
+#    Updated: 2020/02/13 05:05:42 by sleonia          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -129,9 +129,11 @@ UTILS_FILES =							\
 			get_object.c				\
 			gui_utils.c					\
 			int_to_rgb.c				\
+			load_from_rendered_text.c 	\
 			read_kernel.c				\
 			realloc_img.c				\
 			realloc_obj.c				\
+			render_textbox.c 			\
 			rgb_to_int.c				\
 			save_image.c				\
 			show_error.c				\

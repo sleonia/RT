@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/28 11:42:59 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/10 07:43:19 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/12 02:19:19 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void			change_focus(t_sdl *sdl)
 	int			index;
 
 	index = -1;
-	if (sdl->event.key.keysym.scancode == SDL_SCANCODE_1)
+	if (sdl->event.key.keysym.scancode == SDL_SCANCODE_TAB)
 	{
 		if ((!sdl->screen[1]->keyboard_focus || !sdl->screen[1]->mouse_focus))
 			index = 1;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rt.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: deladia <deladia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 04:06:50 by thorker           #+#    #+#             */
-/*   Updated: 2020/02/10 20:29:50 by deladia          ###   ########.fr       */
+/*   Updated: 2020/02/13 05:02:30 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -299,10 +299,6 @@ typedef struct			s_rt
 /*
 **						gui
 */
-void			load_from_rendered_text(t_textbox *textbox,
-									char *text,
-									SDL_Renderer *render,
-									TTF_Font *font);
 void				render(t_textbox *textbox, int x, int y, SDL_Renderer *render);
 void					gui_buttons(t_sdl *sdl);
 void					gui_default_screen(char *flag,
@@ -452,11 +448,18 @@ int						ft_len_arr(void **arr);
 char					*ft_strjoin_free(char *s1, char *s2, int num);
 char					*get_next_name(char *name);
 cl_int3					int_to_rgb(int src_color);
+void					load_from_rendered_text(t_textbox *textbox,
+											char *text,
+											SDL_Renderer *render,
+											TTF_Font *font);
 int						read_kernel(t_cl *cl, char **files_cl);
 int						realloc_img(t_scene *scene, char *file_name);
 int						filter(int	*pixels, char flag);
 int						realloc_obj(SDL_Scancode scancode, t_scene *scene);
 int						rgb_to_int(int red, int green, int blue);
+void					render_textbox(t_textbox *textbox,
+									int x, int y,
+									SDL_Renderer *render);
 void					save_image(int *pixels);
 void					show_error(char *error, char *sounds[]);
 
