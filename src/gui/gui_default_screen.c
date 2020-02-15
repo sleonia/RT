@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/08 06:44:01 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/15 11:01:40 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/15 11:22:18 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,6 @@ void			gui_camera(t_gui *gui, SDL_Surface *sur)
 {
 	sdl_putstr((SDL_Rect){15, 35, 0, 0}, "Camera", gui->ttf[1], sur);
 	sdl_putstr((SDL_Rect){200, 15, 0, 0}, "phi", gui->ttf[0], sur);
-	sdl_putstr((SDL_Rect){265, 15, 0, 0}, "position", gui->ttf[0], sur);
 	sdl_putstr((SDL_Rect){400, 15, 0, 0}, "tetta", gui->ttf[0], sur);
 }
 
@@ -94,9 +93,6 @@ void			gui_default_screen(char *flag,
 	gui_buttons(sdl);
 	for (size_t k = 0; k < COUNT_OF_TEXTBOX; k++)
 	{
-		if (k == New_obj)
-			load_from_rendered_text(sdl->gui->textbox[k], sdl->gui->textbox[k]->text, sdl->screen[1]->render, sdl->gui->ttf[1]->font);
-		else
-			load_from_rendered_text(sdl->gui->textbox[k], sdl->gui->textbox[k]->text, sdl->screen[1]->render, sdl->gui->ttf[2]->font);
+		load_from_rendered_text(sdl->gui->textbox[k], sdl->gui->textbox[k]->text, sdl->screen[1]->render, sdl->gui->ttf[0]->font);
 	}
 }

@@ -6,11 +6,26 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/10 07:16:51 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/13 05:32:56 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/15 16:07:01 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
+
+int				search_textbox_in_focus(t_gui *gui)
+{
+	int			i;
+
+	i = -1;
+	while (++i < COUNT_OF_TEXTBOX)
+	{
+		if (gui->textbox[i]->on_focus)
+			return (i);
+	}
+	return (-1);
+	// gui->textbox[4]->on_focus = true;
+	// return (4);
+}
 
 bool			key_toolbar(SDL_Scancode scancode,
 						char *flag,
@@ -18,42 +33,58 @@ bool			key_toolbar(SDL_Scancode scancode,
 						t_rt *rt)
 {
 	int		len;
+	int		id_cur_textbox;
 
 	if (hi_lited_object)
 		return (false);
+	id_cur_textbox = search_textbox_in_focus(rt->sdl->gui);
+	// printf("id_cur_textbox = %d\n", id_cur_textbox);
 	if (rt->sdl->event.type == SDL_KEYDOWN)
 	{
-		// printf("%d\n", scancode);
-		len = ft_strlen(rt->sdl->gui->textbox[0]->text);
-		if (scancode == SDL_SCANCODE_BACKSPACE && len > 1)
-		{
-			// printf("|%s|\n", rt->sdl->gui->textbox[0]->text);
-			rt->sdl->gui->textbox[0]->text = pop_back(rt->sdl->gui->textbox[0]->text);
-			rt->sdl->gui->textbox[0]->render_text = true;
-		}
-		else if (scancode == SDL_SCANCODE_BACKSPACE && ft_strlen(rt->sdl->gui->textbox[0]->text) == 1)
-		{
-			ft_strdel(&rt->sdl->gui->textbox[0]->text);
-			rt->sdl->gui->textbox[0]->text = ft_strdup(" ");
-			rt->sdl->gui->textbox[0]->render_text = true;
-		}
+		if (scancode == SDL_SCANCODE_B)
+			SDL_ShowCursor(!SDL_ShowCursor(-1));
 		if (scancode == SDL_SCANCODE_ESCAPE)
 			*flag = 1;
 		if (rt->sdl->event.key.keysym.scancode == SDL_SCANCODE_TAB)
 			change_focus(rt->sdl);
-		if (scancode == SDL_SCANCODE_RETURN)
+		// if ((id_cur_textbox = search_textbox_in_focus(rt->sdl->gui)) == -1)
+			// return (false);
+		if (id_cur_textbox != -1)
 		{
-			// printf("%f\n", ft_atof(rt->sdl->gui->textbox[0]->text));
-			rt->scene->cam.phi = ft_atof(rt->sdl->gui->textbox[0]->text);
+			len = ft_strlen(rt->sdl->gui->textbox[id_cur_textbox]->text);
+			if (scancode == SDL_SCANCODE_BACKSPACE && len > 1)
+			{
+				rt->sdl->gui->textbox[id_cur_textbox]->text = pop_back(rt->sdl->gui->textbox[id_cur_textbox]->text);
+				rt->sdl->gui->textbox[id_cur_textbox]->render_text = true;
+			}
+			else if (scancode == SDL_SCANCODE_BACKSPACE && ft_strlen(rt->sdl->gui->textbox[id_cur_textbox]->text) == 1)
+			{
+				ft_strdel(&rt->sdl->gui->textbox[id_cur_textbox]->text);
+				rt->sdl->gui->textbox[id_cur_textbox]->text = ft_strdup(" ");
+				rt->sdl->gui->textbox[id_cur_textbox]->render_text = true;
+			}
+			if (scancode == SDL_SCANCODE_RETURN)
+				rt->scene->cam.phi = ft_atof(rt->sdl->gui->textbox[id_cur_textbox]->text);
+			// rt->sdl->gui->textbox[id_cur_textbox]->on_focus = false;
 		}
 	}
 	else if(rt->sdl->event.type == SDL_TEXTINPUT)
 	{
-		len = ft_strlen(rt->sdl->gui->textbox[0]->text);
-		if (len > 7)
-			return (false);
-		rt->sdl->gui->textbox[0]->text = ft_strjoin_free(rt->sdl->gui->textbox[0]->text, rt->sdl->event.text.text, 1);
-		rt->sdl->gui->textbox[0]->render_text = true;
+		if (id_cur_textbox != -1)
+		{
+			// printf("%s\n", rt->sdl->event.text.text);
+			len = ft_strlen(rt->sdl->gui->textbox[id_cur_textbox]->text);
+			if (len > 7)
+			{
+				rt->sdl->gui->textbox[id_cur_textbox]->on_focus = false;
+				return (false);
+			}
+			rt->sdl->gui->textbox[id_cur_textbox]->text = ft_strjoin_free(rt->sdl->gui->textbox[id_cur_textbox]->text, rt->sdl->event.text.text, 1);
+			// printf("%s\n", rt->sdl->gui->textbox[id_cur_textbox]->text);
+			rt->sdl->gui->textbox[id_cur_textbox]->render_text = true;
+			// rt->sdl->gui->textbox[id_cur_textbox]->on_focus = false;
+			// rt->sdl->gui->textbox[!id_cur_textbox]->on_focus = true;
+		}
 	}
 	return (false);
 }

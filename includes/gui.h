@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/06 22:40:57 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/13 09:02:57 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/15 14:01:00 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,13 @@
 # include <SDL_ttf.h>
 # include <stdbool.h>
 
-# define COUNT_OF_BUTTONS	10
+# define COUNT_OF_BUTTONS	6
 # define COUNT_OF_RADIO_BTN	4
-# define COUNT_OF_TEXTBOX	7
+# define COUNT_OF_TEXTBOX	6
 
 enum						e_textbox_type
 {
 	Phi,
-	Position,
 	Tetta,
 	Id,
 	Ambient,
@@ -42,6 +41,7 @@ typedef struct				s_textbox
 	int						m_height;
 	SDL_Color				color;
 	bool					render_text;
+	bool					on_focus;
 	SDL_Rect				pos;
 	bool					is_changed;
 }							t_textbox;
