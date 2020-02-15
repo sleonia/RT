@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/28 11:38:10 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/13 03:46:44 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/15 10:49:59 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void			events_processing(char *flag, t_object **hi_lited_object, t_rt *rt)
 	bool		ismove;
 
 	ismove = false;
-	gui_main(flag, hi_lited_object, rt->sdl);
+	gui_main(flag, hi_lited_object, rt->scene, rt->sdl);
 	while (SDL_PollEvent(&rt->sdl->event))
 	{
 		window_events(flag, rt->sdl->event, rt->sdl->screen[0]);

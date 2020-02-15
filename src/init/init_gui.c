@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/09 04:48:59 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/13 09:03:54 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/15 11:02:38 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,21 +60,21 @@ static void			init_textbox(t_gui *gui)
 		if (!(gui->textbox[i] = (t_textbox *)ft_memalloc(sizeof(t_textbox))))
 			ft_error(ERROR_MALLOC);
 		gui->textbox[i]->color = (SDL_Color){255, 255, 255, 0};
-		gui->textbox[i]->text = ft_strnew(10);
+		gui->textbox[i]->text = ft_strdup("          ");
 		if (i == Phi)
 			gui->textbox[i]->pos = (SDL_Rect){185, 50, 0, 0};
 		if (i == Position)
-			gui->textbox[i]->pos = (SDL_Rect){185, 50, 0, 0};
+			gui->textbox[i]->pos = (SDL_Rect){250, 50, 0, 0};
 		if (i == Tetta)
-			gui->textbox[i]->pos = (SDL_Rect){185, 50, 0, 0};
+			gui->textbox[i]->pos = (SDL_Rect){385, 50, 0, 0};
 		if (i == Id)
-			gui->textbox[i]->pos = (SDL_Rect){185, 50, 0, 0};
+			gui->textbox[i]->pos = (SDL_Rect){185, 170, 0, 0};
 		if (i == Ambient)
-			gui->textbox[i]->pos = (SDL_Rect){185, 50, 0, 0};
+			gui->textbox[i]->pos = (SDL_Rect){250, 170, 0, 0};
 		if (i == Fsaa)
-			gui->textbox[i]->pos = (SDL_Rect){185, 50, 0, 0};
+			gui->textbox[i]->pos = (SDL_Rect){385, 170, 0, 0};
 		if (i == New_obj)
-			gui->textbox[i]->pos = (SDL_Rect){185, 50, 0, 0};
+			gui->textbox[i]->pos = (SDL_Rect){400, 720, 0, 0};
 	}
 }
 
@@ -88,7 +88,7 @@ t_gui				*init_gui(void)
 	gui->ttf[1] = init_ttf(FONT, 34, (SDL_Color){255, 255, 255, 0});
 	gui->ttf[2] = init_ttf(FONT, 14, (SDL_Color){255, 255, 255, 0});
 	gui->render_text = false;
-	gui->input_text = "KEK";
+	gui->input_text = "KEK"; //хз зачем надо
 	if (!(gui->radio = IMG_Load("./assets/gui/radio.png")))
 		ft_error((char *)SDL_GetError());
 	if (!(gui->radio_click = IMG_Load("./assets/gui/radio_click.png")))

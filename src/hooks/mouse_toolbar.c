@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/10 07:52:23 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/10 13:28:23 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/15 11:08:49 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,12 @@ static void		change_mode(int x, int y, char *flag)
 
 static void		check_buttons(char *flag, int x, int y, t_rt *rt)
 {
+	// int			type_obj;
+
+	// type_obj = 
 	if ((x >= 55 && x <= 450) && (y >= 705 && y <= 805))
 	{
-		// add_obj(scancode, rt);
+		add_obj(89 + ft_atoi(rt->sdl->gui->textbox[New_obj]->text), rt->scene, rt->cl);
 	}
 	if ((x >= 55 && x <= 450) && (y >= 805 && y <= 905))
 		save_image(rt->sdl->screen[0]->sur->pixels);

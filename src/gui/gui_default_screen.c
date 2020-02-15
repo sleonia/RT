@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/08 06:44:01 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/13 07:13:23 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/15 11:01:40 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,11 @@ void			gui_default_screen(char *flag,
 	gui_skybox(sdl->gui, sdl->screen[1]->sur);
 	gui_mode(flag, sdl->gui, sdl->screen[1]->sur);
 	gui_buttons(sdl);
-
-	load_from_rendered_text(sdl->gui->textbox[0], sdl->gui->textbox[0]->text, sdl->screen[1]->render, sdl->gui->ttf[2]->font);
+	for (size_t k = 0; k < COUNT_OF_TEXTBOX; k++)
+	{
+		if (k == New_obj)
+			load_from_rendered_text(sdl->gui->textbox[k], sdl->gui->textbox[k]->text, sdl->screen[1]->render, sdl->gui->ttf[1]->font);
+		else
+			load_from_rendered_text(sdl->gui->textbox[k], sdl->gui->textbox[k]->text, sdl->screen[1]->render, sdl->gui->ttf[2]->font);
+	}
 }

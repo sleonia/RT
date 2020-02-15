@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/08 06:54:01 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/13 09:04:19 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/15 10:58:31 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,41 @@ void				render_surface(SDL_Rect srcrect, SDL_Rect dstrect,
 	SDL_FreeSurface(copy_texture);
 }
 
-void		gui_main(char *flag, t_object **hi_lited_object, t_sdl *sdl)
+void		set_value(t_scene *scene,
+					t_sdl *sdl)
+{
+int				i;
+
+	i = -1;
+	while (++i < COUNT_OF_TEXTBOX)
+	{
+		if (i == Phi)
+			sprintf(sdl->gui->textbox[i]->text, "%3.3f", scene->cam.phi);
+		if (i == Position)
+			sprintf(sdl->gui->textbox[i]->text, "%3.3f", scene->cam.phi); //написать функцию для работы с массивом
+		if (i == Tetta)
+			sprintf(sdl->gui->textbox[i]->text, "%3.3f", scene->cam.tetta);
+		if (i == Id)
+			sprintf(sdl->gui->textbox[i]->text, "%1d", scene->skybox_id);
+		if (i == Ambient)
+			sprintf(sdl->gui->textbox[i]->text, "%3.3f", scene->ambient);
+		if (i == Fsaa)
+			sprintf(sdl->gui->textbox[i]->text, "%1d", scene->fsaa);
+		if (i == New_obj)
+		{
+			sprintf(sdl->gui->textbox[i]->text, "%1d", 0);
+		}
+	}
+}
+
+void		gui_main(char *flag,
+					t_object **hi_lited_object,
+					t_scene *scene,
+					t_sdl *sdl)
 {
 	if (sdl->screen[1]->keyboard_focus)
 	{
+		set_value(scene, sdl);
 		draw_background(0x2C3852, ((int *)(sdl->screen[1]->sur->pixels)));
 		if (!*hi_lited_object)
 			gui_default_screen(flag, hi_lited_object, sdl);
@@ -67,6 +98,5 @@ void		gui_main(char *flag, t_object **hi_lited_object, t_sdl *sdl)
 	{
 		draw_background(0x0, ((int *)(sdl->screen[1]->sur->pixels)));
 		render_surface((SDL_Rect){0, 0, 0, 0}, (SDL_Rect){-70, 50, TOOL_SCREEN_WIDTH + 160, TOOL_SCREEN_HEIGHT - 100},  sdl->gui->headband, sdl);
-		// SDL_BlitSurface(sur_img, &(SDL_Rect){0, -50, TOOL_SCREEN_WIDTH, TOOL_SCREEN_HEIGHT}, sdl->screen[1]->sur, NULL);
 	}
 }

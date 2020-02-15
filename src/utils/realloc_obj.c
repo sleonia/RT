@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/04 12:44:26 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/10 04:27:45 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/15 11:07:21 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,7 +123,7 @@ int				realloc_obj(SDL_Scancode scancode, t_scene *scene)
 	init_objects(&object, scene->count_objects);
 	while (++i < count_objects)
 		object[i] = scene->object[i];
-	if (scancode == SDL_SCANCODE_KP_0)
+	if (scancode == SDL_SCANCODE_KP_5)
 		new_sphere(&object[i]);
 	else if (scancode == SDL_SCANCODE_KP_1)
 		new_cylinder(&object[i]);
