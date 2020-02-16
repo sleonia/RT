@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/10 07:16:51 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/15 16:07:01 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/16 20:51:50 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,21 @@ int				search_textbox_in_focus(t_gui *gui)
 	return (-1);
 	// gui->textbox[4]->on_focus = true;
 	// return (4);
+}
+
+void			set_value_textbox(t_object *hi_lited_object, t_rt *rt) //написать функцию для проверки всего этого
+{
+	if (!hi_lited_object)
+	{
+		rt->scene->cam.phi = ft_atof(rt->sdl->gui->textbox[Phi]->text);
+		rt->scene->cam.tetta = ft_atof(rt->sdl->gui->textbox[Tetta]->text);
+		rt->scene->skybox_id = ft_atof(rt->sdl->gui->textbox[Id]->text);
+		rt->scene->ambient = ft_atof(rt->sdl->gui->textbox[Ambient]->text);
+		rt->scene->fsaa = ft_atof(rt->sdl->gui->textbox[Fsaa]->text);
+		// rt->scene->cam.phi = ft_atof(rt->sdl->gui->textbox[id_cur_textbox]->text);
+		// rt->scene->cam.phi = ft_atof(rt->sdl->gui->textbox[id_cur_textbox]->text);
+		// rt->scene->cam.phi = ft_atof(rt->sdl->gui->textbox[id_cur_textbox]->text);
+	}
 }
 
 bool			key_toolbar(SDL_Scancode scancode,
@@ -64,7 +79,8 @@ bool			key_toolbar(SDL_Scancode scancode,
 				rt->sdl->gui->textbox[id_cur_textbox]->render_text = true;
 			}
 			if (scancode == SDL_SCANCODE_RETURN)
-				rt->scene->cam.phi = ft_atof(rt->sdl->gui->textbox[id_cur_textbox]->text);
+				set_value_textbox(hi_lited_object, rt);
+				// rt->scene->cam.phi = ft_atof(rt->sdl->gui->textbox[id_cur_textbox]->text);
 			// rt->sdl->gui->textbox[id_cur_textbox]->on_focus = false;
 		}
 	}

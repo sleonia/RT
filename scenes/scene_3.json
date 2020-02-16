@@ -15,7 +15,7 @@
 	{
 		"texture_id":				0,
 		"ambient":					0.2,
-		"fsaa":						0
+		"fsaa":						2
 	},
 	"light":
 	[
