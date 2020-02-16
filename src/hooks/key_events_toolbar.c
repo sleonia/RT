@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/10 07:16:51 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/16 20:51:50 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/16 21:49:01 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,18 +27,16 @@ int				search_textbox_in_focus(t_gui *gui)
 	// return (4);
 }
 
-void			set_value_textbox(t_object *hi_lited_object, t_rt *rt) //написать функцию для проверки всего этого
+void			set_value_textbox(t_object *hi_lited_object, t_rt *rt)
 {
+	// printf("%d\n", rt->scene->texture_cnt);
 	if (!hi_lited_object)
 	{
-		rt->scene->cam.phi = ft_atof(rt->sdl->gui->textbox[Phi]->text);
-		rt->scene->cam.tetta = ft_atof(rt->sdl->gui->textbox[Tetta]->text);
-		rt->scene->skybox_id = ft_atof(rt->sdl->gui->textbox[Id]->text);
-		rt->scene->ambient = ft_atof(rt->sdl->gui->textbox[Ambient]->text);
-		rt->scene->fsaa = ft_atof(rt->sdl->gui->textbox[Fsaa]->text);
-		// rt->scene->cam.phi = ft_atof(rt->sdl->gui->textbox[id_cur_textbox]->text);
-		// rt->scene->cam.phi = ft_atof(rt->sdl->gui->textbox[id_cur_textbox]->text);
-		// rt->scene->cam.phi = ft_atof(rt->sdl->gui->textbox[id_cur_textbox]->text);
+		rt->scene->cam.phi = check_phi(ft_atof(rt->sdl->gui->textbox[Phi]->text));
+		rt->scene->cam.tetta = check_tetta(ft_atof(rt->sdl->gui->textbox[Tetta]->text));
+		rt->scene->skybox_id = check_skybox(ft_atof(rt->sdl->gui->textbox[Id]->text), rt->scene->texture_cnt);
+		rt->scene->ambient = check_ambient(ft_atof(rt->sdl->gui->textbox[Ambient]->text));
+		rt->scene->fsaa = check_fsaa(ft_atof(rt->sdl->gui->textbox[Fsaa]->text));
 	}
 }
 

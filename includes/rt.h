@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 04:06:50 by thorker           #+#    #+#             */
-/*   Updated: 2020/02/15 10:46:26 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/16 21:47:17 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -445,6 +445,11 @@ void					sdl_update(char *flag,
 **						utils
 */
 
+double					check_phi(double input_phi);
+double					check_tetta(double input_tetta);
+int						check_skybox(int input_skybox, int texture_cnt);
+double					check_ambient(double input_ambient);
+int						check_fsaa(int input_fsaa);
 void					func_error(int err);
 void					ft_error(char *str);
 int						ft_len_arr(void **arr);

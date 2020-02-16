@@ -8,7 +8,6 @@
 	"textures":
 	[
 		"./assets/textures/white_skybox.png",
-		"./assets/textures/grey_skybox.jpg",
 		"./assets/textures/larkspur.jpg",
 		"./assets/textures/sample.jpg"
 	],
