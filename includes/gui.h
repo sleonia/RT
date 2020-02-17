@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/06 22:40:57 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/17 15:23:03 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/17 21:24:42 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 
 # define COUNT_OF_BUTTONS	6
 # define COUNT_OF_RADIO_BTN	4
-# define COUNT_OF_TEXTBOX	28
+# define COUNT_OF_TEXTBOX	35
 # define SMALL_FONT_ID		0
 # define NORMAL_FONT_ID		1
 # define BIG_FONT_ID		2
@@ -53,14 +53,14 @@ enum						e_textbox_type
 	Tor_center,
 	Tor_bigr,
 	Tor_r,
-	Color,
-	Material_ambient,
-	Diffuse,
-	Specular,
-	Reflection,
-	Refraction,
-	Texture_id,
-	Texture
+	Mtrl_Color,
+	Mtrl_ambient,
+	Mtrl_Diffuse,
+	Mtrl_Specular,
+	Mtrl_Reflection,
+	Mtrl_Refraction,
+	Mtrl_Texture_id,
+	Mtrl_Texture
 };
 
 typedef struct				s_textbox

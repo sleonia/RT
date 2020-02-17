@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/10 07:16:36 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/17 20:36:34 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/17 20:46:12 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,11 @@ bool			key_rt(SDL_Scancode scancode,
 		if (scancode == SDL_SCANCODE_K)
 			*flag = BLUR;
 		if (scancode == SDL_SCANCODE_O)
-			system("imagesnap ~/Desktop/$(date +%y%m%d%H%M%S).png");
+		{
+			system("imagesnap ./assets/photo/$(date +%y%m%d%H%M%S).png"); //переделать имя для фото под адекватное
+			system("afplay /System/Library/Sounds/Hero.aiff");
+		}
+				// mogrify -resize 256x256
 		if (scancode == SDL_SCANCODE_B)
 			SDL_ShowCursor(!SDL_ShowCursor(-1));
 		if (scancode == SDL_SCANCODE_H)

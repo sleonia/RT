@@ -6,7 +6,7 @@
 #    By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/01 04:18:29 by sleonia           #+#    #+#              #
-#    Updated: 2020/02/17 20:11:08 by sleonia          ###   ########.fr        #
+#    Updated: 2020/02/17 21:27:22 by sleonia          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -70,6 +70,7 @@ INIT_FILES =							\
 			init_sdl.c					\
 			init_cl_blur_arg.c			\
 			init_kernel.c				\
+			init_textbox.c				\
 
 INIT_DIR = ./src/init/
 

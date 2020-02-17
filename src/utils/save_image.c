@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/01 05:01:29 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/10 04:26:00 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/17 20:43:28 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,8 @@ static char		*make_screen_name(void)
 	replace_symbs(&old_str_time, ':', '_');
 	if (!(old_str_time = ft_strjoin(old_str_time, ".png")))
 		return (0);
-	system("mkdir -p screenshots");
-	if (!(new_str_time = ft_strjoin("./screenshots/Screen Shot at ",
+	system("mkdir -p ./assets/screenshots");
+	if (!(new_str_time = ft_strjoin("./assets/screenshots/Screen Shot at ",
 		old_str_time)))
 	{
 		ft_strdel(&old_str_time);

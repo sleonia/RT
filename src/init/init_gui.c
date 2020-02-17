@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/09 04:48:59 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/17 15:17:45 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/17 21:27:54 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,38 +50,7 @@ static t_ttf		*init_ttf(char *font, int font_size, SDL_Color font_color)
 	return (ttf);
 }
 
-static void			init_textbox(t_gui *gui)
-{
-	int				i;
 
-	i = -1;
-	while (++i < COUNT_OF_TEXTBOX)
-	{
-		if (!(gui->textbox[i] = (t_textbox *)ft_memalloc(sizeof(t_textbox))))
-			ft_error(ERROR_MALLOC);
-		gui->textbox[i]->color = (SDL_Color){255, 255, 255, 0};
-		// gui->textbox[i]->text = ft_strnew(8);
-		gui->textbox[i]->text = ft_strdup("      ");
-		gui->textbox[i]->on_focus = false;
-		if (i == Phi)
-			gui->textbox[i]->pos = (SDL_Rect){185, 50, 0, 0};
-		else if (i == Tetta)
-			gui->textbox[i]->pos = (SDL_Rect){390, 50, 0, 0};
-		else if (i == Id)
-			gui->textbox[i]->pos = (SDL_Rect){195, 190, 0, 0};
-		else if (i == Skybox_ambient)
-			gui->textbox[i]->pos = (SDL_Rect){260, 190, 0, 0};
-		else if (i == Fsaa)
-			gui->textbox[i]->pos = (SDL_Rect){395, 190, 0, 0};
-		else if (i == New_obj)
-		{
-			gui->textbox[i]->pos = (SDL_Rect){410, 720, 0, 0};
-			gui->textbox[i]->color = (SDL_Color){196, 53, 0, 0};
-		}
-		else
-			gui->textbox[i]->pos = (SDL_Rect){0, 0, 0, 0};
-	}
-}
 
 t_gui				*init_gui(void)
 {

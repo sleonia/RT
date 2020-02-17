@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 04:06:50 by thorker           #+#    #+#             */
-/*   Updated: 2020/02/17 17:36:36 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/17 21:27:38 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -389,6 +389,7 @@ void					print_build_error(t_cl *cl,
 int						*fill_texture_for_object(char *texture_path,
 											int *texture_pixels,
 											int *texture_param);
+void					init_textbox(t_gui *gui);
 
 /*
 **						math_utils
