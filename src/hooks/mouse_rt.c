@@ -6,14 +6,13 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/10 07:52:49 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/16 20:20:49 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/17 08:06:05 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-bool			mouse_rt(char *flag,
-						t_sdl *sdl,
+bool			mouse_rt(t_sdl *sdl,
 						t_object **hi_lited_object,
 						t_scene *scene)
 {

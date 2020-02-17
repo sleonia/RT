@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_lights.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: deladia <deladia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/28 21:50:31 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/01 15:22:34 by deladia          ###   ########.fr       */
+/*   Updated: 2020/02/17 08:27:30 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static void			set_default_value(t_light *light, char *sounds[])
 {
 	light->intensity = 0;
-	light->pos = (cl_float3){0, 0, 0};
+	light->pos = (cl_float3){{0, 0, 0, 0}};
 	show_error(E_LIGHT, sounds);
 }
 
@@ -35,7 +35,7 @@ static void			parse_light_json2(t_key_value *light_obj,
 		light->intensity = (float)value;
 	if (get_array(light_obj, "position", &pos) != 0)
 	{
-		light->pos = (cl_float3){0, 0, 0};
+		light->pos = (cl_float3){{0, 0, 0, 0}};
 		*error = true;
 	}
 	else
@@ -58,7 +58,7 @@ void				parse_light_json(t_key_value *json,
 		return ;
 	}
 	init_light(&scene->light, light_array->length);
-	while (++i < light_array->length)
+	while (++i < (int)light_array->length)
 	{
 		if (getf_object_array(light_array, i, &light_obj) != 0)
 		{

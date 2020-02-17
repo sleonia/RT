@@ -6,13 +6,13 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/28 11:53:04 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/08 03:17:22 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/17 08:08:59 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-void			rotation(SDL_Scancode scancode, t_sdl *sdl, t_cam *cam)
+void			rotation(SDL_Scancode scancode, t_cam *cam)
 {
 	if (scancode == SDL_SCANCODE_Q)
 	{

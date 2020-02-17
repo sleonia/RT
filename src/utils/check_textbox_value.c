@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/16 21:30:49 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/16 21:47:21 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/17 07:55:03 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ double		check_tetta(double input_tetta)
 
 int			check_skybox(int input_skybox, int texture_cnt)
 {
-	if (input_skybox >= -1 && input_skybox <= texture_cnt)
+	if (input_skybox >= -1 && input_skybox < texture_cnt)
 		return (input_skybox);
 	return (-1);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_material.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: deladia <deladia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 20:25:59 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/01 15:22:34 by deladia          ###   ########.fr       */
+/*   Updated: 2020/02/17 08:28:00 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void			set_default_value(t_object *object, char *sounds[])
 {
-	object->material.color = (cl_float3){1.f, 1.f, 1.f};
+	object->material.color = (cl_float3){{1.f, 1.f, 1.f, 0.f}};
 	object->material.ambient = 1.0;
 	object->material.diffuse = 0.4;
 	object->material.specular = 50;
@@ -64,7 +64,7 @@ void				parse_material_json(t_key_value *obj, t_object *object,
 		return ;
 	}
 	if (get_array(material, "color", &array) != 0)
-		object->material.color = (cl_float3){1.f, 1.f, 1.f};
+		object->material.color = (cl_float3){{1.f, 1.f, 1.f, 0.f}};
 	else
 	{
 		parse_array_of_float(array, &object->material.color);

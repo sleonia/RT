@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_cam.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: deladia <deladia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/28 20:46:46 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/01 15:22:34 by deladia          ###   ########.fr       */
+/*   Updated: 2020/02/17 08:27:06 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,15 @@
 
 static void			set_default_value(t_cam *cam, char *sounds[])
 {
-	cam->pos = (cl_float3){0, 0, 0};
+	cam->pos = (cl_float3){{0, 0, 0, 0}};
 	cam->phi = 1.570796;
 	cam->tetta = 1.570796;
 	show_error(E_CAM, sounds);
 }
 
-void				parse_cam_json2(t_key_value *cam_obj, t_cam *cam,
-								bool *error, char *sounds[])
+void				parse_cam_json2(t_key_value *cam_obj,
+								t_cam *cam,
+								bool *error)
 {
 	double			phi;
 	double			tetta;
@@ -72,12 +73,12 @@ void				parse_cam_json(t_key_value *json, t_scene *scene,
 	}
 	if (get_array(cam_obj, "position", &array) != 0)
 	{
-		scene->cam.pos = (cl_float3){0, 0, 0};
+		scene->cam.pos = (cl_float3){{0, 0, 0, 0}};
 		error = true;
 	}
 	else
 		parse_array_of_float(array, &scene->cam.pos);
-	parse_cam_json2(cam_obj, &scene->cam, &error, sounds);
+	parse_cam_json2(cam_obj, &scene->cam, &error);
 	if (error)
 		show_error(E_CAM, sounds);
 }

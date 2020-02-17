@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/08 02:39:27 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/10 05:12:30 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/17 08:10:25 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 bool		window_events(char *flag, SDL_Event event, t_screen *screen)
 {
 	if (!(event.type == SDL_WINDOWEVENT
-		&& event.window.windowID == screen->win_id))
+		&& event.window.windowID == (Uint32)screen->win_id))
 		return (false);
 	if (event.window.event == SDL_WINDOWEVENT_SHOWN)
 		screen->shown = true;

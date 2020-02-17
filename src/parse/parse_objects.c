@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/28 21:51:06 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/16 21:42:07 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/17 08:28:25 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ void				parse_objects_json(t_key_value *json, t_scene *scene,
 	if (get_array(json, "figure", &json_obj_array) != 0)
 		ft_error("Error get_array: figure");
 	init_objects(&scene->object, json_obj_array->length);
-	while (++i < json_obj_array->length)
+	while (++i < (int)json_obj_array->length)
 	{
 		if (getf_object_array(json_obj_array, i, &json_obj) != 0)
 			ft_error("Error getf_object_array: obj");

@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/10 07:52:23 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/16 20:48:01 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/17 08:08:45 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,35 +48,38 @@ static bool		reset_value(int flag, t_rt *rt)
 static bool		check_textbox(int x, int y,
 							t_object **hi_lited_object, t_rt *rt)
 {
-	if ((x >= 185 && x <= 275) && (y >= 60 && y <= 80))
+	if (!*hi_lited_object)
 	{
-		rt->sdl->gui->textbox[Phi]->on_focus = true;
-		return (reset_value(Phi, rt));
-	}
-	if ((x >= 390 && x <= 480) && (y >= 60 && y <= 80))
-	{
-		rt->sdl->gui->textbox[Tetta]->on_focus = true;
-		return (reset_value(Tetta, rt));
-	}
-	if ((x >= 180 && x <= 230) && (y >= 195 && y <= 225))
-	{
-		rt->sdl->gui->textbox[Id]->on_focus = true;
-		return (reset_value(Id, rt));
-	}
-	if ((x >= 265 && x <= 360) && (y >= 195 && y <= 225))
-	{
-		rt->sdl->gui->textbox[Ambient]->on_focus = true;
-		return (reset_value(Ambient, rt));
-	}
-	if ((x >= 400 && x <= 460) && (y >= 195 && y <= 225))
-	{
-		rt->sdl->gui->textbox[Fsaa]->on_focus = true;
-		return (reset_value(Fsaa, rt));
-	}
-	if ((x >= 410 && x <= 430) && (y >= 710 && y <= 750))
-	{
-		rt->sdl->gui->textbox[New_obj]->on_focus = true;
-		return (reset_value(New_obj, rt));
+		if ((x >= 185 && x <= 275) && (y >= 60 && y <= 80))
+		{
+			rt->sdl->gui->textbox[Phi]->on_focus = true;
+			return (reset_value(Phi, rt));
+		}
+		if ((x >= 390 && x <= 480) && (y >= 60 && y <= 80))
+		{
+			rt->sdl->gui->textbox[Tetta]->on_focus = true;
+			return (reset_value(Tetta, rt));
+		}
+		if ((x >= 180 && x <= 230) && (y >= 195 && y <= 225))
+		{
+			rt->sdl->gui->textbox[Id]->on_focus = true;
+			return (reset_value(Id, rt));
+		}
+		if ((x >= 265 && x <= 360) && (y >= 195 && y <= 225))
+		{
+			rt->sdl->gui->textbox[Ambient]->on_focus = true;
+			return (reset_value(Ambient, rt));
+		}
+		if ((x >= 400 && x <= 460) && (y >= 195 && y <= 225))
+		{
+			rt->sdl->gui->textbox[Fsaa]->on_focus = true;
+			return (reset_value(Fsaa, rt));
+		}
+		if ((x >= 410 && x <= 430) && (y >= 710 && y <= 750))
+		{
+			rt->sdl->gui->textbox[New_obj]->on_focus = true;
+			return (reset_value(New_obj, rt));
+		}
 	}
 	return (true);
 }
@@ -88,6 +91,8 @@ bool			mouse_toolbar(char *flag,
 	int			x = -1;
 	int			y = -1;
 
+	// if (hi_lited_object)
+	// 	(*hi_lited_object)->material.ambient = (*hi_lited_object)->material.ambient;
 	if (rt->sdl->event.type == SDL_MOUSEBUTTONDOWN)
 	{
 		if (rt->sdl->event.button.button == SDL_BUTTON_LEFT)

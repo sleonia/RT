@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 04:06:50 by thorker           #+#    #+#             */
-/*   Updated: 2020/02/16 21:47:17 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/17 08:28:58 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -303,13 +303,13 @@ typedef struct			s_rt
 **						gui
 */
 void					gui_buttons(t_sdl *sdl);
+void					set_value_in_textbox(t_scene *scene,
+											t_gui *gui);
 void					gui_default_screen(char *flag,
-										t_object **hi_lited_object,
 										t_sdl *sdl);
 void					gui_main(char *flag,
 								t_object **hi_lited_object,
-								t_scene *scene,
-								t_sdl *sdl);
+								t_rt *rt);
 /*
 **						hooks
 */
@@ -340,14 +340,13 @@ bool					mouse_events(char *flag,
 									t_rt *rt);
 void					mouse_rotation(t_cam *cam, int x, int y);
 void					move(SDL_Event event, t_cam *cam, t_move_flag *flag);
-bool					mouse_rt(char *flag,
-								t_sdl *sdl,
+bool					mouse_rt(t_sdl *sdl,
 								t_object **hi_lited_object,
 								t_scene *scene);
 bool					mouse_toolbar(char *flag,
 									t_object **hi_lited_object,
 									t_rt *rt);
-void					rotation(SDL_Scancode scancode, t_sdl *sdl, t_cam *cam);
+void					rotation(SDL_Scancode scancode, t_cam *cam);
 bool					window_events(char *flag,
 									SDL_Event event,
 									t_screen *screen);
@@ -358,8 +357,8 @@ bool					window_events(char *flag,
 
 char					**init_cl_files(void);
 void					create_kernel_blur(t_cl *cl, t_sdl *sdl);
-void					create_kernel_rt(t_cl *cl, t_scene *scene);
-void					create_cl(t_cl *cl, t_sdl *sdl, t_scene *scene);
+void					create_kernel_rt(t_cl *cl);
+void					create_cl(t_cl *cl, t_scene *scene);
 void					init_light(t_light **light, int nbr);
 void					init_objects(t_object **object, int nbr);
 int						set_opencl_arg(t_cl *cl, t_sdl *sdl, t_scene *scene);
@@ -400,10 +399,9 @@ void					parse_sounds_json(t_key_value *assets, t_sdl *sdl);
 void					parse_music_json(t_key_value *assets, t_sdl *sdl);
 void					parse_array_of_float(t_array *array, cl_float3 *pos);
 int						parse_volume_json(t_key_value *assets);
-void					parse_texture(t_key_value *json, t_scene *scene,
-										char *sounds[]);
-char					*parse_icon_json(t_key_value *assets, t_sdl *sdl);
-t_key_value				*parse_assets(t_key_value *json, t_sdl *sdl);
+void					parse_texture(t_key_value *json, t_scene *scene);
+char					*parse_icon_json(t_key_value *assets);
+t_key_value				*parse_assets(t_key_value *json);
 
 void					parse_cam_json(t_key_value *json,
 										t_scene *scene, char *sounds[]);
@@ -431,6 +429,8 @@ void					parse_cylinder_json(t_key_value *obj,
 void					fill_rect(SDL_Rect tmp, int color, SDL_Surface *sur);
 void					change_music(Mix_Music *music[]);
 void					render_button(t_button *button, t_sdl *sdl);
+void					render_surface(SDL_Rect srcrect, SDL_Rect dstrect,
+									SDL_Surface *surface, t_sdl *sdl);
 void					sdl_loop(t_rt *rt);
 void					sdl_putstr(SDL_Rect	dest,
 								char *text,

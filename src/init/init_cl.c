@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_cl.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: deladia <deladia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/01 04:21:09 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/07 14:36:57 by deladia          ###   ########.fr       */
+/*   Updated: 2020/02/17 08:13:22 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,26 +54,9 @@ static void		cl_create_buffer(t_cl *cl, t_scene *scene)
 	cl_create_buffer_1(cl, scene);
 }
 
-void			print_build_error(t_cl *cl, cl_int ret, size_t log_size)
-{
-	char		*log;
-
-	clGetProgramBuildInfo(cl->program, cl->device_id,
-						CL_PROGRAM_BUILD_LOG, 0, NULL, &log_size);
-	log = (char*)malloc(log_size);
-	clGetProgramBuildInfo(cl->program, cl->device_id,
-						CL_PROGRAM_BUILD_LOG, log_size, log, NULL);
-	ft_putstr("build program - ERROR(");
-	ft_putnbr(ret);
-	ft_putstr(")\n");
-	ft_putendl(log);
-	exit(-1);
-}
-
 static void		create_cl_1(t_cl *cl)
 {
 	cl_int		ret;
-	size_t		log_size;
 
 	cl->global_work_size[0] = WIDTH;
 	cl->global_work_size[1] = HEIGHT;
@@ -85,10 +68,10 @@ static void		create_cl_1(t_cl *cl)
 		ft_error("clCreateProgramWithSource");
 	if ((ret = clBuildProgram(cl->program, 1, &cl->device_id,
 						"-DOPENCL___ -I include/ ", NULL, NULL)) != 0)
-		print_build_error(cl, ret, log_size);
+		ft_error("clBuildProgram");
 }
 
-void			create_cl(t_cl *cl, t_sdl *sdl, t_scene *scene)
+void			create_cl(t_cl *cl, t_scene *scene)
 {
 	int			ret;
 

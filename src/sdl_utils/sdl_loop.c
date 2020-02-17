@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/28 11:30:45 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/15 10:57:47 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/17 08:18:42 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 void		sdl_loop(t_rt *rt)
 {
 	char			flag;
-	SDL_Event		event;
 	t_object		*hi_lited_object;
 
 	hi_lited_object = NULL;

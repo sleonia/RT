@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/03 15:15:57 by deladia           #+#    #+#             */
-/*   Updated: 2020/02/10 04:32:25 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/17 08:13:30 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 static void		set_arg_blur(t_cl *cl, t_sdl *sdl)
 {
 	int		ret;
-	int		*output;
 
 	if ((ret = clEnqueueWriteBuffer(cl->cmd_queue, cl->memobjs[0], CL_TRUE, 0,
 								sizeof(cl_int) * HEIGHT * WIDTH,

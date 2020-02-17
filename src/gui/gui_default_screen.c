@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/08 06:44:01 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/15 11:22:18 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/17 08:01:50 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,18 +79,27 @@ void			gui_camera(t_gui *gui, SDL_Surface *sur)
 	sdl_putstr((SDL_Rect){400, 15, 0, 0}, "tetta", gui->ttf[0], sur);
 }
 
-
-
-void			gui_default_screen(char *flag,
-								t_object **hi_lited_object,
-								t_sdl *sdl)
+void			set_value_in_textbox(t_scene *scene,
+									t_gui *gui)
 {
+	sprintf(gui->textbox[Phi]->text, "%3.3f", scene->cam.phi);
+	sprintf(gui->textbox[Tetta]->text, "%3.3f", scene->cam.tetta);
+	sprintf(gui->textbox[Id]->text, "%1d", scene->skybox_id);
+	sprintf(gui->textbox[Ambient]->text, "%3.3f", scene->ambient);
+	sprintf(gui->textbox[Fsaa]->text, "%1d", scene->fsaa);
+	sprintf(gui->textbox[New_obj]->text, "%d", 1);
+}
 
+void			gui_default_screen(char *flag, t_sdl *sdl)
+{
 	sdl->gui->ttf[0]->font_color = (SDL_Color){255, 255, 255, 0};
 	gui_camera(sdl->gui, sdl->screen[1]->sur);
 	gui_skybox(sdl->gui, sdl->screen[1]->sur);
 	gui_mode(flag, sdl->gui, sdl->screen[1]->sur);
 	gui_buttons(sdl);
+	// if (scene->move_on)
+	// 	set_value_in_textbox(scene, sdl->gui);
+	// if (!scene->move_on || sdl->screen[1]->keyboard_focus)
 	for (size_t k = 0; k < COUNT_OF_TEXTBOX; k++)
 	{
 		load_from_rendered_text(sdl->gui->textbox[k], sdl->gui->textbox[k]->text, sdl->screen[1]->render, sdl->gui->ttf[0]->font);

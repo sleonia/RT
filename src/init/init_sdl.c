@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/28 10:20:37 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/13 07:31:55 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/17 08:23:01 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static void			set_window_icon(t_key_value *assets, t_sdl *sdl)
 	SDL_Surface		*sur_img;
 	SDL_Surface		*conv_sur_img;
 
-	if (!(icon = parse_icon_json(assets, sdl)))
+	if (!(icon = parse_icon_json(assets)))
 		return ;
 	if (!(sur_win = SDL_CreateRGBSurface(0, WIDTH, HEIGHT, 32, 0xFF000000,
 										0x00FF0000, 0x0000FF00, 0x000000FF)))
@@ -61,7 +61,7 @@ static void			init_sdl_2(t_key_value *json, t_sdl *sdl)
 	SDL_RenderClear(sdl->screen[0]->render);
 	SDL_RenderCopy(sdl->screen[0]->render, sdl->screen[0]->texture, NULL, NULL);
 	SDL_RenderPresent(sdl->screen[0]->render);
-	assets = parse_assets(json, sdl);
+	assets = parse_assets(json);
 	if(!(IMG_Init(IMG_INIT_PNG) & IMG_INIT_PNG))
 		ft_error((char *)SDL_GetError());
 	set_window_icon(assets, sdl);

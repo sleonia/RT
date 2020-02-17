@@ -6,7 +6,7 @@
 #    By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/01 04:18:29 by sleonia           #+#    #+#              #
-#    Updated: 2020/02/16 21:45:25 by sleonia          ###   ########.fr        #
+#    Updated: 2020/02/17 08:00:08 by sleonia          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -108,6 +108,7 @@ SDL_UTILS_FILES =						\
 			fill_rect.c					\
 			music_manager.c				\
 			render_button.c				\
+			render_surface.c 			\
 			sdl_loop.c					\
 			sdl_putstr.c				\
 			sdl_quit.c					\
@@ -205,8 +206,8 @@ FRAME = 	-F framework/ -framework SDL2 -framework SDL2_image 	\
 			-rpath framework/ -framework OpenCL						\
 			-framework OpenGL -framework Cocoa -framework IOKit		\
 
-COMPILE_FLAGS = -g
-# COMPILE_FLAGS = -Wall -Werror -Wextra -g
+# COMPILE_FLAGS = -g
+COMPILE_FLAGS = -Wall -Werror -Wextra -g
 
 COMPILE = gcc $(COMPILE_FLAGS) -I $(INCLUDES_DIR) $(INC_SDL) -I $(LIBFT_INC) -I $(LIBTOJSON_INC) -I $(SDL2_AUDIO_INC)
 

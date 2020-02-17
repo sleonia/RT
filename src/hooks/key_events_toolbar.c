@@ -6,13 +6,13 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/10 07:16:51 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/16 21:49:01 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/17 08:03:36 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-int				search_textbox_in_focus(t_gui *gui)
+static int		search_textbox_in_focus(t_gui *gui)
 {
 	int			i;
 
@@ -23,21 +23,54 @@ int				search_textbox_in_focus(t_gui *gui)
 			return (i);
 	}
 	return (-1);
-	// gui->textbox[4]->on_focus = true;
-	// return (4);
 }
 
-void			set_value_textbox(t_object *hi_lited_object, t_rt *rt)
+static void		set_value_from_textbox(t_object *hi_lited_object,
+								t_scene *scene,
+								t_gui *gui)
 {
-	// printf("%d\n", rt->scene->texture_cnt);
 	if (!hi_lited_object)
 	{
-		rt->scene->cam.phi = check_phi(ft_atof(rt->sdl->gui->textbox[Phi]->text));
-		rt->scene->cam.tetta = check_tetta(ft_atof(rt->sdl->gui->textbox[Tetta]->text));
-		rt->scene->skybox_id = check_skybox(ft_atof(rt->sdl->gui->textbox[Id]->text), rt->scene->texture_cnt);
-		rt->scene->ambient = check_ambient(ft_atof(rt->sdl->gui->textbox[Ambient]->text));
-		rt->scene->fsaa = check_fsaa(ft_atof(rt->sdl->gui->textbox[Fsaa]->text));
+		scene->cam.phi = check_phi(ft_atof(gui->textbox[Phi]->text));
+		scene->cam.tetta = check_tetta(ft_atof(gui->textbox[Tetta]->text));
+		scene->skybox_id = check_skybox(ft_atof(gui->textbox[Id]->text),
+										scene->texture_cnt);
+		scene->ambient = check_ambient(ft_atof(gui->textbox[Ambient]->text));
+		scene->fsaa = check_fsaa(ft_atof(gui->textbox[Fsaa]->text));
 	}
+}
+
+static void		backspace_processing(int id_cur_textbox, t_gui *gui)
+{
+	int		len;
+
+	len = ft_strlen(gui->textbox[id_cur_textbox]->text);
+	if (len > 1)
+	{
+		gui->textbox[id_cur_textbox]->text = pop_back(gui->textbox[id_cur_textbox]->text);
+		gui->textbox[id_cur_textbox]->render_text = true;
+	}
+	else if (ft_strlen(gui->textbox[id_cur_textbox]->text) == 1)
+	{
+		ft_strdel(&gui->textbox[id_cur_textbox]->text);
+		gui->textbox[id_cur_textbox]->text = ft_strdup(" ");
+		gui->textbox[id_cur_textbox]->render_text = true;
+	}
+}
+
+static void		text_processing(int id_cur_textbox,
+							char *input_text,
+							t_gui *gui)
+{
+	int		len;
+
+	len = ft_strlen(gui->textbox[id_cur_textbox]->text);
+	if (len > 7)
+		gui->textbox[id_cur_textbox]->on_focus = false;
+	gui->textbox[id_cur_textbox]->text =
+		ft_strjoin_free(gui->textbox[id_cur_textbox]->text, input_text, 1);
+	gui->textbox[id_cur_textbox]->render_text = true;
+	len = ft_strlen(gui->textbox[id_cur_textbox]->text);
 }
 
 bool			key_toolbar(SDL_Scancode scancode,
@@ -45,13 +78,11 @@ bool			key_toolbar(SDL_Scancode scancode,
 						t_object *hi_lited_object,
 						t_rt *rt)
 {
-	int		len;
 	int		id_cur_textbox;
 
-	if (hi_lited_object)
+	if (hi_lited_object) //delete
 		return (false);
 	id_cur_textbox = search_textbox_in_focus(rt->sdl->gui);
-	// printf("id_cur_textbox = %d\n", id_cur_textbox);
 	if (rt->sdl->event.type == SDL_KEYDOWN)
 	{
 		if (scancode == SDL_SCANCODE_B)
@@ -60,45 +91,18 @@ bool			key_toolbar(SDL_Scancode scancode,
 			*flag = 1;
 		if (rt->sdl->event.key.keysym.scancode == SDL_SCANCODE_TAB)
 			change_focus(rt->sdl);
-		// if ((id_cur_textbox = search_textbox_in_focus(rt->sdl->gui)) == -1)
-			// return (false);
 		if (id_cur_textbox != -1)
 		{
-			len = ft_strlen(rt->sdl->gui->textbox[id_cur_textbox]->text);
-			if (scancode == SDL_SCANCODE_BACKSPACE && len > 1)
-			{
-				rt->sdl->gui->textbox[id_cur_textbox]->text = pop_back(rt->sdl->gui->textbox[id_cur_textbox]->text);
-				rt->sdl->gui->textbox[id_cur_textbox]->render_text = true;
-			}
-			else if (scancode == SDL_SCANCODE_BACKSPACE && ft_strlen(rt->sdl->gui->textbox[id_cur_textbox]->text) == 1)
-			{
-				ft_strdel(&rt->sdl->gui->textbox[id_cur_textbox]->text);
-				rt->sdl->gui->textbox[id_cur_textbox]->text = ft_strdup(" ");
-				rt->sdl->gui->textbox[id_cur_textbox]->render_text = true;
-			}
+			if (scancode == SDL_SCANCODE_BACKSPACE)
+				backspace_processing(id_cur_textbox, rt->sdl->gui);
 			if (scancode == SDL_SCANCODE_RETURN)
-				set_value_textbox(hi_lited_object, rt);
-				// rt->scene->cam.phi = ft_atof(rt->sdl->gui->textbox[id_cur_textbox]->text);
-			// rt->sdl->gui->textbox[id_cur_textbox]->on_focus = false;
+				set_value_from_textbox(hi_lited_object, rt->scene, rt->sdl->gui);
 		}
 	}
 	else if(rt->sdl->event.type == SDL_TEXTINPUT)
 	{
 		if (id_cur_textbox != -1)
-		{
-			// printf("%s\n", rt->sdl->event.text.text);
-			len = ft_strlen(rt->sdl->gui->textbox[id_cur_textbox]->text);
-			if (len > 7)
-			{
-				rt->sdl->gui->textbox[id_cur_textbox]->on_focus = false;
-				return (false);
-			}
-			rt->sdl->gui->textbox[id_cur_textbox]->text = ft_strjoin_free(rt->sdl->gui->textbox[id_cur_textbox]->text, rt->sdl->event.text.text, 1);
-			// printf("%s\n", rt->sdl->gui->textbox[id_cur_textbox]->text);
-			rt->sdl->gui->textbox[id_cur_textbox]->render_text = true;
-			// rt->sdl->gui->textbox[id_cur_textbox]->on_focus = false;
-			// rt->sdl->gui->textbox[!id_cur_textbox]->on_focus = true;
-		}
+			text_processing(id_cur_textbox, rt->sdl->event.text.text, rt->sdl->gui);
 	}
 	return (false);
 }

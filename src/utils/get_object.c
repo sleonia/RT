@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_object.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: deladia <deladia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/04 18:38:23 by deladia           #+#    #+#             */
-/*   Updated: 2020/02/10 20:25:05 by deladia          ###   ########.fr       */
+/*   Updated: 2020/02/17 08:30:41 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,13 +148,13 @@ static int		intersect_ray_torus(cl_float3 o, cl_float3 d,
 	cl_float3	p;
 	cl_float3	n1;
 
-	i = (cl_int2){0, 1};
+	i = (cl_int2){{0, 1}};
 	while (i.x < 4096)
 	{
 		current_position = cl_sum(o, cl_mult_n(d, *dist_i));
 		p = cl_minus(current_position, tor->center);
 		n1 = cl_mult_n(tor->axis, dot(p, tor->axis));
-		q = (cl_float2){cl_length(cl_minus(p, n1)) - tor->bigr, cl_length(n1)};
+		q = (cl_float2){{cl_length(cl_minus(p, n1)) - tor->bigr, cl_length(n1)}};
 		if ((i.y == 1) && ((cl_length_v2(q) - tor->r) < -0.00001f))
 			i.y = -1;
 		*dist_i += fabs(cl_length_v2(q) - tor->r);

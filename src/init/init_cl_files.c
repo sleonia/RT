@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_cl_files.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: deladia <deladia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 16:55:40 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/05 23:06:16 by deladia          ###   ########.fr       */
+/*   Updated: 2020/02/17 08:12:05 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ t_cl			*init_cl(t_rt *rt)
 		ft_error(ERROR_INPUT);
 	opencl->files = init_cl_files();
 	read_kernel(opencl, opencl->files);
-	create_cl(opencl, rt->sdl, rt->scene);
+	create_cl(opencl, rt->scene);
 	return (opencl);
 }
 

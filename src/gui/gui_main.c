@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/08 06:54:01 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/15 15:14:09 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/17 08:01:58 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,36 +26,15 @@ void		draw_background(int color, int *pixels)
 	}
 }
 
-void	resize_surface(SDL_Rect srcrect, SDL_Rect dstrect,
-					SDL_Surface *texture, t_sdl *sdl)
-{
-	SDL_BlitScaled(texture, NULL, sdl->screen[1]->sur, &dstrect);
-}
-
-void				render_surface(SDL_Rect srcrect, SDL_Rect dstrect,
-								SDL_Surface *surface, t_sdl *sdl)
-{
-	SDL_Surface		*copy_texture;
-
-	copy_texture = SDL_DuplicateSurface(surface);
-	resize_surface(srcrect,
-					dstrect,
-					copy_texture, sdl);
-	SDL_BlitSurface(sdl->screen[1]->sur, NULL, copy_texture, NULL);
-	SDL_FreeSurface(copy_texture);
-}
-
 void		gui_main(char *flag,
 					t_object **hi_lited_object,
-					t_scene *scene,
-					t_sdl *sdl)
+					t_rt *rt)
 {
-	if (sdl->screen[1]->keyboard_focus)
+	if (rt->sdl->screen[1]->keyboard_focus)
 	{
-		// set_value(scene, sdl);
-		draw_background(0x2C3852, ((int *)(sdl->screen[1]->sur->pixels)));
+		draw_background(0x2C3852, ((int *)(rt->sdl->screen[1]->sur->pixels)));
 		if (!*hi_lited_object)
-			gui_default_screen(flag, hi_lited_object, sdl);
+			gui_default_screen(flag, rt->sdl);
 		// else if ((*hi_lited_object)->type == o_sphere)
 		// 	sdl_putstr(100, 100, "0", sdl);
 		// else if ((*hi_lited_object)->type == o_cylinder)
@@ -69,7 +48,13 @@ void		gui_main(char *flag,
 	}
 	else
 	{
-		draw_background(0x0, ((int *)(sdl->screen[1]->sur->pixels)));
-		render_surface((SDL_Rect){0, 0, 0, 0}, (SDL_Rect){-70, 50, TOOL_SCREEN_WIDTH + 160, TOOL_SCREEN_HEIGHT - 100},  sdl->gui->headband, sdl);
+		draw_background(0x0, ((int *)(rt->sdl->screen[1]->sur->pixels)));
+		set_value_in_textbox(rt->scene, rt->sdl->gui);
+		render_surface((SDL_Rect){0, 0, 0, 0},
+					(SDL_Rect){-70, 50,
+							TOOL_SCREEN_WIDTH + 160,
+							TOOL_SCREEN_HEIGHT - 100},
+					rt->sdl->gui->headband,
+					rt->sdl);
 	}
 }

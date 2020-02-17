@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/28 11:50:12 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/16 20:18:13 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/17 08:04:52 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ bool			mouse_events(char *flag,
 
 	// SDL_GetMouseState(&x, &y);
 	if (rt->sdl->screen[0]->mouse_focus)
-		return (mouse_rt(flag, rt->sdl, hi_lited_object, rt->scene));
+		return (mouse_rt(rt->sdl, hi_lited_object, rt->scene));
 	else if (rt->sdl->screen[1]->mouse_focus)
 		return (mouse_toolbar(flag, hi_lited_object, rt));
 	return (false);

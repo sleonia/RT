@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/10 07:16:36 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/15 11:16:51 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/17 08:09:51 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static void		key_rt_2(SDL_Scancode scancode,
 		|| scancode == SDL_SCANCODE_E
 		|| scancode == SDL_SCANCODE_Z
 		|| scancode == SDL_SCANCODE_X)
-		rotation(scancode, sdl, &(scene->cam));
+		rotation(scancode, &(scene->cam));
 	if (scancode >= SDL_SCANCODE_RIGHT
 		|| scancode <= SDL_SCANCODE_LEFT
 		|| scancode <= SDL_SCANCODE_DOWN
