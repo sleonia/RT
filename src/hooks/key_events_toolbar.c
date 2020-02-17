@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/10 07:16:51 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/17 08:03:36 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/17 08:54:34 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,8 +80,6 @@ bool			key_toolbar(SDL_Scancode scancode,
 {
 	int		id_cur_textbox;
 
-	if (hi_lited_object) //delete
-		return (false);
 	id_cur_textbox = search_textbox_in_focus(rt->sdl->gui);
 	if (rt->sdl->event.type == SDL_KEYDOWN)
 	{

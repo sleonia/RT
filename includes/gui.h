@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/06 22:40:57 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/15 14:01:00 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/17 08:43:25 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ typedef struct				s_textbox
 	SDL_Rect				pos;
 	bool					is_changed;
 }							t_textbox;
-
 
 typedef struct				s_button
 {

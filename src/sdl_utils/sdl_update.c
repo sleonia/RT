@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/28 12:09:13 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/17 08:20:30 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/17 08:43:05 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void		sdl_update(char *flag, t_object **hi_lited_object, t_sdl *sdl)
 	int		i;
 
 	i = -1;
-	*flag = *flag;
+	*flag = *flag; //delete
 	while (++i < CNT_OF_DISPLAYS)
 	{
 		SDL_UpdateTexture(sdl->screen[i]->texture,

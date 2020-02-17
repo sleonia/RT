@@ -6,7 +6,7 @@
 #    By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/01 04:18:29 by sleonia           #+#    #+#              #
-#    Updated: 2020/02/17 08:00:08 by sleonia          ###   ########.fr        #
+#    Updated: 2020/02/17 09:00:56 by sleonia          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,10 +17,15 @@
 # =========== #
 
 GUI_FILES =								\
-			gui_buttons.c				\
-			gui_default_screen.c		\
-			gui_main.c					\
-			gui_textbox.c				\
+			gui_buttons.c 				\
+			gui_cone_screen.c 			\
+			gui_cylinder_screen.c		\
+			gui_default_screen.c 		\
+			gui_main.c 					\
+			gui_parab_screen.c 			\
+			gui_plane_screen.c 			\
+			gui_sphere_screen.c 		\
+			gui_torus_screen.c 			\
 
 GUI_DIR = ./src/gui/
 
@@ -206,8 +211,8 @@ FRAME = 	-F framework/ -framework SDL2 -framework SDL2_image 	\
 			-rpath framework/ -framework OpenCL						\
 			-framework OpenGL -framework Cocoa -framework IOKit		\
 
-# COMPILE_FLAGS = -g
-COMPILE_FLAGS = -Wall -Werror -Wextra -g
+COMPILE_FLAGS = -g
+# COMPILE_FLAGS = -Wall -Werror -Wextra -g
 
 COMPILE = gcc $(COMPILE_FLAGS) -I $(INCLUDES_DIR) $(INC_SDL) -I $(LIBFT_INC) -I $(LIBTOJSON_INC) -I $(SDL2_AUDIO_INC)
 

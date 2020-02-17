@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/10 07:52:23 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/17 08:08:45 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/17 08:54:23 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,8 +91,6 @@ bool			mouse_toolbar(char *flag,
 	int			x = -1;
 	int			y = -1;
 
-	// if (hi_lited_object)
-	// 	(*hi_lited_object)->material.ambient = (*hi_lited_object)->material.ambient;
 	if (rt->sdl->event.type == SDL_MOUSEBUTTONDOWN)
 	{
 		if (rt->sdl->event.button.button == SDL_BUTTON_LEFT)
@@ -105,8 +103,8 @@ bool			mouse_toolbar(char *flag,
 					change_mode(x, y, flag);
 			}
 		}
+		check_buttons(flag, x, y, rt);
+		check_textbox(x, y, hi_lited_object, rt);
 	}
-	check_buttons(flag, x, y, rt);
-	check_textbox(x, y, hi_lited_object, rt);
 	return (false);
 }

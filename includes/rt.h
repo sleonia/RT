@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 04:06:50 by thorker           #+#    #+#             */
-/*   Updated: 2020/02/17 08:28:58 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/17 09:11:48 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -307,9 +307,23 @@ void					set_value_in_textbox(t_scene *scene,
 											t_gui *gui);
 void					gui_default_screen(char *flag,
 										t_sdl *sdl);
+void					gui_cone_screen(t_sdl *sdl,
+										t_object **hi_lited_object);
+void					gui_cylinder_screen(t_sdl *sdl,
+										t_object **hi_lited_object);
+void					gui_parab_screen(t_sdl *sdl,
+										t_object **hi_lited_object);
+void					gui_plane_screen(t_sdl *sdl,
+										t_object **hi_lited_object);
+void					gui_sphere_screen(t_sdl *sdl,
+										t_object **hi_lited_object);
+void					gui_torus_screen(t_sdl *sdl,
+										t_object **hi_lited_object);
+
 void					gui_main(char *flag,
 								t_object **hi_lited_object,
-								t_rt *rt);
+								t_sdl *sdl,
+								t_scene *scene);
 /*
 **						hooks
 */

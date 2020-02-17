@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/28 11:38:10 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/17 08:14:59 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/17 09:07:50 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void			events_processing(char *flag, t_object **hi_lited_object, t_rt *rt)
 		ismove |= mouse_events(flag, hi_lited_object, rt);
 	}
 	// if (ismove == false)
-	gui_main(flag, hi_lited_object, rt);
+	gui_main(flag, hi_lited_object, rt->sdl, rt->scene);
 	if (ismove == false)
 		rt->scene->move_on = 0;
 	calc_screen(&rt->scene->cam);
