@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/10 07:16:36 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/17 08:09:51 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/17 11:07:03 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ static void		key_rt_2(SDL_Scancode scancode,
 		change_focus(sdl);
 	scene->move_on = 1;
 }
-
 
 bool			key_rt(SDL_Scancode scancode,
 					char *flag,

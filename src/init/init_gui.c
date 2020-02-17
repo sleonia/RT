@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/09 04:48:59 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/16 22:31:16 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/17 11:20:25 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,6 @@ static void			init_textbox(t_gui *gui)
 			ft_error(ERROR_MALLOC);
 		gui->textbox[i]->color = (SDL_Color){255, 255, 255, 0};
 		gui->textbox[i]->text = ft_strnew(8);
-		// gui->textbox[i]->text = ft_strdup("7");
 		gui->textbox[i]->on_focus = false;
 		if (i == Phi)
 			gui->textbox[i]->pos = (SDL_Rect){185, 50, 0, 0};
@@ -74,7 +73,10 @@ static void			init_textbox(t_gui *gui)
 		else if (i == Fsaa)
 			gui->textbox[i]->pos = (SDL_Rect){395, 190, 0, 0};
 		else if (i == New_obj)
+		{
 			gui->textbox[i]->pos = (SDL_Rect){410, 720, 0, 0};
+			gui->textbox[i]->color = (SDL_Color){196, 53, 0, 0};
+		}
 		else
 			gui->textbox[i]->pos = (SDL_Rect){0, 0, 0, 0};
 	}

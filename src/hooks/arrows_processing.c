@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/10 05:16:30 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/13 07:04:41 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/17 11:08:12 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ static void	down_arrow(t_object *hi_lited_object)
 		hi_lited_object->object.cone.center.v4[1] -= 0.17;
 	if (hi_lited_object->type == o_parab)
 		hi_lited_object->object.parab.center.v4[1] -= 0.17;
+	if (hi_lited_object->type == o_torus)
+		hi_lited_object->object.parab.center.v4[1] -= 0.17;
 }
 
 static void	up_arrow(t_object *hi_lited_object)
@@ -33,6 +35,8 @@ static void	up_arrow(t_object *hi_lited_object)
 	if (hi_lited_object->type == o_cone)
 		hi_lited_object->object.cone.center.v4[1] += 0.17;
 	if (hi_lited_object->type == o_parab)
+		hi_lited_object->object.parab.center.v4[1] += 0.17;
+	if (hi_lited_object->type == o_torus)
 		hi_lited_object->object.parab.center.v4[1] += 0.17;
 }
 
@@ -46,6 +50,8 @@ static void	left_arrow(t_object *hi_lited_object)
 		hi_lited_object->object.cone.center.v4[0] -= 0.17;
 	if (hi_lited_object->type == o_parab)
 		hi_lited_object->object.parab.center.v4[0] -= 0.17;
+	if (hi_lited_object->type == o_torus)
+		hi_lited_object->object.parab.center.v4[0] -= 0.17;
 }
 
 static void	right_arrow(t_object *hi_lited_object)
@@ -57,6 +63,8 @@ static void	right_arrow(t_object *hi_lited_object)
 	if (hi_lited_object->type == o_cone)
 		hi_lited_object->object.cone.center.v4[0] += 0.17;
 	if (hi_lited_object->type == o_parab)
+		hi_lited_object->object.parab.center.v4[0] += 0.17;
+	if (hi_lited_object->type == o_torus)
 		hi_lited_object->object.parab.center.v4[0] += 0.17;
 }
 

@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/13 04:57:24 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/13 04:57:34 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/17 11:21:02 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void			load_from_rendered_text(t_textbox *textbox,
 {
 	SDL_Surface	*txt_sur;
 
-	if (!(txt_sur = TTF_RenderText_Solid(font, text, (SDL_Color){0, 0, 0, 0})))
+	if (!(txt_sur = TTF_RenderText_Solid(font, text, textbox->color)))
 		ft_error((char *)SDL_GetError());
 	if (!(textbox->m_texture = SDL_CreateTextureFromSurface(render, txt_sur)))
 		ft_error((char *)SDL_GetError());
