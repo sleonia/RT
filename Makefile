@@ -6,11 +6,12 @@
 #    By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/01 04:18:29 by sleonia           #+#    #+#              #
-#    Updated: 2020/02/17 15:47:22 by sleonia          ###   ########.fr        #
+#    Updated: 2020/02/17 20:11:08 by sleonia          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 .PHONY: libft, libtojson, all, clean, fclean, re
+
 
 # =========== #
 #	GUI	  #
@@ -184,6 +185,9 @@ INCLUDES_FILES = $(addprefix $(INCLUDES_DIR), $(INCLUDES_FILES_LIST))
 
 NAME = RT
 
+		
+			
+
 OBJ = 									\
 		$(OBJ_GUI_FILES)				\
 		$(OBJ_HOOKS_FILES)				\
@@ -219,7 +223,13 @@ COMPILE = gcc $(COMPILE_FLAGS) -I $(INCLUDES_DIR) $(INC_SDL) -I $(LIBFT_INC) -I 
 
 RT_LIBS = -L $(LIBFT_DIR) -lft -L $(SDL2_AUDIO_DIR) -lsdl_audio -L $(LIBTOJSON_DIR) -ltojson
 
-all: $(NAME)
+all: update $(NAME)
+
+update:
+		git submodule init libtojson
+		git submodule update libtojson
+		git submodule init libft	
+		git submodule update libft	
 
 $(NAME): $(OBJ_DIR) $(OBJ) $(INCLUDES_FILES)
 	@make lib_refresh
@@ -273,7 +283,10 @@ fclean: clean
 	@make fclean -C $(LIBTOJSON_DIR)
 	@make fclean -C $(SDL2_AUDIO_DIR)
 
-re: fclean $(NAME)
+re: fclean install $(NAME)
+
+install:
+		brew install imagesnap
 
 # =========== #
 # 	COLORS	  #

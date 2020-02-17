@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/10 07:16:36 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/17 11:07:03 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/17 20:36:34 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,8 @@ bool			key_rt(SDL_Scancode scancode,
 			*flag = SEPIA;
 		if (scancode == SDL_SCANCODE_K)
 			*flag = BLUR;
+		if (scancode == SDL_SCANCODE_O)
+			system("imagesnap ~/Desktop/$(date +%y%m%d%H%M%S).png");
 		if (scancode == SDL_SCANCODE_B)
 			SDL_ShowCursor(!SDL_ShowCursor(-1));
 		if (scancode == SDL_SCANCODE_H)

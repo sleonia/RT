@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/10 07:52:23 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/17 15:18:23 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/17 17:57:35 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static bool		reset_value(int flag, t_rt *rt)
 }
 
 static bool		check_textbox(int x, int y,
-							t_object **hi_lited_object, t_rt *rt)
+							t_object **hi_lited_object, t_rt *rt) //отдельный файл
 {
 	if (!*hi_lited_object)
 	{
