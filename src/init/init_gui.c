@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/09 04:48:59 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/17 11:20:25 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/17 15:17:45 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,8 @@ static void			init_textbox(t_gui *gui)
 		if (!(gui->textbox[i] = (t_textbox *)ft_memalloc(sizeof(t_textbox))))
 			ft_error(ERROR_MALLOC);
 		gui->textbox[i]->color = (SDL_Color){255, 255, 255, 0};
-		gui->textbox[i]->text = ft_strnew(8);
+		// gui->textbox[i]->text = ft_strnew(8);
+		gui->textbox[i]->text = ft_strdup("      ");
 		gui->textbox[i]->on_focus = false;
 		if (i == Phi)
 			gui->textbox[i]->pos = (SDL_Rect){185, 50, 0, 0};
@@ -68,7 +69,7 @@ static void			init_textbox(t_gui *gui)
 			gui->textbox[i]->pos = (SDL_Rect){390, 50, 0, 0};
 		else if (i == Id)
 			gui->textbox[i]->pos = (SDL_Rect){195, 190, 0, 0};
-		else if (i == Ambient)
+		else if (i == Skybox_ambient)
 			gui->textbox[i]->pos = (SDL_Rect){260, 190, 0, 0};
 		else if (i == Fsaa)
 			gui->textbox[i]->pos = (SDL_Rect){395, 190, 0, 0};
@@ -88,9 +89,9 @@ t_gui				*init_gui(void)
 
 	if (!(gui = (t_gui *)ft_memalloc((sizeof(t_gui)))))
 		ft_error(ERROR_INPUT);
-	gui->ttf[0] = init_ttf(FONT, 24, (SDL_Color){255, 255, 255, 0});
-	gui->ttf[1] = init_ttf(FONT, 34, (SDL_Color){255, 255, 255, 0});
-	gui->ttf[2] = init_ttf(FONT, 14, (SDL_Color){255, 255, 255, 0});
+	gui->ttf[SMALL_FONT_ID] = init_ttf(FONT, 14, (SDL_Color){255, 255, 255, 0});
+	gui->ttf[NORMAL_FONT_ID] = init_ttf(FONT, 24, (SDL_Color){255, 255, 255, 0});
+	gui->ttf[BIG_FONT_ID] = init_ttf(FONT, 34, (SDL_Color){255, 255, 255, 0});
 	gui->render_text = false;
 	if (!(gui->radio = IMG_Load("./assets/gui/radio.png")))
 		ft_error((char *)SDL_GetError());

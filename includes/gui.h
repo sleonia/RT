@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/06 22:40:57 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/17 08:43:25 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/17 15:17:35 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,16 +20,40 @@
 
 # define COUNT_OF_BUTTONS	6
 # define COUNT_OF_RADIO_BTN	4
-# define COUNT_OF_TEXTBOX	6
+# define COUNT_OF_TEXTBOX	28
+# define SMALL_FONT_ID		0
+# define NORMAL_FONT_ID		1
+# define BIG_FONT_ID		2
 
 enum						e_textbox_type
 {
 	Phi,
 	Tetta,
 	Id,
-	Ambient,
+	Skybox_ambient,
 	Fsaa,
-	New_obj
+	New_obj,
+	Sphere_rad,
+	Sphere_center,
+	Cylinder_axis,
+	Cylinder_center,
+	Cylinder_len,
+	Cylinder_rad,
+	Cone_axis,
+	Cone_center,
+	Cone_len,
+	Cone_tan,
+	Plane_axis,
+	Plane_tan,
+	Parab_axis,
+	Parab_center,
+	Parab_dist,
+	Parab_len,
+	Tor_axis,
+	Tor_center,
+	Tor_bigr,
+	Tor_r,
+	Color
 };
 
 typedef struct				s_textbox

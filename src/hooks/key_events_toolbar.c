@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/10 07:16:51 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/17 08:54:34 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/17 15:18:10 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ static int		search_textbox_in_focus(t_gui *gui)
 
 static void		set_value_from_textbox(t_object *hi_lited_object,
 								t_scene *scene,
-								t_gui *gui)
+								t_gui *gui,
+								t_cl *cl)
 {
 	if (!hi_lited_object)
 	{
@@ -35,9 +36,10 @@ static void		set_value_from_textbox(t_object *hi_lited_object,
 		scene->cam.tetta = check_tetta(ft_atof(gui->textbox[Tetta]->text));
 		scene->skybox_id = check_skybox(ft_atof(gui->textbox[Id]->text),
 										scene->texture_cnt);
-		scene->ambient = check_ambient(ft_atof(gui->textbox[Ambient]->text));
+		scene->ambient = check_ambient(ft_atof(gui->textbox[Skybox_ambient]->text));
 		scene->fsaa = check_fsaa(ft_atof(gui->textbox[Fsaa]->text));
 	}
+	add_obj(88 + ft_atoi(gui->textbox[New_obj]->text), scene, cl);
 }
 
 static void		backspace_processing(int id_cur_textbox, t_gui *gui)
@@ -94,7 +96,7 @@ bool			key_toolbar(SDL_Scancode scancode,
 			if (scancode == SDL_SCANCODE_BACKSPACE)
 				backspace_processing(id_cur_textbox, rt->sdl->gui);
 			if (scancode == SDL_SCANCODE_RETURN)
-				set_value_from_textbox(hi_lited_object, rt->scene, rt->sdl->gui);
+				set_value_from_textbox(hi_lited_object, rt->scene, rt->sdl->gui, rt->cl);
 		}
 	}
 	else if(rt->sdl->event.type == SDL_TEXTINPUT)

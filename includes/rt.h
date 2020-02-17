@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 04:06:50 by thorker           #+#    #+#             */
-/*   Updated: 2020/02/17 09:11:48 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/17 15:20:44 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -324,6 +324,7 @@ void					gui_main(char *flag,
 								t_object **hi_lited_object,
 								t_sdl *sdl,
 								t_scene *scene);
+void					gui_material(t_sdl *sdl, t_object **hi_lited_object);
 /*
 **						hooks
 */

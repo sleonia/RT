@@ -6,7 +6,7 @@
 #    By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/01 04:18:29 by sleonia           #+#    #+#              #
-#    Updated: 2020/02/17 09:00:56 by sleonia          ###   ########.fr        #
+#    Updated: 2020/02/17 15:20:19 by sleonia          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,6 +22,7 @@ GUI_FILES =								\
 			gui_cylinder_screen.c		\
 			gui_default_screen.c 		\
 			gui_main.c 					\
+			gui_material.c				\
 			gui_parab_screen.c 			\
 			gui_plane_screen.c 			\
 			gui_sphere_screen.c 		\

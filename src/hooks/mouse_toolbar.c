@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/10 07:52:23 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/17 08:54:23 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/17 15:18:23 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,8 @@ static bool		check_textbox(int x, int y,
 		}
 		if ((x >= 265 && x <= 360) && (y >= 195 && y <= 225))
 		{
-			rt->sdl->gui->textbox[Ambient]->on_focus = true;
-			return (reset_value(Ambient, rt));
+			rt->sdl->gui->textbox[Skybox_ambient]->on_focus = true;
+			return (reset_value(Skybox_ambient, rt));
 		}
 		if ((x >= 400 && x <= 460) && (y >= 195 && y <= 225))
 		{
@@ -105,6 +105,8 @@ bool			mouse_toolbar(char *flag,
 		}
 		check_buttons(flag, x, y, rt);
 		check_textbox(x, y, hi_lited_object, rt);
+		if (rt->sdl->event.button.button == SDL_BUTTON_RIGHT)
+			change_focus(rt->sdl);
 	}
 	return (false);
 }
