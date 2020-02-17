@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/10 07:16:51 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/17 15:18:10 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/17 17:52:27 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,12 @@ static void		set_value_from_textbox(t_object *hi_lited_object,
 {
 	if (!hi_lited_object)
 	{
-		scene->cam.phi = check_phi(ft_atof(gui->textbox[Phi]->text));
-		scene->cam.tetta = check_tetta(ft_atof(gui->textbox[Tetta]->text));
-		scene->skybox_id = check_skybox(ft_atof(gui->textbox[Id]->text),
+		scene->cam.phi = check_phi(atof(gui->textbox[Phi]->text));
+		scene->cam.tetta = check_tetta(atof(gui->textbox[Tetta]->text));
+		scene->skybox_id = check_skybox(atof(gui->textbox[Id]->text),
 										scene->texture_cnt);
-		scene->ambient = check_ambient(ft_atof(gui->textbox[Skybox_ambient]->text));
-		scene->fsaa = check_fsaa(ft_atof(gui->textbox[Fsaa]->text));
+		scene->ambient = check_ambient(atof(gui->textbox[Skybox_ambient]->text));
+		scene->fsaa = check_fsaa(atof(gui->textbox[Fsaa]->text));
 	}
 	add_obj(88 + ft_atoi(gui->textbox[New_obj]->text), scene, cl);
 }

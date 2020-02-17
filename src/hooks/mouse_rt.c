@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/10 07:52:49 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/17 14:54:04 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/17 15:35:57 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ bool			mouse_rt(t_sdl *sdl,
 	{
 		if ((*hi_lited_object = get_object(scene, x, y)) != NULL)
 			return (true);
-		change_focus(sdl);
 	}
 	return (false);
 }

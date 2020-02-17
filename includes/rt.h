@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 04:06:50 by thorker           #+#    #+#             */
-/*   Updated: 2020/02/17 15:20:44 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/17 17:36:36 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -471,10 +471,10 @@ int						ft_len_arr(void **arr);
 char					*ft_strjoin_free(char *s1, char *s2, int num);
 char					*get_next_name(char *name);
 cl_int3					int_to_rgb(int src_color);
-void					load_from_rendered_text(t_textbox *textbox,
-											char *text,
-											SDL_Renderer *render,
-											TTF_Font *font);
+void					load_textboxes(int start,
+									int end,
+									t_gui *gui,
+									SDL_Renderer *render);
 int						read_kernel(t_cl *cl, char **files_cl);
 int						realloc_img(t_scene *scene, char *file_name);
 int						filter(int	*pixels, char flag);

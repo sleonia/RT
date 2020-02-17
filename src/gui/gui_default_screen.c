@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/08 06:44:01 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/17 15:17:52 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/17 17:51:41 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ void			set_value_in_textbox(t_scene *scene,
 									t_gui *gui)
 {
 	sprintf(gui->textbox[Phi]->text, "%3.3f", scene->cam.phi);
-	sprintf(gui->textbox[Tetta]->text, "%3.3f", scene->cam.tetta);
+	sprintf(gui->textbox[Tetta]->text, "%3.3f", scene->cam.tetta);	
 	sprintf(gui->textbox[Id]->text, "%1d", scene->skybox_id);
 	sprintf(gui->textbox[Skybox_ambient]->text, "%3.3f", scene->ambient);
 	sprintf(gui->textbox[Fsaa]->text, "%1d", scene->fsaa);
@@ -97,8 +97,5 @@ void			gui_default_screen(char *flag, t_sdl *sdl)
 	gui_skybox(sdl->gui, sdl->screen[1]->sur);
 	gui_mode(flag, sdl->gui, sdl->screen[1]->sur);
 	gui_buttons(sdl);
-	for (size_t k = 0; k < COUNT_OF_TEXTBOX; k++)
-	{
-		load_from_rendered_text(sdl->gui->textbox[k], sdl->gui->textbox[k]->text, sdl->screen[1]->render, sdl->gui->ttf[NORMAL_FONT_ID]->font);
-	}
+	load_textboxes(Phi, New_obj, sdl->gui, sdl->screen[1]->render);
 }

@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/06 22:40:57 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/17 15:17:35 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/17 15:23:03 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,14 @@ enum						e_textbox_type
 	Tor_center,
 	Tor_bigr,
 	Tor_r,
-	Color
+	Color,
+	Material_ambient,
+	Diffuse,
+	Specular,
+	Reflection,
+	Refraction,
+	Texture_id,
+	Texture
 };
 
 typedef struct				s_textbox
