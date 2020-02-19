@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 04:06:50 by thorker           #+#    #+#             */
-/*   Updated: 2020/02/19 12:54:06 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/19 14:03:11 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -303,6 +303,8 @@ typedef struct			s_rt
 **						gui
 */
 void					gui_buttons(t_sdl *sdl);
+void					set_value_in_def_textbox(t_scene *scene,
+											t_gui *gui);
 void					set_textbox_value(t_scene *scene,
 										t_object **hi_lited_object,
 										t_gui *gui);

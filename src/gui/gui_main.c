@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/08 06:54:01 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/19 13:02:11 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/19 14:06:24 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,7 @@ void		gui_main(char *flag,
 	else
 	{
 		draw_background(0x0, ((int *)(sdl->screen[1]->sur->pixels)));
-		set_textbox_value(scene, hi_lited_object, sdl->gui); //new func
-		// hi_lited_object
+		set_textbox_value(scene, hi_lited_object, sdl->gui);
 		render_surface((SDL_Rect){0, 0, 0, 0}, (SDL_Rect){-70, 50,
 			TOOL_SCREEN_WIDTH + 160, TOOL_SCREEN_HEIGHT - 100},
 			sdl->gui->headband, sdl);

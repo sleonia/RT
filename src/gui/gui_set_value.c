@@ -6,13 +6,13 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/19 12:35:12 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/19 13:54:21 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/19 14:04:20 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-static void			set_value_in_def_textbox(t_scene *scene,
+void			set_value_in_def_textbox(t_scene *scene,
 									t_gui *gui)
 {
 	sprintf(gui->textbox[Phi]->text, "%3.3f", scene->cam.phi);
@@ -35,7 +35,7 @@ static void		set_value_in_cylinder_textbox(t_cylinder *cylinder,
 {
 	// sprintf(gui->textbox[Cylinder_rad]->text, "%3.3f", hi_lited_object->object.cylinder.axis);
 	// sprintf(gui->textbox[Cylinder_center]->text, "", hi_lited_object->object.cylinder.center); //новая функция для отрисовки хуйни из 3 параметров
-	// sprintf(gui->textbox[Cylinder_axis]->text, "%3.3f", cylinder->length);
+	sprintf(gui->textbox[Cylinder_axis]->text, "%3.3f", cylinder->length);
 	// sprintf(gui->textbox[Cylinder_rad]->text, "%3.3f", cylinder->radius);
 }
 
@@ -75,16 +75,15 @@ static void		set_value_in_torus_textbox(t_torus *torus,
 
 void			set_textbox_value(t_scene *scene, t_object **hi_lited_object, t_gui *gui)
 {
-	// if (!hi_lited_object && !*hi_lited_object)
-	if (!hi_lited_object)
+	if (!*hi_lited_object)
 		set_value_in_def_textbox(scene, gui);
-	// else if ((*hi_lited_object)->type == o_sphere)
-	// 	set_value_in_sphere_textbox(&(*hi_lited_object)->object.sphere, gui);
+	else if ((*hi_lited_object)->type == o_sphere)
+		set_value_in_sphere_textbox(&(*hi_lited_object)->object.sphere, gui);
 	// 	// set_value_in_sphere_textbox((hi_lited_object)->object.sphere, gui);
 	// else if ((*hi_lited_object)->type == o_cylinder)
 	// 	set_value_in_cylinder_textbox(&(*hi_lited_object)->object.cylinder, gui);
 	// else if ((*hi_lited_object)->type == o_cone)
-	// 	set_value_in_cone_textbox(&(*hi_lited_object)->object.cone, gui);
+	// 	set_value_in_cone_textbs_object)->object.cone, gui);
 	// else if ((*hi_lited_object)->type == o_plane)
 	// 	set_value_in_plane_textbox(&(*hi_lited_object)->object.plane, gui);
 	// else if ((*hi_lited_object)->type == o_parab)

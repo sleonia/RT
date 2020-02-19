@@ -295,7 +295,7 @@ int	closest_intersection(float3 o, float3 d, int count_obj, __global t_object *o
 				float3	a;
 
 				dist = dist_i;
-				light_hit->hit = o + d * dist_i * 0.998f;
+				light_hit->hit = o + d * dist_i;
 				k = dot(light_hit->hit - (obj + i)->object.torus.center, (obj + i)->object.torus.axis);
 				a = light_hit->hit - (obj + i)->object.torus.axis * k;
 				a = a - (obj + i)->object.torus.center;
