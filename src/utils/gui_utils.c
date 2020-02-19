@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/10 15:43:41 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/12 01:22:57 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/19 15:22:57 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,4 +37,3 @@ int		get_height(t_textbox *textbox)
 {
 	return (textbox->m_height);
 }
-

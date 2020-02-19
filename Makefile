@@ -6,7 +6,7 @@
 #    By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/01 04:18:29 by sleonia           #+#    #+#              #
-#    Updated: 2020/02/19 15:12:13 by sleonia          ###   ########.fr        #
+#    Updated: 2020/02/19 15:28:02 by sleonia          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -100,6 +100,7 @@ PARSE_FILES =							\
 			parse_lights.c				\
 			parse_material.c			\
 			parse_objects_2.c			\
+			parse_objects_3.c			\
 			parse_objects.c				\
 			parse_skybox.c				\
 			parse_texture.c				\
@@ -113,8 +114,6 @@ OBJ_PARSE_FILES = $(addprefix $(OBJ_DIR), $(PARSE_FILES:.c=.o))
 # =========== #
 
 SDL_UTILS_FILES =						\
-			check_value.c 				\
-			check_value2.c 				\
 			fill_rect.c					\
 			music_manager.c				\
 			render_button.c				\
@@ -133,6 +132,8 @@ OBJ_SDL_UTILS_FILES = $(addprefix $(OBJ_DIR), $(SDL_UTILS_FILES:.c=.o))
 # =========== #
 
 UTILS_FILES =							\
+			check_value.c 				\
+			check_value2.c 				\
 			errors_for_opencl.c			\
 			filter.c					\
 			ft_error.c					\
@@ -142,6 +143,8 @@ UTILS_FILES =							\
 			gui_utils.c					\
 			int_to_rgb.c				\
 			load_textbox.c 				\
+			new_obj.c					\
+			new_obj2.c					\
 			read_kernel.c				\
 			realloc_img.c				\
 			realloc_obj.c				\

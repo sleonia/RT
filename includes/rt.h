@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 04:06:50 by thorker           #+#    #+#             */
-/*   Updated: 2020/02/19 15:10:18 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/19 15:18:02 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -482,6 +482,12 @@ void					load_textboxes(int start,
 									int end,
 									t_gui *gui,
 									SDL_Renderer *render);
+void					new_sphere(t_object *obj);
+void					new_cylinder(t_object *obj);
+void					new_cone(t_object *obj);
+void					new_plane(t_object *obj);
+void					new_parab(t_object *obj);
+void					new_torus(t_object *obj);
 int						read_kernel(t_cl *cl, char **files_cl);
 int						realloc_img(t_scene *scene, char *file_name);
 int						filter(int	*pixels, char flag);
