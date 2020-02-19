@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/19 21:07:57 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/19 21:38:33 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/19 21:51:49 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ bool		check_textbox(int x, int y,
 		}	
 		return (true);
 	}
-	else if ((*hi_lited_object)->type == o_sphere)
+	if ((*hi_lited_object)->type == o_sphere)
 		check_sphere_textbox(x, y, hi_lited_object, rt);
 	if ((x >= 410 && x <= 430) && (y >= 710 && y <= 750))
 	{
