@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/16 21:30:49 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/17 07:55:03 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/19 12:47:24 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,3 +46,6 @@ int			check_fsaa(int input_fsaa)
 		return (input_fsaa);
 	return (0);
 }
+
+//check color
+//check pos

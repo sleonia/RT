@@ -6,7 +6,7 @@
 #    By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/01 04:18:29 by sleonia           #+#    #+#              #
-#    Updated: 2020/02/17 21:27:22 by sleonia          ###   ########.fr        #
+#    Updated: 2020/02/19 12:35:46 by sleonia          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,6 +26,7 @@ GUI_FILES =								\
 			gui_material.c				\
 			gui_parab_screen.c 			\
 			gui_plane_screen.c 			\
+			gui_set_value.c				\
 			gui_sphere_screen.c 		\
 			gui_torus_screen.c 			\
 
@@ -143,7 +144,7 @@ UTILS_FILES =							\
 			read_kernel.c				\
 			realloc_img.c				\
 			realloc_obj.c				\
-			render_textbox.c 			\
+			render_textboxs.c 			\
 			rgb_to_int.c				\
 			save_image.c				\
 			show_error.c				\

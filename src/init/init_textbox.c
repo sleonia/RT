@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 21:27:56 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/17 21:29:45 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/19 12:40:41 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,10 @@ void				init_textbox(t_gui *gui)
 		else if (i == Sphere_rad)
 			gui->textbox[i]->pos = (SDL_Rect){185, 150, 0, 0};
 		else if (i == Sphere_center)
+		{
+			gui->textbox[i]->text = ft_strjoin_free(gui->textbox[i]->text, "     ", 1);
 			gui->textbox[i]->pos = (SDL_Rect){185, 200, 0, 0};
+		}
 		else
 			gui->textbox[i]->pos = (SDL_Rect){0, 0, 0, 0};
 	}

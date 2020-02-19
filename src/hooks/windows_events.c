@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/08 02:39:27 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/17 08:10:25 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/19 09:19:56 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,13 @@ bool		window_events(char *flag, SDL_Event event, t_screen *screen)
 	if (event.window.event == SDL_WINDOWEVENT_ENTER)
 		screen->mouse_focus = true;
 	if (event.window.event == SDL_WINDOWEVENT_LEAVE)
+	{
+		if (screen->win_id == 2)
+			SDL_ShowCursor(0);
+		if (screen->win_id == 1)
+			SDL_ShowCursor(1);
 		screen->mouse_focus = false;
+	}
 	if (event.window.event == SDL_WINDOWEVENT_FOCUS_GAINED)
 		screen->keyboard_focus = true;
 	if (event.window.event == SDL_WINDOWEVENT_FOCUS_LOST)

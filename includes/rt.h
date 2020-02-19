@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 04:06:50 by thorker           #+#    #+#             */
-/*   Updated: 2020/02/17 21:27:38 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/19 12:54:06 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -303,8 +303,9 @@ typedef struct			s_rt
 **						gui
 */
 void					gui_buttons(t_sdl *sdl);
-void					set_value_in_textbox(t_scene *scene,
-											t_gui *gui);
+void					set_textbox_value(t_scene *scene,
+										t_object **hi_lited_object,
+										t_gui *gui);
 void					gui_default_screen(char *flag,
 										t_sdl *sdl);
 void					gui_cone_screen(t_sdl *sdl,
@@ -383,9 +384,6 @@ t_gui					*init_gui(void);
 t_rt					*init_rt(char **av);
 t_scene					*init_scene(t_key_value *json, char *sounds[]);
 t_sdl					*init_sdl(t_key_value *json);
-void					print_build_error(t_cl *cl,
-										cl_int ret,
-										size_t log_size);
 int						*fill_texture_for_object(char *texture_path,
 											int *texture_pixels,
 											int *texture_param);
@@ -453,9 +451,7 @@ void					sdl_putstr(SDL_Rect	dest,
 								t_ttf *ttf,
 								SDL_Surface *sur);
 void					sdl_quit(t_sdl *sdl);
-void					sdl_update(char *flag,
-								t_object **hi_lited_object,
-								t_sdl *sdl);
+void					sdl_update(t_object **hi_lited_object, t_sdl *sdl);
 
 /*
 **						utils
@@ -481,9 +477,10 @@ int						realloc_img(t_scene *scene, char *file_name);
 int						filter(int	*pixels, char flag);
 int						realloc_obj(SDL_Scancode scancode, t_scene *scene);
 int						rgb_to_int(int red, int green, int blue);
-void					render_textbox(t_textbox *textbox,
-									SDL_Rect pos,
-									SDL_Renderer *render);
+void					render_textboxs(int start,
+										int end,
+										t_gui *gui,
+										SDL_Renderer *render);
 void					save_image(int *pixels);
 void					show_error(char *error, char *sounds[]);
 

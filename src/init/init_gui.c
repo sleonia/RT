@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/09 04:48:59 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/17 21:27:54 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/19 11:55:30 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,6 @@ static t_ttf		*init_ttf(char *font, int font_size, SDL_Color font_color)
 	ttf->font_color = font_color;
 	return (ttf);
 }
-
-
 
 t_gui				*init_gui(void)
 {

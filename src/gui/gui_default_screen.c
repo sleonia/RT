@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/08 06:44:01 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/17 17:51:41 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/19 13:05:33 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,17 +77,6 @@ void			gui_camera(t_gui *gui, SDL_Surface *sur)
 	sdl_putstr((SDL_Rect){15, 35, 0, 0}, "Camera", gui->ttf[BIG_FONT_ID], sur);
 	sdl_putstr((SDL_Rect){200, 15, 0, 0}, "phi", gui->ttf[NORMAL_FONT_ID], sur);
 	sdl_putstr((SDL_Rect){400, 15, 0, 0}, "tetta", gui->ttf[NORMAL_FONT_ID], sur);
-}
-
-void			set_value_in_textbox(t_scene *scene,
-									t_gui *gui)
-{
-	sprintf(gui->textbox[Phi]->text, "%3.3f", scene->cam.phi);
-	sprintf(gui->textbox[Tetta]->text, "%3.3f", scene->cam.tetta);	
-	sprintf(gui->textbox[Id]->text, "%1d", scene->skybox_id);
-	sprintf(gui->textbox[Skybox_ambient]->text, "%3.3f", scene->ambient);
-	sprintf(gui->textbox[Fsaa]->text, "%1d", scene->fsaa);
-	sprintf(gui->textbox[New_obj]->text, "%d", 0);
 }
 
 void			gui_default_screen(char *flag, t_sdl *sdl)
