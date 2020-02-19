@@ -6,7 +6,7 @@
 #    By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/01 04:18:29 by sleonia           #+#    #+#              #
-#    Updated: 2020/02/19 12:35:46 by sleonia          ###   ########.fr        #
+#    Updated: 2020/02/19 15:12:13 by sleonia          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -113,7 +113,8 @@ OBJ_PARSE_FILES = $(addprefix $(OBJ_DIR), $(PARSE_FILES:.c=.o))
 # =========== #
 
 SDL_UTILS_FILES =						\
-			check_textbox_value.c 		\
+			check_value.c 				\
+			check_value2.c 				\
 			fill_rect.c					\
 			music_manager.c				\
 			render_button.c				\

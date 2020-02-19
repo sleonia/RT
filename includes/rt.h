@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 04:06:50 by thorker           #+#    #+#             */
-/*   Updated: 2020/02/19 14:03:11 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/19 15:10:18 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,9 @@
 #  include <OpenCL/opencl.h>
 #  include "audio.h"
 #  include <stdbool.h>
+#  define AXIS_FLAG 0
+#  define CENTER_FLAG 1
+#  define COLOR_FLAG 2
 #  define STEP 0.1
 #  define NEGATIVE -101
 #  define SEPIA -102
@@ -464,6 +467,11 @@ double					check_tetta(double input_tetta);
 int						check_skybox(int input_skybox, int texture_cnt);
 double					check_ambient(double input_ambient);
 int						check_fsaa(int input_fsaa);
+void					check_float_array(int flag, float *pos);
+double					check_length(double input_length);
+double					check_radius(double input_radius);
+double					check_tan(double input_tan);
+
 void					func_error(int err);
 void					ft_error(char *str);
 int						ft_len_arr(void **arr);

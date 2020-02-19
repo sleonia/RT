@@ -6,13 +6,13 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/13 05:01:21 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/19 14:43:50 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/19 14:46:42 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-void					render_one_textbox(t_textbox *textbox,
+static void				render_one_textbox(t_textbox *textbox,
 										SDL_Renderer *render)
 {
 	SDL_Rect			*clip;
