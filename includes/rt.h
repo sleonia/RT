@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rt.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccriston <ccriston@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 04:06:50 by thorker           #+#    #+#             */
-/*   Updated: 2020/02/19 20:35:25 by ccriston         ###   ########.fr       */
+/*   Updated: 2020/02/19 21:11:42 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -332,6 +332,8 @@ void					gui_material(t_sdl *sdl, t_object **hi_lited_object);
 
 void					arrows_processing(SDL_Scancode scancode,
 										t_object *hi_lited_object);
+bool					check_textbox(int x, int y,
+									t_object **hi_lited_object, t_rt *rt);
 void					events_processing(char *quit,
 										t_object **hi_lited_object,
 										t_rt *rt);
@@ -501,6 +503,10 @@ int						redred(int	color);
 int						greengreen(int	color);
 int						blueblue(int	color);
 float					minn(float a, float b);
+void					change_mode(int x, int y, char *flag);
+void					check_buttons(char *flag, int x, int y, t_rt *rt);
+bool					reset_value(int flag, t_rt *rt);
+
 
 # endif
 #endif

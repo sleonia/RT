@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/19 12:35:12 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/19 16:37:44 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/19 18:29:51 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,13 @@ void			set_value_in_def_textbox(t_scene *scene,
 static void		set_value_in_sphere_textbox(t_sphere *sphere,
 									t_gui *gui)
 {
+	char		*center;
+
+	center = float_array_to_string(sphere->center);
 	sprintf(gui->textbox[Sphere_rad]->text, "%3.3f", sphere->radius);
-	// sprintf(gui->textbox[Sphere_center]->text, "", sphere->center); //новая функция для отрисовки хуйни из 3 параметров
+	// cl_float3 lox = *string_to_float_array("255 255 255");
+	// printf("%f  %f  %f\n", lox.s[0], lox.s[1], lox.s[2]);
+	gui->textbox[Sphere_center]->text = center;
 }
 
 static void		set_value_in_cylinder_textbox(t_cylinder *cylinder,
