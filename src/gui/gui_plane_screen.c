@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 08:58:20 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/17 15:34:02 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/19 14:42:19 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,4 +27,5 @@ void	gui_plane_screen(t_sdl *sdl, t_object **hi_lited_object)
 	sdl_putstr((SDL_Rect){15, 400, 0, 0}, "distance", sdl->gui->ttf[BIG_FONT_ID], sdl->screen[1]->sur);	
 	gui_material(sdl, hi_lited_object);
 	gui_buttons(sdl);
+	load_textboxes(Plane_axis, Plane_tan, sdl->gui, sdl->screen[1]->render);
 }

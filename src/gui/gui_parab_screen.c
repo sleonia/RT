@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 08:58:49 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/17 15:34:12 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/19 14:42:33 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,4 +29,5 @@ void	gui_parab_screen(t_sdl *sdl, t_object **hi_lited_object)
 	sdl_putstr((SDL_Rect){190, 600, 0, 0}, "length", sdl->gui->ttf[BIG_FONT_ID], sdl->screen[1]->sur);
 	gui_material(sdl, hi_lited_object);
 	gui_buttons(sdl);
+	load_textboxes(Parab_axis, Parab_len, sdl->gui, sdl->screen[1]->render);
 }

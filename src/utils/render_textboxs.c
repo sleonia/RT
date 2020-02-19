@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   render_textbox.c                                   :+:      :+:    :+:   */
+/*   render_textboxs.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/13 05:01:21 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/19 12:04:05 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/19 14:43:50 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,6 @@ void					render_textboxs(int start,
 		render_one_textbox(gui->textbox[i], render);
 		i++;
 	}
-	if (start > New_obj)
+	if (start > New_obj || end < New_obj)
 		render_one_textbox(gui->textbox[New_obj], render);
 }

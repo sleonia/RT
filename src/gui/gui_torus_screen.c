@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 08:59:06 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/17 15:36:25 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/19 14:42:49 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,4 +29,5 @@ void	gui_torus_screen(t_sdl *sdl, t_object **hi_lited_object)
 	sdl_putstr((SDL_Rect){190, 500, 0, 0}, "r", sdl->gui->ttf[BIG_FONT_ID], sdl->screen[1]->sur);
 	gui_material(sdl, hi_lited_object);
 	gui_buttons(sdl);
+	load_textboxes(Torus_axis, Torus_r, sdl->gui, sdl->screen[1]->render);
 }
