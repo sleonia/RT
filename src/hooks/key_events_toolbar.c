@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/10 07:16:51 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/17 17:52:27 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/19 21:44:24 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,16 @@ static void		set_value_from_textbox(t_object *hi_lited_object,
 										scene->texture_cnt);
 		scene->ambient = check_ambient(atof(gui->textbox[Skybox_ambient]->text));
 		scene->fsaa = check_fsaa(atof(gui->textbox[Fsaa]->text));
+	}
+	else if (hi_lited_object->type == o_sphere)
+	{
+		cl_float3 kek = *string_to_float_array(gui->textbox[Sphere_center]->text);
+		check_float_array(CENTER_FLAG, &kek);
+		hi_lited_object->object.sphere.center = kek;
+		printf("1 %f\n", hi_lited_object->object.sphere.radius);
+		hi_lited_object->object.sphere.radius = check_radius(atof(gui->textbox[Sphere_rad]->text));
+		printf("2 %f\n", hi_lited_object->object.sphere.radius);
+		
 	}
 	add_obj(88 + ft_atoi(gui->textbox[New_obj]->text), scene, cl);
 }

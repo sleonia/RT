@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/10 07:52:23 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/19 21:09:53 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/19 21:18:13 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ bool			mouse_toolbar(char *flag,
 		if (rt->sdl->event.button.button == SDL_BUTTON_LEFT)
 		{
 			SDL_GetMouseState(&x, &y);
-			// printf("x = %d  y = %d\n", x, y);
+			printf("x = %d  y = %d\n", x, y);
 			if (!*hi_lited_object)
 			{
 				if ((x >= 200 && x <= 410) && (y >= 350 && y <= 410))

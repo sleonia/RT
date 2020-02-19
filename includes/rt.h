@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rt.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccriston <ccriston@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 04:06:50 by thorker           #+#    #+#             */
-/*   Updated: 2020/02/19 21:16:00 by ccriston         ###   ########.fr       */
+/*   Updated: 2020/02/19 21:37:56 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -465,7 +465,7 @@ double					check_tetta(double input_tetta);
 int						check_skybox(int input_skybox, int texture_cnt);
 double					check_ambient(double input_ambient);
 int						check_fsaa(int input_fsaa);
-void					check_float_array(int flag, float *pos);
+void					check_float_array(int flag, cl_float3 *pos);
 double					check_length(double input_length);
 double					check_radius(double input_radius);
 double					check_tan(double input_tan);
