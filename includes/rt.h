@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rt.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ccriston <ccriston@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 04:06:50 by thorker           #+#    #+#             */
-/*   Updated: 2020/02/19 17:05:52 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/19 20:35:25 by ccriston         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,6 @@
 #  define NBR_OF_SONGS		20
 #  define CNT_OF_DISPLAYS	2
 #  define DISPLAY_NOT	"osascript -e \'display notification\""
-#  define MIN(a,b) (((a)<(b))?(a):(b))
-#  define MAX(a,b) (((a)>(b))?(a):(b))
 #  define FONT			"./assets/fonts/open-sans/OpenSans-Regular.ttf"
 # endif
 # define WIDTH 1280
@@ -47,9 +45,6 @@
 # define TOOL_SCREEN_WIDTH 500
 # define TOOL_SCREEN_HEIGHT HEIGHT
 # define MAX_DIST 10000.f
-# define RED(color) (((int)color >> 16) & 0xFF)
-# define GREEN(color) (((int)color >> 8) & 0xFF)
-# define BLUE(color) ((int)color & 0xFF)
 
 typedef struct			s_move_flag
 {
@@ -343,12 +338,13 @@ void					events_processing(char *quit,
 t_object				*get_object(t_scene *scene, int x, int y);
 char					*pop_back(char *str);
 int						get_width(t_textbox *textbox);
-int						get_height(t_textbox *t_textbox);
-void					add_obj(SDL_Scancode scancode, t_scene *scene, t_cl *cl);
+int						get_height(t_textbox *textbox);
+void					add_obj(SDL_Scancode scancode,
+						t_scene *scene, t_cl *cl);
 void					change_focus(t_sdl *sdl);
 bool					key_events(char *quit, t_object *hi_lited_object,
-								t_rt *rt);
-bool	        		key_rt(SDL_Scancode scancode,
+						t_rt *rt);
+bool					key_rt(SDL_Scancode scancode,
 								char *flag,
 								t_object *hi_lited_object,
 								t_rt *rt);
@@ -501,6 +497,10 @@ void					render_textboxs(int start,
 void					save_image(int *pixels);
 void					show_error(char *error, char *sounds[]);
 cl_float3				*string_to_float_array(char *str);
+int						redred(int	color);
+int						greengreen(int	color);
+int						blueblue(int	color);
+float					minn(float a, float b);
 
 # endif
 #endif

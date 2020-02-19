@@ -2,6 +2,10 @@
 #include "./includes/kernel.h"
 #include "./includes/rt.h"
 
+# define RED(color) (((int)color >> 16) & 0xFF)
+# define GREEN(color) (((int)color >> 8) & 0xFF)
+# define BLUE(color) ((int)color & 0xFF)
+
 static float	coef(int x, int sigma)
 {
 	return(1.f / (sqrt(2 * M_PI_F) * sigma) * exp(-(float)(x * x) / (2 * sigma * sigma)));

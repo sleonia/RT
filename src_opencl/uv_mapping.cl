@@ -2,6 +2,10 @@
 #include "./includes/kernel.h"
 #include "./includes/rt.h"
 
+# define RED(color) (((int)color >> 16) & 0xFF)
+# define GREEN(color) (((int)color >> 8) & 0xFF)
+# define BLUE(color) ((int)color & 0xFF)
+
 static float3			vec_change(float3 n, float3 vec)
 {
     float	cos_x,		cos_z;

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+         #
+#    By: ccriston <ccriston@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/01 04:18:29 by sleonia           #+#    #+#              #
-#    Updated: 2020/02/19 17:00:46 by sleonia          ###   ########.fr        #
+#    Updated: 2020/02/19 20:47:50 by ccriston         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -154,6 +154,7 @@ UTILS_FILES =							\
 			save_image.c				\
 			show_error.c				\
 			string_to_float_array.c		\
+			macros.c					\
 
 UTILS_DIR = ./src/utils/
 
@@ -294,7 +295,7 @@ fclean: clean
 re: fclean install $(NAME)
 
 install:
-		brew install imagesnap
+		# brew install imagesnap
 
 # =========== #
 # 	COLORS	  #

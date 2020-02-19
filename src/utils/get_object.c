@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_object.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ccriston <ccriston@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/04 18:38:23 by deladia           #+#    #+#             */
-/*   Updated: 2020/02/17 08:30:41 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/19 20:46:30 by ccriston         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ static int		intersect_ray_cone(cl_float3 o, cl_float3 d,
 		return (0);
 	t12.x = (-abc.y + sqrt(abc.y * abc.y - 4 * abc.x * abc.z)) / (2.f * abc.x);
 	t12.y = (-abc.y - sqrt(abc.y * abc.y - 4 * abc.x * abc.z)) / (2.f * abc.x);
-	*dist_i = (float)MIN(t12.x, t12.y);
+	*dist_i = (float)minn(t12.x, t12.y);
 	if ((dot(c->axis, (cl_sum(cl_mult_n(d, *dist_i), cl_minus(o, c->center))))
 		* dot(c->axis, (cl_sum(cl_mult_n(d, *dist_i), cl_minus(o, c->center)))))
 		<= (c->length / 2) * (c->length / 2) && *dist_i > 0.002f)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key_events_rt.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ccriston <ccriston@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/10 07:16:36 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/19 14:33:55 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/19 20:51:47 by ccriston         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,10 @@ bool			key_rt(SDL_Scancode scancode,
 			*flag = BLUR;
 		if (scancode == SDL_SCANCODE_O)
 		{
+			system("mkdir -p ./assets/photo/");
 			system("imagesnap ./assets/photo/$(date +%y%m%d%H%M%S).png"); //переделать имя для фото под адекватное
 			system("afplay /System/Library/Sounds/Hero.aiff");
-			system("~/Desktop/test/lox");
+			// system("~/Desktop/test/lox");
 		}
 				// mogrify -resize 256x256
 		if (scancode == SDL_SCANCODE_B)

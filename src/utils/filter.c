@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   filter.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: deladia <deladia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ccriston <ccriston@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/01 08:04:21 by deladia           #+#    #+#             */
-/*   Updated: 2020/02/01 08:04:55 by deladia          ###   ########.fr       */
+/*   Updated: 2020/02/19 20:18:12 by ccriston         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@ static int		color_negative(int color)
 	int		green;
 	int		blue;
 
-	red = 255 - RED(color);
-	green = 255 - GREEN(color);
-	blue = 255 - BLUE(color);
+	red = 255 - redred(color);
+	green = 255 - greengreen(color);
+	blue = 255 - blueblue(color);
 	return ((red << 16) | (green << 8) | blue);
 }
 
@@ -42,9 +42,9 @@ static int		color_sepia(int color)
 	int			green;
 	int			blue;
 
-	red = RED(color) * 0.393 + GREEN(color) * 0.769 + BLUE(color) * 0.189;
-	green = RED(color) * 0.349 + GREEN(color) * 0.686 + BLUE(color) * 0.168;
-	blue = RED(color) * 0.272 + GREEN(color) * 0.534 + BLUE(color) * 0.131;
+	red = redred(color) * 0.393 + greengreen(color) * 0.769 + blueblue(color) * 0.189;
+	green = redred(color) * 0.349 + greengreen(color) * 0.686 + blueblue(color) * 0.168;
+	blue = redred(color) * 0.272 + greengreen(color) * 0.534 + blueblue(color) * 0.131;
 	red = ((red > 255) ? 255 : red);
 	green = ((green > 255) ? 255 : green);
 	blue = ((blue > 255) ? 255 : blue);
