@@ -6,13 +6,40 @@
 /*   By: ccriston <ccriston@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/04 18:38:23 by deladia           #+#    #+#             */
-/*   Updated: 2020/02/19 21:02:12 by ccriston         ###   ########.fr       */
+/*   Updated: 2020/02/19 21:25:52 by ccriston         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-t_object		*get_object(t_scene *s, int x, int y)
+static t_object		*check(t_scene *s, cl_float3 d, cl_float2 dist, int i)
+{
+	while (i < s->count_objects)
+	{
+		if (s->object[i].type == o_sphere && type_sphere(s->cam.pos, d,
+			(s->object + i), &dist))
+			return (&s->object[i]);
+		else if (s->object[i].type == o_plane && type_plane(s->cam.pos, d,
+			(s->object + i), &dist))
+			return (&s->object[i]);
+		else if (s->object[i].type == o_cone && type_cone(s->cam.pos, d,
+			(s->object + i), &dist))
+			return (&s->object[i]);
+		else if (s->object[i].type == o_cylinder && type_cylinder(s->cam.pos, d,
+			(s->object + i), &dist))
+			return (&s->object[i]);
+		else if (s->object[i].type == o_parab && type_parab(s->cam.pos, d,
+			(s->object + i), &dist))
+			return (&s->object[i]);
+		else if (s->object[i].type == o_torus && type_torus(s->cam.pos, d,
+			(s->object + i), &dist))
+			return (&s->object[i]);
+		i++;
+	}
+	return (NULL);
+}
+
+t_object			*get_object(t_scene *s, int x, int y)
 {
 	cl_float3	d;
 	t_object	*closest;
@@ -25,28 +52,7 @@ t_object		*get_object(t_scene *s, int x, int y)
 	cl_normalize(&d);
 	dist.x = MAX_DIST + 1.f;
 	i = 0;
-	while (i < s->count_objects)
-	{
-		if (s->object[i].type == o_sphere && type_sphere(s->cam.pos, d,
-			(s->object + i), &dist))
-			closest = &s->object[i];
-		else if (s->object[i].type == o_plane && type_plane(s->cam.pos, d,
-			(s->object + i), &dist))
-			closest = &s->object[i];
-		else if (s->object[i].type == o_cone && type_cone(s->cam.pos, d,
-			(s->object + i), &dist))
-			closest = &s->object[i];
-		else if (s->object[i].type == o_cylinder && type_cylinder(s->cam.pos, d,
-			(s->object + i), &dist))
-			closest = &s->object[i];
-		else if (s->object[i].type == o_parab && type_parab(s->cam.pos, d,
-			(s->object + i), &dist))
-			closest = &s->object[i];
-		else if (s->object[i].type == o_torus && type_torus(s->cam.pos, d,
-			(s->object + i), &dist))
-			closest = &s->object[i];
-		i++;
-	}
+	closest = check(s, d, dist, i);
 	if (dist.x < MAX_DIST)
 		return (closest);
 	return (NULL);
