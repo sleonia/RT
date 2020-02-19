@@ -6,7 +6,7 @@
 #    By: ccriston <ccriston@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/01 04:18:29 by sleonia           #+#    #+#              #
-#    Updated: 2020/02/19 21:03:07 by ccriston         ###   ########.fr        #
+#    Updated: 2020/02/19 21:16:17 by ccriston         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,6 +40,7 @@ OBJ_GUI_FILES = $(addprefix $(OBJ_DIR), $(GUI_FILES:.c=.o))
 
 HOOKS_FILES =							\
 			arrows_processing.c			\
+			check_textbox.c				\
 			events_processing.c			\
 			key_events.c				\
 			key_events_rt.c				\
@@ -158,6 +159,7 @@ UTILS_FILES =							\
 			show_error.c				\
 			string_to_float_array.c		\
 			macros.c					\
+			textbox_utils.c				\
 
 UTILS_DIR = ./src/utils/
 

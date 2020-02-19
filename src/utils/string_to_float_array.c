@@ -6,15 +6,15 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/19 17:00:29 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/19 18:23:53 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/19 19:37:23 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-void		ft_destroy_string_arr(char **arr)
+void			ft_destroy_string_arr(char **arr)
 {
-	int		i;
+	int			i;
 
 	i = -1;
 	if (arr && arr[0])
