@@ -6,7 +6,7 @@
 #    By: ccriston <ccriston@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/01 04:18:29 by sleonia           #+#    #+#              #
-#    Updated: 2020/02/19 20:47:50 by ccriston         ###   ########.fr        #
+#    Updated: 2020/02/19 21:03:07 by ccriston         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -140,6 +140,9 @@ UTILS_FILES =							\
 			ft_error.c					\
 			ft_len_arr.c				\
 			ft_strjoin_free.c			\
+			help_get_obj.c 				\
+			help_get_obj2.c 			\
+			help_get_obj3.c 			\
 			get_object.c				\
 			gui_utils.c					\
 			int_to_rgb.c				\

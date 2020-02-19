@@ -6,7 +6,7 @@
 /*   By: ccriston <ccriston@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 04:06:50 by thorker           #+#    #+#             */
-/*   Updated: 2020/02/19 20:35:25 by ccriston         ###   ########.fr       */
+/*   Updated: 2020/02/19 21:06:47 by ccriston         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -497,6 +497,18 @@ void					render_textboxs(int start,
 void					save_image(int *pixels);
 void					show_error(char *error, char *sounds[]);
 cl_float3				*string_to_float_array(char *str);
+int						type_sphere(cl_float3 o, cl_float3 d,
+								t_object *object, cl_float2 *dist);
+int						type_cylinder(cl_float3 o, cl_float3 d,
+									t_object *object, cl_float2 *dist);
+int						type_plane(cl_float3 o, cl_float3 d,
+								t_object *object, cl_float2 *dist);
+int						type_cone(cl_float3 o, cl_float3 d,
+								t_object *object, cl_float2 *dist);
+int						type_parab(cl_float3 o, cl_float3 d,
+									t_object *object, cl_float2 *dist);
+int						type_torus(cl_float3 o, cl_float3 d,
+									t_object *object, cl_float2 *dist);
 int						redred(int	color);
 int						greengreen(int	color);
 int						blueblue(int	color);
