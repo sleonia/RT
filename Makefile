@@ -6,7 +6,7 @@
 #    By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/01 04:18:29 by sleonia           #+#    #+#              #
-#    Updated: 2020/02/19 15:28:02 by sleonia          ###   ########.fr        #
+#    Updated: 2020/02/19 17:00:46 by sleonia          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -136,6 +136,7 @@ UTILS_FILES =							\
 			check_value2.c 				\
 			errors_for_opencl.c			\
 			filter.c					\
+			float_array_to_string.c		\
 			ft_error.c					\
 			ft_len_arr.c				\
 			ft_strjoin_free.c			\
@@ -152,6 +153,7 @@ UTILS_FILES =							\
 			rgb_to_int.c				\
 			save_image.c				\
 			show_error.c				\
+			string_to_float_array.c		\
 
 UTILS_DIR = ./src/utils/
 

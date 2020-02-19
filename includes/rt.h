@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 04:06:50 by thorker           #+#    #+#             */
-/*   Updated: 2020/02/19 15:18:02 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/19 17:05:52 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -473,6 +473,7 @@ double					check_radius(double input_radius);
 double					check_tan(double input_tan);
 
 void					func_error(int err);
+char					*float_array_to_string(cl_float3 array);
 void					ft_error(char *str);
 int						ft_len_arr(void **arr);
 char					*ft_strjoin_free(char *s1, char *s2, int num);
@@ -499,6 +500,7 @@ void					render_textboxs(int start,
 										SDL_Renderer *render);
 void					save_image(int *pixels);
 void					show_error(char *error, char *sounds[]);
+cl_float3				*string_to_float_array(char *str);
 
 # endif
 #endif

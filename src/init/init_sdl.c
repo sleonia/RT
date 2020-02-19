@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/28 10:20:37 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/17 08:23:01 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/19 15:59:13 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ static void			init_sdl_2(t_key_value *json, t_sdl *sdl)
 	SDL_RenderCopy(sdl->screen[0]->render, sdl->screen[0]->texture, NULL, NULL);
 	SDL_RenderPresent(sdl->screen[0]->render);
 	assets = parse_assets(json);
-	if(!(IMG_Init(IMG_INIT_PNG) & IMG_INIT_PNG))
+	if (!(IMG_Init(IMG_INIT_PNG) & IMG_INIT_PNG))
 		ft_error((char *)SDL_GetError());
 	set_window_icon(assets, sdl);
 	init_sdl_music(assets, sdl);
@@ -108,7 +108,7 @@ t_sdl				*init_sdl(t_key_value *json)
 		ft_error((char *)SDL_GetError());
 	init_screen(sdl->screen[0], "RT", (SDL_Rect){350, 200, WIDTH, HEIGHT});
 	init_screen(sdl->screen[1], "ToolBar",
-						(SDL_Rect){350 + WIDTH, 200, TOOL_SCREEN_WIDTH, HEIGHT});
+					(SDL_Rect){350 + WIDTH, 200, TOOL_SCREEN_WIDTH, HEIGHT});
 	init_sdl_2(json, sdl);
 	return (sdl);
 }

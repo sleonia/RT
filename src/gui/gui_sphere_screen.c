@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 08:47:21 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/19 12:38:17 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/19 18:23:58 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,4 +27,7 @@ void	gui_sphere_screen(t_sdl *sdl, t_object **hi_lited_object)
 	gui_material(sdl, hi_lited_object);
 	gui_buttons(sdl);
 	load_textboxes(Sphere_rad, Sphere_center, sdl->gui, sdl->screen[1]->render);
+	cl_float3 lox = *string_to_float_array("255 255 255");
+	// printf("%f  %f  %f\n", lox.s[0], lox.s[1], lox.s[2]);
+	// float_array_to_string((*hi_lited_object)->object.sphere.center);
 }

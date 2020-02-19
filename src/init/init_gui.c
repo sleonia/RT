@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/09 04:48:59 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/19 11:55:30 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/19 15:58:43 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,8 @@ t_gui				*init_gui(void)
 	if (!(gui = (t_gui *)ft_memalloc((sizeof(t_gui)))))
 		ft_error(ERROR_INPUT);
 	gui->ttf[SMALL_FONT_ID] = init_ttf(FONT, 14, (SDL_Color){255, 255, 255, 0});
-	gui->ttf[NORMAL_FONT_ID] = init_ttf(FONT, 24, (SDL_Color){255, 255, 255, 0});
+	gui->ttf[NORMAL_FONT_ID] =
+		init_ttf(FONT, 24, (SDL_Color){255, 255, 255, 0});
 	gui->ttf[BIG_FONT_ID] = init_ttf(FONT, 34, (SDL_Color){255, 255, 255, 0});
 	gui->render_text = false;
 	if (!(gui->radio = IMG_Load("./assets/gui/radio.png")))
