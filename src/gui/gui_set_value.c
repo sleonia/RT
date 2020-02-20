@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/19 12:35:12 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/20 21:03:30 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/20 22:13:26 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,11 @@ void			set_value_in_def_textbox(t_scene *scene,
 	sprintf(gui->textbox[Skybox_ambient]->text, "%3.3f", scene->ambient);
 	sprintf(gui->textbox[Fsaa]->text, "%1d", scene->fsaa);
 	sprintf(gui->textbox[New_obj]->text, "%d", 0);
+}
+
+void			set_value_in_material_textbox(t_scene *scene,
+									t_gui *gui)
+{
 }
 
 static void		set_value_in_sphere_textbox(t_sphere *sphere,

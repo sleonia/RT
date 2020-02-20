@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 08:56:57 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/20 21:37:06 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/20 22:04:23 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	gui_cylinder_screen(t_sdl *sdl, t_object **hi_lited_object)
 {
 	print_screen_title(sdl->gui->ttf, sdl->screen[1]->sur);
 	print_screen_item(sdl->gui->ttf, sdl->screen[1]->sur);
-	// gui_material(sdl, hi_lited_object);
+	gui_material(sdl, hi_lited_object);
 	gui_buttons(sdl);
 	load_textboxes(Cylinder_axis, Cylinder_rad, sdl->gui, sdl->screen[1]->render);
 }
