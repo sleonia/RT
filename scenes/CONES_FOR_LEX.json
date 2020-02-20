@@ -58,21 +58,6 @@
 			}
 		},
 		{
-			"type":					"sphere",
-			"radius":				3.0,
-			"center":				[-4.0, 0.0, 10.0],
-			"material":
-			{
-				"color":			[255.0, 0.0, 0.0],
-				"ambient":			1.0,
-				"diffuse":			0.4,
-				"specular":			50.0,
-				"reflection":		0.0,
-				"refraction":		0.0,
-				"texture_id":		-1
-			}
-		},
-		{
 			"type":					"cylinder",
 			"axis":					[-1.0, 1.0, 0.0],
 			"center":				[-4.0, 0.0, 10.0],

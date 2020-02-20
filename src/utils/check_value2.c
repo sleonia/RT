@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/19 15:11:15 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/19 21:47:40 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/20 17:25:54 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,17 +20,17 @@ void		check_float_array(int flag, cl_float3 *pos)
 	if (flag == AXIS_FLAG)
 	{
 		while (++i < 3)
-			pos->s[i] = (pos->s[i] > (1.0) || pos->s[i] < -1) ? pos->s[i] : 0.0;
+			pos->s[i] = (pos->s[i] > (1.0) && pos->s[i] < -1) ? pos->s[i] : 0.0;
 	}
 	else if (flag == CENTER_FLAG)
 	{
 		while (++i < 3)
-			pos->s[i] = (pos->s[i] > 9000.0 || pos->s[i] < 0.0) ? pos->s[i] : 0.0;
+			pos->s[i] = (pos->s[i] <= 9000.0 && pos->s[i] >= 0.0) ? pos->s[i] : 0.0;
 	}
 	else if (flag == COLOR_FLAG)
 	{
 		while (++i < 3)
-			pos->s[i] = (pos->s[i] > 255.0 || pos->s[i] < 0) ? pos->s[i] : 100.0;
+			pos->s[i] = (pos->s[i] > 255.0 && pos->s[i] < 0) ? pos->s[i] : 100.0;
 	}
 }
 

@@ -6,25 +6,46 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 08:47:21 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/19 19:51:45 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/20 21:36:36 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-void	gui_sphere_screen(t_sdl *sdl, t_object **hi_lited_object)
+static void		print_screen_title(t_ttf *ttf[], SDL_Surface *sur)
 {
 	SDL_Color	default_color;
 	SDL_Color	highlighted_color;
 
-	highlighted_color = (SDL_Color){196, 53, 0, 0};
-	default_color = sdl->gui->ttf[BIG_FONT_ID]->font_color;
-	sdl->gui->ttf[BIG_FONT_ID]->font_color = highlighted_color;
-	sdl_putstr((SDL_Rect){190, 35, 0, 0}, "sphere", sdl->gui->ttf[BIG_FONT_ID], sdl->screen[1]->sur);
-	sdl->gui->ttf[BIG_FONT_ID]->font_color = default_color;
-	sdl_putstr((SDL_Rect){50, 100, 0, 0}, "radius", sdl->gui->ttf[NORMAL_FONT_ID], sdl->screen[1]->sur);
-	sdl_putstr((SDL_Rect){360, 100, 0, 0}, "center", sdl->gui->ttf[NORMAL_FONT_ID], sdl->screen[1]->sur);
+	highlighted_color = (SDL_Color){118, 165, 163, 0};
+	default_color = ttf[BIG_FONT_ID]->font_color;
+	ttf[BIG_FONT_ID]->font_color = highlighted_color;
+	sdl_putstr((SDL_Rect){190, 35, 0, 0}, "sphere",
+				ttf[BIG_FONT_ID], sur);
+	ttf[BIG_FONT_ID]->font_color = default_color;
+}
+
+static void		print_screen_item(t_ttf *ttf[], SDL_Surface *sur)
+{
+	SDL_Color	default_color;
+	SDL_Color	highlighted_color;
+
+	highlighted_color = (SDL_Color){189, 171, 135, 0};
+	default_color = ttf[NORMAL_FONT_ID]->font_color;
+	ttf[NORMAL_FONT_ID]->font_color = highlighted_color;
+	sdl_putstr((SDL_Rect){50, 100, 0, 0}, "radius",
+				ttf[NORMAL_FONT_ID], sur);
+	sdl_putstr((SDL_Rect){360, 100, 0, 0}, "center",
+				ttf[NORMAL_FONT_ID], sur);
+	ttf[NORMAL_FONT_ID]->font_color = default_color;
+}
+
+void			gui_sphere_screen(t_sdl *sdl, t_object **hi_lited_object)
+{
+	print_screen_title(sdl->gui->ttf, sdl->screen[1]->sur);
+	print_screen_item(sdl->gui->ttf, sdl->screen[1]->sur);
 	// gui_material(sdl, hi_lited_object);
 	gui_buttons(sdl);
-	load_textboxes(Sphere_rad, Sphere_center, sdl->gui, sdl->screen[1]->render);
+	load_textboxes(Sphere_rad, Sphere_center,
+				sdl->gui, sdl->screen[1]->render);
 }

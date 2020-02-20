@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/28 11:42:59 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/19 21:24:58 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/20 18:13:40 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ void			add_obj(SDL_Scancode scancode, t_scene *scene, t_cl *cl)
 	cl_int		ret;
 
 	ret = 0;
+	if (scancode == SDL_SCANCODE_KP_1 || scancode == SDL_SCANCODE_KP_2 || scancode == SDL_SCANCODE_KP_3 || scancode == SDL_SCANCODE_KP_4 || scancode == SDL_SCANCODE_KP_5 || scancode == SDL_SCANCODE_KP_6)
 	realloc_obj(scancode, scene);
 	clReleaseMemObject(cl->memobjs[2]);
 	if ((cl->memobjs[2] = clCreateBuffer(cl->context,
@@ -45,7 +46,7 @@ void			change_focus(t_sdl *sdl)
 	}
 }
 
-bool			key_events(char *flag, t_object *hi_lited_object, t_rt *rt)
+bool			key_events(char *flag, t_object **hi_lited_object, t_rt *rt)
 {
 	bool		ismove;
 

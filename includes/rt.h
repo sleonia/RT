@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 04:06:50 by thorker           #+#    #+#             */
-/*   Updated: 2020/02/19 21:37:56 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/20 18:00:11 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -344,15 +344,15 @@ int						get_height(t_textbox *textbox);
 void					add_obj(SDL_Scancode scancode,
 						t_scene *scene, t_cl *cl);
 void					change_focus(t_sdl *sdl);
-bool					key_events(char *quit, t_object *hi_lited_object,
+bool					key_events(char *quit, t_object **hi_lited_object,
 						t_rt *rt);
 bool					key_rt(SDL_Scancode scancode,
 								char *flag,
-								t_object *hi_lited_object,
+								t_object **hi_lited_object,
 								t_rt *rt);
 bool					key_toolbar(SDL_Scancode scancode,
 									char *flag,
-									t_object *hi_lited_object,
+									t_object **hi_lited_object,
 									t_rt *rt);
 bool					mouse_events(char *flag,
 									t_object **hi_lited_object,
@@ -454,7 +454,7 @@ void					sdl_putstr(SDL_Rect	dest,
 								t_ttf *ttf,
 								SDL_Surface *sur);
 void					sdl_quit(t_sdl *sdl);
-void					sdl_update(t_object **hi_lited_object, t_sdl *sdl);
+void					sdl_update(t_object *hi_lited_object, t_sdl *sdl);
 
 /*
 **						utils

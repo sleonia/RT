@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/28 11:38:10 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/19 12:32:34 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/20 18:03:48 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void			events_processing(char *flag, t_object **hi_lited_object, t_rt *rt)
 	{
 		window_events(flag, rt->sdl->event, rt->sdl->screen[0]);
 		window_events(flag, rt->sdl->event, rt->sdl->screen[1]);
-		ismove |= key_events(flag, *hi_lited_object, rt);
+		ismove |= key_events(flag, hi_lited_object, rt);
 		ismove |= mouse_events(flag, hi_lited_object, rt);
 	}
 	gui_main(flag, hi_lited_object, rt->sdl, rt->scene);
@@ -33,5 +33,5 @@ void			events_processing(char *flag, t_object **hi_lited_object, t_rt *rt)
 	filter(rt->sdl->screen[0]->sur->pixels, *flag);
 	if (*flag == BLUR && !rt->scene->move_on)
 		create_kernel_blur(rt->cl, rt->sdl);
-	sdl_update(hi_lited_object, rt->sdl);
+	sdl_update(*hi_lited_object, rt->sdl);
 }

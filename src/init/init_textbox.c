@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 21:27:56 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/19 19:58:38 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/20 21:04:55 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void				init_textbox(t_gui *gui)
 		else if (i == Sphere_rad || i == Cylinder_len || i == Cone_len || i == Plane_tan || i == Parab_dist || i == Torus_bigr)
 			gui->textbox[i]->pos = (SDL_Rect){35, 150, 0, 0};
 		else if (i == Cylinder_rad || i == Cone_tan || i == Parab_len || i ==  Torus_r)
-			gui->textbox[i]->pos = (SDL_Rect){315, 250, 0, 0};
+			gui->textbox[i]->pos = (SDL_Rect){35, 250, 0, 0};
 		else if (i == Sphere_center || i == Cone_axis || i == Plane_axis || i ==  Parab_axis || i == Torus_axis)
 			gui->textbox[i]->pos = (SDL_Rect){315, 150, 0, 0};
 				else if (i == Cylinder_center || i == Cone_center || i == Parab_center || i ==  Torus_center)

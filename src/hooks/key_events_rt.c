@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key_events_rt.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccriston <ccriston@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/10 07:16:36 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/19 20:51:47 by ccriston         ###   ########.fr       */
+/*   Updated: 2020/02/20 17:40:05 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static void		key_rt_2(SDL_Scancode scancode,
 
 bool			key_rt(SDL_Scancode scancode,
 					char *flag,
-					t_object *hi_lited_object,
+					t_object **hi_lited_object,
 					t_rt *rt)
 {
 	move(rt->sdl->event, &(rt->scene->cam), &(rt->scene->flag));
@@ -71,7 +71,7 @@ bool			key_rt(SDL_Scancode scancode,
 			|| scancode == SDL_SCANCODE_KP_2 || scancode == SDL_SCANCODE_KP_3
 			|| scancode == SDL_SCANCODE_KP_4)
 			add_obj(scancode, rt->scene, rt->cl);
-		key_rt_2(scancode, hi_lited_object, rt->scene, rt->sdl);
+		key_rt_2(scancode, *hi_lited_object, rt->scene, rt->sdl);
 	}
 	return (false);
 }
