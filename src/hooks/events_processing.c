@@ -6,31 +6,11 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/28 11:38:10 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/21 07:52:35 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/21 10:11:59 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
-
-// static void		mask_processing(t_screen *screen)
-// static void		mask_processing(SDL_Surface *sur)
-// {
-// 	int			i;
-// 	int			k;
-// 	cl_int3		color;
-
-// 	i = -1;
-
-// 	while (++i < HEIGHT)
-// 	{
-// 		k = -1;
-// 		while (++k < WIDTH)
-// 		{
-// 			color = int_to_rgb(((int *)(sur->pixels))[k + HEIGHT * i]);
-// 			((int *)(sur->pixels))[k + HEIGHT * i] = (color.s[0] + color.s[1] + color.s[2]) / 3;
-// 		}
-// 	}
-// }
 
 void			events_processing(char *flag,
 								t_object **hi_lited_object,

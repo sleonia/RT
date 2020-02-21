@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/10 07:16:36 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/21 06:31:36 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/21 10:59:53 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ bool			key_rt(SDL_Scancode scancode,
 					t_object **hi_lited_object,
 					t_rt *rt)
 {
+	SDL_ShowCursor(0);
 	move(rt->sdl->event, &(rt->scene->cam), &(rt->scene->flag));
 	if (rt->sdl->event.type == SDL_KEYDOWN)
 	{
@@ -69,5 +70,6 @@ bool			key_rt(SDL_Scancode scancode,
 		add_obj(scancode, rt->scene, rt->cl);
 		key_rt_2(scancode, *hi_lited_object, rt->scene, rt->sdl);
 	}
+	SDL_ShowCursor(1);
 	return (false);
 }

@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/10 07:52:49 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/17 15:35:57 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/21 11:00:45 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ bool			mouse_rt(t_sdl *sdl,
 	SDL_GetMouseState(&x, &y);
 	if (sdl->event.button.button == SDL_BUTTON_LEFT)
 	{
+		SDL_ShowCursor(0);
 		SDL_WarpMouseInWindow(sdl->screen[0]->win, 640, 512);
 		mouse_rotation(&(scene->cam), x, y);
 		scene->move_on = 1;
