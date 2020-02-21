@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/10 07:16:51 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/21 03:54:59 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/21 04:28:42 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ static void		set_value_from_textbox(t_object **hi_lited_object,
 	{
 		tmp = *string_to_float_array(gui->textbox[Cylinder_axis]->text);
 		check_float_array(AXIS_FLAG, &tmp);
+		cl_normalize(&tmp);
 		(*hi_lited_object)->object.cylinder.axis = tmp;
 		tmp = *string_to_float_array(gui->textbox[Cylinder_center]->text);
 		check_float_array(CENTER_FLAG, &tmp);
@@ -64,6 +65,7 @@ static void		set_value_from_textbox(t_object **hi_lited_object,
 	{
 		tmp = *string_to_float_array(gui->textbox[Cone_axis]->text);
 		check_float_array(AXIS_FLAG, &tmp);
+		cl_normalize(&tmp);		
 		(*hi_lited_object)->object.cone.axis = tmp;
 		tmp = *string_to_float_array(gui->textbox[Cone_center]->text);
 		check_float_array(CENTER_FLAG, &tmp);
@@ -75,6 +77,7 @@ static void		set_value_from_textbox(t_object **hi_lited_object,
 	{
 		tmp = *string_to_float_array(gui->textbox[Plane_axis]->text);
 		check_float_array(AXIS_FLAG, &tmp);
+		cl_normalize(&tmp);		
 		(*hi_lited_object)->object.plane.axis = tmp;
 		(*hi_lited_object)->object.plane.dist = check_dist(atof(gui->textbox[Plane_tan]->text));
 		
@@ -83,17 +86,20 @@ static void		set_value_from_textbox(t_object **hi_lited_object,
 	{
 		tmp = *string_to_float_array(gui->textbox[Parab_axis]->text);
 		check_float_array(AXIS_FLAG, &tmp);
+		cl_normalize(&tmp);		
 		(*hi_lited_object)->object.parab.axis = tmp;
 		tmp = *string_to_float_array(gui->textbox[Parab_center]->text);
 		check_float_array(CENTER_FLAG, &tmp);
 		(*hi_lited_object)->object.parab.center = tmp;
-		(*hi_lited_object)->object.parab.length = check_length(atof(gui->textbox[Cone_len]->text));
-		(*hi_lited_object)->object.parab.k = check_dist(atof(gui->textbox[Cone_tan]->text));
+		(*hi_lited_object)->object.parab.length = check_length(atof(gui->textbox[Parab_len]->text));
+		(*hi_lited_object)->object.parab.k = (atof(gui->textbox[Parab_dist]->text));
+		// (*hi_lited_object)->object.parab.k = check_dist(atof(gui->textbox[Parab_dist]->text));
 	}
 	else if ((*hi_lited_object)->type == o_torus)
 	{
 		tmp = *string_to_float_array(gui->textbox[Torus_axis]->text);
 		check_float_array(AXIS_FLAG, &tmp);
+		cl_normalize(&tmp);		
 		(*hi_lited_object)->object.torus.axis = tmp;
 		tmp = *string_to_float_array(gui->textbox[Torus_center]->text);
 		check_float_array(CENTER_FLAG, &tmp);
