@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/21 05:34:45 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/21 13:00:58 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/21 15:16:28 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,18 +44,26 @@ void			torus(t_object **select_obj, t_textbox *textbox[])
 	(*select_obj)->object.torus.r = (atof(textbox[Torus_r]->text));
 }
 
-void			material(t_material *material, t_textbox *textbox[])
+void			material(int texture_cnt,
+						t_material *material,
+						t_textbox *textbox[])
 {
+	double		res;
 	cl_float3	tmp;
 
 	tmp = *string_to_color(textbox[Mtrl_Color]->text);
 	material->color = tmp;
 	material->ambient = check_ambient(atof(textbox[Mtrl_ambient]->text));
-	material->diffuse = atof(textbox[Mtrl_diffuse]->text);
-	material->specular = atof(textbox[Mtrl_specular]->text);
-	material->reflection = atof(textbox[Mtrl_reflection]->text);
-	material->refraction = atof(textbox[Mtrl_refraction]->text);
-	material->texture_id = atof(textbox[Mtrl_texture_id]->text);
+	res = atof(textbox[Mtrl_diffuse]->text);
+	material->diffuse = (res > 0.1 && res <= 1.0) ? res : 0.4;
+	res = atof(textbox[Mtrl_specular]->text);
+	material->specular = (res > 0.0 && res <= 100.0) ? res : 50.0;
+	res = atof(textbox[Mtrl_reflection]->text);
+	material->reflection = (res > 0.0 && res <= 1.0) ? res : 0.0;
+	res = atof(textbox[Mtrl_refraction]->text);
+	material->refraction = (res > 1.0 && res <= 1.3) ? res : 0.0;
+	res = atof(textbox[Mtrl_texture_id]->text);
+	material->texture_id = (res > texture_cnt ? -1 : res);
 }
 
 void			set_value_from_textbox(t_object **select_obj,
@@ -80,7 +88,7 @@ void			set_value_from_textbox(t_object **select_obj,
 	else if ((*select_obj)->type == o_torus)
 		torus(select_obj, textbox);
 	if (*select_obj)
-		material(&(*select_obj)->material, textbox);
+		material(scene->texture_cnt, &(*select_obj)->material, textbox);
 	if ((obj = (88 + ft_atoi(textbox[New_obj]->text)) > 0))
 		add_obj(obj, scene, cl);
 }
