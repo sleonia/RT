@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/19 17:00:29 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/21 04:50:13 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/21 13:36:30 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,11 @@ cl_float3		*string_to_float_array(char *str)
 		value.s[2] = atof(split[2]);
 	}
 	else
-		return (NULL);
+	{
+		value.s[0] = 0.f;
+		value.s[1] = 0.f;
+		value.s[2] = 0.f;	
+	}
 	ft_destroy_string_arr(split);
 	ptr = &value;
 	return (ptr);
