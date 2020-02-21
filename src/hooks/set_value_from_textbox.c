@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/21 05:34:45 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/21 15:16:28 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/21 18:04:53 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void			material(int texture_cnt,
 	res = atof(textbox[Mtrl_refraction]->text);
 	material->refraction = (res > 1.0 && res <= 1.3) ? res : 0.0;
 	res = atof(textbox[Mtrl_texture_id]->text);
-	material->texture_id = (res > texture_cnt ? -1 : res);
+	material->texture_id = (res > texture_cnt - 1 ? -1 : res);
 }
 
 void			set_value_from_textbox(t_object **select_obj,
