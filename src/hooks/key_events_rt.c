@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/10 07:16:36 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/21 10:59:53 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/21 12:16:13 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,13 @@ static void		key_rt_2(SDL_Scancode scancode,
 						t_scene *scene,
 						t_sdl *sdl)
 {
+	if (scancode == SDL_SCANCODE_B)
+		SDL_ShowCursor(!SDL_ShowCursor(-1));
+	if (scancode == SDL_SCANCODE_H)
+		SDL_SetWindowTitle(sdl->screen[0]->win, "Peer gay!");
+	if (scancode == SDL_SCANCODE_H)
+		SDL_ShowSimpleMessageBox(0, "KEK", "KekWait",
+								sdl->screen[0]->win);
 	if (scancode == SDL_SCANCODE_Q
 		|| scancode == SDL_SCANCODE_E
 		|| scancode == SDL_SCANCODE_Z
@@ -51,24 +58,16 @@ bool			key_rt(SDL_Scancode scancode,
 			*flag = SEPIA;
 		if (scancode == SDL_SCANCODE_K)
 			*flag = BLUR;
+		if (scancode == SDL_SCANCODE_J)
+			*flag = 0;
 		if (scancode == SDL_SCANCODE_O)
 		{
 			system("mkdir -p ./assets/photo/");
-			system("imagesnap ./assets/photo/$(date +%y%m%d%H%M%S).png"); //переделать имя для фото под адекватное
+			system("imagesnap ./assets/photo/Photo_on_$(date +%m-%d-%y-%T)");
 			system("afplay /System/Library/Sounds/Hero.aiff");
-			// system("~/Desktop/test/lox");
 		}
-		if (scancode == SDL_SCANCODE_B)
-			SDL_ShowCursor(!SDL_ShowCursor(-1));
-		if (scancode == SDL_SCANCODE_H)
-			SDL_SetWindowTitle(rt->sdl->screen[0]->win, "Peer gay!");
-		if (scancode == SDL_SCANCODE_H)
-			SDL_ShowSimpleMessageBox(0, "KEK", "KekWait",
-									rt->sdl->screen[0]->win);
-		if (scancode == SDL_SCANCODE_J)
-			*flag = 0;
-		add_obj(scancode, rt->scene, rt->cl);
 		key_rt_2(scancode, *hi_lited_object, rt->scene, rt->sdl);
+		add_obj(scancode, rt->scene, rt->cl);
 	}
 	SDL_ShowCursor(1);
 	return (false);

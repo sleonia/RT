@@ -6,7 +6,7 @@
 #    By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/01 04:18:29 by sleonia           #+#    #+#              #
-#    Updated: 2020/02/21 05:36:10 by sleonia          ###   ########.fr        #
+#    Updated: 2020/02/21 12:00:28 by sleonia          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,6 +24,7 @@ GUI_FILES =								\
 			gui_default_screen.c 		\
 			gui_main.c 					\
 			gui_material.c				\
+			gui_mode.c					\
 			gui_parab_screen.c 			\
 			gui_plane_screen.c 			\
 			gui_set_value.c				\

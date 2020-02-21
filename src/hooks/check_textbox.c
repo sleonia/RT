@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/19 21:07:57 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/21 09:56:16 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/21 12:17:26 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -191,7 +191,6 @@ static bool	check_torus_textbox(int x, int y, t_textbox *textbox[])
 bool		check_textbox(int x, int y,
 							t_object **hi_lited_object, t_textbox *textbox[])
 {
-	printf("x = %d  y = %d\n", x, y);
 	if (!*hi_lited_object)
 	{
 		if ((x >= 185 && x <= 275) && (y >= 60 && y <= 80))
