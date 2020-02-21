@@ -38,7 +38,7 @@
 		{
 			"type":					"sphere",
 			"radius":				20.0,
-			"center":				[0.0, 10.0, 250.0],
+			"center":				[-30.0, 60.0, 150.0],
 			"material":
 			{
 				"color":			[255.0, 255.0, 0.0],
@@ -53,7 +53,7 @@
 		{
 			"type":					"sphere",
 			"radius":				3.0,
-			"center":				[25.0, 15.0, 250.0],
+			"center":				[-5.0, 65.0, 150.0],
 			"material":
 			{
 				"color":			[255.0, 255.0, 0.0],
@@ -68,7 +68,7 @@
 		{
 			"type":					"sphere",
 			"radius":				5.0,
-			"center":				[20.0, 40.0, 250.0],
+			"center":				[-10.0, 90.0, 150.0],
 			"material":
 			{
 				"color":			[255.0, 255.0, 0.0],
@@ -83,7 +83,7 @@
 		{
 			"type":					"sphere",
 			"radius":				5.8,
-			"center":				[-40.0, 40.0, 250.0],
+			"center":				[-70.0, 90.0, 150.0],
 			"material":
 			{
 				"color":			[255.0, 255.0, 0.0],
@@ -98,7 +98,7 @@
 		{
 			"type":					"sphere",
 			"radius":				4.0,
-			"center":				[-60.0, -15.0, 250.0],
+			"center":				[-90.0, 35.0, 150.0],
 			"material":
 			{
 				"color":			[255.0, 255.0, 0.0],
@@ -113,7 +113,7 @@
 		{
 			"type":					"sphere",
 			"radius":				9.0,
-			"center":				[-45.0, -60.0, 250.0],
+			"center":				[-75.0, -10.0, 150.0],
 			"material":
 			{
 				"color":			[255.0, 255.0, 0.0],
@@ -128,7 +128,7 @@
 		{
 			"type":					"sphere",
 			"radius":				7.0,
-			"center":				[0.0, -90.0, 250.0],
+			"center":				[-30.0, -40.0, 150.0],
 			"material":
 			{
 				"color":			[255.0, 255.0, 0.0],
@@ -143,7 +143,7 @@
 		{
 			"type":					"sphere",
 			"radius":				7.0,
-			"center":				[70.0, -80.0, 250.0],
+			"center":				[50.0, -45.0, 150.0],
 			"material":
 			{
 				"color":			[255.0, 255.0, 0.0],
@@ -158,7 +158,7 @@
 		{
 			"type":					"sphere",
 			"radius":				6.0,
-			"center":				[140.0, 0.0, 250.0],
+			"center":				[120.0, 50.0, 150.0],
 			"material":
 			{
 				"color":			[255.0, 255.0, 0.0],
@@ -173,7 +173,7 @@
 		{
 			"type":					"sphere",
 			"radius":				2.0,
-			"center":				[-46.0, 46.0, 250.0],
+			"center":				[-76.0, -4.0, 150.0],
 			"material":
 			{
 				"color":			[255.0, 255.0, 0.0],
@@ -197,7 +197,7 @@
 									"./assets/sounds/fisting-is-300.wav",
 									"./assets/sounds/Boy_next_door.wav"
 		],
-		"icon":						"./assets/icons/shrek.jpg",
+		"icon":						"./assets/icons/cosmos.jpeg",
 		"volume":					0
 	}
 }
