@@ -6,7 +6,7 @@
 #    By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/01 04:18:29 by sleonia           #+#    #+#              #
-#    Updated: 2020/02/21 04:50:28 by sleonia          ###   ########.fr        #
+#    Updated: 2020/02/21 05:36:10 by sleonia          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -51,6 +51,7 @@ HOOKS_FILES =							\
 			move.c						\
 			rotation.c					\
 			windows_events.c			\
+			set_value_from_textbox.c	\
 
 HOOKS_DIR = ./src/hooks/
 

@@ -108,6 +108,6 @@
 									"./assets/sounds/Boy_next_door.wav"
 		],
 		"icon":						"./assets/icons/shrek.jpg",
-		"volume":					0
+		"volume":					50
 	}
 }

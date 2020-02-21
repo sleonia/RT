@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 04:06:50 by thorker           #+#    #+#             */
-/*   Updated: 2020/02/21 04:54:42 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/21 05:44:15 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -364,6 +364,10 @@ void					rotation(SDL_Scancode scancode, t_cam *cam);
 bool					window_events(char *flag,
 									SDL_Event event,
 									t_screen *screen);
+void					set_value_from_textbox(t_object **hi_lited_object,
+											t_scene *scene,
+											t_textbox *textbox[],
+											t_cl *cl);
 
 /*
 **						init

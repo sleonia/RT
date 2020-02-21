@@ -6,13 +6,15 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/28 11:38:10 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/20 18:03:48 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/21 05:32:41 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-void			events_processing(char *flag, t_object **hi_lited_object, t_rt *rt)
+void			events_processing(char *flag,
+								t_object **hi_lited_object,
+								t_rt *rt)
 {
 	bool		ismove;
 

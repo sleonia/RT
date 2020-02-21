@@ -6,11 +6,31 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/19 21:07:57 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/21 05:17:42 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/21 06:28:13 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
+
+static bool	check_material_textbox2(int x, int y, t_textbox *textbox[])
+{
+	if ((x >= 305 && x <= 480) && (y >= 560 && y <= 580))
+	{
+		textbox[Mtrl_reflection]->on_focus = true;
+		return (reset_value(Mtrl_reflection, textbox));
+	}
+	else if ((x >= 305 && x <= 480) && (y >= 610 && y <= 630))
+	{
+		textbox[Mtrl_refraction]->on_focus = true;
+		return (reset_value(Mtrl_refraction, textbox));
+	}
+	else if ((x >= 305 && x <= 480) && (y >= 660 && y <= 680))
+	{
+		textbox[Mtrl_texture_id]->on_focus = true;
+		return (reset_value(Mtrl_texture_id, textbox));
+	}
+	return (true);
+}
 
 static bool	check_material_textbox(int x, int y, t_textbox *textbox[])
 {
@@ -34,21 +54,7 @@ static bool	check_material_textbox(int x, int y, t_textbox *textbox[])
 		textbox[Mtrl_specular]->on_focus = true;
 		return (reset_value(Mtrl_specular, textbox));
 	}
-	else if ((x >= 305 && x <= 480) && (y >= 560 && y <= 580))
-	{
-		textbox[Mtrl_reflection]->on_focus = true;
-		return (reset_value(Mtrl_reflection, textbox));
-	}
-	else if ((x >= 305 && x <= 480) && (y >= 610 && y <= 630))
-	{
-		textbox[Mtrl_refraction]->on_focus = true;
-		return (reset_value(Mtrl_refraction, textbox));
-	}
-	else if ((x >= 305 && x <= 480) && (y >= 660 && y <= 680))
-	{
-		textbox[Mtrl_texture_id]->on_focus = true;
-		return (reset_value(Mtrl_texture_id, textbox));
-	}
+	check_material_textbox2(x, y, textbox);
 	return (true);
 }
 
@@ -211,7 +217,7 @@ bool		check_textbox(int x, int y,
 		{
 			textbox[Fsaa]->on_focus = true;
 			return (reset_value(Fsaa, textbox));
-		}	
+		}
 		return (true);
 	}
 	else if ((*hi_lited_object)->type == o_sphere)

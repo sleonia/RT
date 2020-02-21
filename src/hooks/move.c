@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/28 00:00:22 by thorker           #+#    #+#             */
-/*   Updated: 2020/02/08 03:19:28 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/21 05:31:51 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static void		change_flag(SDL_Scancode scancode, t_move_flag *flag, char i)
 		flag->c = i;
 }
 
-static void     check_flag(SDL_Event event, t_move_flag *flag)
+static void		check_flag(SDL_Event event, t_move_flag *flag)
 {
 	if (event.type == SDL_KEYDOWN)
 		change_flag(event.key.keysym.scancode, flag, 1);
@@ -55,7 +55,9 @@ static void		move_help(float *d, t_cam *cam, t_move_flag *flag)
 		d[0] += STEP * cos(cam->phi) * cos(cam->tetta);
 		d[1] -= STEP * sin(cam->tetta);
 	}
-	if (fabs(d[0]) <0.00001f && fabs(d[1]) <0.00001f && fabs(d[2]) <0.00001f)
+	if (fabs(d[0]) < 0.00001f
+		&& fabs(d[1]) < 0.00001f
+		&& fabs(d[2]) < 0.00001f)
 		return ;
 	cam->pos.s[2] += d[2] / sqrt(d[2] * d[2] + d[1] * d[1] + d[0] * d[0]);
 	cam->pos.s[0] += d[0] / sqrt(d[2] * d[2] + d[1] * d[1] + d[0] * d[0]);

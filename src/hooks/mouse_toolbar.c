@@ -6,21 +6,21 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/10 07:52:23 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/21 02:45:11 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/21 05:32:24 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-
-
 bool			mouse_toolbar(char *flag,
 							t_object **hi_lited_object,
 							t_rt *rt)
 {
-	int			x = -1;
-	int			y = -1;
+	int			x;
+	int			y;
 
+	x = -1;
+	y = -1;
 	if (rt->sdl->event.type == SDL_MOUSEBUTTONDOWN)
 	{
 		if (rt->sdl->event.button.button == SDL_BUTTON_LEFT)

@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/19 12:35:12 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/21 04:52:21 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/21 06:41:38 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void			set_value_in_def_textbox(t_scene *scene,
 									t_gui *gui)
 {
 	sprintf(gui->textbox[Phi]->text, "%3.3f", scene->cam.phi);
-	sprintf(gui->textbox[Tetta]->text, "%3.3f", scene->cam.tetta);	
+	sprintf(gui->textbox[Tetta]->text, "%3.3f", scene->cam.tetta);
 	sprintf(gui->textbox[Id]->text, "%1d", scene->skybox_id);
 	sprintf(gui->textbox[Skybox_ambient]->text, "%3.3f", scene->ambient);
 	sprintf(gui->textbox[Fsaa]->text, "%1d", scene->fsaa);
@@ -110,7 +110,9 @@ static void		set_value_in_torus_textbox(t_torus *torus,
 	sprintf(gui->textbox[Torus_r]->text, "%3.3f", torus->r);
 }
 
-void			set_textbox_value(t_scene *scene, t_object **hi_lited_object, t_gui *gui)
+void			set_textbox_value(t_scene *scene,
+								t_object **hi_lited_object,
+								t_gui *gui)
 {
 	if (!*hi_lited_object)
 		set_value_in_def_textbox(scene, gui);
