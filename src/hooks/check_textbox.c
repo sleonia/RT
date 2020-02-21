@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/19 21:07:57 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/21 04:37:32 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/21 05:17:42 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,41 +14,41 @@
 
 static bool	check_material_textbox(int x, int y, t_textbox *textbox[])
 {
-	if ((x >= 305 && x <= 480) && (y >= 360 && y <= 380)) //hueta
+	if ((x >= 305 && x <= 480) && (y >= 360 && y <= 380))
 	{
 		textbox[Mtrl_Color]->on_focus = true;
 		return (reset_value(Mtrl_Color, textbox));
 	}
-	// else if ((x >= 305 && x <= 480) && (y >= 240 && y <= 260)) //hueta
-	// {
-	// 	textbox[Mtrl_ambient]->on_focus = true;
-	// 	return (reset_value(Mtrl_ambient, textbox));
-	// }
-	// else if ((x >= 305 && x <= 480) && (y >= 240 && y <= 260)) //hueta
-	// {
-	// 	textbox[Mtrl_diffuse]->on_focus = true;
-	// 	return (reset_value(Mtrl_diffuse, textbox));
-	// }
-	// else if ((x >= 305 && x <= 480) && (y >= 240 && y <= 260)) //hueta
-	// {
-	// 	textbox[Mtrl_specular]->on_focus = true;
-	// 	return (reset_value(Mtrl_specular, textbox));
-	// }
-	// else if ((x >= 305 && x <= 480) && (y >= 240 && y <= 260)) //hueta
-	// {
-	// 	textbox[Mtrl_reflection]->on_focus = true;
-	// 	return (reset_value(Mtrl_reflection, textbox));
-	// }
-	// else if ((x >= 305 && x <= 480) && (y >= 240 && y <= 260)) //hueta
-	// {
-	// 	textbox[Mtrl_refraction]->on_focus = true;
-	// 	return (reset_value(Mtrl_refraction, textbox));
-	// }
-	// else if ((x >= 305 && x <= 480) && (y >= 240 && y <= 260)) //hueta
-	// {
-	// 	textbox[Mtrl_refraction]->on_focus = true;
-	// 	return (reset_value(Mtrl_refraction, textbox));
-	// }
+	else if ((x >= 305 && x <= 480) && (y >= 410 && y <= 430))
+	{
+		textbox[Mtrl_ambient]->on_focus = true;
+		return (reset_value(Mtrl_ambient, textbox));
+	}
+	else if ((x >= 305 && x <= 480) && (y >= 460 && y <= 480))
+	{
+		textbox[Mtrl_diffuse]->on_focus = true;
+		return (reset_value(Mtrl_diffuse, textbox));
+	}
+	else if ((x >= 305 && x <= 480) && (y >= 510 && y <= 530))
+	{
+		textbox[Mtrl_specular]->on_focus = true;
+		return (reset_value(Mtrl_specular, textbox));
+	}
+	else if ((x >= 305 && x <= 480) && (y >= 560 && y <= 580))
+	{
+		textbox[Mtrl_reflection]->on_focus = true;
+		return (reset_value(Mtrl_reflection, textbox));
+	}
+	else if ((x >= 305 && x <= 480) && (y >= 610 && y <= 630))
+	{
+		textbox[Mtrl_refraction]->on_focus = true;
+		return (reset_value(Mtrl_refraction, textbox));
+	}
+	else if ((x >= 305 && x <= 480) && (y >= 660 && y <= 680))
+	{
+		textbox[Mtrl_texture_id]->on_focus = true;
+		return (reset_value(Mtrl_texture_id, textbox));
+	}
 	return (true);
 }
 

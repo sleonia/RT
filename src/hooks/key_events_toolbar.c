@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/10 07:16:51 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/21 04:55:35 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/21 05:14:23 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,12 @@ static void		set_value_from_textbox(t_object **hi_lited_object,
 	{
 		tmp = *string_to_color(gui->textbox[Mtrl_Color]->text);
 		(*hi_lited_object)->material.color = tmp;
+		(*hi_lited_object)->material.ambient = check_ambient(atof(gui->textbox[Mtrl_ambient]->text));
+		(*hi_lited_object)->material.diffuse = atof(gui->textbox[Mtrl_diffuse]->text);
+		(*hi_lited_object)->material.specular = atof(gui->textbox[Mtrl_specular]->text);
+		(*hi_lited_object)->material.reflection = atof(gui->textbox[Mtrl_reflection]->text);
+		(*hi_lited_object)->material.refraction = atof(gui->textbox[Mtrl_refraction]->text);
+		(*hi_lited_object)->material.texture_id = atof(gui->textbox[Mtrl_texture_id]->text);
 	}
 	if ((obj = (88 + ft_atoi(gui->textbox[New_obj]->text)) > 0))
 		add_obj(obj, scene, cl);
