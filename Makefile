@@ -6,7 +6,7 @@
 #    By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/01 04:18:29 by sleonia           #+#    #+#              #
-#    Updated: 2020/02/21 12:59:30 by sleonia          ###   ########.fr        #
+#    Updated: 2020/02/21 13:24:06 by sleonia          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,6 +42,7 @@ OBJ_GUI_FILES = $(addprefix $(OBJ_DIR), $(GUI_FILES:.c=.o))
 
 HOOKS_FILES =							\
 			arrows_processing.c			\
+			check_textbox2.c			\
 			check_textbox.c				\
 			events_processing.c			\
 			key_events.c				\

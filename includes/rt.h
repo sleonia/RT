@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 04:06:50 by thorker           #+#    #+#             */
-/*   Updated: 2020/02/21 13:00:32 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/21 13:23:33 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -343,6 +343,11 @@ void					arrows_processing(SDL_Scancode scancode,
 bool					check_textbox(int x, int y,
 									t_object **select_obj,
 									t_textbox *textbox[]);
+bool					check_material_textbox(int x, int y, t_textbox *textbox[]);
+bool					check_sphere_textbox(int x, int y, t_textbox *textbox[]);
+bool					check_cylinder_textbox(int x, int y, t_textbox *textbox[]);
+bool					check_cone_textbox(int x, int y, t_textbox *textbox[]);
+
 void					events_processing(char *quit,
 										t_object **select_obj,
 										t_rt *rt);
