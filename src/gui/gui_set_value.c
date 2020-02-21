@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/19 12:35:12 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/21 12:40:31 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/21 16:57:14 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ void			set_value_in_material_textbox(t_material *material,
 {
 	char	*tmp;
 
+	ft_strdel(&textbox[Mtrl_Color]->text);
 	tmp = color_to_string(material->color);
 	textbox[Mtrl_Color]->text = tmp;
 	sprintf(textbox[Mtrl_ambient]->text, "%3.3f", material->ambient);
@@ -43,6 +44,7 @@ static void		set_value_in_sphere_textbox(t_sphere *sphere,
 {
 	char		*tmp;
 
+	ft_strdel(&textbox[Sphere_center]->text);
 	tmp = float_array_to_string(sphere->center);
 	textbox[Sphere_center]->text = tmp;
 	sprintf(textbox[Sphere_rad]->text, "%3.3f", sphere->radius);

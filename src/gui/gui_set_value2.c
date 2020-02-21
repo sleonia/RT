@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/21 12:38:45 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/21 12:39:00 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/21 17:04:00 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,10 @@ void			set_value_in_cylinder_textbox(t_cylinder *cylinder,
 {
 	char		*tmp;
 
+	ft_strdel(&textbox[Cylinder_axis]->text);
 	tmp = float_array_to_string(cylinder->axis);
 	textbox[Cylinder_axis]->text = tmp;
+	ft_strdel(&textbox[Cylinder_center]->text);
 	tmp = float_array_to_string(cylinder->center);
 	textbox[Cylinder_center]->text = tmp;
 	sprintf(textbox[Cylinder_len]->text, "%3.3f", cylinder->length);
@@ -30,8 +32,10 @@ void			set_value_in_cone_textbox(t_cone *cone,
 {
 	char		*tmp;
 
+	ft_strdel(&textbox[Cone_axis]->text);
 	tmp = float_array_to_string(cone->axis);
 	textbox[Cone_axis]->text = tmp;
+	ft_strdel(&textbox[Cone_center]->text);
 	tmp = float_array_to_string(cone->center);
 	textbox[Cone_center]->text = tmp;
 	sprintf(textbox[Cone_len]->text, "%3.3f", cone->length);
@@ -43,6 +47,7 @@ void			set_value_in_plane_textbox(t_plane *plane,
 {
 	char		*tmp;
 
+	ft_strdel(&textbox[Plane_axis]->text);
 	tmp = float_array_to_string(plane->axis);
 	textbox[Plane_axis]->text = tmp;
 	sprintf(textbox[Plane_tan]->text, "%3.3f", plane->dist);
@@ -53,8 +58,10 @@ void			set_value_in_parab_textbox(t_parab *parab,
 {
 	char		*tmp;
 
+	ft_strdel(&textbox[Parab_axis]->text);
 	tmp = float_array_to_string(parab->axis);
 	textbox[Parab_axis]->text = tmp;
+	ft_strdel(&textbox[Parab_center]->text);
 	tmp = float_array_to_string(parab->center);
 	textbox[Parab_center]->text = tmp;
 	sprintf(textbox[Parab_dist]->text, "%3.3f", parab->k);
@@ -66,8 +73,10 @@ void			set_value_in_torus_textbox(t_torus *torus,
 {
 	char		*tmp;
 
+	ft_strdel(&textbox[Torus_axis]->text);
 	tmp = float_array_to_string(torus->axis);
 	textbox[Torus_axis]->text = tmp;
+	ft_strdel(&textbox[Torus_center]->text);
 	tmp = float_array_to_string(torus->center);
 	textbox[Torus_center]->text = tmp;
 	sprintf(textbox[Torus_bigr]->text, "%3.3f", torus->bigr);
