@@ -1,0 +1,94 @@
+{
+	"camera":
+	{
+		"position":					[0.0, 0.0, -100.0],
+		"phi":						90.0,
+		"tetta":					90.0
+	},
+	"textures":
+	[
+		"./assets/textures/miami.jpg",
+		"./assets/textures/marble.jpg"
+	],
+	"skybox":
+	{
+		"texture_id":				0,
+		"ambient":					0.2,
+		"fsaa":						0
+	},
+	"light":
+	[
+		{
+			"intensity":			1.0,
+			"position":				[3.5, 1.6, -10.0]
+		}
+	],
+	"figure":
+	[
+		{
+			"type":					"torus",
+			"axis":					[0.0, 1.0, 0.0],
+			"center":				[4.0, 10.0, 10.0],
+			"bigr":					12.0,
+			"r":					2.0,
+			"material":
+			{
+				"color":			[0.0, 50.0, 50.0],
+				"ambient":			1.0,
+				"diffuse":			0.4,
+				"specular":			50.0,
+				"reflection":		0.8,
+				"refraction":		0.0,
+				"texture_id":		-1
+			}
+		},
+		{
+			"type":					"cone",
+			"axis":					[1.0, 0.0, 0.0],
+			"center":				[4.0, 0.0, 10.0],
+			"length":				30.0,
+			"tan":					0.25,
+			"material":
+			{
+				"color":			[255.0, 0.0, 255.0],
+				"ambient":			1.0,
+				"diffuse":			0.4,
+				"specular":			50.0,
+				"reflection":		0.0,
+				"refraction":		0.0,
+				"texture_id":		1
+			}
+		},
+		{
+			"type":					"parab",
+			"axis":					[0.0, 10.0, 0.0],
+			"center":				[4.0, 10.0, 10.0],
+			"length":				20.0,
+			"distance":				4.0,
+			"material":
+			{
+				"color":			[0.0, 50.0, 50.0],
+				"ambient":			1.0,
+				"diffuse":			0.0,
+				"specular":			50.0,
+				"reflection":		0.0,
+				"refraction":		0.0,
+				"texture_id":		-1
+			}
+		}
+	],
+	"assets":
+	{
+		"music":
+		[
+									"./assets/music/Somebody_once_told_me.mp3"
+		],
+		"sounds":
+		[
+									"./assets/sounds/fisting-is-300.wav",
+									"./assets/sounds/Boy_next_door.wav"
+		],
+		"icon":						"./assets/icons/shrek.jpg",
+		"volume":					0
+	}
+}
