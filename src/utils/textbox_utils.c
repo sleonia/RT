@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/19 21:10:54 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/21 10:10:04 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/21 11:30:19 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,7 @@ void			check_buttons(int x, int y,
 	if ((x >= 260 && x <= 460) && (y >= 700 && y <= 765))
 		*hi_lited_object = NULL;
 	if ((x >= 55 && x <= 255) && (y >= 700 && y <= 765))
-	{
-		SDL_ShowCursor(1); //или что-то такое
-	}
+		SDL_ShowCursor(1);
 	if ((x >= 55 && x <= 405) && (y >= 770 && y <= 830))
 	{
 		add_obj(88 + ft_atoi(rt->sdl->gui->textbox[New_obj]->text),
@@ -47,7 +45,7 @@ void			check_buttons(int x, int y,
 	if ((x >= 55 && x <= 450) && (y >= 835 && y <= 895))
 		save_image(rt->sdl->screen[0]->sur->pixels);
 	if ((x >= 55 && x <= 455) && (y >= 900 && y <= 960))
-		exit (1);
+		exit(1);
 }
 
 bool			reset_value(int flag, t_textbox *textbox[])

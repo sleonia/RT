@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/10 07:16:51 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/21 06:36:29 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/21 11:30:01 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,11 +84,9 @@ bool			key_toolbar(SDL_Scancode scancode,
 									rt->sdl->gui->textbox, rt->cl);
 		}
 	}
-	else if (rt->sdl->event.type == SDL_TEXTINPUT)
-	{
-		if (id_cur_textbox != -1)
-			text_processing(id_cur_textbox,
-				rt->sdl->event.text.text, rt->sdl->gui);
-	}
+	else if (rt->sdl->event.type == SDL_TEXTINPUT && id_cur_textbox != -1)
+		text_processing(id_cur_textbox,
+						rt->sdl->event.text.text,
+						rt->sdl->gui);
 	return (false);
 }

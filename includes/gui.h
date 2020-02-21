@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/06 22:40:57 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/21 09:55:32 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/21 11:25:25 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,33 +33,26 @@ enum						e_textbox_type
 	Skybox_ambient,
 	Fsaa,
 	New_obj,
-	//
 	Sphere_rad,
 	Sphere_center,
-	//
 	Cylinder_axis,
 	Cylinder_center,
 	Cylinder_len,
 	Cylinder_rad,
-	//
 	Cone_axis,
 	Cone_center,
 	Cone_len,
 	Cone_tan,
-	//
 	Plane_axis,
 	Plane_tan,
-	//
 	Parab_axis,
 	Parab_center,
 	Parab_dist,
 	Parab_len,
-	//
 	Torus_axis,
 	Torus_center,
 	Torus_bigr,
 	Torus_r,
-	//
 	Mtrl_Color,
 	Mtrl_ambient,
 	Mtrl_diffuse,

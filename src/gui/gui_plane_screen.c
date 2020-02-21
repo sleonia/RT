@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 08:58:20 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/21 03:57:56 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/21 11:37:27 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,13 @@ static void		print_screen_item(t_ttf *ttf[], SDL_Surface *sur)
 	default_color = ttf[NORMAL_FONT_ID]->font_color;
 	ttf[NORMAL_FONT_ID]->font_color = highlighted_color;
 	sdl_putstr((SDL_Rect){50, 100, 0, 0}, "distance",
-		ttf[NORMAL_FONT_ID], sur);	
+		ttf[NORMAL_FONT_ID], sur);
 	sdl_putstr((SDL_Rect){360, 100, 0, 0}, "axis",
 		ttf[NORMAL_FONT_ID], sur);
 	ttf[NORMAL_FONT_ID]->font_color = default_color;
 }
 
-void	gui_plane_screen(t_sdl *sdl)
+void			gui_plane_screen(t_sdl *sdl)
 {
 	print_screen_title(sdl->gui->ttf, sdl->screen[1]->sur);
 	print_screen_item(sdl->gui->ttf, sdl->screen[1]->sur);

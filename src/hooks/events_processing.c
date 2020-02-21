@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/28 11:38:10 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/21 10:11:59 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/21 11:25:03 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,8 @@ void			events_processing(char *flag,
 	calc_screen(&rt->scene->cam);
 	create_kernel_rt(rt->cl);
 	set_opencl_arg(rt->cl, rt->sdl, rt->scene);
-	filter(rt->sdl->screen[0]->sur->pixels, *flag); //засунуть сюда маски
+	filter(rt->sdl->screen[0]->sur->pixels, *flag);
 	if (*flag == BLUR && !rt->scene->move_on)
 		create_kernel_blur(rt->cl, rt->sdl);
-	// if (*flag == RED_MASK || *flag == GREEN_MASK || *flag == BLUE_MASK)
-	// 	mask_processing(rt->sdl->screen[0]->sur);
 	sdl_update(*hi_lited_object, rt->sdl);
 }

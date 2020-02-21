@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 08:59:06 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/21 02:35:05 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/21 11:37:35 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static void		print_screen_item(t_ttf *ttf[], SDL_Surface *sur)
 	ttf[NORMAL_FONT_ID]->font_color = default_color;
 }
 
-void	gui_torus_screen(t_sdl *sdl)
+void			gui_torus_screen(t_sdl *sdl)
 {
 	print_screen_title(sdl->gui->ttf, sdl->screen[1]->sur);
 	print_screen_item(sdl->gui->ttf, sdl->screen[1]->sur);

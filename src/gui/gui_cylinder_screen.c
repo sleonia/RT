@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 08:56:57 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/21 03:57:07 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/21 11:31:49 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,11 +44,14 @@ static void		print_screen_item(t_ttf *ttf[], SDL_Surface *sur)
 	ttf[NORMAL_FONT_ID]->font_color = default_color;
 }
 
-void	gui_cylinder_screen(t_sdl *sdl)
+void			gui_cylinder_screen(t_sdl *sdl)
 {
 	print_screen_title(sdl->gui->ttf, sdl->screen[1]->sur);
 	print_screen_item(sdl->gui->ttf, sdl->screen[1]->sur);
 	gui_material(sdl);
 	gui_buttons(sdl);
-	load_textboxes(Cylinder_axis, Cylinder_rad, sdl->gui, sdl->screen[1]->render);
+	load_textboxes(Cylinder_axis,
+				Cylinder_rad,
+				sdl->gui,
+				sdl->screen[1]->render);
 }
