@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 04:06:50 by thorker           #+#    #+#             */
-/*   Updated: 2020/02/21 11:59:49 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/21 13:00:32 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -305,10 +305,20 @@ typedef struct			s_rt
 */
 void					gui_buttons(t_sdl *sdl);
 void					set_value_in_def_textbox(t_scene *scene,
-											t_gui *gui);
+											t_textbox *textbox[]);
 void					set_textbox_value(t_scene *scene,
-										t_object **hi_lited_object,
+										t_object **select_obj,
 										t_gui *gui);
+void					set_value_in_cylinder_textbox(t_cylinder *cylinder,
+											t_textbox *textbox[]);
+void					set_value_in_cone_textbox(t_cone *cone,
+											t_textbox *textbox[]);
+void					set_value_in_plane_textbox(t_plane *plane,
+											t_textbox *textbox[]);
+void					set_value_in_parab_textbox(t_parab *parab,
+											t_textbox *textbox[]);
+void					set_value_in_torus_textbox(t_torus *torus,
+											t_textbox *textbox[]);
 void					gui_default_screen(char *flag,
 										t_sdl *sdl);
 void					gui_cone_screen(t_sdl *sdl);
@@ -319,7 +329,7 @@ void					gui_sphere_screen(t_sdl *sdl);
 void					gui_torus_screen(t_sdl *sdl);
 
 void					gui_main(char *flag,
-								t_object **hi_lited_object,
+								t_object **select_obj,
 								t_sdl *sdl,
 								t_scene *scene);
 void					gui_material(t_sdl *sdl);
@@ -329,12 +339,12 @@ void					gui_mode(char *flag, t_gui *gui, SDL_Surface *sur);
 */
 
 void					arrows_processing(SDL_Scancode scancode,
-										t_object *hi_lited_object);
+										t_object *select_obj);
 bool					check_textbox(int x, int y,
-									t_object **hi_lited_object,
+									t_object **select_obj,
 									t_textbox *textbox[]);
 void					events_processing(char *quit,
-										t_object **hi_lited_object,
+										t_object **select_obj,
 										t_rt *rt);
 t_object				*get_object(t_scene *scene, int x, int y);
 char					*pop_back(char *str);
@@ -343,35 +353,41 @@ int						get_height(t_textbox *textbox);
 void					add_obj(SDL_Scancode scancode,
 						t_scene *scene, t_cl *cl);
 void					change_focus(t_sdl *sdl);
-bool					key_events(char *quit, t_object **hi_lited_object,
+bool					key_events(char *quit, t_object **select_obj,
 						t_rt *rt);
 bool					key_rt(SDL_Scancode scancode,
 								char *flag,
-								t_object **hi_lited_object,
+								t_object **select_obj,
 								t_rt *rt);
 bool					key_toolbar(SDL_Scancode scancode,
 									char *flag,
-									t_object **hi_lited_object,
+									t_object **select_obj,
 									t_rt *rt);
 bool					mouse_events(char *flag,
-									t_object **hi_lited_object,
+									t_object **select_obj,
 									t_rt *rt);
 void					mouse_rotation(t_cam *cam, int x, int y);
 void					move(SDL_Event event, t_cam *cam, t_move_flag *flag);
 bool					mouse_rt(t_sdl *sdl,
-								t_object **hi_lited_object,
+								t_object **select_obj,
 								t_scene *scene);
 bool					mouse_toolbar(char *flag,
-									t_object **hi_lited_object,
+									t_object **select_obj,
 									t_rt *rt);
 void					rotation(SDL_Scancode scancode, t_cam *cam);
 bool					window_events(char *flag,
 									SDL_Event event,
 									t_screen *screen);
-void					set_value_from_textbox(t_object **hi_lited_object,
+void					set_value_from_textbox(t_object **select_obj,
 											t_scene *scene,
 											t_textbox *textbox[],
 											t_cl *cl);
+void					def(t_scene *scene, t_textbox *textbox[]);
+void					sphere(t_object **select_obj, t_textbox *textbox[]);
+void					cylinder(t_object **select_obj, t_textbox *textbox[]);
+void					cone(t_object **select_obj, t_textbox *textbox[]);
+void					plane(t_object **select_obj, t_textbox *textbox[]);
+
 
 /*
 **						init
@@ -457,7 +473,7 @@ void					sdl_putstr(SDL_Rect	dest,
 								t_ttf *ttf,
 								SDL_Surface *sur);
 void					sdl_quit(t_sdl *sdl);
-void					sdl_update(t_object *hi_lited_object, t_sdl *sdl);
+void					sdl_update(t_object *select_obj, t_sdl *sdl);
 
 /*
 **						utils
@@ -522,7 +538,7 @@ int						blueblue(int	color);
 float					minn(float a, float b);
 void					change_mode(int x, int y, char *flag);
 void					check_buttons(int x, int y,
-									t_object **hi_lited_object, t_rt *rt);
+									t_object **select_obj, t_rt *rt);
 bool					reset_value(int flag, t_textbox *t_textbox[]);
 cl_float3				*string_to_color(char *str);
 char					*color_to_string(cl_float3 array);

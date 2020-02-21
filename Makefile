@@ -6,7 +6,7 @@
 #    By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/01 04:18:29 by sleonia           #+#    #+#              #
-#    Updated: 2020/02/21 12:00:28 by sleonia          ###   ########.fr        #
+#    Updated: 2020/02/21 12:59:30 by sleonia          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,6 +28,7 @@ GUI_FILES =								\
 			gui_parab_screen.c 			\
 			gui_plane_screen.c 			\
 			gui_set_value.c				\
+			gui_set_value2.c			\
 			gui_sphere_screen.c 		\
 			gui_torus_screen.c 			\
 
@@ -53,6 +54,7 @@ HOOKS_FILES =							\
 			rotation.c					\
 			windows_events.c			\
 			set_value_from_textbox.c	\
+			set_value_from_textbox2.c	\
 
 HOOKS_DIR = ./src/hooks/
 

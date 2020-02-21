@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/28 11:42:59 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/21 06:31:19 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/21 12:23:46 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,16 +46,16 @@ void			change_focus(t_sdl *sdl)
 	}
 }
 
-bool			key_events(char *flag, t_object **hi_lited_object, t_rt *rt)
+bool			key_events(char *flag, t_object **select_obj, t_rt *rt)
 {
 	bool		ismove;
 
 	ismove = false;
 	if (rt->sdl->screen[0]->keyboard_focus)
 		ismove |= key_rt(rt->sdl->event.key.keysym.scancode, flag,
-						hi_lited_object, rt);
+						select_obj, rt);
 	else if (rt->sdl->screen[1]->keyboard_focus)
 		ismove |= key_toolbar(rt->sdl->event.key.keysym.scancode, flag,
-							hi_lited_object, rt);
+							select_obj, rt);
 	return (ismove);
 }

@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/19 21:07:57 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/21 12:17:26 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/21 12:23:46 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -189,9 +189,9 @@ static bool	check_torus_textbox(int x, int y, t_textbox *textbox[])
 }
 
 bool		check_textbox(int x, int y,
-							t_object **hi_lited_object, t_textbox *textbox[])
+							t_object **select_obj, t_textbox *textbox[])
 {
-	if (!*hi_lited_object)
+	if (!*select_obj)
 	{
 		if ((x >= 185 && x <= 275) && (y >= 60 && y <= 80))
 		{
@@ -219,19 +219,19 @@ bool		check_textbox(int x, int y,
 			return (reset_value(Fsaa, textbox));
 		}
 	}
-	else if ((*hi_lited_object)->type == o_sphere)
+	else if ((*select_obj)->type == o_sphere)
 		check_sphere_textbox(x, y, textbox);
-	else if ((*hi_lited_object)->type == o_cylinder)
+	else if ((*select_obj)->type == o_cylinder)
 		check_cylinder_textbox(x, y, textbox);
-	else if ((*hi_lited_object)->type == o_cone)
+	else if ((*select_obj)->type == o_cone)
 		check_cone_textbox(x, y, textbox);
-	else if ((*hi_lited_object)->type == o_plane)
+	else if ((*select_obj)->type == o_plane)
 		check_plane_textbox(x, y, textbox);
-	else if ((*hi_lited_object)->type == o_parab)
+	else if ((*select_obj)->type == o_parab)
 		check_parab_textbox(x, y, textbox);
-	else if ((*hi_lited_object)->type == o_torus)
+	else if ((*select_obj)->type == o_torus)
 		check_torus_textbox(x, y, textbox);
-	if (*hi_lited_object)
+	if (*select_obj)
 		check_material_textbox(x, y, textbox);
 	if ((x >= 410 && x <= 460) && (y >= 770 && y <= 830))
 	{

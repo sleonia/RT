@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/10 07:16:51 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/21 11:30:01 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/21 12:23:46 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ static void		text_processing(int id_cur_textbox,
 
 bool			key_toolbar(SDL_Scancode scancode,
 						char *flag,
-						t_object **hi_lited_object,
+						t_object **select_obj,
 						t_rt *rt)
 {
 	int		id_cur_textbox;
@@ -80,7 +80,7 @@ bool			key_toolbar(SDL_Scancode scancode,
 			if (scancode == SDL_SCANCODE_BACKSPACE)
 				backspace_processing(id_cur_textbox, rt->sdl->gui);
 			else if (scancode == SDL_SCANCODE_RETURN)
-				set_value_from_textbox(hi_lited_object, rt->scene,
+				set_value_from_textbox(select_obj, rt->scene,
 									rt->sdl->gui->textbox, rt->cl);
 		}
 	}

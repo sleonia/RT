@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/28 11:50:12 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/21 06:35:14 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/21 12:23:46 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,12 @@ void			mouse_rotation(t_cam *cam, int x, int y)
 }
 
 bool			mouse_events(char *flag,
-							t_object **hi_lited_object,
+							t_object **select_obj,
 							t_rt *rt)
 {
 	if (rt->sdl->screen[0]->mouse_focus)
-		return (mouse_rt(rt->sdl, hi_lited_object, rt->scene));
+		return (mouse_rt(rt->sdl, select_obj, rt->scene));
 	else if (rt->sdl->screen[1]->mouse_focus)
-		return (mouse_toolbar(flag, hi_lited_object, rt));
+		return (mouse_toolbar(flag, select_obj, rt));
 	return (false);
 }

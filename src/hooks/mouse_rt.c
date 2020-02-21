@@ -6,14 +6,14 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/10 07:52:49 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/21 11:00:45 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/21 12:23:46 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
 bool			mouse_rt(t_sdl *sdl,
-						t_object **hi_lited_object,
+						t_object **select_obj,
 						t_scene *scene)
 {
 	int			x;
@@ -31,7 +31,7 @@ bool			mouse_rt(t_sdl *sdl,
 	if (sdl->event.type == SDL_MOUSEBUTTONDOWN
 		&& sdl->event.button.button == SDL_BUTTON_RIGHT)
 	{
-		if ((*hi_lited_object = get_object(scene, x, y)) != NULL)
+		if ((*select_obj = get_object(scene, x, y)) != NULL)
 			return (true);
 	}
 	return (false);

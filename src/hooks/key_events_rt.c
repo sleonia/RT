@@ -6,14 +6,14 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/10 07:16:36 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/21 12:16:13 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/21 12:23:46 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
 static void		key_rt_2(SDL_Scancode scancode,
-						t_object *hi_lited_object,
+						t_object *select_obj,
 						t_scene *scene,
 						t_sdl *sdl)
 {
@@ -33,7 +33,7 @@ static void		key_rt_2(SDL_Scancode scancode,
 		|| scancode <= SDL_SCANCODE_LEFT
 		|| scancode <= SDL_SCANCODE_DOWN
 		|| scancode <= SDL_SCANCODE_UP)
-		arrows_processing(scancode, hi_lited_object);
+		arrows_processing(scancode, select_obj);
 	if (scancode == SDL_SCANCODE_SPACE)
 		save_image((int *)(sdl->screen[0]->sur->pixels));
 	if (sdl->event.key.keysym.scancode == SDL_SCANCODE_TAB)
@@ -43,7 +43,7 @@ static void		key_rt_2(SDL_Scancode scancode,
 
 bool			key_rt(SDL_Scancode scancode,
 					char *flag,
-					t_object **hi_lited_object,
+					t_object **select_obj,
 					t_rt *rt)
 {
 	SDL_ShowCursor(0);
@@ -66,7 +66,7 @@ bool			key_rt(SDL_Scancode scancode,
 			system("imagesnap ./assets/photo/Photo_on_$(date +%m-%d-%y-%T)");
 			system("afplay /System/Library/Sounds/Hero.aiff");
 		}
-		key_rt_2(scancode, *hi_lited_object, rt->scene, rt->sdl);
+		key_rt_2(scancode, *select_obj, rt->scene, rt->sdl);
 		add_obj(scancode, rt->scene, rt->cl);
 	}
 	SDL_ShowCursor(1);

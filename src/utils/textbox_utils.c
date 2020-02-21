@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/19 21:10:54 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/21 11:30:19 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/21 12:23:46 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,10 @@ void			change_mode(int x, int y, char *flag)
 }
 
 void			check_buttons(int x, int y,
-							t_object **hi_lited_object, t_rt *rt)
+							t_object **select_obj, t_rt *rt)
 {
 	if ((x >= 260 && x <= 460) && (y >= 700 && y <= 765))
-		*hi_lited_object = NULL;
+		*select_obj = NULL;
 	if ((x >= 55 && x <= 255) && (y >= 700 && y <= 765))
 		SDL_ShowCursor(1);
 	if ((x >= 55 && x <= 405) && (y >= 770 && y <= 830))
