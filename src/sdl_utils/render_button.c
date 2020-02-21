@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/09 04:26:16 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/17 14:59:40 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/21 09:13:33 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,5 +23,5 @@ void		render_button(t_button *button, t_sdl *sdl)
 										button->clr_button.b),
 			sdl->screen[1]->sur);
 	sdl_putstr((SDL_Rect){button->rect_body.x, button->rect_body.y, 0, 0},
-				button->text, sdl->gui->ttf[BIG_FONT_ID], sdl->screen[1]->sur);
+				button->text, sdl->gui->ttf[NORMAL_FONT_ID], sdl->screen[1]->sur);
 }

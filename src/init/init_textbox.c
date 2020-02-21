@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 21:27:56 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/21 05:30:03 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/21 09:48:41 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static void			init_textbox_2(int i, t_gui *gui)
 {
 	if (i == New_obj)
 	{
-		gui->textbox[i]->pos = (SDL_Rect){410, 720, 0, 0};
+		gui->textbox[i]->pos = (SDL_Rect){420, 775, 0, 0};
 		gui->textbox[i]->color = (SDL_Color){196, 53, 0, 0};
 	}
 	else if (i == Sphere_rad || i == Cylinder_len || i == Cone_len

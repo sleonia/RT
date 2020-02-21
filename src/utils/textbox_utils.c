@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/19 21:10:54 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/21 07:31:48 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/21 09:48:56 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,15 @@ void			change_mode(int x, int y, char *flag)
 
 void			check_buttons(char *flag, int x, int y, t_rt *rt)
 {
-	if ((x >= 55 && x <= 350) && (y >= 705 && y <= 805))
+	if ((x >= 55 && x <= 405) && (y >= 770 && y <= 830))
+	{
+		printf("%s", "lox1\n");		
 		add_obj(88 + ft_atoi(rt->sdl->gui->textbox[New_obj]->text),
 				rt->scene, rt->cl);
-	if ((x >= 55 && x <= 450) && (y >= 805 && y <= 905))
+	}
+	if ((x >= 55 && x <= 450) && (y >= 835 && y <= 895))
 		save_image(rt->sdl->screen[0]->sur->pixels);
-	if ((x >= 55 && x <= 450) && (y >= 905 && y <= 1005))
+	if ((x >= 55 && x <= 455) && (y >= 900 && y <= 960))
 		*flag = 1;
 }
 

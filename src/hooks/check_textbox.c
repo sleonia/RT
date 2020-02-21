@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/19 21:07:57 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/21 06:28:13 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/21 09:56:16 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -191,6 +191,7 @@ static bool	check_torus_textbox(int x, int y, t_textbox *textbox[])
 bool		check_textbox(int x, int y,
 							t_object **hi_lited_object, t_textbox *textbox[])
 {
+	printf("x = %d  y = %d\n", x, y);
 	if (!*hi_lited_object)
 	{
 		if ((x >= 185 && x <= 275) && (y >= 60 && y <= 80))
@@ -218,7 +219,6 @@ bool		check_textbox(int x, int y,
 			textbox[Fsaa]->on_focus = true;
 			return (reset_value(Fsaa, textbox));
 		}
-		return (true);
 	}
 	else if ((*hi_lited_object)->type == o_sphere)
 		check_sphere_textbox(x, y, textbox);
@@ -234,7 +234,7 @@ bool		check_textbox(int x, int y,
 		check_torus_textbox(x, y, textbox);
 	if (*hi_lited_object)
 		check_material_textbox(x, y, textbox);
-	if ((x >= 410 && x <= 430) && (y >= 710 && y <= 750))
+	if ((x >= 410 && x <= 460) && (y >= 770 && y <= 830))
 	{
 		textbox[New_obj]->on_focus = true;
 		return (reset_value(New_obj, textbox));
