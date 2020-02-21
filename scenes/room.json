@@ -1,0 +1,233 @@
+{
+	"camera":
+	{
+		"position":					[1.570796, 0.5, -10.5],
+		"phi":						90.0,
+		"tetta":					90.0
+	},
+	"textures":
+	[
+		"./assets/textures/shrek.jpg"
+	],
+	"skybox":
+	{
+		"texture_id":				-1,
+		"ambient":					0.2,
+		"fsaa":						2
+	},
+	"light":
+	[
+		{
+			"intensity":			1.0,
+			"position":				[800.0, 99.0, 800.0]
+		},
+		{
+			"intensity":			0.4,
+			"position":				[-800.0, 99.0, 800.0]
+		},
+		{
+			"intensity":			0.4,
+			"position":				[800.0, 99.0, -800.0]
+		},
+		{
+			"intensity":			0.4,
+			"position":				[-800.0, 99.0, -800.0]
+		}
+	],
+	"figure":
+	[
+		{
+			"type":					"sphere",
+			"radius":				3.0,
+			"center":				[-4.0, 0.0, 10.0],
+			"material":
+			{
+				"color":			[255.0, 255.0, 0.0],
+				"ambient":			1.0,
+				"diffuse":			0.4,
+				"specular":			50.0,
+				"reflection":		0.9,
+				"refraction":		0.0,
+				"texture_id":		0
+			}
+		},
+		{
+			"type":					"plane",
+			"axis":					[1.0, 0.0, 0.0],
+			"dist":					1000.0,
+			"center":				[-4.0, 0.0, 10.0],
+			"material":
+			{
+				"color":			[255.0, 255.0, 0.0],
+				"ambient":			1.0,
+				"diffuse":			0.4,
+				"specular":			50.0,
+				"reflection":		0.0,
+				"refraction":		0.0,
+				"texture_id":		0
+			}
+		},
+		{
+			"type":					"plane",
+			"axis":					[-1.0, 0.0, 0.0],
+			"dist":					1000.0,
+			"center":				[-4.0, 0.0, 10.0],
+			"material":
+			{
+				"color":			[255.0, 255.0, 0.0],
+				"ambient":			1.0,
+				"diffuse":			0.4,
+				"specular":			50.0,
+				"reflection":		0.0,
+				"refraction":		0.0,
+				"texture_id":		0
+			}
+		},
+		{
+			"type":					"plane",
+			"axis":					[0.0, -1.0, 0.0],
+			"dist":					100.0,
+			"center":				[-4.0, 0.0, 10.0],
+			"material":
+			{
+				"color":			[255.0, 255.0, 0.0],
+				"ambient":			1.0,
+				"diffuse":			0.4,
+				"specular":			50.0,
+				"reflection":		0.0,
+				"refraction":		0.0,
+				"texture_id":		0
+			}
+		},
+		{
+			"type":					"plane",
+			"axis":					[0.0, 1.0, 0.0],
+			"dist":					100.0,
+			"center":				[-4.0, 0.0, 10.0],
+			"material":
+			{
+				"color":			[255.0, 255.0, 0.0],
+				"ambient":			1.0,
+				"diffuse":			0.4,
+				"specular":			50.0,
+				"reflection":		0.0,
+				"refraction":		0.0,
+				"texture_id":		0
+			}
+		},
+		{
+			"type":					"plane",
+			"axis":					[0.0, 0.0, 1.0],
+			"dist":					1000.0,
+			"center":				[-4.0, 0.0, 10.0],
+			"material":
+			{
+				"color":			[255.0, 255.0, 0.0],
+				"ambient":			1.0,
+				"diffuse":			0.4,
+				"specular":			50.0,
+				"reflection":		0.0,
+				"refraction":		0.0,
+				"texture_id":		0
+			}
+		},
+		{
+			"type":					"plane",
+			"axis":					[0.0, 0.0, -1.0],
+			"dist":					1000.0,
+			"center":				[-4.0, 0.0, 10.0],
+			"material":
+			{
+				"color":			[255.0, 255.0, 0.0],
+				"ambient":			1.0,
+				"diffuse":			0.4,
+				"specular":			50.0,
+				"reflection":		0.0,
+				"refraction":		0.0,
+				"texture_id":		0
+			}
+		},
+		{
+			"type":					"cylinder",
+			"axis":					[0.0, 1.0, 0.0],
+			"length":				500.0,
+			"radius":				100.0,
+			"center":				[1000.0, 0.0, 1000.0],
+			"material":
+			{
+				"color":			[255.0, 255.0, 0.0],
+				"ambient":			1.0,
+				"diffuse":			0.4,
+				"specular":			50.0,
+				"reflection":		0.0,
+				"refraction":		0.0,
+				"texture_id":		-3
+			}
+		},
+		{
+			"type":					"cylinder",
+			"axis":					[0.0, 1.0, 0.0],
+			"length":				500.0,
+			"radius":				100.0,
+			"center":				[1000.0, 0.0, -1000.0],
+			"material":
+			{
+				"color":			[255.0, 255.0, 0.0],
+				"ambient":			1.0,
+				"diffuse":			0.4,
+				"specular":			50.0,
+				"reflection":		0.0,
+				"refraction":		0.0,
+				"texture_id":		-2
+			}
+		},
+		{
+			"type":					"cylinder",
+			"axis":					[0.0, 1.0, 0.0],
+			"length":				500.0,
+			"radius":				100.0,
+			"center":				[-1000.0, 0.0, 1000.0],
+			"material":
+			{
+				"color":			[255.0, 255.0, 0.0],
+				"ambient":			1.0,
+				"diffuse":			0.4,
+				"specular":			50.0,
+				"reflection":		0.0,
+				"refraction":		0.0,
+				"texture_id":		-3
+			}
+		},
+		{
+			"type":					"cylinder",
+			"axis":					[0.0, 1.0, 0.0],
+			"length":				500.0,
+			"radius":				100.0,
+			"center":				[-1000.0, 0.0, -1000.0],
+			"material":
+			{
+				"color":			[255.0, 255.0, 0.0],
+				"ambient":			1.0,
+				"diffuse":			0.4,
+				"specular":			50.0,
+				"reflection":		0.0,
+				"refraction":		0.0,
+				"texture_id":		-2
+			}
+		}
+	],
+	"assets":
+	{
+		"music":
+		[
+									"./assets/music/Somebody_once_told_me.mp3"
+		],
+		"sounds":
+		[
+									"./assets/sounds/fisting-is-300.wav",
+									"./assets/sounds/Boy_next_door.wav"
+		],
+		"icon":						"./assets/icons/shrek.jpg",
+		"volume":					0
+	}
+}
