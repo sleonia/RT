@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/10 07:52:23 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/21 05:32:24 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/21 07:44:13 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ bool			mouse_toolbar(char *flag,
 			printf("x = %d  y = %d\n", x, y);
 			if (!*hi_lited_object)
 			{
-				if ((x >= 200 && x <= 410) && (y >= 350 && y <= 410))
+				if ((x >= 200 && x <= 410) && (y >= 350 && y <= 465))
 					change_mode(x, y, flag);
 			}
 		}

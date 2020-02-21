@@ -6,11 +6,44 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/08 06:44:01 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/19 14:39:05 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/21 07:27:17 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
+
+static void		gui_mode3(char *flag, t_gui *gui, SDL_Surface *sur)
+{
+	SDL_Color	default_color;
+	SDL_Color	highlighted_color;
+
+	highlighted_color = (SDL_Color){255, 0, 0, 0};
+	default_color = gui->ttf[NORMAL_FONT_ID]->font_color;
+	if (*flag == RED_MASK)
+	{
+		gui->ttf[NORMAL_FONT_ID]->font_color = highlighted_color;
+		sdl_putstr((SDL_Rect){200, 405, 0, 0}, "Red_mask", gui->ttf[NORMAL_FONT_ID], sur);
+		gui->ttf[NORMAL_FONT_ID]->font_color = default_color;
+	}
+	else
+		sdl_putstr((SDL_Rect){200, 405, 0, 0}, "Red_mask", gui->ttf[NORMAL_FONT_ID], sur);
+	if (*flag == GREEN_MASK)
+	{
+		gui->ttf[NORMAL_FONT_ID]->font_color = highlighted_color;
+		sdl_putstr((SDL_Rect){350, 405, 0, 0}, "Green_mask", gui->ttf[NORMAL_FONT_ID], sur);
+		gui->ttf[NORMAL_FONT_ID]->font_color = default_color;
+	}
+	else
+		sdl_putstr((SDL_Rect){350, 405, 0, 0}, "Green_mask", gui->ttf[NORMAL_FONT_ID], sur);
+	if (*flag == BLUE_MASK)
+	{
+		gui->ttf[NORMAL_FONT_ID]->font_color = highlighted_color;
+		sdl_putstr((SDL_Rect){200, 435, 0, 0}, "Blue_mask", gui->ttf[NORMAL_FONT_ID], sur);
+		gui->ttf[NORMAL_FONT_ID]->font_color = default_color;
+	}
+	else
+		sdl_putstr((SDL_Rect){200, 435, 0, 0}, "Blue_mask", gui->ttf[NORMAL_FONT_ID], sur);
+}
 
 static void		gui_mode2(char *flag, t_gui *gui, SDL_Surface *sur)
 {
@@ -62,6 +95,7 @@ void			gui_mode(char *flag, t_gui *gui, SDL_Surface *sur)
 	else
 		sdl_putstr((SDL_Rect){350, 345, 0, 0}, "Sepia", gui->ttf[NORMAL_FONT_ID], sur);
 	gui_mode2(flag, gui, sur);
+	gui_mode3(flag, gui, sur);
 }
 
 void			gui_skybox(t_gui *gui, SDL_Surface *sur)

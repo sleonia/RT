@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/19 21:10:54 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/21 02:47:04 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/21 07:31:48 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,12 @@ void			change_mode(int x, int y, char *flag)
 		*flag = NEGATIVE;
 	if ((x >= 350 && x <= 410) && (y >= 350 && y <= 375))
 		*flag = SEPIA;
+	if ((x >= 200 && x <= 300) && (y >= 410 && y <= 430))
+		*flag = RED_MASK;
+	if ((x >= 350 && x <= 410) && (y >= 410 && y <= 430))
+		*flag = GREEN_MASK;
+	if ((x >= 200 && x <= 300) && (y >= 440 && y <= 465))
+		*flag = BLUE_MASK;
 }
 
 void			check_buttons(char *flag, int x, int y, t_rt *rt)

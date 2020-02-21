@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 04:06:50 by thorker           #+#    #+#             */
-/*   Updated: 2020/02/21 05:44:15 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/21 07:19:26 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,9 @@
 #  define NEGATIVE -101
 #  define SEPIA -102
 #  define BLUR -103
+#  define RED_MASK -104
+#  define GREEN_MASK -105
+#  define BLUE_MASK -106
 #  define NBR_OF_SONGS		20
 #  define CNT_OF_DISPLAYS	2
 #  define DISPLAY_NOT	"osascript -e \'display notification\""
