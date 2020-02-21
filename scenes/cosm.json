@@ -1,0 +1,203 @@
+{
+	"camera":
+	{
+		"position":					[0.0, 0.0, -100.0],
+		"phi":						90.0,
+		"tetta":					90.0
+	},
+	"textures":
+	[
+		"./assets/textures/2k_sun.jpg",
+		"./assets/textures/mercury.jpg",
+		"./assets/textures/venus.jpg",
+		"./assets/textures/earth.jpg",
+		"./assets/textures/mars.jpg",
+		"./assets/textures/jupiter.jpg",
+		"./assets/textures/saturn.jpg",
+		"./assets/textures/uranus.jpg",
+		"./assets/textures/neptune.jpg",
+		"./assets/textures/milky_way.jpg",
+		"./assets/textures/2k_moon.jpg"
+
+	],
+	"skybox":
+	{
+		"texture_id":				9,
+		"ambient":					0.2,
+		"fsaa":						0
+	},
+	"light":
+	[
+		{
+			"intensity":			1.0,
+			"position":				[3.5, 1.6, -10.0]
+		}
+	],
+	"figure":
+	[
+		{
+			"type":					"sphere",
+			"radius":				20.0,
+			"center":				[0.0, 10.0, 250.0],
+			"material":
+			{
+				"color":			[255.0, 255.0, 0.0],
+				"ambient":			1.0,
+				"diffuse":			0.4,
+				"specular":			50.0,
+				"reflection":		0.0,
+				"refraction":		0.0,
+				"texture_id":		0
+			}
+		},
+		{
+			"type":					"sphere",
+			"radius":				3.0,
+			"center":				[25.0, 15.0, 250.0],
+			"material":
+			{
+				"color":			[255.0, 255.0, 0.0],
+				"ambient":			1.0,
+				"diffuse":			0.4,
+				"specular":			50.0,
+				"reflection":		0.0,
+				"refraction":		0.0,
+				"texture_id":		1
+			}
+		},
+		{
+			"type":					"sphere",
+			"radius":				5.0,
+			"center":				[20.0, 40.0, 250.0],
+			"material":
+			{
+				"color":			[255.0, 255.0, 0.0],
+				"ambient":			1.0,
+				"diffuse":			0.4,
+				"specular":			50.0,
+				"reflection":		0.0,
+				"refraction":		0.0,
+				"texture_id":		2
+			}
+		},
+		{
+			"type":					"sphere",
+			"radius":				5.8,
+			"center":				[-40.0, 40.0, 250.0],
+			"material":
+			{
+				"color":			[255.0, 255.0, 0.0],
+				"ambient":			1.0,
+				"diffuse":			0.4,
+				"specular":			50.0,
+				"reflection":		0.0,
+				"refraction":		0.0,
+				"texture_id":		3
+			}
+		},
+		{
+			"type":					"sphere",
+			"radius":				4.0,
+			"center":				[-60.0, -15.0, 250.0],
+			"material":
+			{
+				"color":			[255.0, 255.0, 0.0],
+				"ambient":			1.0,
+				"diffuse":			0.4,
+				"specular":			50.0,
+				"reflection":		0.0,
+				"refraction":		0.0,
+				"texture_id":		4
+			}
+		},
+		{
+			"type":					"sphere",
+			"radius":				9.0,
+			"center":				[-45.0, -60.0, 250.0],
+			"material":
+			{
+				"color":			[255.0, 255.0, 0.0],
+				"ambient":			1.0,
+				"diffuse":			0.4,
+				"specular":			50.0,
+				"reflection":		0.0,
+				"refraction":		0.0,
+				"texture_id":		5
+			}
+		},
+		{
+			"type":					"sphere",
+			"radius":				7.0,
+			"center":				[0.0, -90.0, 250.0],
+			"material":
+			{
+				"color":			[255.0, 255.0, 0.0],
+				"ambient":			1.0,
+				"diffuse":			0.4,
+				"specular":			50.0,
+				"reflection":		0.0,
+				"refraction":		0.0,
+				"texture_id":		6
+			}
+		},
+		{
+			"type":					"sphere",
+			"radius":				7.0,
+			"center":				[70.0, -80.0, 250.0],
+			"material":
+			{
+				"color":			[255.0, 255.0, 0.0],
+				"ambient":			1.0,
+				"diffuse":			0.4,
+				"specular":			50.0,
+				"reflection":		0.0,
+				"refraction":		0.0,
+				"texture_id":		7
+			}
+		},
+		{
+			"type":					"sphere",
+			"radius":				6.0,
+			"center":				[140.0, 0.0, 250.0],
+			"material":
+			{
+				"color":			[255.0, 255.0, 0.0],
+				"ambient":			1.0,
+				"diffuse":			0.4,
+				"specular":			50.0,
+				"reflection":		0.0,
+				"refraction":		0.0,
+				"texture_id":		8
+			}
+		},
+		{
+			"type":					"sphere",
+			"radius":				2.0,
+			"center":				[-46.0, 46.0, 250.0],
+			"material":
+			{
+				"color":			[255.0, 255.0, 0.0],
+				"ambient":			1.0,
+				"diffuse":			0.4,
+				"specular":			50.0,
+				"reflection":		0.0,
+				"refraction":		0.0,
+				"texture_id":		10
+			}
+		}
+	],
+	"assets":
+	{
+		"music":
+		[
+									"./assets/music/Somebody_once_told_me.mp3"
+		],
+		"sounds":
+		[
+									"./assets/sounds/fisting-is-300.wav",
+									"./assets/sounds/Boy_next_door.wav"
+		],
+		"icon":						"./assets/icons/shrek.jpg",
+		"volume":					0
+	}
+}
