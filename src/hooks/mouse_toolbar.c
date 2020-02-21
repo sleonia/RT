@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/10 07:52:23 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/21 09:50:40 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/21 10:07:15 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,14 @@ bool			mouse_toolbar(char *flag,
 		if (rt->sdl->event.button.button == SDL_BUTTON_LEFT)
 		{
 			SDL_GetMouseState(&x, &y);
-			// printf("x = %d  y = %d\n", x, y);
+			printf("x = %d  y = %d\n", x, y);
 			if (!*hi_lited_object)
 			{
 				if ((x >= 200 && x <= 410) && (y >= 350 && y <= 465))
 					change_mode(x, y, flag);
 			}
 		}
-		check_buttons(flag, x, y, rt);
+		check_buttons(x, y, hi_lited_object, rt);
 		check_textbox(x, y, hi_lited_object, rt->sdl->gui->textbox);
 		if (rt->sdl->event.button.button == SDL_BUTTON_RIGHT)
 			change_focus(rt->sdl);

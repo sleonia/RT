@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 04:06:50 by thorker           #+#    #+#             */
-/*   Updated: 2020/02/21 07:19:26 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/21 10:06:59 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -520,7 +520,8 @@ int						greengreen(int	color);
 int						blueblue(int	color);
 float					minn(float a, float b);
 void					change_mode(int x, int y, char *flag);
-void					check_buttons(char *flag, int x, int y, t_rt *rt);
+void					check_buttons(int x, int y,
+									t_object **hi_lited_object, t_rt *rt);
 bool					reset_value(int flag, t_textbox *t_textbox[]);
 cl_float3				*string_to_color(char *str);
 char					*color_to_string(cl_float3 array);
