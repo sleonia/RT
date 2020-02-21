@@ -6,11 +6,34 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 21:27:56 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/20 21:04:55 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/21 03:23:21 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
+
+static void			init_textbox_2(int i, t_gui *gui)
+{
+	if (i == New_obj)
+	{
+		gui->textbox[i]->pos = (SDL_Rect){410, 720, 0, 0};
+		gui->textbox[i]->color = (SDL_Color){196, 53, 0, 0};
+	}
+	else if (i == Sphere_rad || i == Cylinder_len || i == Cone_len
+		|| i == Plane_tan || i == Parab_dist || i == Torus_bigr)
+		gui->textbox[i]->pos = (SDL_Rect){35, 150, 0, 0};
+	else if (i == Cylinder_rad || i == Cone_tan
+		|| i == Parab_len || i ==  Torus_r)
+		gui->textbox[i]->pos = (SDL_Rect){35, 250, 0, 0};
+	else if (i == Sphere_center || i == Cone_axis || i == Plane_axis
+		|| i ==  Parab_axis || i == Torus_axis)
+		gui->textbox[i]->pos = (SDL_Rect){315, 150, 0, 0};
+	else if (i == Cylinder_center || i == Cone_center
+		|| i == Parab_center || i ==  Torus_center)
+		gui->textbox[i]->pos = (SDL_Rect){315, 250, 0, 0};
+	else
+		gui->textbox[i]->pos = (SDL_Rect){315, 300 + (i - Mtrl_Color) * 50, 0, 0};
+}
 
 void				init_textbox(t_gui *gui)
 {
@@ -34,20 +57,7 @@ void				init_textbox(t_gui *gui)
 			gui->textbox[i]->pos = (SDL_Rect){260, 190, 0, 0};
 		else if (i == Fsaa)
 			gui->textbox[i]->pos = (SDL_Rect){395, 190, 0, 0};
-		else if (i == New_obj)
-		{
-			gui->textbox[i]->pos = (SDL_Rect){410, 720, 0, 0};
-			gui->textbox[i]->color = (SDL_Color){196, 53, 0, 0};
-		}
-		else if (i == Sphere_rad || i == Cylinder_len || i == Cone_len || i == Plane_tan || i == Parab_dist || i == Torus_bigr)
-			gui->textbox[i]->pos = (SDL_Rect){35, 150, 0, 0};
-		else if (i == Cylinder_rad || i == Cone_tan || i == Parab_len || i ==  Torus_r)
-			gui->textbox[i]->pos = (SDL_Rect){35, 250, 0, 0};
-		else if (i == Sphere_center || i == Cone_axis || i == Plane_axis || i ==  Parab_axis || i == Torus_axis)
-			gui->textbox[i]->pos = (SDL_Rect){315, 150, 0, 0};
-				else if (i == Cylinder_center || i == Cone_center || i == Parab_center || i ==  Torus_center)
-			gui->textbox[i]->pos = (SDL_Rect){315, 250, 0, 0};
 		else
-			gui->textbox[i]->pos = (SDL_Rect){0, 0, 0, 0};
+			init_textbox_2(i, gui);
 	}
 }

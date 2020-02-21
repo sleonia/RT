@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/06 22:40:57 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/19 12:51:45 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/21 02:58:25 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,12 +62,11 @@ enum						e_textbox_type
 	//
 	Mtrl_Color,
 	Mtrl_ambient,
-	Mtrl_Diffuse,
-	Mtrl_Specular,
-	Mtrl_Reflection,
-	Mtrl_Refraction,
-	Mtrl_Texture_id,
-	Mtrl_Texture
+	Mtrl_diffuse,
+	Mtrl_specular,
+	Mtrl_reflection,
+	Mtrl_refraction,
+	Mtrl_texture_id,
 };
 
 typedef struct				s_textbox

@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/19 12:35:12 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/20 22:13:26 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/21 02:59:19 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,19 @@ void			set_value_in_def_textbox(t_scene *scene,
 	sprintf(gui->textbox[New_obj]->text, "%d", 0);
 }
 
-void			set_value_in_material_textbox(t_scene *scene,
+void			set_value_in_material_textbox(t_object **hi_lited_object,
 									t_gui *gui)
 {
+		char	*tmp;
+
+	tmp = float_array_to_string((*hi_lited_object)->material.color);
+	gui->textbox[Mtrl_Color]->text = tmp;
+	sprintf(gui->textbox[Mtrl_ambient]->text, "%3.3f", (*hi_lited_object)->material.ambient);
+	sprintf(gui->textbox[Mtrl_diffuse]->text, "%3.3f", (*hi_lited_object)->material.diffuse);
+	sprintf(gui->textbox[Mtrl_specular]->text, "%3.3f", (*hi_lited_object)->material.specular);
+	sprintf(gui->textbox[Mtrl_reflection]->text, "%3.3f", (*hi_lited_object)->material.reflection);
+	sprintf(gui->textbox[Mtrl_refraction]->text, "%3.3f", (*hi_lited_object)->material.refraction);
+	sprintf(gui->textbox[Mtrl_texture_id]->text, "%d", (*hi_lited_object)->material.texture_id);
 }
 
 static void		set_value_in_sphere_textbox(t_sphere *sphere,
@@ -116,4 +126,6 @@ void			set_textbox_value(t_scene *scene, t_object **hi_lited_object, t_gui *gui)
 		set_value_in_parab_textbox(&(*hi_lited_object)->object.parab, gui);
 	else if ((*hi_lited_object)->type == o_torus)
 		set_value_in_torus_textbox(&(*hi_lited_object)->object.torus, gui);
+	else
+		set_value_in_material_textbox(hi_lited_object, gui);
 }

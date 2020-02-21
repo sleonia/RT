@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ccriston <ccriston@student.42.fr>          +#+  +:+       +#+         #
+#    By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/01 04:18:29 by sleonia           #+#    #+#              #
-#    Updated: 2020/02/19 21:16:17 by ccriston         ###   ########.fr        #
+#    Updated: 2020/02/21 02:33:30 by sleonia          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -230,8 +230,8 @@ FRAME = 	-F framework/ -framework SDL2 -framework SDL2_image 	\
 			-rpath framework/ -framework OpenCL						\
 			-framework OpenGL -framework Cocoa -framework IOKit		\
 
-COMPILE_FLAGS = -g
-# COMPILE_FLAGS = -Wall -Werror -Wextra -g
+# COMPILE_FLAGS = -g
+COMPILE_FLAGS = -Wall -Werror -Wextra -g
 
 COMPILE = gcc $(COMPILE_FLAGS) -I $(INCLUDES_DIR) $(INC_SDL) -I $(LIBFT_INC) -I $(LIBTOJSON_INC) -I $(SDL2_AUDIO_INC)
 

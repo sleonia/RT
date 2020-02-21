@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/28 12:09:13 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/20 18:00:41 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/21 03:18:28 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,11 @@ static void		textbox_update(t_object *hi_lited_object,
 		render_textboxs(Parab_axis, Parab_len, gui, render);
 	else if (hi_lited_object->type == o_torus)
 		render_textboxs(Torus_axis, Torus_r, gui, render);
+	if (hi_lited_object)
+	{
+		// printf("%d\n", gui->textbox[Mtrl_Color]->pos.x);
+		render_textboxs(Mtrl_Color, Mtrl_texture_id, gui, render);
+	}
 }
 
 void			sdl_update(t_object *hi_lited_object, t_sdl *sdl)

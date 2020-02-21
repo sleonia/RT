@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 08:47:21 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/20 22:04:23 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/21 02:35:05 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,11 @@ static void		print_screen_item(t_ttf *ttf[], SDL_Surface *sur)
 	ttf[NORMAL_FONT_ID]->font_color = default_color;
 }
 
-void			gui_sphere_screen(t_sdl *sdl, t_object **hi_lited_object)
+void			gui_sphere_screen(t_sdl *sdl)
 {
 	print_screen_title(sdl->gui->ttf, sdl->screen[1]->sur);
 	print_screen_item(sdl->gui->ttf, sdl->screen[1]->sur);
-	gui_material(sdl, hi_lited_object);
+	gui_material(sdl);
 	gui_buttons(sdl);
 	load_textboxes(Sphere_rad, Sphere_center,
 				sdl->gui, sdl->screen[1]->render);

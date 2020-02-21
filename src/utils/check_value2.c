@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/19 15:11:15 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/20 17:25:54 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/21 03:48:10 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,4 +53,11 @@ double		check_tan(double input_tan)
 	if (input_tan >= 0.1 && input_tan <= 1.0)
 		return (input_tan);
 	return (0.2);
+}
+
+double		check_dist(double input_tan)
+{
+	if (input_tan >= 1.0 && input_tan <= 100.0)
+		return (input_tan);
+	return (30);
 }

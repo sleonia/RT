@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_object.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccriston <ccriston@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/04 18:38:23 by deladia           #+#    #+#             */
-/*   Updated: 2020/02/19 22:27:48 by ccriston         ###   ########.fr       */
+/*   Updated: 2020/02/21 02:46:26 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ static t_object		*check(t_scene *s, cl_float2 dist, cl_float3 d, int i)
 t_object		*get_object(t_scene *s, int x, int y)
 {
 	cl_float3	d;
-	t_object	*closest;
 	cl_float2	dist;
 	int			i;
 

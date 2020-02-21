@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/19 21:10:54 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/19 21:49:58 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/21 02:47:04 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void			check_buttons(char *flag, int x, int y, t_rt *rt)
 		*flag = 1;
 }
 
-bool			reset_value(int flag, t_rt *rt)
+bool			reset_value(int flag, t_textbox *textbox[])
 {
 	int		i;
 
@@ -43,7 +43,7 @@ bool			reset_value(int flag, t_rt *rt)
 	while (i < COUNT_OF_TEXTBOX)
 	{
 		if (i != flag)
-			rt->sdl->gui->textbox[i]->on_focus = false;
+			textbox[i]->on_focus = false;
 		i++;
 	}
 	return (true);

@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 04:06:50 by thorker           #+#    #+#             */
-/*   Updated: 2020/02/20 18:00:11 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/21 03:48:31 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -308,24 +308,18 @@ void					set_textbox_value(t_scene *scene,
 										t_gui *gui);
 void					gui_default_screen(char *flag,
 										t_sdl *sdl);
-void					gui_cone_screen(t_sdl *sdl,
-										t_object **hi_lited_object);
-void					gui_cylinder_screen(t_sdl *sdl,
-										t_object **hi_lited_object);
-void					gui_parab_screen(t_sdl *sdl,
-										t_object **hi_lited_object);
-void					gui_plane_screen(t_sdl *sdl,
-										t_object **hi_lited_object);
-void					gui_sphere_screen(t_sdl *sdl,
-										t_object **hi_lited_object);
-void					gui_torus_screen(t_sdl *sdl,
-										t_object **hi_lited_object);
+void					gui_cone_screen(t_sdl *sdl);
+void					gui_cylinder_screen(t_sdl *sdl);
+void					gui_parab_screen(t_sdl *sdl);
+void					gui_plane_screen(t_sdl *sdl);
+void					gui_sphere_screen(t_sdl *sdl);
+void					gui_torus_screen(t_sdl *sdl);
 
 void					gui_main(char *flag,
 								t_object **hi_lited_object,
 								t_sdl *sdl,
 								t_scene *scene);
-void					gui_material(t_sdl *sdl, t_object **hi_lited_object);
+void					gui_material(t_sdl *sdl);
 /*
 **						hooks
 */
@@ -333,7 +327,8 @@ void					gui_material(t_sdl *sdl, t_object **hi_lited_object);
 void					arrows_processing(SDL_Scancode scancode,
 										t_object *hi_lited_object);
 bool					check_textbox(int x, int y,
-									t_object **hi_lited_object, t_rt *rt);
+									t_object **hi_lited_object,
+									t_textbox *textbox[]);
 void					events_processing(char *quit,
 										t_object **hi_lited_object,
 										t_rt *rt);
@@ -469,6 +464,7 @@ void					check_float_array(int flag, cl_float3 *pos);
 double					check_length(double input_length);
 double					check_radius(double input_radius);
 double					check_tan(double input_tan);
+double					check_dist(double input_tan);
 
 void					func_error(int err);
 char					*float_array_to_string(cl_float3 array);
@@ -517,8 +513,7 @@ int						blueblue(int	color);
 float					minn(float a, float b);
 void					change_mode(int x, int y, char *flag);
 void					check_buttons(char *flag, int x, int y, t_rt *rt);
-bool					reset_value(int flag, t_rt *rt);
-
+bool					reset_value(int flag, t_textbox *t_textbox[]);
 
 # endif
 #endif

@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/10 07:52:23 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/19 21:18:13 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/21 02:45:11 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ bool			mouse_toolbar(char *flag,
 			}
 		}
 		check_buttons(flag, x, y, rt);
-		check_textbox(x, y, hi_lited_object, rt);
+		check_textbox(x, y, hi_lited_object, rt->sdl->gui->textbox);
 		if (rt->sdl->event.button.button == SDL_BUTTON_RIGHT)
 			change_focus(rt->sdl);
 	}

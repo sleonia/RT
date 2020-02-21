@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/08 06:54:01 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/20 22:05:53 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/21 03:19:52 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,18 +37,17 @@ void		gui_main(char *flag,
 		if (!*hi_lited_object)
 			gui_default_screen(flag, sdl);
 		else if ((*hi_lited_object)->type == o_sphere)
-			gui_sphere_screen(sdl, hi_lited_object);
+			gui_sphere_screen(sdl);
 		else if ((*hi_lited_object)->type == o_cylinder)
-			gui_cylinder_screen(sdl, hi_lited_object);
+			gui_cylinder_screen(sdl);
 		else if ((*hi_lited_object)->type == o_cone)
-			gui_cone_screen(sdl, hi_lited_object);
+			gui_cone_screen(sdl);
 		else if ((*hi_lited_object)->type == o_plane)
-			gui_plane_screen(sdl, hi_lited_object);
+			gui_plane_screen(sdl);
 		else if ((*hi_lited_object)->type == o_parab)
-			gui_parab_screen(sdl, hi_lited_object);
+			gui_parab_screen(sdl);
 		else if ((*hi_lited_object)->type == o_torus)
-			gui_torus_screen(sdl, hi_lited_object);
-		
+			gui_torus_screen(sdl);
 	}
 	else
 	{

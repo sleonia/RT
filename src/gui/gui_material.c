@@ -6,13 +6,13 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 14:54:20 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/20 22:09:46 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/21 03:20:40 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-void		gui_material(t_sdl *sdl, t_object **hi_lited_object)
+void			gui_material(t_sdl *sdl)
 {
 	SDL_Color	default_color;
 	SDL_Color	highlighted_color;
@@ -27,7 +27,6 @@ void		gui_material(t_sdl *sdl, t_object **hi_lited_object)
 	sdl_putstr((SDL_Rect){50, 500, 0, 0}, "reflection", sdl->gui->ttf[NORMAL_FONT_ID], sdl->screen[1]->sur);
 	sdl_putstr((SDL_Rect){50, 550, 0, 0}, "refraction", sdl->gui->ttf[NORMAL_FONT_ID], sdl->screen[1]->sur);
 	sdl_putstr((SDL_Rect){50, 600, 0, 0}, "texture_id", sdl->gui->ttf[NORMAL_FONT_ID], sdl->screen[1]->sur);
-	sdl_putstr((SDL_Rect){50, 650, 0, 0}, "texture", sdl->gui->ttf[NORMAL_FONT_ID], sdl->screen[1]->sur);
 	sdl->gui->ttf[NORMAL_FONT_ID]->font_color = default_color;
-	load_textboxes(Mtrl_Color, Mtrl_Texture, sdl->gui, sdl->screen[1]->render);
+	load_textboxes(Mtrl_Color, Mtrl_texture_id, sdl->gui, sdl->screen[1]->render);
 }

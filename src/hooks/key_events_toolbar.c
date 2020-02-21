@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/10 07:16:51 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/20 18:14:01 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/21 03:54:59 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ static void		set_value_from_textbox(t_object **hi_lited_object,
 								t_cl *cl)
 {
 	int			obj;
+	cl_float3	tmp;
 
 	if (!(*hi_lited_object))
 	{
@@ -43,11 +44,62 @@ static void		set_value_from_textbox(t_object **hi_lited_object,
 	}
 	else if ((*hi_lited_object)->type == o_sphere)
 	{
-		cl_float3 kek = *string_to_float_array(gui->textbox[Sphere_center]->text);
-		check_float_array(CENTER_FLAG, &kek);
-		(*hi_lited_object)->object.sphere.center = kek;
+		tmp = *string_to_float_array(gui->textbox[Sphere_center]->text);
+		check_float_array(CENTER_FLAG, &tmp);
+		(*hi_lited_object)->object.sphere.center = tmp;
 		(*hi_lited_object)->object.sphere.radius = check_radius(atof(gui->textbox[Sphere_rad]->text));
+	}
+	else if ((*hi_lited_object)->type == o_cylinder)
+	{
+		tmp = *string_to_float_array(gui->textbox[Cylinder_axis]->text);
+		check_float_array(AXIS_FLAG, &tmp);
+		(*hi_lited_object)->object.cylinder.axis = tmp;
+		tmp = *string_to_float_array(gui->textbox[Cylinder_center]->text);
+		check_float_array(CENTER_FLAG, &tmp);
+		(*hi_lited_object)->object.cylinder.center = tmp;
+		(*hi_lited_object)->object.cylinder.length = check_length(atof(gui->textbox[Cylinder_len]->text));
+		(*hi_lited_object)->object.cylinder.radius = check_radius(atof(gui->textbox[Cylinder_rad]->text));
+	}
+	else if ((*hi_lited_object)->type == o_cone)
+	{
+		tmp = *string_to_float_array(gui->textbox[Cone_axis]->text);
+		check_float_array(AXIS_FLAG, &tmp);
+		(*hi_lited_object)->object.cone.axis = tmp;
+		tmp = *string_to_float_array(gui->textbox[Cone_center]->text);
+		check_float_array(CENTER_FLAG, &tmp);
+		(*hi_lited_object)->object.cone.center = tmp;
+		(*hi_lited_object)->object.cone.length = check_length(atof(gui->textbox[Cone_len]->text));
+		(*hi_lited_object)->object.cone.tan = check_tan(atof(gui->textbox[Cone_tan]->text));
+	}
+	else if ((*hi_lited_object)->type == o_plane)
+	{
+		tmp = *string_to_float_array(gui->textbox[Plane_axis]->text);
+		check_float_array(AXIS_FLAG, &tmp);
+		(*hi_lited_object)->object.plane.axis = tmp;
+		(*hi_lited_object)->object.plane.dist = check_dist(atof(gui->textbox[Plane_tan]->text));
 		
+	}
+	else if ((*hi_lited_object)->type == o_parab)
+	{
+		tmp = *string_to_float_array(gui->textbox[Parab_axis]->text);
+		check_float_array(AXIS_FLAG, &tmp);
+		(*hi_lited_object)->object.parab.axis = tmp;
+		tmp = *string_to_float_array(gui->textbox[Parab_center]->text);
+		check_float_array(CENTER_FLAG, &tmp);
+		(*hi_lited_object)->object.parab.center = tmp;
+		(*hi_lited_object)->object.parab.length = check_length(atof(gui->textbox[Cone_len]->text));
+		(*hi_lited_object)->object.parab.k = check_dist(atof(gui->textbox[Cone_tan]->text));
+	}
+	else if ((*hi_lited_object)->type == o_torus)
+	{
+		tmp = *string_to_float_array(gui->textbox[Torus_axis]->text);
+		check_float_array(AXIS_FLAG, &tmp);
+		(*hi_lited_object)->object.torus.axis = tmp;
+		tmp = *string_to_float_array(gui->textbox[Torus_center]->text);
+		check_float_array(CENTER_FLAG, &tmp);
+		(*hi_lited_object)->object.torus.center = tmp;
+		(*hi_lited_object)->object.torus.bigr = atof(gui->textbox[Torus_bigr]->text);
+		(*hi_lited_object)->object.torus.r = atof(gui->textbox[Torus_r]->text);
 	}
 	if ((obj = (88 + ft_atoi(gui->textbox[New_obj]->text)) > 0))
 		add_obj(obj, scene, cl);
