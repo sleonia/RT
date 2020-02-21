@@ -6,7 +6,7 @@
 #    By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/01 04:18:29 by sleonia           #+#    #+#              #
-#    Updated: 2020/02/21 02:33:30 by sleonia          ###   ########.fr        #
+#    Updated: 2020/02/21 04:50:28 by sleonia          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -135,6 +135,7 @@ OBJ_SDL_UTILS_FILES = $(addprefix $(OBJ_DIR), $(SDL_UTILS_FILES:.c=.o))
 UTILS_FILES =							\
 			check_value.c 				\
 			check_value2.c 				\
+			color_to_string.c			\
 			errors_for_opencl.c			\
 			filter.c					\
 			float_array_to_string.c		\
@@ -157,8 +158,10 @@ UTILS_FILES =							\
 			rgb_to_int.c				\
 			save_image.c				\
 			show_error.c				\
+			ft_destroy_string_arr.c		\
 			string_to_float_array.c		\
 			macros.c					\
+			string_to_color.c			\
 			textbox_utils.c				\
 
 UTILS_DIR = ./src/utils/

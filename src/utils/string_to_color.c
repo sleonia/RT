@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   string_to_float_array.c                            :+:      :+:    :+:   */
+/*   string_to_color.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/02/19 17:00:29 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/21 04:50:13 by sleonia          ###   ########.fr       */
+/*   Created: 2020/02/21 04:46:41 by sleonia           #+#    #+#             */
+/*   Updated: 2020/02/21 04:49:31 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-cl_float3		*string_to_float_array(char *str)
+cl_float3		*string_to_color(char *str)
 {
 	cl_float3	value;
 	cl_float3	*ptr;
@@ -22,9 +22,9 @@ cl_float3		*string_to_float_array(char *str)
 		ft_error(ERROR_MALLOC);
 	if (ft_len_arr((void **)(split)) >= 3)
 	{
-		value.s[0] = atof(split[0]);
-		value.s[1] = atof(split[1]);
-		value.s[2] = atof(split[2]);
+		value.s[0] = atof(split[0]) / 255.0;
+		value.s[1] = atof(split[1]) / 255.0;
+		value.s[2] = atof(split[2]) / 255.0;
 	}
 	else
 		return (NULL);

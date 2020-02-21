@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 04:06:50 by thorker           #+#    #+#             */
-/*   Updated: 2020/02/21 03:48:31 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/21 04:54:42 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -468,6 +468,7 @@ double					check_dist(double input_tan);
 
 void					func_error(int err);
 char					*float_array_to_string(cl_float3 array);
+void					ft_destroy_string_arr(char **arr);
 void					ft_error(char *str);
 int						ft_len_arr(void **arr);
 char					*ft_strjoin_free(char *s1, char *s2, int num);
@@ -514,6 +515,8 @@ float					minn(float a, float b);
 void					change_mode(int x, int y, char *flag);
 void					check_buttons(char *flag, int x, int y, t_rt *rt);
 bool					reset_value(int flag, t_textbox *t_textbox[]);
+cl_float3				*string_to_color(char *str);
+char					*color_to_string(cl_float3 array);
 
 # endif
 #endif

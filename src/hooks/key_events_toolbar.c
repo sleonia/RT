@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/10 07:16:51 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/21 04:28:42 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/21 04:55:35 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,19 +93,11 @@ static void		set_value_from_textbox(t_object **hi_lited_object,
 		(*hi_lited_object)->object.parab.center = tmp;
 		(*hi_lited_object)->object.parab.length = check_length(atof(gui->textbox[Parab_len]->text));
 		(*hi_lited_object)->object.parab.k = (atof(gui->textbox[Parab_dist]->text));
-		// (*hi_lited_object)->object.parab.k = check_dist(atof(gui->textbox[Parab_dist]->text));
 	}
-	else if ((*hi_lited_object)->type == o_torus)
+	if (*hi_lited_object)
 	{
-		tmp = *string_to_float_array(gui->textbox[Torus_axis]->text);
-		check_float_array(AXIS_FLAG, &tmp);
-		cl_normalize(&tmp);		
-		(*hi_lited_object)->object.torus.axis = tmp;
-		tmp = *string_to_float_array(gui->textbox[Torus_center]->text);
-		check_float_array(CENTER_FLAG, &tmp);
-		(*hi_lited_object)->object.torus.center = tmp;
-		(*hi_lited_object)->object.torus.bigr = atof(gui->textbox[Torus_bigr]->text);
-		(*hi_lited_object)->object.torus.r = atof(gui->textbox[Torus_r]->text);
+		tmp = *string_to_color(gui->textbox[Mtrl_Color]->text);
+		(*hi_lited_object)->material.color = tmp;
 	}
 	if ((obj = (88 + ft_atoi(gui->textbox[New_obj]->text)) > 0))
 		add_obj(obj, scene, cl);

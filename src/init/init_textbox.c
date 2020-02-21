@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 21:27:56 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/21 04:11:53 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/21 04:36:00 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static void			init_textbox_2(int i, t_gui *gui)
 		|| i == Parab_center || i ==  Torus_center)
 		gui->textbox[i]->pos = (SDL_Rect){315, 250, 0, 0};
 	else
-		gui->textbox[i]->pos = (SDL_Rect){315, 300 + (i - Mtrl_Color) * 50, 0, 0};
+		gui->textbox[i]->pos = (SDL_Rect){315, 350 + (i - Mtrl_Color) * 50, 0, 0};
 }
 
 void				init_textbox(t_gui *gui)

@@ -6,7 +6,7 @@
 /*   By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/19 21:07:57 by sleonia           #+#    #+#             */
-/*   Updated: 2020/02/21 03:25:04 by sleonia          ###   ########.fr       */
+/*   Updated: 2020/02/21 04:37:32 by sleonia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static bool	check_material_textbox(int x, int y, t_textbox *textbox[])
 {
-	if ((x >= 305 && x <= 480) && (y >= 290 && y <= 310)) //hueta
+	if ((x >= 305 && x <= 480) && (y >= 360 && y <= 380)) //hueta
 	{
 		textbox[Mtrl_Color]->on_focus = true;
 		return (reset_value(Mtrl_Color, textbox));
