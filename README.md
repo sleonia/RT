@@ -18,8 +18,8 @@ The final project of the graphic branch of ["School 21"](https://21-school.ru/) 
 [**ccriston**](https://github.com/ccriston). Normals  
 
 ## Screenshots
-<img src = https://github.com/Aldarius/RT/blob/master/screens/screen_1.png>
-<img src = https://github.com/Aldarius/RT/blob/master/screens/screen_2.png>
-<img src = https://github.com/Aldarius/RT/blob/master/screens/screen_3.png>
-<img src = https://github.com/Aldarius/RT/blob/master/screens/screen_4.png>
-<img src = https://github.com/Aldarius/RT/blob/master/screens/screen_5.png>
+<img src = https://github.com/sleonia/RT/blob/master/assets/screenshots/forest.png>
+<img src = https://github.com/sleonia/RT/blob/master/assets/screenshots/torus_parabaloid.png>
+<img src = https://github.com/sleonia/RT/blob/master/assets/screenshots/nails.png>
+<img src = https://github.com/sleonia/RT/blob/master/assets/screenshots/room.png>
+<img src = https://github.com/sleonia/RT/blob/master/assets/screenshots/chess.png>
