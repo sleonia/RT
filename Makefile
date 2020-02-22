@@ -6,12 +6,11 @@
 #    By: sleonia <sleonia@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/01 04:18:29 by sleonia           #+#    #+#              #
-#    Updated: 2020/02/21 13:24:06 by sleonia          ###   ########.fr        #
+#    Updated: 2020/02/22 21:13:26 by sleonia          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 .PHONY: libft, libtojson, all, clean, fclean, re
-
 
 # =========== #
 #	GUI	  #
@@ -238,20 +237,13 @@ FRAME = 	-F framework/ -framework SDL2 -framework SDL2_image 	\
 			-rpath framework/ -framework OpenCL						\
 			-framework OpenGL -framework Cocoa -framework IOKit		\
 
-# COMPILE_FLAGS = -g
 COMPILE_FLAGS = -Wall -Werror -Wextra -g
 
 COMPILE = gcc $(COMPILE_FLAGS) -I $(INCLUDES_DIR) $(INC_SDL) -I $(LIBFT_INC) -I $(LIBTOJSON_INC) -I $(SDL2_AUDIO_INC)
 
 RT_LIBS = -L $(LIBFT_DIR) -lft -L $(SDL2_AUDIO_DIR) -lsdl_audio -L $(LIBTOJSON_DIR) -ltojson
 
-all: update $(NAME)
-
-update:
-		git submodule init libtojson
-		git submodule update libtojson
-		git submodule init libft	
-		git submodule update libft	
+all: $(NAME)
 
 $(NAME): $(OBJ_DIR) $(OBJ) $(INCLUDES_FILES)
 	@make lib_refresh
@@ -305,10 +297,7 @@ fclean: clean
 	@make fclean -C $(LIBTOJSON_DIR)
 	@make fclean -C $(SDL2_AUDIO_DIR)
 
-re: fclean install $(NAME)
-
-install:
-		# brew install imagesnap
+re: fclean $(NAME)
 
 # =========== #
 # 	COLORS	  #
